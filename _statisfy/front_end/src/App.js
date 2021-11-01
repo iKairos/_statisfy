@@ -5,7 +5,7 @@ function App() {
   const [data, setData] = useState([{}]);
 
   useEffect( () => {
-    fetch("/api").then(
+    fetch("/api/user/9875").then(
       res => res.json()
     ).then(
         data => {
@@ -19,12 +19,10 @@ function App() {
   return (
     <div className="App">
       {
-          (typeof data.test === "undefined") ? (
+          (typeof data.user === "undefined") ? (
             <p>loading data...</p>
           ) : ( 
-            data.test.map((d, i) => (
-              <p>{d}</p>
-            ))
+            data.user.username
           )
         }
     </div>
