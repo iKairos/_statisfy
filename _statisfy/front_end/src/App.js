@@ -1,7 +1,13 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from './actions/userActions';
+import {BrowserRouter, Route, Switch, Link} from 'react-router-dom'
+import {Button, Navbar, Row, Col, Container, Nav, NavDropdown} from 'react-bootstrap'
 import './App.css';
+import HomeScreen from './screens/HomeScreen';
+import DashboardScreen from './screens/DashboardScreen';
+import StatScreen from './DashboardContents/StatsMethods';
+import MLScreen from './DashboardContents/MachineLearning';
 
 function App() {
   const dispatch = useDispatch();
@@ -15,13 +21,57 @@ function App() {
   }, [])
 
   return (
-    loading ? (<p>loading...</p>) :
-    error ? (<p>Error: {error}</p>) : (
-      <div className="App">
-        <p>{userData.username}</p>
-        <p>{userData.email_address}</p>
-      </div>
-    )
+    <BrowserRouter>
+    <div>
+    
+          <Container fluid>
+              <Row className ="FirstRow">
+                <Col sm ="5" md lg ="2">
+                  <div>
+                      <a href>Statisfy</a>
+                  </div>
+                </Col>
+                <Col sm ="2" md lg ="8"/>
+                <Col sm ="5" md lg ="2">
+                  <div>
+                      <a style={{alignContent:"end"}}>Account</a>
+                  </div>
+                </Col>
+              </Row>
+              <Row className ="SecondRow">
+                <Col sm md lg ="12">
+                <Navbar bg ="dark" variant="dark" fluid>
+                      <Nav className ="justify-content-center" style={{width:"100%"}}>
+                        <Nav.Link className="NavbarContents">
+                          <Link to="/">Home</Link>
+                        </Nav.Link>
+                        <NavDropdown title ="Guides" className="NavbarContents">
+                            <NavDropdown.Item>Statistical Method Guide</NavDropdown.Item>
+                            <NavDropdown.Item>Machine Learning Guide</NavDropdown.Item>
+                        </NavDropdown>
+                        <Nav.Link className="NavbarContents">
+                          <Link to="/dashboard">Dashboard</Link>
+                        </Nav.Link>
+                        <Nav.Link className="NavbarContents">About</Nav.Link>
+                      </Nav>
+                    </Navbar>
+                </Col>
+              </Row>
+
+              <main>
+              <Switch>
+                <Route path = "/" component={HomeScreen} exact></Route>
+                <Route path = "/dashboard" component={DashboardScreen} exact></Route>
+                <Route path = "/dashboard/stats" component={StatScreen} exact></Route>
+                <Route path = "/dashboard/machinelearning" component={MLScreen} exact></Route>
+              </Switch>
+              </main>
+              
+          </Container>
+        </div>
+    
+      
+    </BrowserRouter>
   );
 }
 
