@@ -21,61 +21,61 @@ class ResearchesBackbone(DatabaseBackbone):
             print(e)
             return False
     
-    def get_research_name(self, uid):
+    def get_research_name(self, rid):
         try:
             fetched = self.fetch_row(
                 "researches",
-                _id = uid
-            )
-
+                _id = rid
+            )[0]
+            
             return fetched[1]
         except Exception as e:
             print(e)
             return False
 
-    def get_research_description(self, uid):
+    def get_research_description(self, rid):
         try:
             fetched = self.fetch_row(
                 "researches",
-                _id = uid
-            )
+                _id = rid
+            )[0]
 
             return fetched[2]
         except Exception as e:
             print(e)
             return False
 
-    def get_dataset(self, uid):
+    def get_dataset(self, rid):
         try:
             fetched = self.fetch_row(
                 "researches",
-                _id = uid
-            )
+                _id = rid
+            )[0]
 
             return fetched[3]
         except Exception as e:
             print(e)
             return False
 
-    def get_test_type(self, uid):
+    def get_test_type(self, rid):
         try:
             fetched = self.fetch_row(
                 "researches",
-                _id = uid
-            )
+                _id = rid
+            )[0]
 
             return fetched[4]
         except Exception as e:
             print(e)
             return False
     
-    def set_research_name(self, uid, new):
+    def set_research_name(self, rid, new):
         try:
             self.update_data(
                 "researches",
                 "research_name",
                 new,
-                _id = uid
+                _id = rid
             )
 
             return True
@@ -83,13 +83,13 @@ class ResearchesBackbone(DatabaseBackbone):
             print(e)
             return False
 
-    def set_research_description(self, uid, new):
+    def set_research_description(self, rid, new):
         try:
             self.update_data(
                 "researches",
                 "research_description",
                 new,
-                _id = uid
+                _id = rid
             )
 
             return True
@@ -97,13 +97,13 @@ class ResearchesBackbone(DatabaseBackbone):
             print(e)
             return False
 
-    def set_dataset(self, uid, new):
+    def set_dataset(self, rid, new):
         try:
             self.update_data(
                 "researches",
                 "dataset",
                 new,
-                _id = uid
+                _id = rid
             )
 
             return True
@@ -111,13 +111,13 @@ class ResearchesBackbone(DatabaseBackbone):
             print(e)
             return False
 
-    def set_test_type(self, uid, new):
+    def set_test_type(self, rid, new):
         try:
             self.update_data(
                 "researches",
                 "test_type",
                 new,
-                _id = uid
+                _id = rid
             )
 
             return True

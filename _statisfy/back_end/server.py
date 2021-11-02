@@ -1,7 +1,11 @@
+from types import resolve_bases
 from flask import Flask, request
 from objects.user import User, UserAuthentication
+from objects.research import Research
 
 app = Flask(__name__)
+
+# ========================= USER ROUTES =========================
 
 @app.route("/api/user/<id>")
 def fetch_user(id):
@@ -23,6 +27,24 @@ def fetch_user(id):
             'profile_picture': user.profile_picture,
             'researches': user.research_papers}
     }
+
+# ========================= RESEARCH ROUTES =========================
+@app.route("/api/research/<id>")
+def fetch_research(id):
+    research = Research(id)
+
+    return {
+        'research' : {
+            '_id': id, 
+            'research_name': research.research_name,
+            'research_description': research.research_description,
+            'dataset': research.dataset_directory,
+            'test_type': research.test_type,
+            'authors': research.authors
+        }
+    }
+
+# ========================= AUTH ROUTES =========================
 
 @app.route("/api/login", methods = ['POST'])
 def login():

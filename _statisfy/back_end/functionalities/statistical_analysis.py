@@ -48,7 +48,7 @@ def pearsonr(x, y):
     term2_sum = 0
 
     for i in range(length):
-        numerator_sum += (x[i] - mean(x)) * (y[i] -mean(y))
+        numerator_sum += (x[i] - mean(x)) * (y[i] - mean(y))
 
         term1_sum += (x[i] - mean(x)) ** 2
         term2_sum += (y[i] - mean(y)) ** 2
