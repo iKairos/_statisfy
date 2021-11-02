@@ -1,5 +1,5 @@
-from flask import Flask
-from objects.user import User
+from flask import Flask, request
+from objects.user import User, UserAuthentication
 
 app = Flask(__name__)
 
@@ -23,6 +23,14 @@ def fetch_user(id):
             'profile_picture': user.profile_picture,
             'researches': user.research_papers}
     }
+
+@app.route("/api/login", methods = ['POST'])
+def login():
+    data = request.get_json()
+
+    auth = UserAuthentication.authenticate(data.username, data.password)
+
+    return {'auth': auth}
 
 if __name__ == "__main__":
     app.run(debug=True)

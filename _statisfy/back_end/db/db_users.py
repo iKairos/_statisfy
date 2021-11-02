@@ -28,11 +28,18 @@ class UsersBackbone(DatabaseBackbone):
             print(e)
             return False
     
-    def get_user(self, uid):
+    def get_user(self, uid = None, uname = None):
         try:
-            fetched = self.fetch_row("users", _id = uid)
+            fetched = None 
 
-            return fetched
+            if uid:
+                fetched = self.fetch_row("users", _id = uid)
+            elif uname:
+                fetched = self.fetch_row("users", username = uname)
+            else:
+                raise ValueError("Either uid or uname argument is needed.")
+
+            return fetched[0]
         except Exception as e :
             print(e)  
             return False
