@@ -12,11 +12,10 @@ import "../StyleSheets/dashboard.css";
 
 export default function DashboardScreen(){
     return(
-
         <div className="wrapper">
                     <MethodCard
                         img = {img1}
-                        title ="Statistic Methods"
+                        title ="Statistical Analysis"
                         content = "Analyze and interpret the dataset you have and unlock the intricacies of relationships, associations, and patterns!"
                         link="/dashboard/stats"
                     />
@@ -43,8 +42,7 @@ function MethodCard(props){
             </p>
         </div>
         
-            <Link className="card_link" to={props.link}><button className ="card_btn">Proceed</button></Link>
-        
+        <Link className="card_link" to={props.link}><button className ="card_btn">Proceed</button></Link>
     </div>   
     ); 
 }

@@ -30,7 +30,7 @@ body {
   transform: scale(1);
   transition: transform 200ms ease-in, box-shadow 200ms ease-in;
   height: 100%;
-  width: 18rem;
+  width: 19rem;
 }
 .card:hover {
   transform: scale(1.05);
@@ -38,11 +38,11 @@ body {
 }
 .card:hover .card_btn {
   color: aliceblue;
-  background-color: #8951b8;
+  background-color: rgb(223, 154, 255);
 }
 .card_image {
   height: 12rem;
-  width: 18rem;
+  width: 19rem;
   object-fit: cover;
 }
 .card_title {
@@ -69,6 +69,6 @@ body {
   font-size: 0.85rem;
   margin: 1.5rem;
   font-family: Montserrat;
-  transition: all 0.5s linear;
+  transition: all 0.25s linear;
   text-transform: uppercase;
 }
