@@ -17,13 +17,13 @@ export default function DashboardScreen(){
                     <MethodCard
                         img = {img1}
                         title ="Statistic Methods"
-                        content =" Choose this motherfucker statistical methods???"
+                        content = "Analyze and interpret the dataset you have and unlock the intricacies of relationships, associations, and patterns!"
                         link="/dashboard/stats"
                     />
                     <MethodCard
                         img = {img2}
                         title ="Machine Learning"
-                        content =" Choose this motherfucker statistical methods???"
+                        content = "Find patterns and generate machine learning models for your predictive and classification researches! Leave the training and model generation to us!"
                         link ="/dashboard/machinelearning"
                      />
         </div>
