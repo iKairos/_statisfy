@@ -27,6 +27,10 @@ class Research:
     def authors(self):
         return self.rdb.get_authors(self.rid)
     
+    @property
+    def is_registered(self):
+        return self.db.is_registered(self.rid)
+
     def set_research_name(self, new_name):
         return self.db.set_research_name(self.rid, new_name)
     
