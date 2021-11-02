@@ -1,31 +1,27 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from './actions/userActions';
 import './App.css';
 
 function App() {
-  const [data, setData] = useState([{}]);
+  const dispatch = useDispatch();
+  const dataSelector = useSelector((state) => 
+    state.users
+  );
+  const {loading, error, userData} = dataSelector;
 
-  useEffect( () => {
-    fetch("/api/user/9875").then(
-      res => res.json()
-    ).then(
-        data => {
-          setData(data)
-          console.log(data)
-        }
-    )
-  }
-  , [])
+  useEffect(() => {
+    dispatch(getUser(9875));
+  }, [])
 
   return (
-    <div className="App">
-      {
-          (typeof data.user === "undefined") ? (
-            <p>loading data...</p>
-          ) : ( 
-            data.user.username
-          )
-        }
-    </div>
+    loading ? (<p>loading...</p>) :
+    error ? (<p>Error: {error}</p>) : (
+      <div className="App">
+        <p>{userData.username}</p>
+        <p>{userData.email_address}</p>
+      </div>
+    )
   );
 }
 
