@@ -28,6 +28,15 @@ class UsersBackbone(DatabaseBackbone):
             print(e)
             return False
     
+    def is_registered(self, uid):
+        try:
+            fetched = self.fetch_row("users", _id = uid)
+
+            return False if len(fetched[0]) == 0 else True
+        except Exception as e :
+            print(e)  
+            return False
+    
     def get_user(self, uid = None, uname = None):
         try:
             fetched = None 

@@ -52,6 +52,10 @@ class User:
         return self.db.get_profile_pic_directory(self.uid)
     
     @property
+    def is_registered(self):
+        return self.db.is_registered(self.uid)
+    
+    @property
     def research_papers(self):
         return self.rdb.get_researches_author(self.uid)
     
