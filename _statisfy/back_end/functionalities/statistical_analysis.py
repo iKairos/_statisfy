@@ -1,6 +1,9 @@
 from collections import Counter
 from itertools import groupby
 from operator import itemgetter
+from scipy import stats as sp
+import pandas as pd 
+import numpy as np
 
 # UNIVARIATE STATISTICAL ANALYSIS
 def mean(x):
@@ -38,21 +41,63 @@ def variance(x):
 # RELATIONSHIP / ASSOCIATION STATISTICAL ANALYSIS
 
 def pearsonr(x, y):
-    if len(x) != len(y):
+    n = len(x)
+
+    if n != len(y):
         raise ValueError(f"Dataset size is not equal. Size {len(x)} not equal to {len(y)}.")
-    
-    length = len(x)
 
     numerator_sum = 0
     term1_sum = 0 
     term2_sum = 0
 
-    for i in range(length):
+    for i in range(n):
         numerator_sum += (x[i] - mean(x)) * (y[i] - mean(y))
 
         term1_sum += (x[i] - mean(x)) ** 2
         term2_sum += (y[i] - mean(y)) ** 2
     
-    return numerator_sum / (term1_sum * term2_sum) ** 0.5
+    r = numerator_sum / (term1_sum * term2_sum) ** 0.5
+    
+    t = r * np.sqrt((n-2)/(1-r**2))
+
+    p = 2 * sp.t.sf(np.abs(t), n-2)
+    
+    return r, p
+
+def spearmanrho(x, y):
+    n = len(x)
+
+    if n != len(y):
+        raise ValueError(f"Dataset size is not equal. Size {len(x)} not equal to {len(y)}.")
+
+    df_x = pd.DataFrame(x)
+    df_x['rank'] = df_x.rank(ascending=False)
+
+    df_y = pd.DataFrame(y)
+    df_y['rank'] = df_y.rank(ascending=False)
+
+    ranked_x = []
+    ranked_y = []
+
+    for data, rank in df_x.iterrows():
+        ranked_x.append((rank[0],rank['rank']))
+    
+    for data, rank in df_y.iterrows():
+        ranked_y.append((rank[0],rank['rank']))
+
+    d_squared_sum = 0
+
+    for i in range(len(x)):
+        d_squared = (ranked_x[i][1] - ranked_y[i][1]) ** 2
+
+        d_squared_sum += d_squared
+    
+    rho = 1 - ((6*d_squared_sum)/((n)**3 - n))
+
+    t = rho * np.sqrt((n-2)/(1-rho**2))
+
+    p = 2 * sp.t.sf(np.abs(t), n-2)
+    
+    return 1 - ((6*d_squared_sum)/((n)**3 - n)), p
 
 # =========================================================================
