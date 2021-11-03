@@ -2,6 +2,7 @@ from collections import Counter
 from itertools import groupby
 from operator import itemgetter
 from scipy import stats as sp
+from itertools import chain
 import pandas as pd 
 import numpy as np
 
@@ -160,3 +161,42 @@ def chi_square(x, expected = None, alpha = 0.05):
     return chi, p, df, expected, critical_value
 
 # =========================================================================
+
+# SIGNIFICANT DIFFERENCE ANALYSIS
+
+def one_way_anova(*x, alpha = 0.05):
+    N = sum(len(i) for i in x)
+
+    n = set(len(i) for i in x)
+
+    if len(n) > 1:
+        raise ValueError("The length of each of the columns should be the same.")
+
+    n = list(n)[0]
+    
+    a = len(x)
+
+    df_between = a - 1
+    df_within = N - a
+    df_total = N - 1
+
+    ss_between_sum = sum([sum(data) ** 2 for data in x])
+    ss_between_t2 = sum([sum(data) for data in x]) ** 2
+    
+    ss_between = (ss_between_sum / n) - (ss_between_t2 / N)
+
+    ss_within_sum_all = sum([data**2 for data in chain.from_iterable(x)])
+    ss_within = ss_within_sum_all - (ss_between_sum / n)
+
+    ss_total = ss_within_sum_all - (ss_between_t2 / N)
+
+    ms_between = ss_between / df_between
+    ms_within = ss_within / df_within
+
+    f_statistic = ms_between / ms_within
+
+    p = sp.f.sf(f_statistic, df_between, df_within)
+
+    critical_value = sp.f.ppf(1 - alpha, df_between, df_within)
+
+    return f_statistic, p, critical_value
