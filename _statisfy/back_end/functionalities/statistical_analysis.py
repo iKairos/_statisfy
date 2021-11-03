@@ -167,7 +167,7 @@ def chi_square(x, expected = None, alpha = 0.05):
 def one_way_anova(*x, alpha = 0.05):
     if len(x) < 2:
         raise ValueError("The number of data groups should be at least two or more.")
-        
+
     N = sum(len(i) for i in x)
 
     n = set(len(i) for i in x)
@@ -203,3 +203,47 @@ def one_way_anova(*x, alpha = 0.05):
     critical_value = sp.f.ppf(1 - alpha, df_between, df_within)
 
     return f_statistic, p, critical_value
+
+# =========================================================================
+
+# RANK SUM ANALYSIS
+
+def kruskal_wallis(*x, alpha = 0.05):
+    k = set(len(i) for i in x)
+
+    if len(k) > 1:
+        raise ValueError("The length of each of the columns should be the same.")
+    
+    k = list(k)[0]
+
+    df = len(x)-1
+
+    flat = list(chain.from_iterable(x))
+
+    N = len(flat)
+
+    df_x = pd.DataFrame(flat)
+    df_x['rank'] = df_x.rank()
+
+    ranked = []
+    temp = []
+
+    for index, data in df_x.iterrows():
+        temp.append((data[0], data['rank']))
+
+        if (index + 1) % k == 0:
+            ranked.append(temp)
+            temp = []
+ 
+    sum_rank = 0 
+
+    for r in ranked:
+        sum_rank += sum([i[1] for i in r]) ** 2
+
+    H = ((12/(N**2+N)) * sum_rank/k) - (3*(N+1))
+
+    p = sp.chi2.sf(H, df)
+
+    critical_value = sp.chi2.ppf(1-0.05, df)
+
+    return H, p, critical_value
