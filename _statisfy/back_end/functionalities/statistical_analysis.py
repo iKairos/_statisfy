@@ -165,6 +165,9 @@ def chi_square(x, expected = None, alpha = 0.05):
 # SIGNIFICANT DIFFERENCE ANALYSIS
 
 def one_way_anova(*x, alpha = 0.05):
+    if len(x) < 2:
+        raise ValueError("The number of data groups should be at least two or more.")
+        
     N = sum(len(i) for i in x)
 
     n = set(len(i) for i in x)
