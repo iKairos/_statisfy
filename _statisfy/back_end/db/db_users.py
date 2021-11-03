@@ -48,7 +48,7 @@ class UsersBackbone(DatabaseBackbone):
             else:
                 raise ValueError("Either uid or uname argument is needed.")
 
-            return fetched[0]
+            return None if len(fetched) == 0 else fetched[0]
         except Exception as e :
             print(e)  
             return False

@@ -1,6 +1,6 @@
 from types import resolve_bases
 from flask import Flask, request
-from objects.user import User, UserAuthentication
+from objects.user import User
 from objects.research import Research
 
 app = Flask(__name__)
@@ -13,8 +13,7 @@ def fetch_user(id):
     
     if not user.is_registered:
         return {
-            'error': 'User does not exist.',
-            'res': 401
+            'error': 'User does not exist.'
         }
 
     return {
@@ -32,8 +31,7 @@ def fetch_user(id):
             'occupation': user.occupation,
             'profile_picture': user.profile_picture,
             'researches': user.research_papers
-        },
-        'res': 201
+        }
     }
 
 # ========================= RESEARCH ROUTES =========================
@@ -45,7 +43,6 @@ def fetch_research(id):
     if not research.is_registered:
         return {
             'error': 'Research does not exist.',
-            'res': 401
         }
 
     return {
@@ -56,8 +53,7 @@ def fetch_research(id):
             'dataset': research.dataset_directory,
             'test_type': research.test_type,
             'authors': research.authors
-        },
-        'res': 201
+        }
     }
 
 # ========================= AUTH ROUTES =========================
@@ -66,9 +62,12 @@ def fetch_research(id):
 def login():
     data = request.get_json()
 
-    auth = UserAuthentication.authenticate(data.username, data.password)
+    auth = User.authenticate(data.username, data.password)
 
-    return {'auth': auth}
+    if auth[0]:
+        return {'authPassed': auth[0], 'uid': auth[1]}
+    else:
+        return {'authPassed': auth[0], 'error': auth[1]}
 
 if __name__ == "__main__":
     app.run(debug=True)

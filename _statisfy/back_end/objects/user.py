@@ -92,7 +92,6 @@ class User:
     def set_profile_picture(self, new_profile_picture):
         return self.db.set_profile_picture(self.uid, new_profile_picture)
     
-    @staticmethod
     def register_user(self, **kwargs):
         return self.db.register_user(
                 _id = kwargs['_id'],
@@ -108,13 +107,18 @@ class User:
                 occupation = kwargs['occupation'],
                 profile_picture = kwargs['profile_picture']
             )
-
-class UserAuthentication:
+    
     def authenticate(username, password_hash):
         db = db_users.UsersBackbone()
 
         user = db.get_user(uname=username)
 
+        if user is None:
+            return False, "Username does not match any account."
+
         pword = user[5]
+
+        if not password_hash == pword:
+            return False, "Credentials failed to authenticate."
         
-        return password_hash == pword
+        return True, user[0]
