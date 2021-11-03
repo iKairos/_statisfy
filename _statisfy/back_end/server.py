@@ -63,11 +63,8 @@ def login():
     data = request.get_json()
 
     auth = User.authenticate(data.username, data.password)
-
-    if auth[0]:
-        return {'authPassed': auth[0], 'uid': auth[1]}
-    else:
-        return {'authPassed': auth[0], 'error': auth[1]}
+    
+    return {'authPassed': auth[0], 'uid' if auth[0] else 'error': auth[1]}
 
 if __name__ == "__main__":
     app.run(debug=True)
