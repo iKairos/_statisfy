@@ -98,6 +98,6 @@ def spearmanrho(x, y):
 
     p = 2 * sp.t.sf(np.abs(t), n-2)
     
-    return 1 - ((6*d_squared_sum)/((n)**3 - n)), p
+    return rho, p
 
 # =========================================================================
