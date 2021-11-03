@@ -100,4 +100,63 @@ def spearmanrho(x, y):
     
     return rho, p
 
+def chi_square(x, expected = None, alpha = 0.05):
+    """
+    Format
+    ----------
+    2D Array in which in each array is one row while the size of the inner array is the column number.
+    
+    The data and the expected array should be in this format:
+
+    >>> format = [['val11','val12','val13'],['val21', 'val12', 'val13']...]
+    """
+    r = len(x)
+    c = len(x[0])
+
+    if expected:
+        if r != len(expected) or c != len(expected[0]):
+            raise ValueError("Row and column of original data is not equal to the row and column of the expected data.")
+    else:
+        expected = []
+
+        column_sums = []
+        row_sums = []
+        
+        for i in zip(*x):
+            column_sums.append(sum(i))
+        
+        for row in x:
+            row_sums.append(sum(row))
+        
+        rw = 0
+        
+        for row in x:
+            temp = []
+            col = 0
+
+            for c in row:
+                temp.append((column_sums[col] * row_sums[rw]) / sum(row_sums))
+                col += 1
+            
+            expected.append(temp)
+            rw += 1
+
+    chi = 0
+
+    rw = 0
+    for row in x:
+        col = 0
+        for c in row:
+            chi += (c - expected[rw][col])**2 / expected[rw][col]
+            col += 1
+        rw += 1
+    
+    df = len(x[0]) - 1
+
+    p = sp.chi2.sf(chi, df)
+
+    critical_value = sp.chi2.ppf(1-alpha, df)
+    
+    return chi, p, df, expected, critical_value
+
 # =========================================================================
