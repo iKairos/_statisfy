@@ -9,28 +9,33 @@ import MethodCard from "../components/MethodCard";
 export default function StatScreen(){
     return(
         <div className="container">
+            <div className="row">
+                <div className ="insidediv1">
+                    
+                </div>
+            </div>
             
             <div className="row">
                 <div className="col-2">
-                    <div className="row divcontainers div1">
+                    <div className="row div1">
                         <div className="insidediv1">
                             <img className="uploadLogo" src={logo} alt="Logo"/>
                             <button className="uploadbtn">UPLOAD DATA</button>
                         </div>
                         
                     </div>
-                    <div className="row divcontainers div2">
+                    <div className="row div2">
                         <div className="insidediv2">2</div>
                     </div>
                 </div>
-                <div className="col-10 divcontainers div3">
+                <div className="col-10 div3">
                     <div className="insidediv3">
                         <DisplayTable/>
                     </div>
                 </div>
             </div>
 
-            <div className="row divcontainers">
+            <div className="row div4">
                 <div className="col-12 insidediv3">
                     <MethodCard
                         img = {img1}

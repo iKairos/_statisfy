@@ -23,5 +23,6 @@ table th {
   padding-bottom: 12px;
   text-align: center;
   background-color: rgb(223, 154, 255);
+  position: sticky;
   color: white;
 }

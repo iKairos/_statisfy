@@ -8,6 +8,7 @@ import HomeScreen from './screens/HomeScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import StatScreen from './DashboardContents/StatsMethods';
 import MLScreen from './DashboardContents/MachineLearning';
+import PearsonScreen from './screens/PearsonScreen';
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +65,7 @@ function App() {
                 <Route path = "/" component={HomeScreen} exact></Route>
                 <Route path = "/dashboard" component={DashboardScreen} exact></Route>
                 <Route path = "/dashboard/stats" component={StatScreen} exact></Route>
+                <Route path = "/dashboard/stats/pearson" component={PearsonScreen} exact></Route>
                 <Route path = "/dashboard/machinelearning" component={MLScreen} exact></Route>
               </Switch>
               </main>
