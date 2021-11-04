@@ -1,6 +1,3 @@
-import { Col, Row, Button, Card} from "react-bootstrap";
-import StatScreen from "../DashboardContents/StatsMethods";
-import MLScreen from "../DashboardContents/MachineLearning";
 
 import img1 from "../images/statisticsHeader.png";
 import img2 from "../images/mlHeader.png";
