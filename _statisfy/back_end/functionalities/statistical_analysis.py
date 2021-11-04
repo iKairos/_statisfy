@@ -244,6 +244,26 @@ def kruskal_wallis(*x, alpha = 0.05):
 
     p = sp.chi2.sf(H, df)
 
-    critical_value = sp.chi2.ppf(1-0.05, df)
+    critical_value = sp.chi2.ppf(1-alpha, df)
 
     return H, p, critical_value
+
+def mann_whitney_u(x, y, alpha = 0.05):    
+    df_x = pd.DataFrame(x)
+    df_x['group'] = 'x'
+
+    df_y = pd.DataFrame(y)
+    df_y['group'] = 'y'
+
+    df_concat = pd.concat([df_x, df_y]).copy()
+    df_concat['rank'] = df_concat[0].rank()
+
+    r1 = sum([z['rank'] for i,z, in df_concat.loc[df_concat['group'] == 'x'].iterrows()])
+    r2 = sum([z['rank'] for i,z, in df_concat.loc[df_concat['group'] == 'y'].iterrows()])
+
+    U1 = r1 - ((len(x)*(len(x) + 1)) / 2)
+    U2 = r2 - ((len(y)*(len(y) + 1)) / 2)
+
+    U = U1 if U1 < U2 else U2
+
+    return U
