@@ -8,6 +8,8 @@ import HomeScreen from './screens/HomeScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import StatScreen from './DashboardContents/StatsMethods';
 import MLScreen from './DashboardContents/MachineLearning';
+import SignInScreen from './screens/SignInScreen';
+import SignUpScreen from './screens/SignUpScreen';
 
 function App() {
   const dispatch = useDispatch();
@@ -34,8 +36,8 @@ function App() {
                 <Col sm ="2" md lg ="8"/>
                 <Col sm ="5" md lg ="2">
                   <div>
-                      <a style={{alignContent:"end", padding:"5px"}}>Log-in</a>
-                      <a style={{alignContent:"end", padding:"5px"}}>Sign up</a>
+                    <Link class="menuLink" to="/signIn"style={{alignContent:"end", padding:"5px"}}>Sign in</Link>
+                    <Link class="menuLink" to="/signUp"style={{alignContent:"end", padding:"5px"}}>Sign up</Link>
                   </div>
                 </Col>
               </Row>
@@ -65,6 +67,8 @@ function App() {
                 <Route path = "/dashboard" component={DashboardScreen} exact></Route>
                 <Route path = "/dashboard/stats" component={StatScreen} exact></Route>
                 <Route path = "/dashboard/machinelearning" component={MLScreen} exact></Route>
+                <Route path = "/signIn" component={SignInScreen} exact></Route>
+                <Route path = "/signUp" component={SignUpScreen} exact></Route>
               </Switch>
               </main>
               
