@@ -9,6 +9,9 @@
   align-content: center;
 }
 
+.statheader {
+  min-height: 10rem;
+}
 .div1 {
   padding: 1rem;
   min-height: 10rem;

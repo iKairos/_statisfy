@@ -10,8 +10,9 @@ export default function StatScreen(){
     return(
         <div className="container">
             <div className="row">
-                <div className ="insidediv1">
-                    
+                <div className ="statheader">
+                    <h1>Statistical Methods</h1>
+
                 </div>
             </div>
             
