@@ -24,13 +24,15 @@ export const DisplayTable = () => {
             {
               data.map(i => {
                 return(
-                  <tr>{
-                    columns.map(col =>{
-                      return(
-                        <td>{i[col]}</td>
-                      )
-                    })  
-                  }</tr>
+                  <tr>
+                    {
+                      columns.map(col =>{
+                        return(
+                          <td>{i[col]}</td>
+                        )
+                      })  
+                    }
+                  </tr>
                 )
               })
             }
