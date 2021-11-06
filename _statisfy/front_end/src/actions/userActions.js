@@ -1,4 +1,15 @@
-import { USER_DATA_FAIL, USER_DATA_REQUEST, USER_DATA_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS } from "../constants/userConstants"
+import { 
+    USER_DATA_FAIL, 
+    USER_DATA_REQUEST, 
+    USER_DATA_SUCCESS, 
+    USER_LOGIN_FAIL, 
+    USER_LOGIN_REQUEST, 
+    USER_LOGIN_SUCCESS, 
+    USER_TOKEN_PROCESS_FAIL, 
+    USER_TOKEN_PROCESS_REQUEST, 
+    USER_TOKEN_PROCESS_SUCCESS
+} from "../constants/userConstants";
+
 import Axios from 'axios';
 
 export const getUser = (uid) => async(dispatch) => {
@@ -36,6 +47,26 @@ export const authenticateUser = (username, password) => async(dispatch) => {
     }catch(error){
         dispatch({
             type:USER_LOGIN_FAIL,
+            payload:error.message
+        });
+    }
+}
+
+export const processUserToken = (token) => async(dispatch) => {
+    dispatch({
+        type:USER_TOKEN_PROCESS_REQUEST
+    });
+
+    try{
+        const {data} = await Axios.get(`/api/user/token/decode/${token}`)
+
+        dispatch({
+            type: USER_TOKEN_PROCESS_SUCCESS, 
+            payload: data
+        });
+    }catch(error){
+        dispatch({
+            type:USER_TOKEN_PROCESS_FAIL,
             payload:error.message
         });
     }

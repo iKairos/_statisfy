@@ -1,5 +1,6 @@
 from db import db_users
 from db import db_authors
+import jwt, datetime
 
 class User:
     def __init__(self, uid):
@@ -108,17 +109,43 @@ class User:
                 profile_picture = kwargs['profile_picture']
             )
     
-    def authenticate(username, password_hash):
+    def authenticate(username, password_hash, secret_key):
         db = db_users.UsersBackbone()
 
         user = db.get_user(uname=username)
 
         if user is None:
-            return False, "Username does not match any account."
+            return False, "Username does not match any account.", None
 
         pword = user[5]
 
         if not password_hash == pword:
-            return False, "Credentials failed to authenticate."
+            return False, "Credentials failed to authenticate.", None
         
-        return True, user[0]
+        try:
+            payload = {
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=3600),
+                'iat': datetime.datetime.utcnow(),
+                'sub': user[0]
+            } 
+
+            token = jwt.encode(
+                payload,
+                secret_key,
+                algorithm='HS256'
+            )
+        except Exception as e:
+            return False, f"Token generation failed returning with error message: {e}.", None
+        
+        return True, user[0], token
+    
+    @staticmethod
+    def decode_auth_token(auth_token, secret_key):
+        try:
+            payload = jwt.decode(auth_token, secret_key, ['HS256'])
+
+            return payload['sub']
+        except jwt.ExpiredSignatureError:
+            return 'Token is already expired.'
+        except jwt.InvalidTokenError:
+            return f'Token is not valid. Token value: {auth_token}'

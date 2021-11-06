@@ -1,4 +1,14 @@
-import { USER_DATA_FAIL, USER_DATA_REQUEST, USER_DATA_SUCCESS, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL } from "../constants/userConstants";
+import { 
+    USER_DATA_FAIL, 
+    USER_DATA_REQUEST,
+     USER_DATA_SUCCESS, 
+     USER_LOGIN_REQUEST, 
+     USER_LOGIN_SUCCESS, 
+     USER_LOGIN_FAIL, 
+     USER_TOKEN_PROCESS_REQUEST,
+     USER_TOKEN_PROCESS_SUCCESS,
+     USER_TOKEN_PROCESS_FAIL
+} from "../constants/userConstants";
 
 export const userDataReducers = (state={userData:[]}, action) => {
     switch(action.type){
@@ -25,6 +35,22 @@ export const userLoginReducers = (state={userAuth:[]}, action) => {
             return {loading: false, userAuth: action.payload};
         
         case USER_LOGIN_FAIL:
+            return {loading: false, error: action.payload};
+        
+        default:
+            return state
+    }
+}
+
+export const processTokenReducers = (state={decodedUserToken:[]}, action) => {
+    switch(action.type){
+        case USER_TOKEN_PROCESS_REQUEST:
+            return {loading: true};
+        
+        case USER_TOKEN_PROCESS_SUCCESS:
+            return {loading: false, processed: action.payload};
+        
+        case USER_TOKEN_PROCESS_FAIL:
             return {loading: false, error: action.payload};
         
         default:

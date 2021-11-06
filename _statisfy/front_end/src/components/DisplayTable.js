@@ -9,8 +9,6 @@ export const DisplayTable = () => {
       return key;
     })
 
-    console.log(columns)
-
     return (
       <table>
         <thead>
