@@ -60,11 +60,12 @@ def fetch_research(id):
 
 @app.route("/api/login", methods = ['POST'])
 def login():
-    data = request.get_json()
+    if request.method == 'POST':
+        data = request.get_json(force=True)
 
-    auth = User.authenticate(data.username, data.password)
-    
-    return {'authPassed': auth[0], 'uid' if auth[0] else 'error': auth[1]}
+        auth = User.authenticate(data['username'], data['password'])
+        
+        return {'authPassed': auth[0], 'uid' if auth[0] else 'error': auth[1]}
 
 if __name__ == "__main__":
     app.run(debug=True)

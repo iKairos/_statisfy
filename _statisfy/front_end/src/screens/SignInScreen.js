@@ -1,25 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import '../StyleSheets/signin.css'
+import { authenticateUser } from '../actions/userActions';
 
 export default function SignInScreen() {
 
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
+  const dataSelector = useSelector((state) => 
+    state.userAuth
+  );
+  const {loading, error, userAuth} = dataSelector;
+
   const submitHandler = (e) => {
     e.preventDefault();
-    // TODO: sign in action
+    
+    dispatch(authenticateUser(username, password)); 
   };
+
   return (
     <div className="display" type="signin">
       <h1>Sign In</h1>
-      <form method="post">
+      <form method="post" onSubmit={submitHandler}>
         <div className="division">
           <input 
-            type="email"
-            id="email"
+            type="text"
+            id="username"
             required
-            onChange={(e) => setEmail(e.target.value)}></input>
+            onChange={(e) => setUsername(e.target.value)}></input>
           <span></span>
           <label>Username</label>
         </div>
@@ -27,9 +38,9 @@ export default function SignInScreen() {
         <div className="division">
           <input 
             type="password"
-            id="email"
+            id="password"
             required
-            onChange={(e) => setEmail(e.target.value)}>
+            onChange={(e) => setPassword(e.target.value)}>
           </input> 
           <span></span>
           <label>Password</label>
