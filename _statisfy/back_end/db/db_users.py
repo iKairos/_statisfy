@@ -36,11 +36,11 @@ class UsersBackbone(DatabaseBackbone):
             fetched = None 
 
             if by == 'uid':
-                fetched == self.fetch_row("users", _id = value)
+                fetched == self.fetch_row_string_strict("users", _id = value)
             elif by == 'uname':
-                fetched = self.fetch_row("users", username = value)
+                fetched = self.fetch_row_string_strict("users", username = value)
             elif by == 'email':
-                fetched = self.fetch_row("users", email_address = value)
+                fetched = self.fetch_row_string_strict("users", email_address = value)
             else:
                 raise ValueError("Either uid or uname argument is needed.")
 

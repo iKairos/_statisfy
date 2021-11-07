@@ -75,6 +75,27 @@ class DatabaseBackbone():
         c.execute(runner, equated)
         fetched = c.fetchall()
         return fetched
+
+    def fetch_row_string_strict(self, table, **kwargs):
+        if len(kwargs) == 0:
+            runner = f"SELECT * FROM {table}"
+            uplink = self.connect()
+            c = uplink.cursor()
+            c.execute(runner, ())
+            fetched = c.fetchall()
+            return fetched
+        
+        cols = [x for x in kwargs]
+        equated = tuple([kwargs[x] for x in kwargs])
+        runner = "SELECT * FROM {} WHERE " + "{} = ? AND " * len(kwargs) + "!@#"
+        runner = runner.format(table, *cols)
+        runner = runner.replace("AND !@#", "")
+
+        uplink = self.connect()
+        c = uplink.cursor()
+        c.execute(runner + " COLLATE Latin1_General_CS_AS", equated)
+        fetched = c.fetchall()
+        return fetched
     
     def update_data(self, table, column, new_value, **kwargs):
         cols = [x for x in kwargs]

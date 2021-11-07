@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom'
 import {Navbar, Row, Col, Nav, NavDropdown} from 'react-bootstrap'
+import { useHistory } from "react-router"
 
 export default function Header(props){
+    const history = useHistory();
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        history.push('/');
+        history.go(0);
+    }
+
     return(
         <div>
             <Row className ="FirstRow">
@@ -15,7 +24,7 @@ export default function Header(props){
                     <div>
                     {
                         props.loading ? <p>Loading...</p> : typeof props.user != 'undefined' ? (
-                        <p>Hello, {props.user?.first_name} {props.user?.last_name}!</p>
+                        <div><p>Hello, {props.user?.first_name} {props.user?.last_name}! </p> <button onClick={handleLogout}>Logout</button></div>
                         ) : (
                         <div>
                             <Link className="menuLink" to="/signIn"style={{alignContent:"end", padding:"5px"}}>Sign in</Link>

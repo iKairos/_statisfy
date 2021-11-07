@@ -48,7 +48,7 @@ export default function SignUpScreen1() {
 
   if(registerRes?.code === 'REGISTER_SUCCESS'){
     return(
-      <Redirect to={{pathname: "/signIn", message: "You may now log in to your account!"}}></Redirect>
+      <Redirect to={{pathname: "/signIn", message: "Registration successful! You may now log in to your account."}}></Redirect>
     )
   }
 
