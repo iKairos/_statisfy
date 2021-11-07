@@ -1,9 +1,9 @@
 from db import db_users
 from db import db_authors
-import jwt, datetime
+import jwt, datetime, bcrypt
 
 class User:
-    def __init__(self, uid):
+    def __init__(self, uid = None):
         self.db = db_users.UsersBackbone()
         self.rdb = db_authors.AuthorsBackbone()
         self.uid = uid
@@ -93,8 +93,15 @@ class User:
     def set_profile_picture(self, new_profile_picture):
         return self.db.set_profile_picture(self.uid, new_profile_picture)
     
-    def register_user(self, **kwargs):
-        return self.db.register_user(
+    def check_availability(param, value):
+        db = db_users.UsersBackbone()
+        
+        return True if db.get_user(param, value) is None else False
+    
+    def register_user(**kwargs):
+        db = db_users.UsersBackbone()
+
+        return db.register_user(
                 _id = kwargs['_id'],
                 first_name = kwargs['first_name'],
                 middle_name = kwargs['middle_name'],
@@ -102,24 +109,19 @@ class User:
                 username = kwargs['username'],
                 password_hash = kwargs['password_hash'],
                 email_address = kwargs['email_address'],
-                nickname = kwargs['nickname'],
-                educ_level = kwargs['educ_level'],
-                major = kwargs['major'],
-                occupation = kwargs['occupation'],
-                profile_picture = kwargs['profile_picture']
             )
     
-    def authenticate(username, password_hash, secret_key):
+    def authenticate(username, password, secret_key):
         db = db_users.UsersBackbone()
 
-        user = db.get_user(uname=username)
+        user = db.get_user("uname", username)
 
         if user is None:
             return False, "Username does not match any account.", None
 
         pword = user[5]
 
-        if not password_hash == pword:
+        if not bcrypt.checkpw(password.encode('utf-8'), pword.encode('utf-8')):
             return False, "Credentials failed to authenticate.", None
         
         try:

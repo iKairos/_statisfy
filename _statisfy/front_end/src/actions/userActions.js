@@ -5,6 +5,9 @@ import {
     USER_LOGIN_FAIL, 
     USER_LOGIN_REQUEST, 
     USER_LOGIN_SUCCESS, 
+    USER_REGISTER_FAIL, 
+    USER_REGISTER_REQUEST, 
+    USER_REGISTER_SUCCESS, 
     USER_TOKEN_PROCESS_FAIL, 
     USER_TOKEN_PROCESS_REQUEST, 
     USER_TOKEN_PROCESS_SUCCESS
@@ -18,7 +21,7 @@ export const getUser = (uid) => async(dispatch) => {
     });
 
     try{
-        const {data} = await Axios.get(`/api/user/${uid}`);
+        const {data} = await Axios.get(`/api/user/fetch/${uid}`);
 
         dispatch({
             type: USER_DATA_SUCCESS, 
@@ -47,6 +50,33 @@ export const authenticateUser = (username, password) => async(dispatch) => {
     }catch(error){
         dispatch({
             type:USER_LOGIN_FAIL,
+            payload:error.message
+        });
+    }
+}
+
+export const registerUser = (data) => async(dispatch) => {
+    dispatch({
+        type:USER_REGISTER_REQUEST
+    });
+
+    try{
+        await Axios.post('/api/user/new', {
+            'first_name': data['first_name'],
+            'middle_name': data['middle_name'],
+            'last_name': data['last_name'],
+            'username': data['username'],
+            'password': data['password'],
+            'email_address': data['email_address']
+        }).then(res => {
+            dispatch({
+                type: USER_REGISTER_SUCCESS, 
+                payload: res?.data
+            });
+        });
+    }catch(error){
+        dispatch({
+            type:USER_REGISTER_FAIL,
             payload:error.message
         });
     }

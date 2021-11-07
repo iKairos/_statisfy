@@ -15,13 +15,12 @@ import StatScreen from './DashboardContents/StatsMethods';
 import MLScreen from './DashboardContents/MachineLearning';
 import PearsonScreen from './screens/PearsonScreen';
 import SignInScreen from './screens/SignInScreen';
-import SignUpScreen1 from './screens/SignUpScreen1';
-import SignUpScreen2 from './screens/SignUpScreen2';
+import SignUpScreen from './screens/SignUpScreen';
 
 // stylesheets
 import './App.css';
 
-// tokens
+// token handling
 import useToken from './useToken';
 
 function App() {
@@ -33,7 +32,7 @@ function App() {
   );
   const {loading, error, processed} = dataSelector;
 
-  if(processed?.code === "TOKEN_FAIL"){
+  if(token && processed?.code === "TOKEN_FAIL"){
     localStorage.removeItem('token');
   }
 
@@ -54,11 +53,8 @@ function App() {
                   <Route path = "/dashboard/stats" component={StatScreen} exact></Route>
                   <Route path = "/dashboard/stats/pearson" component={PearsonScreen} exact></Route>
                   <Route path = "/dashboard/machinelearning" component={MLScreen} exact></Route>
-                  <Route path = "/signIn" exact>
-                    <SignInScreen setToken={setToken}/>
-                  </Route>
-                  <Route path = "/signUp1" component={SignUpScreen1} exact></Route>
-                  <Route path = "/signUp2" component={SignUpScreen2} exact></Route>
+                  <Route path = "/signIn" exact render={(props) => <SignInScreen setToken={setToken} {...props}/>}/>
+                  <Route path = "/signUp" component={SignUpScreen} exact></Route>
                 </Switch>
               </main>
               

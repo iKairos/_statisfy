@@ -7,7 +7,10 @@ import {
      USER_LOGIN_FAIL, 
      USER_TOKEN_PROCESS_REQUEST,
      USER_TOKEN_PROCESS_SUCCESS,
-     USER_TOKEN_PROCESS_FAIL
+     USER_TOKEN_PROCESS_FAIL,
+     USER_REGISTER_REQUEST,
+     USER_REGISTER_SUCCESS,
+     USER_REGISTER_FAIL
 } from "../constants/userConstants";
 
 export const userDataReducers = (state={userData:[]}, action) => {
@@ -35,6 +38,22 @@ export const userLoginReducers = (state={userAuth:[]}, action) => {
             return {loading: false, userAuth: action.payload};
         
         case USER_LOGIN_FAIL:
+            return {loading: false, error: action.payload};
+        
+        default:
+            return state
+    }
+}
+
+export const userRegisterReducers = (state={registerRes:[]}, action) => {
+    switch(action.type){
+        case USER_REGISTER_REQUEST:
+            return {loading: true};
+        
+        case USER_REGISTER_SUCCESS:
+            return {loading: false, registerRes: action.payload};
+        
+        case USER_REGISTER_FAIL:
             return {loading: false, error: action.payload};
         
         default:

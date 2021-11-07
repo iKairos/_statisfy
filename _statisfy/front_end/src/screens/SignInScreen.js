@@ -5,8 +5,9 @@ import '../StyleSheets/signin.css'
 import { authenticateUser } from '../actions/userActions';
 import PropTypes from 'prop-types';
 import { useHistory } from "react-router"
+import { Alert } from 'react-bootstrap'
 
-export default function SignInScreen({ setToken }) {
+export default function SignInScreen(props) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +23,7 @@ export default function SignInScreen({ setToken }) {
 
   if(typeof userAuth != 'undefined'){
     if(userAuth.access_token != null){
-      setToken(userAuth.access_token);
+      props.setToken(userAuth.access_token);
       history.push('/');
       history.go(0);
       return;
@@ -35,24 +36,17 @@ export default function SignInScreen({ setToken }) {
     dispatch(authenticateUser(username, password)); 
   };
 
-  /*
-  useEffect(() => {
-    if(typeof userAuth != 'undefined'){
-      if(userAuth.access_token === null){
-        setErrorMessage(userAuth.payload)
-      }else if(userAuth.access_token != null){
-        setToken(userAuth.access_token);
-        setSuccess(true);
-      }
-    }
-  });
-  */
-
   return (
     <div className="display" type="signin">
       <h1>Sign In</h1>
       {
-        userAuth?.access_token === null ? <p>{userAuth?.payload}</p> : error ? <p>{error}</p> : <p></p>
+        userAuth?.access_token === null ? 
+        <Alert variant='danger'>{userAuth?.payload}</Alert> 
+        : error ? 
+        <Alert variant='danger'>{error}</Alert>
+        : props.history.location.message ? 
+        <Alert variant='info'>{props.history.location.message}</Alert>
+        : ""
       }
       <form method="post" onSubmit={submitHandler}>
         <div className="division">
@@ -87,8 +81,8 @@ export default function SignInScreen({ setToken }) {
         </div>
 
         <div className="signup" type="signup" id="signup">
-          Not a member?
-          <Link to="/SignUp1">Sign Up</Link>
+          Not a member? 
+          <Link to="/SignUp">Sign Up</Link>
         </div>
 
       </form>

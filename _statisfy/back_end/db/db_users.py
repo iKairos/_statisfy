@@ -7,7 +7,7 @@ class UsersBackbone(DatabaseBackbone):
     
     def register_user(self, **kwargs):
         try:
-            self.append_row(
+            res = self.append_row(
                 "users", 
                 _id = kwargs['_id'],
                 first_name = kwargs['first_name'],
@@ -15,18 +15,12 @@ class UsersBackbone(DatabaseBackbone):
                 last_name = kwargs['last_name'],
                 username = kwargs['username'],
                 password_hash = kwargs['password_hash'],
-                email_address = kwargs['email_address'],
-                nickname = kwargs['nickname'],
-                educ_level = kwargs['educ_level'],
-                major = kwargs['major'],
-                occupation = kwargs['occupation'],
-                profile_picture = kwargs['profile_picture']
+                email_address = kwargs['email_address']
             )
 
-            return True
+            return True, res
         except Exception as e:
-            print(e)
-            return False
+            return False, e
     
     def is_registered(self, uid):
         try:
@@ -37,14 +31,16 @@ class UsersBackbone(DatabaseBackbone):
             print(e)  
             return False
     
-    def get_user(self, uid = None, uname = None):
+    def get_user(self, by, value):
         try:
             fetched = None 
 
-            if uid:
-                fetched = self.fetch_row("users", _id = uid)
-            elif uname:
-                fetched = self.fetch_row("users", username = uname)
+            if by == 'uid':
+                fetched == self.fetch_row("users", _id = value)
+            elif by == 'uname':
+                fetched = self.fetch_row("users", username = value)
+            elif by == 'email':
+                fetched = self.fetch_row("users", email_address = value)
             else:
                 raise ValueError("Either uid or uname argument is needed.")
 

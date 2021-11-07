@@ -4,6 +4,8 @@ from flask_cors import CORS, cross_origin
 from objects.user import User
 from objects.research import Research
 from secret import SECRET_KEY
+from random import randint
+import bcrypt
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -11,10 +13,10 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SECRET_KEY'] = SECRET_KEY
 
-
 # ========================= USER ROUTES =========================
 
-@app.route("/api/user/<id>")
+@app.route("/api/user/fetch/<id>")
+@cross_origin()
 def fetch_user(id):
     user = User(id)
     
@@ -41,6 +43,65 @@ def fetch_user(id):
                 'researches': user.research_papers
             }
         }
+
+@app.route("/api/user/new", methods = ['POST'])
+@cross_origin()
+def register_user():
+    if request.method == 'POST':
+        try:
+            data = request.get_json()
+
+            if not User.check_availability("uname", data['username']):
+                return {
+                    'message': "Username already exists.",
+                    'code': "REGISTER_USERNAME_EXISTS",
+                    'type': 'warning'
+                }
+            
+            if not User.check_availability("email", data['email_address']):
+                return {
+                    'message': "Email Address is already registered.",
+                    'code': "REGISTER_EMAIL_EXISTS",
+                    'type': 'warning'
+                }
+            
+            
+            
+            uuid = randint(10000000, 99999999)
+            
+            user = User(uuid)
+            
+            while user.is_registered:
+                uuid = randint(10000000, 99999999)
+
+                user = User(uuid)
+
+                if not user.is_registered:
+                    break
+
+            hashed_pw = bcrypt.hashpw(bytes(data['password'].encode('utf-8')), bcrypt.gensalt())
+
+            User.register_user(
+                _id = uuid,
+                first_name = data['first_name'],
+                middle_name = data['middle_name'],
+                last_name = data['last_name'],
+                username = data['username'],
+                password_hash = hashed_pw.decode('utf-8'),
+                email_address = data['email_address']
+            )
+
+            return {
+                    'message': 'Registration successful.',
+                    'code': 'REGISTER_SUCCESS',
+                    'type': 'success'
+                }
+        except Exception as e:
+            return {
+                'error': str(e),
+                'code': 'REGISTER_INTERNAL_FAILURE',
+                'type': 'danger'
+            }
 
 # ========================= RESEARCH ROUTES =========================
 
@@ -78,7 +139,6 @@ def login():
 
         auth = User.authenticate(data['username'], data['password'], secret_key)
         
-        #return {'authPassed': auth[0], 'uid' if auth[0] else 'error': auth[1], 'access_token': auth[2]}
         return {'access_token': auth[2], 'payload': auth[1] if not auth[0] else None}
 
 @app.route(f"/api/user/token/decode/<token>")

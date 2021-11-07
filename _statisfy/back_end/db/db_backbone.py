@@ -40,7 +40,7 @@ class DatabaseBackbone():
         try:
             self.do_operation(runner, equated)
         except Exception as e:
-            print(e)
+            return e
     
     def purge_row(self, table, **kwargs):
         cols = [x for x in kwargs]
