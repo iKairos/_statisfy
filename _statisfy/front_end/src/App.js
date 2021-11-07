@@ -1,9 +1,9 @@
 // dependencies
 import React, {useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { processUserToken } from './actions/userActions';
-import {BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
+import { processUserToken } from './actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
+import {BrowserRouter, Route, Switch } from 'react-router-dom'
 
 // components
 import Header from './components/Header'
