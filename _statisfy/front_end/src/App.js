@@ -1,20 +1,26 @@
+// dependencies
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { processUserToken } from './actions/userActions';
 import {BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
+
+// components
 import Header from './components/Header'
-import './App.css';
+
+// screens
 import HomeScreen from './screens/HomeScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import StatScreen from './DashboardContents/StatsMethods';
 import MLScreen from './DashboardContents/MachineLearning';
-
 import PearsonScreen from './screens/PearsonScreen';
-
 import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
 
+// stylesheets
+import './App.css';
+
+// tokens
 import useToken from './useToken';
 
 function App() {
