@@ -26,8 +26,7 @@ function App() {
   const {loading, error, processed} = dataSelector;
 
   if(processed?.code === "TOKEN_FAIL"){
-    localStorage.removeItem('token')
-
+    localStorage.removeItem('token');
   }
 
   useEffect(() => {
@@ -81,17 +80,17 @@ function App() {
               </Row>
 
               <main>
-              <Switch>
-                <Route path = "/"exact component={HomeScreen}></Route>
-                <Route path = "/dashboard" component={DashboardScreen} exact></Route>
-                <Route path = "/dashboard/stats" component={StatScreen} exact></Route>
-                <Route path = "/dashboard/stats/pearson" component={PearsonScreen} exact></Route>
-                <Route path = "/dashboard/machinelearning" component={MLScreen} exact></Route>
-                <Route path = "/signIn" exact>
-                  <SignInScreen setToken={setToken}/>
-                </Route>
-                <Route path = "/signUp" component={SignUpScreen} exact></Route>
-              </Switch>
+                <Switch>
+                  <Route path = "/" exact component={HomeScreen}></Route>
+                  <Route path = "/dashboard" component={DashboardScreen} exact></Route>
+                  <Route path = "/dashboard/stats" component={StatScreen} exact></Route>
+                  <Route path = "/dashboard/stats/pearson" component={PearsonScreen} exact></Route>
+                  <Route path = "/dashboard/machinelearning" component={MLScreen} exact></Route>
+                  <Route path = "/signIn" exact>
+                    <SignInScreen setToken={setToken}/>
+                  </Route>
+                  <Route path = "/signUp" component={SignUpScreen} exact></Route>
+                </Switch>
               </main>
               
           </Container>
