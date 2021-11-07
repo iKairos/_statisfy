@@ -59,29 +59,38 @@ form .division{
   width: 100%;
 }
 
-button[type="next"]{
+button[type="next_signup1"]{
   background-color: #f8f8f8;
   cursor: pointer;
   padding: .5rem;
   width: 30%;
 }
-button[type="back"]{
+button[type="next_signup2"]{
   background-color: #f8f8f8;
   cursor: pointer;
   padding: .5rem;
   width: 30%;
+}
+button[type="back_signup2"]{
+  background-color: #f8f8f8;
+  cursor: pointer;
+  padding: .5rem;
+  width: 30%;
+  
 }
 button.btn_next{
   background-color: whitesmoke;
   border-radius: 5rem;
   border: 0.1rem rgb(223, 154, 255) solid;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
+  margin-left: 20%;
 }
 button.btn_back{
   background-color: whitesmoke;
   border-radius: 5rem;
   border: 0.1rem rgb(223, 154, 255) solid;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
+  margin-right: 20%;
 }
 
 button.primary:hover{
@@ -94,5 +103,8 @@ button.primary:hover{
   text-align: center;
   font-size: 16px;
   color: #666666;
+}
+.btn_container{
+  text-align:right;
 }
 

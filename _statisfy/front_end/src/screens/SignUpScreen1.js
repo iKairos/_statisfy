@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../StyleSheets/signup.css'
 
-export default function SignUpScreen() {
+export default function SignUpScreen1() {
   const [email, setEmail] = useState('');
   const [firstname, setFirstname] = useState('');
   const [middlename, setMiddlename] = useState('');
@@ -10,13 +10,6 @@ export default function SignUpScreen() {
   const submitHandler = (e) => {
     e.preventDefault();
     // TODO: sign in action
-  };
-  const clickNext = () => {
-    console.log('Twice')
-  };
-
-  const clickBack = () => {
-    console.log('Twice')
   };
   return (
     <div className="display" type="signup">
@@ -66,11 +59,8 @@ export default function SignUpScreen() {
         </div>
 
         <div className="btn_container">
-          <button className="btn_back" type="back" onClick={clickBack} >
-            Back
-          </button>
-          <button className="btn_next" type="next" onClick={clickNext}>
-            Next
+          <button className="btn_next" type="next_signup1">
+            <Link to="/signUp2">Next</Link>
           </button>
         </div>
 

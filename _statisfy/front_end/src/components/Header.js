@@ -19,7 +19,7 @@ export default function Header(props){
                         ) : (
                         <div>
                             <Link className="menuLink" to="/signIn"style={{alignContent:"end", padding:"5px"}}>Sign in</Link>
-                            <Link className="menuLink" to="/signUp"style={{alignContent:"end", padding:"5px"}}>Sign up</Link>
+                            <Link className="menuLink" to="/signUp1"style={{alignContent:"end", padding:"5px"}}>Sign up</Link>
                         </div>
                         )
                     }

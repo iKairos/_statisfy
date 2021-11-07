@@ -88,7 +88,7 @@ export default function SignInScreen({ setToken }) {
 
         <div className="signup" type="signup" id="signup">
           Not a member?
-          <Link to="/SignUp">Sign Up</Link>
+          <Link to="/SignUp1">Sign Up</Link>
         </div>
 
       </form>
