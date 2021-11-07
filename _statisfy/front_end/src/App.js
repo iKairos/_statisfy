@@ -15,7 +15,8 @@ import StatScreen from './DashboardContents/StatsMethods';
 import MLScreen from './DashboardContents/MachineLearning';
 import PearsonScreen from './screens/PearsonScreen';
 import SignInScreen from './screens/SignInScreen';
-import SignUpScreen from './screens/SignUpScreen';
+import SignUpScreen1 from './screens/SignUpScreen1';
+import SignUpScreen2 from './screens/SignUpScreen2';
 
 // stylesheets
 import './App.css';
@@ -56,7 +57,8 @@ function App() {
                   <Route path = "/signIn" exact>
                     <SignInScreen setToken={setToken}/>
                   </Route>
-                  <Route path = "/signUp" component={SignUpScreen} exact></Route>
+                  <Route path = "/signUp1" component={SignUpScreen1} exact></Route>
+                  <Route path = "/signUp2" component={SignUpScreen2} exact></Route>
                 </Switch>
               </main>
               
