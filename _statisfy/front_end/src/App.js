@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { processUserToken } from './actions/userActions';
-import {BrowserRouter, Route, Switch, Link, withRouter } from 'react-router-dom'
-import {Navbar, Row, Col, Container, Nav, NavDropdown} from 'react-bootstrap'
+import {BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Container } from 'react-bootstrap'
 import Header from './components/Header'
 import './App.css';
 import HomeScreen from './screens/HomeScreen';
