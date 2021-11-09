@@ -60,6 +60,10 @@ class User:
     def research_papers(self):
         return self.rdb.get_researches_author(self.uid)
     
+    @property
+    def created_at(self):
+        return self.db.get_created_at(self.uid)
+    
     def set_first_name(self, new_first_name):
         return self.db.set_first_name(self.uid, new_first_name)
     
@@ -109,6 +113,7 @@ class User:
                 username = kwargs['username'],
                 password_hash = kwargs['password_hash'],
                 email_address = kwargs['email_address'],
+                created_at = kwargs['created_at']
             )
     
     def authenticate(username, password, secret_key):

@@ -5,7 +5,7 @@ from objects.user import User
 from objects.research import Research
 from secret import SECRET_KEY
 from random import randint
-import bcrypt
+import bcrypt, datetime
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -66,7 +66,6 @@ def register_user():
                 }
             
             
-            
             uuid = randint(10000000, 99999999)
             
             user = User(uuid)
@@ -81,15 +80,23 @@ def register_user():
 
             hashed_pw = bcrypt.hashpw(bytes(data['password'].encode('utf-8')), bcrypt.gensalt())
 
-            User.register_user(
+            res = User.register_user(
                 _id = uuid,
                 first_name = data['first_name'],
                 middle_name = data['middle_name'],
                 last_name = data['last_name'],
                 username = data['username'],
                 password_hash = hashed_pw.decode('utf-8'),
-                email_address = data['email_address']
+                email_address = data['email_address'],
+                created_at = data['created_at']
             )
+            
+            if not res[0]:
+                return {
+                    'message': res[1],
+                    'code': 'REGISTER_UNEXPECTED_FAILURE',
+                    'type': 'danger'
+                }
 
             return {
                     'message': 'Registration successful.',
@@ -162,14 +169,14 @@ def decode_token(token):
                 'middle_name': u.middle_name,
                 'last_name': u.last_name,
                 'username': u.username,
-                'password_hash': u.password_hash,
                 'email_address': u.email_address,
                 'nickname': u.nickname,
                 'educ_level': u.educ_level,
                 'major': u.major,
                 'occupation': u.occupation,
                 'profile_picture': u.profile_picture,
-                'researches': u.research_papers
+                'researches': u.research_papers,
+                'created_at': u.created_at
             },
             'code': 'TOKEN_SUCCESS'
         }

@@ -15,7 +15,8 @@ class UsersBackbone(DatabaseBackbone):
                 last_name = kwargs['last_name'],
                 username = kwargs['username'],
                 password_hash = kwargs['password_hash'],
-                email_address = kwargs['email_address']
+                email_address = kwargs['email_address'],
+                created_at = kwargs['created_at']
             )
 
             return True, res
@@ -25,8 +26,8 @@ class UsersBackbone(DatabaseBackbone):
     def is_registered(self, uid):
         try:
             fetched = self.fetch_row("users", _id = uid)
-
-            return False if len(fetched[0]) == 0 else True
+            
+            return False if len(fetched) == 0 else True
         except Exception as e :
             print(e)  
             return False
@@ -144,6 +145,15 @@ class UsersBackbone(DatabaseBackbone):
             fetched = self.fetch_row("users", _id = uid)[0]
 
             return fetched[11]
+        except Exception as e:
+            print(e)  
+            return False
+    
+    def get_created_at(self, uid):
+        try:
+            fetched = self.fetch_row("users", _id = uid)[0]
+
+            return fetched[12]
         except Exception as e:
             print(e)  
             return False
@@ -293,6 +303,20 @@ class UsersBackbone(DatabaseBackbone):
             self.update_data(
                 "users",
                 "profile_picture",
+                new,
+                _id = uid
+            )
+
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
+    def set_created_at(self, uid, new):
+        try:
+            self.update_data(
+                "users",
+                "created_at",
                 new,
                 _id = uid
             )

@@ -67,7 +67,8 @@ export const registerUser = (data) => async(dispatch) => {
             'last_name': data['last_name'],
             'username': data['username'],
             'password': data['password'],
-            'email_address': data['email_address']
+            'email_address': data['email_address'],
+            'created_at': data['created_at']
         }).then(res => {
             dispatch({
                 type: USER_REGISTER_SUCCESS, 
