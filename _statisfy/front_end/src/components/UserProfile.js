@@ -2,9 +2,12 @@
 
 export default function UserProfile(props){
     const stringifyDatetime = datetime => {
-        const d = new Date(datetime)
+        const d = new Date(datetime).toLocaleString('en-US', {
+            timeZone: 'Asia/Manila'
+            });
 
-        return `${d.getMonth()}/${d.getDay()}/${d.getFullYear()} | ${d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`
+        //return `${d.getMonth()}/${d.getDay()}/${d.getFullYear()} ${d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`
+        return d
     }
 
     return(
