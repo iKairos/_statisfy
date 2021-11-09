@@ -4,8 +4,7 @@ import { Alert } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { registerUser } from '../actions/userActions';
 import '../StyleSheets/signup.css'
-import SignInScreen from './SignInScreen';
-import { Redirect, useHistory } from "react-router"
+import { Redirect } from "react-router"
 
 export default function SignUpScreen1() {
   const [email, setEmail] = useState('');
@@ -18,9 +17,6 @@ export default function SignUpScreen1() {
 
   const [showFirst, setShowFirst] = useState(true);
   const [showSecond, setShowSecond] = useState(false);
-
-  // MESSAGES AND ERRORS
-  const [errorMsg, setErrorMsg] = useState('');
 
   // REDUX DISPATCHER 
   const dispatch = useDispatch();
