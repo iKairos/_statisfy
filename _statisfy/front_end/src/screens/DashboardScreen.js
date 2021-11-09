@@ -26,13 +26,18 @@ export default function DashboardScreen(props){
     if(processed?.code === 'TOKEN_SUCCESS'){
         return(
             <div>
-                <div className = "container">
-                    <UserProfile user={processed?.user} />
-                </div>
-                <div className = "container">
-                    <Research/>
-                </div>
-                
+                {
+                    loading ? <p>Loading...</p> : (
+                        <div>
+                            <div className = "container">
+                                <UserProfile user={processed?.user} />
+                            </div>
+                            <div className = "container">
+                                <Research/>
+                            </div>
+                        </div>
+                    )
+                }
             </div>
         )
     }else if(processed?.code === 'TOKEN_FAIL'){

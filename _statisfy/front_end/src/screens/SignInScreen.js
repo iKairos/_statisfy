@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useState  } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import '../StyleSheets/signin.css'
 import { authenticateUser } from '../actions/userActions';
@@ -11,7 +11,6 @@ export default function SignInScreen(props) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState(false);
 
   const history = useHistory();
   

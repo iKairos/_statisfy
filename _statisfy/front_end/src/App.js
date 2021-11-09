@@ -25,7 +25,6 @@ import useToken from './useToken';
 
 function App() {
   const { token, setToken } = useToken();
-  process.env.TZ = "Asia/Manila";
 
   const dispatch = useDispatch();
   const dataSelector = useSelector((state) => 
