@@ -64,6 +64,10 @@ class User:
     def created_at(self):
         return self.db.get_created_at(self.uid)
     
+    @property
+    def bio(self):
+        return self.db.get_bio(self.uid)
+    
     def set_first_name(self, new_first_name):
         return self.db.set_first_name(self.uid, new_first_name)
     
@@ -96,6 +100,9 @@ class User:
     
     def set_profile_picture(self, new_profile_picture):
         return self.db.set_profile_picture(self.uid, new_profile_picture)
+    
+    def set_bio(self, new_bio):
+        return self.db.set_bio(self.uid, new_bio)
     
     def check_availability(param, value):
         db = db_users.UsersBackbone()
