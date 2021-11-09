@@ -42,7 +42,8 @@ export default function SignUpScreen1() {
       last_name: lastname,
       username: uname,
       password: password,
-      email_address: email
+      email_address: email,
+      created_at: new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, '')
     }))
   };
 
