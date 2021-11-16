@@ -10,6 +10,7 @@ import Header from './components/Header'
 
 // screens
 import HomeScreen from './screens/HomeScreen';
+import UserScreen from './screens/UserScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import StatScreen from './DashboardContents/StatsMethods';
 import MLScreen from './DashboardContents/MachineLearning';
@@ -43,23 +44,21 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
-          <Container fluid>
+      <div className="wrapper">
               <Header loading={loading} user={processed?.user} />
 
-              <main>
+              <div>
                 <Switch>
                   <Route path = "/" exact component={HomeScreen}></Route>
-                  <Route path = "/dashboard" render={(props) => <DashboardScreen token={token} />} exact></Route>
+                  <Route path = "/user" render={(props) => <UserScreen token={token} />} exact></Route>
+                  <Route path = "/dashboard" component={DashboardScreen} exact></Route>
                   <Route path = "/dashboard/stats" component={StatScreen} exact></Route>
                   <Route path = "/dashboard/stats/pearson" component={PearsonScreen} exact></Route>
                   <Route path = "/dashboard/machinelearning" component={MLScreen} exact></Route>
                   <Route path = "/signIn" exact render={(props) => <SignInScreen setToken={setToken} {...props}/>}/>
                   <Route path = "/signUp" component={SignUpScreen} exact></Route>
                 </Switch>
-              </main>
-              
-          </Container>
+              </div>
       </div>
     </BrowserRouter>
   );

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import {Navbar, Row, Col, Nav, NavDropdown} from 'react-bootstrap'
+import {Navbar, Row, Col, Nav, NavDropdown, Container} from 'react-bootstrap'
 import { useHistory } from "react-router"
 
 export default function Header(props){
@@ -12,16 +12,11 @@ export default function Header(props){
     }
 
     return(
-        <div>
-            <Row className ="FirstRow">
-                <Col sm ="5" md lg ="2">
-                    <div>
-                        <Link className="headerLink" to="/">Statisfy</Link>
-                    </div>
-                </Col>
-                <Col sm ="2" md lg ="8"/>
-                <Col sm ="5" md lg ="2">
-                    <div>
+        <div className="pagewrapper ">
+            <Navbar bg="light" expand="lg" className="FirstRow" >
+                    <Navbar.Brand to="/">Statisfy</Navbar.Brand>
+
+                    <div className="account">
                     {
                         props.loading ? <p>Loading...</p> : typeof props.user != 'undefined' ? (
                         <div><p>Hello, {props.user?.first_name} {props.user?.last_name}! </p> <button onClick={handleLogout}>Logout</button></div>
@@ -33,27 +28,28 @@ export default function Header(props){
                         )
                     }
                     </div>
-                </Col>
-                </Row>
-                <Row className ="SecondRow">
-                <Col sm md lg ="12">
-                    <Navbar bg="light" variant="light" fluid>
-                        <Nav className ="justify-content-center" style={{width:"100%"}}>
-                        <Nav.Link className="NavbarContents">
-                            <Link className="menuLink" to="/">Home</Link>
-                        </Nav.Link>
-                        <NavDropdown title ="Guides" className="NavbarContents">
-                            <NavDropdown.Item>Statistical Method Guide</NavDropdown.Item>
-                            <NavDropdown.Item>Machine Learning Guide</NavDropdown.Item>
+            </Navbar>
+
+            
+            <Navbar bg="light" expand="lg" className="SecondRow">
+                    <Navbar.Toggle aria-controls="navbarScroll" />
+                    <Navbar.Collapse id="navbarScroll">
+                    <Nav
+                        className="me-auto my-2 my-lg-0"
+                        style={{ maxHeight: '100px' }}
+                        navbarScroll
+                    >
+                        <Nav.Link> <Link className="menuLink" to="/">Home</Link></Nav.Link>
+                        <Nav.Link> <Link className="menuLink" to="/user">Profile</Link></Nav.Link>
+                        <NavDropdown title="Guides" id="navbarScrollingDropdown">
+                        <NavDropdown.Item href="#action3">Statistical Method Guide</NavDropdown.Item>
+                        <NavDropdown.Item href="#action4">Machine Learning Guide</NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link className="NavbarContents">
-                            <Link className="menuLink" to="/dashboard">Dashboard</Link>
-                        </Nav.Link>
-                        <Nav.Link className="NavbarContents">About</Nav.Link>
-                        </Nav>
-                    </Navbar>
-                </Col>
-            </Row>
+                        <Nav.Link to="/dashboard"><Link className="menuLink" to="/dashboard">Dashboard</Link></Nav.Link>
+                        <Nav.Link>About</Nav.Link>
+                    </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
         </div>
     )
 }

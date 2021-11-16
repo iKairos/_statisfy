@@ -1,47 +1,67 @@
-
+import MethodCard from "../components/MethodCard";
 import "../StyleSheets/dashboard.css";
+import { useState } from "react";
 
-import UserProfile from "../components/UserProfile";
-import Research from "../components/Research";
-import { Redirect } from "react-router";
-import { processUserToken } from "../actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+export default function PearsonScreen(){
+    const [stats, setStats] = useState("");
+    const [ML, setML] = useState("");
 
-export default function DashboardScreen(props){
-    const dispatch = useDispatch();
-    const dataSelector = useSelector((state) => 
-        state.decodedUserToken
-    );
-    const {loading, error, processed} = dataSelector;
-
-    if(props.token && processed?.code === "TOKEN_FAIL"){
-        localStorage.removeItem('token');
+    const selectStats = function(){
+      setStats("Selected");
+      setML("");
     }
 
-    useEffect(() => {
-        dispatch(processUserToken(props.token));
-    }, [])
+    const selectML = function(){
+        setML("Selected");
+        setStats("");
+      }
 
-    if(processed?.code === 'TOKEN_SUCCESS'){
-        return(
-            <div>
-                <div className = "container">
-                    <UserProfile user={processed?.user} />
+
+
+    return(
+        <div className="dashboard">
+
+            <div className ="dashContainer">
+                <div className="dashheader">
+                    <h3>Enter Title and Description</h3>
                 </div>
-                <div className = "container">
-                    <Research/>
+                <div className="res">
+                    <div className="res_div">
+                        <span className="res_span">Research Title</span>
+                        <input className="res_title" placeholder="Research Title"></input>
+                    </div>
+                    <div className="res_div">
+                        <span className="res_span">Research Description</span>
+                        <textarea className="res_desc" placeholder="Description"></textarea>
+                    </div>
+                    
                 </div>
-                
             </div>
-        )
-    }else if(processed?.code === 'TOKEN_FAIL'){
-        return(
-            <Redirect to={{pathname: "/signIn", message: "You need to log in to access this page. Please log in first or create an account using the Sign Up page."}}></Redirect>
-        )
-    }else{
-        return(
-            <p></p>
-        );
-    }
+
+            <div className ="dashContainer">
+                <div className="dashheader">
+                    <h3>Choose Research Tool</h3>
+                </div>
+                <div className="cardwrapper">
+                    <div onClick ={selectStats}>
+                        <MethodCard
+                            title="Statistics"
+                            desc= "dsad"
+                            status ={stats}
+                        />
+                    </div>
+                    <div onClick = {selectML}>
+                        <MethodCard
+                            title="Machine Learning"
+                            desc= "card 1"
+                            status ={ML}
+                            
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    );
 }
