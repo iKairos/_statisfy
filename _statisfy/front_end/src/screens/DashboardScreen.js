@@ -16,8 +16,6 @@ export default function PearsonScreen(){
         setStats("");
       }
 
-
-
     return(
         <div className="dashboard">
 
@@ -60,8 +58,6 @@ export default function PearsonScreen(){
                     </div>
                 </div>
             </div>
-        </div>
-
-        
+        </div> 
     );
 }
