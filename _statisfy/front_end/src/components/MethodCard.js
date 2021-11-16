@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
-import "../StyleSheets/methodcard.css";
+
+import "../StyleSheets/dashboard.css";
+import { useState } from "react";
 
 export default function MethodCard(props){
+  //  <button className="card_btn">Select</button>
+
     return(
-    <div className="card">
-        <div className="card_body">
-            <img className="card_image" src ={props.img}/>
-            <h2 className= "card_title">{props.title}</h2>
-            <p className= "card_desc">
-            {props.content}
-            </p>
+        <div className ="card">
+            
+                <h4 className="card_title">{props.title}</h4>
+                <div className="card_desc">{props.desc}</div>
+                <div className= "card_status">{props.status}</div>
+           
+
         </div>
-        
-        <Link className="card_link" to={props.link}><button className ="card_btn">Proceed</button></Link>
-    </div>   
     ); 
 }
