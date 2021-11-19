@@ -2,21 +2,28 @@ import MethodCard from "../components/MethodCard";
 import "../StyleSheets/dashboard.css";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router";
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { processUserToken } from "../actions/userActions";
 
 export default function DashboardScreen(props){
     const [stats, setStats] = useState("");
     const [ML, setML] = useState("");
+    const [option, setOption] = useState(false);
+    const [toStatistics, setDestination] = useState(false);
 
     const selectStats = function(){
-      setStats("Selected");
-      setML("");
+        setStats("Selected");
+        setML(""); 
+        setOption(true);
+        setDestination(true);
     }
 
     const selectML = function(){
         setML("Selected");
         setStats("");
+        setOption(true);
+        setDestination(false);
     }
 
     const dispatch = useDispatch();
@@ -75,6 +82,21 @@ export default function DashboardScreen(props){
                         </div>
                     </div>
                 </div>
+
+                <div className = "proceed">
+                    {option?(
+                        toStatistics?(
+                            <Link to="/dashboard/stats">
+                                <button className="proceed_Btn" >PROCEED</button>
+                            </Link>
+                        ):(
+                            <Link to="/dashboard/machinelearning">
+                            <button className="proceed_Btn" > PROCEED</button>
+                            </Link>
+                        )
+                    ): null}
+                </div>
+
             </div> 
         );
     }else if(processed?.code === 'TOKEN_FAIL'){
