@@ -50,7 +50,7 @@ function App() {
                 <Switch>
                   <Route path = "/" exact component={HomeScreen}></Route>
                   <Route path = "/user" render={(props) => <UserScreen token={token} />} exact></Route>
-                  <Route path = "/dashboard" component={DashboardScreen} exact></Route>
+                  <Route path = "/dashboard" render={(props) => <DashboardScreen token={token} />} exact></Route>
                   <Route path = "/dashboard/stats" component={StatScreen} exact></Route>
                   <Route path = "/dashboard/stats/pearson" component={PearsonScreen} exact></Route>
                   <Route path = "/dashboard/machinelearning" component={MLScreen} exact></Route>
