@@ -97,6 +97,23 @@ body {
   border: 1px;
 }
 
+.proceed_Btn {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background-color: white;
+  color: black;
+  width: 100%;
+  border-color: violet;
+}
+
+.proceed_Btn:hover {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background-color: violet;
+  color: white;
+  border-color: white;
+}
+
 .cardwrapper {
   display: -ms-grid;
   display: grid;
@@ -185,6 +202,21 @@ body {
     -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
     height: 100%;
+  }
+  .proceed_Btn {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    background-color: white;
+    color: black;
+    width: 100%;
+    border-color: violet;
+  }
+  .proceed_Btn:hover {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    background-color: violet;
+    color: white;
+    border-color: white;
   }
 }
 /*# sourceMappingURL=dashboard.css.map */
