@@ -1,20 +1,27 @@
 import MethodCard from "../components/MethodCard";
 import "../StyleSheets/dashboard.css";
 import { useState } from "react";
+import { Link } from 'react-router-dom'
 
 export default function PearsonScreen(){
     const [stats, setStats] = useState("");
     const [ML, setML] = useState("");
+    const [option, setOption] = useState(false);
+    const [toStatistics, setDestination] = useState(false);
 
     const selectStats = function(){
-      setStats("Selected");
-      setML("");
+        setStats("Selected");
+        setML(""); 
+        setOption(true);
+        setDestination(true);
     }
 
     const selectML = function(){
         setML("Selected");
         setStats("");
-      }
+        setOption(true);
+        setDestination(false);
+    }
 
 
 
@@ -59,6 +66,19 @@ export default function PearsonScreen(){
                         />
                     </div>
                 </div>
+            </div>
+            <div className = "proceed">
+                {option?(
+                    toStatistics?(
+                        <Link to="/dashboard/stats">
+                            <button className="proceed_Btn" >PROCEED</button>
+                        </Link>
+                    ):(
+                        <Link to="/dashboard/machinelearning">
+                        <button className="proceed_Btn" > PROCEED</button>
+                        </Link>
+                    )
+                ): null}
             </div>
         </div>
 

@@ -77,6 +77,23 @@ body {
   }
 }
 
+.proceed {
+  &_Btn {
+    box-shadow: none;
+    background-color: white;
+    color: black;
+    width: 100%;
+    border-color: violet;
+  }
+
+  &_Btn:hover {
+    box-shadow: none;
+    background-color: violet;
+    color: white;
+    border-color: white;
+  }
+}
+
 .cardwrapper {
   display: grid;
   padding: 2rem;
@@ -141,5 +158,22 @@ body {
     position: relative;
     flex-wrap: nowrap;
     height: 100%;
+  }
+
+  .proceed {
+    &_Btn {
+      box-shadow: none;
+      background-color: white;
+      color: black;
+      width: 100%;
+      border-color: violet;
+    }
+
+    &_Btn:hover {
+      box-shadow: none;
+      background-color: violet;
+      color: white;
+      border-color: white;
+    }
   }
 }
