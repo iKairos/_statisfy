@@ -23,8 +23,6 @@ export default function PearsonScreen(){
         setDestination(false);
     }
 
-
-
     return(
         <div className="dashboard">
 
@@ -67,21 +65,7 @@ export default function PearsonScreen(){
                     </div>
                 </div>
             </div>
-            <div className = "proceed">
-                {option?(
-                    toStatistics?(
-                        <Link to="/dashboard/stats">
-                            <button className="proceed_Btn" >PROCEED</button>
-                        </Link>
-                    ):(
-                        <Link to="/dashboard/machinelearning">
-                        <button className="proceed_Btn" > PROCEED</button>
-                        </Link>
-                    )
-                ): null}
-            </div>
         </div>
 
         
-    );
-}
+    )};

@@ -157,6 +157,15 @@ class UsersBackbone(DatabaseBackbone):
         except Exception as e:
             print(e)  
             return False
+
+    def get_bio(self, uid):
+        try:
+            fetched = self.fetch_row("users", _id = uid)[0]
+
+            return fetched[13]
+        except Exception as e:
+            print(e)  
+            return False
     
     def set_first_name(self, uid, new):
         try:
@@ -317,6 +326,20 @@ class UsersBackbone(DatabaseBackbone):
             self.update_data(
                 "users",
                 "created_at",
+                new,
+                _id = uid
+            )
+
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
+    def set_bio(self, uid, new):
+        try:
+            self.update_data(
+                "users",
+                "bio",
                 new,
                 _id = uid
             )

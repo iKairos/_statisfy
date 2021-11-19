@@ -176,7 +176,8 @@ def decode_token(token):
                 'occupation': u.occupation,
                 'profile_picture': u.profile_picture,
                 'researches': u.research_papers,
-                'created_at': u.created_at
+                'created_at': u.created_at,
+                'bio': u.bio
             },
             'code': 'TOKEN_SUCCESS'
         }
