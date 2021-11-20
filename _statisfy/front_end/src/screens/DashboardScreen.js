@@ -69,14 +69,14 @@ export default function DashboardScreen(props){
                         <div onClick ={selectStats}>
                             <MethodCard
                                 title="Statistics"
-                                desc= "dsad"
+                                desc= "Analyze your dataset by performing statistical techniques to infer specific hypotheses."
                                 status ={stats}
                             />
                         </div>
                         <div onClick = {selectML}>
                             <MethodCard
                                 title="Machine Learning"
-                                desc= "card 1"
+                                desc= "Develop a model for prediction and classification by training a machine learning model."
                                 status ={ML}
                             />
                         </div>
