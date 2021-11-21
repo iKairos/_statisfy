@@ -49,13 +49,13 @@ function App() {
               <div>
                 <Switch>
                   <Route path = "/" exact component={HomeScreen}></Route>
-                  <Route path = "/user" render={(props) => <UserScreen token={token} />} exact></Route>
+                  <Route path = "/user/:id?" render={(props) => <UserScreen token={token} />} exact></Route>
                   <Route path = "/dashboard" render={(props) => <DashboardScreen token={token} />} exact></Route>
                   <Route path = "/dashboard/stats" component={StatScreen} exact></Route>
                   <Route path = "/dashboard/stats/pearson" component={PearsonScreen} exact></Route>
                   <Route path = "/dashboard/machinelearning" component={MLScreen} exact></Route>
-                  <Route path = "/signIn" exact render={(props) => <SignInScreen setToken={setToken} {...props}/>}/>
-                  <Route path = "/signUp" component={SignUpScreen} exact></Route>
+                  <Route path = "/signIn" exact render={(props) => <SignInScreen setToken={setToken} token={token} {...props}/>}/>
+                  <Route path = "/signUp" exact render={() => <SignUpScreen token={token} />}></Route>
                 </Switch>
               </div>
       </div>
