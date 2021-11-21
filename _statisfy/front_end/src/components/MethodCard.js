@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-import "../StyleSheets/dashboard.css";
 import { useState } from "react";
 
 export default function MethodCard(props){

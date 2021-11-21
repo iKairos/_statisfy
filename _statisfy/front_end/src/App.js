@@ -12,7 +12,7 @@ import Header from './components/Header'
 import HomeScreen from './screens/HomeScreen';
 import UserScreen from './screens/UserScreen';
 import DashboardScreen from './screens/DashboardScreen';
-import StatScreen from './DashboardContents/StatsMethods';
+import StatScreen from './screens/StatScreen';
 import MLScreen from './DashboardContents/MachineLearning';
 import PearsonScreen from './screens/PearsonScreen';
 import SignInScreen from './screens/SignInScreen';

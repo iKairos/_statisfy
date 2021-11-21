@@ -19,7 +19,9 @@ export default function Header(props){
                     <div className="account">
                     {
                         props.loading ? <p>Loading...</p> : typeof props.user != 'undefined' ? (
-                        <div><p>Hello, {props.user?.first_name} {props.user?.last_name}! </p> <button onClick={handleLogout}>Logout</button></div>
+                        <div><p>Hello, {props.user?.first_name} {props.user?.last_name}! </p> 
+                            <button onClick={handleLogout}>Logout</button>
+                        </div>
                         ) : (
                         <div>
                             <Link className="menuLink" to="/signIn"style={{alignContent:"end", padding:"5px"}}>Sign in</Link>

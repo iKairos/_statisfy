@@ -5,6 +5,7 @@ import { Redirect } from "react-router";
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { processUserToken } from "../actions/userActions";
+import { DisplayTable } from "../components/DisplayTable";
 
 export default function DashboardScreen(props){
     const [stats, setStats] = useState("");
@@ -12,6 +13,9 @@ export default function DashboardScreen(props){
     const [option, setOption] = useState(false);
     const [toStatistics, setDestination] = useState(false);
 
+    const [showFirst, setShowFirst] = useState(true);
+
+    
     const selectStats = function(){
         setStats("Selected");
         setML(""); 
@@ -25,6 +29,16 @@ export default function DashboardScreen(props){
         setOption(true);
         setDestination(false);
     }
+
+
+    const switchToFirst = () => {
+        setShowFirst(true);
+    }
+
+    const switchToSecond = () => {
+        setShowFirst(false);
+    }
+
 
     const dispatch = useDispatch();
     
@@ -43,60 +57,121 @@ export default function DashboardScreen(props){
 
     if(processed?.code === 'TOKEN_SUCCESS'){
         return(
-            <div className="dashboard">
-                <div className ="dashContainer">
-                    <div className="dashheader">
-                        <h3>Enter Title and Description</h3>
-                    </div>
-                    <div className="res">
-                        <div className="res_div">
-                            <span className="res_span">Research Title</span>
-                            <input className="res_title" placeholder="Research Title"></input>
+            <div>
+                {showFirst?(
+                    <div className="dashboard">
+                        <div className ="dashboard_container">
+                            <div className="dashboard_header">
+                                <h3>Enter Title and Description</h3>
+                            </div>
+                            <div className="res">
+                                <div className="res_div">
+                                    <span className="res_span">Research Title</span>
+                                    <input className="res_title" placeholder="Research Title"></input>
+                                </div>
+                                <div className="res_div">
+                                    <span className="res_span">Research Description</span>
+                                    <textarea className="res_desc" placeholder="Description"></textarea>
+                                </div>
+                                
+                            </div>
                         </div>
-                        <div className="res_div">
-                            <span className="res_span">Research Description</span>
-                            <textarea className="res_desc" placeholder="Description"></textarea>
-                        </div>
-                        
-                    </div>
-                </div>
-    
-                <div className ="dashContainer">
-                    <div className="dashheader">
-                        <h3>Choose Research Tool</h3>
-                    </div>
-                    <div className="cardwrapper">
-                        <div onClick ={selectStats}>
-                            <MethodCard
-                                title="Statistics"
-                                desc= "Analyze your dataset by performing statistical techniques to infer specific hypotheses."
-                                status ={stats}
-                            />
-                        </div>
-                        <div onClick = {selectML}>
-                            <MethodCard
-                                title="Machine Learning"
-                                desc= "Develop a model for prediction and classification by training a machine learning model."
-                                status ={ML}
-                            />
-                        </div>
-                    </div>
-                </div>
+            
+                        <div className ="dashboard_container">
+                            <div className="dashboard_header">
+                                <h3>Choose Research Tool</h3>
+                            </div>
+                            <div className="cardwrapper">
+                                <div onClick ={selectStats}>
+                                    <MethodCard
+                                        title="Statistics"
+                                        desc= "Analyze your dataset by performing statistical techniques to infer specific hypotheses."
+                                        status ={stats}
+                                    />
+                                </div>
+                                <div onClick = {selectML}>
+                                    <MethodCard
+                                        title="Machine Learning"
+                                        desc= "Develop a model for prediction and classification by training a machine learning model."
+                                        status ={ML}
+                                    />
+                                </div>
+                            </div>
 
-                <div className = "proceed">
-                    {option?(
-                        toStatistics?(
-                            <Link to="/dashboard/stats">
-                                <button className="proceed_Btn" >PROCEED</button>
-                            </Link>
-                        ):(
-                            <Link to="/dashboard/machinelearning">
-                            <button className="proceed_Btn" > PROCEED</button>
-                            </Link>
-                        )
-                    ): null}
-                </div>
+                            <div className = "proceed">
+                                {option?(
+                                    <button className="proceed_Btn" onClick={switchToSecond}> next</button>
+                                ): null}
+                            </div>
+                        </div>
 
+                       
+
+                    </div>
+
+                ):(
+                    <div className="upload">
+                        <div className="upload_container">
+                            <div className="upload_res">
+                                <div className="upload_header"><h3>Research</h3></div>
+                                <div className="upload_body">
+                                    <span className="upload_span"> Title:</span>
+                                    <p>Research lorem loremasdmwandak</p>
+                                    <span className="upload_span"> Description:</span>
+                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    
+                                    <button className="proceed_Btn" onClick={switchToFirst}> edit</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="upload_container">
+                            <div className="upload_res">
+                                <div className="upload_header">
+                                    <h3>Data</h3>
+                                    <div className="upload_data">
+                                            <button className="upload_btn"> Upload</button>
+                                            <button className="upload_btn"> Clear</button>
+
+                                    </div>
+                                    
+                                </div>
+                                <div className="upload_table">
+                                    <DisplayTable/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="upload_container">
+                            <div className="upload_res">
+                                <div className="upload_header"><h3>Filter</h3></div>
+                                <div className="upload_body">
+                                    <span className="upload_span"> Type of Data:</span>
+                                    
+                                    <span className="upload_span"> Number of Variables:</span>
+                                   
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className="upload_container">
+                            <div className="upload_res">
+                                <div className="upload_header">
+                                    <h3>Statistical Methods</h3>
+                                </div>
+                                <div className="upload_body">
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    
+                )}
             </div> 
         );
     }else if(processed?.code === 'TOKEN_FAIL'){

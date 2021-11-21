@@ -3,6 +3,7 @@
 $radius: 1rem;
 $cardcolor: #e8e8e8;
 $boxshadow: 0 0 10px 5px rgb(240, 240, 240);
+$buttonbg: #a742c5;
 
 *,
 *::before,
@@ -14,7 +15,6 @@ $boxshadow: 0 0 10px 5px rgb(240, 240, 240);
 
 body {
   font-family: "Montserrat";
-  background-color: aquamarine;
 }
 
 .dashboard {
@@ -23,21 +23,23 @@ body {
   gap: 2rem;
   grid-template-columns: 1fr;
   justify-content: center;
-  align-items: center;
+
+  &_container {
+    border-radius: $radius;
+    overflow: hidden;
+    box-shadow: $boxshadow;
+    margin-bottom: 2rem;
+  }
+
+  &_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+    width: 1fr;
+  }
 }
 
-.dashContainer {
-  border-radius: $radius;
-  overflow: hidden;
-  box-shadow: $boxshadow;
-}
-.dashheader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 5rem;
-  width: 1fr;
-}
 .res {
   display: grid;
   padding: 2rem;
@@ -72,7 +74,6 @@ body {
   }
 
   &_desc:focus {
-    border-color: aquamarine;
     border: 1px;
   }
 }
@@ -80,17 +81,11 @@ body {
 .proceed {
   &_Btn {
     box-shadow: none;
-    background-color: white;
-    color: black;
-    width: 100%;
-    border-color: violet;
-  }
-
-  &_Btn:hover {
-    box-shadow: none;
-    background-color: violet;
+    border: none;
+    border-top: 1px solid $cardcolor;
+    background-color: $buttonbg;
     color: white;
-    border-color: white;
+    width: 100%;
   }
 }
 
@@ -140,21 +135,88 @@ body {
   }
 }
 
-@media screen and (min-width: 600px) {
-  .cardwrapper {
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 16rem));
+.upload {
+  display: grid;
+  padding: 2rem;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  justify-content: center;
+
+  &_res {
+    width: 1fr;
+  }
+  &_container {
+    border-radius: $radius;
+    overflow: hidden;
+    box-shadow: $boxshadow;
+    margin-bottom: 2rem;
+    background-color: $cardcolor;
   }
 
-  .dashboard {
+  &_header {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+    width: 1fr;
+    position: relative;
+  }
+
+  &_body {
+    display: grid;
+    padding: 2rem;
+    width: 1fr;
     grid-template-columns: 1fr;
     justify-content: center;
     align-items: center;
+    background-color: $cardcolor;
+  }
+  &_span {
+    color: #313131;
+    font-weight: bold;
+  }
+
+  &_data {
+    max-width: 1fr;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    gap: 0.5rem;
+  }
+
+  &_btn {
+    min-width: 5rem;
+    border: none;
+    border-radius: 2rem;
+    margin-right: 0.5rem;
+  }
+  &_table {
+    text-align: center;
+    max-height: 25rem;
+    overflow: scroll;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .dashboard {
+    grid-template-columns: 1fr 1fr;
+
+    &_container {
+      width: 1fr;
+      height: min-content;
+    }
+  }
+
+  .cardwrapper {
+    grid-template-columns: 1fr 1fr;
+    width: 1fr;
   }
   .card {
-    flex-direction: column;
+    flex-direction: row;
     text-align: center;
-    min-width: 14rem;
-    max-width: 16rem;
+    width: 1fr;
     position: relative;
     flex-wrap: nowrap;
     height: 100%;
@@ -162,18 +224,17 @@ body {
 
   .proceed {
     &_Btn {
-      box-shadow: none;
       background-color: white;
       color: black;
-      width: 100%;
-      border-color: violet;
     }
-
     &_Btn:hover {
       box-shadow: none;
-      background-color: violet;
+      background-color: $buttonbg;
       color: white;
-      border-color: white;
     }
+  }
+
+  .upload {
+    grid-template-columns: 1fr 3fr;
   }
 }

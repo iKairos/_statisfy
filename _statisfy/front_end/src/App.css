@@ -8,6 +8,10 @@
   flex-direction: column;
   align-items: center;
 }
+.account {
+  position: fixed;
+  right: 0;
+}
 .pagewrapper {
   z-index: 999;
   margin: 0;
