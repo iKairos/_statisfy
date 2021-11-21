@@ -23,15 +23,16 @@ def fetch_user(id):
                 'middle_name': user.middle_name,
                 'last_name': user.last_name,
                 'username': user.username,
-                'password_hash': user.password_hash,
                 'email_address': user.email_address,
                 'nickname': user.nickname,
                 'educ_level': user.educ_level,
                 'major': user.major,
                 'occupation': user.occupation,
                 'profile_picture': user.profile_picture,
-                'researches': user.research_papers
-            }
+                'researches': user.research_papers,
+                'created_at': user.created_at
+            },
+            'code': 'USER_FETCH_SUCCESS'
         }
 
 @app.route("/api/user/new", methods = ['POST'])

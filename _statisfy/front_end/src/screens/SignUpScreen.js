@@ -6,7 +6,7 @@ import { registerUser } from '../actions/userActions';
 import '../StyleSheets/signup.css'
 import { Redirect } from "react-router"
 
-export default function SignUpScreen1() {
+export default function SignUpScreen1(props) {
   const [email, setEmail] = useState('');
   const [uname, setUsername] = useState('');
   const [firstname, setFirstname] = useState('');
@@ -57,6 +57,12 @@ export default function SignUpScreen1() {
   const switchToSecond = () => {
     setShowFirst(false);
     setShowSecond(true);
+  }
+
+  if(props.token){
+    return(
+      <Redirect to={{pathname: "/user"}}></Redirect>
+    )
   }
 
   return (

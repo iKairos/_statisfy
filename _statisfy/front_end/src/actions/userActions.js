@@ -25,7 +25,7 @@ export const getUser = (uid) => async(dispatch) => {
 
         dispatch({
             type: USER_DATA_SUCCESS, 
-            payload: data.user
+            payload: data
         });
     }catch(error){
         dispatch({
