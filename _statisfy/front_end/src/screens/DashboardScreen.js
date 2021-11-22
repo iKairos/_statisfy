@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { processUserToken } from "../actions/userActions";
 import { DisplayTable } from "../components/DisplayTable";
+import { Alert } from "react-bootstrap";
 
 export default function DashboardScreen(props){
     const [stats, setStats] = useState("");
@@ -16,6 +17,7 @@ export default function DashboardScreen(props){
 
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
+    const [error, setError] = useState();
 
     
     const selectStats = function(){
@@ -38,16 +40,23 @@ export default function DashboardScreen(props){
     }
 
     const switchToSecond = () => {
+        if(title?.length == 0 || description?.length == 0 || typeof title === 'undefined' || typeof description === 'undefined'){
+            setError("Please fill in all the details to continue.");
+            return;
+        }
+        
         setShowFirst(false);
+        setError("");
     }
 
+    // process token
 
     const dispatch = useDispatch();
     
     const dataSelector = useSelector((state) => 
         state.decodedUserToken
     );
-    const {loading, error, processed} = dataSelector;
+    const {processed} = dataSelector;
 
     if(props.token && processed?.code === "TOKEN_FAIL"){
         localStorage.removeItem('token');
@@ -67,6 +76,7 @@ export default function DashboardScreen(props){
                                 <h3>Enter Title and Description</h3>
                             </div>
                             <div className="res">
+                                {error && <Alert variant='danger'>{error}</Alert>}
                                 <div className="res_div">
                                     <span className="res_span">Research Title</span>
                                     <input className="res_title" value={title} placeholder="Research Title" onChange={(e) => setTitle(e.target.value)}></input>
@@ -75,7 +85,6 @@ export default function DashboardScreen(props){
                                     <span className="res_span">Research Description</span>
                                     <textarea className="res_desc" value={description} placeholder="Description" onChange={(e) => setDescription(e.target.value)}></textarea>
                                 </div>
-                                
                             </div>
                         </div>
             
@@ -198,8 +207,6 @@ export default function DashboardScreen(props){
                         </div>
 
                     </div>
-                    
-                    
                 )}
             </div> 
         );
