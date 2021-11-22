@@ -34,24 +34,24 @@ export default function Header(props){
 
             
             <Navbar bg="light" expand="lg" className="SecondRow">
-                    <Navbar.Toggle aria-controls="navbarScroll" />
+                <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
-                    <Nav
-                        className="me-auto my-2 my-lg-0"
-                        style={{ maxHeight: '100px' }}
-                        navbarScroll
-                    >
-                        <Nav.Link> <Link className="menuLink" to="/">Home</Link></Nav.Link>
-                        <Nav.Link> <Link className="menuLink" to="/profile">Profile</Link></Nav.Link>
-                        <NavDropdown title="Guides" id="navbarScrollingDropdown">
-                        <NavDropdown.Item href="#action3">Statistical Method Guide</NavDropdown.Item>
-                        <NavDropdown.Item href="#action4">Machine Learning Guide</NavDropdown.Item>
-                        </NavDropdown>
-                        <Nav.Link to="/dashboard"><Link className="menuLink" to="/dashboard">Dashboard</Link></Nav.Link>
-                        <Nav.Link>About</Nav.Link>
-                    </Nav>
+                        <Nav
+                            className="me-auto my-2 my-lg-0"
+                            style={{ maxHeight: '100px' }}
+                            navbarScroll
+                        >
+                            <Nav.Link> <Link className="menuLink" to="/">Home</Link></Nav.Link>
+                            <Nav.Link> <Link className="menuLink" to="/profile">Profile</Link></Nav.Link>
+                            <NavDropdown title="Guides" id="navbarScrollingDropdown">
+                            <NavDropdown.Item href="#action3">Statistical Method Guide</NavDropdown.Item>
+                            <NavDropdown.Item href="#action4">Machine Learning Guide</NavDropdown.Item>
+                            </NavDropdown>
+                            <Nav.Link to="/dashboard"><Link className="menuLink" to="/dashboard">Dashboard</Link></Nav.Link>
+                            <Nav.Link>About</Nav.Link>
+                        </Nav>
                     </Navbar.Collapse>
-                </Navbar>
+            </Navbar>
         </div>
     )
 }
