@@ -1,12 +1,10 @@
-
 import "../StyleSheets/dashboard.css";
 
 import UserProfile from "../components/UserProfile";
-import Research from "../components/Research";
 import { Redirect, useParams } from "react-router";
 import { getUser, processUserToken } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function UserScreen(props){
     const { id } = useParams();
@@ -27,7 +25,6 @@ export default function UserScreen(props){
         localStorage.removeItem('token');
     }
 
-
     useEffect(() => {
         dispatch(processUserToken(props.token));
         
@@ -36,19 +33,20 @@ export default function UserScreen(props){
         }
     }, [])
 
-    if(!id && processed?.code === 'TOKEN_SUCCESS'){ // no id, logged in, render self profile
+    if(props.isUser && processed?.code === 'TOKEN_SUCCESS'){ // no id, logged in, render self profile
         return(
             <div>
                 <div className = "container">
-                    <UserProfile user={processed?.user} editable={true}/>
-                </div>
+                    <UserProfile user={processed.user} editable={true}/>
+                </div> 
             </div>
         )
     }else if(userData?.code === 'USER_FETCH_SUCCESS'){ // provided id, render id profile
+        const editable = Number(id) === processed?.user._id;
         return(
             <div>
                 <div className = "container">
-                    <UserProfile user={userData.user}/>
+                    <UserProfile user={userData.user} editable={editable}/>
                 </div> 
             </div>
         )
@@ -59,6 +57,6 @@ export default function UserScreen(props){
             <Redirect to={{pathname: "/signIn", message: "You need to log in to access this page. Please log in first or create an account using the Sign Up page."}}></Redirect>
         )
     }else{
-        return(<p></p>);
+        return(<p>Loading</p>);
     }
 }

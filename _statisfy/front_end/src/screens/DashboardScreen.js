@@ -12,8 +12,10 @@ export default function DashboardScreen(props){
     const [ML, setML] = useState("");
     const [option, setOption] = useState(false);
     const [toStatistics, setDestination] = useState(false);
-
     const [showFirst, setShowFirst] = useState(true);
+
+    const [title, setTitle] = useState();
+    const [description, setDescription] = useState();
 
     
     const selectStats = function(){
@@ -67,11 +69,11 @@ export default function DashboardScreen(props){
                             <div className="res">
                                 <div className="res_div">
                                     <span className="res_span">Research Title</span>
-                                    <input className="res_title" placeholder="Research Title"></input>
+                                    <input className="res_title" value={title} placeholder="Research Title" onChange={(e) => setTitle(e.target.value)}></input>
                                 </div>
                                 <div className="res_div">
                                     <span className="res_span">Research Description</span>
-                                    <textarea className="res_desc" placeholder="Description"></textarea>
+                                    <textarea className="res_desc" value={description} placeholder="Description" onChange={(e) => setDescription(e.target.value)}></textarea>
                                 </div>
                                 
                             </div>
@@ -116,9 +118,9 @@ export default function DashboardScreen(props){
                                 <div className="upload_header"><h3>Research</h3></div>
                                 <div className="upload_body">
                                     <span className="upload_span"> Title:</span>
-                                    <p>Research lorem loremasdmwandak</p>
+                                    <p>{title}</p>
                                     <span className="upload_span"> Description:</span>
-                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    <p>{description}</p>
                                     
                                     <button className="proceed_Btn" onClick={switchToFirst}> edit</button>
 

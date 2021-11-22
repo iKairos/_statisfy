@@ -160,6 +160,6 @@ class User:
 
             return payload['sub']
         except jwt.ExpiredSignatureError:
-            return 'Token is already expired.'
+            return 'Token already expired.'
         except jwt.InvalidTokenError:
             return f'Token is not valid. Token value: {auth_token}'

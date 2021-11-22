@@ -42,7 +42,7 @@ export default function Header(props){
                         navbarScroll
                     >
                         <Nav.Link> <Link className="menuLink" to="/">Home</Link></Nav.Link>
-                        <Nav.Link> <Link className="menuLink" to="/user">Profile</Link></Nav.Link>
+                        <Nav.Link> <Link className="menuLink" to="/profile">Profile</Link></Nav.Link>
                         <NavDropdown title="Guides" id="navbarScrollingDropdown">
                         <NavDropdown.Item href="#action3">Statistical Method Guide</NavDropdown.Item>
                         <NavDropdown.Item href="#action4">Machine Learning Guide</NavDropdown.Item>

@@ -61,7 +61,7 @@ export default function SignUpScreen1(props) {
 
   if(props.token){
     return(
-      <Redirect to={{pathname: "/user"}}></Redirect>
+      <Redirect to={{pathname: "/profile"}}></Redirect>
     )
   }
 

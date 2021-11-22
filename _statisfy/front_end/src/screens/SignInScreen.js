@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import '../StyleSheets/signin.css'
 import { authenticateUser } from '../actions/userActions';
 import PropTypes from 'prop-types';
-import { useHistory } from "react-router"
+import { Redirect, useHistory } from "react-router"
 import { Alert } from 'react-bootstrap'
 
 export default function SignInScreen(props) {
@@ -18,7 +18,7 @@ export default function SignInScreen(props) {
   const dataSelector = useSelector((state) => 
     state.userAuth
   );
-  const {loading, error, userAuth} = dataSelector;
+  const { error, userAuth } = dataSelector;
 
   if(typeof userAuth != 'undefined'){
     if(userAuth.access_token != null){
@@ -34,6 +34,12 @@ export default function SignInScreen(props) {
     
     dispatch(authenticateUser(username, password)); 
   };
+
+  if(props.token){
+    return(
+      <Redirect to={{pathname: "/profile"}}></Redirect>
+    )
+  }
 
   return (
     <div className="display" type="signin">

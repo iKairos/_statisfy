@@ -18,6 +18,7 @@ export default function UserProfile(props){
             <p>Email: {props.user.email_address}</p>
             <p>Registered since: {stringifyDatetime(props.user.created_at)}</p>
             <p>{props.user.bio}</p>
+            {props.editable && <h1>Edit</h1>}
         </div>
     ); 
 }
