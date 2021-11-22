@@ -171,10 +171,21 @@ body {
     justify-content: center;
     align-items: center;
     background-color: $cardcolor;
+    overflow-y: scroll;
+    max-height: 25rem;
+
+    word-wrap: break-word;
   }
   &_span {
     color: #313131;
     font-weight: bold;
+  }
+
+  &_desc {
+    display: inline-block;
+    min-width: 10rem;
+    max-width: fit-content;
+    overflow-wrap: break-word;
   }
 
   &_data {
@@ -236,5 +247,10 @@ body {
 
   .upload {
     grid-template-columns: 1fr 3fr;
+
+    &_body {
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 16rem));
+      gap: 1rem;
+    }
   }
 }
