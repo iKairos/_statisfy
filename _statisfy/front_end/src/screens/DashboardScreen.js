@@ -120,14 +120,20 @@ export default function DashboardScreen(props){
                     <div className="upload">
                         <div className="upload_container">
                             <div className="upload_res">
-                                <div className="upload_header"><h3>Research</h3></div>
+                                <div className="upload_header">
+                                    <h3>Research</h3>
+                                    <div className = "upload_data">
+                                        <button className="upload_btn" onClick={switchToFirst}> edit</button>
+                                    </div>
+                                    
+                                </div>
                                 <div className="upload_body">
                                     <span className="upload_span"> Title:</span>
                                     <p>{title}</p>
                                     <span className="upload_span"> Description:</span>
-                                    <p>{description}</p>
+                                    <p className="upload_desc">{description}</p>
                                     
-                                    <button className="proceed_Btn" onClick={switchToFirst}> edit</button>
+                                    
 
                                 </div>
                             </div>
@@ -170,6 +176,27 @@ export default function DashboardScreen(props){
                                     <h3>Statistical Methods</h3>
                                 </div>
                                 <div className="upload_body">
+                                    <div onClick = {selectML}>
+                                        <MethodCard
+                                            title="Machine Learning"
+                                            desc= "Develop a model for prediction and classification by training a machine learning model."
+                                            status ={ML}
+                                        />
+                                    </div>
+                                    <div onClick = {selectML}>
+                                        <MethodCard
+                                            title="Machine Learning"
+                                            desc= "Develop a model for prediction and classification by training a machine learning model."
+                                            status ={ML}
+                                        />
+                                    </div>
+                                    <div onClick = {selectML}>
+                                        <MethodCard
+                                            title="Machine Learning"
+                                            desc= "Develop a model for prediction and classification by training a machine learning model."
+                                            status ={ML}
+                                        />
+                                    </div>
                                     
                                 </div>
                             </div>

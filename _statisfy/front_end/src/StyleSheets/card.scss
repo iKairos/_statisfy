@@ -1,0 +1,21 @@
+.tool {
+  width: 100%;
+  min-height: 10rem;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  border-radius: 2rem;
+  text-align: center;
+  padding: 1rem;
+
+  &_title {
+    line-height: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &_desc {
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
