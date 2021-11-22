@@ -19,7 +19,6 @@ export default function DashboardScreen(props){
     const [description, setDescription] = useState();
     const [error, setError] = useState();
 
-    
     const selectStats = function(){
         setStats("Selected");
         setML(""); 
@@ -33,7 +32,6 @@ export default function DashboardScreen(props){
         setOption(true);
         setDestination(false);
     }
-
 
     const switchToFirst = () => {
         setShowFirst(true);
@@ -50,9 +48,7 @@ export default function DashboardScreen(props){
     }
 
     // process token
-
     const dispatch = useDispatch();
-    
     const dataSelector = useSelector((state) => 
         state.decodedUserToken
     );
