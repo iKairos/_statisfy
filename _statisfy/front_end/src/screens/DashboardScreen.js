@@ -1,5 +1,7 @@
 import MethodCard from "../components/MethodCard";
+import AllCards from "../components/AllCards";
 import Checkbox from "../components/Checkbox";
+
 import "../StyleSheets/dashboard.css";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router";
@@ -10,6 +12,7 @@ import { DisplayTable } from "../components/DisplayTable";
 import { Alert } from "react-bootstrap";
 
 export default function DashboardScreen(props){
+    // ======= FUNCTION-WIDE VARIABLES ======= //
     const [stats, setStats] = useState("");
     const [ML, setML] = useState("");
     const [option, setOption] = useState(false);
@@ -19,6 +22,19 @@ export default function DashboardScreen(props){
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
     const [error, setError] = useState();
+
+    // ======= TOKEN HANDLING ======= //
+    const dispatch = useDispatch();
+    const dataSelector = useSelector((state) => 
+        state.decodedUserToken
+    );
+    const {processed} = dataSelector;
+
+    if(props.token && processed?.code === "TOKEN_FAIL"){
+        localStorage.removeItem('token');
+    }
+
+    // ======= HANDLERS ======= //
 
     const selectStats = function(){
         setStats("Selected");
@@ -33,6 +49,7 @@ export default function DashboardScreen(props){
         setOption(true);
         setDestination(false);
     }
+
 
     const switchToFirst = () => {
         setShowFirst(true);
@@ -49,19 +66,9 @@ export default function DashboardScreen(props){
     }
 
 
-   
 
-    // process token
-    const dispatch = useDispatch();
-    const dataSelector = useSelector((state) => 
-        state.decodedUserToken
-    );
-    const {processed} = dataSelector;
 
-    if(props.token && processed?.code === "TOKEN_FAIL"){
-        localStorage.removeItem('token');
-    }
-
+    // ======= DISPATCH ON RENDER ======= //
     useEffect(() => {
         dispatch(processUserToken(props.token));
     }, [])
@@ -134,11 +141,10 @@ export default function DashboardScreen(props){
                                 <div className="upload_body">
                                     <span className="upload_span"> Title:</span>
                                     <p>{title}</p>
+                                    <span className="upload_span"> Author(s):</span>
+                                    <Link to={`/profile/${processed?.user._id}`}><p>{processed?.user.username}</p></Link>
                                     <span className="upload_span"> Description:</span>
                                     <p className="upload_desc">{description}</p>
-                                    
-                                    
-
                                 </div>
                             </div>
                         </div>
@@ -175,30 +181,7 @@ export default function DashboardScreen(props){
                                 <div className="upload_header">
                                     <h3>Statistical Methods</h3>
                                 </div>
-                                <div className="upload_body">
-                                    <div onClick = {selectML}>
-                                        <MethodCard
-                                            title="Machine Learning"
-                                            desc= "Develop a model for prediction and classification by training a machine learning model."
-                                            status ={ML}
-                                        />
-                                    </div>
-                                    <div onClick = {selectML}>
-                                        <MethodCard
-                                            title="Machine Learning"
-                                            desc= "Develop a model for prediction and classification by training a machine learning model."
-                                            status ={ML}
-                                        />
-                                    </div>
-                                    <div onClick = {selectML}>
-                                        <MethodCard
-                                            title="Machine Learning"
-                                            desc= "Develop a model for prediction and classification by training a machine learning model."
-                                            status ={ML}
-                                        />
-                                    </div>
-                                    
-                                </div>
+                                <AllCards/>
                             </div>
                         </div>
 

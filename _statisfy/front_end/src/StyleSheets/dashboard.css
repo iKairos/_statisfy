@@ -164,6 +164,25 @@ body {
   font-family: inherit;
 }
 
+.card_tagcont {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.card_tags {
+  color: white;
+  border-radius: 1rem;
+  background-color: #a742c5;
+  width: 1fr;
+  font-size: 0.8rem;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+}
+
 .upload {
   display: -ms-grid;
   display: grid;

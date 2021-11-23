@@ -3,13 +3,10 @@ import { useState } from "react";
 import "../StyleSheets/checkbox.css";
 
 export default function Checkbox(){
-
-   
-   
     return (
         <div className = "contStyle">
             <div className = "divStyle" >    
-                <span className="upload_span"> Number of Variables:</span>
+                <span className="upload_span"> Variable Count:</span>
                     
                 <div>
                     <input type="checkbox" className="checkbox_child"/>
@@ -30,6 +27,8 @@ export default function Checkbox(){
                     </label>
                 </div>
             </div>
+
+            
 
             <div className = "divStyle" >    
                 <span className="upload_span"> Type of Variable:</span>
@@ -86,6 +85,42 @@ export default function Checkbox(){
                     <input type="checkbox" className="checkbox_child"/>
                     <label>
                         Univariate Data Analysis
+                    </label>
+                </div>
+               
+            </div>
+
+            <div className = "divStyle" >    
+                <span className="upload_span"> Number of Groups:</span>
+                    
+                <div>
+                    <input type="checkbox" className="checkbox_child"/>
+                    <label >
+                        Two
+                    </label>
+                </div>
+                <div>
+                    <input type="checkbox" className="checkbox_child"/>
+                    <label>
+                        Three or more
+                    </label>
+                </div>
+               
+            </div>
+
+            <div className = "divStyle" >    
+                <span className="upload_span"> Number of Independent Variables:</span>
+                    
+                <div>
+                    <input type="checkbox" className="checkbox_child"/>
+                    <label >
+                        One
+                    </label>
+                </div>
+                <div>
+                    <input type="checkbox" className="checkbox_child"/>
+                    <label>
+                        Two
                     </label>
                 </div>
                

@@ -1,19 +1,20 @@
-import { Link } from "react-router-dom";
-
-import "../StyleSheets/card.css";
 import { useState } from "react";
 
-export default function Card(){
-  //  <button className="card_btn">Select</button>
+export default function Card(props){
+    const [varCount, setVarCount] = useState("");
+
+   // const attributes = props.attribute
 
     return(
-        <div className ="tool">
+        <div className ="card">
             
-                <h4 className="tool_title">PearsonR</h4>
-                <div className="tool_desc">dsamdlksamdklwmalkdmsalkmdlwamdasm</div>
-                <div className= "tool_status">selected</div>
-           
+                <h4 className="card_title">{props.title}</h4>
+                <div className="card_desc">{props.desc}</div>
+                <div className="card_tagcont">{props.attributes.map(i=>{
+                  return <div className="card_tags">{i}</div>
+                })}</div>
 
+           
         </div>
     ); 
 }
