@@ -1,5 +1,7 @@
 import MethodCard from "../components/MethodCard";
+import AllCards from "../components/AllCards";
 import Checkbox from "../components/Checkbox";
+
 import "../StyleSheets/dashboard.css";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router";
@@ -33,6 +35,7 @@ export default function DashboardScreen(props){
     }
 
     // ======= HANDLERS ======= //
+
     const selectStats = function(){
         setStats("Selected");
         setML(""); 
@@ -47,6 +50,7 @@ export default function DashboardScreen(props){
         setDestination(false);
     }
 
+
     const switchToFirst = () => {
         setShowFirst(true);
     }
@@ -60,6 +64,9 @@ export default function DashboardScreen(props){
         setShowFirst(false);
         setError("");
     }
+
+
+
 
     // ======= DISPATCH ON RENDER ======= //
     useEffect(() => {
@@ -174,30 +181,7 @@ export default function DashboardScreen(props){
                                 <div className="upload_header">
                                     <h3>Statistical Methods</h3>
                                 </div>
-                                <div className="upload_body">
-                                    <div onClick = {selectML}>
-                                        <MethodCard
-                                            title="Machine Learning"
-                                            desc= "Develop a model for prediction and classification by training a machine learning model."
-                                            status ={ML}
-                                        />
-                                    </div>
-                                    <div onClick = {selectML}>
-                                        <MethodCard
-                                            title="Machine Learning"
-                                            desc= "Develop a model for prediction and classification by training a machine learning model."
-                                            status ={ML}
-                                        />
-                                    </div>
-                                    <div onClick = {selectML}>
-                                        <MethodCard
-                                            title="Machine Learning"
-                                            desc= "Develop a model for prediction and classification by training a machine learning model."
-                                            status ={ML}
-                                        />
-                                    </div>
-                                    
-                                </div>
+                                <AllCards/>
                             </div>
                         </div>
 

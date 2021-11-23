@@ -133,6 +133,19 @@ body {
     align-items: center;
     font-family: inherit;
   }
+  &_tagcont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  &_tags {
+    color: white;
+    border-radius: 1rem;
+    background-color: #a742c5;
+    width: 1fr;
+    font-size: 0.8rem;
+    height: min-content;
+  }
 }
 
 .upload {
