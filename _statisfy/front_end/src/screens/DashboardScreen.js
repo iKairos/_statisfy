@@ -1,6 +1,5 @@
 import MethodCard from "../components/MethodCard";
 import Checkbox from "../components/Checkbox";
-
 import "../StyleSheets/dashboard.css";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router";
@@ -21,7 +20,6 @@ export default function DashboardScreen(props){
     const [description, setDescription] = useState();
     const [error, setError] = useState();
 
-    
     const selectStats = function(){
         setStats("Selected");
         setML(""); 
@@ -35,7 +33,6 @@ export default function DashboardScreen(props){
         setOption(true);
         setDestination(false);
     }
-
 
     const switchToFirst = () => {
         setShowFirst(true);
@@ -55,9 +52,7 @@ export default function DashboardScreen(props){
    
 
     // process token
-
     const dispatch = useDispatch();
-    
     const dataSelector = useSelector((state) => 
         state.decodedUserToken
     );
