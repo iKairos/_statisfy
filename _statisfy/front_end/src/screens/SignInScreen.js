@@ -20,6 +20,12 @@ export default function SignInScreen(props) {
   );
   const { error, userAuth } = dataSelector;
 
+  // process token
+  const tokSelector = useSelector((state) => 
+      state.decodedUserToken
+  );
+  const {processed} = tokSelector;
+
   if(typeof userAuth != 'undefined'){
     if(userAuth.access_token != null){
       props.setToken(userAuth.access_token);
@@ -35,7 +41,11 @@ export default function SignInScreen(props) {
     dispatch(authenticateUser(username, password)); 
   };
 
-  if(props.token){
+  if(props.token && processed?.code === "TOKEN_FAIL"){
+    localStorage.removeItem('token');
+  }
+
+  if(props.token && processed?.code == "TOKEN_SUCCESS"){
     return(
       <Redirect to={{pathname: "/profile"}}></Redirect>
     )
