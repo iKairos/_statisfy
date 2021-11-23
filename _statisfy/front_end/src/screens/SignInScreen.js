@@ -8,38 +8,25 @@ import { Redirect, useHistory } from "react-router"
 import { Alert } from 'react-bootstrap'
 
 export default function SignInScreen(props) {
-
+  // ======= FUNCTION-WIDE VARIABLES ======= //
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  // ======= HISTORY ======= //
   const history = useHistory();
   
+  // ======= LOGIN FUNCTION ======= //
   const dispatch = useDispatch();
   const dataSelector = useSelector((state) => 
     state.userAuth
   );
   const { error, userAuth } = dataSelector;
 
-  // process token
+  // ======= TOKEN HANDLING ======= //
   const tokSelector = useSelector((state) => 
       state.decodedUserToken
   );
   const {processed} = tokSelector;
-
-  if(typeof userAuth != 'undefined'){
-    if(userAuth.access_token != null){
-      props.setToken(userAuth.access_token);
-      history.push('/');
-      history.go(0);
-      return;
-    }
-  }
-  
-  const submitHandler = (e) => {
-    e.preventDefault();
-    
-    dispatch(authenticateUser(username, password)); 
-  };
 
   if(props.token && processed?.code === "TOKEN_FAIL"){
     localStorage.removeItem('token');
@@ -49,6 +36,23 @@ export default function SignInScreen(props) {
     return(
       <Redirect to={{pathname: "/profile"}}></Redirect>
     )
+  }
+  
+  // ======= HANDLERS ======= //
+  const submitHandler = (e) => {
+    e.preventDefault();
+    
+    dispatch(authenticateUser(username, password)); 
+  };
+
+  // ======= LOGIN PROCESSING ======= //
+  if(typeof userAuth != 'undefined'){
+    if(userAuth.access_token != null){
+      props.setToken(userAuth.access_token);
+      history.push('/');
+      history.go(0);
+      return;
+    }
   }
 
   return (
