@@ -17,8 +17,8 @@ export default function DashboardScreen(props){
     const [toStatistics, setDestination] = useState(false);
     const [showFirst, setShowFirst] = useState(true);
 
-    const [title, setTitle] = useState();
-    const [description, setDescription] = useState();
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [error, setError] = useState();
 
     // ======= TOKEN HANDLING ======= //
@@ -78,11 +78,11 @@ export default function DashboardScreen(props){
                             <div className="res">
                                 {error && <Alert variant='danger'>{error}</Alert>}
                                 <div className="res_div">
-                                    <span className="res_span">Research Title</span>
+                                    <span className="res_span">Research Title ({title.length}/200 characters)</span>
                                     <input className="res_title" value={title} placeholder="Research Title" onChange={(e) => setTitle(e.target.value)}></input>
                                 </div>
                                 <div className="res_div">
-                                    <span className="res_span">Research Description</span>
+                                    <span className="res_span">Research Description ({description.length}/250 characters)</span>
                                     <textarea className="res_desc" value={description} placeholder="Description" onChange={(e) => setDescription(e.target.value)}></textarea>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@ export default function DashboardScreen(props){
                                     <span className="upload_span"> Title:</span>
                                     <p>{title}</p>
                                     <span className="upload_span"> Author(s):</span>
-                                    <Link to={`/profile/${processed?.user._id}`}><p>{processed?.user.username}</p></Link>
+                                    <Link target="_blank" to={`/profile/${processed?.user._id}`}><p>{processed?.user.username}</p></Link>
                                     <span className="upload_span"> Description:</span>
                                     <p className="upload_desc">{description}</p>
                                 </div>
