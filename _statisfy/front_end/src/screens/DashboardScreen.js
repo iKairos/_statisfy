@@ -1,4 +1,5 @@
 import MethodCard from "../components/MethodCard";
+import Checkbox from "../components/Checkbox";
 import "../StyleSheets/dashboard.css";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router";
@@ -162,11 +163,7 @@ export default function DashboardScreen(props){
                             <div className="upload_res">
                                 <div className="upload_header"><h3>Filter</h3></div>
                                 <div className="upload_body">
-                                    <span className="upload_span"> Type of Data:</span>
-                                    
-                                    <span className="upload_span"> Number of Variables:</span>
-                                   
-
+                                    <Checkbox/>
                                 </div>
                             </div>
                         </div>

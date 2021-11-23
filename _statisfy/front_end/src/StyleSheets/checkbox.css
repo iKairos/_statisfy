@@ -1,0 +1,19 @@
+.contStyle {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.divStyle {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  margin-left: 1rem;
+}
+label {
+  font-family: inherit;
+  cursor: pointer;
+}
