@@ -11,6 +11,7 @@ import { DisplayTable } from "../components/DisplayTable";
 import { Alert } from "react-bootstrap";
 
 export default function DashboardScreen(props){
+    // ======= FUNCTION-WIDE VARIABLES ======= //
     const [stats, setStats] = useState("");
     const [ML, setML] = useState("");
     const [option, setOption] = useState(false);
@@ -21,7 +22,7 @@ export default function DashboardScreen(props){
     const [description, setDescription] = useState();
     const [error, setError] = useState();
 
-    
+
     const selectStats = function(){
         setStats("Selected");
         setML(""); 
@@ -52,9 +53,6 @@ export default function DashboardScreen(props){
     }
 
 
-   
-
-    // process token
 
     const dispatch = useDispatch();
     
@@ -66,6 +64,7 @@ export default function DashboardScreen(props){
     if(props.token && processed?.code === "TOKEN_FAIL"){
         localStorage.removeItem('token');
     }
+
 
     useEffect(() => {
         dispatch(processUserToken(props.token));
@@ -139,11 +138,10 @@ export default function DashboardScreen(props){
                                 <div className="upload_body">
                                     <span className="upload_span"> Title:</span>
                                     <p>{title}</p>
+                                    <span className="upload_span"> Author(s):</span>
+                                    <Link to={`/profile/${processed?.user._id}`}><p>{processed?.user.username}</p></Link>
                                     <span className="upload_span"> Description:</span>
                                     <p className="upload_desc">{description}</p>
-                                    
-                                    
-
                                 </div>
                             </div>
                         </div>

@@ -49,7 +49,6 @@ export default function SignUpScreen1(props) {
   }
 
   // ======= HANDLERS ======= //
-
   const switchToFirst = () => {
     setShowFirst(true);
     setShowSecond(false);
