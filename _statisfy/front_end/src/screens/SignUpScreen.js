@@ -7,6 +7,7 @@ import '../StyleSheets/signup.css'
 import { Redirect } from "react-router"
 
 export default function SignUpScreen1(props) {
+  // ======= FUNCTION-WIDE VARIABLES ======= //
   const [email, setEmail] = useState('');
   const [uname, setUsername] = useState('');
   const [firstname, setFirstname] = useState('');
@@ -18,12 +19,46 @@ export default function SignUpScreen1(props) {
   const [showFirst, setShowFirst] = useState(true);
   const [showSecond, setShowSecond] = useState(false);
 
-  // REDUX DISPATCHER 
+  // ======= REGISTER FUNCTION ======= //
   const dispatch = useDispatch();
   const dataSelector = useSelector((state) => 
     state.registerRes
   );
-  const {loading, error, registerRes} = dataSelector;
+  const {registerRes} = dataSelector;
+
+  // ======= TOKEN HANDLING ======= //
+  const tokSelector = useSelector((state) => 
+      state.decodedUserToken
+  );
+  const {processed} = tokSelector;
+
+  if(registerRes?.code === 'REGISTER_SUCCESS'){
+    return(
+      <Redirect to={{pathname: "/signIn", message: "Registration successful! You may now log in to your account."}}></Redirect>
+    )
+  }
+
+  if(props.token && processed?.code === "TOKEN_FAIL"){
+    localStorage.removeItem('token');
+  }
+
+  if(props.token && processed?.code == "TOKEN_SUCCESS"){
+    return(
+      <Redirect to={{pathname: "/profile"}}></Redirect>
+    )
+  }
+
+  // ======= HANDLERS ======= //
+
+  const switchToFirst = () => {
+    setShowFirst(true);
+    setShowSecond(false);
+  }
+
+  const switchToSecond = () => {
+    setShowFirst(false);
+    setShowSecond(true);
+  }
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -42,28 +77,6 @@ export default function SignUpScreen1(props) {
       created_at: new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, '')
     }))
   };
-
-  if(registerRes?.code === 'REGISTER_SUCCESS'){
-    return(
-      <Redirect to={{pathname: "/signIn", message: "Registration successful! You may now log in to your account."}}></Redirect>
-    )
-  }
-
-  const switchToFirst = () => {
-    setShowFirst(true);
-    setShowSecond(false);
-  }
-
-  const switchToSecond = () => {
-    setShowFirst(false);
-    setShowSecond(true);
-  }
-
-  if(props.token){
-    return(
-      <Redirect to={{pathname: "/profile"}}></Redirect>
-    )
-  }
 
   return (
     <div className="display" type="signup">
