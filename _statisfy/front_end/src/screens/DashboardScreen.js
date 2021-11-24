@@ -23,6 +23,8 @@ export default function DashboardScreen(props){
     const [description, setDescription] = useState("");
     const [error, setError] = useState();
 
+    const [tags, setTags] = useState([]);
+
     // ======= TOKEN HANDLING ======= //
     const dispatch = useDispatch();
     const dataSelector = useSelector((state) => 
@@ -65,8 +67,10 @@ export default function DashboardScreen(props){
         setError("");
     }
 
-
-
+    // ======= CALLBACKS ======= //
+    const callbackCheckbox = (checked) => {
+        setTags(checked);
+    }
 
     // ======= DISPATCH ON RENDER ======= //
     useEffect(() => {
@@ -170,7 +174,7 @@ export default function DashboardScreen(props){
                             <div className="upload_res">
                                 <div className="upload_header"><h3>Filter</h3></div>
                                 <div className="upload_body">
-                                    <Checkbox/>
+                                    <Checkbox callbackFunction={callbackCheckbox}/>
                                 </div>
                             </div>
                         </div>
@@ -181,7 +185,7 @@ export default function DashboardScreen(props){
                                 <div className="upload_header">
                                     <h3>Statistical Methods</h3>
                                 </div>
-                                <AllCards/>
+                                <AllCards tags={tags}/>
                             </div>
                         </div>
 
