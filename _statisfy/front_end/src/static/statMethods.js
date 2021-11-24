@@ -33,7 +33,7 @@ export const statMethods = [
     ],
     [
         "Wilcoxon-Mann-Whitney Rank Sum Test",
-        ["Two Groups", "Ordinal", "Two Independent Variable", "Significant Differences"]
+        ["Two Groups", "Ordinal", "Two Independent Variables", "Significant Differences"]
     ],
     [
         "Multiple Regression",

@@ -76,11 +76,34 @@ export default function DashboardScreen(props){
         setError("");
     }
 
+
     const switchToThird = () => {
         setShowActive("third");
     }
 
 
+
+    const handleTitle = (e) => {
+        setTitle(e.target.value)
+
+        if(title.length > 200){
+            setError("Title should not exceed 200 characters.");
+            return;
+        }else{
+            setError("");
+        }
+    }
+
+    const handleDescription = (e) => {
+        setDescription(e.target.value)
+
+        if(description.length > 250){
+            setError("Description should not exceed 200 characters.");
+            return;
+        }else{
+            setError("");
+        }
+    }
 
     // ======= CALLBACKS ======= //
     const callbackCheckbox = (checked) => {
@@ -105,11 +128,11 @@ export default function DashboardScreen(props){
                                 {error && <Alert variant='danger'>{error}</Alert>}
                                 <div className="res_div">
                                     <span className="res_span">Research Title ({title.length}/200 characters)</span>
-                                    <input className="res_title" value={title} placeholder="Research Title" onChange={(e) => setTitle(e.target.value)}></input>
+                                    <input className="res_title" value={title} placeholder="Research Title" onChange={(e) => handleTitle(e)}></input>
                                 </div>
                                 <div className="res_div">
                                     <span className="res_span">Research Description ({description.length}/250 characters)</span>
-                                    <textarea className="res_desc" value={description} placeholder="Description" onChange={(e) => setDescription(e.target.value)}></textarea>
+                                    <textarea className="res_desc" value={description} placeholder="Description" onChange={(e) => handleDescription(e)}></textarea>
                                 </div>
                             </div>
                         </div>
