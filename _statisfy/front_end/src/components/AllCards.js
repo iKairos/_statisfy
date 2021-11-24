@@ -9,7 +9,7 @@ export default function AllCards(props){
     return(
         <div className="upload_body">
             {
-                filtered.length != 0 ? filtered.map(([method, tags]) => {
+                filtered.length !== 0 ? filtered.map(([method, tags]) => {
                     return <Card title={method} desc="desc" attributes={tags}/>
                 }) : <h1>Oops, nothing here!</h1>
             }
