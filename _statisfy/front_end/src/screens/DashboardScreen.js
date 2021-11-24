@@ -24,6 +24,11 @@ export default function DashboardScreen(props){
     const [error, setError] = useState();
 
     const [tags, setTags] = useState([]);
+    const [methodChosen, setMethodChosen] = useState("");
+    const [showActive, setShowActive] = useState("first");
+
+    
+
 
     // ======= TOKEN HANDLING ======= //
     const dispatch = useDispatch();
@@ -52,9 +57,13 @@ export default function DashboardScreen(props){
         setDestination(false);
     }
 
+    const displayMethodChosen = (choice) =>{
+        setMethodChosen(choice);
+    }
+
 
     const switchToFirst = () => {
-        setShowFirst(true);
+        setShowActive("first");
     }
 
     const switchToSecond = () => {
@@ -63,9 +72,15 @@ export default function DashboardScreen(props){
             return;
         }
         
-        setShowFirst(false);
+        setShowActive("second");
         setError("");
     }
+
+    const switchToThird = () => {
+        setShowActive("third");
+    }
+
+
 
     // ======= CALLBACKS ======= //
     const callbackCheckbox = (checked) => {
@@ -80,7 +95,7 @@ export default function DashboardScreen(props){
     if(processed?.code === 'TOKEN_SUCCESS'){
         return(
             <div>
-                {showFirst?(
+                {showActive === "first" &&
                     <div className="dashboard">
                         <div className ="dashboard_container">
                             <div className="dashboard_header">
@@ -127,11 +142,12 @@ export default function DashboardScreen(props){
                             </div>
                         </div>
 
-                       
+                    
 
                     </div>
+                }
 
-                ):(
+                {showActive === "second" &&
                     <div className="upload">
                         <div className="upload_container">
                             <div className="upload_res">
@@ -182,15 +198,26 @@ export default function DashboardScreen(props){
 
                         <div className="upload_container">
                             <div className="upload_res">
-                                <div className="upload_header">
-                                    <h3>Statistical Methods</h3>
+                                <div className="upload_headerstat">
+                                    <h3>Statistical Method: {methodChosen}</h3>
                                 </div>
-                                <AllCards tags={tags}/>
+                                <AllCards tags={tags} display={displayMethodChosen}/>
+                                <button className="upload_nxtbtn">
+                                    <div className="upload_nxtbtndiv" onClick={switchToThird}>
+                                        Next
+                                    </div>
+                                    
+                                </button>
                             </div>
                         </div>
 
                     </div>
-                )}
+                }
+
+                {showActive === "third" && 
+                <div></div>
+                }
+
             </div> 
         );
     }else if(processed?.code === 'TOKEN_FAIL'){
