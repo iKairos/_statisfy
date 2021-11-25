@@ -27,7 +27,7 @@ export default function DashboardScreen(props){
     const [methodChosen, setMethodChosen] = useState("");
     const [showActive, setShowActive] = useState("first");
 
-    
+    const [dataArray, setDataArray] = useState();
 
 
     // ======= TOKEN HANDLING ======= //
@@ -115,6 +115,36 @@ export default function DashboardScreen(props){
         dispatch(processUserToken(props.token));
     }, [])
 
+    // ======= FILE UPLOAD MECHANISM ======= //
+    const changeHandler = (e) => {
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const text = e.target.result;
+            processCSV(text);
+        }
+
+        reader.readAsText(e.target.files[0]);
+    }
+
+    const processCSV = (str, delim=',') => {
+        const headers = str.slice(0,str.indexOf('\n')).split(delim);
+        const rows = str.slice(str.indexOf('\n')+1).split('\n');
+
+        const newArray = rows.map( row => {
+            const values = row.split(delim);
+            const eachObject = headers.reduce((obj, header, i) => {
+                obj[header] = values[i];
+                return obj;
+            }, {})
+            return eachObject;
+        })
+
+        setDataArray(newArray)
+    }
+
+    
+
     if(processed?.code === 'TOKEN_SUCCESS'){
         return(
             <div>
@@ -197,14 +227,14 @@ export default function DashboardScreen(props){
                                 <div className="upload_header">
                                     <h3>Data</h3>
                                     <div className="upload_data">
-                                            <button className="upload_btn"> Upload</button>
+                                            <input type="file" name="file" accept=".csv" onChange={(e) => changeHandler(e)} />
                                             <button className="upload_btn"> Clear</button>
 
                                     </div>
                                     
                                 </div>
                                 <div className="upload_table">
-                                    <DisplayTable/>
+                                    <DisplayTable data={dataArray}/>
                                 </div>
                             </div>
                         </div>
