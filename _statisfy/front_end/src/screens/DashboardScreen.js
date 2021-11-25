@@ -117,14 +117,16 @@ export default function DashboardScreen(props){
 
     // ======= FILE UPLOAD MECHANISM ======= //
     const changeHandler = (e) => {
-        const reader = new FileReader();
+        if (e.target.files.length != 0){
+            const reader = new FileReader();
 
-        reader.onload = (e) => {
-            const text = e.target.result;
-            processCSV(text);
+            reader.onload = (e) => {
+                const text = e.target.result;
+                processCSV(text);
+            }
+
+            reader.readAsText(e.target.files[0]);
         }
-
-        reader.readAsText(e.target.files[0]);
     }
 
     const processCSV = (str, delim=',') => {
@@ -142,8 +144,6 @@ export default function DashboardScreen(props){
 
         setDataArray(newArray)
     }
-
-    
 
     if(processed?.code === 'TOKEN_SUCCESS'){
         return(
