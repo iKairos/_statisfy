@@ -25,7 +25,7 @@ export default function DashboardScreen(props){
 
     const [tags, setTags] = useState([]);
     const [methodChosen, setMethodChosen] = useState("");
-    const [showActive, setShowActive] = useState("first");
+    const [showActive, setShowActive] = useState(1);
 
     
 
@@ -61,27 +61,19 @@ export default function DashboardScreen(props){
         setMethodChosen(choice);
     }
 
-
-    const switchToFirst = () => {
-        setShowActive("first");
-    }
-
-    const switchToSecond = () => {
+    const nextScreen = () => {
         if(title?.length == 0 || description?.length == 0 || typeof title === 'undefined' || typeof description === 'undefined'){
             setError("Please fill in all the details to continue.");
             return;
         }
-        
-        setShowActive("second");
-        setError("");
+        setShowActive(showActive + 1);
     }
 
-
-    const switchToThird = () => {
-        setShowActive("third");
+    const prevScreen = () => {
+        setShowActive(showActive - 1);
     }
 
-
+   
 
     const handleTitle = (e) => {
         setTitle(e.target.value)
@@ -115,10 +107,38 @@ export default function DashboardScreen(props){
         dispatch(processUserToken(props.token));
     }, [])
 
+
+
+    /*
+    <div className="upload_header">
+        <h3>Research</h3>
+        <div className = "upload_data">
+            <button className="upload_btn" onClick={prevScreen}> edit</button>
+        </div>
+        
+    </div>
+
+
+    <div className="upload_container">
+        <div className="upload_res">
+            
+            <div className="upload_body">
+                <span className="upload_span"> Title:</span>
+                <p>{title}</p>
+                <span className="upload_span"> Author(s):</span>
+                <Link target="_blank" to={`/profile/${processed?.user._id}`}><p>{processed?.user.username}</p></Link>
+                <span className="upload_span"> Description:</span>
+                <p className="upload_desc">{description}</p>
+            </div>
+        </div>
+    </div>
+   */
+    //research title + desc display
+
     if(processed?.code === 'TOKEN_SUCCESS'){
         return(
             <div>
-                {showActive === "first" &&
+                {showActive === 1 &&
                     <div className="dashboard">
                         <div className ="dashboard_container">
                             <div className="dashboard_header">
@@ -135,8 +155,21 @@ export default function DashboardScreen(props){
                                     <textarea className="res_desc" value={description} placeholder="Description" onChange={(e) => handleDescription(e)}></textarea>
                                 </div>
                             </div>
+
+                            <div className="dashboard_btn_cont">
+                                <div className="dashboard_btn_div">
+                                 <button className="dashboard_btn" disabled="true"> previous</button>
+                                </div>
+                                <div className="dashboard_btn_div">
+                                 <button className="dashboard_btn" onClick={nextScreen}> next</button>
+                                </div>
+                            </div>
                         </div>
-            
+                    </div>
+                }
+
+                {showActive === 2 &&
+                    <div className="dashboard">
                         <div className ="dashboard_container">
                             <div className="dashboard_header">
                                 <h3>Choose Research Tool</h3>
@@ -157,58 +190,47 @@ export default function DashboardScreen(props){
                                     />
                                 </div>
                             </div>
-
-                            <div className = "proceed">
-                                {option?(
-                                    <button className="proceed_Btn" onClick={switchToSecond}> next</button>
-                                ): null}
+                            <div className="dashboard_btn_cont">
+                                <div className="dashboard_btn_div">
+                                 <button className="dashboard_btn" onClick={prevScreen}> previous</button>
+                                </div>
+                                <div className="dashboard_btn_div">
+                                 <button className="dashboard_btn" onClick={nextScreen}> next</button>
+                                </div>
                             </div>
+                            
                         </div>
-
-                    
-
                     </div>
                 }
-
-                {showActive === "second" &&
-                    <div className="upload">
+                {showActive === 3 &&
+                    <div className = "dashboard">
                         <div className="upload_container">
-                            <div className="upload_res">
-                                <div className="upload_header">
-                                    <h3>Research</h3>
-                                    <div className = "upload_data">
-                                        <button className="upload_btn" onClick={switchToFirst}> edit</button>
-                                    </div>
-                                    
+                            <div className="upload_header">
+                                <h3>Data</h3>
+                                <div className="upload_data">
+                                        <button className="upload_btn"> Upload</button>
+                                        <button className="upload_btn"> Clear</button>
                                 </div>
-                                <div className="upload_body">
-                                    <span className="upload_span"> Title:</span>
-                                    <p>{title}</p>
-                                    <span className="upload_span"> Author(s):</span>
-                                    <Link target="_blank" to={`/profile/${processed?.user._id}`}><p>{processed?.user.username}</p></Link>
-                                    <span className="upload_span"> Description:</span>
-                                    <p className="upload_desc">{description}</p>
+                            </div>
+                            <div className="upload_table">
+                                <DisplayTable/>
+                            </div>
+                            <div className="dashboard_btn_cont">
+                                <div className="dashboard_btn_div">
+                                 <button className="dashboard_btn" onClick={prevScreen}> previous</button>
+                                </div>
+                                <div className="dashboard_btn_div">
+                                 <button className="dashboard_btn" onClick={nextScreen}> next</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div className="upload_container">
-                            <div className="upload_res">
-                                <div className="upload_header">
-                                    <h3>Data</h3>
-                                    <div className="upload_data">
-                                            <button className="upload_btn"> Upload</button>
-                                            <button className="upload_btn"> Clear</button>
+                
+                }
 
-                                    </div>
-                                    
-                                </div>
-                                <div className="upload_table">
-                                    <DisplayTable/>
-                                </div>
-                            </div>
-                        </div>
-
+                {showActive === 4 &&
+                    <div className="dashboard">
                         <div className="upload_container">
                             <div className="upload_res">
                                 <div className="upload_header"><h3>Filter</h3></div>
@@ -217,22 +239,22 @@ export default function DashboardScreen(props){
                                 </div>
                             </div>
                         </div>
-
-
                         <div className="upload_container">
-                            <div className="upload_res">
-                                <div className="upload_headerstat">
-                                    <h3>Statistical Method: {methodChosen}</h3>
+                            <div className="upload_headerstat">
+                                <h3>Statistical Method: {methodChosen}</h3>
+                            </div>
+                            <AllCards tags={tags} display={displayMethodChosen}/>
+                            <div className="dashboard_btn_cont">
+                                <div className="dashboard_btn_div">
+                                    <button className="dashboard_btn" onClick={prevScreen}> previous</button>
                                 </div>
-                                <AllCards tags={tags} display={displayMethodChosen}/>
-                                <button className="upload_nxtbtn">
-                                    <div className="upload_nxtbtndiv" onClick={switchToThird}>
-                                        Next
-                                    </div>
-                                    
-                                </button>
+                                <div className="dashboard_btn_div">
+                                    <button className="dashboard_btn" onClick={nextScreen}> next</button>
+                                </div>
                             </div>
                         </div>
+
+                       
 
                     </div>
                 }

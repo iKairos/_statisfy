@@ -4,6 +4,7 @@ $radius: 1rem;
 $cardcolor: #e8e8e8;
 $boxshadow: 0 0 10px 5px rgb(240, 240, 240);
 $buttonbg: #a742c5;
+$maxwidth: 40rem;
 
 *,
 *::before,
@@ -24,11 +25,12 @@ body {
   grid-template-columns: 1fr;
   justify-content: center;
 
+  max-width: $maxwidth;
+
   &_container {
     border-radius: $radius;
     overflow: hidden;
     box-shadow: $boxshadow;
-    margin-bottom: 2rem;
   }
 
   &_header {
@@ -37,6 +39,30 @@ body {
     align-items: center;
     height: 5rem;
     width: 1fr;
+  }
+
+  &_btn {
+    min-width: 5rem;
+    max-width: max-content;
+    height: 2.5rem;
+    border-radius: 2rem;
+    border: 0.1rem rgb(223, 154, 255) solid;
+    background-color: whitesmoke;
+    &_div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1fr;
+    }
+
+    &_cont {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
   }
 }
 
@@ -75,17 +101,6 @@ body {
 
   &_desc:focus {
     border: 1px;
-  }
-}
-
-.proceed {
-  &_Btn {
-    box-shadow: none;
-    border: none;
-    border-top: 1px solid $cardcolor;
-    background-color: $buttonbg;
-    color: white;
-    width: 100%;
   }
 }
 
@@ -151,6 +166,7 @@ body {
 
 .upload {
   display: grid;
+  grid-template-columns: 1fr;
   padding: 2rem;
   gap: 2rem;
   grid-template-columns: 1fr;
@@ -161,6 +177,7 @@ body {
     position: relative;
   }
   &_container {
+    width: 1fr;
     border-radius: $radius;
     overflow: hidden;
     box-shadow: $boxshadow;
@@ -259,7 +276,7 @@ body {
 
 @media screen and (min-width: 600px) {
   .dashboard {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
 
     &_container {
       width: 1fr;
@@ -268,7 +285,7 @@ body {
   }
 
   .cardwrapper {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     width: 1fr;
   }
   .card {

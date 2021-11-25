@@ -22,6 +22,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  max-width: 40rem;
 }
 
 .dashboard_container {
@@ -29,7 +30,6 @@ body {
   overflow: hidden;
   -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
           box-shadow: 0 0 10px 5px #f0f0f0;
-  margin-bottom: 2rem;
 }
 
 .dashboard_header {
@@ -44,6 +44,45 @@ body {
           align-items: center;
   height: 5rem;
   width: 1fr;
+}
+
+.dashboard_btn {
+  min-width: 5rem;
+  max-width: -webkit-max-content;
+  max-width: -moz-max-content;
+  max-width: max-content;
+  height: 2.5rem;
+  border-radius: 2rem;
+  border: 0.1rem #df9aff solid;
+  background-color: whitesmoke;
+}
+
+.dashboard_btn_div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 1fr;
+}
+
+.dashboard_btn_cont {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem;
 }
 
 .res {
@@ -91,16 +130,6 @@ body {
 
 .res_desc:focus {
   border: 1px;
-}
-
-.proceed_Btn {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  border: none;
-  border-top: 1px solid #e8e8e8;
-  background-color: #a742c5;
-  color: white;
-  width: 100%;
 }
 
 .cardwrapper {
@@ -190,10 +219,11 @@ body {
 .upload {
   display: -ms-grid;
   display: grid;
-  padding: 2rem;
-  gap: 2rem;
   -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
+  padding: 2rem;
+  gap: 2rem;
+  grid-template-columns: 1fr;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -205,6 +235,7 @@ body {
 }
 
 .upload_container {
+  width: 1fr;
   border-radius: 1rem;
   overflow: hidden;
   -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
@@ -337,8 +368,8 @@ body {
 
 @media screen and (min-width: 600px) {
   .dashboard {
-    -ms-grid-columns: 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
   }
   .dashboard_container {
     width: 1fr;
@@ -347,8 +378,8 @@ body {
     height: min-content;
   }
   .cardwrapper {
-    -ms-grid-columns: 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
     width: 1fr;
   }
   .card {
