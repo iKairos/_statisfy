@@ -107,7 +107,6 @@ export default function DashboardScreen(props){
         dispatch(processUserToken(props.token));
     }, [])
 
-<<<<<<< HEAD
     // ======= FILE UPLOAD MECHANISM ======= //
     const changeHandler = (e) => {
         if (e.target.files.length != 0){
@@ -137,35 +136,6 @@ export default function DashboardScreen(props){
 
         setDataArray(newArray)
     }
-=======
-
-
-    /*
-    <div className="upload_header">
-        <h3>Research</h3>
-        <div className = "upload_data">
-            <button className="upload_btn" onClick={prevScreen}> edit</button>
-        </div>
-        
-    </div>
-
-
-    <div className="upload_container">
-        <div className="upload_res">
-            
-            <div className="upload_body">
-                <span className="upload_span"> Title:</span>
-                <p>{title}</p>
-                <span className="upload_span"> Author(s):</span>
-                <Link target="_blank" to={`/profile/${processed?.user._id}`}><p>{processed?.user.username}</p></Link>
-                <span className="upload_span"> Description:</span>
-                <p className="upload_desc">{description}</p>
-            </div>
-        </div>
-    </div>
-   */
-    //research title + desc display
->>>>>>> ac3369b8c3aba7d3094b234809edbfd4902cb0c6
 
     if(processed?.code === 'TOKEN_SUCCESS'){
         return(
@@ -199,42 +169,43 @@ export default function DashboardScreen(props){
                         </div>
                     </div>
                 }
-
-                {showActive === 2 &&
-                    <div className="dashboard">
-                        <div className ="dashboard_container">
-                            <div className="dashboard_header">
-                                <h3>Choose Research Tool</h3>
+                {
+                    showActive === 2 &&
+                        <div className="dashboard">
+                            <div className ="dashboard_container">
+                                <div className="dashboard_header">
+                                    <h3>Choose Research Tool</h3>
+                                </div>
+                                <div className="cardwrapper">
+                                    <div onClick ={selectStats}>
+                                        <MethodCard
+                                            title="Statistics"
+                                            desc= "Analyze your dataset by performing statistical techniques to infer specific hypotheses."
+                                            status ={stats}
+                                        />
+                                    </div>
+                                    <div onClick = {selectML}>
+                                        <MethodCard
+                                            title="Machine Learning"
+                                            desc= "Develop a model for prediction and classification by training a machine learning model."
+                                            status ={ML}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="dashboard_btn_cont">
+                                    <div className="dashboard_btn_div">
+                                    <button className="dashboard_btn" onClick={prevScreen}> previous</button>
+                                    </div>
+                                    <div className="dashboard_btn_div">
+                                    <button className="dashboard_btn" onClick={nextScreen}> next</button>
+                                    </div>
+                                </div>
+                                
                             </div>
-                            <div className="cardwrapper">
-                                <div onClick ={selectStats}>
-                                    <MethodCard
-                                        title="Statistics"
-                                        desc= "Analyze your dataset by performing statistical techniques to infer specific hypotheses."
-                                        status ={stats}
-                                    />
-                                </div>
-                                <div onClick = {selectML}>
-                                    <MethodCard
-                                        title="Machine Learning"
-                                        desc= "Develop a model for prediction and classification by training a machine learning model."
-                                        status ={ML}
-                                    />
-                                </div>
-                            </div>
-                            <div className="dashboard_btn_cont">
-                                <div className="dashboard_btn_div">
-                                 <button className="dashboard_btn" onClick={prevScreen}> previous</button>
-                                </div>
-                                <div className="dashboard_btn_div">
-                                 <button className="dashboard_btn" onClick={nextScreen}> next</button>
-                                </div>
-                            </div>
-                            
                         </div>
-                    </div>
                 }
-                {showActive === 3 &&
+                {
+                showActive === 3 &&
                     <div className = "dashboard">
                         <div className="upload_container">
                             <div className="upload_header">
@@ -244,7 +215,6 @@ export default function DashboardScreen(props){
                                         <button className="upload_btn"> Clear</button>
                                 </div>
                             </div>
-<<<<<<< HEAD
                         </div>
 
                         <div className="upload_container">
@@ -254,46 +224,12 @@ export default function DashboardScreen(props){
                                     <div className="upload_data">
                                             <input type="file" name="file" accept=".csv" onChange={(e) => changeHandler(e)} />
                                             <button className="upload_btn"> Clear</button>
-
                                     </div>
-                                    
                                 </div>
                                 <div className="upload_table">
                                     <DisplayTable data={dataArray}/>
-=======
-                            <div className="upload_table">
-                                <DisplayTable/>
-                            </div>
-                            <div className="dashboard_btn_cont">
-                                <div className="dashboard_btn_div">
-                                 <button className="dashboard_btn" onClick={prevScreen}> previous</button>
-                                </div>
-                                <div className="dashboard_btn_div">
-                                 <button className="dashboard_btn" onClick={nextScreen}> next</button>
->>>>>>> ac3369b8c3aba7d3094b234809edbfd4902cb0c6
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                
-                }
-
-                {showActive === 4 &&
-                    <div className="dashboard">
-                        <div className="upload_container">
-                            <div className="upload_res">
-                                <div className="upload_header"><h3>Filter</h3></div>
-                                <div className="upload_body">
-                                    <Checkbox callbackFunction={callbackCheckbox}/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="upload_container">
-                            <div className="upload_headerstat">
-                                <h3>Statistical Method: {methodChosen}</h3>
-                            </div>
-                            <AllCards tags={tags} display={displayMethodChosen}/>
                             <div className="dashboard_btn_cont">
                                 <div className="dashboard_btn_div">
                                     <button className="dashboard_btn" onClick={prevScreen}> previous</button>
@@ -303,17 +239,39 @@ export default function DashboardScreen(props){
                                 </div>
                             </div>
                         </div>
-
-                       
-
                     </div>
                 }
-
-                {showActive === "third" && 
-                <div></div>
+                {
+                    showActive === 4 &&
+                        <div className="dashboard">
+                            <div className="upload_container">
+                                <div className="upload_res">
+                                    <div className="upload_header"><h3>Filter</h3></div>
+                                    <div className="upload_body">
+                                        <Checkbox callbackFunction={callbackCheckbox}/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="upload_container">
+                                <div className="upload_headerstat">
+                                    <h3>Statistical Method: {methodChosen}</h3>
+                                </div>
+                                <AllCards tags={tags} display={displayMethodChosen}/>
+                                <div className="dashboard_btn_cont">
+                                    <div className="dashboard_btn_div">
+                                        <button className="dashboard_btn" onClick={prevScreen}> previous</button>
+                                    </div>
+                                    <div className="dashboard_btn_div">
+                                        <button className="dashboard_btn" onClick={nextScreen}> next</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 }
-
-            </div> 
+                {
+                    showActive === "third" && <div></div>
+                }
+            </div>
         );
     }else if(processed?.code === 'TOKEN_FAIL'){
         return(
