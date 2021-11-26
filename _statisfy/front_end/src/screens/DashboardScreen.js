@@ -2,6 +2,13 @@ import MethodCard from "../components/MethodCard";
 import AllCards from "../components/AllCards";
 import Checkbox from "../components/Checkbox";
 
+
+import TitlePage from "../components/dashboardPages/titlepage";
+import ToolPage from "../components/dashboardPages/toolPage";
+import DataPage from "../components/dashboardPages/dataPage";
+import StatPage from "../components/dashboardPages/statPage";
+import Navigator from "../components/navigator";
+
 import "../StyleSheets/dashboard.css";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router";
@@ -13,11 +20,7 @@ import { Alert } from "react-bootstrap";
 
 export default function DashboardScreen(props){
     // ======= FUNCTION-WIDE VARIABLES ======= //
-    const [stats, setStats] = useState("");
-    const [ML, setML] = useState("");
-    const [option, setOption] = useState(false);
-    const [toStatistics, setDestination] = useState(false);
-    const [showFirst, setShowFirst] = useState(true);
+    
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -43,26 +46,14 @@ export default function DashboardScreen(props){
 
     // ======= HANDLERS ======= //
 
-    const selectStats = function(){
-        setStats("Selected");
-        setML(""); 
-        setOption(true);
-        setDestination(true);
-    }
-
-    const selectML = function(){
-        setML("Selected");
-        setStats("");
-        setOption(true);
-        setDestination(false);
-    }
+    
 
     const displayMethodChosen = (choice) =>{
         setMethodChosen(choice);
     }
 
     const nextScreen = () => {
-        if(title?.length == 0 || description?.length == 0 || typeof title === 'undefined' || typeof description === 'undefined'){
+       if(title?.length == 0 || description?.length == 0 || typeof title === 'undefined' || typeof description === 'undefined'){
             setError("Please fill in all the details to continue.");
             return;
         }
@@ -140,142 +131,69 @@ export default function DashboardScreen(props){
     if(processed?.code === 'TOKEN_SUCCESS'){
         return(
             <div>
+                
                 {showActive === 1 &&
-                    <div className="dashboard">
-                        <div className ="dashboard_container">
-                            <div className="dashboard_header">
-                                <h3>Enter Title and Description</h3>
-                            </div>
-                            <div className="res">
-                                {error && <Alert variant='danger'>{error}</Alert>}
-                                <div className="res_div">
-                                    <span className="res_span">Research Title ({title.length}/200 characters)</span>
-                                    <input className="res_title" value={title} placeholder="Research Title" onChange={(e) => handleTitle(e)}></input>
-                                </div>
-                                <div className="res_div">
-                                    <span className="res_span">Research Description ({description.length}/250 characters)</span>
-                                    <textarea className="res_desc" value={description} placeholder="Description" onChange={(e) => handleDescription(e)}></textarea>
-                                </div>
-                            </div>
-
-                            <div className="dashboard_btn_cont">
-                                <div className="dashboard_btn_div">
-                                 <button className="dashboard_btn" disabled="true"> utot</button>
-                                </div>
-                                <div className="dashboard_btn_div">
-                                 <button className="dashboard_btn" onClick={nextScreen}> next</button>
-                                </div>
-                            </div>
+                <div>
+                    <TitlePage
+                        Title = {title}
+                        HandleTitle = {handleTitle}
+                        Error = {error}
+                        Description = {description}
+                        HandleDescription = {handleDescription}
+                    />
+                    <Navigator
+                        NextScreen={nextScreen}
+                        PrevScreen={prevScreen}
+                        nextDisabled={false}
+                        prevDisabled={true}
+                    />
+                    
+                </div>
+                }
+                {showActive === 2 &&
+                <div>
+                    <ToolPage/>
+                    <div className="dashboard_btn_cont">
+                        <div className="dashboard_btn_div">
+                         <button className="dashboard_btn" onClick={prevScreen}> previous</button>
+                        </div>
+                        <div className="dashboard_btn_div">
+                            <button className="dashboard_btn" onClick={nextScreen}> next</button>
                         </div>
                     </div>
+                </div>
+                    
                 }
-                {
-                    showActive === 2 &&
-                        <div className="dashboard">
-                            <div className ="dashboard_container">
-                                <div className="dashboard_header">
-                                    <h3>Choose Research Tool</h3>
-                                </div>
-                                <div className="cardwrapper">
-                                    <div onClick ={selectStats}>
-                                        <MethodCard
-                                            title="Statistics"
-                                            desc= "Analyze your dataset by performing statistical techniques to infer specific hypotheses."
-                                            status ={stats}
-                                        />
-                                    </div>
-                                    <div onClick = {selectML}>
-                                        <MethodCard
-                                            title="Machine Learning"
-                                            desc= "Develop a model for prediction and classification by training a machine learning model."
-                                            status ={ML}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="dashboard_btn_cont">
-                                    <div className="dashboard_btn_div">
-                                    <button className="dashboard_btn" onClick={prevScreen}> previous</button>
-                                    </div>
-                                    <div className="dashboard_btn_div">
-                                    <button className="dashboard_btn" onClick={nextScreen}> next</button>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                }
-                {
-                showActive === 3 &&
-                    <div className = "dashboard">
-                        <div className="upload_container">
-                            <div className="upload_header">
-                                <h3>Data</h3>
-                                <div className="upload_data">
-                                        <button className="upload_btn"> Upload</button>
-                                        <button className="upload_btn"> Clear</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="upload_container">
-                            <div className="upload_res">
-                                <div className="upload_header">
-                                    <h3>Data</h3>
-                                    <div className="upload_data">
-                                            <input type="file" name="file" accept=".csv" onChange={(e) => changeHandler(e)} />
-                                            <button className="upload_btn"> Clear</button>
-                                    </div>
-                                </div>
-                                <div className="upload_table">
-                                    <DisplayTable data={dataArray}/>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div className="upload_container">
-                            <div className="upload_headerstat">
-                                <h3>Statistical Method: </h3>
-                                <h5>{methodChosen}</h5>
-                            </div>
-                            <AllCards tags={tags} display={displayMethodChosen}/>
-
-                            <div className="dashboard_btn_cont">
-                                <div className="dashboard_btn_div">
-                                    <button className="dashboard_btn" onClick={prevScreen}> previous</button>
-                                </div>
-                                <div className="dashboard_btn_div">
-                                    <button className="dashboard_btn" onClick={nextScreen}> next</button>
-                                </div>
-                            </div>
-                        </div>
+                { showActive === 3 &&
+                    <div>
+                        <DataPage
+                            ChangeHandler = {changeHandler}
+                            DataArray = {dataArray}
+                        />
+                        <Navigator
+                            NextScreen={nextScreen}
+                            PrevScreen={prevScreen}
+                            nextDisabled={false}
+                            prevDisabled={false}
+                        />
                     </div>
                 }
-                {
-                    showActive === 4 &&
-                        <div className="dashboard">
-                            <div className="upload_container">
-                                <div className="upload_res">
-                                    <div className="upload_header"><h3>Filter</h3></div>
-                                    <div className="upload_body">
-                                        <Checkbox callbackFunction={callbackCheckbox}/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="upload_container">
-                                <div className="upload_headerstat">
-                                    <h3>Statistical Method: {methodChosen}</h3>
-                                </div>
-                                <AllCards tags={tags} display={displayMethodChosen}/>
-                                <div className="dashboard_btn_cont">
-                                    <div className="dashboard_btn_div">
-                                        <button className="dashboard_btn" onClick={prevScreen}> previous</button>
-                                    </div>
-                                    <div className="dashboard_btn_div">
-                                        <button className="dashboard_btn" onClick={nextScreen}> next</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                { showActive === 4 &&
+                    <div>
+                        <StatPage
+                            CallbackCheckbox = {callbackCheckbox}
+                            MethodChosen = {methodChosen}
+                            Tags = {tags}
+                            DisplayMethodChosen = {displayMethodChosen}
+                        />
+                        <Navigator
+                            NextScreen={nextScreen}
+                            PrevScreen={prevScreen}
+                            nextDisabled={false}
+                            prevDisabled={false}
+                        />
+                    </div>
+                        
                 }
                 {
                     showActive === "third" && <div></div>

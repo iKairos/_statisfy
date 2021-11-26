@@ -366,6 +366,79 @@ body {
   overflow: scroll;
 }
 
+.stat_checkbox {
+  display: -ms-grid;
+  display: grid;
+  padding: 2rem;
+  width: 1fr;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #e8e8e8;
+  overflow-y: scroll;
+  max-height: 25rem;
+  position: relative;
+}
+
+.data {
+  display: -ms-grid;
+  display: grid;
+  width: 1fr;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.data_header {
+  background-color: antiquewhite;
+  height: 3rem;
+}
+
+.data_container {
+  width: 1fr;
+  background-color: #e8e8e8;
+  border-radius: 1rem;
+  -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
+          box-shadow: 0 0 10px 5px #f0f0f0;
+  overflow: hidden;
+}
+
+.data_container_table {
+  width: 1fr;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #e8e8e8;
+  border-radius: 1rem;
+  -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
+          box-shadow: 0 0 10px 5px #f0f0f0;
+  overflow: hidden;
+}
+
+.data_container_display {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.data_table {
+  height: 20rem;
+  overflow-y: scroll;
+}
+
 @media screen and (min-width: 600px) {
   .dashboard {
     -ms-grid-columns: 1fr;
@@ -421,6 +494,31 @@ body {
   .upload_nxtbtn:hover {
     -webkit-transform: scale(1.05);
             transform: scale(1.05);
+  }
+  .data {
+    display: -ms-grid;
+    display: grid;
+    padding: 2rem;
+    width: 1fr;
+    -ms-grid-columns: 1fr 2fr;
+        grid-template-columns: 1fr 2fr;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 2rem;
+  }
+  .data_container {
+    width: 1fr;
+  }
+  .data_container_table {
+    width: 2fr;
+  }
+  .data_header {
+    padding: 1rem;
+    background-color: white;
   }
 }
 /*# sourceMappingURL=dashboard.css.map */

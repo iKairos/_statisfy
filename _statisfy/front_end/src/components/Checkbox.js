@@ -6,15 +6,15 @@ export default function Checkbox({callbackFunction}){
     const [ checked, setChecked] = useState([]);
 
     return (
-        <div className = "contStyle">
-            <div className = "divStyle" >    
+        <div className="contStyle">
+            <div className = "divStyle">    
                 <span className="upload_span"> Variable Count:</span>
                     
                 <div>
                     <input type="checkbox" className="checkbox_child" onChange={callbackFunction(checked)} onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "One Variable"]) : setChecked(checked.filter((i) => i !== "One Variable"))
                     }}/>
-                    <label for="one-numvar">
+                    <label>
                          One variable
                     </label>
                 </div>
@@ -22,7 +22,7 @@ export default function Checkbox({callbackFunction}){
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Two Variables"]) : setChecked(checked.filter((i) => i !== "Two Variables"))
                     }}/>
-                    <label for="two-numvar">
+                    <label>
                         Two variables
                     </label>
                 </div>
@@ -30,7 +30,7 @@ export default function Checkbox({callbackFunction}){
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Multiple Variables"]) : setChecked(checked.filter((i) => i !== "Multiple Variables"))
                     }}/>
-                    <label for="three-numvar">
+                    <label>
                         Two or more variables
                     </label>
                 </div>
@@ -38,7 +38,7 @@ export default function Checkbox({callbackFunction}){
 
             
 
-            <div className = "divStyle" >    
+            <div  >    
                 <span className="upload_span"> Type of Variable:</span>
                     
                 <div>
@@ -76,7 +76,7 @@ export default function Checkbox({callbackFunction}){
                
             </div>
 
-            <div className = "divStyle" >    
+            <div>    
                 <span className="upload_span"> Type of Data:</span>
                     
                 <div>
@@ -98,7 +98,7 @@ export default function Checkbox({callbackFunction}){
                
             </div>
 
-            <div className = "divStyle" >    
+            <div>    
                 <span className="upload_span"> Purpose of Analysis:</span>
                     
                 <div>
@@ -128,7 +128,7 @@ export default function Checkbox({callbackFunction}){
                
             </div>
 
-            <div className = "divStyle" >    
+            <div>    
                 <span className="upload_span"> Number of Groups:</span>
                     
                 <div>
@@ -150,7 +150,7 @@ export default function Checkbox({callbackFunction}){
                
             </div>
 
-            <div className = "divStyle" >    
+            <div >    
                 <span className="upload_span"> Number of Independent Variables:</span>
                     
                 <div>

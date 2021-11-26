@@ -273,6 +273,58 @@ body {
     overflow: scroll;
   }
 }
+.stat {
+  &_checkbox {
+    display: grid;
+    padding: 2rem;
+    width: 1fr;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    background-color: $cardcolor;
+    overflow-y: scroll;
+    max-height: 25rem;
+    position: relative;
+  }
+}
+.data {
+  display: grid;
+  width: 1fr;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: center;
+
+  &_header {
+    background-color: antiquewhite;
+    height: 3rem;
+  }
+  &_container {
+    width: 1fr;
+    background-color: $cardcolor;
+    border-radius: $radius;
+    box-shadow: $boxshadow;
+    overflow: hidden;
+
+    &_table {
+      width: 1fr;
+      height: fit-content;
+      background-color: $cardcolor;
+      border-radius: $radius;
+      box-shadow: $boxshadow;
+      overflow: hidden;
+    }
+    &_display {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+  &_table {
+    height: 20rem;
+    overflow-y: scroll;
+  }
+}
 
 @media screen and (min-width: 600px) {
   .dashboard {
@@ -326,6 +378,27 @@ body {
       &:hover {
         transform: scale(1.05);
       }
+    }
+  }
+
+  .data {
+    display: grid;
+    padding: 2rem;
+    width: 1fr;
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    &_container {
+      width: 1fr;
+      &_table {
+        width: 2fr;
+      }
+    }
+    &_header {
+      padding: 1rem;
+      background-color: white;
     }
   }
 }

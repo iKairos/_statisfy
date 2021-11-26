@@ -1,13 +1,14 @@
 .contStyle {
+  min-width: max-content;
   display: grid;
-  grid-template-columns: 1rem 1rem;
+  grid-template-columns: 1fr;
   gap: 1rem;
+  word-wrap: normal;
 }
 
 .divStyle {
-  width: 1rem;
-  display: flex;
-  flex-direction: column;
+  width: 1fr;
+  grid-template-columns: 1fr;
 }
 
 input[type="checkbox"] {
@@ -18,6 +19,9 @@ label {
   font-family: inherit;
   cursor: pointer;
 }
-
 @media screen and (min-width: 600px) {
+  .contStyle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
