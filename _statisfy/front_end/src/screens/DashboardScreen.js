@@ -158,7 +158,7 @@ export default function DashboardScreen(props){
 
                             <div className="dashboard_btn_cont">
                                 <div className="dashboard_btn_div">
-                                 <button className="dashboard_btn" disabled="true"> previous</button>
+                                 <button className="dashboard_btn" disabled="true"> utot</button>
                                 </div>
                                 <div className="dashboard_btn_div">
                                  <button className="dashboard_btn" onClick={nextScreen}> next</button>
@@ -241,7 +241,8 @@ export default function DashboardScreen(props){
                         </div>
                         <div className="upload_container">
                             <div className="upload_headerstat">
-                                <h3>Statistical Method: {methodChosen}</h3>
+                                <h3>Statistical Method: </h3>
+                                <h5>{methodChosen}</h5>
                             </div>
                             <AllCards tags={tags} display={displayMethodChosen}/>
                             <div className="dashboard_btn_cont">
