@@ -412,6 +412,7 @@ body {
   -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
           box-shadow: 0 0 10px 5px #f0f0f0;
   overflow: hidden;
+  width: 100%;
 }
 
 .data_container_table {
@@ -485,9 +486,7 @@ body {
   -ms-grid-columns: 1rem;
       grid-template-columns: 1rem;
   height: 8rem;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  width: 20rem;
 }
 
 .data_cells {
@@ -591,6 +590,7 @@ body {
   }
   .data_container_table {
     width: 2fr;
+    max-width: 60rem;
   }
   .data_header {
     padding: 1rem;
