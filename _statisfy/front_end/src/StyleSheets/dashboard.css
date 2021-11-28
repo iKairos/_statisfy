@@ -332,6 +332,7 @@ body {
   border: none;
   border-radius: 2rem;
   margin-right: 0.5rem;
+  height: 2rem;
 }
 
 .upload_nxtbtn {
@@ -400,13 +401,13 @@ body {
 }
 
 .data_header {
-  background-color: antiquewhite;
+  background-color: white;
   height: 3rem;
 }
 
 .data_container {
-  width: 1fr;
-  background-color: #e8e8e8;
+  height: 1fr;
+  background-color: white;
   border-radius: 1rem;
   -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
           box-shadow: 0 0 10px 5px #f0f0f0;
@@ -428,15 +429,90 @@ body {
 .data_container_display {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr;
-      grid-template-columns: 1fr;
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
   gap: 1rem;
-  margin-bottom: 1rem;
+  height: 100%;
 }
 
 .data_table {
   height: 20rem;
   overflow-y: scroll;
+}
+
+.data_tabs {
+  background-color: white;
+  width: 1fr;
+  height: 2.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+}
+
+.data_tabs_inactive {
+  background-color: transparent;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+}
+
+.data_tabs_header {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  background-color: #838383;
+}
+
+.data_content {
+  padding: 1rem;
+  background-color: white;
+  -ms-grid-columns: 1rem;
+      grid-template-columns: 1rem;
+  height: 8rem;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.data_cells {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  height: 8rem;
+  overflow-y: scroll;
+}
+
+.data_span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  border-bottom: 2px solid #e7e7e7;
+  font-weight: 500;
+  font-size: 1rem;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
 }
 
 @media screen and (min-width: 600px) {

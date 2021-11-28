@@ -245,6 +245,7 @@ body {
     border: none;
     border-radius: 2rem;
     margin-right: 0.5rem;
+    height: 2rem;
   }
   &_nxtbtn {
     padding: 2px;
@@ -295,12 +296,12 @@ body {
   align-items: center;
 
   &_header {
-    background-color: antiquewhite;
+    background-color: white;
     height: 3rem;
   }
   &_container {
-    width: 1fr;
-    background-color: $cardcolor;
+    height: 1fr;
+    background-color: white;
     border-radius: $radius;
     box-shadow: $boxshadow;
     overflow: hidden;
@@ -315,14 +316,57 @@ body {
     }
     &_display {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
       gap: 1rem;
-      margin-bottom: 1rem;
+      height: 100%;
     }
   }
   &_table {
     height: 20rem;
     overflow-y: scroll;
+  }
+  &_tabs {
+    background-color: white;
+    width: 1fr;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    &_inactive {
+      background-color: transparent;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    &_header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background-color: #838383;
+    }
+  }
+  &_content {
+    padding: 1rem;
+    background-color: rgb(255, 255, 255);
+    grid-template-columns: 1rem;
+    height: 8rem;
+    width: max-content;
+  }
+  &_cells {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 8rem;
+    overflow-y: scroll;
+  }
+  &_span {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid #e7e7e7;
+    font-weight: 500;
+    font-size: 1rem;
+    height: min-content;
   }
 }
 
