@@ -1,11 +1,21 @@
 import { Link } from 'react-router-dom'
 import {Navbar, Row, Col, Nav, NavDropdown, Container} from 'react-bootstrap'
 import { useHistory } from "react-router"
+import { useDispatch, useSelector } from 'react-redux';
+import { expireToken } from '../actions/tokenActions';
 
 export default function Header(props){
     const history = useHistory();
+    const dispatch = useDispatch();
+
+    const expireTokenSelector = useSelector((state) => 
+        state.tokenExpire
+    );
+
+    const {expireRes} = expireTokenSelector;
 
     const handleLogout = () => {
+        dispatch(expireToken(props.token));
         localStorage.removeItem('token');
         history.push('/');
         history.go(0);

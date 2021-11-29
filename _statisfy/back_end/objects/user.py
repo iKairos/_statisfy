@@ -142,7 +142,7 @@ class User:
                 'iat': datetime.datetime.utcnow(),
                 'sub': user[0]
             } 
-
+                                
             token = jwt.encode(
                 payload,
                 secret_key,

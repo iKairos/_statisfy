@@ -44,7 +44,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="wrapper">
-              <Header loading={loading} user={processed?.user} />
+              <Header loading={loading} token={token} user={processed?.user} />
 
               <div>
                 <Switch>

@@ -1,5 +1,6 @@
 from __main__ import app 
 from flask import request
+from objects.token import Token
 from objects.user import User
 from flask_cors import cross_origin
 
@@ -15,7 +16,7 @@ def login():
         
         return {'access_token': auth[2], 'payload': auth[1] if not auth[0] else None}
 
-@app.route(f"/api/user/token/decode/<token>")
+@app.route("/api/user/token/decode/<token>", methods = ['GET'])
 @cross_origin()
 def decode_token(token):
     secret_key = app.config.get('SECRET_KEY')
@@ -28,7 +29,14 @@ def decode_token(token):
             'code': 'TOKEN_FAIL'
         }
     else:
+        if Token(token).is_expired:
+            return {
+                'error': 'Token is already expired.',
+                'code': 'TOKEN_FAIL'
+            }
+
         u = User(decoded)
+
         return {
             'user': {
                 '_id': decoded,
@@ -48,3 +56,29 @@ def decode_token(token):
             },
             'code': 'TOKEN_SUCCESS'
         }
+
+@app.route("/api/user/token/expire/<token>")
+@cross_origin()
+def expire_token(token):
+    try:
+        secret_key = app.config.get('SECRET_KEY')
+
+        decoded = User.decode_auth_token(token, secret_key)
+
+        if type(decoded) == str:
+            return {
+                'error': decoded,
+                'code': 'TOKEN_FAIL'
+            }
+        else:
+            if Token(token).is_expired:
+                return {
+                    'error': 'Token is already expired.',
+                    'code': 'TOKEN_FAIL'
+                }
+
+            Token().expire_token(token)
+
+            return {'code': 'TOKEN_EXPIRE_SUCCESS'}
+    except Exception as e:
+        return {'code': 'TOKEN_EXPIRE_FAILURE', 'error': str(e)}
