@@ -306,6 +306,7 @@ body {
     box-shadow: $boxshadow;
     overflow: hidden;
     width: 100%;
+    margin-bottom: 2rem;
 
     &_table {
       width: 1fr;
@@ -352,14 +353,30 @@ body {
     padding: 1rem;
     background-color: rgb(255, 255, 255);
     grid-template-columns: 1rem;
-    height: 8rem;
+    height: 15rem;
     width: 20rem;
+    &_right {
+      padding: 1rem;
+      background-color: rgb(255, 255, 255);
+      grid-template-columns: 1rem;
+      height: 15rem;
+      width: 100%;
+      overflow-y: scroll;
+    }
   }
   &_cells {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 8rem;
-    overflow-y: scroll;
+    &_left {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 1rem;
+      height: 15rem;
+    }
+    &_right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 15rem;
+      overflow-y: scroll;
+    }
   }
   &_span {
     display: flex;
@@ -367,7 +384,8 @@ body {
     border-bottom: 2px solid #e7e7e7;
     font-weight: 500;
     font-size: 1rem;
-    height: min-content;
+    height: 1.5rem;
+    row-gap: 0;
   }
 }
 
@@ -435,16 +453,31 @@ body {
     align-items: center;
     gap: 2rem;
 
+    &_table {
+      height: 35rem;
+    }
     &_container {
       width: 1fr;
+      min-width: 35rem;
+      max-width: 35rem;
+      height: 100%;
+      margin: 0;
       &_table {
         width: 2fr;
-        max-width: 60rem;
+        min-width: 65rem;
+        max-width: 65rem;
+        height: 36rem;
       }
     }
     &_header {
       padding: 1rem;
       background-color: white;
+    }
+    &_cells {
+      &_right {
+        padding: 1rem;
+        width: fit-content;
+      }
     }
   }
 }
