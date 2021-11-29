@@ -109,6 +109,7 @@ export default function DataPage(props){
                             </div> :
                             displayTab === "right" ? 
                             <div className="data_cells_right">
+
                                 <table className="column_table">
                                     <thead>
                                         <tr>
@@ -128,7 +129,7 @@ export default function DataPage(props){
                                                     <tr>
                                                         <td><input type="checkbox" className="checkbox_child"/></td>
                                                         <td><p>{i[0]}</p></td>
-                                                        <td><p>{i[1]}</p></td>
+                                                        <td><p>{i[1]} | {((i[1] / props.DatasetDetails.rows)*100).toFixed(2)}% missing</p></td>
                                                         <td><p>{i[1]}</p></td>
                                                         <td><p>{i[1]}</p></td>
                                                         <td><p>{i[1]}</p></td>
@@ -139,6 +140,7 @@ export default function DataPage(props){
                                         }
                                     </tbody>
                                 </table>
+                            
                             </div>: null
                         }
                         
