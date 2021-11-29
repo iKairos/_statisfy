@@ -6,7 +6,7 @@ export const DisplayTable = (props) => {
     var data = props.data;
 
     if(typeof data === 'undefined'){
-      return <h1>sandali lang po sandali lang po...</h1>
+      return <h1>.</h1>
     }else{
       if (data.length > 50) {
         data = data.slice(0,50)
