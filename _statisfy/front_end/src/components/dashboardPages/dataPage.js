@@ -78,7 +78,7 @@ export default function DataPage(props){
                                     props.DatasetDetails?.null_count?.map((i) => (
                                         <>
                                             <span className="data_span">{i[0]} missing data</span>
-                                            <p className="data_span">{i[1]}</p>
+                                            <p className="data_span">{i[1]} | {((i[1] / props.DatasetDetails.rows)*100).toFixed(2)}% missing</p>
                                         </>
                                     )) : <Spinner animation="border" variant="primary" />
                                 }
