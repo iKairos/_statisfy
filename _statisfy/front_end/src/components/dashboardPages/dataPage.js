@@ -56,14 +56,20 @@ export default function DataPage(props){
                     <div>
                         {displayTab === "left" ?
                             <div className="data_cells">
-                                <span className="data_span">Size</span>
-                                {props.DatasetDetails ? <p className="data_span">{props.DatasetDetails?.size} datapoints</p> : <Spinner animation="border" variant="primary" />}
-                                <span className="data_span">Columns</span>
-                                {props.DatasetDetails ? <p className="data_span">{props.DatasetDetails?.columns} columns</p> : <Spinner animation="border" variant="primary" />}
-                                <span className="data_span">Rows</span>
-                                {props.DatasetDetails ? <p className="data_span">{props.DatasetDetails?.rows} rows</p> : <Spinner animation="border" variant="primary" /> }
-                                <span className="data_span">Mean</span>
-                                <p className="data_span">1</p>
+                                { props.DatasetDetails ?
+                                    (
+                                        <>
+                                            <span className="data_span">Size</span>
+                                            {<p className="data_span">{props.DatasetDetails?.size} datapoints</p>}
+                                            <span className="data_span">Columns</span>
+                                            {<p className="data_span">{props.DatasetDetails?.columns} columns</p>}
+                                            <span className="data_span">Rows</span>
+                                            {<p className="data_span">{props.DatasetDetails?.rows} rows</p>}
+                                            <span className="data_span">Mean</span>
+                                            <p className="data_span">1</p>
+                                        </>
+                                    ) : <Spinner animation="border" variant="primary" />
+                                }
                             </div> :
                             displayTab === "right" ? 
                             <div className="data_cells">
