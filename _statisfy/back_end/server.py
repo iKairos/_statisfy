@@ -11,7 +11,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SECRET_KEY'] = SECRET_KEY
 
 # connect routes to app
-from routes import user_routes, research_routes, auth_routes
+from routes import user_routes, research_routes, auth_routes, dataset_routes
 
 # run the app
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 import { DisplayTable } from "../DisplayTable";
 import { useState } from "react";
+import { Alert, Spinner } from "react-bootstrap";
 
 export default function DataPage(props){
 
@@ -14,14 +15,13 @@ export default function DataPage(props){
     const switchDisplayPage = (page)=>{
         setDisplayTab(page);
     }
-
     
- 
-     return(
+    return(
 
         <div className = "data">
             <div className="data_container_display">
                 <div className="data_container">
+                    {props.Error && <Alert variant='danger'>{props.Error}</Alert>}  
                     <div className="data_tabs_header">
                         <div className = {uploadTab === "left" ? "data_tabs" : "data_tabs_inactive"} onClick= {()=> switchUploadPage("left")}>
                             Upload
@@ -54,18 +54,29 @@ export default function DataPage(props){
                         </div>
                     </div>
                     <div>
-                        {displayTab === "left"?
+                        {displayTab === "left" ?
                             <div className="data_cells">
-                                <span className="data_span">Size:</span>
-                                <p className="data_span">1</p>
-                                <span className="data_span">Columns:</span>
-                                <p className="data_span">1</p>
-                                <span className="data_span">Rows:</span>
-                                <p className="data_span">1</p>
+                                <span className="data_span">Size</span>
+                                {props.DatasetDetails ? <p className="data_span">{props.DatasetDetails?.size} datapoints</p> : <Spinner animation="border" variant="primary" />}
+                                <span className="data_span">Columns</span>
+                                {props.DatasetDetails ? <p className="data_span">{props.DatasetDetails?.columns} columns</p> : <Spinner animation="border" variant="primary" />}
+                                <span className="data_span">Rows</span>
+                                {props.DatasetDetails ? <p className="data_span">{props.DatasetDetails?.rows} rows</p> : <Spinner animation="border" variant="primary" /> }
                                 <span className="data_span">Mean</span>
                                 <p className="data_span">1</p>
                             </div> :
-                            null
+                            displayTab === "right" ? 
+                            <div className="data_cells">
+                                {
+                                    props.DatasetDetails ? 
+                                    props.DatasetDetails?.null_count?.map((i) => (
+                                        <>
+                                            <span className="data_span">{i[0]} missing data</span>
+                                            <p className="data_span">{i[1]}</p>
+                                        </>
+                                    )) : <Spinner animation="border" variant="primary" />
+                                }
+                            </div>: null
                         }
                         
                     </div>

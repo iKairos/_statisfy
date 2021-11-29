@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { processUserToken } from "../actions/userActions";
 import { DisplayTable } from "../components/DisplayTable";
 import { Alert } from "react-bootstrap";
+import { processDataset } from "../actions/datasetActions";
 
 export default function DashboardScreen(props){
     // ======= FUNCTION-WIDE VARIABLES ======= //
@@ -64,8 +65,6 @@ export default function DashboardScreen(props){
         setShowActive(showActive - 1);
     }
 
-   
-
     const handleTitle = (e) => {
         setTitle(e.target.value)
 
@@ -99,8 +98,24 @@ export default function DashboardScreen(props){
     }, [])
 
     // ======= FILE UPLOAD MECHANISM ======= //
+    const fileDetailsSelector = useSelector((state) => 
+        state.datasetDetails
+    );
+    const {datasetDetails} = fileDetailsSelector;
+
     const changeHandler = (e) => {
         if (e.target.files.length != 0){
+            var filename = e.target.files[0].name
+
+            const extension = filename.split('.').pop();
+
+            if(extension != 'csv'){
+                setError("File is not in comma-separated value (CSV) format. Please make sure you are uploading your dataset in CSV format.");
+                return;
+            }
+
+            setError(undefined);
+
             const reader = new FileReader();
 
             reader.onload = (e) => {
@@ -109,6 +124,12 @@ export default function DashboardScreen(props){
             }
 
             reader.readAsText(e.target.files[0]);
+
+            const formData = new FormData();
+
+            formData.append("file", e.target.files[0]);
+
+            dispatch(processDataset(formData));
         }
     }
 
@@ -169,6 +190,8 @@ export default function DashboardScreen(props){
                         <DataPage
                             ChangeHandler = {changeHandler}
                             DataArray = {dataArray}
+                            DatasetDetails = {datasetDetails}
+                            Error = {error}
                         />
                         <Navigator
                             NextScreen={nextScreen}
