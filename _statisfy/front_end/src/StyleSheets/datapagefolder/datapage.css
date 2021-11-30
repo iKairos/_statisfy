@@ -1,0 +1,174 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.column_table {
+  width: 100%;
+}
+
+.column_table_header {
+  word-wrap: break-word;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 10rem;
+}
+
+.dropdown_hover {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  background-color: #df9aff;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+}
+
+.dropdown_hover:hover {
+  background-color: white;
+  color: gray;
+}
+
+.dropdown_menu {
+  border-radius: 1rem;
+  padding: 0.5rem;
+  display: none;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border: 2px solid gray;
+}
+
+.dropdown_menu_items {
+  cursor: pointer;
+  color: black;
+}
+
+.dropdown_menu_items:hover {
+  color: white;
+  background-color: gray;
+}
+
+.dropdown:hover .dropdown_menu {
+  display: -ms-grid;
+  display: grid;
+  z-index: 1;
+}
+
+.datapage {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0.5rem;
+  min-height: 100%;
+}
+
+.datapage_container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 5fr;
+      grid-template-rows: 1fr 5fr;
+  border-radius: 1rem;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
+          box-shadow: 0 0 10px 5px #f0f0f0;
+  background-color: white;
+  height: 76vh;
+  width: 90vw;
+}
+
+.datapage_navigator {
+  padding-top: 2rem;
+  display: -ms-grid;
+  display: grid;
+  background-color: #a8a8a8;
+  height: 5rem;
+  -ms-grid-columns: (5rem)[auto-fill];
+      grid-template-columns: repeat(auto-fill, 5rem);
+  padding-left: 1.5rem;
+  border: none;
+}
+
+.datapage_navigator_active {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background-color: #ffffff;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 3rem;
+  width: 5rem;
+  height: 3rem;
+  cursor: pointer;
+}
+
+.datapage_navigator_inactive {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background-color: #cfcfcf;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 3rem;
+  height: 3rem;
+  width: 5rem;
+  cursor: pointer;
+}
+
+.datapage_content {
+  padding: 0.5rem;
+  gap: 1rem;
+  overflow-y: scroll;
+}
+
+@media screen and (min-width: 600px) {
+  .datapage_navigator {
+    display: -ms-grid;
+    display: grid;
+    background-color: #a8a8a8;
+    height: 5rem;
+    -ms-grid-columns: (10rem)[auto-fill];
+        grid-template-columns: repeat(auto-fill, 10rem);
+    padding-left: 2rem;
+  }
+  .datapage_navigator_active {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    background-color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 3rem;
+    width: 10rem;
+    height: 3rem;
+    cursor: pointer;
+  }
+  .datapage_navigator_inactive {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border: 2px solid #bbbbbb;
+    background-color: #cfcfcf;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 3rem;
+    height: 3rem;
+    width: 10rem;
+    cursor: pointer;
+  }
+  .datapage_content {
+    padding: 2rem;
+    gap: 1rem;
+    overflow-y: scroll;
+  }
+}
+/*# sourceMappingURL=datapage.css.map */

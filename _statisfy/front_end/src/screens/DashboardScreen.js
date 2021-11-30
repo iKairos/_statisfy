@@ -6,6 +6,7 @@ import Checkbox from "../components/Checkbox";
 import TitlePage from "../components/dashboardPages/titlepage";
 import ToolPage from "../components/dashboardPages/toolPage";
 import DataPage from "../components/dashboardPages/dataPage";
+import DataSetPage from "../components/dashboardPages/datasetPage";
 import StatPage from "../components/dashboardPages/statPage";
 import Navigator from "../components/navigator";
 
@@ -190,7 +191,7 @@ export default function DashboardScreen(props){
                 }
                 { showActive === 3 &&
                     <div>
-                        <DataPage
+                        <DataSetPage
                             ChangeHandler = {changeHandler}
                             DataArray = {dataArray}
                             DatasetDetails = {datasetDetails}
