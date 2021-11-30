@@ -95,14 +95,16 @@ export default function DataPage(props){
                                 { props.DatasetDetails ?
                                     (
                                         <div className="data_cells_left">
+                                            <span className="data_span">File Name</span>
+                                            {<p className="data_span">{props.FileDetails?.name}</p>}
+                                            <span className="data_span">File Size</span>
+                                            {<p className="data_span">{props.FileDetails?.size / 1000} kB</p>}
                                             <span className="data_span">Size</span>
                                             {<p className="data_span">{props.DatasetDetails?.size} datapoints</p>}
                                             <span className="data_span">Columns</span>
                                             {<p className="data_span">{props.DatasetDetails?.columns} columns</p>}
                                             <span className="data_span">Rows</span>
                                             {<p className="data_span">{props.DatasetDetails?.rows} rows</p>}
-                                            <span className="data_span">Mean</span>
-                                            <p className="data_span">1</p>
                                         </div>
                                     ) : <Spinner animation="border" variant="primary" />
                                 }

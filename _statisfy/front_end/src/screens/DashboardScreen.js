@@ -32,6 +32,7 @@ export default function DashboardScreen(props){
     const [showActive, setShowActive] = useState(1);
 
     const [dataArray, setDataArray] = useState();
+    const [fileDetails, setFileDetails] = useState({});
 
 
     // ======= TOKEN HANDLING ======= //
@@ -117,19 +118,21 @@ export default function DashboardScreen(props){
             setError(undefined);
 
             const reader = new FileReader();
-
             reader.onload = (e) => {
                 const text = e.target.result;
                 processCSV(text);
             }
-
             reader.readAsText(e.target.files[0]);
 
             const formData = new FormData();
-
             formData.append("file", e.target.files[0]);
 
             dispatch(processDataset(formData));
+
+            setFileDetails({
+                'size': e.target.files[0].size,
+                'name': filename
+            });
         }
     }
 
@@ -191,6 +194,7 @@ export default function DashboardScreen(props){
                             ChangeHandler = {changeHandler}
                             DataArray = {dataArray}
                             DatasetDetails = {datasetDetails}
+                            FileDetails = {fileDetails}
                             Error = {error}
                         />
                         <Navigator
