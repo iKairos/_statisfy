@@ -10,14 +10,31 @@ def dataset_details():
     
     df = pd.read_csv(file)
     
-    null_count = []
+    details = []
 
     for i in df.columns:
-        null_count.append((i, int(df.isna().sum()[i])))
+        mean = "NA"
+        std = "NA"
+        median = "NA"
+        try:
+            if df[i].dtypes != 'O':
+                mean = float(df[i].mean())
+                std = float(df[i].std())
+                median = float(df[i].median())
+        except:
+            pass 
+
+        details.append({
+            'column': i,
+            'null_count': int(df.isna().sum()[i]),
+            'mean': mean,
+            'std': std,
+            'median': median
+        })
 
     return {
         'size': int(df.size),
         'rows': int(df.shape[0]),
         'columns': int(df.shape[1]),
-        'null_count': null_count
+        'details': details
     }

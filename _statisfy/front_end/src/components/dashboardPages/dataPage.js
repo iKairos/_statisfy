@@ -50,11 +50,11 @@ export default function DataPage(props){
                                     <tbody>
                                         {
                                             props.DatasetDetails ? 
-                                            props.DatasetDetails?.null_count?.map((i) => (
+                                            props.DatasetDetails?.details?.map((i) => (
                                             
                                                 <>
                                                     <tr>
-                                                        <td><p>{i[0]}</p></td>
+                                                        <td><p>{i['column']}</p></td>
                                                         <td>
                                                             <div className = "dropdown">
                                                                 <button className="dropdown_hover">Data Replacement</button>
@@ -124,15 +124,15 @@ export default function DataPage(props){
                                     <tbody>
                                         {
                                             props.DatasetDetails ? 
-                                            props.DatasetDetails?.null_count?.map((i) => (
+                                            props.DatasetDetails?.details?.map((i) => (
                                                 <>
                                                     <tr>
                                                         <td><input type="checkbox" className="checkbox_child"/></td>
-                                                        <td><p>{i[0]}</p></td>
-                                                        <td><p>{i[1]} | {((i[1] / props.DatasetDetails.rows)*100).toFixed(2)}% missing</p></td>
-                                                        <td><p>{i[1]}</p></td>
-                                                        <td><p>{i[1]}</p></td>
-                                                        <td><p>{i[1]}</p></td>
+                                                        <td><p>{i['column']}</p></td>
+                                                        <td><p>{i['null_count']} | {((i['null_count'] / props.DatasetDetails.rows)*100).toFixed(2)}% missing</p></td>
+                                                        <td><p>{typeof i['mean'] === 'number' ? i['mean'].toFixed(2) : i['mean']}</p></td>
+                                                        <td><p>{typeof i['std'] === 'number' ? i['std'].toFixed(2) : i['std']}</p></td>
+                                                        <td><p>{typeof i['median'] === 'number' ? i['median'].toFixed(2) : i['std']}</p></td>
                                                     </tr>
                                                     
                                                 </>

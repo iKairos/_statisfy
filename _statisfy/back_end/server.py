@@ -15,4 +15,4 @@ from routes import user_routes, research_routes, auth_routes, dataset_routes
 
 # run the app
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, threaded=True)
