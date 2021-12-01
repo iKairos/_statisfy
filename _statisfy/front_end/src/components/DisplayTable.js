@@ -8,10 +8,6 @@ export const DisplayTable = (props) => {
     if(typeof data === 'undefined'){
       return <h1>.</h1>
     }else{
-      if (data.length > 50) {
-        data = data.slice(0,50)
-      }
-      
       const columns = Object.keys(data[1]).map((key, id)=>{
         return key;
       })

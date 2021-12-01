@@ -4,7 +4,7 @@ import { Alert, Spinner } from "react-bootstrap";
 import "../../StyleSheets/column/columntable.css";
 
 export default function DataPage(props){
-
+    console.log(props.FileDetails)
     const [uploadTab, setTab] = useState("left");
 
     const switchUploadPage = (page)=>{
@@ -16,7 +16,7 @@ export default function DataPage(props){
     const switchDisplayPage = (page)=>{
         setDisplayTab(page);
     }
-    
+
     return(
 
         <div className = "data">
@@ -87,21 +87,19 @@ export default function DataPage(props){
                     
                     {displayTab === "left" ?
                         <div className="data_cells">
-                            { props.DatasetDetails ?
-                                (
-                                    <div className="data_cells_left">
-                                        <span className="data_span">File Name</span>
-                                        {<p className="data_span">{props.FileDetails?.name}</p>}
-                                        <span className="data_span">File Size</span>
-                                        {<p className="data_span">{props.FileDetails?.size / 1000} kB</p>}
-                                        <span className="data_span">Size</span>
-                                        {<p className="data_span">{props.DatasetDetails?.size} datapoints</p>}
-                                        <span className="data_span">Columns</span>
-                                        {<p className="data_span">{props.DatasetDetails?.columns} columns</p>}
-                                        <span className="data_span">Rows</span>
-                                        {<p className="data_span">{props.DatasetDetails?.rows} rows</p>}
-                                    </div>
-                                ) : <Spinner animation="border" variant="primary" />
+                            { 
+                                <div className="data_cells_left">
+                                    <span className="data_span">File Name</span>
+                                    {<p className="data_span">{props.FileDetails ? props.FileDetails.name : ""}</p>}
+                                    <span className="data_span">File Size</span>
+                                    {<p className="data_span">{props.FileDetails ? `${props.FileDetails.size / 1000} kB` : ""}</p>}
+                                    <span className="data_span">Size</span>
+                                    {<p className="data_span">{props.DatasetDetails ? `${props.DatasetDetails?.size} datapoints` : ""}</p>}
+                                    <span className="data_span">Columns</span>
+                                    {<p className="data_span">{props.DatasetDetails?.columns} columns</p>}
+                                    <span className="data_span">Rows</span>
+                                    {<p className="data_span">{props.DatasetDetails?.rows} rows</p>}
+                                </div>
                             }
                         </div> :
                         displayTab === "right" ? 
@@ -123,13 +121,13 @@ export default function DataPage(props){
                                         props.DatasetDetails?.details?.map((i) => (
                                             <>
                                                 <tr>
-                                                        <td><input type="checkbox" className="checkbox_child"/></td>
-                                                        <td><p>{i['column']}</p></td>
-                                                        <td><p>{i['null_count']} | {((i['null_count'] / props.DatasetDetails.rows)*100).toFixed(2)}% missing</p></td>
-                                                        <td><p>{typeof i['mean'] === 'number' ? i['mean'].toFixed(2) : i['mean']}</p></td>
-                                                        <td><p>{typeof i['std'] === 'number' ? i['std'].toFixed(2) : i['std']}</p></td>
-                                                        <td><p>{typeof i['median'] === 'number' ? i['median'].toFixed(2) : i['std']}</p></td>
-                                                    </tr>
+                                                    <td><input type="checkbox" className="checkbox_child"/></td>
+                                                    <td><p>{i['column']}</p></td>
+                                                    <td><p>{i['null_count']} | {((i['null_count'] / props.DatasetDetails.rows)*100).toFixed(2)}% missing</p></td>
+                                                    <td><p>{typeof i['mean'] === 'number' ? i['mean'].toFixed(2) : i['mean']}</p></td>
+                                                    <td><p>{typeof i['std'] === 'number' ? i['std'].toFixed(2) : i['std']}</p></td>
+                                                    <td><p>{typeof i['median'] === 'number' ? i['median'].toFixed(2) : i['std']}</p></td>
+                                                </tr>
                                                 
                                             </>
                                         )) : <Spinner animation="border" variant="primary" />

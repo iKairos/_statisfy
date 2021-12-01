@@ -23,18 +23,19 @@ import { processDataset } from "../actions/datasetActions";
 export default function DashboardScreen(props){
     // ======= FUNCTION-WIDE VARIABLES ======= //
     
-
+    // Research details variables
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [error, setError] = useState();
+    const [file, setFile] = useState();
 
+    // Utils variables
+    const [error, setError] = useState();
     const [tags, setTags] = useState([]);
     const [methodChosen, setMethodChosen] = useState("");
     const [showActive, setShowActive] = useState(1);
 
+    // File handling variables
     const [dataArray, setDataArray] = useState();
-    const [fileDetails, setFileDetails] = useState({});
-
 
     // ======= TOKEN HANDLING ======= //
     const dispatch = useDispatch();
@@ -48,9 +49,6 @@ export default function DashboardScreen(props){
     }
 
     // ======= HANDLERS ======= //
-
-    
-
     const displayMethodChosen = (choice) =>{
         setMethodChosen(choice);
     }
@@ -94,16 +92,12 @@ export default function DashboardScreen(props){
         setTags(checked);
     }
 
-    // ======= DISPATCH ON RENDER ======= //
-    useEffect(() => {
-        dispatch(processUserToken(props.token));
-    }, [])
-
     // ======= FILE UPLOAD MECHANISM ======= //
     const fileDetailsSelector = useSelector((state) => 
         state.datasetDetails
     );
     const {datasetDetails} = fileDetailsSelector;
+    
 
     const changeHandler = (e) => {
         if (e.target.files.length != 0){
@@ -130,10 +124,7 @@ export default function DashboardScreen(props){
 
             dispatch(processDataset(formData));
 
-            setFileDetails({
-                'size': e.target.files[0].size,
-                'name': filename
-            });
+            setFile(e.target.files[0])
         }
     }
 
@@ -141,17 +132,29 @@ export default function DashboardScreen(props){
         const headers = str.slice(0,str.indexOf('\n')).split(delim);
         const rows = str.slice(str.indexOf('\n')+1).split('\n');
 
-        const newArray = rows.map( row => {
+        var newArray = rows.map( (row, index) => {
             const values = row.split(delim);
             const eachObject = headers.reduce((obj, header, i) => {
                 obj[header] = values[i];
                 return obj;
             }, {})
+            if(index == 50){
+                return eachObject;
+            }
             return eachObject;
         })
 
-        setDataArray(newArray)
+        if (newArray.length > 50) {
+            newArray = newArray.slice(0,50);
+        }
+
+        setDataArray(newArray);
     }
+    
+    // ======= DISPATCH ON RENDER ======= //
+    useEffect(() => {
+        dispatch(processUserToken(props.token));
+    }, [])
 
     if(processed?.code === 'TOKEN_SUCCESS'){
         return(
@@ -195,7 +198,10 @@ export default function DashboardScreen(props){
                             ChangeHandler = {changeHandler}
                             DataArray = {dataArray}
                             DatasetDetails = {datasetDetails}
-                            FileDetails = {fileDetails}
+                            FileDetails = { file ? {
+                                'name': file.name,
+                                'size': file.size
+                            } : undefined}
                             Error = {error}
                         />
                         <Navigator

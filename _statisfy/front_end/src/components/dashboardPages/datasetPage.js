@@ -2,15 +2,17 @@ import { DisplayTable } from "../DisplayTable";
 import { useState } from "react";
 import { Alert, Spinner } from "react-bootstrap";
 import "../../StyleSheets/datapagefolder/datapage.css";
+import Button from "@restart/ui/esm/Button";
 
 export default function DataSetPage(props){
 
     const [tabNumber, setTab] = useState(1);
+    const [show, setShow] = useState(true);
 
     const switchPage = (page)=>{
         setTab(page);
     }
-    
+    console.log(props.DatasetDetails)
     return(
         <div className="datapage">
             <div className="datapage_container">
@@ -30,42 +32,65 @@ export default function DataSetPage(props){
                 </div>
                 {tabNumber === 1 &&
                     <div className="datapage_content">
-                        {props.Error && <Alert variant='danger'>{props.Error}</Alert>} 
+                        {
+                            props.DatasetDetails?.error && 
+                                show && (
+                                <Alert variant='danger' onClose={() => setShow(false)} dismissible>
+                                    <Alert.Heading>An error occurred.</Alert.Heading>
+                                    <b>Code:</b> {props.DatasetDetails?.code} <br/>
+                                    <b>Message:</b> {props.DatasetDetails?.error}
+                                    <hr/>
+                                    Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
+                                </Alert>
+                                )
+                        }  
+                        {!show && <Button onClick={() => setShow(true)}>Show Error</Button>}
                         <input type="file" name="file" accept=".csv" onChange={(e) => props.ChangeHandler(e)} />
                         <DisplayTable data={props.DataArray}/>
                     </div>
                 }
                 {tabNumber === 2 &&
                     <div className="datapage_content">
-                    { props.DatasetDetails ?
-                        (
-                            <div className="data_cells_left">
-                                <span className="data_span">File Name</span>
-                                {<p className="data_span">{props.FileDetails?.name}</p>}
-                                <span className="data_span">File Size</span>
-                                {<p className="data_span">{props.FileDetails?.size / 1000} kB</p>}
-                                <span className="data_span">Size</span>
-                                {<p className="data_span">{props.DatasetDetails?.size} datapoints</p>}
-                                <span className="data_span">Columns</span>
-                                {<p className="data_span">{props.DatasetDetails?.columns} columns</p>}
-                                <span className="data_span">Rows</span>
-                                {<p className="data_span">{props.DatasetDetails?.rows} rows</p>}
-                            </div>
-                        ) : <Spinner animation="border" variant="primary" />
-                    }
+                        <div className="data_cells_left">
+                            <span className="data_span">File Name</span>
+                            {<p className="data_span">{props.FileDetails ? props.FileDetails?.name : ""}</p>}
+                            <span className="data_span">File Size</span>
+                            {<p className="data_span">{props.FileDetails ? `${props.FileDetails?.size / 1000} kB`: ""}</p>}
+                            <span className="data_span">Size</span>
+                            {<p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p>}
+                            <span className="data_span">Columns</span>
+                            {<p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p>}
+                            <span className="data_span">Rows</span>
+                            {<p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p>}
+                        </div>
                     </div>
                 }
                 {tabNumber === 3 &&
                     <div className="datapage_content">
+                        {
+                            props.DatasetDetails?.error && 
+                                show && (
+                                <Alert variant='danger' onClose={() => setShow(false)} dismissible>
+                                    <Alert.Heading>An error occurred.</Alert.Heading>
+                                    <b>Code:</b> {props.DatasetDetails?.code} <br/>
+                                    <b>Message:</b> {props.DatasetDetails?.error}
+                                    <hr/>
+                                    Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
+                                </Alert>
+                                )
+                        }  
+                        {!show && <Button onClick={() => setShow(true)}>Show Error</Button>}
                         <table className="column_table">
                             <thead>
                                 <tr>
                                     <th className="column_table_header">Selected</th>
                                     <th className="column_table_header">Column</th>
-                                    <th className="column_table_header">Missing Data</th>
+                                    <th className="column_table_header">Data</th>
                                     <th className="column_table_header">Mean</th>
                                     <th className="column_table_header">St.Dev</th>
                                     <th className="column_table_header">Median</th>
+                                    <th className="column_table_header">Max</th>
+                                    <th className="column_table_header">Min</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,10 +101,34 @@ export default function DataSetPage(props){
                                             <tr>
                                                     <td><input type="checkbox" className="checkbox_child"/></td>
                                                     <td><p>{i['column']}</p></td>
-                                                    <td><p>{i['null_count']} | {((i['null_count'] / props.DatasetDetails.rows)*100).toFixed(2)}% missing</p></td>
+                                                    <td>
+                                                        <p>
+                                                            <span style={
+                                                                {
+                                                                    'color': 'green'
+                                                                }
+                                                            }>
+                                                                {
+                                                                    (((props.DatasetDetails.rows-i['null_count'])/props.DatasetDetails.rows)*100).toFixed(2)
+                                                                }% valid
+                                                            </span>
+                                                            <br></br>
+                                                            <span style={
+                                                                {
+                                                                    'color': ((i['null_count'] / props.DatasetDetails.rows)*100).toFixed(2) >= 60 ? 'red' : 'black'
+                                                                }
+                                                            }>
+                                                                {
+                                                                    ((i['null_count'] / props.DatasetDetails.rows)*100).toFixed(2)
+                                                                }% missing
+                                                            </span>
+                                                        </p>
+                                                    </td>
                                                     <td><p>{typeof i['mean'] === 'number' ? i['mean'].toFixed(2) : i['mean']}</p></td>
                                                     <td><p>{typeof i['std'] === 'number' ? i['std'].toFixed(2) : i['std']}</p></td>
                                                     <td><p>{typeof i['median'] === 'number' ? i['median'].toFixed(2) : i['std']}</p></td>
+                                                    <td><p>{i['max']}</p></td>
+                                                    <td><p>{i['min']}</p></td>
                                                 </tr>
                                             
                                         </>

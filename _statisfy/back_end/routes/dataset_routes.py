@@ -6,35 +6,52 @@ import pandas as pd
 @app.route("/api/dataset/process", methods = ['POST'])
 @cross_origin()
 def dataset_details():
-    file = request.files['file']
-    
-    df = pd.read_csv(file)
-    
-    details = []
+    try:
+        file = request.files['file']
 
-    for i in df.columns:
-        mean = "NA"
-        std = "NA"
-        median = "NA"
-        try:
-            if df[i].dtypes != 'O':
-                mean = float(df[i].mean())
-                std = float(df[i].std())
-                median = float(df[i].median())
-        except:
-            pass 
+        df = pd.read_csv(file)
+        
+        details = []
 
-        details.append({
-            'column': i,
-            'null_count': int(df.isna().sum()[i]),
-            'mean': mean,
-            'std': std,
-            'median': median
-        })
+        for i in df.columns:
+            mean = "NA"
+            std = "NA"
+            median = "NA"
+            max = "NA"
+            min = "NA"
+            try:
+                if df[i].dtypes != 'O':
+                    mean = float(df[i].mean())
+                    std = float(df[i].std())
+                    median = float(df[i].median())
 
-    return {
-        'size': int(df.size),
-        'rows': int(df.shape[0]),
-        'columns': int(df.shape[1]),
-        'details': details
-    }
+                try:
+                    max = float(df[i].max())
+                    min = float(df[i].min())
+                except:
+                    max = df[i].max()
+                    min = df[i].min()
+            except:
+                pass 
+
+            details.append({
+                'column': i,
+                'null_count': int(df.isna().sum()[i]),
+                'mean': mean,
+                'std': std,
+                'median': median,
+                'max': max,
+                'min': min
+            })
+
+        return {
+            'size': int(df.size),
+            'rows': int(df.shape[0]),
+            'columns': int(df.shape[1]),
+            'details': details
+        }
+    except Exception as e:
+        return {
+            'error': str(e),
+            'code': 'DATASET_PROCESS_FAIL'
+        }
