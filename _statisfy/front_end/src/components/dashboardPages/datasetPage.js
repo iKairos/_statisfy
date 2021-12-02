@@ -99,37 +99,37 @@ export default function DataSetPage(props){
                                     props.DatasetDetails?.details?.map((i) => (
                                         <>
                                             <tr>
-                                                    <td><input type="checkbox" className="checkbox_child"/></td>
-                                                    <td><p>{i['column']}</p></td>
-                                                    <td>
-                                                        <p>
-                                                            <span style={
-                                                                {
-                                                                    'color': 'green'
-                                                                }
-                                                            }>
-                                                                {
-                                                                    (((props.DatasetDetails.rows-i['null_count'])/props.DatasetDetails.rows)*100).toFixed(2)
-                                                                }% valid
-                                                            </span>
-                                                            <br></br>
-                                                            <span style={
-                                                                {
-                                                                    'color': ((i['null_count'] / props.DatasetDetails.rows)*100).toFixed(2) >= 60 ? 'red' : 'black'
-                                                                }
-                                                            }>
-                                                                {
-                                                                    ((i['null_count'] / props.DatasetDetails.rows)*100).toFixed(2)
-                                                                }% missing
-                                                            </span>
-                                                        </p>
-                                                    </td>
-                                                    <td><p>{typeof i['mean'] === 'number' ? i['mean'].toFixed(2) : i['mean']}</p></td>
-                                                    <td><p>{typeof i['std'] === 'number' ? i['std'].toFixed(2) : i['std']}</p></td>
-                                                    <td><p>{typeof i['median'] === 'number' ? i['median'].toFixed(2) : i['std']}</p></td>
-                                                    <td><p>{i['max']}</p></td>
-                                                    <td><p>{i['min']}</p></td>
-                                                </tr>
+                                                <td><input type="checkbox" className="checkbox_child"/></td>
+                                                <td><p>{i['column']}</p></td>
+                                                <td>
+                                                    <p>
+                                                        <span style={
+                                                            {
+                                                                'color': 'green'
+                                                            }
+                                                        }>
+                                                            {
+                                                                (((props.DatasetDetails.rows-i['null_count'])/props.DatasetDetails.rows)*100).toFixed(2)
+                                                            }% valid
+                                                        </span>
+                                                        <br></br>
+                                                        <span style={
+                                                            {
+                                                                'color': ((i['null_count'] / props.DatasetDetails.rows)*100).toFixed(2) >= 60 ? 'red' : 'black'
+                                                            }
+                                                        }>
+                                                            {
+                                                                ((i['null_count'] / props.DatasetDetails.rows)*100).toFixed(2)
+                                                            }% missing
+                                                        </span>
+                                                    </p>
+                                                </td>
+                                                <td><p>{typeof i['mean'] === 'number' ? i['mean'].toFixed(2) : i['mean']}</p></td>
+                                                <td><p>{typeof i['std'] === 'number' ? i['std'].toFixed(2) : i['std']}</p></td>
+                                                <td><p>{typeof i['median'] === 'number' ? i['median'].toFixed(2) : i['std']}</p></td>
+                                                <td><p>{i['max']}</p></td>
+                                                <td><p>{i['min']}</p></td>
+                                            </tr>
                                             
                                         </>
                                     )) : <Spinner animation="border" variant="primary" />
