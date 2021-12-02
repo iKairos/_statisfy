@@ -8,6 +8,7 @@ import ToolPage from "../components/dashboardPages/toolPage";
 import DataPage from "../components/dashboardPages/dataPage";
 import DataSetPage from "../components/dashboardPages/datasetPage";
 import StatPage from "../components/dashboardPages/statPage";
+import SummaryPage from "../components/dashboardPages/summaryPage";
 import Navigator from "../components/navigator";
 
 import "../StyleSheets/dashboard.css";
@@ -28,6 +29,7 @@ export default function DashboardScreen(props){
     const [description, setDescription] = useState("");
     const [file, setFile] = useState();
     const [columns, setColumns] = useState([]);
+    const [tool, setTool] = useState("");
 
     // Utils variables
     const [error, setError] = useState();
@@ -50,6 +52,10 @@ export default function DashboardScreen(props){
     }
 
     // ======= HANDLERS ======= //
+    const setToolChosen = (choice) =>{
+        setTool(choice);
+    }
+
     const displayMethodChosen = (choice) =>{
         setMethodChosen(choice);
     }
@@ -184,7 +190,10 @@ export default function DashboardScreen(props){
                 }
                 {showActive === 2 &&
                 <div>
-                    <ToolPage/>
+                    <ToolPage
+                        SetToolChosen = {setToolChosen}
+                    />
+
                     <div className="dashboard_btn_cont">
                         <div className="dashboard_btn_div">
                          <button className="dashboard_btn" onClick={prevScreen}> previous</button>
@@ -236,7 +245,27 @@ export default function DashboardScreen(props){
                         
                 }
                 {
-                    showActive === "third" && <div></div>
+                    showActive === 5 && 
+                    <div>
+                        <SummaryPage
+                            Title = {title}
+                            Description = {description}
+                            Tool = {tool}
+                            MethodChosen = {methodChosen}
+                            FileDetails = { file ? {
+                                'name': file.name,
+                                'size': file.size
+                            } : undefined}
+                            DatasetDetails = {datasetDetails}
+
+                        />
+                        <Navigator
+                            NextScreen={nextScreen}
+                            PrevScreen={prevScreen}
+                            nextDisabled={true}
+                            prevDisabled={false}
+                        />
+                    </div>
                 }
             </div>
         );

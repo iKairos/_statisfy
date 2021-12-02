@@ -11,11 +11,13 @@ export default function Toolpage(props){
     const selectStats = function(){
         setStats("Selected");
         setML(""); 
+        props.SetToolChosen("Statistics")
     }
 
     const selectML = function(){
         setML("Selected");
         setStats("");
+        props.SetToolChosen("Machine Learning")
     }
 
      return(
