@@ -2,7 +2,7 @@ import { DisplayTable } from "../DisplayTable";
 import { useState } from "react";
 import { Alert, Spinner } from "react-bootstrap";
 import "../../StyleSheets/datapagefolder/datapage.css";
-import Button from "@restart/ui/esm/Button";
+import { FaExclamationCircle } from "react-icons/fa";
 
 export default function DataSetPage(props){
 
@@ -46,7 +46,9 @@ export default function DataSetPage(props){
                             {
                                 props.DatasetDetails?.error &&
                                 <>
-                                <button className="datapage_error" onClick={() => setShow(!show)}>Error</button>
+                                <button className="datapage_error" onClick={() => setShow(!show)}>
+                                    {show ? "Hide" : "Show"} Error <FaExclamationCircle/>
+                                </button>
                                 {
                                 props.DatasetDetails?.error && 
                                 show &&(
@@ -67,11 +69,11 @@ export default function DataSetPage(props){
                                 <span className="data_span">File Size</span>
                                 {<p className="data_span">{props.FileDetails ? `${props.FileDetails?.size / 1000} kB`: ""}</p>}
                                 <span className="data_span">Size</span>
-                                {<p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p>}
+                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p> : <Spinner animation="border" variant="primary" />}
                                 <span className="data_span">Columns</span>
-                                {<p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p>}
+                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p> : <Spinner animation="border" variant="primary" />}
                                 <span className="data_span">Rows</span>
-                                {<p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p>}
+                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p> : <Spinner animation="border" variant="primary" />}
                             </div> 
                         </div>
                         

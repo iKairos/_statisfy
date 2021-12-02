@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { processUserToken } from "../actions/userActions";
 import { DisplayTable } from "../components/DisplayTable";
-import { Alert } from "react-bootstrap";
+import { Alert, Spinner } from "react-bootstrap";
 import { processDataset } from "../actions/datasetActions";
 
 export default function DashboardScreen(props){
@@ -96,12 +96,12 @@ export default function DashboardScreen(props){
     const callbackColumns = (columns) => {
         setColumns(columns);
     }
-    console.log(columns)
+
     // ======= FILE UPLOAD MECHANISM ======= //
     const fileDetailsSelector = useSelector((state) => 
         state.datasetDetails
     );
-    const {datasetDetails} = fileDetailsSelector;
+    const {loading, datasetDetails} = fileDetailsSelector;
 
     const changeHandler = (e) => {
         if (e.target.files.length != 0){
@@ -208,6 +208,7 @@ export default function DashboardScreen(props){
                                 'size': file.size
                             } : undefined}
                             Error = {error}
+                            Loading = {loading}
                         />
                         <Navigator
                             NextScreen={nextScreen}
@@ -245,7 +246,7 @@ export default function DashboardScreen(props){
         )
     }else{
         return(
-            <p></p>
+            <Spinner animation="border" variant="primary" />
         );
     }
 }
