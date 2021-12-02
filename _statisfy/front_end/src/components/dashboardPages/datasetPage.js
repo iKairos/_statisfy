@@ -21,65 +21,78 @@ export default function DataSetPage(props){
                         Upload
                     </div>
                     <div className={tabNumber === 2 ? "datapage_navigator_active" : "datapage_navigator_inactive"} onClick= {()=> switchPage(2)}>
-                        Details
-                    </div>
-                    <div className={tabNumber === 3 ? "datapage_navigator_active" : "datapage_navigator_inactive"} onClick= {()=> switchPage(3)}>
                         Columns
                     </div>
-                    <div className={tabNumber === 4 ? "datapage_navigator_active" : "datapage_navigator_inactive"} onClick= {()=> switchPage(4)}>
+                    <div className={tabNumber === 3 ? "datapage_navigator_active" : "datapage_navigator_inactive"} onClick= {()=> switchPage(3)}>
                         Cleaning
                     </div>
                 </div>
                 {tabNumber === 1 &&
                     <div className="datapage_content">
-                        {
-                            props.DatasetDetails?.error && 
-                                show && (
-                                <Alert variant='danger' onClose={() => setShow(false)} dismissible>
-                                    <Alert.Heading>An error occurred.</Alert.Heading>
-                                    <b>Code:</b> {props.DatasetDetails?.code} <br/>
-                                    <b>Message:</b> {props.DatasetDetails?.error}
-                                    <hr/>
-                                    Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
-                                </Alert>
-                                )
-                        }  
-                        {!show && <Button onClick={() => setShow(true)}>Show Error</Button>}
-                        <input type="file" name="file" accept=".csv" onChange={(e) => props.ChangeHandler(e)} />
+                        <div className="datapage_upload_cont">
+                            <label className="datapage_upload">
+                                <input className="datapage_upload_input" type="file" name="file" accept=".csv" onChange={(e) => props.ChangeHandler(e)} />
+                                New Dataset
+                            </label>
+                            {
+                                props.DatasetDetails?.error &&
+                                <>
+                                <button className="datapage_error" onClick={() => setShow(!show)}>Error</button>
+                                {
+                                props.DatasetDetails?.error && 
+                                show &&(
+                                    <Alert variant='danger' onClose={() => setShow(false)}>
+                                        <Alert.Heading>An error occurred.</Alert.Heading>
+                                        <b>Code:</b> {props.DatasetDetails?.code} <br/>
+                                        <b>Message:</b> {props.DatasetDetails?.error}
+                                        <hr/>
+                                        Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
+                                    </Alert>
+                                    )
+                                }
+                                </>
+                            }
+                            <div className="datapage_details">
+                                <span className="data_span">File Name</span>
+                                {<p className="data_span">{props.FileDetails ? props.FileDetails?.name : ""}</p>}
+                                <span className="data_span">File Size</span>
+                                {<p className="data_span">{props.FileDetails ? `${props.FileDetails?.size / 1000} kB`: ""}</p>}
+                                <span className="data_span">Size</span>
+                                {<p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p>}
+                                <span className="data_span">Columns</span>
+                                {<p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p>}
+                                <span className="data_span">Rows</span>
+                                {<p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p>}
+                            </div> 
+                        </div>
+                        
+                        
                         <DisplayTable data={props.DataArray}/>
                     </div>
                 }
+                
                 {tabNumber === 2 &&
                     <div className="datapage_content">
-                        <div className="data_cells_left">
-                            <span className="data_span">File Name</span>
-                            {<p className="data_span">{props.FileDetails ? props.FileDetails?.name : ""}</p>}
-                            <span className="data_span">File Size</span>
-                            {<p className="data_span">{props.FileDetails ? `${props.FileDetails?.size / 1000} kB`: ""}</p>}
-                            <span className="data_span">Size</span>
-                            {<p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p>}
-                            <span className="data_span">Columns</span>
-                            {<p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p>}
-                            <span className="data_span">Rows</span>
-                            {<p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p>}
+                        <div className="datapage_upload_cont">
+                            {
+                                props.DatasetDetails?.error &&
+                                <>
+                                <button className="datapage_error" onClick={() => setShow(!show)}>Error</button>
+                                {
+                                props.DatasetDetails?.error && 
+                                show &&(
+                                    <Alert variant='danger' onClose={() => setShow(false)}>
+                                        <Alert.Heading>An error occurred.</Alert.Heading>
+                                        <b>Code:</b> {props.DatasetDetails?.code} <br/>
+                                        <b>Message:</b> {props.DatasetDetails?.error}
+                                        <hr/>
+                                        Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
+                                    </Alert>
+                                    )
+                                }
+                                </>
+                            } 
                         </div>
-                    </div>
-                }
-                {tabNumber === 3 &&
-                    <div className="datapage_content">
-                        {
-                            props.DatasetDetails?.error && 
-                                show && (
-                                <Alert variant='danger' onClose={() => setShow(false)} dismissible>
-                                    <Alert.Heading>An error occurred.</Alert.Heading>
-                                    <b>Code:</b> {props.DatasetDetails?.code} <br/>
-                                    <b>Message:</b> {props.DatasetDetails?.error}
-                                    <hr/>
-                                    Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
-                                </Alert>
-                                )
-                        }  
-                        {!show && <Button onClick={() => setShow(true)}>Show Error</Button>}
                         <table className="column_table">
                             <thead>
                                 <tr>
@@ -138,7 +151,7 @@ export default function DataSetPage(props){
                         </table>
                     </div>
                 }
-                {tabNumber===4 &&
+                {tabNumber===3 &&
                     <div className="datapage_content">
                         <table className="column_table">
                         <thead>

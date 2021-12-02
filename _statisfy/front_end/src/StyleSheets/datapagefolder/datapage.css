@@ -132,6 +132,51 @@ table {
   overflow-y: scroll;
 }
 
+.datapage_upload {
+  border: 1px solid #a8a8a8;
+  background-color: #ffffff;
+  cursor: pointer;
+  height: 2rem;
+  width: 10rem;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 0.2rem;
+  margin-bottom: 2rem;
+}
+
+.datapage_upload_input {
+  display: none;
+}
+
+.datapage_upload_cont {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (2.5rem)[auto-fill];
+      grid-template-rows: repeat(auto-fill, 2.5rem);
+  padding-bottom: 1rem;
+}
+
+.datapage_error {
+  width: 10rem;
+  height: 2rem;
+  border: 1px solid #ad2929;
+  color: #ad2929;
+  background-color: #ffc1c1;
+}
+
+.datapage_error:hover {
+  background-color: #e26b6b;
+}
+
+.datapage_details {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 10rem 25rem;
+      grid-template-columns: 10rem 25rem;
+  padding: 1rem;
+  height: 15rem;
+}
+
 @media screen and (min-width: 600px) {
   .datapage_navigator {
     display: -ms-grid;

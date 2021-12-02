@@ -117,6 +117,41 @@ table {
     gap: 1rem;
     overflow-y: scroll;
   }
+  &_upload {
+    border: 1px solid #a8a8a8;
+    background-color: #ffffff;
+    cursor: pointer;
+    height: 2rem;
+    width: 10rem;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 0.2rem;
+    margin-bottom: 2rem;
+    &_input {
+      display: none;
+    }
+    &_cont {
+      display: grid;
+      grid-template-rows: repeat(auto-fill, 2.5rem);
+      padding-bottom: 1rem;
+    }
+  }
+  &_error {
+    width: 10rem;
+    height: 2rem;
+    border: 1px solid #ad2929;
+    color: #ad2929;
+    background-color: #ffc1c1;
+    &:hover {
+      background-color: #e26b6b;
+    }
+  }
+  &_details {
+    display: grid;
+    grid-template-columns: 10rem 25rem;
+    padding: 1rem;
+    height: 15rem;
+  }
 }
 
 @media screen and (min-width: 600px) {
