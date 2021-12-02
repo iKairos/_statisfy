@@ -8,11 +8,20 @@ export default function DataSetPage(props){
 
     const [tabNumber, setTab] = useState(1);
     const [show, setShow] = useState(true);
+    const [checkedCols, setCheckedCols] = useState([]);
 
     const switchPage = (page)=>{
         setTab(page);
     }
-    console.log(props.DatasetDetails)
+    
+    const onCheck = (e) => {
+        if(e.target.checked){
+            setCheckedCols([...checkedCols, e.target.name]);
+        }else{
+            setCheckedCols(checkedCols.filter((i) => i !== e.target.name));
+        }
+    }
+
     return(
         <div className="datapage">
             <div className="datapage_container">
@@ -99,7 +108,10 @@ export default function DataSetPage(props){
                                     props.DatasetDetails?.details?.map((i) => (
                                         <>
                                             <tr>
-                                                <td><input type="checkbox" className="checkbox_child"/></td>
+                                                <td>
+                                                    <input name={i['column']} type="checkbox" className="checkbox_child" onChange={props.CallbackColumns(checkedCols)} 
+                                                    onClick={(e) => onCheck(e)}/>
+                                                </td>
                                                 <td><p>{i['column']}</p></td>
                                                 <td>
                                                     <p>

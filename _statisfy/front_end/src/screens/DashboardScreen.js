@@ -27,6 +27,7 @@ export default function DashboardScreen(props){
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [file, setFile] = useState();
+    const [columns, setColumns] = useState([]);
 
     // Utils variables
     const [error, setError] = useState();
@@ -92,12 +93,15 @@ export default function DashboardScreen(props){
         setTags(checked);
     }
 
+    const callbackColumns = (columns) => {
+        setColumns(columns);
+    }
+    console.log(columns)
     // ======= FILE UPLOAD MECHANISM ======= //
     const fileDetailsSelector = useSelector((state) => 
         state.datasetDetails
     );
     const {datasetDetails} = fileDetailsSelector;
-    
 
     const changeHandler = (e) => {
         if (e.target.files.length != 0){
@@ -195,6 +199,7 @@ export default function DashboardScreen(props){
                 { showActive === 3 &&
                     <div>
                         <DataSetPage
+                            CallbackColumns = {callbackColumns}
                             ChangeHandler = {changeHandler}
                             DataArray = {dataArray}
                             DatasetDetails = {datasetDetails}
