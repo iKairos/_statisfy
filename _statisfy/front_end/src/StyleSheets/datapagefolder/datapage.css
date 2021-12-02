@@ -171,8 +171,8 @@ table {
 .datapage_details {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 10rem 25rem;
-      grid-template-columns: 10rem 25rem;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
   padding: 1rem;
   height: 15rem;
 }
@@ -214,6 +214,14 @@ table {
     padding: 2rem;
     gap: 1rem;
     overflow-y: scroll;
+  }
+  .datapage_details {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 10vw 60vw;
+        grid-template-columns: 10vw 60vw;
+    padding: 1rem;
+    height: 15rem;
   }
 }
 /*# sourceMappingURL=datapage.css.map */
