@@ -52,6 +52,12 @@ export default function DashboardScreen(props){
         localStorage.removeItem('token');
     }
 
+    // ======= RESEARCH_SAVE ======= //
+    const researchSaveSelector = useSelector((state) => 
+        state.researchSave
+    );
+    const {researchSaveRes} = researchSaveSelector;
+
     // ======= HANDLERS ======= //
     const setToolChosen = (choice) =>{
         setTool(choice);
@@ -103,13 +109,9 @@ export default function DashboardScreen(props){
             'test_type': methodChosen,
             'columns': columns
         }));
-    }
 
-    // ======= RESEARCH_SAVE ======= //
-    const researchSaveSelector = useSelector((state) => 
-        state.researchSave
-    );
-    const {researchSaveRes} = researchSaveSelector;
+        console.log(researchSaveRes);
+    }
 
     // ======= CALLBACKS ======= //
     const callbackCheckbox = (checked) => {

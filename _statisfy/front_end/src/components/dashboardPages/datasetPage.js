@@ -2,7 +2,7 @@ import { DisplayTable } from "../DisplayTable";
 import { useState } from "react";
 import { Alert, Spinner } from "react-bootstrap";
 import "../../StyleSheets/datapagefolder/datapage.css";
-import { FaExclamationCircle } from "react-icons/fa";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 export default function DataSetPage(props){
 
@@ -47,7 +47,7 @@ export default function DataSetPage(props){
                                 props.DatasetDetails?.error &&
                                 <>
                                 <button className="datapage_error" onClick={() => setShow(!show)}>
-                                    <FaExclamationCircle/> {show ? "Hide" : "Show"} Error
+                                    {show ? <FaAngleDown/> : <FaAngleUp/>} Error
                                 </button>
                                 {
                                 props.DatasetDetails?.error && 
