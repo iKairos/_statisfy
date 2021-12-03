@@ -121,12 +121,18 @@ table {
     border: 1px solid #a8a8a8;
     background-color: #ffffff;
     cursor: pointer;
-    height: 2rem;
-    width: 10rem;
+    height: 5rem;
+    width: 100%;
     text-align: center;
     vertical-align: middle;
     border-radius: 0.2rem;
     margin-bottom: 2rem;
+
+    &:hover {
+      background-color: #a8a8a8;
+      border: 1px solid #a8a8a8;
+      color: white;
+    }
     &_input {
       display: none;
     }
@@ -134,6 +140,7 @@ table {
       display: grid;
       grid-template-rows: repeat(auto-fill, 2.5rem);
       padding-bottom: 1rem;
+      justify-content: center;
     }
   }
   &_error {
@@ -151,6 +158,25 @@ table {
     grid-template-columns: 1fr 1fr;
     padding: 1rem;
     height: 15rem;
+  }
+  &_drop {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+
+    &_button {
+      margin-top: 1rem;
+      background-color: white;
+      &:hover {
+        background-color: #a8a8a8;
+        color: white;
+        border: 0;
+      }
+    }
+  }
+  &_checkbox {
+    transform: scale(2);
+    margin-right: 1rem;
   }
 }
 
@@ -187,6 +213,14 @@ table {
         cursor: pointer;
       }
     }
+    &_upload {
+      &_cont {
+        display: grid;
+        grid-template-rows: repeat(auto-fill, 2.5rem);
+        padding-bottom: 1rem;
+        justify-content: flex-start;
+      }
+    }
     &_content {
       padding: 2rem;
       gap: 1rem;
@@ -198,6 +232,11 @@ table {
       grid-template-columns: 10vw 60vw;
       padding: 1rem;
       height: 15rem;
+    }
+    &_drop {
+      width: 20vw;
+      display: flex;
+      flex-direction: column;
     }
   }
 }

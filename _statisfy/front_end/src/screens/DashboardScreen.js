@@ -248,9 +248,11 @@ export default function DashboardScreen(props){
                     showActive === 5 && 
                     <div>
                         <SummaryPage
+
                             Title = {title}
                             Description = {description}
                             Tool = {tool}
+                            Columns={columns}
                             MethodChosen = {methodChosen}
                             FileDetails = { file ? {
                                 'name': file.name,

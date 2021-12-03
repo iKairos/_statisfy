@@ -11,6 +11,7 @@ $maxwidth: 40rem;
   grid-template-rows: 1fr;
   padding: 0;
   padding-top: 2rem;
+  height: 100%;
   &_container {
     background-color: white;
     border-radius: 1rem;
@@ -28,6 +29,8 @@ $maxwidth: 40rem;
   }
   &_body {
     padding: 2rem;
+    height: 100vh;
+    overflow-y: scroll;
     &_res {
       &_span {
         font-weight: 500;
@@ -43,6 +46,14 @@ $maxwidth: 40rem;
         font-weight: 500;
         font-size: 1rem;
         height: 1.5rem;
+      }
+    }
+    &_columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 5rem);
+      &_cont {
+        max-width: 4.8rem;
+        overflow: hidden;
       }
     }
   }
@@ -72,7 +83,8 @@ $maxwidth: 40rem;
     }
     &_body {
       display: grid;
-      grid-template-rows: 1fr 1fr;
+      height: 100%;
+      grid-template-rows: repeat(auto-fit, 28vh);
       gap: 1rem;
       &_res {
         display: grid;
@@ -81,6 +93,7 @@ $maxwidth: 40rem;
       &_file {
         display: grid;
         grid-template-columns: 10rem 80%;
+        gap: 0;
       }
     }
   }
