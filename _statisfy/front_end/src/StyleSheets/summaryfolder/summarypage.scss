@@ -83,8 +83,8 @@ $maxwidth: 40rem;
     }
     &_body {
       display: grid;
-      height: 100%;
-      grid-template-rows: repeat(auto-fit, 28vh);
+      height: 60vh;
+      grid-template-rows: repeat(auto-fill, 28vh);
       gap: 1rem;
       &_res {
         display: grid;

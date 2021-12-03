@@ -58,8 +58,6 @@
   display: grid;
   -ms-grid-columns: (5rem)[auto-fill];
       grid-template-columns: repeat(auto-fill, 5rem);
-  overflow: hidden;
-  text-overflow: clip;
 }
 
 .summary_body_columns_cont {
@@ -100,9 +98,9 @@
   .summary_body {
     display: -ms-grid;
     display: grid;
-    height: 100%;
-    -ms-grid-rows: (28vh)[auto-fit];
-        grid-template-rows: repeat(auto-fit, 28vh);
+    height: 60vh;
+    -ms-grid-rows: (28vh)[auto-fill];
+        grid-template-rows: repeat(auto-fill, 28vh);
     gap: 1rem;
   }
   .summary_body_res {

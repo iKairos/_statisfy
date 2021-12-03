@@ -45,7 +45,9 @@ export default function SummaryPage(props){
                     <div className="summary_button_cont">
                         <button className="summary_button" onClick={props.SaveResearchHandler}>Create Research</button>
                     </div>
+                    
                 </div>
+                
            </div>
        </div>
      ); 
