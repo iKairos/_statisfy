@@ -32,7 +32,7 @@ export default function SummaryPage(props){
                         {<p className = "summary_body_file_content">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p>}
                     </div>
                     <div className="summary_button_cont">
-                        <button className="summary_button">Create Research</button>
+                        <button className="summary_button" onClick={props.SaveResearchHandler}>Create Research</button>
                     </div>
                     
                     

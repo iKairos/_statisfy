@@ -47,7 +47,7 @@ export default function DataSetPage(props){
                                 props.DatasetDetails?.error &&
                                 <>
                                 <button className="datapage_error" onClick={() => setShow(!show)}>
-                                    {show ? "Hide" : "Show"} Error <FaExclamationCircle/>
+                                    <FaExclamationCircle/> {show ? "Hide" : "Show"} Error
                                 </button>
                                 {
                                 props.DatasetDetails?.error && 

@@ -30,6 +30,10 @@ class Research:
     @property
     def is_registered(self):
         return self.db.is_registered(self.rid)
+    
+    @property 
+    def columns(self):
+        return self.db.get_columns(self.rid)
 
     def set_research_name(self, new_name):
         return self.db.set_research_name(self.rid, new_name)
@@ -42,3 +46,18 @@ class Research:
     
     def set_test_type(self, new_test_type):
         return self.db.set_test_type(self.rid, new_test_type)
+    
+    def add_column(self, column):
+        return self.db.add_column(self.rid, column)
+
+    def register_research(**kwargs):
+        db = db_researches.ResearchesBackbone()
+
+        return db.register_research(
+            _id = kwargs['_id'],
+            research_name = kwargs['research_name'],
+            research_description = kwargs['research_description'],
+            dataset = kwargs['dataset'],
+            test_type = kwargs['test_type'],
+            columns = kwargs['columns']
+        )
