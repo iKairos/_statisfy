@@ -177,7 +177,7 @@ export default function DashboardScreen(props){
 
         setDataArray(newArray);
     }
-    
+
     // ======= DISPATCH ON RENDER ======= //
     useEffect(() => {
         dispatch(processUserToken(props.token));

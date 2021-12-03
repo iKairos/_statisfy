@@ -57,7 +57,7 @@ export default function Header(props){
                             <NavDropdown.Item href="#action3">Statistical Method Guide</NavDropdown.Item>
                             <NavDropdown.Item href="#action4">Machine Learning Guide</NavDropdown.Item>
                             </NavDropdown>
-                            <Nav.Link to="/dashboard"><Link className="menuLink" to="/dashboard">Dashboard</Link></Nav.Link>
+                            <Nav.Link><Link className="menuLink" to="/dashboard">Dashboard</Link></Nav.Link>
                             <Nav.Link>About</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>

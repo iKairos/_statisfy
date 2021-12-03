@@ -30,6 +30,7 @@ export default function DataSetPage(props){
         }else{
             setCheckedCols(checkedCols.filter((i) => i !== e.target.name));
         }
+        
     }
 
     return(

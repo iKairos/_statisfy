@@ -138,8 +138,6 @@ class User:
         
         try:
             payload = {
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=3600),
-                'iat': datetime.datetime.utcnow(),
                 'sub': user[0]
             } 
                                 
