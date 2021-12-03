@@ -7,7 +7,7 @@ class ResearchesBackbone(DatabaseBackbone):
     
     def register_research(self, **kwargs):
         try:
-            self.append_row(
+            res = self.append_row(
                 "researches",
                 _id = kwargs['_id'],
                 research_name = kwargs['research_name'],
@@ -16,7 +16,10 @@ class ResearchesBackbone(DatabaseBackbone):
                 test_type = kwargs['test_type']
             )
 
-            return True
+            for col in kwargs['columns']:
+                self.add_column(kwargs['_id'], col)
+
+            return True, res
         except Exception as e:
             print(e)
             return False
@@ -77,7 +80,32 @@ class ResearchesBackbone(DatabaseBackbone):
         except Exception as e:
             print(e)
             return False
-    
+
+    def get_columns(self, rid):
+        try:
+            fetched = self.fetch_row(
+                "dataset_columns",
+                _id = rid
+            )[0]
+
+            return fetched
+        except Exception as e:
+            print(e)
+            return False
+        
+    def add_column(self, rid, column):
+        try:
+            self.append_row(
+                "dataset_columns",
+                research_id = rid,
+                _column = column
+            )
+
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
     def set_research_name(self, rid, new):
         try:
             self.update_data(

@@ -20,6 +20,7 @@ import { processUserToken } from "../actions/userActions";
 import { DisplayTable } from "../components/DisplayTable";
 import { Alert, Spinner } from "react-bootstrap";
 import { processDataset } from "../actions/datasetActions";
+import { saveResearch } from "../actions/researchAction";
 
 export default function DashboardScreen(props){
     // ======= FUNCTION-WIDE VARIABLES ======= //
@@ -50,6 +51,12 @@ export default function DashboardScreen(props){
     if(props.token && processed?.code === "TOKEN_FAIL"){
         localStorage.removeItem('token');
     }
+
+    // ======= RESEARCH_SAVE ======= //
+    const researchSaveSelector = useSelector((state) => 
+        state.researchSave
+    );
+    const {researchSaveRes} = researchSaveSelector;
 
     // ======= HANDLERS ======= //
     const setToolChosen = (choice) =>{
@@ -84,7 +91,7 @@ export default function DashboardScreen(props){
     }
 
     const handleDescription = (e) => {
-        setDescription(e.target.value)
+        setDescription(e.target.value);
 
         if(description.length > 250){
             setError("Description should not exceed 200 characters.");
@@ -92,6 +99,16 @@ export default function DashboardScreen(props){
         }else{
             setError("");
         }
+    }
+
+    const handleCreateResearch = () => {
+        dispatch(saveResearch({
+            'research_name': title,
+            'research_description': description,
+            'dataset': 'temp[TO BE FIXED]',
+            'test_type': methodChosen,
+            'columns': columns
+        }));
     }
 
     // ======= CALLBACKS ======= //
@@ -259,6 +276,7 @@ export default function DashboardScreen(props){
                                 'size': file.size
                             } : undefined}
                             DatasetDetails = {datasetDetails}
+                            SaveResearchHandler = {handleCreateResearch}
 
                         />
                         <Navigator
