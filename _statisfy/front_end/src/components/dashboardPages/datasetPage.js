@@ -3,6 +3,9 @@ import { useState } from "react";
 import { Alert, Spinner } from "react-bootstrap";
 import "../../StyleSheets/datapagefolder/datapage.css";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { IconButton, Tooltip } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 
 export default function DataSetPage(props){
 
@@ -59,7 +62,21 @@ export default function DataSetPage(props){
                                     </label>
                                     <span className="data_span">File Name</span>
                                     <p className = "datapage_drop_name">{props.FileDetails ? props.FileDetails?.name : ""}</p>
-                                    <span className="data_span">Set Delimeter</span>
+                                    <span className="data_span">
+                                        Set Delimiter 
+                                        <Tooltip
+                                            title="A delimiter determines the partitioning of every data per column in a dataset. 
+                                            It is an indicator of separation between data point.
+                                            The default delimiter for CSV files is a comma ','."
+                                            placement="right"
+                                        >
+                                            <IconButton>
+                                                <FontAwesomeIcon icon={faQuestionCircle} style={{color:"#6DB65B", fontSize: 17}}/>
+                                            </IconButton>
+                                        </Tooltip>
+                                    </span>
+                                    
+                                
                                     <input className = "datapage_drop_input"></input>
                                     <button 
                                         className = "datapage_drop_button" 
@@ -68,7 +85,6 @@ export default function DataSetPage(props){
                                     >
                                         Display
                                     </button>
-                                    
                                 </div>
                             ):
                             (
