@@ -109,8 +109,6 @@ export default function DashboardScreen(props){
             'test_type': methodChosen,
             'columns': columns
         }));
-
-        console.log(researchSaveRes);
     }
 
     // ======= CALLBACKS ======= //
