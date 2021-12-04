@@ -53,93 +53,59 @@ export default function DataSetPage(props){
                 {tabNumber === 1 &&
                     <div className="datapage_content">
                         <div className="datapage_upload_cont">
-                            {isUploading? 
-                            (
-                                <div className = "datapage_drop">
-                                    <label className="datapage_upload">
-                                        <input className="datapage_upload_input" type="file" name="file" accept=".csv" onChange={(e) => props.ChangeHandler(e)} />
-                                        Upload
-                                    </label>
-                                    <span className="data_span">File Name</span>
-                                    <p className = "datapage_drop_name">{props.FileDetails ? props.FileDetails?.name : ""}</p>
-                                    <span className="data_span">
-                                        Set Delimiter 
-                                        <Tooltip
-                                            title="A delimiter determines the partitioning of every data per column in a dataset. 
-                                            It is an indicator of separation between data points.
-                                            The default delimiter for CSV files is a comma ','."
-                                            placement="right"
-                                        >
-                                            <IconButton>
-                                                <FontAwesomeIcon icon={faQuestionCircle} style={{color:"#6DB65B", fontSize: 17}}/>
-                                            </IconButton>
-                                        </Tooltip>
-                                    </span>
-                                    <input className = "datapage_drop_input"></input>
-                                    <button 
-                                        className = "datapage_drop_button" 
-                                        onClick={displayContent}
-                                        disabled = {props.FileDetails ? false:true}
-                                    >
-                                        Display
-                                    </button>
-                                </div>
-                            ):
-                            (
-                                <div className = "datapage_drop">
-                                <button className="datapage_upload" onClick={uploadNew}>
-                                    New DataSet
-                                </button>
-                                </div>
-                                
-                            )}
-                            
-                            
-                            {display? (
+                            <label className="datapage_upload">
+                                <input className="datapage_upload_input" type="file" name="file" accept=".csv" onChange={(e) => props.ChangeHandler(e)} />
+                                Upload
+                            </label>
+                            {
+                                props.DatasetDetails?.error &&
                                 <>
-                                 {
-                                    props.DatasetDetails?.error &&
-                                    <>
-                                    <button className="datapage_error" onClick={() => setShow(!show)}>
-                                        Error {show ? <FaAngleDown/> : <FaAngleUp/>}
-                                    </button>
-                                    {
-                                    props.DatasetDetails?.error && 
-                                    <Collapse in={show}>
-                                        <Alert variant="outlined" severity="error">
-                                            <AlertTitle>Error</AlertTitle>
-                                            <b>Code:</b> {props.DatasetDetails?.code} <br/>
-                                            <b>Message:</b> {props.DatasetDetails?.error}
-                                            <hr/>
-                                            Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
-                                        </Alert>
-                                    </Collapse>
-                                    }
-                                    </>
-                                 }
-
-                                <div className="datapage_details">
-                                    <span className="data_span">File Name</span>
-                                    {<p className="data_span">{props.FileDetails ? props.FileDetails?.name : ""}</p>}
-                                    <span className="data_span">File Size</span>
-                                    {<p className="data_span">{props.FileDetails ? `${props.FileDetails?.size / 1000} kB`: ""}</p>}
-                                    <span className="data_span">Size</span>
-                                    {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p> : <Spinner animation="border" variant="primary" />}
-                                    <span className="data_span">Columns</span>
-                                    {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p> : <Spinner animation="border" variant="primary" />}
-                                    <span className="data_span">Rows</span>
-                                    {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p> : <Spinner animation="border" variant="primary" />}
-                                </div> 
+                                <button className="datapage_error" onClick={() => setShow(!show)}>
+                                    Error {show ? <FaAngleDown/> : <FaAngleUp/>}
+                                </button>
+                                {
+                                props.DatasetDetails?.error && 
+                                <Collapse in={show}>
+                                    <Alert variant="outlined" severity="error">
+                                        <AlertTitle>Error</AlertTitle>
+                                        <b>Code:</b> {props.DatasetDetails?.code} <br/>
+                                        <b>Message:</b> {props.DatasetDetails?.error}
+                                        <hr/>
+                                        Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
+                                    </Alert>
+                                </Collapse>
+                                }
                                 </>
-                            ):null}
-                            
-                            
+                            }
+                            <div className="datapage_details">
+                                <span className="data_span">File Name</span>
+                                {<p className="data_span">{props.FileDetails ? props.FileDetails?.name : ""}</p>}
+                                <span className="data_span">File Size</span>
+                                {<p className="data_span">{props.FileDetails ? `${props.FileDetails?.size / 1000} kB`: ""}</p>}
+                                <span className="data_span">Size</span>
+                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p> : <Spinner animation="border" variant="primary" />}
+                                <span className="data_span">Columns</span>
+                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p> : <Spinner animation="border" variant="primary" />}
+                                <span className="data_span">Rows</span>
+                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p> : <Spinner animation="border" variant="primary" />}
+                            </div> 
+                            <span className="data_span">
+                                Set Delimiter 
+                                <Tooltip
+                                    title="A delimiter determines the partitioning of every data per column in a dataset. 
+                                    It is an indicator of separation between data points.
+                                    The default delimiter for CSV files is a comma ','."
+                                    placement="right"
+                                >
+                                    <IconButton>
+                                        <FontAwesomeIcon icon={faQuestionCircle} style={{color:"#6DB65B", fontSize: 17}}/>
+                                    </IconButton>
+                                </Tooltip>
+                            </span>
+                            <input className = "datapage_drop_input"></input>
                         </div>
-                        
-                        {display?
-                        (<DisplayTable data={props.DataArray}/>):null
-                        }
-                        
+
+                        <DisplayTable data={props.DataArray}/>
                     </div>
                 }
                 
