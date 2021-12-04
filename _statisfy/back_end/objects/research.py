@@ -66,5 +66,6 @@ class Research:
             research_description = kwargs['research_description'],
             dataset = kwargs['dataset'],
             test_type = kwargs['test_type'],
-            columns = kwargs['columns']
+            columns = kwargs['columns'],
+            author=kwargs['author']
         )

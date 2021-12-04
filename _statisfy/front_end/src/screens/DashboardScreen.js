@@ -101,7 +101,8 @@ export default function DashboardScreen(props){
             'dataset': 'temp[TO BE FIXED]',
             'test_type': methodChosen,
             'columns': columns,
-            'delimiter': delimiter
+            'delimiter': delimiter,
+            'author': processed?.user._id
         }));
     }
 

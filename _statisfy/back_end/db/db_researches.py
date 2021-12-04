@@ -19,6 +19,8 @@ class ResearchesBackbone(DatabaseBackbone):
             for col in kwargs['columns']:
                 self.add_column(kwargs['_id'], col)
 
+            self.add_author(kwargs['author'], kwargs['_id', "AUTHOR"])
+
             return True, res
         except Exception as e:
             print(e)
@@ -184,6 +186,48 @@ class ResearchesBackbone(DatabaseBackbone):
             )
 
             return True
+        except Exception as e:
+            print(e)
+            return False
+    
+    def add_author(self, uid, research_id, author_type):
+        try:
+            self.append_row(
+                "research_authors",
+                research_id = research_id,
+                user_id = uid,
+                author_type = author_type
+            )
+
+            return True
+        except Exception as e:
+            print(e)
+            return False
+    
+    def get_researches_author(self, rid):
+        try:
+            fetched = self.fetch_row(
+                "research_authors",
+                user_id = rid
+            )
+
+            data = [i[0] for i in fetched]
+
+            return data
+        except Exception as e:
+            print(e)
+            return False
+    
+    def get_authors(self, rid):
+        try:
+            fetched = self.fetch_row(
+                "research_authors",
+                research_id = rid
+            )
+
+            data = [i[1] for i in fetched]
+
+            return data
         except Exception as e:
             print(e)
             return False

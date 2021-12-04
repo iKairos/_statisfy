@@ -15,7 +15,6 @@ export default function DataSetPage(props){
     const [checkedCols, setCheckedCols] = useState([]);
     const [display, setDisplay] = useState(false);
     const [isUploading, setUploading] = useState(true);
-    const [display, setDisplay] = useState(false);
 
     const switchPage = (page)=>{
         setTab(page);

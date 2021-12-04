@@ -1,3 +1,4 @@
+from random import randint
 from db import db_users
 from db import db_authors
 import jwt, datetime, bcrypt
@@ -138,6 +139,7 @@ class User:
         
         try:
             payload = {
+                'flush': randint(10000000, 99999999),
                 'sub': user[0]
             } 
                                 

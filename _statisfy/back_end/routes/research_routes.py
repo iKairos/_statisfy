@@ -53,7 +53,8 @@ def add_research():
             dataset = data['dataset'],
             test_type = data['test_type'],
             columns = data['columns'],
-            delimiter = data['delimiter']
+            delimiter = data['delimiter'],
+            author = data['author']
         )
 
         if not res[0]:
