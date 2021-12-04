@@ -1,7 +1,7 @@
 export default function ResearchScreen(){
     return(
         <div className = "upload">
-            <h1>StatScreen</h1>
+            <h1>Rsearch</h1>
         </div>
     );
 }

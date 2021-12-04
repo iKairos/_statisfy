@@ -222,6 +222,27 @@ table {
   margin-right: 1rem;
 }
 
+.datapage_btn {
+  width: 3rem;
+  background-color: white;
+  border: 1px solid #a8a8a8;
+  border-radius: 0.2rem;
+  margin: 0.5rem;
+}
+
+.datapage_btn:hover {
+  background-color: #a8a8a8;
+  color: white;
+}
+
+.datapage_btn_active {
+  width: 3rem;
+  background-color: white;
+  border: 1px solid #a742c5;
+  border-radius: 0.2rem;
+  margin: 0.5rem;
+}
+
 @media screen and (min-width: 600px) {
   .datapage_navigator {
     display: -ms-grid;
