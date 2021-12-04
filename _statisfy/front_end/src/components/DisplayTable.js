@@ -17,11 +17,24 @@ export const DisplayTable = (props) => {
           <thead>
               <tr>
                   {
-                    columns.map(i => {return <th>{i}</th>})
+                    props.Header? (
+                      columns.map(i => {return <th>{i}</th>})
+                    ): (
+                      
+                      columns.map(i => {return (
+                        <th><input type="text" className="table_input" placeholder="Column"></input></th>
+                      )})
+                    )
+                   
                   }
               </tr>
           </thead>
           <tbody>
+            {
+              !props.Header? (
+                columns.map(i => {return <td>{i}</td>})
+              ):null
+            }
               {
                 data.map(i => {
                   return(

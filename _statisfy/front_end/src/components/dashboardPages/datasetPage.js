@@ -15,7 +15,7 @@ export default function DataSetPage(props){
     const [checkedCols, setCheckedCols] = useState([]);
     const [display, setDisplay] = useState(false);
     const [isUploading, setUploading] = useState(true);
-    const [display, setDisplay] = useState(false);
+    const [header, setHeader] = useState(false);
 
     const switchPage = (page)=>{
         setTab(page);
@@ -51,17 +51,14 @@ export default function DataSetPage(props){
                 {tabNumber === 1 &&
                     <div className="datapage_content">
                         <div className="data_upload_cont">
-
                             <Alert variant="outlined" severity="info">
-                            <AlertTitle><strong>Instructions:</strong></AlertTitle>
-                            {
-                                instDataPage.map((i) => (
-                                    <><b>{i[0]}.</b> {i[1]} <br/></>
-                                ))
-                            }
-                        </Alert>
-
-                            
+                                <AlertTitle><strong>Instructions:</strong></AlertTitle>
+                                {
+                                    instDataPage.map((i) => (
+                                        <><b>{i[0]}.</b> {i[1]} <br/></>
+                                    ))
+                                }
+                            </Alert>
                         </div>
                         <div className="datapage_upload_cont">
                             <label className="datapage_upload">
@@ -122,7 +119,27 @@ export default function DataSetPage(props){
                                 </div>
                             }
 
-                        {props.DatasetDetails?.error ? null : <DisplayTable data={props.DataArray}/>}
+                        {props.DatasetDetails?.error ? null : 
+                            <>
+                             <div className="data_upload_cont">
+                                <Alert variant="outlined" severity="info">
+                                    <AlertTitle><strong>Table Header:</strong></AlertTitle>
+                                    <b>Do you want to set the first row as header?</b>
+                                    <button className= {header? "datapage_btn_active":"datapage_btn"}
+                                        onClick={() => setHeader(true)}>Yes</button>
+                                    <button className= {header? "datapage_btn":"datapage_btn_active"}
+                                        onClick={() => setHeader(false)}>No</button>
+                                </Alert>
+                            </div>
+                            <DisplayTable 
+                                data={props.DataArray}
+                                Header = {header}
+                            />
+                           
+
+
+                            </>
+                        }
                     </div>
                 }
                 
