@@ -52,7 +52,19 @@ export default function DataSetPage(props){
                 </div>
                 {tabNumber === 1 &&
                     <div className="datapage_content">
+                        <div className="data_upload_cont">
+                            <Collapse in={show}>
+                                <Alert variant="outlined" severity="error">
+                                <AlertTitle>Error</AlertTitle>
+                                <b>Code:</b> {props.DatasetDetails?.code} <br/>
+                                <b>Message:</b> {props.DatasetDetails?.error}
+                                <hr/>
+                                Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
+                                </Alert>
+                            </Collapse>
+                        </div>
                         <div className="datapage_upload_cont">
+                            
                             <label className="datapage_upload">
                                 <input className="datapage_upload_input" type="file" name="file" accept=".csv" 
                                 onChange={(e) => props.ChangeHandler(e)} 
