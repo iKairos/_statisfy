@@ -124,7 +124,7 @@ export default function DashboardScreen(props){
         state.datasetDetails
     );
     const {loading, datasetDetails} = fileDetailsSelector;
-
+    
     const changeHandler = (e) => {
         if (e.target.files.length != 0){
             var filename = e.target.files[0].name
@@ -132,7 +132,10 @@ export default function DashboardScreen(props){
             const extension = filename.split('.').pop();
 
             if(extension != 'csv'){
-                setError("File is not in comma-separated value (CSV) format. Please make sure you are uploading your dataset in CSV format.");
+                setError({
+                    'code': 'EXTENSION_NOT_VALID',
+                    'message': "File is not in comma-separated value (CSV) format. Please make sure you are uploading your dataset in CSV format."
+                });
                 return;
             }
 

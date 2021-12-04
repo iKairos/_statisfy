@@ -1,12 +1,11 @@
 import { DisplayTable } from "../DisplayTable";
 import { useState } from "react";
-import { Spinner } from "react-bootstrap";
 import "../../StyleSheets/datapagefolder/datapage.css";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { Alert, AlertTitle, Collapse, IconButton, Tooltip, Skeleton } from '@mui/material';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
+import { Alert, AlertTitle, Collapse, Tooltip, CircularProgress } from '@mui/material';
 import { instDataPage } from "../../constants/stringConstants";
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import TableChartIcon from '@mui/icons-material/TableChart';
 
 export default function DataSetPage(props){
 
@@ -33,7 +32,7 @@ export default function DataSetPage(props){
         }
         
     }
-
+    console.log(props.Loading)
     return(
         <div className="datapage">
             <div className="datapage_container">
@@ -68,7 +67,7 @@ export default function DataSetPage(props){
                                 Upload
                             </label>
                             <span>
-                                <b>Set Delimiter</b>
+                                <b>Set Delimiter </b>
                                 <Tooltip
                                     title="A delimiter determines the partitioning of every data per column in a dataset. 
                                     It is an indicator of separation between data points.
@@ -76,53 +75,68 @@ export default function DataSetPage(props){
                                     placement="right"
                                     arrow
                                 >
-                                    <IconButton>
-                                        <FontAwesomeIcon icon={faQuestionCircle} style={{color:"#6DB65B", fontSize: 17}}/>
-                                    </IconButton>
+                                    <HelpOutlineIcon fontSize='inherit' color='info'/>
                                 </Tooltip>
                             </span>
                             <input className = "datapage_drop_input" onChange={(e) => props.CallbackDelimiter(e.target.value)}></input>
                             
                             {props.Display? (
                                 <div className="datapage_details">
-                                    <span className="data_span">File Name</span>
-                                    {<p className="data_span">{props.FileDetails ? props.FileDetails?.name : ""}</p>}
-                                    <span className="data_span">File Size</span>
-                                    {<p className="data_span">{props.FileDetails ? `${props.FileDetails?.size / 1000} kB`: ""}</p>}
-                                    <span className="data_span">Size</span>
-                                    {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
-                                    <span className="data_span">Columns</span>
-                                    {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
-                                    <span className="data_span">Rows</span>
-                                    {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
+                                    {
+                                        !props.Loading ? (
+                                            <>
+                                                <span className="data_span">File Name</span>
+                                                {<p className="data_span">{props.FileDetails ? props.FileDetails?.name : ""}</p>}
+                                                <span className="data_span">File Size</span>
+                                                {<p className="data_span">{props.FileDetails ? `${props.FileDetails?.size / 1000} kB`: ""}</p>}
+                                                <span className="data_span">Size</span>
+                                                <p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p>
+                                                <span className="data_span">Columns</span>
+                                                <p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p>
+                                                <span className="data_span">Rows</span>
+                                                <p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p>
+                                            </>
+                                        ) : <CircularProgress color="info" thickness={2.5} size={30}/>
+                                    }
                                 </div> 
                             ):null}
                         </div>
                             {
-                                props.DatasetDetails?.error &&
+                                props.DatasetDetails?.error || props.Error ? (
                                 <div className = "data_upload_cont">
                                     <button className="datapage_error" onClick={() => setShow(!show)}>
                                         Error {show ? <FaAngleDown/> : <FaAngleUp/>}
                                     </button>
-                                    {
-                                    props.DatasetDetails?.error && 
                                     <Collapse in={show}>
                                         <Alert variant="outlined" severity="error">
                                             <AlertTitle>Error</AlertTitle>
-                                            <b>Code:</b> {props.DatasetDetails?.code} <br/>
-                                            <b>Message:</b> {props.DatasetDetails?.error}
+                                            {
+                                                props.DatasetDetails?.error ? (
+                                                    <>
+                                                        <b>Code:</b> {props.DatasetDetails?.code} <br/>
+                                                        <b>Message:</b> {props.DatasetDetails?.error}
+                                                    </>
+                                                ) : props.Error ? (
+                                                    <>
+                                                        <b>Code:</b> {props.Error.code} <br/>
+                                                        <b>Message:</b> {props.Error.message}
+                                                    </>
+                                                ):null
+                                            }
                                             <hr/>
                                             Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
                                         </Alert>
                                     </Collapse>
-                                    }
                                 </div>
+                                ) : null
                             }
 
                         {props.DatasetDetails?.error ? null : 
                             <>
                              <div className="data_upload_cont">
-                                <Alert variant="outlined" severity="info">
+                                <Alert iconMapping={{
+                                    info: <TableChartIcon/>,
+                                }}variant="outlined" severity="info">
                                     <AlertTitle><strong>Table Header:</strong></AlertTitle>
                                     <b>Do you want to set the first row as header?</b>
                                     <button className= {header? "datapage_btn_active":"datapage_btn"}
@@ -146,26 +160,35 @@ export default function DataSetPage(props){
                 {tabNumber === 2 &&
                     <div className="datapage_content">
                         <div className="datapage_upload_cont">
-                            {
-                                props.DatasetDetails?.error &&
-                                <>
+                        {
+                            props.DatasetDetails?.error || props.Error ? (
+                            <div className = "data_upload_cont">
                                 <button className="datapage_error" onClick={() => setShow(!show)}>
-                                Error {show ? <FaAngleDown/> : <FaAngleUp/>} 
+                                    Error {show ? <FaAngleDown/> : <FaAngleUp/>}
                                 </button>
-                                {
-                                props.DatasetDetails?.error && 
                                 <Collapse in={show}>
                                     <Alert variant="outlined" severity="error">
                                         <AlertTitle>Error</AlertTitle>
-                                        <b>Code:</b> {props.DatasetDetails?.code} <br/>
-                                        <b>Message:</b> {props.DatasetDetails?.error}
+                                        {
+                                            props.DatasetDetails?.error ? (
+                                                <>
+                                                    <b>Code:</b> {props.DatasetDetails?.code} <br/>
+                                                    <b>Message:</b> {props.DatasetDetails?.error}
+                                                </>
+                                            ) : props.Error ? (
+                                                <>
+                                                    <b>Code:</b> {props.Error.code} <br/>
+                                                    <b>Message:</b> {props.Error.message}
+                                                </>
+                                            ):null
+                                        }
                                         <hr/>
                                         Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
                                     </Alert>
                                 </Collapse>
-                                }
-                                </>
-                            } 
+                            </div>
+                            ) : null
+                        }
                         </div>
                         <table className="column_table">
                             <thead>
@@ -225,7 +248,7 @@ export default function DataSetPage(props){
                                             </tr>
                                             
                                         </>
-                                    )) : <Spinner animation="border" variant="primary" />
+                                    )) : <CircularProgress color="info" thickness={2.5} size={30}/>
                                 }
                             </tbody>
                         </table>
@@ -260,7 +283,7 @@ export default function DataSetPage(props){
                                     </td>
                                 </tr> 
                             </>
-                            )) : <Spinner animation="border" variant="primary" />
+                            )) : <CircularProgress color="info" thickness={2.5} size={30}/>
                         }
                         </tbody>
                      </table>
