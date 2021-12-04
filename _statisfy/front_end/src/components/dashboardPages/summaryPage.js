@@ -32,11 +32,10 @@ export default function SummaryPage(props){
                         {<p className = "summary_body_file_content">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p>}
                         <span className = "summary_body_file_content">Columns Selected</span>
                         <div className = "summary_body_columns">
+                            
                             {props.Columns.map(i => {
-                                return (
-                                <div className = "summary_body_columns_cont">
-                                    <p className = "summary_body_file_content">{i}</p>
-                                </div>)
+                                return (<p>{i} </p>
+                                )
                             })}
                         </div>
                     
