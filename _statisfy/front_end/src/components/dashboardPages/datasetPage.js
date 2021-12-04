@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Spinner } from "react-bootstrap";
 import "../../StyleSheets/datapagefolder/datapage.css";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { Alert, AlertTitle, Collapse, IconButton, Tooltip } from '@mui/material';
+import { Alert, AlertTitle, Collapse, IconButton, Tooltip, Skeleton } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 
@@ -83,11 +83,11 @@ export default function DataSetPage(props){
                                 <span className="data_span">File Size</span>
                                 {<p className="data_span">{props.FileDetails ? `${props.FileDetails?.size / 1000} kB`: ""}</p>}
                                 <span className="data_span">Size</span>
-                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p> : <Spinner animation="border" variant="primary" />}
+                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
                                 <span className="data_span">Columns</span>
-                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p> : <Spinner animation="border" variant="primary" />}
+                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
                                 <span className="data_span">Rows</span>
-                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p> : <Spinner animation="border" variant="primary" />}
+                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
                             </div> 
                             <span className="data_span">
                                 Set Delimiter 
@@ -96,6 +96,7 @@ export default function DataSetPage(props){
                                     It is an indicator of separation between data points.
                                     The default delimiter for CSV files is a comma ','."
                                     placement="right"
+                                    arrow
                                 >
                                     <IconButton>
                                         <FontAwesomeIcon icon={faQuestionCircle} style={{color:"#6DB65B", fontSize: 17}}/>
@@ -105,7 +106,7 @@ export default function DataSetPage(props){
                             <input className = "datapage_drop_input"></input>
                         </div>
 
-                        <DisplayTable data={props.DataArray}/>
+                        {props.DatasetDetails?.error ? null : <DisplayTable data={props.DataArray}/>}
                     </div>
                 }
                 

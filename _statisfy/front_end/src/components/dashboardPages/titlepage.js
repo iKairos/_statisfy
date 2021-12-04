@@ -13,7 +13,7 @@ export default function TitlePage(props){
                     <h3>Enter Title and Description</h3>
                 </div>
                 <div className="res">
-                    {props.Error && <Alert variant="outlined" severity="error"><AlertTitle>Error</AlertTitle>{props.Error}</Alert>}
+                    {props.Error && <Alert variant="outlined" severity="error">{props.Error}</Alert>}
                     <div className="res_div">
                         <span className="res_span">Research Title ({props.Title.length}/200 characters)</span>
                         <input className="res_title" value={props.Title} placeholder="Research Title" onChange={(e) => props.HandleTitle(e)}></input>

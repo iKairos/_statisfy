@@ -294,8 +294,10 @@ export default function DashboardScreen(props){
     }else{
         return(
             <>
-                <Skeleton variant="text" />
-                <Skeleton variant="rectangular" width={500} height={500} />
+                <Skeleton variant="text" width={300} height={40}/>
+                <Skeleton variant="text" width={400} height={40}/>
+                <Skeleton variant="text" width={500} height={40}/>
+                <Skeleton variant="rectangular" width={500} height={350} />
             </>
         );
     }
