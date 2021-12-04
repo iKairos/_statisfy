@@ -21,6 +21,7 @@ import { DisplayTable } from "../components/DisplayTable";
 import { Alert, Spinner } from "react-bootstrap";
 import { processDataset } from "../actions/datasetActions";
 import { saveResearch } from "../actions/researchAction";
+import { Skeleton } from "@mui/material";
 
 export default function DashboardScreen(props){
     // ======= FUNCTION-WIDE VARIABLES ======= //
@@ -295,7 +296,10 @@ export default function DashboardScreen(props){
         )
     }else{
         return(
-            <Spinner animation="border" variant="primary" />
+            <>
+                <Skeleton variant="text" />
+                <Skeleton variant="rectangular" width={500} height={500} />
+            </>
         );
     }
 }

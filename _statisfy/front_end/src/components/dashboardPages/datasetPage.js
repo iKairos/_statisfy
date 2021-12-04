@@ -1,9 +1,9 @@
 import { DisplayTable } from "../DisplayTable";
 import { useState } from "react";
-import { Alert, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import "../../StyleSheets/datapagefolder/datapage.css";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { IconButton, Tooltip } from '@mui/material';
+import { Alert, AlertTitle, IconButton, Tooltip } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 
@@ -108,8 +108,8 @@ export default function DataSetPage(props){
                                     {
                                     props.DatasetDetails?.error && 
                                     show &&(
-                                        <Alert variant='danger' onClose={() => setShow(false)}>
-                                            <Alert.Heading>An error occurred.</Alert.Heading>
+                                        <Alert variant="outlined" severity="error">
+                                            <AlertTitle>Error</AlertTitle>
                                             <b>Code:</b> {props.DatasetDetails?.code} <br/>
                                             <b>Message:</b> {props.DatasetDetails?.error}
                                             <hr/>
@@ -157,8 +157,8 @@ export default function DataSetPage(props){
                                 {
                                 props.DatasetDetails?.error && 
                                 show &&(
-                                    <Alert variant='danger' onClose={() => setShow(false)}>
-                                        <Alert.Heading>An error occurred.</Alert.Heading>
+                                    <Alert variant="outlined" severity="error">
+                                        <AlertTitle>Error</AlertTitle>
                                         <b>Code:</b> {props.DatasetDetails?.code} <br/>
                                         <b>Message:</b> {props.DatasetDetails?.error}
                                         <hr/>
