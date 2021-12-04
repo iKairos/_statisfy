@@ -12,19 +12,10 @@ export default function DataSetPage(props){
     const [tabNumber, setTab] = useState(1);
     const [show, setShow] = useState(true);
     const [checkedCols, setCheckedCols] = useState([]);
-    const [display, setDisplay] = useState(false);
     const [isUploading, setUploading] = useState(true);
 
     const switchPage = (page)=>{
         setTab(page);
-    }
-    const displayContent = () =>{
-        setUploading(false);
-        setDisplay(true);
-    }
-    const uploadNew = () =>{
-        setUploading(true);
-        setDisplay(false);
     }
     
     const onCheck = (e) => {
@@ -53,14 +44,16 @@ export default function DataSetPage(props){
                 {tabNumber === 1 &&
                     <div className="datapage_content">
                         <div className="datapage_upload_cont">
-                            <label className="datapage_upload">
-                                <input className="datapage_upload_input" type="file" name="file" accept=".csv" 
-                                onChange={(e) => props.ChangeHandler(e)} 
-                                onClick={displayContent}/>
-                                Upload
-                            </label>
                             <span>
-                                <b>Set Delimiter </b>
+                                <label className="datapage_upload">
+                                    <input className="datapage_upload_input" type="file" name="file" accept=".csv" 
+                                    onChange={(e) => props.ChangeHandler(e)} 
+                                    />
+                                    Upload
+                                </label>
+                            </span>
+                            <span>
+                                <b>Set Delimiter</b>
                                 <Tooltip
                                     title="A delimiter determines the partitioning of every data per column in a dataset. 
                                     It is an indicator of separation between data points.
@@ -73,7 +66,7 @@ export default function DataSetPage(props){
                                     </IconButton>
                                 </Tooltip>
                             </span>
-                            <input className = "datapage_drop_input"></input>
+                            <input className = "datapage_drop_input" onChange={(e) => props.CallbackDelimiter(e.target.value)}></input>
                             {
                                 props.DatasetDetails?.error &&
                                 <>
@@ -94,7 +87,7 @@ export default function DataSetPage(props){
                                     }
                                 </>
                             }
-                            {display? (
+                            {props.Display? (
                                 <div className="datapage_details">
                                     <span className="data_span">File Name</span>
                                     {<p className="data_span">{props.FileDetails ? props.FileDetails?.name : ""}</p>}

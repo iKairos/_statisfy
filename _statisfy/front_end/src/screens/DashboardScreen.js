@@ -22,13 +22,14 @@ export default function DashboardScreen(props){
     const [file, setFile] = useState();
     const [columns, setColumns] = useState([]);
     const [tool, setTool] = useState("");
-    const [delimiter, setDelimiter] = useState("")
+    const [delimiter, setDelimiter] = useState(',');
 
     // Utils variables
     const [error, setError] = useState();
     const [tags, setTags] = useState([]);
     const [methodChosen, setMethodChosen] = useState("");
     const [showActive, setShowActive] = useState(1);
+    const [display, setDisplay] = useState(false);
 
     // File handling variables
     const [dataArray, setDataArray] = useState();
@@ -146,18 +147,19 @@ export default function DashboardScreen(props){
             const formData = new FormData();
             formData.append("file", e.target.files[0]);
 
-            dispatch(processDataset(formData));
+            dispatch(processDataset(formData,delimiter));
 
             setFile(e.target.files[0])
+            setDisplay(true);
         }
     }
 
-    const processCSV = (str, delim=',') => {
-        const headers = str.slice(0,str.indexOf('\n')).split(delim);
+    const processCSV = (str) => {
+        const headers = str.slice(0,str.indexOf('\n')).split(delimiter);
         const rows = str.slice(str.indexOf('\n')+1).split('\n');
 
         var newArray = rows.map( (row, index) => {
-            const values = row.split(delim);
+            const values = row.split(delimiter);
             const eachObject = headers.reduce((obj, header, i) => {
                 obj[header] = values[i];
                 return obj;
@@ -227,6 +229,7 @@ export default function DashboardScreen(props){
                             ChangeHandler = {changeHandler}
                             DataArray = {dataArray}
                             DatasetDetails = {datasetDetails}
+                            Display = {display}
                             FileDetails = { file ? {
                                 'name': file.name,
                                 'size': file.size
@@ -275,6 +278,7 @@ export default function DashboardScreen(props){
                             } : undefined}
                             DatasetDetails = {datasetDetails}
                             SaveResearchHandler = {handleCreateResearch}
+                            Delimiter = {delimiter}
 
                         />
                         <Navigator

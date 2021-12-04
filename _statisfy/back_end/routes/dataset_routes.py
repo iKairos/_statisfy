@@ -3,13 +3,13 @@ from flask import request
 from flask_cors import cross_origin
 import pandas as pd
 
-@app.route("/api/dataset/process", methods = ['POST'])
+@app.route("/api/dataset/process/delimiter=<delim>", methods = ['POST'])
 @cross_origin()
-def dataset_details():
+def dataset_details(delim):
     try:
         file = request.files['file']
-
-        df = pd.read_csv(file)
+        
+        df = pd.read_csv(file, delimiter=delim)
         
         details = []
 

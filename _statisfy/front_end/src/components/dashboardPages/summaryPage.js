@@ -1,8 +1,6 @@
-
 import "../../StyleSheets/summaryfolder/summarypage.css";
 
 export default function SummaryPage(props){
-
     return(
        <div className="summary">
            <div className="summary_container">
@@ -20,6 +18,8 @@ export default function SummaryPage(props){
                         <p >{props.Tool} Tool</p>
                         <span className="summary_body_res_span">Method:</span>
                         <p >{props.MethodChosen}</p>
+                        <span className="summary_body_res_span">Delimiter:</span>
+                        <p >{props.Delimiter}</p>
                     </div>
                     <div className = "summary_body_file">
                         <span className = "summary_body_file_content">File Name</span>

@@ -5,13 +5,13 @@ import {
     DATASET_PROCESS_SUCCESS } 
 from "../constants/datasetConstants";
 
-export const processDataset = (file) => async(dispatch) =>{
+export const processDataset = (file, delimiter) => async(dispatch) =>{
     dispatch({
         type:DATASET_PROCESS_REQUEST
     });
 
     try{
-        const {data} = await Axios.post('/api/dataset/process', file);
+        const {data} = await Axios.post(`/api/dataset/process/delimiter=${delimiter}`, file);
 
         dispatch({
             type: DATASET_PROCESS_SUCCESS, 
