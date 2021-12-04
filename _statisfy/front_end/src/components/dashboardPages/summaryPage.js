@@ -1,6 +1,8 @@
+
 import "../../StyleSheets/summaryfolder/summarypage.css";
 
 export default function SummaryPage(props){
+
     return(
        <div className="summary">
            <div className="summary_container">
@@ -31,7 +33,7 @@ export default function SummaryPage(props){
                         <span className = "summary_body_file_content">Rows</span>
                         {<p className = "summary_body_file_content">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p>}
                         <span className = "summary_body_file_content">Columns Selected</span>
-                        <div >
+                        <div className = "summary_body_columns">
                             
                             {props.Columns.map(i => {
                                 return (<p>{i} </p>

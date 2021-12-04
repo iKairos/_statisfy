@@ -13,9 +13,14 @@ export default function DataSetPage(props){
     const [show, setShow] = useState(true);
     const [checkedCols, setCheckedCols] = useState([]);
     const [isUploading, setUploading] = useState(true);
+    const [display, setDisplay] = useState(false);
 
     const switchPage = (page)=>{
         setTab(page);
+    }
+    const displayContent = () =>{
+        setUploading(false);
+        setDisplay(true);
     }
     
     const onCheck = (e) => {
@@ -44,24 +49,15 @@ export default function DataSetPage(props){
                 {tabNumber === 1 &&
                     <div className="datapage_content">
                         <div className="data_upload_cont">
-                            <Collapse in={show}>
-                                <Alert variant="outlined" severity="error">
-                                <AlertTitle>Error</AlertTitle>
-                                <b>Code:</b> {props.DatasetDetails?.code} <br/>
-                                <b>Message:</b> {props.DatasetDetails?.error}
-                                <hr/>
-                                Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
-                                </Alert>
-                            </Collapse>
+                            <Alert variant="outlined" severity="error">
+                            <AlertTitle>Error</AlertTitle>
+                            <b>Code:</b> {props.DatasetDetails?.code} <br/>
+                            <b>Message:</b> {props.DatasetDetails?.error}
+                            <hr/>
+                            Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
+                            </Alert>
                         </div>
                         <div className="datapage_upload_cont">
-                            
-                            <label className="datapage_upload">
-                                <input className="datapage_upload_input" type="file" name="file" accept=".csv" 
-                                onChange={(e) => props.ChangeHandler(e)} 
-                                onClick={displayContent}/>
-                                Upload
-                            </label>
                             <span>
                                 <label className="datapage_upload">
                                     <input className="datapage_upload_input" type="file" name="file" accept=".csv" 
@@ -85,9 +81,25 @@ export default function DataSetPage(props){
                                 </Tooltip>
                             </span>
                             <input className = "datapage_drop_input" onChange={(e) => props.CallbackDelimiter(e.target.value)}></input>
+                            
+                            {props.Display? (
+                                <div className="datapage_details">
+                                    <span className="data_span">File Name</span>
+                                    {<p className="data_span">{props.FileDetails ? props.FileDetails?.name : ""}</p>}
+                                    <span className="data_span">File Size</span>
+                                    {<p className="data_span">{props.FileDetails ? `${props.FileDetails?.size / 1000} kB`: ""}</p>}
+                                    <span className="data_span">Size</span>
+                                    {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
+                                    <span className="data_span">Columns</span>
+                                    {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
+                                    <span className="data_span">Rows</span>
+                                    {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
+                                </div> 
+                            ):null}
+                        </div>
                             {
                                 props.DatasetDetails?.error &&
-                                <>
+                                <div className = "data_upload_cont">
                                     <button className="datapage_error" onClick={() => setShow(!show)}>
                                         Error {show ? <FaAngleDown/> : <FaAngleUp/>}
                                     </button>
@@ -103,25 +115,8 @@ export default function DataSetPage(props){
                                         </Alert>
                                     </Collapse>
                                     }
-                                </>
+                                </div>
                             }
-                            {props.Display? (
-                                <div className="datapage_details">
-                                    <span className="data_span">File Name</span>
-                                    {<p className="data_span">{props.FileDetails ? props.FileDetails?.name : ""}</p>}
-                                    <span className="data_span">File Size</span>
-                                    {<p className="data_span">{props.FileDetails ? `${props.FileDetails?.size / 1000} kB`: ""}</p>}
-                                    <span className="data_span">Size</span>
-                                    {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
-                                    <span className="data_span">Columns</span>
-                                    {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
-                                    <span className="data_span">Rows</span>
-                                    {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
-                                </div> 
-                            ):null}
-                            
-                            
-                        </div>
 
                         {props.DatasetDetails?.error ? null : <DisplayTable data={props.DataArray}/>}
                     </div>
