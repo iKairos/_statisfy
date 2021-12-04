@@ -23,7 +23,8 @@ def fetch_research(id):
             'dataset': research.dataset_directory,
             'test_type': research.test_type,
             'authors': research.authors,
-            'columns': research.columns
+            'columns': research.columns,
+            'delimiter': research.delimiter
         }
     }
 
@@ -51,7 +52,8 @@ def add_research():
             research_description = data['research_description'],
             dataset = data['dataset'],
             test_type = data['test_type'],
-            columns = data['columns']
+            columns = data['columns'],
+            delimiter = data['delimiter']
         )
 
         if not res[0]:

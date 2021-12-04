@@ -34,6 +34,10 @@ class Research:
     @property 
     def columns(self):
         return self.db.get_columns(self.rid)
+    
+    @property
+    def delimiter(self):
+        return self.db.get_delimiter(self.rid)
 
     def set_research_name(self, new_name):
         return self.db.set_research_name(self.rid, new_name)
@@ -46,6 +50,9 @@ class Research:
     
     def set_test_type(self, new_test_type):
         return self.db.set_test_type(self.rid, new_test_type)
+    
+    def set_delimiter(self, new_delimiter):
+        return self.db.set_delimiter(self.rid, new_delimiter)
     
     def add_column(self, column):
         return self.db.add_column(self.rid, column)

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Spinner } from "react-bootstrap";
 import "../../StyleSheets/datapagefolder/datapage.css";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { Alert, AlertTitle, IconButton, Tooltip } from '@mui/material';
+import { Alert, AlertTitle, Collapse, IconButton, Tooltip } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 
@@ -66,7 +66,7 @@ export default function DataSetPage(props){
                                         Set Delimiter 
                                         <Tooltip
                                             title="A delimiter determines the partitioning of every data per column in a dataset. 
-                                            It is an indicator of separation between data point.
+                                            It is an indicator of separation between data points.
                                             The default delimiter for CSV files is a comma ','."
                                             placement="right"
                                         >
@@ -75,8 +75,6 @@ export default function DataSetPage(props){
                                             </IconButton>
                                         </Tooltip>
                                     </span>
-                                    
-                                
                                     <input className = "datapage_drop_input"></input>
                                     <button 
                                         className = "datapage_drop_button" 
@@ -107,7 +105,7 @@ export default function DataSetPage(props){
                                     </button>
                                     {
                                     props.DatasetDetails?.error && 
-                                    show &&(
+                                    <Collapse in={show}>
                                         <Alert variant="outlined" severity="error">
                                             <AlertTitle>Error</AlertTitle>
                                             <b>Code:</b> {props.DatasetDetails?.code} <br/>
@@ -115,7 +113,7 @@ export default function DataSetPage(props){
                                             <hr/>
                                             Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
                                         </Alert>
-                                        )
+                                    </Collapse>
                                     }
                                     </>
                                  }
@@ -156,7 +154,7 @@ export default function DataSetPage(props){
                                 </button>
                                 {
                                 props.DatasetDetails?.error && 
-                                show &&(
+                                <Collapse in={show}>
                                     <Alert variant="outlined" severity="error">
                                         <AlertTitle>Error</AlertTitle>
                                         <b>Code:</b> {props.DatasetDetails?.code} <br/>
@@ -164,7 +162,7 @@ export default function DataSetPage(props){
                                         <hr/>
                                         Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
                                     </Alert>
-                                    )
+                                </Collapse>
                                 }
                                 </>
                             } 

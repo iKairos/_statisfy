@@ -1,24 +1,14 @@
-import MethodCard from "../components/MethodCard";
-import AllCards from "../components/AllCards";
-import Checkbox from "../components/Checkbox";
-
-
 import TitlePage from "../components/dashboardPages/titlepage";
 import ToolPage from "../components/dashboardPages/toolPage";
-import DataPage from "../components/dashboardPages/dataPage";
 import DataSetPage from "../components/dashboardPages/datasetPage";
 import StatPage from "../components/dashboardPages/statPage";
 import SummaryPage from "../components/dashboardPages/summaryPage";
 import Navigator from "../components/navigator";
-
 import "../StyleSheets/dashboard.css";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router";
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { processUserToken } from "../actions/userActions";
-import { DisplayTable } from "../components/DisplayTable";
-import { Alert, Spinner } from "react-bootstrap";
 import { processDataset } from "../actions/datasetActions";
 import { saveResearch } from "../actions/researchAction";
 import { Skeleton } from "@mui/material";
@@ -32,6 +22,7 @@ export default function DashboardScreen(props){
     const [file, setFile] = useState();
     const [columns, setColumns] = useState([]);
     const [tool, setTool] = useState("");
+    const [delimiter, setDelimiter] = useState("")
 
     // Utils variables
     const [error, setError] = useState();
@@ -108,7 +99,8 @@ export default function DashboardScreen(props){
             'research_description': description,
             'dataset': 'temp[TO BE FIXED]',
             'test_type': methodChosen,
-            'columns': columns
+            'columns': columns,
+            'delimiter': delimiter
         }));
     }
 
@@ -119,6 +111,10 @@ export default function DashboardScreen(props){
 
     const callbackColumns = (columns) => {
         setColumns(columns);
+    }
+
+    const callbackDelimiter = (delimiter) => {
+        setDelimiter(delimiter);
     }
 
     // ======= FILE UPLOAD MECHANISM ======= //
@@ -227,6 +223,7 @@ export default function DashboardScreen(props){
                     <div>
                         <DataSetPage
                             CallbackColumns = {callbackColumns}
+                            CallbackDelimiter = {callbackDelimiter}
                             ChangeHandler = {changeHandler}
                             DataArray = {dataArray}
                             DatasetDetails = {datasetDetails}

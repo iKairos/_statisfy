@@ -93,6 +93,18 @@ class ResearchesBackbone(DatabaseBackbone):
             print(e)
             return False
         
+    def get_delimiter(self, rid):
+        try:
+            fetched = self.fetch_row(
+                "researches",
+                _id = rid
+            )[5]
+
+            return fetched
+        except Exception as e:
+            print(e)
+            return False
+        
     def add_column(self, rid, column):
         try:
             self.append_row(
@@ -153,6 +165,20 @@ class ResearchesBackbone(DatabaseBackbone):
             self.update_data(
                 "researches",
                 "test_type",
+                new,
+                _id = rid
+            )
+
+            return True
+        except Exception as e:
+            print(e)
+            return False
+    
+    def set_delimiter(self, rid, new):
+        try:
+            self.update_data(
+                "researches",
+                "delimiter",
                 new,
                 _id = rid
             )
