@@ -136,8 +136,8 @@ table {
   border: 1px solid #a8a8a8;
   background-color: #ffffff;
   cursor: pointer;
-  height: 5rem;
-  width: 100%;
+  height: 1.5rem;
+  width: 10rem;
   text-align: center;
   vertical-align: middle;
   border-radius: 0.2rem;
@@ -155,10 +155,13 @@ table {
 }
 
 .datapage_upload_cont {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-rows: (2.5rem)[auto-fill];
-      grid-template-rows: repeat(auto-fill, 2.5rem);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   padding-bottom: 1rem;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -206,6 +209,11 @@ table {
   background-color: #a8a8a8;
   color: white;
   border: 0;
+}
+
+.datapage_drop_input {
+  width: 10rem;
+  margin-bottom: 1rem;
 }
 
 .datapage_checkbox {
