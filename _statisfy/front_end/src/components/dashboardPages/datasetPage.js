@@ -83,11 +83,11 @@ export default function DataSetPage(props){
                                 <span className="data_span">File Size</span>
                                 {<p className="data_span">{props.FileDetails ? `${props.FileDetails?.size / 1000} kB`: ""}</p>}
                                 <span className="data_span">Size</span>
-                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
+                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</p> : <Skeleton variant="text" width={100} height={40}/>}
                                 <span className="data_span">Columns</span>
-                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
+                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p> : <Skeleton variant="text" width={100} height={40}/>}
                                 <span className="data_span">Rows</span>
-                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p> : <Skeleton variant="text" width={500} height={40}/>}
+                                {!props.Loading ? <p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p> : <Skeleton variant="text" width={100} height={40}/>}
                             </div> 
                             <span className="data_span">
                                 Set Delimiter 
