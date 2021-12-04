@@ -280,6 +280,7 @@ export default function DashboardScreen(props){
                             DatasetDetails = {datasetDetails}
                             SaveResearchHandler = {handleCreateResearch}
                             Delimiter = {delimiter}
+                            Author = {processed?.user.username}
 
                         />
                         <Navigator

@@ -67,5 +67,6 @@ class Research:
             dataset = kwargs['dataset'],
             test_type = kwargs['test_type'],
             columns = kwargs['columns'],
-            author=kwargs['author']
+            author = kwargs['author'],
+            delimiter = kwargs['delimiter']
         )

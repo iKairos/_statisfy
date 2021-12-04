@@ -13,13 +13,14 @@ class ResearchesBackbone(DatabaseBackbone):
                 research_name = kwargs['research_name'],
                 research_description = kwargs['research_description'],
                 dataset = kwargs['dataset'],
-                test_type = kwargs['test_type']
+                test_type = kwargs['test_type'],
+                delimiter = kwargs['delimiter']
             )
 
             for col in kwargs['columns']:
                 self.add_column(kwargs['_id'], col)
 
-            self.add_author(kwargs['author'], kwargs['_id', "AUTHOR"])
+            self.add_author(kwargs['author'], kwargs['_id'], "AUTHOR")
 
             return True, res
         except Exception as e:

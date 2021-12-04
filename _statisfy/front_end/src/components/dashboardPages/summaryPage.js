@@ -16,6 +16,8 @@ export default function SummaryPage(props){
                         <p >{props.Title}</p>
                         <span className="summary_body_res_span">Description:</span>
                         <p >{props.Description}</p>
+                        <span className="summary_body_res_span">Author:</span>
+                        <p >{props.Author}</p>
                         <span className="summary_body_res_span">Tool:</span>
                         <p >{props.Tool} Tool</p>
                         <span className="summary_body_res_span">Method:</span>
