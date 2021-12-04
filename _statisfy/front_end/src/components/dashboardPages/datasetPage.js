@@ -6,16 +6,23 @@ import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { Alert, AlertTitle, Collapse, IconButton, Tooltip, Skeleton } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
+import { instDataPage } from "../../constants/stringConstants";
 
 export default function DataSetPage(props){
 
     const [tabNumber, setTab] = useState(1);
     const [show, setShow] = useState(true);
     const [checkedCols, setCheckedCols] = useState([]);
+    const [display, setDisplay] = useState(false);
     const [isUploading, setUploading] = useState(true);
 
     const switchPage = (page)=>{
         setTab(page);
+    }
+
+    const displayContent = () =>{
+        setUploading(false);
+        setDisplay(true);
     }
     
     const onCheck = (e) => {
@@ -44,32 +51,22 @@ export default function DataSetPage(props){
                 {tabNumber === 1 &&
                     <div className="datapage_content">
                         <div className="data_upload_cont">
-                            <Collapse in={show}>
-                                <Alert variant="outlined" severity="error">
-                                <AlertTitle>Error</AlertTitle>
-                                <b>Code:</b> {props.DatasetDetails?.code} <br/>
-                                <b>Message:</b> {props.DatasetDetails?.error}
-                                <hr/>
-                                Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
-                                </Alert>
-                            </Collapse>
+                            <Alert variant="outlined" severity="info">
+                                <AlertTitle><strong>Instructions:</strong></AlertTitle>
+                                {
+                                    instDataPage.map((i) => (
+                                        <><b>{i[0]}.</b> {i[1]} <br/></>
+                                    ))
+                                }
+                            </Alert>
                         </div>
                         <div className="datapage_upload_cont">
-                            
                             <label className="datapage_upload">
                                 <input className="datapage_upload_input" type="file" name="file" accept=".csv" 
                                 onChange={(e) => props.ChangeHandler(e)} 
                                 onClick={displayContent}/>
                                 Upload
                             </label>
-                            <span>
-                                <label className="datapage_upload">
-                                    <input className="datapage_upload_input" type="file" name="file" accept=".csv" 
-                                    onChange={(e) => props.ChangeHandler(e)} 
-                                    />
-                                    Upload
-                                </label>
-                            </span>
                             <span>
                                 <b>Set Delimiter</b>
                                 <Tooltip
