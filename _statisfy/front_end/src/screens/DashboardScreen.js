@@ -19,6 +19,7 @@ import FileUploadIcon from '@mui/icons-material/FileUpload';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import clsx from 'clsx';
+import { stepsString } from "../constants/stringConstants";
 
 export default function DashboardScreen(props){
     // ======= FUNCTION-WIDE VARIABLES ======= //
@@ -112,14 +113,6 @@ export default function DashboardScreen(props){
             'author': processed?.user._id
         }));
     }
-
-    const steps = [
-        'Name Research',
-        'Select a tool for your dataset',
-        'Upload and configure dataset',
-        'Select specific tool',
-        'Verify choices'
-    ];
 
     // ======= CALLBACKS ======= //
     const callbackCheckbox = (checked) => {
@@ -223,7 +216,7 @@ export default function DashboardScreen(props){
           4: <AnalyticsIcon />,
           5: <SummarizeIcon />,
         };
-    
+
         return (
           <div
             className={clsx(classes.root, {
@@ -246,7 +239,7 @@ export default function DashboardScreen(props){
             <div className = "overall_div">
                 <div className="stepper_cont">
                     <Stepper activeStep={showActive-1} alternativeLabel>
-                        {steps.map((label) => (
+                        {stepsString.map((label) => (
                             <Step key={label}>
                                 <StepLabel StepIconComponent={CustomStepIcon}>
                                     <div className="stepper_div">{label}</div>

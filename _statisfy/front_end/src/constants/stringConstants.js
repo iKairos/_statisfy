@@ -10,3 +10,11 @@ export const instDataPage = [
 export const tooltipDelimiter = "A delimiter determines the partitioning of every data per column in a dataset. It is an indicator of separation between data points. The default delimiter for CSV files is a comma ','.";
 
 export const tooltipDataset = "A dataset is a collection of interrelated information that can be analyzed by means of data analysis, statistics, and machine learning. The system only accepts comma-separated values (CSV) as file extension for datasets for uniformity.";
+
+export const stepsString = [
+    'Name your research.',
+    'Select a analysis tool for your dataset.',
+    'Upload and configure your dataset.',
+    'Select a specific analysis technique.',
+    'Verify your choices.'
+];
