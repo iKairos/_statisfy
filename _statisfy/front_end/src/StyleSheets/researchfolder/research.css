@@ -1,0 +1,111 @@
+.research {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 2rem;
+  padding-top: 2rem;
+}
+
+.research_container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr;
+      grid-template-rows: 1fr;
+  border-radius: 1rem;
+  -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
+          box-shadow: 0 0 10px 5px #f0f0f0;
+  background-color: white;
+}
+
+.research_header {
+  height: 100%;
+  width: 85vw;
+}
+
+.research_header_tabs {
+  padding-left: 2rem;
+}
+
+.research_header_display {
+  border-bottom: 1px solid #eeeeee;
+  padding: 1rem;
+  padding-left: 1rem;
+}
+
+.research_body {
+  height: 80vh;
+  margin-bottom: 2rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+}
+
+.research_body_header {
+  overflow: hidden;
+  padding: 1rem;
+  width: 85vw;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.text_title {
+  font-weight: bold;
+  font-size: 2rem;
+  color: #23272a;
+}
+
+.text_label {
+  color: #b5b5b5;
+}
+
+.text_content {
+  color: #23272a;
+}
+
+.text_topic {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #b5b5b5;
+}
+
+@media screen and (min-width: 600px) {
+  .research_container {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: 1fr;
+        grid-template-rows: 1fr;
+    border-radius: 1rem;
+    -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
+            box-shadow: 0 0 10px 5px #f0f0f0;
+    background-color: white;
+  }
+  .research_header {
+    height: 30vh;
+    width: 70vw;
+  }
+  .research_header_tabs {
+    padding-left: 2rem;
+  }
+  .research_header_display {
+    border-bottom: 1px solid #eeeeee;
+    padding: 1rem;
+    padding-left: 2rem;
+  }
+  .research_body {
+    height: 80vh;
+    width: 70vw;
+    margin-bottom: 2rem;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+  .research_body_header {
+    padding: 2rem;
+  }
+}
+/*# sourceMappingURL=research.css.map */
