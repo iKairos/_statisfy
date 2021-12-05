@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { processUserToken } from "../actions/userActions";
 import { processDataset } from "../actions/datasetActions";
 import { saveResearch } from "../actions/researchAction";
-import { Skeleton } from "@mui/material";
+import { Fade, Skeleton } from "@mui/material";
 
 export default function DashboardScreen(props){
     // ======= FUNCTION-WIDE VARIABLES ======= //
@@ -190,109 +190,119 @@ export default function DashboardScreen(props){
         return(
             <div>
                 
-                {showActive === 1 &&
-                <div>
-                    <TitlePage
-                        Title = {title}
-                        HandleTitle = {handleTitle}
-                        Error = {error}
-                        Description = {description}
-                        HandleDescription = {handleDescription}
-                    />
-                    <Navigator
-                        NextScreen={nextScreen}
-                        PrevScreen={prevScreen}
-                        nextDisabled={false}
-                        prevDisabled={true}
-                    />
-                    
-                </div>
+                {
+                    showActive === 1 &&
+                    <Fade in={showActive === 1}>
+                        <div>
+                            <TitlePage
+                                Title = {title}
+                                HandleTitle = {handleTitle}
+                                Error = {error}
+                                Description = {description}
+                                HandleDescription = {handleDescription}
+                            />
+                            <Navigator
+                                NextScreen={nextScreen}
+                                PrevScreen={prevScreen}
+                                nextDisabled={false}
+                                prevDisabled={true}
+                            />
+                            
+                        </div>
+                    </Fade>
                 }
-                {showActive === 2 &&
-                <div>
-                    <ToolPage
-                        SetToolChosen = {setToolChosen}
-                    />
+                {
+                    showActive === 2 && 
+                    <Fade in={showActive === 2}>
+                        <div>
+                            <ToolPage
+                                SetToolChosen = {setToolChosen}
+                            />
 
-                    <div className="dashboard_btn_cont">
-                        <div className="dashboard_btn_div">
-                         <button className="dashboard_btn" onClick={prevScreen}> previous</button>
+                            <div className="dashboard_btn_cont">
+                                <div className="dashboard_btn_div">
+                                <button className="dashboard_btn" onClick={prevScreen}> previous</button>
+                                </div>
+                                <div className="dashboard_btn_div">
+                                    <button className="dashboard_btn" onClick={nextScreen}> next</button>
+                                </div>
+                            </div>
                         </div>
-                        <div className="dashboard_btn_div">
-                            <button className="dashboard_btn" onClick={nextScreen}> next</button>
-                        </div>
-                    </div>
-                </div>
-                    
+                    </Fade>
                 }
                 { showActive === 3 &&
-                    <div>
-                        <DataSetPage
-                            CallbackColumns = {callbackColumns}
-                            CallbackDelimiter = {callbackDelimiter}
-                            ChangeHandler = {changeHandler}
-                            DataArray = {dataArray}
-                            DatasetDetails = {datasetDetails}
-                            Display = {display}
-                            FileDetails = { file ? {
-                                'name': file.name,
-                                'size': file.size
-                            } : undefined}
-                            Error = {error}
-                            Loading = {loading}
-                        />
-                        <Navigator
-                            NextScreen={nextScreen}
-                            PrevScreen={prevScreen}
-                            nextDisabled={false}
-                            prevDisabled={false}
-                        />
-                    </div>
+                    <Fade in={showActive === 3}>
+                        <div>
+                            <DataSetPage
+                                CallbackColumns = {callbackColumns}
+                                CallbackDelimiter = {callbackDelimiter}
+                                ChangeHandler = {changeHandler}
+                                DataArray = {dataArray}
+                                DatasetDetails = {datasetDetails}
+                                Display = {display}
+                                FileDetails = { file ? {
+                                    'name': file.name,
+                                    'size': file.size
+                                } : undefined}
+                                Error = {error}
+                                Loading = {loading}
+                            />
+                            <Navigator
+                                NextScreen={nextScreen}
+                                PrevScreen={prevScreen}
+                                nextDisabled={false}
+                                prevDisabled={false}
+                            />
+                        </div>
+                    </Fade>
                 }
                 { showActive === 4 &&
-                    <div>
-                        <StatPage
-                            CallbackCheckbox = {callbackCheckbox}
-                            MethodChosen = {methodChosen}
-                            Tags = {tags}
-                            DisplayMethodChosen = {displayMethodChosen}
-                        />
-                        <Navigator
-                            NextScreen={nextScreen}
-                            PrevScreen={prevScreen}
-                            nextDisabled={false}
-                            prevDisabled={false}
-                        />
-                    </div>
-                        
+                    <Fade in={showActive === 4}>
+                        <div>
+                            <StatPage
+                                CallbackCheckbox = {callbackCheckbox}
+                                MethodChosen = {methodChosen}
+                                Tags = {tags}
+                                DisplayMethodChosen = {displayMethodChosen}
+                            />
+                            <Navigator
+                                NextScreen={nextScreen}
+                                PrevScreen={prevScreen}
+                                nextDisabled={false}
+                                prevDisabled={false}
+                            />
+                        </div>
+                    </Fade>
                 }
                 {
                     showActive === 5 && 
-                    <div>
-                        <SummaryPage
+                    <Fade in={showActive === 5}>
+                        <div>
+                            <SummaryPage
 
-                            Title = {title}
-                            Description = {description}
-                            Tool = {tool}
-                            Columns={columns}
-                            MethodChosen = {methodChosen}
-                            FileDetails = { file ? {
-                                'name': file.name,
-                                'size': file.size
-                            } : undefined}
-                            DatasetDetails = {datasetDetails}
-                            SaveResearchHandler = {handleCreateResearch}
-                            Delimiter = {delimiter}
-                            Author = {processed?.user.username}
+                                Title = {title}
+                                Description = {description}
+                                Tool = {tool}
+                                Columns={columns}
+                                MethodChosen = {methodChosen}
+                                FileDetails = { file ? {
+                                    'name': file.name,
+                                    'size': file.size
+                                } : undefined}
+                                DatasetDetails = {datasetDetails}
+                                SaveResearchHandler = {handleCreateResearch}
+                                Delimiter = {delimiter}
+                                Author = {processed?.user.username}
 
-                        />
-                        <Navigator
-                            NextScreen={nextScreen}
-                            PrevScreen={prevScreen}
-                            nextDisabled={true}
-                            prevDisabled={false}
-                        />
-                    </div>
+                            />
+                            <Navigator
+                                NextScreen={nextScreen}
+                                PrevScreen={prevScreen}
+                                nextDisabled={true}
+                                prevDisabled={false}
+                            />
+                        </div>
+                    </Fade>
                 }
             </div>
         );
