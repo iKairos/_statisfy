@@ -12,6 +12,13 @@ import { processUserToken } from "../actions/userActions";
 import { processDataset } from "../actions/datasetActions";
 import { saveResearch } from "../actions/researchAction";
 import { Fade, Skeleton, Stepper, Step, StepLabel } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import ScienceIcon from '@mui/icons-material/Science';
+import InsightsIcon from '@mui/icons-material/Insights';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import clsx from 'clsx';
 
 export default function DashboardScreen(props){
     // ======= FUNCTION-WIDE VARIABLES ======= //
@@ -189,6 +196,46 @@ export default function DashboardScreen(props){
         setDataArray(newArray);
     }
 
+    const useStyles = makeStyles(() => ({
+        root: {
+            backgroundColor: '#eaeaf0',
+            padding: 8,
+            borderRadius: '50%'
+        },
+        active: {
+            backgroundColor: '#A742C5',
+            color: 'black',
+        },
+        completed: {
+            backgroundColor: '#23272A',
+            color: 'black',
+        },
+      }));
+    
+      const CustomStepIcon = (props) => {
+        const classes = useStyles();
+        const { active, completed } = props;
+    
+        const stepIcons = {
+          1: <ScienceIcon />,
+          2: <InsightsIcon />,
+          3: <FileUploadIcon />,
+          4: <AnalyticsIcon />,
+          5: <SummarizeIcon />,
+        };
+    
+        return (
+          <div
+            className={clsx(classes.root, {
+              [classes.active]: active,
+              [classes.completed]: completed,
+            })}
+          >
+            {stepIcons[String(props.icon)]}
+          </div>
+        );
+    };
+
     // ======= DISPATCH ON RENDER ======= //
     useEffect(() => {
         dispatch(processUserToken(props.token));
@@ -201,10 +248,9 @@ export default function DashboardScreen(props){
                     <Stepper activeStep={showActive-1} alternativeLabel>
                         {steps.map((label) => (
                             <Step key={label}>
-                            
-                            <StepLabel>
-                            <div className="stepper_div">{label}</div></StepLabel>
-                            
+                                <StepLabel StepIconComponent={CustomStepIcon}>
+                                    <div className="stepper_div">{label}</div>
+                                </StepLabel>
                             </Step>
                         ))}
                     </Stepper>
