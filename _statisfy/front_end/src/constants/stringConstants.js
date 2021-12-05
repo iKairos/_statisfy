@@ -13,7 +13,7 @@ export const tooltipDataset = "A dataset is a collection of interrelated informa
 
 export const stepsString = [
     'Name your research.',
-    'Select a analysis tool for your dataset.',
+    'Select an analysis tool for your dataset.',
     'Upload and configure your dataset.',
     'Select a specific analysis technique.',
     'Verify your choices.'

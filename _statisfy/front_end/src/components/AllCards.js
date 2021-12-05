@@ -8,7 +8,7 @@ export default function AllCards(props){
         return props.tags.every(tag => tags.includes(tag))
     })
 
-    const [chosen, setChosen] = useState("");
+    const [chosen, setChosen] = useState();
 
     const displayChosen = (choice) =>{
         setChosen(choice);

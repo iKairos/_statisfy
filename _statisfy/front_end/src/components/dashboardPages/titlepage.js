@@ -1,4 +1,4 @@
-import { Alert, AlertTitle } from "@mui/material";
+import { Alert, AlertTitle, Grow } from "@mui/material";
 
 
 
@@ -13,7 +13,11 @@ export default function TitlePage(props){
                     <h3>Enter Title and Description</h3>
                 </div>
                 <div className="res">
-                    {props.Error && <Alert variant="outlined" severity="error">{props.Error}</Alert>}
+                    {props.Error && (
+                        <Grow in={props.Error} {...(props.Error ? { timeout: 1000 } : {})}>
+                            <Alert variant="outlined" severity="error">{props.Error}</Alert>
+                        </Grow>
+                    )}
                     <div className="res_div">
                         <span className="res_span">Research Title ({props.Title.length}/200 characters)</span>
                         <input className="res_title" value={props.Title} placeholder="Research Title" onChange={(e) => props.HandleTitle(e)}></input>
@@ -23,8 +27,6 @@ export default function TitlePage(props){
                         <textarea className="res_desc" value={props.Description} placeholder="Description" onChange={(e) => props.HandleDescription(e)}></textarea>
                     </div>
                 </div>
-
-        
             </div>
         </div>
      ); 

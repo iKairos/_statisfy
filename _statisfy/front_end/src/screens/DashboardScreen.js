@@ -29,13 +29,13 @@ export default function DashboardScreen(props){
     const [description, setDescription] = useState("");
     const [file, setFile] = useState();
     const [columns, setColumns] = useState([]);
-    const [tool, setTool] = useState("");
+    const [tool, setTool] = useState();
     const [delimiter, setDelimiter] = useState(',');
 
     // Utils variables
-    const [error, setError] = useState();
+    const [error, setError] = useState({});
     const [tags, setTags] = useState([]);
-    const [methodChosen, setMethodChosen] = useState("");
+    const [methodChosen, setMethodChosen] = useState();
     const [showActive, setShowActive] = useState(1);
     const [display, setDisplay] = useState(false);
 
@@ -69,10 +69,31 @@ export default function DashboardScreen(props){
     }
 
     const nextScreen = () => {
-       if(title?.length == 0 || description?.length == 0 || typeof title === 'undefined' || typeof description === 'undefined'){
-            setError("Please fill in all the details to continue.");
+        if(title?.length == 0 || description?.length == 0 || typeof title === 'undefined' || typeof description === 'undefined'){
+            setError({
+                'titlePage': "Please fill in all the details to continue."
+            });
             return;
         }
+
+        if(title.length > 200 || description.length > 250){
+            return;
+        }
+
+        if(typeof tool === 'undefined' && showActive === 2){
+            setError({
+                'toolPage': 'Please select a tool before proceeding.'
+            })
+            return;
+        }
+        
+        if(typeof methodChosen === 'undefined' && showActive === 4){
+            setError({
+                'statPage': 'Please select a statistical tool before proceeding.'
+            });
+            return;
+        }
+
         setShowActive(showActive + 1);
     }
 
@@ -84,10 +105,14 @@ export default function DashboardScreen(props){
         setTitle(e.target.value)
 
         if(title.length > 200){
-            setError("Title should not exceed 200 characters.");
+            setError({
+                'titlePage': 'Title should not exceed 200 characters.'
+            });
             return;
         }else{
-            setError("");
+            setError({
+                'titlePage': undefined
+            });
         }
     }
 
@@ -95,10 +120,14 @@ export default function DashboardScreen(props){
         setDescription(e.target.value);
 
         if(description.length > 250){
-            setError("Description should not exceed 200 characters.");
+            setError({
+                'titlePage': 'Description should not exceed 200 characters.'
+            });
             return;
         }else{
-            setError("");
+            setError({
+                'titlePage': undefined
+            });
         }
     }
 
@@ -141,13 +170,17 @@ export default function DashboardScreen(props){
 
             if(extension != 'csv'){
                 setError({
-                    'code': 'EXTENSION_NOT_VALID',
-                    'message': "File is not in comma-separated value (CSV) format. Please make sure you are uploading your dataset in CSV format."
+                    'datasetPage': {
+                        'code': 'EXTENSION_NOT_VALID',
+                        'message': "File is not in comma-separated value (CSV) format. Please make sure you are uploading your dataset in CSV format."
+                    }
                 });
                 return;
             }
 
-            setError(undefined);
+            setError({
+                'datasetPage': undefined
+            });
 
             const reader = new FileReader();
             reader.onload = (e) => {
@@ -238,17 +271,19 @@ export default function DashboardScreen(props){
     if(processed?.code === 'TOKEN_SUCCESS'){
         return(
             <div className = "overall_div">
-                <div className="stepper_cont">
-                    <Stepper activeStep={showActive-1} alternativeLabel>
-                        {stepsString.map((label) => (
-                            <Step key={label}>
-                                <StepLabel StepIconComponent={CustomStepIcon}>
-                                    <div className="stepper_div">{label}</div>
-                                </StepLabel>
-                            </Step>
-                        ))}
-                    </Stepper>
-                </div>
+                <Fade in={true} {...(true ? { timeout: 1400 } : {})}>
+                    <div className="stepper_cont">
+                        <Stepper activeStep={showActive-1} alternativeLabel>
+                            {stepsString.map((label) => (
+                                <Step key={label}>
+                                    <StepLabel StepIconComponent={CustomStepIcon}>
+                                        <div className="stepper_div">{label}</div>
+                                    </StepLabel>
+                                </Step>
+                            ))}
+                        </Stepper>
+                    </div>
+                </Fade>
                 
                 
                 {
@@ -258,7 +293,7 @@ export default function DashboardScreen(props){
                             <TitlePage
                                 Title = {title}
                                 HandleTitle = {handleTitle}
-                                Error = {error}
+                                Error = {error.titlePage}
                                 Description = {description}
                                 HandleDescription = {handleDescription}
                             />
@@ -271,6 +306,7 @@ export default function DashboardScreen(props){
                     <Fade in={showActive === 2}>
                         <div className = "component_div">
                             <ToolPage
+                                Error = {error.toolPage}
                                 SetToolChosen = {setToolChosen}
                             />
                         </div>
@@ -290,7 +326,7 @@ export default function DashboardScreen(props){
                                     'name': file.name,
                                     'size': file.size
                                 } : undefined}
-                                Error = {error}
+                                Error = {error.datasetPage}
                                 Loading = {loading}
                             />
                         </div>
@@ -304,6 +340,7 @@ export default function DashboardScreen(props){
                                 MethodChosen = {methodChosen}
                                 Tags = {tags}
                                 DisplayMethodChosen = {displayMethodChosen}
+                                Error = {error.statPage}
                             />
                         </div>
                     </Fade>

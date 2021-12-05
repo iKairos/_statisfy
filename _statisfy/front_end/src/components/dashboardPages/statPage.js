@@ -1,5 +1,6 @@
 import Checkbox from "../Checkbox";
 import AllCards from "../AllCards";
+import { Alert, Grow } from "@mui/material";
 
 
 
@@ -12,6 +13,11 @@ export default function StatPage(props){
                 <div className="upload_res">
                     <div className="upload_header"><h3>Filter</h3></div>
                     <div className="stat_checkbox">
+                        {props.Error && (
+                            <Grow in={props.Error} {...(props.Error ? { timeout: 1000 } : {})}>
+                                <Alert variant="outlined" severity="error">{props.Error}</Alert>
+                            </Grow>
+                        )}
                         <Checkbox callbackFunction={props.CallbackCheckbox}/>
                     </div> 
                 </div>

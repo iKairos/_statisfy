@@ -1,6 +1,7 @@
 
 import MethodCard from "../MethodCard";
 import { useState } from "react";
+import { Alert, Grow } from "@mui/material";
 
 
 
@@ -28,6 +29,11 @@ export default function Toolpage(props){
                     <h3>Choose Research Tool</h3>
                 </div>
                 <div className="cardwrapper">
+                    {props.Error && (
+                        <Grow in={props.Error} {...(props.Error ? { timeout: 1000 } : {})}>
+                            <Alert variant="outlined" severity="error">{props.Error}</Alert>
+                        </Grow>
+                    )}
                     <div onClick ={selectStats}>
                         <MethodCard
                             title="Statistics"
