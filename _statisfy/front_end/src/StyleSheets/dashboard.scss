@@ -17,7 +17,25 @@ $maxwidth: 40rem;
 body {
   font-family: "Montserrat";
 }
-
+.stepper_div {
+  display: none;
+}
+.stepper_cont {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+.overall_div {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+}
+.component_div {
+  width: 1fr;
+  display: flex;
+  justify-content: center;
+}
 .dashboard {
   display: grid;
   padding: 2rem;
@@ -398,6 +416,9 @@ body {
       width: 1fr;
       height: min-content;
     }
+  }
+  .stepper_div {
+    display: block;
   }
 
   .cardwrapper {

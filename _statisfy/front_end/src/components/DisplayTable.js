@@ -4,13 +4,20 @@ import '../StyleSheets/table.css'
 
 export const DisplayTable = (props) => {
     var data = props.data;
+    var columns;
 
     if(typeof data === 'undefined'){
       return null;
     }else{
-      const columns = Object.keys(data[1]).map((key, id)=>{
-        return key;
-      })
+      if(props.Header == true){
+        columns = Object.keys(data[1]).map((key, id)=>{
+          return key;
+        })
+      }else{
+        columns = Object.keys(data[0]).map((key, id)=>{
+          return key;
+        })
+      }
 
       return (
         <table>

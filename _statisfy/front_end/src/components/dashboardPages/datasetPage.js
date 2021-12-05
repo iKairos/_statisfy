@@ -93,8 +93,8 @@ export default function DataSetPage(props){
                                 
                                 {props.Display? (
                                     !props.Loading ? (
-                                    <div ref={containerRef}>
-                                        <Slide direction="right" in ={!props.Loading} container={containerRef.current} {...(!props.Loading ? { timeout: 1200 } : {})}>
+                                    <div ref={containerRef} style={{overflow:"hidden"}}>
+                                        <Slide direction="down" in ={!props.Loading} container={containerRef.current} {...(!props.Loading ? { timeout: 1200 } : {})}>
                                             <div className="datapage_details">
                                                     <>
                                                         <span className="data_span">File Name</span>

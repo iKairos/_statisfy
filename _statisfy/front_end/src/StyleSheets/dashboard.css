@@ -12,6 +12,41 @@ body {
   font-family: "Montserrat";
 }
 
+.stepper_div {
+  display: none;
+}
+
+.stepper_cont {
+  margin-top: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100vw;
+}
+
+.overall_div {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.component_div {
+  width: 1fr;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .dashboard {
   display: -ms-grid;
   display: grid;
@@ -544,6 +579,9 @@ body {
     height: -webkit-min-content;
     height: -moz-min-content;
     height: min-content;
+  }
+  .stepper_div {
+    display: block;
   }
   .cardwrapper {
     -ms-grid-columns: 1fr;

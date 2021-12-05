@@ -23,7 +23,7 @@ export default function SummaryPage(props){
                         <span className="summary_body_res_span">Method:</span>
                         <p >{props.MethodChosen}</p>
                         <span className="summary_body_res_span">Delimiter:</span>
-                        <p >{props.Delimiter}</p>
+                        <p >"{props.Delimiter}"</p>
                     </div>
                     <div className = "summary_body_file">
                         <span className = "summary_body_file_content">File Name</span>

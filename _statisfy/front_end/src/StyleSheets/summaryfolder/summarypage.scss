@@ -82,18 +82,25 @@ $maxwidth: 40rem;
       width: 60vw;
     }
     &_body {
-      display: grid;
+      display: flex;
+      flex-direction: column;
       height: 60vh;
-      grid-template-rows: repeat(auto-fill, 28vh);
       gap: 1rem;
       &_res {
         display: grid;
         grid-template-columns: 1fr;
       }
       &_file {
+        margin-top: 2rem;
         display: grid;
         grid-template-columns: 10rem 80%;
         gap: 0;
+      }
+      &_columns {
+        display: flex;
+        gap: 1rem;
+        width: 40vw;
+        flex-wrap: wrap;
       }
     }
   }

@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { processUserToken } from "../actions/userActions";
 import { processDataset } from "../actions/datasetActions";
 import { saveResearch } from "../actions/researchAction";
-import { Fade, Skeleton } from "@mui/material";
+import { Fade, Skeleton, Stepper, Step, StepLabel } from "@mui/material";
 
 export default function DashboardScreen(props){
     // ======= FUNCTION-WIDE VARIABLES ======= //
@@ -106,6 +106,14 @@ export default function DashboardScreen(props){
         }));
     }
 
+    const steps = [
+        'Name Research',
+        'Select a tool for your dataset',
+        'Upload and configure dataset',
+        'Select specific tool',
+        'Verify choices'
+    ];
+
     // ======= CALLBACKS ======= //
     const callbackCheckbox = (checked) => {
         setTags(checked);
@@ -188,24 +196,31 @@ export default function DashboardScreen(props){
 
     if(processed?.code === 'TOKEN_SUCCESS'){
         return(
-            <div>
+            <div className = "overall_div">
+                <div className="stepper_cont">
+                    <Stepper activeStep={showActive-1} alternativeLabel>
+                        {steps.map((label) => (
+                            <Step key={label}>
+                            
+                            <StepLabel>
+                            <div className="stepper_div">{label}</div></StepLabel>
+                            
+                            </Step>
+                        ))}
+                    </Stepper>
+                </div>
+                
                 
                 {
                     showActive === 1 &&
                     <Fade in={showActive === 1}>
-                        <div>
+                        <div className = "component_div">
                             <TitlePage
                                 Title = {title}
                                 HandleTitle = {handleTitle}
                                 Error = {error}
                                 Description = {description}
                                 HandleDescription = {handleDescription}
-                            />
-                            <Navigator
-                                NextScreen={nextScreen}
-                                PrevScreen={prevScreen}
-                                nextDisabled={false}
-                                prevDisabled={true}
                             />
                             
                         </div>
@@ -214,25 +229,16 @@ export default function DashboardScreen(props){
                 {
                     showActive === 2 && 
                     <Fade in={showActive === 2}>
-                        <div>
+                        <div className = "component_div">
                             <ToolPage
                                 SetToolChosen = {setToolChosen}
                             />
-
-                            <div className="dashboard_btn_cont">
-                                <div className="dashboard_btn_div">
-                                <button className="dashboard_btn" onClick={prevScreen}> previous</button>
-                                </div>
-                                <div className="dashboard_btn_div">
-                                    <button className="dashboard_btn" onClick={nextScreen}> next</button>
-                                </div>
-                            </div>
                         </div>
                     </Fade>
                 }
                 { showActive === 3 &&
                     <Fade in={showActive === 3}>
-                        <div>
+                         <div className = "component_div">
                             <DataSetPage
                                 CallbackColumns = {callbackColumns}
                                 CallbackDelimiter = {callbackDelimiter}
@@ -247,29 +253,17 @@ export default function DashboardScreen(props){
                                 Error = {error}
                                 Loading = {loading}
                             />
-                            <Navigator
-                                NextScreen={nextScreen}
-                                PrevScreen={prevScreen}
-                                nextDisabled={false}
-                                prevDisabled={false}
-                            />
                         </div>
                     </Fade>
                 }
                 { showActive === 4 &&
                     <Fade in={showActive === 4}>
-                        <div>
+                         <div className = "component_div">
                             <StatPage
                                 CallbackCheckbox = {callbackCheckbox}
                                 MethodChosen = {methodChosen}
                                 Tags = {tags}
                                 DisplayMethodChosen = {displayMethodChosen}
-                            />
-                            <Navigator
-                                NextScreen={nextScreen}
-                                PrevScreen={prevScreen}
-                                nextDisabled={false}
-                                prevDisabled={false}
                             />
                         </div>
                     </Fade>
@@ -277,7 +271,7 @@ export default function DashboardScreen(props){
                 {
                     showActive === 5 && 
                     <Fade in={showActive === 5}>
-                        <div>
+                         <div className = "component_div">
                             <SummaryPage
 
                                 Title = {title}
@@ -295,15 +289,16 @@ export default function DashboardScreen(props){
                                 Author = {processed?.user.username}
 
                             />
-                            <Navigator
-                                NextScreen={nextScreen}
-                                PrevScreen={prevScreen}
-                                nextDisabled={true}
-                                prevDisabled={false}
-                            />
                         </div>
                     </Fade>
                 }
+                
+                <Navigator
+                    NextScreen={nextScreen}
+                    PrevScreen={prevScreen}
+                    ActiveStep = {showActive -1}
+                    prevDisabled={true}
+                />
             </div>
         );
     }else if(processed?.code === 'TOKEN_FAIL'){
