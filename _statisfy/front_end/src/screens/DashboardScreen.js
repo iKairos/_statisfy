@@ -191,17 +191,18 @@ export default function DashboardScreen(props){
 
     const useStyles = makeStyles(() => ({
         root: {
-            backgroundColor: '#eaeaf0',
+            backgroundColor: '#b5b5b5',
+            color: '#23272a',
             padding: 8,
             borderRadius: '50%'
         },
         active: {
-            backgroundColor: '#A742C5',
-            color: 'black',
+            backgroundColor: '#23272A',
+            color: '#DF9AFF',
         },
         completed: {
-            backgroundColor: '#23272A',
-            color: 'black',
+            backgroundColor: '#b5b5b5',
+            color: '#A742C5',
         },
       }));
     
