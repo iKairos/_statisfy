@@ -174,7 +174,6 @@ export default function DataSetPage(props){
                 {tabNumber === 2 &&
                     <Fade in={tabNumber === 2}>
                         <div className="datapage_content">
-                            <div className="datapage_upload_cont">
                             {
                                 props.DatasetDetails?.error || props.Error ? (
                                 <div className = "data_upload_cont">
@@ -204,7 +203,6 @@ export default function DataSetPage(props){
                                 </div>
                                 ) : null
                             }
-                            </div>
                             <table className="column_table">
                                 <thead>
                                     <tr>

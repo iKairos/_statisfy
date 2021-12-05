@@ -6,6 +6,7 @@ table {
 }
 
 .column_table {
+  margin-top: 1rem;
   width: 100%;
 }
 
@@ -155,6 +156,7 @@ table {
 }
 
 .datapage_upload_cont {
+  margin-top: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

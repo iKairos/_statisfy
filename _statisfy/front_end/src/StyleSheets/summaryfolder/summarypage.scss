@@ -29,8 +29,7 @@ $maxwidth: 40rem;
   }
   &_body {
     padding: 2rem;
-    height: 100vh;
-    overflow-y: scroll;
+    max-height: min-content;
     &_res {
       &_span {
         font-weight: 500;
@@ -84,7 +83,7 @@ $maxwidth: 40rem;
     &_body {
       display: flex;
       flex-direction: column;
-      height: 60vh;
+      height: 100%;
       gap: 1rem;
       &_res {
         display: grid;
