@@ -6,7 +6,7 @@ export const DisplayTable = (props) => {
     var data = props.data;
 
     if(typeof data === 'undefined'){
-      return <h1>.</h1>
+      return null;
     }else{
       const columns = Object.keys(data[1]).map((key, id)=>{
         return key;

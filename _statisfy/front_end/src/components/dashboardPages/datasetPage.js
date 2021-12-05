@@ -3,7 +3,7 @@ import { useState } from "react";
 import "../../StyleSheets/datapagefolder/datapage.css";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { Alert, AlertTitle, Collapse, Tooltip, CircularProgress } from '@mui/material';
-import { instDataPage } from "../../constants/stringConstants";
+import { instDataPage, tooltipDataset, tooltipDelimiter } from "../../constants/stringConstants";
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import TableChartIcon from '@mui/icons-material/TableChart';
 
@@ -60,18 +60,27 @@ export default function DataSetPage(props){
                             </Alert>
                         </div>
                         <div className="datapage_upload_cont">
-                            <label className="datapage_upload">
-                                <input className="datapage_upload_input" type="file" name="file" accept=".csv" 
-                                onChange={(e) => props.ChangeHandler(e)} 
-                                onClick={displayContent}/>
-                                Upload
-                            </label>
+                            <span>
+                                <b>Upload a dataset </b>
+                                <Tooltip
+                                    title={tooltipDataset}
+                                    placement="right"
+                                    arrow
+                                >
+                                    <HelpOutlineIcon fontSize='inherit' color='info'/>
+                                </Tooltip><br/>
+                                <label className="datapage_upload">
+                                    <input className="datapage_upload_input" type="file" name="file" accept=".csv" 
+                                    onChange={(e) => props.ChangeHandler(e)} 
+                                    onClick={displayContent}/>
+                                    Upload
+                                </label> 
+                            </span>
+                            <br/>
                             <span>
                                 <b>Set Delimiter </b>
                                 <Tooltip
-                                    title="A delimiter determines the partitioning of every data per column in a dataset. 
-                                    It is an indicator of separation between data points.
-                                    The default delimiter for CSV files is a comma ','."
+                                    title={tooltipDelimiter}
                                     placement="right"
                                     arrow
                                 >
