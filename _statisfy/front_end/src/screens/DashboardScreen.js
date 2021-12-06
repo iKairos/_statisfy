@@ -70,15 +70,20 @@ export default function DashboardScreen(props){
     }
 
     const nextScreen = () => {
-        if(title?.length == 0 || description?.length == 0 || typeof title === 'undefined' || typeof description === 'undefined'){
+        if(title?.length == 0 || description?.length == 0 || typeof title === 'undefined' || typeof description === 'undefined' && showActive === 1){
             setError({
                 'titlePage': "Please fill in all the details to continue."
             });
             return;
-        }
-
-        if(title.length > 200 || description.length > 250){
+        } else if(title.length > 200 || description.length > 250 && showActive === 1){
+            setError({
+                'titlePage': 'Title should be at least 200 characters and description should be at least 250 characters.'
+            });
             return;
+        } else if (showActive === 1){
+            setError({
+                'titlePage': undefined
+            });
         }
 
         if(typeof tool === 'undefined' && showActive === 2){
@@ -115,30 +120,22 @@ export default function DashboardScreen(props){
     const handleTitle = (e) => {
         setTitle(e.target.value)
 
-        if(title.length > 200){
+        if(e.target.value.length > 200){
             setError({
                 'titlePage': 'Title should not exceed 200 characters.'
             });
             return;
-        }else{
-            setError({
-                'titlePage': undefined
-            });
         }
     }
 
     const handleDescription = (e) => {
         setDescription(e.target.value);
 
-        if(description.length > 250){
+        if(e.target.value.length > 250){
             setError({
-                'titlePage': 'Description should not exceed 200 characters.'
+                'titlePage': 'Description should not exceed 250 characters.'
             });
             return;
-        }else{
-            setError({
-                'titlePage': undefined
-            });
         }
     }
 
@@ -375,6 +372,7 @@ export default function DashboardScreen(props){
                                 SaveResearchHandler = {handleCreateResearch}
                                 Delimiter = {delimiter}
                                 Author = {processed?.user.username}
+                                ResearchRes = {researchSaveRes}
 
                             />
                         </div>

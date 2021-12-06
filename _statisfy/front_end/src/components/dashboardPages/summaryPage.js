@@ -1,8 +1,14 @@
-
+import { useHistory } from "react-router";
 import "../../StyleSheets/summaryfolder/summarypage.css";
 
 export default function SummaryPage(props){
-
+    const history = useHistory();
+    
+    if(props.ResearchRes?.code === "RESEARCH_SAVE_SUCCESS"){
+        history.push(`/dashboard/${props.ResearchRes?.uuid}`);
+        history.go(0);
+        return;
+    }
     return(
        <div className="summary">
            <div className="summary_container">

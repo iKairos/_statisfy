@@ -3,8 +3,8 @@ import { Alert, Grow } from "@mui/material";
 
 
 export default function TitlePage(props){
-    
-     return(
+
+    return(
         <div className="dashboard">
             <div className ="dashboard_container">
                 <div className="dashboard_header">

@@ -2,6 +2,7 @@ from __main__ import app
 from random import randint 
 from flask import request
 from flask_cors import cross_origin
+from objects.user import User
 from objects.research import Research
 
 @app.route("/api/research/<id>")
@@ -16,16 +17,17 @@ def fetch_research(id):
         }
 
     return {
-        'research' : {
+        'data' : {
             '_id': id, 
             'research_name': research.research_name,
             'research_description': research.research_description,
             'dataset': research.dataset_directory,
             'test_type': research.test_type,
-            'authors': research.authors,
+            'authors': [{'uid': u, 'username': User(u).username} for u in research.authors],
             'columns': research.columns,
             'delimiter': research.delimiter
-        }
+        },
+        'code': "RESEARCH_GET_SUCCESS",
     }
 
 @app.route("/api/research/new", methods=["POST"])
@@ -61,7 +63,7 @@ def add_research():
             return {
                 'message': res[1],
                 'code': 'RESEARCH_SAVE_UNEXPECTED_FAILURE',
-                'type': 'danger'
+                'type': 'error'
             }
         
         return {
@@ -74,6 +76,6 @@ def add_research():
         return {
             'error': str(e),
             'code': 'RESEARCH_SAVE_INTERNAL_FAILURE',
-            'type': 'danger'
+            'type': 'error'
         }
 
