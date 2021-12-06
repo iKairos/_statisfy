@@ -80,7 +80,11 @@ export default function ResearchScreen(props){
                     <div className = "research_header_display">
                         <span className ="text_title">{researchGetRes?.data.research_name}</span>
                         {researchGetRes?.data.authors.map(author => {
-                            return <p className ="text_label"><Link to={`/profile/${author['uid']}`}>{author['username'].toUpperCase()}</Link></p>
+                            return <Link to={`/profile/${author['uid']}`}
+                                        style={{ textDecoration: 'none' }}
+                                    >
+                                        <div className="text_button">{author['username'].toUpperCase()}</div>
+                                    </Link>
                         })}
                         <span className = "text_content">
                             {researchGetRes?.data.research_description}
@@ -129,8 +133,11 @@ export default function ResearchScreen(props){
                 <div className="research_container research_body">
                     <Fade in={value === 1}>
                         <div className = "research_body_header">
-                            <span className ="text_topic">{researchGetRes?.data.test_type}</span>
-                            <p className ="text_label">STATISTICS</p>
+                            <div className = "research_body_content">
+                                <span className ="text_topic">{researchGetRes?.data.test_type}</span>
+                                <p className ="text_label">STATISTICS</p>
+                            </div>
+                           
                             <div className="research_body_tabs">
                                 <button
                                     className="research_arrow"
@@ -173,8 +180,11 @@ export default function ResearchScreen(props){
                 <div className="research_container research_body">
                     <Fade in={value === 2}>
                         <div className = "research_body_header">
-                            <span className ="text_topic">Interpretation of the Results</span>
-                            <p className ="text_label">SUMMARY</p>
+                            <div className = "research_body_header_title">
+                                <span className ="text_topic">Interpretation of the Results</span>
+                                <p className ="text_label">SUMMARY</p>
+                            </div>
+                            
                         </div>
                     </Fade>
                 </div>
@@ -184,8 +194,10 @@ export default function ResearchScreen(props){
                 <div className="research_container research_body">
                     <Fade in={value === 3}>
                         <div className = "research_body_header">
-                            <span className ="text_topic">Discussions</span>
-                            <p className ="text_label">FORUM AND THREADS</p>
+                            <div className = "research_body_header_title">
+                                <span className ="text_topic">Discussions</span>
+                                <p className ="text_label">FORUM AND THREADS</p>
+                            </div>
                         </div>
                     </Fade>
                 </div>
@@ -195,8 +207,10 @@ export default function ResearchScreen(props){
                 <div className="research_container research_body">
                     <Fade in={value === 4}>
                         <div className = "research_body_header">
-                            <span className ="text_topic">Metadata</span>
-                            <p className ="text_label">RESEARCH DETAILS</p>
+                            <div className = "research_body_header_title">
+                                <span className ="text_topic">Metadata</span>
+                                <p className ="text_label">RESEARCH DETAILS</p>
+                            </div>
                         </div>
                     </Fade>
                 </div>
@@ -206,8 +220,10 @@ export default function ResearchScreen(props){
                 <div className="research_container research_body">
                     <Fade in={value === 5}>
                     <div className = "research_body_header">
-                        <span className ="text_topic">Settings</span>
-                        <p className ="text_label">EDIT RESEARCH DETAILS</p>
+                        <div className = "research_body_header_title">
+                            <span className ="text_topic">Settings</span>
+                            <p className ="text_label">EDIT RESEARCH DETAILS</p>
+                        </div>
                     </div>
                     </Fade>
                 </div>

@@ -41,7 +41,7 @@ $maxwidth: 40rem;
 
       word-wrap: break-word;
       overflow: hidden;
-      padding: 1rem;
+      padding: 0.5rem;
       padding-left: 1rem;
     }
   }
@@ -55,17 +55,25 @@ $maxwidth: 40rem;
       overflow: hidden;
       width: 85vw;
       border-bottom: 1px solid $white1;
+
+      &_title {
+        padding: 1rem;
+      }
     }
     &_tabs {
       display: grid;
       grid-template-columns: 2rem 1fr 2rem;
       width: 100%;
     }
+    &_content {
+      padding: 1rem;
+    }
   }
 }
 
 .text {
   &_title {
+    padding-left: 0.5rem;
     font-weight: bold;
     font-size: 2rem;
     color: $black;
@@ -74,12 +82,25 @@ $maxwidth: 40rem;
     color: $gray1;
   }
   &_content {
+    padding-left: 0.5rem;
     color: $black;
   }
   &_topic {
     font-size: 1.5rem;
     font-weight: 600;
     color: $gray1;
+  }
+  &_button {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    color: $gray1;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    max-width: min-content;
+    &:hover {
+      background-color: $gray1;
+      color: $white1;
+    }
   }
 }
 
