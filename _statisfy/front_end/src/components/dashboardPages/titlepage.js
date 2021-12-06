@@ -1,16 +1,14 @@
-import { Alert, AlertTitle, Grow } from "@mui/material";
+import { Alert, Grow } from "@mui/material";
 
 
 
 export default function TitlePage(props){
     
-    // const attributes = props.attribute
- 
      return(
         <div className="dashboard">
             <div className ="dashboard_container">
                 <div className="dashboard_header">
-                    <h3>Enter Title and Description</h3>
+                    <h3>Describe Your Research</h3>
                 </div>
                 <div className="res">
                     {props.Error && (

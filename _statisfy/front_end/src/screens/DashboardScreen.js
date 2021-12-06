@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { processUserToken } from "../actions/userActions";
 import { processDataset } from "../actions/datasetActions";
 import { saveResearch } from "../actions/researchAction";
-import { Fade, Skeleton, Stepper, Step, StepLabel } from "@mui/material";
+import { Fade, Skeleton, Stepper, Step, StepLabel, Grow, Alert } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import ScienceIcon from '@mui/icons-material/Science';
 import InsightsIcon from '@mui/icons-material/Insights';
@@ -19,7 +19,8 @@ import FileUploadIcon from '@mui/icons-material/FileUpload';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import clsx from 'clsx';
-import { stepsString } from "../constants/stringConstants";
+import { status500, stepsString } from "../constants/stringConstants";
+import Stack from '@mui/material/Stack';
 
 export default function DashboardScreen(props){
     // ======= FUNCTION-WIDE VARIABLES ======= //
@@ -33,7 +34,7 @@ export default function DashboardScreen(props){
     const [delimiter, setDelimiter] = useState(',');
 
     // Utils variables
-    const [error, setError] = useState({});
+    const [_error, setError] = useState({});
     const [tags, setTags] = useState([]);
     const [methodChosen, setMethodChosen] = useState();
     const [showActive, setShowActive] = useState(1);
@@ -47,7 +48,7 @@ export default function DashboardScreen(props){
     const dataSelector = useSelector((state) => 
         state.decodedUserToken
     );
-    const {processed} = dataSelector;
+    const { error, processed } = dataSelector;
 
     if(props.token && processed?.code === "TOKEN_FAIL"){
         localStorage.removeItem('token');
@@ -84,6 +85,16 @@ export default function DashboardScreen(props){
             setError({
                 'toolPage': 'Please select a tool before proceeding.'
             })
+            return;
+        }
+
+        if(typeof file === 'undefined' && showActive === 3){
+            setError({
+                'datasetPage': {
+                    'code': 'DATASET_IS_NULL',
+                    'message': 'Please upload a file before proceeding.'
+                }
+            });
             return;
         }
         
@@ -161,9 +172,9 @@ export default function DashboardScreen(props){
         state.datasetDetails
     );
     const {loading, datasetDetails} = fileDetailsSelector;
-    
+
     const changeHandler = (e) => {
-        if (e.target.files.length != 0){
+        if (e.target.files.length !== 0){
             var filename = e.target.files[0].name
 
             const extension = filename.split('.').pop();
@@ -271,7 +282,7 @@ export default function DashboardScreen(props){
     if(processed?.code === 'TOKEN_SUCCESS'){
         return(
             <div className = "overall_div">
-                <Fade in={true} {...(true ? { timeout: 1400 } : {})}>
+                <Fade in={true} {...(true ? { timeout: 1200 } : {})}>
                     <div className="stepper_cont">
                         <Stepper activeStep={showActive-1} alternativeLabel>
                             {stepsString.map((label) => (
@@ -293,7 +304,7 @@ export default function DashboardScreen(props){
                             <TitlePage
                                 Title = {title}
                                 HandleTitle = {handleTitle}
-                                Error = {error.titlePage}
+                                Error = {_error.titlePage}
                                 Description = {description}
                                 HandleDescription = {handleDescription}
                             />
@@ -306,7 +317,7 @@ export default function DashboardScreen(props){
                     <Fade in={showActive === 2}>
                         <div className = "component_div">
                             <ToolPage
-                                Error = {error.toolPage}
+                                Error = {_error.toolPage}
                                 SetToolChosen = {setToolChosen}
                             />
                         </div>
@@ -326,7 +337,7 @@ export default function DashboardScreen(props){
                                     'name': file.name,
                                     'size': file.size
                                 } : undefined}
-                                Error = {error.datasetPage}
+                                Error = {_error.datasetPage}
                                 Loading = {loading}
                             />
                         </div>
@@ -340,7 +351,7 @@ export default function DashboardScreen(props){
                                 MethodChosen = {methodChosen}
                                 Tags = {tags}
                                 DisplayMethodChosen = {displayMethodChosen}
-                                Error = {error.statPage}
+                                Error = {_error.statPage}
                             />
                         </div>
                     </Fade>
@@ -382,14 +393,21 @@ export default function DashboardScreen(props){
         return(
             <Redirect to={{pathname: "/signIn", message: "You need to log in to access this page. Please log in first or create an account using the Sign Up page."}}></Redirect>
         )
+    }else if(typeof processed === "string"){
+        return(
+            <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
+                <Alert variant="outlined" severity="error">{status500}</Alert>
+            </Grow>
+        )
     }else{
         return(
-            <>
-                <Skeleton variant="text" width={300} height={40}/>
-                <Skeleton variant="text" width={400} height={40}/>
-                <Skeleton variant="text" width={500} height={40}/>
-                <Skeleton variant="rectangular" width={500} height={350} />
-            </>
+            <Stack spacing={1}>
+                <Skeleton variant="text" width={200} height={40} animation="wave"/>
+                <Skeleton variant="text" width={300} height={40} animation="wave"/>
+                <Skeleton variant="text" width={400} height={40} animation="wave"/>
+                <Skeleton variant="text" width={500} height={40} animation="wave"/>
+                <Skeleton variant="rectangular" width={500} height={350} animation="wave" />
+            </Stack>
         );
     }
 }

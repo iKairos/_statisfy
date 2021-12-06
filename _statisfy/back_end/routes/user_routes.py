@@ -86,7 +86,7 @@ def register_user():
                 return {
                     'message': res[1],
                     'code': 'REGISTER_UNEXPECTED_FAILURE',
-                    'type': 'danger'
+                    'type': 'error'
                 }
 
             return {
@@ -98,5 +98,5 @@ def register_user():
             return {
                 'error': str(e),
                 'code': 'REGISTER_INTERNAL_FAILURE',
-                'type': 'danger'
+                'type': 'error'
             }

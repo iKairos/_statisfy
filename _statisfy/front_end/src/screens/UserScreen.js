@@ -5,6 +5,7 @@ import { Redirect, useParams } from "react-router";
 import { getUser, processUserToken } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { Alert, Grow, Skeleton } from "@mui/material";
 
 export default function UserScreen(props){
     const { id } = useParams();
@@ -56,7 +57,21 @@ export default function UserScreen(props){
         return(
             <Redirect to={{pathname: "/signIn", message: "You need to log in to access this page. Please log in first or create an account using the Sign Up page."}}></Redirect>
         )
+    }else if(typeof processed === 'string'){
+        return(
+            <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
+                <Alert variant="outlined" severity="error">Request from server returned an error status 500. The server might be offline or down, please try again later.</Alert>
+            </Grow>
+        )
     }else{
-        return(<p>Loading</p>);
+        return(
+            <>
+                <Skeleton variant="circular" width={100} height={100} animation="wave"/>
+                <Skeleton variant="text" width={300} height={40} animation="wave"/>
+                <Skeleton variant="text" width={400} height={40} animation="wave"/>
+                <Skeleton variant="text" width={500} height={40} animation="wave"/>
+                <Skeleton variant="rectangular" width={500} height={350} animation="wave" />
+            </>
+        );
     }
 }
