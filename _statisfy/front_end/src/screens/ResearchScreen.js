@@ -7,19 +7,22 @@ import Box from '@mui/material/Box';
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getResearch } from "../actions/researchAction";
+import { useState } from "react";
 import { Alert, AlertTitle, Fade, Grow, Skeleton } from "@mui/material";
 import TableChartIcon from '@mui/icons-material/TableChart';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import CalculateIcon from '@mui/icons-material/Calculate';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { processUserToken } from "../actions/userActions";
 import { Link } from "react-router-dom";
 
 
 export default function ResearchScreen(props){
     const { id } = useParams();
-    const [value, setValue] = React.useState('one');
-    const [contentPage, setContentPage] = React.useState('one');
+    const [value, setValue] = useState(1);
+    const [contentPage, setContentPage] = useState(1);
 
     const dispatch = useDispatch();
     const dataSelector = useSelector((state) => 
@@ -35,6 +38,19 @@ export default function ResearchScreen(props){
     const switchTabs = (event, newValue) => {
         setValue(newValue);
     };
+    const nextTab = function(){
+        setValue(value+1);
+    };
+    const prevTab = function(){
+        setValue(value-1);
+    };
+    const nextContent = function(){
+        setContentPage(contentPage+1);
+    };
+    const prevContent = function(){
+        setContentPage(contentPage-1);
+    };
+
 
     const switchContentPage = (event, newValue) => {
         setContentPage(newValue);
@@ -71,55 +87,91 @@ export default function ResearchScreen(props){
                         </span>
                     </div>
                     <div className = "research_header_tabs">
-                        <Box sx={{ width: '100%' }}>
+                        <button
+                            className="research_arrow"
+                            onClick={prevTab}
+                            disabled = {value === 1 ? true : false}
+                        >
+                            <ArrowBackIosNewIcon/>
+                        </button>
+                        <Box sx = {{ width:'65vw' }}>
+                            
                             <Tabs
                                 value={value}
                                 onChange={switchTabs}
                                 textColor="secondary"
                                 indicatorColor="secondary"
-                                aria-label="secondary tabs example"
+                                aria-label="scrollable tabs"
+                                variant="scrollable"
+                                scrollButtons="auto"
                             >
-                                <Tab value="one" label="Computation" />
-                                <Tab value="two" label="Interpretation" />
-                                <Tab value="three" label="Discussions" />
-                                <Tab value="four" label="Metadata" />
+                                
+                                <Tab value={1} label="Computation"/>
+                                <Tab value={2} label="Interpretation" />
+                                <Tab value={3} label="Discussions" />
+                                <Tab value={4} label="Metadata" />
                                 {
                                     isAuthor() &&
-                                    <Tab value="five" label="Settings" />
+                                    <Tab value={5} label="Settings"/>
                                 }
                             </Tabs>
                         </Box>
+                        <button
+                            className="research_arrow"
+                            onClick={nextTab}
+                            disabled = {value === 5 ? true : false}
+                        >
+                            <ArrowForwardIosIcon/>
+                        </button>
                     </div>
                 </div>
-                {value === "one" &&
+                {value === 1 &&
                 <div className="research_container research_body">
-                    <Fade in={value === "one"}>
+                    <Fade in={value === 1}>
                         <div className = "research_body_header">
                             <span className ="text_topic">{researchGetRes?.data.test_type}</span>
                             <p className ="text_label">STATISTICS</p>
-
-                        <Box sx={{ width: '100%' }}>
-                            <Tabs
-                                value={contentPage}
-                                onChange={switchContentPage}
-                                textColor="secondary"
-                                indicatorColor="secondary"
-                                aria-label="secondary tabs example"
-                            >
-                                <Tab value="one" label="Dataset" icon={<TableChartIcon/>}/>
-                                <Tab value="two" label="Graphs" icon={<TimelineIcon/>}/>
-                                <Tab value="four" label="Variables" icon={<CalculateIcon/>}/>
-                                <Tab value="three" label="Results" icon={<DoneAllIcon/>}/>
-                            </Tabs>
-                        </Box>
+                            <div className="research_body_tabs">
+                                <button
+                                    className="research_arrow"
+                                    onClick={prevContent}
+                                    disabled = {contentPage === 1 ? true : false}
+                                >
+                                    <ArrowBackIosNewIcon/>
+                                </button>
+                                <Box sx = {{ width:'65vw' }}>
+                                    <Tabs
+                                        value={contentPage}
+                                        onChange={switchContentPage}
+                                        textColor="secondary"
+                                        indicatorColor="secondary"
+                                        aria-label="scrollable tabs"
+                                        variant="scrollable"
+                                        scrollButtons="auto"
+                                    >
+                                        <Tab value={1} label="Dataset" icon={<TableChartIcon/>}/>
+                                        <Tab value={2} label="Graphs" icon={<TimelineIcon/>} />
+                                        <Tab value={3} label="Variables" icon={<CalculateIcon/>} />
+                                        <Tab value={4} label="Results" icon={<DoneAllIcon/>} />
+                                    </Tabs>
+                                </Box>
+                                <button
+                                    className="research_arrow"
+                                    onClick={nextContent}
+                                    disabled = {contentPage === 4 ? true : false}
+                                >
+                                    <ArrowForwardIosIcon/>
+                                </button>
+                            </div>
+                        
                         </div>  
                     </Fade>
                 </div>
                 }
 
-                {value === "two" &&
+                {value === 2 &&
                 <div className="research_container research_body">
-                    <Fade in={value === "two"}>
+                    <Fade in={value === 2}>
                         <div className = "research_body_header">
                             <span className ="text_topic">Interpretation of the Results</span>
                             <p className ="text_label">SUMMARY</p>
@@ -128,9 +180,9 @@ export default function ResearchScreen(props){
                 </div>
                 }
 
-                {value === "three" &&
+                {value === 3 &&
                 <div className="research_container research_body">
-                    <Fade in={value === "three"}>
+                    <Fade in={value === 3}>
                         <div className = "research_body_header">
                             <span className ="text_topic">Discussions</span>
                             <p className ="text_label">FORUM AND THREADS</p>
@@ -139,9 +191,9 @@ export default function ResearchScreen(props){
                 </div>
                 }
 
-                {value === "four" &&
+                {value === 4 &&
                 <div className="research_container research_body">
-                    <Fade in={value === "four"}>
+                    <Fade in={value === 4}>
                         <div className = "research_body_header">
                             <span className ="text_topic">Metadata</span>
                             <p className ="text_label">RESEARCH DETAILS</p>
@@ -150,9 +202,9 @@ export default function ResearchScreen(props){
                 </div>
                 }
 
-                {value === "five" &&
+                {value === 5 &&
                 <div className="research_container research_body">
-                    <Fade in={value === "five"}>
+                    <Fade in={value === 5}>
                     <div className = "research_body_header">
                         <span className ="text_topic">Settings</span>
                         <p className ="text_label">EDIT RESEARCH DETAILS</p>

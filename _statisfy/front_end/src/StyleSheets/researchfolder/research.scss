@@ -15,7 +15,12 @@ $maxwidth: 40rem;
   gap: 2rem;
 
   padding-top: 2rem;
-
+  &_arrow {
+    width: 100%;
+    display: block;
+    border: none;
+    background-color: transparent;
+  }
   &_container {
     display: grid;
     grid-template-rows: 1fr;
@@ -27,10 +32,15 @@ $maxwidth: 40rem;
     height: 100%;
     width: 85vw;
     &_tabs {
-      padding-left: 2rem;
+      display: grid;
+      grid-template-columns: 2rem 1fr 2rem;
     }
     &_display {
       border-bottom: 1px solid $white1;
+      width: 100%;
+
+      word-wrap: break-word;
+      overflow: hidden;
       padding: 1rem;
       padding-left: 1rem;
     }
@@ -43,9 +53,13 @@ $maxwidth: 40rem;
     grid-template-columns: 1fr;
     &_header {
       overflow: hidden;
-      padding: 1rem;
       width: 85vw;
       border-bottom: 1px solid $white1;
+    }
+    &_tabs {
+      display: grid;
+      grid-template-columns: 2rem 1fr 2rem;
+      width: 100%;
     }
   }
 }
@@ -71,6 +85,9 @@ $maxwidth: 40rem;
 
 @media screen and (min-width: 600px) {
   .research {
+    &_arrow {
+      display: none;
+    }
     &_container {
       display: grid;
       grid-template-rows: 1fr;
@@ -79,10 +96,17 @@ $maxwidth: 40rem;
       background-color: white;
     }
     &_header {
-      height: 30vh;
+      height: 100%;
       width: 70vw;
       &_tabs {
-        padding-left: 2rem;
+        padding-left: 1rem;
+
+        &_active {
+          display: none;
+        }
+        &_inactive {
+          display: none;
+        }
       }
       &_display {
         border-bottom: 1px solid $white1;
