@@ -7,12 +7,13 @@ import Box from '@mui/material/Box';
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getResearch } from "../actions/researchAction";
-import { Alert, AlertTitle, Grow, Skeleton } from "@mui/material";
+import { Alert, AlertTitle, Fade, Grow, Skeleton } from "@mui/material";
 import TableChartIcon from '@mui/icons-material/TableChart';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import { processUserToken } from "../actions/userActions";
+import { Link } from "react-router-dom";
 
 
 export default function ResearchScreen(props){
@@ -62,7 +63,9 @@ export default function ResearchScreen(props){
                 <div className = "research_container research_header">
                     <div className = "research_header_display">
                         <span className ="text_title">{researchGetRes?.data.research_name}</span>
-                        <p className ="text_label">{researchGetRes?.data.authors.map(author => author['username'].toUpperCase())}</p>
+                        {researchGetRes?.data.authors.map(author => {
+                            return <p className ="text_label"><Link to={`/profile/${author['uid']}`}>{author['username'].toUpperCase()}</Link></p>
+                        })}
                         <span className = "text_content">
                             {researchGetRes?.data.research_description}
                         </span>
@@ -90,62 +93,71 @@ export default function ResearchScreen(props){
                 </div>
                 {value === "one" &&
                 <div className="research_container research_body">
-                    <div className = "research_body_header">
-                        <span className ="text_topic">{researchGetRes?.data.test_type}</span>
-                        <p className ="text_label">STATISTICS</p>
+                    <Fade in={value === "one"}>
+                        <div className = "research_body_header">
+                            <span className ="text_topic">{researchGetRes?.data.test_type}</span>
+                            <p className ="text_label">STATISTICS</p>
 
-                    <Box sx={{ width: '100%' }}>
-                        <Tabs
-                            value={contentPage}
-                            onChange={switchContentPage}
-                            textColor="secondary"
-                            indicatorColor="secondary"
-                            aria-label="secondary tabs example"
-                        >
-                            <Tab value="one" label="Dataset" icon={<TableChartIcon/>}/>
-                            <Tab value="two" label="Graphs" icon={<TimelineIcon/>}/>
-                            <Tab value="four" label="Variables" icon={<CalculateIcon/>}/>
-                            <Tab value="three" label="Results" icon={<DoneAllIcon/>}/>
-                        </Tabs>
-                    </Box>
-                    </div>
-                    
+                        <Box sx={{ width: '100%' }}>
+                            <Tabs
+                                value={contentPage}
+                                onChange={switchContentPage}
+                                textColor="secondary"
+                                indicatorColor="secondary"
+                                aria-label="secondary tabs example"
+                            >
+                                <Tab value="one" label="Dataset" icon={<TableChartIcon/>}/>
+                                <Tab value="two" label="Graphs" icon={<TimelineIcon/>}/>
+                                <Tab value="four" label="Variables" icon={<CalculateIcon/>}/>
+                                <Tab value="three" label="Results" icon={<DoneAllIcon/>}/>
+                            </Tabs>
+                        </Box>
+                        </div>  
+                    </Fade>
                 </div>
                 }
 
                 {value === "two" &&
                 <div className="research_container research_body">
-                    <div className = "research_body_header">
-                        <span className ="text_topic">Interpretation of the Results</span>
-                        <p className ="text_label">SUMMARY</p>
-                    </div>
+                    <Fade in={value === "two"}>
+                        <div className = "research_body_header">
+                            <span className ="text_topic">Interpretation of the Results</span>
+                            <p className ="text_label">SUMMARY</p>
+                        </div>
+                    </Fade>
                 </div>
                 }
 
                 {value === "three" &&
                 <div className="research_container research_body">
-                    <div className = "research_body_header">
-                        <span className ="text_topic">Discussions</span>
-                        <p className ="text_label">FORUM AND THREADS</p>
-                    </div>
+                    <Fade in={value === "three"}>
+                        <div className = "research_body_header">
+                            <span className ="text_topic">Discussions</span>
+                            <p className ="text_label">FORUM AND THREADS</p>
+                        </div>
+                    </Fade>
                 </div>
                 }
 
                 {value === "four" &&
                 <div className="research_container research_body">
-                    <div className = "research_body_header">
-                        <span className ="text_topic">Metadata</span>
-                        <p className ="text_label">RESEARCH DETAILS</p>
-                    </div>
+                    <Fade in={value === "four"}>
+                        <div className = "research_body_header">
+                            <span className ="text_topic">Metadata</span>
+                            <p className ="text_label">RESEARCH DETAILS</p>
+                        </div>
+                    </Fade>
                 </div>
                 }
 
                 {value === "five" &&
                 <div className="research_container research_body">
+                    <Fade in={value === "five"}>
                     <div className = "research_body_header">
                         <span className ="text_topic">Settings</span>
                         <p className ="text_label">EDIT RESEARCH DETAILS</p>
                     </div>
+                    </Fade>
                 </div>
                 }
             </div>
