@@ -4,6 +4,8 @@ from flask import request
 from flask_cors import cross_origin
 from objects.user import User
 from objects.research import Research
+from os.path import dirname, realpath
+import os
 
 @app.route("/api/research/<id>")
 @cross_origin()
@@ -25,7 +27,8 @@ def fetch_research(id):
             'test_type': research.test_type,
             'authors': [{'uid': u, 'username': User(u).username} for u in research.authors],
             'columns': research.columns,
-            'delimiter': research.delimiter
+            'delimiter': research.delimiter,
+            'created_at': research.created_at
         },
         'code': "RESEARCH_GET_SUCCESS",
     }
@@ -34,7 +37,7 @@ def fetch_research(id):
 @cross_origin()
 def add_research():
     try:
-        data = request.get_json()
+        data = request.form
 
         uuid = randint(10000000, 99999999)
             
@@ -48,15 +51,22 @@ def add_research():
             if not research.is_registered:
                 break
 
+        file = request.files['dataset']
+
+        UPLOADS_PATH = os.path.join(dirname(realpath(__file__)), '..\\temp\\datasets\\'+ f"{uuid}_{file.filename}")
+        
+        file.save(UPLOADS_PATH)
+
         res = Research.register_research(
             _id = uuid,
             research_name = data['research_name'],
             research_description = data['research_description'],
-            dataset = data['dataset'],
+            dataset = UPLOADS_PATH,
             test_type = data['test_type'],
-            columns = data['columns'],
+            columns = data['columns'].split(','),
             delimiter = data['delimiter'],
-            author = data['author']
+            author = data['author'],
+            created_at = data['created_at']
         )
 
         if not res[0]:

@@ -140,15 +140,17 @@ export default function DashboardScreen(props){
     }
 
     const handleCreateResearch = () => {
-        dispatch(saveResearch({
-            'research_name': title,
-            'research_description': description,
-            'dataset': 'temp[TO BE FIXED]',
-            'test_type': methodChosen,
-            'columns': columns,
-            'delimiter': delimiter,
-            'author': processed?.user._id
-        }));
+        const formData = new FormData();
+        formData.append('research_name', title);
+        formData.append('research_description', description);
+        formData.append('test_type', methodChosen);
+        formData.append('columns', columns);
+        formData.append('delimiter', delimiter);
+        formData.append('author', processed?.user._id);
+        formData.append('created_at', new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, ''));
+        formData.append('dataset', file);
+
+        dispatch(saveResearch(formData));
     }
 
     // ======= CALLBACKS ======= //

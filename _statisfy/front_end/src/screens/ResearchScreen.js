@@ -16,15 +16,19 @@ import CalculateIcon from '@mui/icons-material/Calculate';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { processUserToken } from "../actions/userActions";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { DisplayTable } from "../components/DisplayTable";
 
+import createHistory from 'history/createBrowserHistory';
 
 export default function ResearchScreen(props){
     const { id } = useParams();
+    const location = useLocation();
     const [value, setValue] = useState(1);
     const [contentPage, setContentPage] = useState(1);
+    const [message, setMessage] = useState();
 
     const dispatch = useDispatch();
     const dataSelector = useSelector((state) => 
@@ -63,7 +67,7 @@ export default function ResearchScreen(props){
             return author['uid'] === processed?.user?._id;
         });
 
-        return x[0];
+        return x.includes(true);
     }
 
     if(props.token && processed?.code === "TOKEN_FAIL"){
@@ -73,7 +77,14 @@ export default function ResearchScreen(props){
     React.useEffect(() => {
         dispatch(processUserToken(props.token));
         dispatch(getResearch(id));
-    }, []);
+
+        if(location.state){
+            setMessage(location.state.message);
+        }
+
+        const history = createHistory();
+        history.replace();
+    }, [location]);
 
     if(researchGetRes?.code === 'RESEARCH_GET_SUCCESS'){
         return(

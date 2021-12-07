@@ -1,11 +1,33 @@
+import { Backdrop, CircularProgress } from "@mui/material";
+import { useState } from "react";
 import { useHistory } from "react-router";
 import "../../StyleSheets/summaryfolder/summarypage.css";
 
 export default function SummaryPage(props){
     const history = useHistory();
+    const [open, setOpen] = useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleToggle = () => {
+        setOpen(!open);
+    };
+
+    const saveResearch = () => {
+        handleToggle();
+        props.SaveResearchHandler();
+    }
     
     if(props.ResearchRes?.code === "RESEARCH_SAVE_SUCCESS"){
-        history.push(`/dashboard/${props.ResearchRes?.uuid}`);
+        history.push({
+            pathname: `/dashboard/${props.ResearchRes?.uuid}`,
+            state: {
+                message: {
+                    'title': "Research created successfully!",
+                    'body': "You may now view and customize your research. Proceed by pressing the compute button to generate analytics and interpretation."
+                }
+            }
+        });
         history.go(0);
         return;
     }
@@ -52,9 +74,15 @@ export default function SummaryPage(props){
                     
                     </div>
                     <div className="summary_button_cont">
-                        <button className="summary_button" onClick={props.SaveResearchHandler}>Create Research</button>
+                        <button className="summary_button" onClick={saveResearch}>Create Research</button>
                     </div>
                     
+                    <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open={open}
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
                 </div>
                 
            </div>

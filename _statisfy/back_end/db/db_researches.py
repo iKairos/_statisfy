@@ -14,7 +14,8 @@ class ResearchesBackbone(DatabaseBackbone):
                 research_description = kwargs['research_description'],
                 dataset = kwargs['dataset'],
                 test_type = kwargs['test_type'],
-                delimiter = kwargs['delimiter']
+                delimiter = kwargs['delimiter'],
+                created_at = kwargs['created_at']
             )
 
             for col in kwargs['columns']:
@@ -102,6 +103,18 @@ class ResearchesBackbone(DatabaseBackbone):
                 "researches",
                 _id = rid
             )[5]
+
+            return fetched
+        except Exception as e:
+            print(e)
+            return False
+
+    def get_created_at(self, rid):
+        try:
+            fetched = self.fetch_row(
+                "researches",
+                _id = rid
+            )[6]
 
             return fetched
         except Exception as e:
