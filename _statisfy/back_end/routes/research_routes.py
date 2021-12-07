@@ -61,7 +61,7 @@ def add_research():
             research_description = data['research_description'],
             dataset = new_directory,
             test_type = data['test_type'],
-            columns = data['columns'],
+            columns = data['columns'].split(','),
             delimiter = data['delimiter'],
             author = data['author'],
             created_at = data['created_at']

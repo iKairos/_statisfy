@@ -78,13 +78,9 @@ export default function ResearchScreen(props){
         if(location.state){
             setMessage(location.state.message);
         }
-        console.log(message)
+
         const history = createHistory();
-        if (history.location.state && history.location.state.transaction) {
-            let state = { ...history.location.state };
-            delete state.transaction;
-            history.replace({ ...history.location, state });
-        }
+        history.replace();
     }, [location]);
 
     if(researchGetRes?.code === 'RESEARCH_GET_SUCCESS'){
