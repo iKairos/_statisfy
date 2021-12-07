@@ -4,6 +4,8 @@ from flask import request
 from flask_cors import cross_origin
 from objects.user import User
 from objects.research import Research
+from os.path import dirname, realpath
+import os
 
 @app.route("/api/research/<id>")
 @cross_origin()
@@ -48,18 +50,18 @@ def add_research():
 
             if not research.is_registered:
                 break
-        
+
         file = request.files['dataset']
 
-        new_directory = f"temp/datasets/{uuid}_{file.filename}"
+        UPLOADS_PATH = os.path.join(dirname(realpath(__file__)), '..\\temp\\datasets\\'+ f"{uuid}_{file.filename}")
         
-        file.save(new_directory)
+        file.save(UPLOADS_PATH)
 
         res = Research.register_research(
             _id = uuid,
             research_name = data['research_name'],
             research_description = data['research_description'],
-            dataset = new_directory,
+            dataset = UPLOADS_PATH,
             test_type = data['test_type'],
             columns = data['columns'].split(','),
             delimiter = data['delimiter'],
