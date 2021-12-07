@@ -78,7 +78,7 @@ export default function ResearchScreen(props){
         if(location.state){
             setMessage(location.state.message);
         }
-
+        console.log(message)
         const history = createHistory();
         if (history.location.state && history.location.state.transaction) {
             let state = { ...history.location.state };
@@ -95,7 +95,10 @@ export default function ResearchScreen(props){
                         {
                             message &&
                             <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
-                                <Alert variant="outlined" severity="info">{ message }</Alert>
+                                <Alert variant="outlined" severity="info">
+                                    <AlertTitle><b>{message.title}</b></AlertTitle>
+                                    { message.body }
+                                </Alert>
                             </Grow>
                         }
                         <span className ="text_title">{researchGetRes?.data.research_name}</span>
