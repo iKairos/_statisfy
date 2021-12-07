@@ -91,7 +91,7 @@ export default function ResearchScreen(props){
                         {
                             message &&
                             <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
-                                <Alert variant="outlined" severity="info">
+                                <Alert variant="outlined" severity="success">
                                     <AlertTitle><b>{message.title}</b></AlertTitle>
                                     { message.body }
                                 </Alert>
