@@ -91,6 +91,15 @@ export default function ResearchScreen(props){
             <div className = "research">
                 <div className = "research_header_container">
                     <div className = "research_heading">
+                        {
+                            message &&
+                            <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
+                                <Alert variant="outlined" severity="success">
+                                    <AlertTitle><b>{message.title}</b></AlertTitle>
+                                    { message.body }
+                                </Alert>
+                            </Grow>
+                        }
                         <span className ="text_title">{researchGetRes?.data.research_name}</span>
                         {researchGetRes?.data.authors.map(author => {
                             return <p className="text_button">
