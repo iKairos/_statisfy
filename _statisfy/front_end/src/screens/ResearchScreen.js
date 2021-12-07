@@ -16,13 +16,16 @@ import CalculateIcon from '@mui/icons-material/Calculate';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { processUserToken } from "../actions/userActions";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import createHistory from 'history/createBrowserHistory';
 
 export default function ResearchScreen(props){
     const { id } = useParams();
+    const location = useLocation();
     const [value, setValue] = useState(1);
     const [contentPage, setContentPage] = useState(1);
+    const [message, setMessage] = useState();
 
     const dispatch = useDispatch();
     const dataSelector = useSelector((state) => 
@@ -61,7 +64,7 @@ export default function ResearchScreen(props){
             return author['uid'] === processed?.user?._id;
         });
 
-        return x[0];
+        return x.includes(true);
     }
 
     if(props.token && processed?.code === "TOKEN_FAIL"){
@@ -71,13 +74,30 @@ export default function ResearchScreen(props){
     React.useEffect(() => {
         dispatch(processUserToken(props.token));
         dispatch(getResearch(id));
-    }, []);
+
+        if(location.state){
+            setMessage(location.state.message);
+        }
+
+        const history = createHistory();
+        if (history.location.state && history.location.state.transaction) {
+            let state = { ...history.location.state };
+            delete state.transaction;
+            history.replace({ ...history.location, state });
+        }
+    }, [location]);
 
     if(researchGetRes?.code === 'RESEARCH_GET_SUCCESS'){
         return(
             <div className = "research">
                 <div className = "research_container research_header">
                     <div className = "research_header_display">
+                        {
+                            message &&
+                            <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
+                                <Alert variant="outlined" severity="info">{ message }</Alert>
+                            </Grow>
+                        }
                         <span className ="text_title">{researchGetRes?.data.research_name}</span>
                         {researchGetRes?.data.authors.map(author => {
                             return <Link to={`/profile/${author['uid']}`}

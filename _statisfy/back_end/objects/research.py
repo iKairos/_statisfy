@@ -38,6 +38,10 @@ class Research:
     @property
     def delimiter(self):
         return self.db.get_delimiter(self.rid)
+    
+    @property
+    def created_at(self):
+        return self.db.get_created_at(self.rid)
 
     def set_research_name(self, new_name):
         return self.db.set_research_name(self.rid, new_name)
@@ -68,5 +72,6 @@ class Research:
             test_type = kwargs['test_type'],
             columns = kwargs['columns'],
             author = kwargs['author'],
-            delimiter = kwargs['delimiter']
+            delimiter = kwargs['delimiter'],
+            created_at = kwargs['created_at']
         )

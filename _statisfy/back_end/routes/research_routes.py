@@ -25,7 +25,8 @@ def fetch_research(id):
             'test_type': research.test_type,
             'authors': [{'uid': u, 'username': User(u).username} for u in research.authors],
             'columns': research.columns,
-            'delimiter': research.delimiter
+            'delimiter': research.delimiter,
+            'created_at': research.created_at
         },
         'code': "RESEARCH_GET_SUCCESS",
     }
@@ -34,7 +35,7 @@ def fetch_research(id):
 @cross_origin()
 def add_research():
     try:
-        data = request.get_json()
+        data = request.form
 
         uuid = randint(10000000, 99999999)
             
@@ -47,16 +48,23 @@ def add_research():
 
             if not research.is_registered:
                 break
+        
+        file = request.files['dataset']
+
+        new_directory = f"temp/datasets/{uuid}_{file.filename}"
+        
+        file.save(new_directory)
 
         res = Research.register_research(
             _id = uuid,
             research_name = data['research_name'],
             research_description = data['research_description'],
-            dataset = data['dataset'],
+            dataset = new_directory,
             test_type = data['test_type'],
             columns = data['columns'],
             delimiter = data['delimiter'],
-            author = data['author']
+            author = data['author'],
+            created_at = data['created_at']
         )
 
         if not res[0]:
