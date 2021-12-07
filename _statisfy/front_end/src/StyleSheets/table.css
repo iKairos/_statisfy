@@ -1,7 +1,16 @@
 table {
   font-family: Arial, Helvetica, sans-serif;
+
+  width: 100%;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
   border-collapse: collapse;
 }
+
 .table_input {
   background-color: transparent;
   color: white;
@@ -12,6 +21,8 @@ table {
   width: min-content;
   outline: none;
 }
+.table_width {
+}
 ::placeholder {
   color: white;
   opacity: 1;
@@ -19,9 +30,9 @@ table {
 
 table td,
 table th {
-  width: 5rem;
   text-align: center;
   padding: 8px;
+  border: 1px solid black;
 }
 
 table tr:nth-child(even) {

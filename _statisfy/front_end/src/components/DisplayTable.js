@@ -1,6 +1,6 @@
 import React from 'react'
 import MOCK_DATA from './MOCK_DATA.json'
-import '../StyleSheets/table.css'
+import  "../StyleSheets/tablesFolder/tables.css";
 
 export const DisplayTable = (props) => {
     var data = props.data;
@@ -20,16 +20,17 @@ export const DisplayTable = (props) => {
       }
 
       return (
+        <div className="table_width">
         <table>
           <thead>
               <tr>
                   {
                     props.Header? (
-                      columns.map(i => {return <th>{i}</th>})
+                      columns.map(i => {return <th className="column_table_header">{i}</th>})
                     ): (
                       
                       columns.map(i => {return (
-                        <th><input type="text" className="table_input" placeholder="Column"></input></th>
+                        <th className="column_table_header"><input type="text" className="table_input" placeholder="Column"></input></th>
                       )})
                     )
                    
@@ -39,7 +40,12 @@ export const DisplayTable = (props) => {
           <tbody>
             {
               !props.Header? (
-                columns.map(i => {return <td>{i}</td>})
+                <tr>
+                  {
+                    columns.map(i => {return <td className="column_table_content">{i}</td>})
+                  }
+                </tr>
+                
               ):null
             }
               {
@@ -49,7 +55,7 @@ export const DisplayTable = (props) => {
                       {
                         columns.map(col =>{
                           return(
-                            <td>{i[col]}</td>
+                            <td className="column_table_content">{i[col]}</td>
                           )
                         })  
                       }
@@ -59,5 +65,6 @@ export const DisplayTable = (props) => {
               }
           </tbody>
         </table>
+        </div>
       );
   }};

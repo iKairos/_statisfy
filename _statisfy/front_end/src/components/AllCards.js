@@ -16,7 +16,7 @@ export default function AllCards(props){
 
 
     return(
-        <div className="upload_body">
+        <div className="statmethod">
             {
                 filtered.length !== 0 ? filtered.map(([method, tags]) => {
                     return <Card title={method} desc="desc" attributes={tags} display={displayChosen}/>

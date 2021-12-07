@@ -18,6 +18,8 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { processUserToken } from "../actions/userActions";
 import { Link } from "react-router-dom";
 
+import { DisplayTable } from "../components/DisplayTable";
+
 
 export default function ResearchScreen(props){
     const { id } = useParams();
@@ -76,21 +78,26 @@ export default function ResearchScreen(props){
     if(researchGetRes?.code === 'RESEARCH_GET_SUCCESS'){
         return(
             <div className = "research">
-                <div className = "research_container research_header">
-                    <div className = "research_header_display">
+                <div className = "research_header_container">
+                    <div className = "research_heading">
                         <span className ="text_title">{researchGetRes?.data.research_name}</span>
                         {researchGetRes?.data.authors.map(author => {
-                            return <Link to={`/profile/${author['uid']}`}
-                                        style={{ textDecoration: 'none' }}
-                                    >
-                                        <div className="text_button">{author['username'].toUpperCase()}</div>
-                                    </Link>
+                            return <p className="text_button">
+                            <Link to={`/profile/${author['uid']}`}
+                            style={{ textDecoration: 'none' }}
+                            >
+                                <p className="text_button">
+                                    {author['username'].toUpperCase()}
+                                </p>
+                            </Link>
+                            </p>
+                            
                         })}
                         <span className = "text_content">
                             {researchGetRes?.data.research_description}
                         </span>
                     </div>
-                    <div className = "research_header_tabs">
+                    <div className = "research_heading_tabs">
                         <button
                             className="research_arrow"
                             onClick={prevTab}
@@ -130,104 +137,160 @@ export default function ResearchScreen(props){
                     </div>
                 </div>
                 {value === 1 &&
-                <div className="research_container research_body">
-                    <Fade in={value === 1}>
-                        <div className = "research_body_header">
+                <>
+                <Fade in={value === 1}>
+                    <div className="research_body_container">
+                        <div className="research_body_heading">
+                            <span className ="text_topic">{researchGetRes?.data.test_type}</span>
+                            <p className ="text_label">STATISTICS</p>
+                        </div>
+                        <div className="research_body_tabs">
+                            <button
+                                className="research_arrow"
+                                onClick={prevContent}
+                                disabled = {contentPage === 1 ? true : false}
+                            >
+                                <ArrowBackIosNewIcon/>
+                            </button>
+                            <Box sx = {{ width:'65vw' }}>
+                                <Tabs
+                                    value={contentPage}
+                                    onChange={switchContentPage}
+                                    textColor="secondary"
+                                    indicatorColor="secondary"
+                                    aria-label="scrollable tabs"
+                                    variant="scrollable"
+                                    scrollButtons="auto"
+                                >
+                                    <Tab value={1} label="Dataset" icon={<TableChartIcon/>}/>
+                                    <Tab value={2} label="Graphs" icon={<TimelineIcon/>} />
+                                    <Tab value={3} label="Variables" icon={<CalculateIcon/>} />
+                                    <Tab value={4} label="Results" icon={<DoneAllIcon/>} />
+                                </Tabs>
+                            </Box>
+                            <button
+                                className="research_arrow"
+                                onClick={nextContent}
+                                disabled = {contentPage === 4 ? true : false}
+                            >
+                                <ArrowForwardIosIcon/>
+                            </button>
+                        </div>
+                        {contentPage === 1 &&
                             <div className = "research_body_content">
-                                <span className ="text_topic">{researchGetRes?.data.test_type}</span>
+                                <div className = "research_dataset">
+                                    <div className = "research_dataset_heading">
+                                        Description
+                                    </div>
+                                    <div className = "research_dataset_desc">
+                                        <p className = "text_topic"> Context</p>
+                                        <p className = " text_content">
+                                            This Dataset ChuChu
+                                        </p>
+                                        <p className = "text_topic"> Content</p>
+                                        <p className = " text_content">
+                                            This Dataset ChuChu
+                                        </p>
+                                        <p className = "text_topic"> Acknowledgements</p>
+                                        <p className = " text_content">
+                                            This Dataset ChuChu
+                                        </p>
+                                    </div>
+                                    <div className = "research_dataset_table">
+                                        <div className = "research_dataset_table_heading">
+                                            <p className = "text_label">Table Header 36gb</p>
+                                        </div>
+                                        <table>
+                                            <thead>
+                                                <th>Sample Table</th>
+                                                <th>Sample Table</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>1</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        
+                    </div>
+                    
+                </Fade>
+                </>
+                
+
+                }
+                {value === 2 &&
+                <>
+                    <Fade in={value === 2}>
+                        <div className="research_body_container">
+                            <div className="research_body_heading">
+                                <span className ="text_topic">Interpretation of the Results</span>
                                 <p className ="text_label">STATISTICS</p>
                             </div>
-                           
-                            <div className="research_body_tabs">
-                                <button
-                                    className="research_arrow"
-                                    onClick={prevContent}
-                                    disabled = {contentPage === 1 ? true : false}
-                                >
-                                    <ArrowBackIosNewIcon/>
-                                </button>
-                                <Box sx = {{ width:'65vw' }}>
-                                    <Tabs
-                                        value={contentPage}
-                                        onChange={switchContentPage}
-                                        textColor="secondary"
-                                        indicatorColor="secondary"
-                                        aria-label="scrollable tabs"
-                                        variant="scrollable"
-                                        scrollButtons="auto"
-                                    >
-                                        <Tab value={1} label="Dataset" icon={<TableChartIcon/>}/>
-                                        <Tab value={2} label="Graphs" icon={<TimelineIcon/>} />
-                                        <Tab value={3} label="Variables" icon={<CalculateIcon/>} />
-                                        <Tab value={4} label="Results" icon={<DoneAllIcon/>} />
-                                    </Tabs>
-                                </Box>
-                                <button
-                                    className="research_arrow"
-                                    onClick={nextContent}
-                                    disabled = {contentPage === 4 ? true : false}
-                                >
-                                    <ArrowForwardIosIcon/>
-                                </button>
-                            </div>
-                        
-                        </div>  
-                    </Fade>
-                </div>
-                }
-
-                {value === 2 &&
-                <div className="research_container research_body">
-                    <Fade in={value === 2}>
-                        <div className = "research_body_header">
-                            <div className = "research_body_header_title">
-                                <span className ="text_topic">Interpretation of the Results</span>
-                                <p className ="text_label">SUMMARY</p>
-                            </div>
-                            
                         </div>
                     </Fade>
-                </div>
+                </>
+                    
                 }
-
                 {value === 3 &&
-                <div className="research_container research_body">
-                    <Fade in={value === 3}>
-                        <div className = "research_body_header">
-                            <div className = "research_body_header_title">
-                                <span className ="text_topic">Discussions</span>
-                                <p className ="text_label">FORUM AND THREADS</p>
-                            </div>
+                <>
+                <Fade in={value === 3}>
+                    <div className="research_body_container">
+                        <div className="research_body_heading">
+                            <span className ="text_topic">Discussions</span>
+                            <p className ="text_label">FORUM AND THREADS</p>
                         </div>
-                    </Fade>
-                </div>
-                }
 
-                {value === 4 &&
-                <div className="research_container research_body">
-                    <Fade in={value === 4}>
-                        <div className = "research_body_header">
-                            <div className = "research_body_header_title">
-                                <span className ="text_topic">Metadata</span>
-                                <p className ="text_label">RESEARCH DETAILS</p>
-                            </div>
-                        </div>
-                    </Fade>
-                </div>
-                }
-
-                {value === 5 &&
-                <div className="research_container research_body">
-                    <Fade in={value === 5}>
-                    <div className = "research_body_header">
-                        <div className = "research_body_header_title">
-                            <span className ="text_topic">Settings</span>
-                            <p className ="text_label">EDIT RESEARCH DETAILS</p>
-                        </div>
                     </div>
-                    </Fade>
-                </div>
+                </Fade>
+                </>
+                    
                 }
+                {value === 4 &&
+                <>
+                <Fade in={value === 4}>
+                    <div className="research_body_container">
+                        <div className="research_body_heading">
+                            <span className ="text_topic">Metadata</span>
+                            <p className ="text_label">RESEARCH DETAILS</p>
+                        </div>
+
+                    </div>
+                </Fade>
+                </>
+                }
+                {value === 5 &&
+                <>
+                    <Fade in={value === 5}>
+                        <div className="research_body_container">
+                            <div className="research_body_heading">
+                                <span className ="text_topic">Settings</span>
+                                <p className ="text_label">EDIT RESEARCH DETAILS</p>
+                            </div>
+
+                        </div>
+                    </Fade>
+                </>
+                    
+                }
+                
             </div>
         );
     }else if(researchGetRes?.code === 'RESEARCH_NOT_EXIST'){

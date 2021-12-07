@@ -1,19 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
-table {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.column_table {
-  margin-top: 1rem;
-  width: 100%;
-}
-
-.column_table_header {
-  word-wrap: break-word;
-}
-
+/* Works on Firefox */
 .dropdown {
   position: relative;
   display: inline-block;
@@ -168,6 +154,21 @@ table {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.datapage_upload_dispTable {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+  padding-top: 1rem;
+  border: 1px solid gray;
+}
+
+.datapage_upload_dummy {
+  margin-top: 1rem;
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
 }
 
 .datapage_error {

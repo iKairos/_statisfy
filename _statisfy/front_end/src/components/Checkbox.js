@@ -10,7 +10,7 @@ export default function Checkbox({callbackFunction}){
             <div className = "divStyle">    
                 <span className="upload_span"> Variable Count:</span>
                     
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onChange={callbackFunction(checked)} onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "One Variable"]) : setChecked(checked.filter((i) => i !== "One Variable"))
                     }}/>
@@ -18,7 +18,7 @@ export default function Checkbox({callbackFunction}){
                          One variable
                     </label>
                 </div>
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Two Variables"]) : setChecked(checked.filter((i) => i !== "Two Variables"))
                     }}/>
@@ -26,7 +26,7 @@ export default function Checkbox({callbackFunction}){
                         Two variables
                     </label>
                 </div>
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Multiple Variables"]) : setChecked(checked.filter((i) => i !== "Multiple Variables"))
                     }}/>
@@ -38,10 +38,10 @@ export default function Checkbox({callbackFunction}){
 
             
 
-            <div  >    
+            <div className = "divStyle">    
                 <span className="upload_span"> Type of Variable:</span>
                     
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Ordinal"]) : setChecked(checked.filter((i) => i !== "Ordinal"))
                     }}/>
@@ -49,7 +49,7 @@ export default function Checkbox({callbackFunction}){
                          Ordinal
                     </label>
                 </div>
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Interval"]) : setChecked(checked.filter((i) => i !== "Interval"))
                     }}/>
@@ -57,7 +57,7 @@ export default function Checkbox({callbackFunction}){
                         Interval
                     </label>
                 </div>
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Ratio"]) : setChecked(checked.filter((i) => i !== "Ratio"))
                     }}/>
@@ -65,7 +65,7 @@ export default function Checkbox({callbackFunction}){
                         Ratio
                     </label>
                 </div>
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Nominal"]) : setChecked(checked.filter((i) => i !== "Nominal"))
                     }}/>
@@ -76,10 +76,10 @@ export default function Checkbox({callbackFunction}){
                
             </div>
 
-            <div>    
+            <div className = "divStyle">    
                 <span className="upload_span"> Type of Data:</span>
                     
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Grouped"]) : setChecked(checked.filter((i) => i !== "Grouped"))
                     }}/>
@@ -87,7 +87,7 @@ export default function Checkbox({callbackFunction}){
                          Grouped
                     </label>
                 </div>
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Ungrouped"]) : setChecked(checked.filter((i) => i !== "Ungrouped"))
                     }}/>
@@ -98,10 +98,10 @@ export default function Checkbox({callbackFunction}){
                
             </div>
 
-            <div>    
+            <div className = "divStyle">    
                 <span className="upload_span"> Purpose of Analysis:</span>
                     
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Relationship"]) : setChecked(checked.filter((i) => i !== "Relationship"))
                     }}/>
@@ -109,7 +109,7 @@ export default function Checkbox({callbackFunction}){
                          Relationship
                     </label>
                 </div>
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Significant Differences"]) : setChecked(checked.filter((i) => i !== "Significant Differences"))
                     }}/>
@@ -117,7 +117,7 @@ export default function Checkbox({callbackFunction}){
                         Significant Differences
                     </label>
                 </div>
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Univariate Analysis"]) : setChecked(checked.filter((i) => i !== "Univariate Analysis"))
                     }}/>
@@ -128,10 +128,10 @@ export default function Checkbox({callbackFunction}){
                
             </div>
 
-            <div>    
+            <div className = "divStyle">    
                 <span className="upload_span"> Number of Groups:</span>
                     
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Two Groups"]) : setChecked(checked.filter((i) => i !== "Two Groups"))
                     }}/>
@@ -139,7 +139,7 @@ export default function Checkbox({callbackFunction}){
                         Two
                     </label>
                 </div>
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Multiple Groups"]) : setChecked(checked.filter((i) => i !== "Multiple Groups"))
                     }}/>
@@ -150,10 +150,10 @@ export default function Checkbox({callbackFunction}){
                
             </div>
 
-            <div >    
+            <div className = "divStyle" >    
                 <span className="upload_span"> Number of Independent Variables:</span>
                     
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "One Independent Variable"]) : setChecked(checked.filter((i) => i !== "One Independent Variable"))
                     }}/>
@@ -161,7 +161,7 @@ export default function Checkbox({callbackFunction}){
                         One
                     </label>
                 </div>
-                <div>
+                <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Two Independent Variables"]) : setChecked(checked.filter((i) => i !== "Two Independent Variables"))
                     }}/>

@@ -170,10 +170,14 @@ export default function DataSetPage(props){
                                             onClick={() => setHeader(false)}>No</button>
                                     </Alert>
                                 </div>
-                                <DisplayTable 
-                                    data={props.DataArray}
-                                    Header = {header}
-                                />
+                                <div className = "datapage_upload_dispTable">
+                                    <div className = "datapage_upload_dummy">
+                                        <DisplayTable 
+                                            data={props.DataArray}
+                                            Header = {header}
+                                        />
+                                    </div>
+                                </div>
                             
 
 
@@ -238,12 +242,12 @@ export default function DataSetPage(props){
                                                 props.DatasetDetails?.details?.map((i) => (
                                                     <>
                                                         <tr>
-                                                            <td>
+                                                            <td className="column_table_content">
                                                                 <input name={i['column']} type="checkbox" className="datapage_checkbox" onChange={props.CallbackColumns(checkedCols)} 
                                                                 onClick={(e) => onCheck(e)}/>
                                                             </td>
-                                                            <td><p>{i['column']}</p></td>
-                                                            <td>
+                                                            <td className="column_table_content"><p>{i['column']}</p></td>
+                                                            <td className="column_table_content">
                                                                 <p>
                                                                     <span style={
                                                                         {
@@ -266,11 +270,11 @@ export default function DataSetPage(props){
                                                                     </span>
                                                                 </p>
                                                             </td>
-                                                            <td><p>{typeof i['mean'] === 'number' ? i['mean'].toFixed(2) : i['mean']}</p></td>
-                                                            <td><p>{typeof i['std'] === 'number' ? i['std'].toFixed(2) : i['std']}</p></td>
-                                                            <td><p>{typeof i['median'] === 'number' ? i['median'].toFixed(2) : i['std']}</p></td>
-                                                            <td><p>{i['max']}</p></td>
-                                                            <td><p>{i['min']}</p></td>
+                                                            <td className="column_table_content"><p>{typeof i['mean'] === 'number' ? i['mean'].toFixed(2) : i['mean']}</p></td>
+                                                            <td className="column_table_content"><p>{typeof i['std'] === 'number' ? i['std'].toFixed(2) : i['std']}</p></td>
+                                                            <td className="column_table_content"><p>{typeof i['median'] === 'number' ? i['median'].toFixed(2) : i['std']}</p></td>
+                                                            <td className="column_table_content"><p>{i['max']}</p></td>
+                                                            <td className="column_table_content"><p>{i['min']}</p></td>
                                                         </tr>
                                                         
                                                     </>
@@ -298,8 +302,8 @@ export default function DataSetPage(props){
                                 props.DatasetDetails?.details?.map((i) => (
                                 <>
                                     <tr>
-                                        <td><p>{i['column']}</p></td>
-                                        <td>
+                                        <td className="column_table_content"><p>{i['column']}</p></td>
+                                        <td className="column_table_content">
                                             <div className = "dropdown">
                                                 <button className="dropdown_hover">Data Replacement</button>
                                                 <div className="dropdown_menu">

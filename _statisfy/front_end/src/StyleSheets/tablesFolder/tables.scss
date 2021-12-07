@@ -1,0 +1,72 @@
+$radius: 1rem;
+$white1: #eeeeee;
+$gray1: #b5b5b5;
+$pink: #dfa9ff;
+$purple: #a742c5;
+$black: #23272a;
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  width: fit-content;
+  border: 1px solid $gray1;
+  border-collapse: collapse;
+}
+
+.column_table {
+  margin-top: 1rem;
+  width: fit-content;
+  &_header {
+    padding: 1rem;
+    word-wrap: break-word;
+    min-width: 10rem;
+  }
+  &_content {
+    padding: 1rem;
+    min-width: 10rem;
+    word-wrap: break-word;
+  }
+}
+.table_input {
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-bottom: 2px solid white;
+  font-weight: bold;
+  text-align: center;
+  width: min-content;
+  outline: none;
+}
+
+::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+table td {
+  border: 1px solid $gray1;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 8px;
+}
+table th {
+  border: 1px solid #8f8f8f;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 8px;
+}
+
+table tr:nth-child(even) {
+}
+
+table tr:hover {
+  background-color: $white1;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: $gray1;
+  position: sticky;
+  color: white;
+}

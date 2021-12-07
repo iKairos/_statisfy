@@ -6,19 +6,7 @@ $boxshadow: 0 0 10px 5px rgb(240, 240, 240);
 $buttonbg: #a742c5;
 $maxwidth: 40rem;
 
-table {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.column_table {
-  margin-top: 1rem;
-  width: 100%;
-  &_header {
-    word-wrap: break-word;
-  }
-}
+/* Works on Firefox */
 
 .dropdown {
   position: relative;
@@ -143,6 +131,18 @@ table {
       flex-direction: column;
       padding-bottom: 1rem;
       justify-content: center;
+    }
+    &_dispTable {
+      max-width: 100%;
+      overflow-x: auto;
+      transform: rotateX(180deg);
+      padding-top: 1rem;
+
+      border: 1px solid gray;
+    }
+    &_dummy {
+      margin-top: 1rem;
+      transform: rotateX(180deg);
     }
   }
   &_error {

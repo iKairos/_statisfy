@@ -4,11 +4,19 @@
   grid-template-columns: 1fr;
   gap: 1rem;
   word-wrap: normal;
+  padding: 1rem;
 }
 
 .divStyle {
   width: 1fr;
   grid-template-columns: 1fr;
+}
+.checkbox_div {
+  word-wrap: break-word;
+}
+.checkbox_child {
+  width: 5rem;
+  word-wrap: break-word;
 }
 
 input[type="checkbox"] {
@@ -18,10 +26,11 @@ input[type="checkbox"] {
 label {
   font-family: inherit;
   cursor: pointer;
+  word-wrap: break-word;
 }
 @media screen and (min-width: 600px) {
   .contStyle {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
   }
 }
