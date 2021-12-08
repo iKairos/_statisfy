@@ -203,7 +203,7 @@ export default function ResearchScreen(props){
                                 <div className = "research_body_content">
                                     <div className = "research_dataset">
                                         <div className = "research_dataset_heading">
-                                            <DescriptionIcon/>
+                                            <DescriptionIcon fontSize={'medium'}/>
                                             Description
                                         </div>
                                         <div className = "research_dataset_desc">
@@ -222,7 +222,7 @@ export default function ResearchScreen(props){
                                         </div>
                                         <div className = "research_dataset_table">
                                             <div className = "research_dataset_table_heading">
-                                                <TableRowsIcon/> dataset_name.csv (5.43 kB)
+                                                <TableRowsIcon fontSize={'medium'}/> dataset_name.csv (5.43 kB)
                                             </div>
                                             <DisplayTable data={researchGetRes?.data?.dataset} Header={true}/>
                                         </div>
