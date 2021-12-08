@@ -15,8 +15,6 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import DescriptionIcon from '@mui/icons-material/Description';
-import TableRowsIcon from '@mui/icons-material/TableRows';
 import { processUserToken } from "../actions/userActions";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -203,7 +201,6 @@ export default function ResearchScreen(props){
                                 <div className = "research_body_content">
                                     <div className = "research_dataset">
                                         <div className = "research_dataset_heading">
-                                            <DescriptionIcon fontSize={'medium'}/>
                                             Description
                                         </div>
                                         <div className = "research_dataset_desc">
@@ -222,7 +219,7 @@ export default function ResearchScreen(props){
                                         </div>
                                         <div className = "research_dataset_table">
                                             <div className = "research_dataset_table_heading">
-                                                <TableRowsIcon fontSize={'medium'}/> dataset_name.csv (5.43 kB)
+                                                dataset_name.csv (5.43 kB)
                                             </div>
                                             <DisplayTable data={researchGetRes?.data?.dataset} Header={true}/>
                                         </div>
