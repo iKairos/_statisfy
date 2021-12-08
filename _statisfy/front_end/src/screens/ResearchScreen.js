@@ -127,7 +127,10 @@ export default function ResearchScreen(props){
                         >
                             <ArrowBackIosNewIcon/>
                         </button>
-                        <Box sx = {{ width:'65vw' }}>
+                        <Box sx = {{ 
+                            minWidth: 100,
+                            width: '1fr'
+                         }}>
                             
                             <Tabs
                                 value={value}
@@ -174,7 +177,10 @@ export default function ResearchScreen(props){
                             >
                                 <ArrowBackIosNewIcon/>
                             </button>
-                            <Box sx = {{ width:'65vw' }}>
+                            <Box sx = {{ 
+                                minWidth: 100,
+                                width: '1fr'
+                             }}>
                                 <Tabs
                                     value={contentPage}
                                     onChange={switchContentPage}

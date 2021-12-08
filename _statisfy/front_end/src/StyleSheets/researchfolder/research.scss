@@ -4,7 +4,7 @@ $gray1: #b5b5b5;
 $pink: #dfa9ff;
 $purple: #a742c5;
 $black: #23272a;
-$boxshadow: 0 0 10px 5px rgb(240, 240, 240);
+$boxshadow: 0 0 10px 5px rgb(252, 252, 252);
 $buttonbg: #a742c5;
 $maxwidth: 40rem;
 
@@ -30,6 +30,8 @@ $maxwidth: 40rem;
   &_heading {
     padding: 1rem;
     border-bottom: 1px solid $white1;
+    max-width: 90vw;
+
     &_tabs {
       display: grid;
       grid-template-columns: 2rem 1fr 2rem;
@@ -79,6 +81,7 @@ $maxwidth: 40rem;
       height: fit-content;
       background-color: $white1;
       border: 1px solid $gray1;
+      word-wrap: break-word;
     }
     &_table {
       margin-top: 1rem;
@@ -97,34 +100,10 @@ $maxwidth: 40rem;
 
   padding-top: 2rem;
   &_arrow {
-    width: 100%;
+    width: 2rem;
     display: block;
     border: none;
     background-color: transparent;
-  }
-  &_container {
-    display: grid;
-    grid-template-rows: 1fr;
-    border-radius: $radius;
-    box-shadow: $boxshadow;
-    background-color: white;
-  }
-  &_header {
-    height: 100%;
-    width: 85vw;
-    &_tabs {
-      display: grid;
-      grid-template-columns: 2rem 1fr 2rem;
-    }
-    &_display {
-      border-bottom: 1px solid $white1;
-      width: 100%;
-
-      word-wrap: break-word;
-      overflow: hidden;
-      padding: 0.5rem;
-      padding-left: 1rem;
-    }
   }
 }
 
@@ -158,58 +137,49 @@ $maxwidth: 40rem;
 
 @media screen and (min-width: 600px) {
   .research {
-    &_arrow {
-      display: none;
-    }
-    &_container {
-      display: grid;
-      grid-template-rows: 1fr;
-      border-radius: $radius;
-      box-shadow: $boxshadow;
-      background-color: white;
-    }
-    &_header {
-      height: 100%;
-      width: 70vw;
-      &_tabs {
-        padding-left: 1rem;
-      }
-      &_display {
-        border-bottom: 1px solid $white1;
-        padding: 1rem;
-        padding-left: 2rem;
-      }
-    }
-
-    &_body {
-      height: 80vh;
-      width: 70vw;
-      margin-bottom: 2rem;
-      display: grid;
-      grid-template-columns: 1fr;
-      &_header {
-        padding: 2rem;
-      }
-    }
-  }
-
-  .research {
     display: grid;
     grid-template-columns: 1fr;
     justify-content: center;
     gap: 1rem;
     align-items: center;
+    padding-top: 2rem;
 
     &_header {
+      padding: 1rem;
+      max-width: 50vw;
       &_container {
         width: 50vw;
+        border: 1px solid $white1;
+      }
+    }
+
+    &_heading {
+      padding: 1rem;
+      max-width: 50vw;
+
+      &_tabs {
+        display: grid;
+        grid-template-columns: 1fr;
       }
     }
 
     &_body {
+      max-width: 50vw;
       &_container {
         height: 100%;
+        max-width: 50vw;
+        border: 1px solid $white1;
+      }
+      &_heading {
+        height: fit-content;
+        border-bottom: 1px solid $white1;
+        max-width: 50vw;
+      }
+      &_tabs {
         width: 50vw;
+        display: grid;
+        grid-template-columns: 1fr;
+        border-bottom: 1px solid $white1;
       }
     }
     &_dataset {
@@ -245,33 +215,11 @@ $maxwidth: 40rem;
       }
     }
 
-    padding-top: 2rem;
     &_arrow {
       display: none;
     }
-    &_container {
-      display: grid;
-      grid-template-rows: 1fr;
-      border-radius: $radius;
-      box-shadow: $boxshadow;
-      background-color: white;
-    }
-    &_header {
-      height: 100%;
-      width: 100%;
-      &_tabs {
-        display: grid;
-        grid-template-columns: 2rem 1fr 2rem;
-      }
-      &_display {
-        border-bottom: 1px solid $white1;
-        width: 100%;
-
-        word-wrap: break-word;
-        overflow: hidden;
-        padding: 0.5rem;
-        padding-left: 1rem;
-      }
-    }
   }
+}
+
+@media screen and (min-width: 900px) {
 }

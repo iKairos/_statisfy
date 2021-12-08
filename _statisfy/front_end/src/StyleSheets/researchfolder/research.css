@@ -22,14 +22,15 @@
       grid-template-rows: 1fr;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
-  -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
-          box-shadow: 0 0 10px 5px #f0f0f0;
+  -webkit-box-shadow: 0 0 10px 5px #fcfcfc;
+          box-shadow: 0 0 10px 5px #fcfcfc;
   background-color: white;
 }
 
 .research_heading {
   padding: 1rem;
   border-bottom: 1px solid #eeeeee;
+  max-width: 90vw;
 }
 
 .research_heading_tabs {
@@ -48,8 +49,8 @@
       grid-template-rows: 1fr;
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
-  -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
-          box-shadow: 0 0 10px 5px #f0f0f0;
+  -webkit-box-shadow: 0 0 10px 5px #fcfcfc;
+          box-shadow: 0 0 10px 5px #fcfcfc;
   background-color: white;
 }
 
@@ -102,6 +103,7 @@
   height: fit-content;
   background-color: #eeeeee;
   border: 1px solid #b5b5b5;
+  word-wrap: break-word;
 }
 
 .research_dataset_table {
@@ -120,42 +122,10 @@
 }
 
 .research_arrow {
-  width: 100%;
+  width: 2rem;
   display: block;
   border: none;
   background-color: transparent;
-}
-
-.research_container {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-rows: 1fr;
-      grid-template-rows: 1fr;
-  border-radius: 0.25rem;
-  -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
-          box-shadow: 0 0 10px 5px #f0f0f0;
-  background-color: white;
-}
-
-.research_header {
-  height: 100%;
-  width: 85vw;
-}
-
-.research_header_tabs {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 2rem 1fr 2rem;
-      grid-template-columns: 2rem 1fr 2rem;
-}
-
-.research_header_display {
-  border-bottom: 1px solid #eeeeee;
-  width: 100%;
-  word-wrap: break-word;
-  overflow: hidden;
-  padding: 0.5rem;
-  padding-left: 1rem;
 }
 
 .text_title {
@@ -192,43 +162,6 @@
 }
 
 @media screen and (min-width: 600px) {
-  .research_arrow {
-    display: none;
-  }
-  .research_container {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-rows: 1fr;
-        grid-template-rows: 1fr;
-    border-radius: 0.25rem;
-    -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
-            box-shadow: 0 0 10px 5px #f0f0f0;
-    background-color: white;
-  }
-  .research_header {
-    height: 100%;
-    width: 70vw;
-  }
-  .research_header_tabs {
-    padding-left: 1rem;
-  }
-  .research_header_display {
-    border-bottom: 1px solid #eeeeee;
-    padding: 1rem;
-    padding-left: 2rem;
-  }
-  .research_body {
-    height: 80vh;
-    width: 70vw;
-    margin-bottom: 2rem;
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 1fr;
-        grid-template-columns: 1fr;
-  }
-  .research_body_header {
-    padding: 2rem;
-  }
   .research {
     display: -ms-grid;
     display: grid;
@@ -243,12 +176,46 @@
             align-items: center;
     padding-top: 2rem;
   }
+  .research_header {
+    padding: 1rem;
+    max-width: 50vw;
+  }
   .research_header_container {
     width: 50vw;
+    border: 1px solid #eeeeee;
+  }
+  .research_heading {
+    padding: 1rem;
+    max-width: 50vw;
+  }
+  .research_heading_tabs {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+  .research_body {
+    max-width: 50vw;
   }
   .research_body_container {
     height: 100%;
+    max-width: 50vw;
+    border: 1px solid #eeeeee;
+  }
+  .research_body_heading {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    border-bottom: 1px solid #eeeeee;
+    max-width: 50vw;
+  }
+  .research_body_tabs {
     width: 50vw;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    border-bottom: 1px solid #eeeeee;
   }
   .research_dataset {
     padding: 1rem;
@@ -292,34 +259,6 @@
   }
   .research_arrow {
     display: none;
-  }
-  .research_container {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-rows: 1fr;
-        grid-template-rows: 1fr;
-    border-radius: 0.25rem;
-    -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
-            box-shadow: 0 0 10px 5px #f0f0f0;
-    background-color: white;
-  }
-  .research_header {
-    height: 100%;
-    width: 100%;
-  }
-  .research_header_tabs {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 2rem 1fr 2rem;
-        grid-template-columns: 2rem 1fr 2rem;
-  }
-  .research_header_display {
-    border-bottom: 1px solid #eeeeee;
-    width: 100%;
-    word-wrap: break-word;
-    overflow: hidden;
-    padding: 0.5rem;
-    padding-left: 1rem;
   }
 }
 /*# sourceMappingURL=research.css.map */
