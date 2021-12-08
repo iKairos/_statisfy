@@ -15,13 +15,13 @@
 
 .research_header_container {
   height: 100%;
-  width: 90vw;
+  width: 50vw;
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: 1fr;
       grid-template-rows: 1fr;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
   -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
           box-shadow: 0 0 10px 5px #f0f0f0;
   background-color: white;
@@ -41,13 +41,13 @@
 
 .research_body_container {
   height: 100%;
-  width: 90vw;
+  width: 50vw;
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: 1fr;
       grid-template-rows: 1fr;
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
   -webkit-box-shadow: 0 0 10px 5px #f0f0f0;
           box-shadow: 0 0 10px 5px #f0f0f0;
   background-color: white;
@@ -90,7 +90,7 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  background-color: #eeeeee;
+  background-color: #ffffff;
   border: 1px solid #b5b5b5;
 }
 

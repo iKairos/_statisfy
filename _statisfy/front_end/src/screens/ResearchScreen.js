@@ -15,6 +15,8 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import DescriptionIcon from '@mui/icons-material/Description';
+import TableRowsIcon from '@mui/icons-material/TableRows';
 import { processUserToken } from "../actions/userActions";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -197,56 +199,36 @@ export default function ResearchScreen(props){
                             </button>
                         </div>
                         {contentPage === 1 &&
-                            <div className = "research_body_content">
-                                <div className = "research_dataset">
-                                    <div className = "research_dataset_heading">
-                                        Description
-                                    </div>
-                                    <div className = "research_dataset_desc">
-                                        <p className = "text_topic"> Context</p>
-                                        <p className = " text_content">
-                                            This Dataset ChuChu
-                                        </p>
-                                        <p className = "text_topic"> Content</p>
-                                        <p className = " text_content">
-                                            This Dataset ChuChu
-                                        </p>
-                                        <p className = "text_topic"> Acknowledgements</p>
-                                        <p className = " text_content">
-                                            This Dataset ChuChu
-                                        </p>
-                                    </div>
-                                    <div className = "research_dataset_table">
-                                        <div className = "research_dataset_table_heading">
-                                            <p className = "text_label">Table Header 36gb</p>
+                            <Fade in={contentPage === 1}>
+                                <div className = "research_body_content">
+                                    <div className = "research_dataset">
+                                        <div className = "research_dataset_heading">
+                                            <DescriptionIcon/>
+                                            Description
                                         </div>
-                                        <table>
-                                            <thead>
-                                                <th>Sample Table</th>
-                                                <th>Sample Table</th>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <div className = "research_dataset_desc">
+                                            <p className = "text_topic"> Context</p>
+                                            <p className = " text_content">
+                                                This Dataset ChuChu
+                                            </p>
+                                            <p className = "text_topic"> Content</p>
+                                            <p className = " text_content">
+                                                This Dataset ChuChu
+                                            </p>
+                                            <p className = "text_topic"> Acknowledgements</p>
+                                            <p className = " text_content">
+                                                This Dataset ChuChu
+                                            </p>
+                                        </div>
+                                        <div className = "research_dataset_table">
+                                            <div className = "research_dataset_table_heading">
+                                                <TableRowsIcon/> dataset_name.csv (5.43 kB)
+                                            </div>
+                                            <DisplayTable data={researchGetRes?.data?.dataset} Header={true}/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Fade>
                         }
                         
                     </div>

@@ -5,6 +5,7 @@ from flask_cors import cross_origin
 from objects.user import User
 from objects.research import Research
 from os.path import dirname, realpath
+import pandas as pd
 import os
 
 @app.route("/api/research/<id>")
@@ -18,12 +19,14 @@ def fetch_research(id):
             'code': 'RESEARCH_NOT_EXIST'
         }
 
+    df = pd.read_csv(research.dataset_directory).to_dict('records')
+    
     return {
         'data' : {
             '_id': id, 
             'research_name': research.research_name,
             'research_description': research.research_description,
-            'dataset': research.dataset_directory,
+            'dataset': df,
             'test_type': research.test_type,
             'authors': [{'uid': u, 'username': User(u).username} for u in research.authors],
             'columns': research.columns,
@@ -32,6 +35,8 @@ def fetch_research(id):
         },
         'code': "RESEARCH_GET_SUCCESS",
     }
+
+@app.route
 
 @app.route("/api/research/new", methods=["POST"])
 @cross_origin()
