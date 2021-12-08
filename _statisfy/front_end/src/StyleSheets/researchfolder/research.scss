@@ -1,4 +1,4 @@
-$radius: 1rem;
+$radius: 0.25rem;
 $white1: #eeeeee;
 $gray1: #b5b5b5;
 $pink: #dfa9ff;
@@ -64,7 +64,11 @@ $maxwidth: 40rem;
     }
   }
   &_dataset {
-    padding: 1rem;
+    max-width: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     &_heading {
       padding: 1rem;
       border: 1px solid $gray1;
@@ -185,6 +189,88 @@ $maxwidth: 40rem;
       grid-template-columns: 1fr;
       &_header {
         padding: 2rem;
+      }
+    }
+  }
+
+  .research {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+
+    &_header {
+      &_container {
+        width: 50vw;
+      }
+    }
+
+    &_body {
+      &_container {
+        height: 100%;
+        width: 50vw;
+      }
+    }
+    &_dataset {
+      padding: 1rem;
+      max-width: 48vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &_heading {
+        padding: 1rem;
+        border: 1px solid $gray1;
+        border-bottom: none;
+      }
+      &_desc {
+        padding: 1rem;
+        height: fit-content;
+        background-color: $white1;
+        border: 1px solid $gray1;
+      }
+      &_table {
+        margin-top: 1rem;
+        min-height: 20vh;
+        max-height: 60vh;
+        overflow: auto;
+        background-color: white;
+        border: 1px solid $gray1;
+        &_heading {
+          padding: 1rem;
+          border-bottom: 1px solid $gray1;
+          height: 3rem;
+        }
+      }
+    }
+
+    padding-top: 2rem;
+    &_arrow {
+      display: none;
+    }
+    &_container {
+      display: grid;
+      grid-template-rows: 1fr;
+      border-radius: $radius;
+      box-shadow: $boxshadow;
+      background-color: white;
+    }
+    &_header {
+      height: 100%;
+      width: 100%;
+      &_tabs {
+        display: grid;
+        grid-template-columns: 2rem 1fr 2rem;
+      }
+      &_display {
+        border-bottom: 1px solid $white1;
+        width: 100%;
+
+        word-wrap: break-word;
+        overflow: hidden;
+        padding: 0.5rem;
+        padding-left: 1rem;
       }
     }
   }
