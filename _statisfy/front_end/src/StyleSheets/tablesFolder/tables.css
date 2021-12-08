@@ -15,15 +15,23 @@ table {
 }
 
 .column_table_header {
-  padding: 1rem;
+  padding: 0;
   word-wrap: break-word;
   min-width: 10rem;
+  text-align: start;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .column_table_content {
-  padding: 1rem;
+  padding: 0;
   min-width: 10rem;
   word-wrap: break-word;
+  text-align: start;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .table_input {
@@ -63,14 +71,18 @@ table td {
   border: 1px solid #b5b5b5;
   border-collapse: collapse;
   text-align: center;
-  padding: 8px;
+  padding: 0;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 table th {
   border: 1px solid #8f8f8f;
   border-collapse: collapse;
   text-align: center;
-  padding: 8px;
+  padding: 0;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 table tr:hover {
