@@ -65,6 +65,7 @@ def get_dataset(filename):
         directory = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..\\temp\\datasets\\')
 
         df = pd.read_csv(directory+filename)
+        df = df.head(50) if df.shape[0] > 50 else df
         df = df.fillna('')
 
         return {
