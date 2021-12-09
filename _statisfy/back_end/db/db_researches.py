@@ -84,18 +84,6 @@ class ResearchesBackbone(DatabaseBackbone):
         except Exception as e:
             print(e)
             return False
-
-    def get_columns(self, rid):
-        try:
-            fetched = self.fetch_row(
-                "dataset_columns",
-                _id = rid
-            )[0]
-
-            return fetched
-        except Exception as e:
-            print(e)
-            return False
         
     def get_delimiter(self, rid):
         try:
@@ -120,16 +108,15 @@ class ResearchesBackbone(DatabaseBackbone):
         except Exception as e:
             print(e)
             return False
-        
-    def add_column(self, rid, column):
+    
+    def get_studies(self, rid):
         try:
-            self.append_row(
-                "dataset_columns",
-                research_id = rid,
-                _column = column
+            fetched = self.fetch_row(
+                "studies",
+                research_id = rid
             )
 
-            return True
+            return fetched
         except Exception as e:
             print(e)
             return False

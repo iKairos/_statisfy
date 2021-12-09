@@ -31,10 +31,6 @@ class Research:
     def is_registered(self):
         return self.db.is_registered(self.rid)
     
-    @property 
-    def columns(self):
-        return self.db.get_columns(self.rid)
-    
     @property
     def delimiter(self):
         return self.db.get_delimiter(self.rid)
@@ -42,6 +38,10 @@ class Research:
     @property
     def created_at(self):
         return self.db.get_created_at(self.rid)
+    
+    @property 
+    def studies(self):
+        return self.db.get_studies(self.rid)
 
     def set_research_name(self, new_name):
         return self.db.set_research_name(self.rid, new_name)
@@ -57,9 +57,6 @@ class Research:
     
     def set_delimiter(self, new_delimiter):
         return self.db.set_delimiter(self.rid, new_delimiter)
-    
-    def add_column(self, column):
-        return self.db.add_column(self.rid, column)
 
     def register_research(**kwargs):
         db = db_researches.ResearchesBackbone()
