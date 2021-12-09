@@ -232,7 +232,7 @@ export default function ResearchScreen(props){
                                             <div className = "research_dataset_table_heading">
                                                 dataset_name.csv (5.43 kB)
                                             </div>
-                                            {typeof datasetFile !== 'undefined' ? <DisplayTable data={datasetFile.data} Header={true}/> : null}
+                                            {typeof datasetFile !== 'undefined' ? <DisplayTable data={datasetFile.data} Header={true} rowNumber={15}/> : null}
                                         </div>
                                     </div>
                                 </div>
