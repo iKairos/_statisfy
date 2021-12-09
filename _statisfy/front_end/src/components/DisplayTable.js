@@ -18,7 +18,7 @@ export const DisplayTable = (props) => {
           return key;
         })
       }
-
+      
       return (
         <div className="table_width">
         <table>

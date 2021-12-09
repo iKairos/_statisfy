@@ -37,9 +37,13 @@ export default function ResearchScreen(props){
     const userdataSelector = useSelector((state) => 
         state.decodedUserToken
     );
+    const filedataSelector = useSelector((state) =>
+        state.datasetFile
+    );
 
     const { processed } = userdataSelector;
     const {researchGetRes} = dataSelector;
+    const {datasetFile} = filedataSelector;
 
     const switchTabs = (event, newValue) => {
         setValue(newValue);
@@ -87,6 +91,7 @@ export default function ResearchScreen(props){
     }, [location]);
 
     if(researchGetRes?.code === 'RESEARCH_GET_SUCCESS'){
+
         return(
             <div className = "research">
                 <div className = "research_header_container">
@@ -227,7 +232,7 @@ export default function ResearchScreen(props){
                                             <div className = "research_dataset_table_heading">
                                                 dataset_name.csv (5.43 kB)
                                             </div>
-                                            <DisplayTable data={researchGetRes?.data?.dataset} Header={true}/>
+                                            {typeof datasetFile !== 'undefined' ? <DisplayTable data={datasetFile.data} Header={true}/> : null}
                                         </div>
                                     </div>
                                 </div>
