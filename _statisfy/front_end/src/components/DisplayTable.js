@@ -22,6 +22,7 @@ export const DisplayTable = (props) => {
         })
       }
 
+
       var columnHeader = [
         { field: 'id', headerName: 'ID', width: 70 },
         { field: 'firstName', headerName: 'First name', width: 130 },
@@ -59,6 +60,7 @@ export const DisplayTable = (props) => {
 
 
       ]
+
 
       return (
         <div style={{ height: 400, width: '100%' }}>

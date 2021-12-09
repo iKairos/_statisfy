@@ -1,7 +1,9 @@
 from __main__ import app 
-from flask import request
+from flask import request, jsonify
+from flask.helpers import send_file
 from flask_cors import cross_origin
 import pandas as pd
+import os
 
 @app.route("/api/dataset/process/delimiter=<delim>", methods = ['POST'])
 @cross_origin()
@@ -54,4 +56,24 @@ def dataset_details(delim):
         return {
             'error': str(e),
             'code': 'DATASET_PROCESS_FAIL'
+        }
+    
+@app.route("/api/dataset/get/<filename>", methods=['GET'])
+@cross_origin()
+def get_dataset(filename):
+    try:
+        directory = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..\\temp\\datasets\\')
+
+        df = pd.read_csv(directory+filename)
+        df = df.head(50) if df.shape[0] > 50 else df
+        df = df.fillna('')
+
+        return {
+            'code': 'DATASET_GET_SUCCESS',
+            'data': df.to_dict(orient='records')
+        }
+    except Exception as e:
+        return {
+            'code': 'DATASET_GET_FAIL',
+            'error': str(e)
         }

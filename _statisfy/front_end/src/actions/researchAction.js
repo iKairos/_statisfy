@@ -8,6 +8,7 @@ import {
 } from "../constants/researchConstants";
 
 import Axios from 'axios';
+import { getDataset } from "./datasetActions";
 
 export const saveResearch = (research) => async(dispatch) => {
     dispatch({
@@ -36,6 +37,10 @@ export const getResearch = (id) => async(dispatch) => {
 
     try{
         const {data} = await Axios.get(`/api/research/${id}`);
+
+        if(data.code === RESEARCH_GET_SUCCESS){
+            dispatch(getDataset(data.data.dataset));
+        }
 
         dispatch({
             type: RESEARCH_GET_SUCCESS, 
