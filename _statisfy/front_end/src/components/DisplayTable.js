@@ -1,8 +1,11 @@
 import React from 'react'
 import MOCK_DATA from './MOCK_DATA.json'
 import  "../StyleSheets/tablesFolder/tables.css";
+//import * as React from 'react';
+import { DataGrid } from '@mui/x-data-grid';
 
 export const DisplayTable = (props) => {
+   
     var data = props.data;
     var columns;
 
@@ -19,52 +22,52 @@ export const DisplayTable = (props) => {
         })
       }
 
+      var columnHeader = [
+        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'firstName', headerName: 'First name', width: 130 },
+        { field: 'lastName', headerName: 'Last name', width: 130 },
+        {
+          field: 'age',
+          headerName: 'Age',
+          type: 'number',
+          width: 90,
+        },
+        {
+          field: 'fullName',
+          headerName: 'Full name',
+          description: 'This column has a value getter and is not sortable.',
+          sortable: false,
+          width: 160,
+          valueGetter: (params) =>
+            `${params.getValue(params.id, 'firstName') || ''} ${
+              params.getValue(params.id, 'lastName') || ''
+            }`,
+        },
+      ];
+      
+
+      var rows = [
+        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
+        { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+        { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+        { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+        { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+        { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
+        { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+        { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+        { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 }
+
+
+      ]
+
       return (
-        <div className="table_width">
-        <table>
-          <thead>
-              <tr>
-                  {
-                    props.Header? (
-                      columns.map(i => {return <th className="column_table_header">{i}</th>})
-                    ): (
-                      
-                      columns.map(i => {return (
-                        <th className="column_table_header"><input type="text" className="table_input" placeholder="Column"></input></th>
-                      )})
-                    )
-                   
-                  }
-              </tr>
-          </thead>
-          <tbody>
-            {
-              !props.Header? (
-                <tr>
-                  {
-                    columns.map(i => {return <td className="column_table_content">{i}</td>})
-                  }
-                </tr>
-                
-              ):null
-            }
-              {
-                data.map(i => {
-                  return(
-                    <tr>
-                      {
-                        columns.map(col =>{
-                          return(
-                            <td className="column_table_content">{i[col]}</td>
-                          )
-                        })  
-                      }
-                    </tr>
-                  )
-                })
-              }
-          </tbody>
-        </table>
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid
+            rows={rows}
+            columns={columnHeader}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
         </div>
       );
   }};
