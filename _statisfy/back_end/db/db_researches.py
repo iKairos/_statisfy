@@ -13,13 +13,9 @@ class ResearchesBackbone(DatabaseBackbone):
                 research_name = kwargs['research_name'],
                 research_description = kwargs['research_description'],
                 dataset = kwargs['dataset'],
-                test_type = kwargs['test_type'],
                 delimiter = kwargs['delimiter'],
                 created_at = kwargs['created_at']
             )
-
-            for col in kwargs['columns']:
-                self.add_column(kwargs['_id'], col)
 
             self.add_author(kwargs['author'], kwargs['_id'], "AUTHOR")
 
@@ -68,18 +64,6 @@ class ResearchesBackbone(DatabaseBackbone):
                 _id = rid
             )[0]
 
-            return fetched[3]
-        except Exception as e:
-            print(e)
-            return False
-
-    def get_test_type(self, rid):
-        try:
-            fetched = self.fetch_row(
-                "researches",
-                _id = rid
-            )[0]
-
             return fetched[4]
         except Exception as e:
             print(e)
@@ -90,7 +74,7 @@ class ResearchesBackbone(DatabaseBackbone):
             fetched = self.fetch_row(
                 "researches",
                 _id = rid
-            )[5]
+            )[3]
 
             return fetched
         except Exception as e:
@@ -102,7 +86,7 @@ class ResearchesBackbone(DatabaseBackbone):
             fetched = self.fetch_row(
                 "researches",
                 _id = rid
-            )[6]
+            )[5]
 
             return fetched
         except Exception as e:

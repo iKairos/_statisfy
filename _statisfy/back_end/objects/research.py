@@ -52,9 +52,6 @@ class Research:
     def set_dataset(self, new_dataset):
         return self.db.set_dataset(self.rid, new_dataset)
     
-    def set_test_type(self, new_test_type):
-        return self.db.set_test_type(self.rid, new_test_type)
-    
     def set_delimiter(self, new_delimiter):
         return self.db.set_delimiter(self.rid, new_delimiter)
 
@@ -66,8 +63,6 @@ class Research:
             research_name = kwargs['research_name'],
             research_description = kwargs['research_description'],
             dataset = kwargs['dataset'],
-            test_type = kwargs['test_type'],
-            columns = kwargs['columns'],
             author = kwargs['author'],
             delimiter = kwargs['delimiter'],
             created_at = kwargs['created_at']
