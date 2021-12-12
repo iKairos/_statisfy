@@ -1,10 +1,9 @@
 import React from 'react'
-import MOCK_DATA from './MOCK_DATA.json'
-import  "../StyleSheets/tablesFolder/tables.css";
+import  "../../StyleSheets/tablesFolder/tables.css";
 //import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
-export const DisplayTable = (props) => {
+export const DataColumns = (props) => {
    
     var data = props.data;
     var columns;
@@ -23,13 +22,24 @@ export const DisplayTable = (props) => {
       }
       
      // { field: 'id', headerName: 'ID', width: 70 },
-
-      const columnHeader = columns.map(i => {
+     /*const columnHeader = columns.map(i => {
         return {field: i , headerName: i, width: 100}
-      })
+      })*/
+
+      const columnHeader = [
+         { field: 'columnName', headerName: 'Column Name', width: 140 },
+         { field: 'mean', headerName: 'Mean', width: 140 },
+         { field: 'std', headerName: 'Standard Deviation', width: 140 },
+         { field: 'min', headerName: 'MIN', width: 140 },
+         { field: 'max', headerName: 'MAX', width: 140 }
+      ]
       //{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-      //i.id = index;
-      const rows = data.map((i, index) => ({id: index, ...i}));
+      //const rows = data.map((i, index) => ({id: index, ...i}));
+      const columnNames = columns.map(i => {
+          return {columnName: i}
+      })
+
+      const rows = columnNames.map((i, index) => ({id: index, ...i}));
 
 
       return (

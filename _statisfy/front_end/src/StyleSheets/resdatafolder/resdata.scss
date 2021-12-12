@@ -8,36 +8,12 @@ $boxshadow: 0 0 10px 5px rgb(252, 252, 252);
 $buttonbg: #a742c5;
 $maxwidth: 40rem;
 
-.research {
+.resData {
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
   gap: 1rem;
   align-items: center;
-
-  &_header {
-    &_container {
-      height: 100%;
-      width: 90vw;
-      display: grid;
-      grid-template-rows: 1fr;
-      border-top-left-radius: $radius;
-      border-top-right-radius: $radius;
-      box-shadow: $boxshadow;
-      background-color: white;
-    }
-  }
-  &_heading {
-    padding: 1rem;
-    border-bottom: 1px solid $white1;
-    max-width: 90vw;
-
-    &_tabs {
-      display: grid;
-      grid-template-columns: 2rem 1fr 2rem;
-    }
-  }
-
   &_body {
     &_container {
       height: 100%;
@@ -86,7 +62,7 @@ $maxwidth: 40rem;
     &_table {
       margin-top: 1rem;
       min-height: 20vh;
-      max-height: 60vh;
+      height: max-content;
       overflow: auto;
       background-color: white;
       border: 1px solid $gray1;
@@ -97,8 +73,6 @@ $maxwidth: 40rem;
       }
     }
   }
-
-  padding-top: 2rem;
   &_arrow {
     width: 2rem;
     display: block;
@@ -107,64 +81,8 @@ $maxwidth: 40rem;
   }
 }
 
-.text {
-  &_title {
-    font-weight: bold;
-    font-size: 2rem;
-    color: $black;
-  }
-  &_label {
-    color: $gray1;
-  }
-  &_content {
-    color: $black;
-  }
-  &_topic {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: $gray1;
-  }
-  &_button {
-    color: $gray1;
-    border-radius: 0.5rem;
-    background-color: transparent;
-    max-width: min-content;
-    cursor: pointer;
-    &:hover {
-      color: $purple;
-      cursor: pointer;
-    }
-  }
-}
-
 @media screen and (min-width: 600px) {
-  .research {
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-content: center;
-    gap: 1rem;
-    align-items: center;
-    padding-top: 2rem;
-
-    &_header {
-      padding: 1rem;
-      max-width: 50vw;
-      &_container {
-        width: 50vw;
-        border: 1px solid $white1;
-      }
-    }
-
-    &_heading {
-      padding: 1rem;
-      max-width: 50vw;
-
-      &_tabs {
-        display: grid;
-        grid-template-columns: 1fr;
-      }
-    }
-
+  .resData {
     &_body {
       max-width: 50vw;
       &_container {
@@ -205,7 +123,7 @@ $maxwidth: 40rem;
       &_table {
         margin-top: 1rem;
         min-height: 20vh;
-        max-height: 60vh;
+        height: max-content;
         overflow: auto;
         background-color: white;
         border: 1px solid $gray1;
