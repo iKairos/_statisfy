@@ -74,9 +74,9 @@ class ResearchesBackbone(DatabaseBackbone):
             fetched = self.fetch_row(
                 "researches",
                 _id = rid
-            )[3]
-
-            return fetched
+            )[0]
+            
+            return fetched[3]
         except Exception as e:
             print(e)
             return False
@@ -86,9 +86,9 @@ class ResearchesBackbone(DatabaseBackbone):
             fetched = self.fetch_row(
                 "researches",
                 _id = rid
-            )[5]
+            )[0]
 
-            return fetched
+            return fetched[5]
         except Exception as e:
             print(e)
             return False
