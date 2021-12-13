@@ -18,6 +18,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { processUserToken } from "../actions/userActions";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { status500 } from "../constants/stringConstants";
 
 import { DisplayTable } from "../components/DisplayTable";
 
@@ -310,6 +311,12 @@ export default function ResearchScreen(props){
                     <AlertTitle>404 not found</AlertTitle>
                     This page does not exist. Please check the URL thoroughly or notify us if this is a mistake.
                 </Alert>
+            </Grow>
+        )
+    }else if(processed === "Request failed with status code 500"){
+        return(
+            <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
+                <Alert variant="outlined" severity="error">{status500}</Alert>
             </Grow>
         )
     }else{
