@@ -29,7 +29,6 @@ def decode_token(token):
             'code': 'TOKEN_FAIL'
         }
     else:
-        print(token)
         if Token(token).is_expired:
             return {
                 'error': 'Token is already expired.',
@@ -37,6 +36,12 @@ def decode_token(token):
             }
 
         u = User(decoded)
+
+        if not u.is_registered:
+            return {
+                "code": "TOKEN_FAIL",
+                "error": "Tokenized user does not exist [anymore]."
+            }
 
         return {
             'user': {

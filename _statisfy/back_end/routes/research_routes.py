@@ -24,9 +24,7 @@ def fetch_research(id):
             'research_name': research.research_name,
             'research_description': research.research_description,
             'dataset': research.dataset_directory,
-            'test_type': research.test_type,
             'authors': [{'uid': u, 'username': User(u).username} for u in research.authors],
-            'columns': research.columns,
             'delimiter': research.delimiter,
             'created_at': research.created_at
         },

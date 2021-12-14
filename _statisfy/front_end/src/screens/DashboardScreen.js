@@ -393,7 +393,7 @@ export default function DashboardScreen(props){
         return(
             <Redirect to={{pathname: "/signIn", message: "You need to log in to access this page. Please log in first or create an account using the Sign Up page."}}></Redirect>
         )
-    }else if(typeof processed === "string"){
+    }else if(processed === "Request failed with status code 500"){
         return(
             <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
                 <Alert variant="outlined" severity="error">{status500}</Alert>

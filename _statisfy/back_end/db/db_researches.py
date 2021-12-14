@@ -13,13 +13,9 @@ class ResearchesBackbone(DatabaseBackbone):
                 research_name = kwargs['research_name'],
                 research_description = kwargs['research_description'],
                 dataset = kwargs['dataset'],
-                test_type = kwargs['test_type'],
                 delimiter = kwargs['delimiter'],
                 created_at = kwargs['created_at']
             )
-
-            for col in kwargs['columns']:
-                self.add_column(kwargs['_id'], col)
 
             self.add_author(kwargs['author'], kwargs['_id'], "AUTHOR")
 
@@ -68,31 +64,7 @@ class ResearchesBackbone(DatabaseBackbone):
                 _id = rid
             )[0]
 
-            return fetched[3]
-        except Exception as e:
-            print(e)
-            return False
-
-    def get_test_type(self, rid):
-        try:
-            fetched = self.fetch_row(
-                "researches",
-                _id = rid
-            )[0]
-
             return fetched[4]
-        except Exception as e:
-            print(e)
-            return False
-
-    def get_columns(self, rid):
-        try:
-            fetched = self.fetch_row(
-                "dataset_columns",
-                _id = rid
-            )[0]
-
-            return fetched
         except Exception as e:
             print(e)
             return False
@@ -102,9 +74,9 @@ class ResearchesBackbone(DatabaseBackbone):
             fetched = self.fetch_row(
                 "researches",
                 _id = rid
-            )[5]
-
-            return fetched
+            )[0]
+            
+            return fetched[3]
         except Exception as e:
             print(e)
             return False
@@ -114,22 +86,21 @@ class ResearchesBackbone(DatabaseBackbone):
             fetched = self.fetch_row(
                 "researches",
                 _id = rid
-            )[6]
+            )[0]
 
-            return fetched
+            return fetched[5]
         except Exception as e:
             print(e)
             return False
-        
-    def add_column(self, rid, column):
+    
+    def get_studies(self, rid):
         try:
-            self.append_row(
-                "dataset_columns",
-                research_id = rid,
-                _column = column
+            fetched = self.fetch_row(
+                "studies",
+                research_id = rid
             )
 
-            return True
+            return fetched
         except Exception as e:
             print(e)
             return False
