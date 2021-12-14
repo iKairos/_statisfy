@@ -4,7 +4,6 @@
   grid-template-columns: 1fr;
   gap: 1rem;
   word-wrap: normal;
-  padding: 1rem;
 }
 
 .divStyle {
@@ -21,7 +20,6 @@
 
 input[type="checkbox"] {
   cursor: pointer;
-  margin-left: 1rem;
 }
 label {
   font-family: inherit;

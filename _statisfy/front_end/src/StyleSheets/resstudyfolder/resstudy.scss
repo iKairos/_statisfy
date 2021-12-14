@@ -15,13 +15,21 @@ $buttonbg: #a742c5;
   position: absolute;
   right: 0;
 }
+.StudyTitle {
+  padding: 0.5rem;
+  width: 100%;
+  grid-template-columns: 1fr;
+}
+.StudyFilter {
+  width: 100%;
+  margin-top: 1rem;
+}
 
 .resStudy {
+  background-color: #a742c5;
   display: grid;
   grid-template-columns: 1fr;
-  justify-content: center;
   gap: 1rem;
-  align-items: center;
   &_body {
     &_container {
       height: 100%;
@@ -32,6 +40,7 @@ $buttonbg: #a742c5;
       border-bottom-right-radius: $radius;
       box-shadow: $boxshadow;
       background-color: white;
+      border: 1px solid #b5b5b5;
     }
     &_add {
       width: 90vw;
@@ -45,10 +54,36 @@ $buttonbg: #a742c5;
         display: flex;
       }
     }
+
+    &_content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    &_study {
+      min-height: 50vh;
+    }
+  }
+  &_stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    &_filter {
+      width: 100%;
+    }
+    &_methods {
+    }
   }
 }
-
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 900px) {
+  .StudyTitle {
+    width: 48vw;
+    margin-bottom: 1rem;
+  }
+  .StudyFilter {
+    width: 15vw;
+    margin-top: 1rem;
+  }
   .Sort {
     position: absolute;
     right: 5rem;
@@ -69,15 +104,23 @@ $buttonbg: #a742c5;
         border-bottom-right-radius: $radius;
         box-shadow: $boxshadow;
         background-color: white;
-        border: 1px solid #b5b5b5;
       }
       &_add {
-        padding-left: 1rem;
         width: 50vw;
         display: flex;
         flex-direction: row;
         border-bottom: 1px solid $white1;
       }
+      &_content {
+        height: 100%;
+        padding-top: 1rem;
+        display: grid;
+        justify-content: center;
+      }
+    }
+    &_stats {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
     }
   }
 }

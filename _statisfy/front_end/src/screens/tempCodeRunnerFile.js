@@ -1,0 +1,1 @@
+import "../StyleSheets/researchfolder/research.css"
