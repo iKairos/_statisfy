@@ -1,6 +1,7 @@
 import { Backdrop, CircularProgress } from "@mui/material";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import { researchSuccess, researchSuccessTitle } from "../../constants/stringConstants";
 import "../../StyleSheets/summaryfolder/summarypage.css";
 
 export default function SummaryPage(props){
@@ -23,8 +24,8 @@ export default function SummaryPage(props){
             pathname: `/dashboard/${props.ResearchRes?.uuid}`,
             state: {
                 message: {
-                    'title': "Research created successfully!",
-                    'body': "You may now view and customize your research. Proceed by pressing the compute button to generate analytics and interpretation."
+                    'title': researchSuccessTitle,
+                    'body': researchSuccess
                 }
             }
         });

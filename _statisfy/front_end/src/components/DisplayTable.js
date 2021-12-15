@@ -22,13 +22,10 @@ export const DisplayTable = (props) => {
         })
       }
       
-     // { field: 'id', headerName: 'ID', width: 70 },
-
       const columnHeader = columns.map(i => {
         return {field: i , headerName: i, width: 70}
       })
-      //{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-      //i.id = index;
+      
       const rows = data.map((i, index) => ({id: index, ...i}));
 
 
