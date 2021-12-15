@@ -175,6 +175,7 @@ export default function DataSetPage(props){
                                         <DisplayTable 
                                             data={props.DataArray}
                                             Header = {header}
+                                            rowNumber = {10}
                                         />
                                     </div>
                                 </div>

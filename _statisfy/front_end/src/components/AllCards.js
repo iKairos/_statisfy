@@ -3,6 +3,9 @@ import { statMethods } from "../static/statMethods";
 import Card from "./Card";
 import { useState } from "react";
 
+
+import "../StyleSheets/statpagefolder/statpage.css";
+
 export default function AllCards(props){
     const filtered = statMethods.filter(([name, tags]) => {
         return props.tags.every(tag => tags.includes(tag))

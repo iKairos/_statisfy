@@ -1,8 +1,7 @@
-
+import "../StyleSheets/cardfolder/card.css"
 export default function Card(props){
 
    // const attributes = props.attribute
-
     return(
         <div className ="card" onClick={()=>props.display(props.title)}>
             

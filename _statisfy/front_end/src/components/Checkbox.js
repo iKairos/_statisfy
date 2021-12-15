@@ -151,7 +151,7 @@ export default function Checkbox({callbackFunction}){
             </div>
 
             <div className = "divStyle" >    
-                <span className="upload_span"> Number of Independent Variables:</span>
+                <span className="upload_span"> Independent Variables:</span>
                     
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {

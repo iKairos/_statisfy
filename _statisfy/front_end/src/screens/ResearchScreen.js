@@ -1,4 +1,3 @@
-
 import "../StyleSheets/researchfolder/research.css"
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
@@ -9,27 +8,41 @@ import { useDispatch, useSelector } from "react-redux";
 import { getResearch } from "../actions/researchAction";
 import { useState } from "react";
 import { Alert, AlertTitle, Fade, Grow, Skeleton } from "@mui/material";
+
 import TableChartIcon from '@mui/icons-material/TableChart';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import TextField from '@mui/material/TextField';
+import EditIcon from '@mui/icons-material/Edit';
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+
 import { processUserToken } from "../actions/userActions";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import createHistory from 'history/createBrowserHistory';
+
+
+import ResData from "../components/researchPages/resData";
+import ResStudies from "../components/researchPages/resStudies";
+
+
 import { status500 } from "../constants/stringConstants";
 
-import { DisplayTable } from "../components/DisplayTable";
 
-import createHistory from 'history/createBrowserHistory';
 
 export default function ResearchScreen(props){
     const { id } = useParams();
     const location = useLocation();
     const [value, setValue] = useState(1);
-    const [contentPage, setContentPage] = useState(1);
     const [message, setMessage] = useState();
+    const [editTitle, setTitle] = useState(true);
+    const [editDesc, setDesc] = useState(false);
 
     const dispatch = useDispatch();
     const dataSelector = useSelector((state) => 
@@ -46,6 +59,9 @@ export default function ResearchScreen(props){
     const {researchGetRes} = dataSelector;
     const {datasetFile} = filedataSelector;
 
+    const setTitleFunction = function(newValue){
+        setTitle(newValue);
+    };
     const switchTabs = (event, newValue) => {
         setValue(newValue);
     };
@@ -55,18 +71,7 @@ export default function ResearchScreen(props){
     const prevTab = function(){
         setValue(value-1);
     };
-    const nextContent = function(){
-        setContentPage(contentPage+1);
-    };
-    const prevContent = function(){
-        setContentPage(contentPage-1);
-    };
-
-
-    const switchContentPage = (event, newValue) => {
-        setContentPage(newValue);
-    };
-
+    
     const isAuthor = () => {
         const x = researchGetRes?.data.authors.map(author => {
             return author['uid'] === processed?.user?._id;
@@ -91,6 +96,20 @@ export default function ResearchScreen(props){
         history.replace();
     }, [location]);
 
+
+    //COMPONENT STYLES
+    const styles = theme => ({
+        textField: {
+            width: '90%',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            color: 'white',
+            paddingBottom: 0,
+            marginTop: 0,
+            fontWeight: 500
+        },
+    });
+
     if(researchGetRes?.code === 'RESEARCH_GET_SUCCESS'){
 
         return(
@@ -106,7 +125,34 @@ export default function ResearchScreen(props){
                                 </Alert>
                             </Grow>
                         }
-                        <span className ="text_title">{researchGetRes?.data.research_name}</span>
+                        {
+                            editTitle? (
+                                <div className = "text_content">
+                                    <span className ="text_title">{researchGetRes?.data.research_name}
+                                        <EditIcon
+                                            onClick={()=>setTitleFunction(false)}
+                                        />
+                                    
+                                    </span>
+                                    
+                                </div>
+                                
+                            ):(
+                                <div className = "text_content">
+                                    <TextField 
+                                        id="standard-basic" 
+                                        label="New Research Title" 
+                                        variant="standard"
+                                        size="small"
+                                    />
+                                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end' }}>
+                                        <p>1</p>
+                                        <p>2</p>
+                                    </Box>
+                                </div>
+                            )
+                        }
+
                         {researchGetRes?.data.authors.map(author => {
                             return <p className="text_button">
                             <Link to={`/profile/${author['uid']}`}
@@ -146,13 +192,14 @@ export default function ResearchScreen(props){
                                 scrollButtons="auto"
                             >
                                 
-                                <Tab value={1} label="Computation"/>
-                                <Tab value={2} label="Interpretation" />
-                                <Tab value={3} label="Discussions" />
-                                <Tab value={4} label="Metadata" />
+                                <Tab value={1} label="Dataset"/>
+                                <Tab value={2} label="Studies" />
+                                <Tab value={3} label="Interpretation" />
+                                <Tab value={4} label="Discussions" />
+                                <Tab value={5} label="Metadata" />
                                 {
                                     isAuthor() &&
-                                    <Tab value={5} label="Settings"/>
+                                    <Tab value={6} label="Settings"/>
                                 }
                             </Tabs>
                         </Box>
@@ -168,93 +215,22 @@ export default function ResearchScreen(props){
                 {value === 1 &&
                 <>
                 <Fade in={value === 1}>
-                    <div className="research_body_container">
-                        <div className="research_body_heading">
-                            <span className ="text_topic">{researchGetRes?.data.test_type}</span>
-                            <p className ="text_label">STATISTICS</p>
-                        </div>
-                        <div className="research_body_tabs">
-                            <button
-                                className="research_arrow"
-                                onClick={prevContent}
-                                disabled = {contentPage === 1 ? true : false}
-                            >
-                                <ArrowBackIosNewIcon/>
-                            </button>
-                            <Box sx = {{ 
-                                minWidth: 100,
-                                width: '1fr'
-                             }}>
-                                <Tabs
-                                    value={contentPage}
-                                    onChange={switchContentPage}
-                                    textColor="secondary"
-                                    indicatorColor="secondary"
-                                    aria-label="scrollable tabs"
-                                    variant="scrollable"
-                                    scrollButtons="auto"
-                                >
-                                    <Tab value={1} label="Dataset" icon={<TableChartIcon/>}/>
-                                    <Tab value={2} label="Graphs" icon={<TimelineIcon/>} />
-                                    <Tab value={3} label="Variables" icon={<CalculateIcon/>} />
-                                    <Tab value={4} label="Results" icon={<DoneAllIcon/>} />
-                                </Tabs>
-                            </Box>
-                            <button
-                                className="research_arrow"
-                                onClick={nextContent}
-                                disabled = {contentPage === 4 ? true : false}
-                            >
-                                <ArrowForwardIosIcon/>
-                            </button>
-                        </div>
-                        {contentPage === 1 &&
-                            <Fade in={contentPage === 1}>
-                                <div className = "research_body_content">
-                                    <div className = "research_dataset">
-                                        <div className = "research_dataset_heading">
-                                            Description
-                                        </div>
-                                        <div className = "research_dataset_desc">
-                                            <p className = "text_topic"> Context</p>
-                                            <p className = " text_content">
-                                                This Dataset ChuChu
-                                            </p>
-                                            <p className = "text_topic"> Content</p>
-                                            <p className = " text_content">
-                                                This Dataset ChuChu
-                                            </p>
-                                            <p className = "text_topic"> Acknowledgements</p>
-                                            <p className = " text_content">
-                                                This Dataset ChuChu
-                                            </p>
-                                        </div>
-                                        <div className = "research_dataset_table">
-                                            <div className = "research_dataset_table_heading">
-                                                dataset_name.csv (5.43 kB)
-                                            </div>
-                                            {typeof datasetFile !== 'undefined' ? <DisplayTable data={datasetFile.data} Header={true} rowNumber={15}/> : null}
-                                        </div>
-                                    </div>
-                                </div>
-                            </Fade>
-                        }
-                        
+                    <div>
+                        <ResData
+                            DataSetFile = {datasetFile}
+                        />
                     </div>
-                    
+                        
                 </Fade>
                 </>
-                
-
                 }
                 {value === 2 &&
                 <>
                     <Fade in={value === 2}>
-                        <div className="research_body_container">
-                            <div className="research_body_heading">
-                                <span className ="text_topic">Interpretation of the Results</span>
-                                <p className ="text_label">STATISTICS</p>
-                            </div>
+                        <div>
+                            <ResStudies
+                                DataSetFile = {datasetFile}
+                            />
                         </div>
                     </Fade>
                 </>

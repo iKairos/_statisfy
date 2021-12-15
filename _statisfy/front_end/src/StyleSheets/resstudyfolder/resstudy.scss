@@ -1,0 +1,126 @@
+$radius: 0.25rem;
+$white1: #eeeeee;
+$gray1: #b5b5b5;
+$pink: #dfa9ff;
+$purple: #a742c5;
+$black: #23272a;
+$boxshadow: 0 0 10px 5px rgb(252, 252, 252);
+$buttonbg: #a742c5;
+
+.AddIcon {
+  color: #a742c5;
+  transform: scale(1.2);
+}
+.Sort {
+  position: absolute;
+  right: 0;
+}
+.StudyTitle {
+  padding: 0.5rem;
+  width: 100%;
+  grid-template-columns: 1fr;
+}
+.StudyFilter {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.resStudy {
+  background-color: #a742c5;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  &_body {
+    &_container {
+      height: 100%;
+      width: 90vw;
+      display: grid;
+      grid-template-rows: 1fr;
+      border-bottom-left-radius: $radius;
+      border-bottom-right-radius: $radius;
+      box-shadow: $boxshadow;
+      background-color: white;
+      border: 1px solid #b5b5b5;
+    }
+    &_add {
+      width: 90vw;
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid $white1;
+      position: relative;
+      &_button {
+        border: none;
+        width: max-content;
+        display: flex;
+      }
+    }
+
+    &_content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    &_study {
+      min-height: 50vh;
+    }
+  }
+  &_stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    &_filter {
+      width: 100%;
+    }
+    &_methods {
+    }
+  }
+}
+@media screen and (min-width: 900px) {
+  .StudyTitle {
+    width: 48vw;
+    margin-bottom: 1rem;
+  }
+  .StudyFilter {
+    width: 15vw;
+    margin-top: 1rem;
+  }
+  .Sort {
+    position: absolute;
+    right: 5rem;
+  }
+  .resStudy {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    &_body {
+      &_container {
+        height: 100%;
+        width: 50vw;
+        display: grid;
+        grid-template-rows: 1fr;
+        border-bottom-left-radius: $radius;
+        border-bottom-right-radius: $radius;
+        box-shadow: $boxshadow;
+        background-color: white;
+      }
+      &_add {
+        width: 50vw;
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px solid $white1;
+      }
+      &_content {
+        height: 100%;
+        padding-top: 1rem;
+        display: grid;
+        justify-content: center;
+      }
+    }
+    &_stats {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+}
