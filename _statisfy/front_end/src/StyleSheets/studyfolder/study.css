@@ -1,0 +1,39 @@
+.Study {
+  height: 50rem;
+  background-color: transparent;
+}
+
+.Study_tabs {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 2rem 1fr 2rem;
+      grid-template-columns: 2rem 1fr 2rem;
+  border-bottom: 1px solid #eeeeee;
+  width: 100%;
+}
+
+.Study_header {
+  padding: 1rem;
+}
+
+@media screen and (min-width: 600px) {
+  .Study {
+    height: 50rem;
+    background-color: transparent;
+  }
+  .Study_tabs {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    border-bottom: 1px solid #eeeeee;
+    width: 100%;
+  }
+  .Study_content {
+    padding: 1rem;
+  }
+  .Study_content_details {
+    color: #414141;
+  }
+}
+/*# sourceMappingURL=study.css.map */

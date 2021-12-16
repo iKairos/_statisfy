@@ -23,14 +23,14 @@ export const DisplayTable = (props) => {
       }
       
       const columnHeader = columns.map(i => {
-        return {field: i , headerName: i, width: 100}
+        return {field: i , headerName: i, width: 140}
       })
       
       const rows = data.map((i, index) => ({id: index, ...i}));
 
 
       return (
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 600, width: '100%' }}>
           {props.checked? (
             <DataGrid
               rows={rows}

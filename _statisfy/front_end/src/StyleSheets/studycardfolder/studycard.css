@@ -1,0 +1,36 @@
+.StudyCard {
+  background-color: white;
+  border: 1px solid #b5b5b5;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  width: 70vw;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.StudyCard_title {
+  font-weight: 700;
+}
+
+.StudyCard_method {
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.StudyCard_desc {
+  display: none;
+}
+
+@media screen and (min-width: 900px) {
+  .StudyCard {
+    width: 45vw;
+  }
+  .StudyCard_desc {
+    display: block;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eeeeee;
+  }
+}
+/*# sourceMappingURL=studycard.css.map */
