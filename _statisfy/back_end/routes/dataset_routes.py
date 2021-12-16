@@ -5,13 +5,17 @@ from flask_cors import cross_origin
 import pandas as pd
 import os
 
-@app.route("/api/dataset/process/delimiter=<delim>", methods = ['POST'])
+@app.route("/api/dataset/process/delimiter=<delim>/isjson=<json>", methods = ['POST'])
 @cross_origin()
-def dataset_details(delim):
+def dataset_details(delim, json):
     try:
-        file = request.files['file']
-        
-        df = pd.read_csv(file, delimiter=delim)
+        file = None
+        try:
+            file = request.files['file']
+            df = pd.read_csv(file, delimiter=delim)
+        except KeyError:
+            file = request.get_json()
+            df = pd.json_normalize(file)
         
         details = []
 
@@ -66,11 +70,13 @@ def get_dataset(filename):
 
         df = pd.read_csv(directory+filename)
         df = df.head(50) if df.shape[0] > 50 else df
-        df = df.fillna('')
+        df = df.fillna('NA')
 
         return {
             'code': 'DATASET_GET_SUCCESS',
-            'data': df.to_dict(orient='records')
+            'data': df.to_dict(orient='records'),
+            'filename': filename,
+            'filesize': os.path.getsize(directory+filename)
         }
     except Exception as e:
         return {

@@ -6,6 +6,7 @@ import { Alert, AlertTitle, Collapse, Tooltip, CircularProgress, Fade, Slide } f
 import { instDataPage, tooltipDataset, tooltipDelimiter } from "../../constants/stringConstants";
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import TableChartIcon from '@mui/icons-material/TableChart';
+import { formatBytes } from '../../utils';
 
 export default function DataSetPage(props){
 
@@ -31,19 +32,6 @@ export default function DataSetPage(props){
         }else{
             setCheckedCols(checkedCols.filter((i) => i !== e.target.name));
         }
-        
-    }
-
-    const formatBytes = (bytes, decimals = 2) => {
-        if (bytes === 0) return '0 Bytes';
-    
-        const k = 1024;
-        const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['Bytes', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-    
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
     
     return(
