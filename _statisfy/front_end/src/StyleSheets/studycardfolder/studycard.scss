@@ -1,0 +1,42 @@
+$radius: 0.25rem;
+$white1: #eeeeee;
+$gray1: #b5b5b5;
+$pink: #dfa9ff;
+$purple: #a742c5;
+$black: #23272a;
+$boxshadow: 0 0 10px 5px rgb(252, 252, 252);
+$buttonbg: #a742c5;
+
+.StudyCard {
+  background-color: white;
+  border: 1px solid #b5b5b5;
+  border-radius: $radius;
+  padding: 1rem;
+  width: 70vw;
+  margin-top: 1rem;
+  cursor: pointer;
+  &_title {
+    font-weight: 700;
+  }
+  &_method {
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+  &_desc {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .StudyCard {
+    width: 45vw;
+
+    &_desc {
+      display: block;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eeeeee;
+    }
+  }
+}

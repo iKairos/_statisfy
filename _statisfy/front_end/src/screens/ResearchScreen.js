@@ -194,12 +194,11 @@ export default function ResearchScreen(props){
                                 
                                 <Tab value={1} label="Dataset"/>
                                 <Tab value={2} label="Studies" />
-                                <Tab value={3} label="Interpretation" />
-                                <Tab value={4} label="Discussions" />
-                                <Tab value={5} label="Metadata" />
+                                <Tab value={3} label="Discussions" />
+                                <Tab value={4} label="Metadata" />
                                 {
                                     isAuthor() &&
-                                    <Tab value={6} label="Settings"/>
+                                    <Tab value={5} label="Settings"/>
                                 }
                             </Tabs>
                         </Box>

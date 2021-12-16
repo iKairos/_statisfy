@@ -22,7 +22,6 @@
 }
 
 .resStudy {
-  background-color: #a742c5;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr;
@@ -46,6 +45,7 @@
 }
 
 .resStudy_body_add {
+  padding: 0.5rem;
   width: 90vw;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -60,9 +60,7 @@
 
 .resStudy_body_add_button {
   border: none;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  width: 11rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -83,6 +81,19 @@
 }
 
 .resStudy_body_study {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   min-height: 50vh;
 }
 
@@ -135,6 +146,7 @@
     -webkit-box-shadow: 0 0 10px 5px #fcfcfc;
             box-shadow: 0 0 10px 5px #fcfcfc;
     background-color: white;
+    margin-bottom: 1rem;
   }
   .resStudy_body_add {
     width: 50vw;
