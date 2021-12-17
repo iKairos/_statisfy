@@ -119,8 +119,10 @@ $buttonbg: #a742c5;
       &_content {
         height: 100%;
         padding-top: 1rem;
+        padding-bottom: 1rem;
         display: grid;
         justify-content: center;
+        gap: 1rem;
       }
     }
     &_stats {
