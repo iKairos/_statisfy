@@ -7,10 +7,12 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { CircularProgress } from '@mui/material';
 
-import TableChartIcon from '@mui/icons-material/TableChart';
+import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
-import CalculateIcon from '@mui/icons-material/Calculate';
+import DetailsIcon from '@mui/icons-material/Details';
+import DescriptionIcon from '@mui/icons-material/Description';
+
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useState } from "react";
@@ -73,10 +75,10 @@ export default function ResData(props){
                         variant="scrollable"
                         scrollButtons="auto"
                     >
-                        <Tab value={1} label="Description" icon={<TableChartIcon/>}/>
+                        <Tab value={1} label="Description" icon={<DescriptionIcon/>}/>
                         <Tab value={2} label="Data" icon={<TimelineIcon/>} />
-                        <Tab value={3} label="Columns" icon={<CalculateIcon/>} />
-                        <Tab value={4} label="Details" icon={<DoneAllIcon/>} />
+                        <Tab value={3} label="Columns" icon={<ViewColumnIcon/>} />
+                        <Tab value={4} label="Details" icon={<DetailsIcon/>} />
                     </Tabs>
                 </Box>
                 <button
