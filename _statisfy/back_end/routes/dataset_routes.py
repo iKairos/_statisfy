@@ -5,13 +5,18 @@ from flask_cors import cross_origin
 import pandas as pd
 import os
 
-@app.route("/api/dataset/process/delimiter=<delim>", methods = ['POST'])
+@app.route("/api/dataset/process", methods = ['POST'])
 @cross_origin()
-def dataset_details(delim):
+def dataset_details():
     try:
-        file = request.files['file']
-        
-        df = pd.read_csv(file, delimiter=delim)
+        file = None
+        data = request.form
+        try:
+            file = request.files['file']
+        except:
+            file = data['filepath']
+
+        df = pd.read_csv(file, delimiter=data['delimiter'])
         
         details = []
 
@@ -23,10 +28,9 @@ def dataset_details(delim):
             min = "NA"
             try:
                 if df[i].dtypes != 'O':
-                    mean = float(df[i].mean())
-                    std = float(df[i].std())
-                    median = float(df[i].median())
-
+                    mean = round(float(df[i].mean()), 2) # temporary fix
+                    std = round(float(df[i].std()), 2)
+                    median = round(float(df[i].median()), 2)
                 try:
                     max = float(df[i].max())
                     min = float(df[i].min())
@@ -66,11 +70,14 @@ def get_dataset(filename):
 
         df = pd.read_csv(directory+filename)
         df = df.head(50) if df.shape[0] > 50 else df
-        df = df.fillna('')
+        df = df.fillna('NA')
 
         return {
             'code': 'DATASET_GET_SUCCESS',
-            'data': df.to_dict(orient='records')
+            'data': df.to_dict(orient='records'),
+            'filename': filename,
+            'filesize': os.path.getsize(directory+filename),
+            'directory': directory+filename
         }
     except Exception as e:
         return {

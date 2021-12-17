@@ -28,6 +28,7 @@ export const DataColumns = (props) => {
 
       const columnHeader = [
          { field: 'columnName', headerName: 'Column Name', width: 140 },
+         { field: 'data', headerName: 'Data', width: 140 },
          { field: 'mean', headerName: 'Mean', width: 140 },
          { field: 'std', headerName: 'Standard Deviation', width: 140 },
          { field: 'min', headerName: 'MIN', width: 140 },

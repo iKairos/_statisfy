@@ -5,19 +5,23 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import { CircularProgress } from '@mui/material';
 
-import TableChartIcon from '@mui/icons-material/TableChart';
+import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
-import CalculateIcon from '@mui/icons-material/Calculate';
+import DetailsIcon from '@mui/icons-material/Details';
+import DescriptionIcon from '@mui/icons-material/Description';
+
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useState } from "react";
-import { Alert, AlertTitle, Fade, Grow, Skeleton } from "@mui/material";
 
 import { DisplayTable } from "../../components/DisplayTable";
 import { DataColumns } from "./dataColumns";
-
+import { formatBytes } from '../../utils';
+import { useDispatch, useSelector } from "react-redux";
+import { processDataset } from "../../actions/datasetActions";
 
 
 
@@ -26,6 +30,8 @@ import { DataColumns } from "./dataColumns";
 export default function ResData(props){
     
     const [contentPage, setContentPage] = useState(1);
+
+    const dispatch = useDispatch();
 
     const nextContent = function(){
         setContentPage(contentPage+1);
@@ -37,10 +43,15 @@ export default function ResData(props){
         setContentPage(newValue);
     };
 
+    const fileDetailsSelector = useSelector((state) => 
+        state.datasetDetails
+    );
+    const {datasetDetails} = fileDetailsSelector;
+
     return(
         <div className="resData_body_container">
             <div className="resData_body_heading">
-                <p className ="text_label">dataset.csv (5.1kb) </p>
+                <p className ="text_label">{props.DataSetFile ? `${props.DataSetFile?.filename.slice(9,)} (${formatBytes(props.DataSetFile?.filesize)})` : <CircularProgress color="info" thickness={2.5} size={30}/>} </p>
             </div>
 
             <div className="resData_body_tabs">
@@ -64,10 +75,10 @@ export default function ResData(props){
                         variant="scrollable"
                         scrollButtons="auto"
                     >
-                        <Tab value={1} label="Description" icon={<TableChartIcon/>}/>
+                        <Tab value={1} label="Description" icon={<DescriptionIcon/>}/>
                         <Tab value={2} label="Data" icon={<TimelineIcon/>} />
-                        <Tab value={3} label="Columns" icon={<CalculateIcon/>} />
-                        <Tab value={4} label="Details" icon={<DoneAllIcon/>} />
+                        <Tab value={3} label="Columns" icon={<ViewColumnIcon/>} />
+                        <Tab value={4} label="Details" icon={<DetailsIcon/>} />
                     </Tabs>
                 </Box>
                 <button
@@ -106,7 +117,7 @@ export default function ResData(props){
                 <div className = "resData_dataset">
                     <div className = "resData_dataset_table">
                         <div className = "resData_dataset_table_heading">
-                            dataset_name.csv (5.43 kB)
+                        {props.DataSetFile ? `${props.DataSetFile?.filename.slice(9,)} (${formatBytes(props.DataSetFile?.filesize)})` : <CircularProgress color="info" thickness={2.5} size={30}/>}
                         </div>
                         {typeof props.DataSetFile !== 'undefined' ? 
                             <DisplayTable 
@@ -114,7 +125,7 @@ export default function ResData(props){
                                 Header={true} 
                                 rowNumber={15}
                                 checked={false}
-                            /> : null
+                            /> : <CircularProgress color="info" thickness={2.5} size={30}/>
                         }
                     </div>
                 </div>
@@ -123,15 +134,15 @@ export default function ResData(props){
                 <div className = "resData_dataset">
                     <div className = "resData_dataset_table">
                         <div className = "resData_dataset_table_heading">
-                            Columns
+                            Column Data
                         </div>
-                        {typeof props.DataSetFile !== 'undefined' ? 
-                            <DataColumns
-                                data={props.DataSetFile.data} 
+                        {typeof datasetDetails !== 'undefined' ? 
+                            <DisplayTable 
+                                data={datasetDetails.details} 
                                 Header={true} 
-                                rowNumber={10}
-                                checked={true}
-                            /> : null
+                                rowNumber={15}
+                                checked={false}
+                            /> : <CircularProgress color="info" thickness={2.5} size={30}/>
                         }
                     </div>
                 </div>

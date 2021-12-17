@@ -33,6 +33,7 @@ import ResStudies from "../components/researchPages/resStudies";
 
 
 import { status500 } from "../constants/stringConstants";
+import { processDataset } from "../actions/datasetActions";
 
 
 
@@ -57,7 +58,7 @@ export default function ResearchScreen(props){
 
     const { processed } = userdataSelector;
     const {researchGetRes} = dataSelector;
-    const {datasetFile} = filedataSelector;
+    const {datasetFile} = filedataSelector;   
 
     const setTitleFunction = function(newValue){
         setTitle(newValue);
@@ -82,6 +83,14 @@ export default function ResearchScreen(props){
 
     if(props.token && processed?.code === "TOKEN_FAIL"){
         localStorage.removeItem('token');
+    }
+
+    if(typeof datasetFile !== 'undefined'){
+        const formData = new FormData();
+        formData.append("filepath", datasetFile.directory);
+        formData.append("delimiter", ','); // temporary fix
+
+        dispatch(processDataset(formData))
     }
 
     React.useEffect(() => {
