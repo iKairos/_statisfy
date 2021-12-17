@@ -86,7 +86,11 @@ export default function ResearchScreen(props){
     }
 
     if(typeof datasetFile !== 'undefined'){
-        dispatch(processDataset(datasetFile.data, null, 'true'))
+        const formData = new FormData();
+        formData.append("filepath", datasetFile.directory);
+        formData.append("delimiter", ','); // temporary fix
+
+        dispatch(processDataset(formData))
     }
 
     React.useEffect(() => {

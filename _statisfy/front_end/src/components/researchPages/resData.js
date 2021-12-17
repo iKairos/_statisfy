@@ -49,7 +49,7 @@ export default function ResData(props){
     return(
         <div className="resData_body_container">
             <div className="resData_body_heading">
-                <p className ="text_label">{props.DataSetFile ? `${props.DataSetFile?.filename} (${formatBytes(props.DataSetFile?.filesize)})` : <CircularProgress color="info" thickness={2.5} size={30}/>} </p>
+                <p className ="text_label">{props.DataSetFile ? `${props.DataSetFile?.filename.slice(9,)} (${formatBytes(props.DataSetFile?.filesize)})` : <CircularProgress color="info" thickness={2.5} size={30}/>} </p>
             </div>
 
             <div className="resData_body_tabs">
@@ -115,7 +115,7 @@ export default function ResData(props){
                 <div className = "resData_dataset">
                     <div className = "resData_dataset_table">
                         <div className = "resData_dataset_table_heading">
-                        {props.DataSetFile ? `${props.DataSetFile?.filename} (${formatBytes(props.DataSetFile?.filesize)})` : <CircularProgress color="info" thickness={2.5} size={30}/>}
+                        {props.DataSetFile ? `${props.DataSetFile?.filename.slice(9,)} (${formatBytes(props.DataSetFile?.filesize)})` : <CircularProgress color="info" thickness={2.5} size={30}/>}
                         </div>
                         {typeof props.DataSetFile !== 'undefined' ? 
                             <DisplayTable 
@@ -132,7 +132,7 @@ export default function ResData(props){
                 <div className = "resData_dataset">
                     <div className = "resData_dataset_table">
                         <div className = "resData_dataset_table_heading">
-                            Columns
+                            Column Data
                         </div>
                         {typeof datasetDetails !== 'undefined' ? 
                             <DisplayTable 

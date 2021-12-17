@@ -201,8 +201,9 @@ export default function DashboardScreen(props){
 
             const formData = new FormData();
             formData.append("file", e.target.files[0]);
+            formData.append("delimiter", delimiter);
 
-            dispatch(processDataset(formData,delimiter));
+            dispatch(processDataset(formData));
 
             setFile(e.target.files[0])
             setDisplay(true);

@@ -5,17 +5,18 @@ from flask_cors import cross_origin
 import pandas as pd
 import os
 
-@app.route("/api/dataset/process/delimiter=<delim>/isjson=<json>", methods = ['POST'])
+@app.route("/api/dataset/process", methods = ['POST'])
 @cross_origin()
-def dataset_details(delim, json):
+def dataset_details():
     try:
         file = None
+        data = request.form
         try:
             file = request.files['file']
-            df = pd.read_csv(file, delimiter=delim)
-        except KeyError:
-            file = request.get_json()
-            df = pd.json_normalize(file)
+        except:
+            file = data['filepath']
+
+        df = pd.read_csv(file, delimiter=data['delimiter'])
         
         details = []
 
@@ -27,10 +28,9 @@ def dataset_details(delim, json):
             min = "NA"
             try:
                 if df[i].dtypes != 'O':
-                    mean = float(df[i].mean())
-                    std = float(df[i].std())
-                    median = float(df[i].median())
-
+                    mean = round(float(df[i].mean()), 2) # temporary fix
+                    std = round(float(df[i].std()), 2)
+                    median = round(float(df[i].median()), 2)
                 try:
                     max = float(df[i].max())
                     min = float(df[i].min())
@@ -76,7 +76,8 @@ def get_dataset(filename):
             'code': 'DATASET_GET_SUCCESS',
             'data': df.to_dict(orient='records'),
             'filename': filename,
-            'filesize': os.path.getsize(directory+filename)
+            'filesize': os.path.getsize(directory+filename),
+            'directory': directory+filename
         }
     except Exception as e:
         return {
