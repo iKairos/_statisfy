@@ -162,11 +162,13 @@
   .resStudy_body_content {
     height: 100%;
     padding-top: 1rem;
+    padding-bottom: 1rem;
     display: -ms-grid;
     display: grid;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    gap: 1rem;
   }
   .resStudy_stats {
     display: -ms-grid;

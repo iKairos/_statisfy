@@ -355,6 +355,13 @@ export default function ResStudies(props){
                                 checked={true}
                             /> : null
                         }
+
+                        <Button
+                            onClick={()=>handleAdding(false)}
+                            color="secondary"
+                        >
+                        Create Study
+                        </Button>
                     
                     </div>)
                     : (
