@@ -30,7 +30,7 @@ export const DisplayTable = (props) => {
 
 
       return (
-        <div style={{ height: 600, width: '100%' }}>
+        <div style={{ height:500, width: '100%' }}>
           {props.checked? (
             <DataGrid
               rows={rows}

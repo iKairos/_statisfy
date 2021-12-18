@@ -362,6 +362,18 @@ export default function ResStudies(props){
                                     fullWidth
                                 />
                             </div>
+                        <div style={{paddingTop:"1rem"}}>
+                            <TextField
+                                id="outlined-textarea"
+                                label="Description"
+                                placeholder="Add description"
+                                multiline
+                                rows={4}
+                                color = "secondary"
+                                fullWidth
+                            />
+                        </div>
+                        
                         </Box>
                         <Box className = "StudyTitle">
                             <Typography>Select Method:</Typography>
