@@ -70,7 +70,7 @@ def get_dataset(filename):
 
         df = pd.read_csv(directory+filename)
         df = df.head(50) if df.shape[0] > 50 else df
-        df = df.fillna('NA')
+        df = df.fillna('')
 
         return {
             'code': 'DATASET_GET_SUCCESS',
