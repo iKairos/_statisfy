@@ -50,6 +50,7 @@ export default function ResStudies(props){
 
     // main study variables
     const [studyName, setStudyName] = useState();
+    const [studyDesc, setStudyDesc] = useState();
     const [studyMethod, setStudyMethod] = useState();
     const [studyColumns, setStudyColumns] = useState([]);
 
@@ -126,6 +127,7 @@ export default function ResStudies(props){
         formData.append("test_type", methodChosen)
         formData.append("created_at", new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, ''))
         formData.append("columns", studyColumns)
+        formData.append("study_description", studyDesc)
 
         dispatch(saveStudy(formData));
     }
@@ -370,6 +372,7 @@ export default function ResStudies(props){
                                 multiline
                                 rows={4}
                                 color = "secondary"
+                                onChange={e => setStudyDesc(e.target.value)}
                                 fullWidth
                             />
                         </div>
@@ -444,9 +447,10 @@ export default function ResStudies(props){
                                                 HandleSelected = {handleSelected}
                                                 title={i[1]}
                                                 method={i[4]}
+                                                description={i[6]}
                                             />
                                         )
-                                    }) : "a"
+                                    }) : <CircularProgress color="info" thickness={2.5} size={30}/>
                                 }
                             </div>
                         </div>

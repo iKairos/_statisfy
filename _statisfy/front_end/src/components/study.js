@@ -6,6 +6,10 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import HelpIcon from '@mui/icons-material/Help';
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+import ArticleIcon from '@mui/icons-material/Article';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useState } from "react";
 
 
@@ -50,10 +54,10 @@ export default function Study(props){
                         variant="scrollable"
                         scrollButtons="auto"
                     >
-                        <Tab value={1} label="Details"/>
-                        <Tab value={2} label="Graphs"/>
-                        <Tab value={3} label="Results"/>
-                        <Tab value={4} label="Interpretation"/>
+                        <Tab value={1} label="Details" icon={<HelpIcon/>}/>
+                        <Tab value={2} label="Graphs" icon={<AutoGraphIcon/>}/>
+                        <Tab value={3} label="Results" icon={<CheckCircleIcon/>}/>
+                        <Tab value={4} label="Interpretation" icon={<ArticleIcon/>}/>
                     </Tabs>
                 </Box>
                 <button

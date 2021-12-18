@@ -16,9 +16,7 @@ export default function StudyCard(props){
             </div>
             
             <div className="StudyCard_desc">
-                This study aims to ganto ganyan using pearson r correlation for variables ganto ganyan
-                This study uses data from ganto then ganyan tas nagpunta sa bundok 
-                
+                {props.description}
             </div>
             <Button 
                 onClick={()=>props.HandleSelected(true)}

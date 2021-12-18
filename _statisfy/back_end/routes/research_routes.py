@@ -113,7 +113,8 @@ def add_study():
             created_by = data['created_by'],
             test_type = data['test_type'],
             created_at = data['created_at'],
-            columns = data['columns']
+            columns = data['columns'],
+            study_description = data['study_description']
         )
 
         return {

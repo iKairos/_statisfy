@@ -13,6 +13,10 @@ class Study:
     def name(self):
         return self.db.get_study_name(self.id)
     
+    @property
+    def description(self):
+        return self.db.get_study_description(self.id)
+    
     @property 
     def research_parent(self):
         return self.db.get_research_id(self.id)
@@ -49,5 +53,6 @@ class Study:
             created_by = kwargs['created_by'],
             test_type = kwargs['test_type'],
             created_at = kwargs['created_at'],
-            columns = kwargs['columns']
+            columns = kwargs['columns'],
+            study_description = kwargs['study_description']
         )
