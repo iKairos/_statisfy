@@ -37,6 +37,7 @@ export const DisplayTable = (props) => {
               columns={columnHeader}
               pageSize={props.rowNumber}
               rowsPerPageOptions={[props.rowNumber]}
+              onSelectionModelChange={props.callbackSetSelectedRows}
               checkboxSelection
             />
           ):(

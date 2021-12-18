@@ -2,6 +2,7 @@ from __main__ import app
 from random import randint 
 from flask import request
 from flask_cors import cross_origin
+from objects.study import Study
 from objects.user import User
 from objects.research import Research
 from os.path import dirname, realpath
@@ -87,3 +88,59 @@ def add_research():
             'type': 'error'
         }
 
+@app.route("/api/research/study/new", methods=["POST"])
+@cross_origin()
+def add_study():
+    try:
+        data = request.form 
+
+        uuid = randint(10000000, 99999999)
+            
+        study = Study(uuid)
+        
+        while study.is_registered:
+            uuid = randint(10000000, 99999999)
+
+            study = Study(uuid)
+
+            if not study.is_registered:
+                break
+
+        Study.new_study(
+            _id = uuid,
+            study_name = data['study_name'],
+            research_id = data['research_id'],
+            created_by = data['created_by'],
+            test_type = data['test_type'],
+            created_at = data['created_at'],
+            columns = data['columns']
+        )
+
+        return {
+            'code': 'STUDY_ADD_SUCCESS',
+            'message': 'Study is successfully registered.'
+        }
+
+    except Exception as e:
+        return {
+            'code': 'STUDY_ADD_FAIL',
+            'error': str(e)
+        }
+
+@app.route("/api/research/study/fetch", methods=["POST"])
+@cross_origin()
+def get_studies():
+    try:
+        data = request.form 
+
+        research = Research(data['research_id'])
+
+        return {
+            'code': 'STUDY_GET_SUCCESS',
+            'data': [list(i) for i in research.studies]
+        }
+    except Exception as e:
+        return {
+            'code': 'STUDY_GET_FAIL',
+            'error': str(e)
+        }

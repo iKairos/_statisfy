@@ -9,10 +9,10 @@ export default function StudyCard(props){
     return(
         <div className ="StudyCard">
             <div className="StudyCard_title">
-                Study 1
+                {props.title}
             </div>
             <div className="StudyCard_method">
-                Pearson-R Correlation
+                {props.method}
             </div>
             
             <div className="StudyCard_desc">

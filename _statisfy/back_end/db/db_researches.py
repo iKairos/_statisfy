@@ -99,7 +99,7 @@ class ResearchesBackbone(DatabaseBackbone):
                 "studies",
                 research_id = rid
             )
-
+           
             return fetched
         except Exception as e:
             print(e)

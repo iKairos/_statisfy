@@ -4,7 +4,13 @@ import {
     RESEARCH_GET_SUCCESS,
     RESEARCH_SAVE_FAIL,
     RESEARCH_SAVE_REQUEST,
-    RESEARCH_SAVE_SUCCESS 
+    RESEARCH_SAVE_SUCCESS, 
+    STUDY_GET_FAIL, 
+    STUDY_GET_REQUEST, 
+    STUDY_GET_SUCCESS, 
+    STUDY_SAVE_FAIL, 
+    STUDY_SAVE_REQUEST,
+    STUDY_SAVE_SUCCESS
 } from "../constants/researchConstants";
 
 import Axios from 'axios';
@@ -49,6 +55,46 @@ export const getResearch = (id) => async(dispatch) => {
     }catch(error){
         dispatch({
             type:RESEARCH_GET_FAIL,
+            payload:error.message
+        });
+    }
+}
+
+export const saveStudy = (formData) => async(dispatch) => {
+    dispatch({
+        type:STUDY_SAVE_REQUEST
+    });
+
+    try{
+        const {data} = await Axios.post('/api/research/study/new', formData);
+
+        dispatch({
+            type: STUDY_SAVE_SUCCESS, 
+            payload: data
+        });
+    }catch(error){
+        dispatch({
+            type:STUDY_SAVE_FAIL,
+            payload:error.message
+        });
+    }
+}
+
+export const getStudy = (formData) => async(dispatch) => {
+    dispatch({
+        type:STUDY_GET_REQUEST
+    });
+
+    try{
+        const {data} = await Axios.post('/api/research/study/fetch', formData);
+
+        dispatch({
+            type: STUDY_GET_SUCCESS, 
+            payload: data
+        });
+    }catch(error){
+        dispatch({
+            type:STUDY_GET_FAIL,
             payload:error.message
         });
     }
