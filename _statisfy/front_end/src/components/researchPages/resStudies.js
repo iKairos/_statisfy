@@ -294,17 +294,29 @@ export default function ResStudies(props){
                             className = "StudyTitle"
                             
                         >
-                            <div>
-                                <TextField
-                                    id="outlined-textarea"
-                                    label="Study Title"
-                                    placeholder="Add new title"
-                                    multiline
-                                    rows={2}
-                                    color = "secondary"
-                                    fullWidth
-                                />
-                            </div>
+                        <div>
+                            <TextField
+                                id="outlined-textarea"
+                                label="Study Title"
+                                placeholder="Add new title"
+                                multiline
+                                rows={2}
+                                color = "secondary"
+                                fullWidth
+                            />
+                        </div>
+                        <div style={{paddingTop:"1rem"}}>
+                            <TextField
+                                id="outlined-textarea"
+                                label="Description"
+                                placeholder="Add description"
+                                multiline
+                                rows={4}
+                                color = "secondary"
+                                fullWidth
+                            />
+                        </div>
+                        
                         </Box>
                         <Box className = "StudyTitle">
                             <Typography>Select Method:</Typography>
