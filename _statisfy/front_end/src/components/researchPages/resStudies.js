@@ -36,6 +36,10 @@ import StudyCard from "../StudyCard";
 import Study from "../study";
 import Checkbox from "../Checkbox";
 import { DataColumns } from "./dataColumns";
+import { useDispatch, useSelector } from "react-redux";
+import { CircularProgress } from "@mui/material";
+import { DisplayTable } from "../DisplayTable";
+import { getStudy, saveStudy } from "../../actions/researchAction";
 
 
 
@@ -43,6 +47,11 @@ import { DataColumns } from "./dataColumns";
 //<span className ="text_topic">{researchGetRes?.data.test_type}</span>
 
 export default function ResStudies(props){
+
+    // main study variables
+    const [studyName, setStudyName] = useState();
+    const [studyMethod, setStudyMethod] = useState();
+    const [studyColumns, setStudyColumns] = useState([]);
 
     const [isAdding, setAdding] = useState(false);
     const [selected, setSelected] = useState(false);
@@ -53,6 +62,23 @@ export default function ResStudies(props){
 
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
+
+    const dispatch = useDispatch();
+
+    const dataSelector = useSelector((state) => 
+        state.researchGet
+    );
+    const { researchGetRes } = dataSelector;
+
+    const fileDetailsSelector = useSelector((state) => 
+        state.datasetDetails
+    );
+    const { datasetDetails } = fileDetailsSelector;
+
+    const studyDetailsSelector = useSelector((state) => 
+        state.getStudyRes
+    );
+    const { getStudyRes } = studyDetailsSelector;
 
     const callbackCheckbox = (checked) => {
         setTags(checked);
@@ -90,6 +116,31 @@ export default function ResStudies(props){
         setOpen(false);
     };
 
+    const handleSubmit = () => {
+        handleAdding(false);
+
+        const formData = new FormData()
+        formData.append("study_name", studyName)
+        formData.append("research_id", researchGetRes.data._id)
+        formData.append("created_by", props.User)
+        formData.append("test_type", methodChosen)
+        formData.append("created_at", new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, ''))
+        formData.append("columns", studyColumns)
+
+        dispatch(saveStudy(formData));
+    }
+
+    const callbackSetSelectedRows = (ids) => {
+        const selectedIDs = new Set(ids);
+        const selectedColumns = [];
+
+        selectedIDs.forEach(id => {
+            selectedColumns.push(datasetDetails.details[id].column)
+        });
+
+        setStudyColumns(selectedColumns)
+    }
+
     function handleListKeyDown(event) {
         if (event.key === 'Tab') {
         event.preventDefault();
@@ -102,6 +153,11 @@ export default function ResStudies(props){
     // return focus to the button when we transitioned from !open -> open
     const prevOpen = React.useRef(open);
     React.useEffect(() => {
+        const formData = new FormData()
+        formData.append("research_id", researchGetRes.data._id)
+
+        dispatch(getStudy(formData))
+
         if (prevOpen.current === true && open === false) {
         anchorRef.current.focus();
         }
@@ -294,17 +350,18 @@ export default function ResStudies(props){
                             className = "StudyTitle"
                             
                         >
-                        <div>
-                            <TextField
-                                id="outlined-textarea"
-                                label="Study Title"
-                                placeholder="Add new title"
-                                multiline
-                                rows={2}
-                                color = "secondary"
-                                fullWidth
-                            />
-                        </div>
+                            <div>
+                                <TextField
+                                    id="outlined-textarea"
+                                    label="Study Title"
+                                    placeholder="Add new title"
+                                    multiline
+                                    rows={2}
+                                    color = "secondary"
+                                    onChange={e => setStudyName(e.target.value)}
+                                    fullWidth
+                                />
+                            </div>
                         <div style={{paddingTop:"1rem"}}>
                             <TextField
                                 id="outlined-textarea"
@@ -359,17 +416,18 @@ export default function ResStudies(props){
                         </Box>
                         
 
-                        {typeof props.DataSetFile !== 'undefined' ? 
-                            <DataColumns
-                                data={props.DataSetFile.data} 
+                        {typeof datasetDetails !== 'undefined' ? 
+                            <DisplayTable 
+                                data={datasetDetails.details} 
                                 Header={true} 
                                 rowNumber={15}
                                 checked={true}
-                            /> : null
+                                callbackSetSelectedRows={callbackSetSelectedRows}
+                            /> : <CircularProgress color="info" thickness={2.5} size={30}/>
                         }
 
                         <Button
-                            onClick={()=>handleAdding(false)}
+                            onClick={handleSubmit}
                             color="secondary"
                         >
                         Create Study
@@ -379,16 +437,17 @@ export default function ResStudies(props){
                     : (
                         <div className = "resStudy_body_content">
                             <div className = "resStudy_body_study">
-                               
-                                <StudyCard
-                                    HandleSelected = {handleSelected}
-                                />
-                                <StudyCard
-                                    HandleSelected = {handleSelected}
-                                />
-                                <StudyCard
-                                    HandleSelected = {handleSelected}
-                                />
+                                {
+                                    typeof getStudyRes !== 'undefined' ? getStudyRes.data?.map((i) => {
+                                        return (
+                                            <StudyCard
+                                                HandleSelected = {handleSelected}
+                                                title={i[1]}
+                                                method={i[4]}
+                                            />
+                                        )
+                                    }) : "a"
+                                }
                             </div>
                         </div>
                     )

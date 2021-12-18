@@ -25,6 +25,15 @@ class StudiesBackbone(DatabaseBackbone):
             print(e)
             return False
     
+    def is_registered(self, rid):
+        try:
+            fetched = self.fetch_row("studies", _id = rid)
+
+            return False if len(fetched[0]) == 0 else True
+        except Exception as e :
+            print(e)  
+            return False
+    
     def get_study_name(self, rid):
         try:
             fetched = self.fetch_row(

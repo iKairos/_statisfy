@@ -6,6 +6,10 @@ class Study:
         self.id = study_id 
     
     @property
+    def is_registered(self):
+        return self.db.is_registered(self.id)
+
+    @property
     def name(self):
         return self.db.get_study_name(self.id)
     
