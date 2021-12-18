@@ -51,6 +51,7 @@ export default function ResData(props){
     return(
         <div className="resData_body_container">
             <div className="resData_body_heading">
+                <span className ="text_topic">Dataset</span>
                 <p className ="text_label">{props.DataSetFile ? `${props.DataSetFile?.filename.slice(9,)} (${formatBytes(props.DataSetFile?.filesize)})` : <CircularProgress color="info" thickness={2.5} size={30}/>} </p>
             </div>
 
