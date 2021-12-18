@@ -30,6 +30,7 @@ import createHistory from 'history/createBrowserHistory';
 
 import ResData from "../components/researchPages/resData";
 import ResStudies from "../components/researchPages/resStudies";
+import ResMeta from "../components/researchPages/resMeta";
 
 
 import { status500 } from "../constants/stringConstants";
@@ -266,7 +267,7 @@ export default function ResearchScreen(props){
                             <span className ="text_topic">Metadata</span>
                             <p className ="text_label">RESEARCH DETAILS</p>
                         </div>
-
+                        <ResMeta/>
                     </div>
                 </Fade>
                 </>
