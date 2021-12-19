@@ -14,7 +14,8 @@ class StudiesBackbone(DatabaseBackbone):
                 research_id = kwargs['research_id'],
                 created_by = kwargs['created_by'],
                 test_type = kwargs['test_type'],
-                created_at = kwargs['created_at']
+                created_at = kwargs['created_at'],
+                study_description = kwargs['study_description']
             )
 
             for col in kwargs['columns']:
@@ -40,6 +41,18 @@ class StudiesBackbone(DatabaseBackbone):
                 "studies",
                 _id = rid
             )[1]
+
+            return fetched
+        except Exception as e:
+            print(e)
+            return False
+
+    def get_study_description(self, rid):
+        try:
+            fetched = self.fetch_row(
+                "studies",
+                _id = rid
+            )[6]
 
             return fetched
         except Exception as e:
