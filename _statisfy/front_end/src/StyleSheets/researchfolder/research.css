@@ -22,8 +22,6 @@
       grid-template-rows: 1fr;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
-  -webkit-box-shadow: 0 0 10px 5px #fcfcfc;
-          box-shadow: 0 0 10px 5px #fcfcfc;
   background-color: white;
 }
 
@@ -49,8 +47,6 @@
       grid-template-rows: 1fr;
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
-  -webkit-box-shadow: 0 0 10px 5px #fcfcfc;
-          box-shadow: 0 0 10px 5px #fcfcfc;
   background-color: white;
 }
 

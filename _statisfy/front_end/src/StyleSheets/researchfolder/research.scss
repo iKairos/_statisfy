@@ -23,7 +23,6 @@ $maxwidth: 40rem;
       grid-template-rows: 1fr;
       border-top-left-radius: $radius;
       border-top-right-radius: $radius;
-      box-shadow: $boxshadow;
       background-color: white;
     }
   }
@@ -46,7 +45,6 @@ $maxwidth: 40rem;
       grid-template-rows: 1fr;
       border-bottom-left-radius: $radius;
       border-bottom-right-radius: $radius;
-      box-shadow: $boxshadow;
       background-color: white;
     }
     &_heading {

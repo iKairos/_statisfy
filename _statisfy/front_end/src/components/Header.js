@@ -1,8 +1,28 @@
 import { Link } from 'react-router-dom'
-import {Navbar, Row, Col, Nav, NavDropdown, Container} from 'react-bootstrap'
+import {Navbar, Row, Col, Nav, NavDropdown} from 'react-bootstrap'
 import { useHistory } from "react-router"
 import { useDispatch, useSelector } from 'react-redux';
 import { expireToken } from '../actions/tokenActions';
+
+import StatisfyIcon from '../images/statisfyLogo.png';
+
+
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+
+const pages = ['Products', 'Pricing', 'Blog'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function Header(props){
     const history = useHistory();
@@ -21,16 +41,192 @@ export default function Header(props){
         history.go(0);
     }
 
+    const handleExitLogOut = () => {
+        handleLogout();
+        handleCloseUserMenu();
+    }
+
+
+//=======================================================>
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
+
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
     return(
         <div className="pagewrapper ">
-            <Navbar bg="light" expand="lg" className="FirstRow" >
-                    <Navbar.Brand to="/">Statisfy</Navbar.Brand>
+            <AppBar 
+                position="static"
+                color = "transparent"
+            >
+                <Container maxWidth="xl">
+                    <Toolbar disableGutters>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                    >
+                        <img src= {StatisfyIcon} alt='Statisfy' height="50"/>
+                    </Typography>
+                    
+
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleOpenNavMenu}
+                            color="inherit"
+                        >
+                        <MenuIcon />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorElNav}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                            sx={{
+                                display: { xs: 'block', md: 'none' },
+                            }}
+                        >
+                            <MenuItem key={1} onClick={handleCloseNavMenu}>
+                                <Link className="menuLink" to="/"> 
+                                    <Typography textAlign="center">Home</Typography>
+                                </Link>
+                            </MenuItem>
+                            <MenuItem key={2} onClick={handleCloseNavMenu}>
+                                <Link className="menuLink" to="/profile">
+                                    <Typography textAlign="center">Profile</Typography>
+                                </Link>
+                            </MenuItem>
+                            <MenuItem key={3} onClick={handleCloseNavMenu}>
+                                <Link className="menuLink" to="/dashboard">
+                                    <Typography textAlign="center">Dashboard</Typography>
+                                </Link>
+                            </MenuItem>
+                            <MenuItem key={4} onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">Guides</Typography>
+                            </MenuItem>
+                            <MenuItem key={5} onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">About</Typography>
+                            </MenuItem>
+                        </Menu>
+                    </Box>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+                    >
+                        <img src= {StatisfyIcon} alt='Statisfy' height="50"/>
+                    </Typography>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        <Link className="menuLink" to="/">
+                            <Button
+                                key={"1"}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Home
+                            </Button>
+                        </Link>
+                        <Link className="menuLink" to="/profile">
+                            <Button
+                                key={"2"}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Profile
+                            </Button>
+                        </Link>
+                        <Link className="menuLink" to="/dashboard">
+                            <Button
+                                key={"3"}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Dashboard
+                            </Button>
+                        </Link>
+                        <Button
+                            key={"4"}
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Guides
+                        </Button>
+                        <Button
+                            key={"5"}
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            About
+                        </Button>
+                        
+                    </Box>
 
                     <div className="account">
                     {
                         props.loading ? <p>Loading...</p> : typeof props.user != 'undefined' ? (
-                        <div><p>Hello, {props.user?.first_name} {props.user?.last_name}! </p> 
-                            <button onClick={handleLogout}>Logout</button>
+                        <div>
+                            <Box sx={{ flexGrow: 0 }}>
+                                <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar alt={props.user?.first_name} src="/static/images/avatar/2.jpg" />
+                                </IconButton>
+                                </Tooltip>
+                                <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                                >
+                                    <Link className="menuLink" to="/profile">
+                                        <MenuItem key={1} onClick={handleCloseUserMenu}>
+                                            <Typography textAlign="center">{props.user?.first_name} {props.user?.last_name}</Typography>
+                                        </MenuItem>
+                                    </Link>
+                                        
+                                   
+                                    <MenuItem key={2} onClick={handleExitLogOut}>
+                                        <Typography textAlign="center">Log Out</Typography>
+                                    </MenuItem>
+                                </Menu>
+                            </Box>
                         </div>
                         ) : (
                         <div>
@@ -40,28 +236,11 @@ export default function Header(props){
                         )
                     }
                     </div>
-            </Navbar>
 
-            
-            <Navbar bg="light" expand="lg" className="SecondRow">
-                <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="me-auto my-2 my-lg-0"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
-                        >
-                            <Nav.Link> <Link className="menuLink" to="/">Home</Link></Nav.Link>
-                            <Nav.Link> <Link className="menuLink" to="/profile">Profile</Link></Nav.Link>
-                            <NavDropdown title="Guides" id="navbarScrollingDropdown">
-                            <NavDropdown.Item href="#action3">Statistical Method Guide</NavDropdown.Item>
-                            <NavDropdown.Item href="#action4">Machine Learning Guide</NavDropdown.Item>
-                            </NavDropdown>
-                            <Nav.Link><Link className="menuLink" to="/dashboard">Dashboard</Link></Nav.Link>
-                            <Nav.Link>About</Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-            </Navbar>
+                    
+                    </Toolbar>
+                </Container>
+                </AppBar>
         </div>
     )
 }

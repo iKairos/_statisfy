@@ -2,28 +2,18 @@
   width: 100%;
   min-height: 100vh;
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
   background-color: gray;
 }
-
 .account {
   right: 0;
 }
-
 .Navigation {
   background-color: white;
   padding: 1rem;
 }
-
 .pagewrapper {
   position: relative;
   z-index: 999;
@@ -36,7 +26,6 @@
   color: inherit;
   text-decoration: inherit;
 }
-
 @media screen and (min-width: 600px) {
   .pagewrapper {
     z-index: 999;
@@ -47,4 +36,3 @@
     left: 0;
   }
 }
-/*# sourceMappingURL=App.css.map */

@@ -30,9 +30,10 @@ export default function Navigator(props){
                 steps={5}
                 position="static"
                 activeStep={props.ActiveStep}
-                sx={{ maxWidth: 400, flexGrow: 1 }}
+                color = "secondary"
+                sx={{ maxWidth: 400, flexGrow: 1 , backgroundColor: 'transparent'}}
                 nextButton={
-                    <Button size="small" onClick={nextStep} disabled={props.ActiveStep === 4}>
+                    <Button size="small" onClick={nextStep} disabled={props.ActiveStep === 4} color = "secondary">
                     Next
                     {theme.direction === 'rtl' ? (
                         <KeyboardArrowLeft />
@@ -42,7 +43,7 @@ export default function Navigator(props){
                     </Button>
                 }
                 backButton={
-                    <Button size="small" onClick={prevStep} disabled={props.ActiveStep === 0}>
+                    <Button size="small" onClick={prevStep} disabled={props.ActiveStep === 0} color = "secondary">
                     {theme.direction === 'rtl' ? (
                         <KeyboardArrowRight />
                     ) : (

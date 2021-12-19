@@ -22,7 +22,6 @@ $maxwidth: 40rem;
       grid-template-rows: 1fr;
       border-bottom-left-radius: $radius;
       border-bottom-right-radius: $radius;
-      box-shadow: $boxshadow;
       background-color: white;
     }
     &_heading {
@@ -88,7 +87,6 @@ $maxwidth: 40rem;
       &_container {
         height: 100%;
         max-width: 50vw;
-        border: 1px solid $white1;
       }
       &_heading {
         height: fit-content;
