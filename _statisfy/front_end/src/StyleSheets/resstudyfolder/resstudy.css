@@ -38,10 +38,7 @@
       grid-template-rows: 1fr;
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
-  -webkit-box-shadow: 0 0 10px 5px #fcfcfc;
-          box-shadow: 0 0 10px 5px #fcfcfc;
   background-color: white;
-  border: 1px solid #b5b5b5;
 }
 
 .resStudy_body_add {
@@ -143,8 +140,6 @@
         grid-template-rows: 1fr;
     border-bottom-left-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
-    -webkit-box-shadow: 0 0 10px 5px #fcfcfc;
-            box-shadow: 0 0 10px 5px #fcfcfc;
     background-color: white;
     margin-bottom: 1rem;
   }

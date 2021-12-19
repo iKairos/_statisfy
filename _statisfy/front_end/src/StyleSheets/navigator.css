@@ -3,4 +3,9 @@
   width: 1fr;
   display: flex;
   justify-content: center;
+  background-color: transparent;
+}
+
+.navigator_stepper {
+  background-color: transparent;
 }

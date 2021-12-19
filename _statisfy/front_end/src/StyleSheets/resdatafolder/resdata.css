@@ -21,8 +21,6 @@
       grid-template-rows: 1fr;
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
-  -webkit-box-shadow: 0 0 10px 5px #fcfcfc;
-          box-shadow: 0 0 10px 5px #fcfcfc;
   background-color: white;
 }
 
@@ -109,7 +107,6 @@
   .resData_body_container {
     height: 100%;
     max-width: 50vw;
-    border: 1px solid #eeeeee;
   }
   .resData_body_heading {
     height: -webkit-fit-content;
