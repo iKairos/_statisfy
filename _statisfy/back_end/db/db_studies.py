@@ -17,8 +17,8 @@ class StudiesBackbone(DatabaseBackbone):
                 created_at = kwargs['created_at'],
                 study_description = kwargs['study_description']
             )
-
-            for col in kwargs['columns']:
+            
+            for col in kwargs['columns'].split(','): # temp
                 self.add_column(kwargs['_id'], col)
 
             return True, res
@@ -137,7 +137,7 @@ class StudiesBackbone(DatabaseBackbone):
         try:
             self.append_row(
                 "dataset_columns",
-                research_id = rid,
+                study_id = rid,
                 _column = column
             )
 

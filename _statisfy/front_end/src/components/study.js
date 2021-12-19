@@ -15,6 +15,7 @@ import { useState } from "react";
 
 export default function Study(props){
     const [studyPage, setStudyPage] = useState(1);
+    
     const switchStudyPage = (event, newValue) => {
         setStudyPage(newValue);
     };
