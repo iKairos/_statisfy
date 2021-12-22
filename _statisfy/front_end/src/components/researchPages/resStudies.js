@@ -38,7 +38,7 @@ import Checkbox from "../Checkbox";
 import { DataColumns } from "./dataColumns";
 import { useDispatch, useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
-import { DisplayTable } from "../DisplayTable";
+import { DisplayTable, MemoizedTable } from "../DisplayTable";
 import { getStudy, saveStudy } from "../../actions/researchAction";
 
 
@@ -159,7 +159,7 @@ export default function ResStudies(props){
         formData.append("research_id", researchGetRes.data._id)
 
         dispatch(getStudy(formData))
-
+        
         if (prevOpen.current === true && open === false) {
         anchorRef.current.focus();
         }
@@ -420,7 +420,7 @@ export default function ResStudies(props){
                         
 
                         {typeof datasetDetails !== 'undefined' ? 
-                            <DisplayTable 
+                            <MemoizedTable
                                 data={datasetDetails.details} 
                                 Header={true} 
                                 rowNumber={15}
