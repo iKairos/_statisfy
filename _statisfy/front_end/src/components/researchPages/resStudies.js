@@ -337,7 +337,7 @@ export default function ResStudies(props){
                 
             {selected
             ?(
-                <Study/>
+                <Study data={getStudyRes.data.filter(i => i[0] === selected)[0]}/>
             )
             :(
                 <>
@@ -446,8 +446,9 @@ export default function ResStudies(props){
                                             <StudyCard
                                                 HandleSelected = {handleSelected}
                                                 title={i[1]}
-                                                method={i[4]}
-                                                description={i[6]}
+                                                method={i[5]}
+                                                description={i[2]}
+                                                id={i[0]}
                                             />
                                         )
                                     }) : <CircularProgress color="info" thickness={2.5} size={30}/>

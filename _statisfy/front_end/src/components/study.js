@@ -30,8 +30,8 @@ export default function Study(props){
     return(
         <div className ="Study">
             <div className = "Study_header">
-                <h4>Study Title</h4>
-                <h6>Statistical Method</h6>
+                <h4>{props.data[1]} | {props.data[5]}</h4>
+                <h6>{props.data[2]}</h6>
             </div>
            
             <div className = "Study_tabs">

@@ -19,7 +19,7 @@ export default function StudyCard(props){
                 {props.description}
             </div>
             <Button 
-                onClick={()=>props.HandleSelected(true)}
+                onClick={()=>props.HandleSelected(props.id)}
                 variant="outlined"
                 
             >View Study
