@@ -102,9 +102,8 @@ export default function Study(props){
                         scrollButtons="auto"
                     >
                         <Tab value={1} label="Details" icon={<HelpIcon/>}/>
-                        <Tab value={2} label="Graphs" icon={<AutoGraphIcon/>}/>
-                        <Tab value={3} label="Results" icon={<CheckCircleIcon/>}/>
-                        <Tab value={4} label="Interpretation" icon={<ArticleIcon/>}/>
+                        <Tab value={2} label="Results" icon={<AutoGraphIcon/>}/>
+                        <Tab value={3} label="Interpretation" icon={<ArticleIcon/>}/>
                     </Tabs>
                 </Box>
                 <button
@@ -140,11 +139,6 @@ export default function Study(props){
                     </div>
                 }
                 {studyPage === 3 &&
-                    <div className = "Study_content_results">
-                        Results
-                    </div>
-                }
-                {studyPage === 4 &&
                     <div className = "Study_content_interpretation">
                         Interpretation
                     </div>
