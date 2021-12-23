@@ -38,7 +38,7 @@ import Checkbox from "../Checkbox";
 import { DataColumns } from "./dataColumns";
 import { useDispatch, useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
-import { DisplayTable } from "../DisplayTable";
+import { DisplayTable, MemoizedTable } from "../DisplayTable";
 import { getStudy, saveStudy } from "../../actions/researchAction";
 
 
@@ -159,14 +159,14 @@ export default function ResStudies(props){
         formData.append("research_id", researchGetRes.data._id)
 
         dispatch(getStudy(formData))
-
+        
         if (prevOpen.current === true && open === false) {
         anchorRef.current.focus();
         }
 
         prevOpen.current = open;
     }, [open]);
-
+    
     return(
         
         <div className="resStudy_body_container">
@@ -337,7 +337,7 @@ export default function ResStudies(props){
                 
             {selected
             ?(
-                <Study/>
+                <Study data={getStudyRes.data.filter(i => i[0] === selected)[0]}/>
             )
             :(
                 <>
@@ -418,9 +418,8 @@ export default function ResStudies(props){
                             </Accordion>
                         </Box>
                         
-
                         {typeof datasetDetails !== 'undefined' ? 
-                            <DisplayTable 
+                            <MemoizedTable
                                 data={datasetDetails.details} 
                                 Header={true} 
                                 rowNumber={15}
@@ -433,7 +432,7 @@ export default function ResStudies(props){
                             onClick={handleSubmit}
                             color="secondary"
                         >
-                        Create Study
+                        Compute
                         </Button>
                     
                     </div>)
@@ -446,8 +445,9 @@ export default function ResStudies(props){
                                             <StudyCard
                                                 HandleSelected = {handleSelected}
                                                 title={i[1]}
-                                                method={i[4]}
-                                                description={i[6]}
+                                                method={i[5]}
+                                                description={i[2]}
+                                                id={i[0]}
                                             />
                                         )
                                     }) : <CircularProgress color="info" thickness={2.5} size={30}/>

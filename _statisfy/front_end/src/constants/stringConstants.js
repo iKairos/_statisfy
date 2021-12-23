@@ -22,4 +22,4 @@ export const passwordRequirement = "Password should be at least eight characters
 export const status500 = "Request from server returned an error status 500. The server might be offline or down, please try again later.";
 
 export const researchSuccessTitle = "Research created successfully!";
-export const researchSuccess = "You may now view and customize your research. Proceed by pressing the compute button to generate analytics and interpretation.";
+export const researchSuccess = "You may now view and customize your research. Proceed by creating a study, which selects certain colums for you to analyze by our preset statistical or machine learning methods.";

@@ -17,7 +17,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useState } from "react";
 
-import { DisplayTable } from "../../components/DisplayTable";
+import { DisplayTable, MemoizedTable } from "../../components/DisplayTable";
 import { DataColumns } from "./dataColumns";
 import { formatBytes } from '../../utils';
 import { useDispatch, useSelector } from "react-redux";
@@ -121,7 +121,7 @@ export default function ResData(props){
                         {props.DataSetFile ? `${props.DataSetFile?.filename.slice(9,)} (${formatBytes(props.DataSetFile?.filesize)})` : <CircularProgress color="info" thickness={2.5} size={30}/>}
                         </div>
                         {typeof props.DataSetFile !== 'undefined' ? 
-                            <DisplayTable 
+                            <MemoizedTable 
                                 data={props.DataSetFile.data} 
                                 Header={true} 
                                 rowNumber={15}
@@ -138,7 +138,7 @@ export default function ResData(props){
                             Column Data
                         </div>
                         {typeof datasetDetails !== 'undefined' ? 
-                            <DisplayTable 
+                            <MemoizedTable 
                                 data={datasetDetails.details} 
                                 Header={true} 
                                 rowNumber={15}

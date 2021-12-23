@@ -63,7 +63,7 @@ def pearsonr(x, y):
 
     p = 2 * sp.t.sf(np.abs(t), n-2)
     
-    return r, p
+    return (('R Coefficient', r), ('P-value', p), ('SSxy', numerator_sum), ('SSx', term1_sum), ('SSy', term2_sum))
 
 def spearmanrho(x, y):
     n = len(x)

@@ -28,7 +28,6 @@ export const DisplayTable = (props) => {
       
       const rows = data.map((i, index) => ({id: index, ...i}));
 
-
       return (
         <div style={{ height:660, width: '100%' }}>
           {props.checked? (
@@ -52,3 +51,9 @@ export const DisplayTable = (props) => {
         </div>
       );
   }};
+
+  const areEqual = (prev, curr) => {
+    return JSON.stringify(prev.data) == JSON.stringify(curr.data)
+  }
+
+  export const MemoizedTable = React.memo(DisplayTable, areEqual);

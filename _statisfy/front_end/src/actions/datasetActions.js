@@ -28,13 +28,17 @@ export const processDataset = (formData) => async(dispatch) =>{
     }
 }
 
-export const getDataset = (file) => async(dispatch) => {
+export const getDataset = (file, columns) => async(dispatch) => {
     dispatch({
         type:DATASET_FILE_REQUEST
     });
 
     try{
-        const {data} = await Axios.get(`/api/dataset/get/${file}`);
+        let cols = columns;
+        if(typeof columns === 'undefined'){
+            cols = 'nocols';
+        }
+        const {data} = await Axios.get(`/api/dataset/get/${file}/${cols}`);
 
         dispatch({
             type: DATASET_FILE_SUCCESS, 
