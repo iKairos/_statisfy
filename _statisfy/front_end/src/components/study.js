@@ -67,7 +67,7 @@ export default function Study(props){
                 var filter = _.pick(row, props.data[7]);
                 return {x: filter[props.data[7][0]], y: filter[props.data[7][1]]}
             }),
-            backgroundColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(167, 66, 197, 1)',
           },
         ],
       };
