@@ -20,6 +20,9 @@ class StudiesBackbone(DatabaseBackbone):
             
             for col in kwargs['columns'].split(','): # temp
                 self.add_column(kwargs['_id'], col)
+            
+            for var_name, var_val in kwargs['variables']:
+                self.add_variable(kwargs['_id'], var_name, var_val)
 
             return True, res
         except Exception as e:
@@ -119,6 +122,23 @@ class StudiesBackbone(DatabaseBackbone):
             print(e)
             return False
     
+    def get_variables(self, rid):
+        try:
+            fetched = self.fetch_row(
+                "variables",
+                study_id = rid
+            )
+            
+            res = []
+            
+            for id, var_name, var_value in fetched:
+                res.append((var_name, float(var_value)))
+            
+            return tuple(res)
+        except Exception as e:
+            print(e)
+            return False
+    
     def set_study_name(self, rid, name):
         try:
             self.update_data(
@@ -139,6 +159,20 @@ class StudiesBackbone(DatabaseBackbone):
                 "dataset_columns",
                 study_id = rid,
                 _column = column
+            )
+
+            return True
+        except Exception as e:
+            print(e)
+            return False
+    
+    def add_variable(self, rid, var_name, var_value):
+        try:
+            self.append_row(
+                "variables",
+                study_id = rid,
+                variable_name = var_name,
+                variable_value = var_value
             )
 
             return True

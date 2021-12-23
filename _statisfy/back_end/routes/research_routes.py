@@ -107,17 +107,6 @@ def add_study():
 
             if not study.is_registered:
                 break
-
-        Study.new_study(
-            _id = uuid,
-            study_name = data['study_name'],
-            research_id = data['research_id'],
-            created_by = data['created_by'],
-            test_type = data['test_type'],
-            created_at = data['created_at'],
-            columns = data['columns'],
-            study_description = data['study_description']
-        )
         
         compute_res = None
         
@@ -136,11 +125,22 @@ def add_study():
             
             compute_res = pearsonr(df[columns[0]], df[columns[1]])
             print(compute_res)
+        
+        Study.new_study(
+            _id = uuid,
+            study_name = data['study_name'],
+            research_id = data['research_id'],
+            created_by = data['created_by'],
+            test_type = data['test_type'],
+            created_at = data['created_at'],
+            columns = data['columns'],
+            study_description = data['study_description'],
+            variables = compute_res
+        )
 
         return {
             'code': 'STUDY_ADD_SUCCESS',
             'message': 'Study is successfully registered and computed.',
-            'res': compute_res
         }
 
     except Exception as e:
@@ -162,6 +162,7 @@ def get_studies():
         for i in research.studies:
             i = list(i)
             i.append(list(Study(i[0]).columns))
+            i.append(list(Study(i[0]).variables))
             res_data.append(list(i))
 
         return {

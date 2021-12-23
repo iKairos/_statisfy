@@ -135,6 +135,11 @@ export default function Study(props){
                 }
                 {studyPage === 2 &&
                     <div className = "Study_content_graphs">
+                        {
+                            props.data[8].map(([var_name, var_val]) => {
+                                return <p><strong>{var_name}</strong>: {var_val}</p>
+                            })
+                        }
                         <Scatter data={pearsonDataChart} options={options}/>
                     </div>
                 }

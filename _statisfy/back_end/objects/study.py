@@ -37,6 +37,10 @@ class Study:
     def columns(self):
         return self.db.get_columns(self.id)
     
+    @property
+    def variables(self):
+        return self.db.get_variables(self.id)
+    
     def set_study_name(self, name):
         return self.db.set_study_name(self.id, name)
     
@@ -54,5 +58,6 @@ class Study:
             test_type = kwargs['test_type'],
             created_at = kwargs['created_at'],
             columns = kwargs['columns'],
-            study_description = kwargs['study_description']
+            study_description = kwargs['study_description'],
+            variables = kwargs['variables']
         )
