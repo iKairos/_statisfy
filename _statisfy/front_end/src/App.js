@@ -18,6 +18,7 @@ import PearsonScreen from './screens/PearsonScreen';
 import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import ResearchScreen from './screens/ResearchScreen';
+import ResearchList from './components/newDashBoard/ResearchList';
 
 // stylesheets
 import './App.css';
@@ -56,7 +57,7 @@ function App() {
                   <Route path = "/dashboard/:id?" render={(props) => <ResearchScreen token={token}/>} exact></Route>
                   <Route path = "/dashboard/stats" component={StatScreen} exact></Route>
                   <Route path = "/dashboard/stats/pearson" component={PearsonScreen} exact></Route>
-                  <Route path = "/dashboard/machinelearning" component={MLScreen} exact></Route>
+                  <Route path = "/researchlist" component={ResearchList} exact></Route>
                   <Route path = "/signIn" exact render={(props) => <SignInScreen setToken={setToken} token={token} {...props}/>}/>
                   <Route path = "/signUp" exact render={() => <SignUpScreen token={token} />}></Route>
                 </Switch>

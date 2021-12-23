@@ -5,6 +5,9 @@
   padding: 1rem;
   width: 70vw;
   margin-top: 1rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   cursor: pointer;
 }
 

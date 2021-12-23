@@ -111,9 +111,38 @@ export default function DataSetPage(props){
                                             </div> 
                                         </Slide>
                                     </div>
-                                    ): <CircularProgress color="info" thickness={2.5} size={30}/>
-                                ):null}
-                            </div>
+                                        ): <CircularProgress color="info" thickness={2.5} size={30}/>
+                                    ):null}
+                                </div>
+                                     {
+                                    props.DatasetDetails?.error || props.Error ? (
+                                    <div className = "data_upload_cont">
+                                        <button className="datapage_error" onClick={() => setShow(!show)}>
+                                            Error {show ? <FaAngleDown/> : <FaAngleUp/>}
+                                        </button>
+                                        <Collapse in={show}>
+                                            <Alert variant="outlined" severity="error">
+                                                <AlertTitle>Error</AlertTitle>
+                                                {
+                                                    props.DatasetDetails?.error ? (
+                                                        <>
+                                                            <b>Code:</b> {props.DatasetDetails?.code} <br/>
+                                                            <b>Message:</b> {props.DatasetDetails?.error}
+                                                        </>
+                                                    ) : props.Error ? (
+                                                        <>
+                                                            <b>Code:</b> {props.Error.code} <br/>
+                                                            <b>Message:</b> {props.Error.message}
+                                                        </>
+                                                    ):null
+                                                }
+                                                <hr/>
+                                                Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
+                                            </Alert>
+                                        </Collapse>
+                                    </div>
+                                    ) : null
+                                }
                                 {
                                     props.DatasetDetails?.error || props.Error ? (
                                     <div className = "data_upload_cont">

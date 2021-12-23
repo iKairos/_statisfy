@@ -4,6 +4,8 @@ import DataSetPage from "../components/dashboardPages/datasetPage";
 import StatPage from "../components/dashboardPages/statPage";
 import SummaryPage from "../components/dashboardPages/summaryPage";
 import Navigator from "../components/navigator";
+import ResearchList from "../components/newDashBoard/ResearchList";
+
 import "../StyleSheets/dashboard.css";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router";
@@ -273,6 +275,8 @@ export default function DashboardScreen(props){
           </div>
         );
     };
+
+    
 
     // ======= DISPATCH ON RENDER ======= //
     useEffect(() => {

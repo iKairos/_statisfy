@@ -27,13 +27,13 @@ export default function Navigator(props){
         <div className="navigator_div">
             <MobileStepper
                 variant="dots"
-                steps={5}
+                steps={3}
                 position="static"
                 activeStep={props.ActiveStep}
                 color = "secondary"
                 sx={{ maxWidth: 400, flexGrow: 1 , backgroundColor: 'transparent'}}
                 nextButton={
-                    <Button size="small" onClick={nextStep} disabled={props.ActiveStep === 4} color = "secondary">
+                    <Button size="small" onClick={nextStep} disabled={props.ActiveStep === 5} color = "secondary">
                     Next
                     {theme.direction === 'rtl' ? (
                         <KeyboardArrowLeft />
