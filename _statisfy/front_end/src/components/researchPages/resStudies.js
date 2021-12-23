@@ -166,7 +166,7 @@ export default function ResStudies(props){
 
         prevOpen.current = open;
     }, [open]);
-
+    
     return(
         
         <div className="resStudy_body_container">
@@ -418,7 +418,6 @@ export default function ResStudies(props){
                             </Accordion>
                         </Box>
                         
-
                         {typeof datasetDetails !== 'undefined' ? 
                             <MemoizedTable
                                 data={datasetDetails.details} 
@@ -433,7 +432,7 @@ export default function ResStudies(props){
                             onClick={handleSubmit}
                             color="secondary"
                         >
-                        Create Study
+                        Compute
                         </Button>
                     
                     </div>)

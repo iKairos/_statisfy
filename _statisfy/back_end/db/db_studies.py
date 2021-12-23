@@ -111,10 +111,10 @@ class StudiesBackbone(DatabaseBackbone):
         try:
             fetched = self.fetch_row(
                 "dataset_columns",
-                _id = rid
-            )[0]
-
-            return fetched
+                study_id = rid
+            )
+            
+            return [i[1] for i in fetched]
         except Exception as e:
             print(e)
             return False

@@ -6,6 +6,8 @@ from objects.study import Study
 from objects.user import User
 from objects.research import Research
 from os.path import dirname, realpath
+from functionalities.statistical_analysis import *
+import pandas as pd
 import os
 
 @app.route("/api/research/<id>")
@@ -116,10 +118,29 @@ def add_study():
             columns = data['columns'],
             study_description = data['study_description']
         )
+        
+        compute_res = None
+        
+        research = Research(data['research_id'])
+        
+        df = pd.read_csv(os.path.join(dirname(realpath(__file__)), '..\\temp\\datasets\\' + research.dataset_directory))
+        
+        columns = data['columns'].split(',')
+        
+        if data['test_type'] == 'Pearson R Correlation Test':
+            if len(columns) != 2:
+                return {
+                    'code': 'STUDY_WRONG_VAR_COUNT',
+                    'error': 'Pearson R only accepts two variables. Please make sure to only select two columns to analyze.'
+                }
+            
+            compute_res = pearsonr(df[columns[0]], df[columns[1]])
+            print(compute_res)
 
         return {
             'code': 'STUDY_ADD_SUCCESS',
-            'message': 'Study is successfully registered.'
+            'message': 'Study is successfully registered and computed.',
+            'res': compute_res
         }
 
     except Exception as e:
@@ -135,10 +156,17 @@ def get_studies():
         data = request.form 
 
         research = Research(data['research_id'])
+        
+        res_data = []
+        
+        for i in research.studies:
+            i = list(i)
+            i.append(list(Study(i[0]).columns))
+            res_data.append(list(i))
 
         return {
             'code': 'STUDY_GET_SUCCESS',
-            'data': [list(i) for i in research.studies]
+            'data': list(res_data),
         }
     except Exception as e:
         return {

@@ -62,14 +62,14 @@ def dataset_details():
             'code': 'DATASET_PROCESS_FAIL'
         }
     
-@app.route("/api/dataset/get/<filename>", methods=['GET'])
+@app.route("/api/dataset/get/<filename>/<cols>", methods=['GET'])
 @cross_origin()
-def get_dataset(filename):
+def get_dataset(filename,cols):
     try:
         directory = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..\\temp\\datasets\\')
 
         df = pd.read_csv(directory+filename)
-        df = df.head(50) if df.shape[0] > 50 else df
+        #df = df.head(50) if df.shape[0] > 50 else df
         df = df.fillna('')
 
         return {

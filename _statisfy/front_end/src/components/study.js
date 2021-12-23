@@ -11,10 +11,26 @@ import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import ArticleIcon from '@mui/icons-material/Article';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useState } from "react";
+import { Scatter } from 'react-chartjs-2';
+import {
+    Chart as ChartJS,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
+import { useDispatch, useSelector } from "react-redux";
+import _ from "lodash"
+
+ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 
 export default function Study(props){
     const [studyPage, setStudyPage] = useState(1);
+    const [colData, setColData] = useState();
+
+    const dispatch = useDispatch()
     
     const switchStudyPage = (event, newValue) => {
         setStudyPage(newValue);
@@ -26,6 +42,35 @@ export default function Study(props){
     const prevStudy = function(){
         setStudyPage(studyPage-1);
     };
+
+    const filedataSelector = useSelector((state) =>
+        state.datasetFile
+    );
+
+    const {datasetFile} = filedataSelector; 
+
+    const options = {
+        scales: {
+          y: {
+            beginAtZero: false,
+          },
+        },
+      };
+
+    const pearsonDataChart = {
+        labels: props.data[7],
+        datasets: [
+          {
+            label: 'Datapoints',
+            data: datasetFile.data.map(row => {
+                var filter = _.pick(row, props.data[7]);
+                return {x: filter[props.data[7][0]], y: filter[props.data[7][1]]}
+            }),
+            backgroundColor: 'rgba(255, 99, 132, 1)',
+          },
+        ],
+      };
+
    // const attributes = props.attribute
     return(
         <div className ="Study">
@@ -80,7 +125,7 @@ export default function Study(props){
                 }
                 {studyPage === 2 &&
                     <div className = "Study_content_graphs">
-                        Graphs
+                        <Scatter data={pearsonDataChart} options={options}/>
                     </div>
                 }
                 {studyPage === 3 &&
