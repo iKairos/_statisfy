@@ -26,9 +26,6 @@ $buttonbg: #a742c5;
 }
 
 .resStudy {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
   &_body {
     &_container {
       height: 100%;
@@ -55,15 +52,15 @@ $buttonbg: #a742c5;
 
     &_content {
       height: 100%;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
     &_study {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr;
       justify-content: center;
-      align-items: center;
       min-height: 50vh;
     }
   }

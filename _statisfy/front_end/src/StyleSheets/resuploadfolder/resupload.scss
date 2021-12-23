@@ -1,0 +1,114 @@
+$radius: 0.25rem;
+$white1: #eeeeee;
+$gray1: #b5b5b5;
+$pink: #dfa9ff;
+$purple: #a742c5;
+$black: #23272a;
+
+.resUpload {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  padding: 0.5rem;
+  min-height: 100%;
+  &_content {
+    padding: 0.5rem;
+    gap: 1rem;
+    width: 100%;
+  }
+  &_upload {
+    border: 1px solid #a8a8a8;
+    background-color: #ffffff;
+    cursor: pointer;
+    height: 1.5rem;
+    width: 10rem;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 0.2rem;
+    margin-bottom: 2rem;
+
+    &:hover {
+      background-color: #a8a8a8;
+      border: 1px solid #a8a8a8;
+      color: white;
+    }
+    &_input {
+      display: none;
+    }
+    &_cont {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 1rem;
+      justify-content: center;
+    }
+    &_dispTable {
+      max-width: 100%;
+      transform: rotateX(180deg);
+    }
+    &_dummy {
+      transform: rotateX(180deg);
+    }
+  }
+  &_drop {
+    &_button {
+      margin-top: 1rem;
+      background-color: white;
+      &:hover {
+        background-color: #a8a8a8;
+        color: white;
+        border: 0;
+      }
+    }
+    &_input {
+      width: 10rem;
+      margin-bottom: 1rem;
+    }
+  }
+  &_details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem;
+    height: 15rem;
+  }
+  &_error {
+    width: 10rem;
+    height: 2rem;
+    border: 1px solid #ad2929;
+    color: #ad2929;
+    background-color: #ffc1c1;
+    &:hover {
+      background-color: #e26b6b;
+    }
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .datapage {
+    &_upload {
+      &_cont {
+        display: grid;
+        grid-template-rows: repeat(auto-fill, 2.5rem);
+        padding-bottom: 1rem;
+        justify-content: flex-start;
+      }
+    }
+    &_content {
+      padding: 2rem;
+      gap: 1rem;
+      overflow-y: scroll;
+    }
+
+    &_details {
+      display: grid;
+      grid-template-columns: 15vw 25vw;
+      padding: 1rem;
+      height: 15rem;
+    }
+    &_drop {
+      width: 20vw;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

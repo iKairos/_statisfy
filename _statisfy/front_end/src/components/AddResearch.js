@@ -1,3 +1,7 @@
+//Hindi na to ginagamit
+
+
+
 import MethodCard from "./MethodCard";
 import "../StyleSheets/dashboard.css";
 import img1 from "../images/statisticsHeader.png";

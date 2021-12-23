@@ -29,7 +29,7 @@ export const DisplayTable = (props) => {
       const rows = data.map((i, index) => ({id: index, ...i}));
 
       return (
-        <div style={{ height:500, width: '100%' }}>
+        <div style={{ height:660, width: '100%' }}>
           {props.checked? (
             <DataGrid
               rows={rows}
