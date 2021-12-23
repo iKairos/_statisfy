@@ -1,5 +1,5 @@
 import "../StyleSheets/studyfolder/study.css"
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import * as React from 'react';
@@ -22,6 +22,7 @@ import {
   } from 'chart.js';
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash"
+import { MemoizedTable } from "./DisplayTable";
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 
@@ -120,6 +121,16 @@ export default function Study(props){
                     <div className = "Study_content_details">
                         
                         <h6>DataSet</h6>
+                        {typeof datasetFile !== 'undefined' ? 
+                            <MemoizedTable
+                                data={datasetFile.data.map(row => {
+                                    return _.pick(row, props.data[7]);
+                                })} 
+                                Header={true} 
+                                rowNumber={15}
+                                checked={false}
+                            /> : <CircularProgress color="info" thickness={2.5} size={30}/>
+                        }
                         <h6>Variables</h6>
                     </div>
                 }
