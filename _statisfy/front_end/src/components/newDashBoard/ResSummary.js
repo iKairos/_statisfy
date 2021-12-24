@@ -54,37 +54,37 @@ export default function ResSummary(props){
            </div>
            
            <div className = "resSummary_body">
-               <Typography variant="button" className="resSummary_category"><TitleIcon fontSize="small"/> Title</Typography>
+               <Typography variant="button" className="resSummary_category"><TitleIcon fontSize="small" color="secondary"/> Title</Typography>
                <Typography variant="subtitle2" className="resSummary_data">{props.Title}</Typography>
 
                 <div className="resSummary_desc">
-                <Typography variant="button" className="resSummary_category"><DescriptionIcon fontSize="small"/> Description</Typography>
+                <Typography variant="button" className="resSummary_category"><DescriptionIcon fontSize="small" color="secondary"/> Description</Typography>
                 </div>
                
                <Typography variant="subtitle2" className="resSummary_data">{props.Description}</Typography>
 
-               <Typography variant="button" className="resSummary_category"><AccountBoxIcon fontSize="small"/>Author</Typography>
+               <Typography variant="button" className="resSummary_category"><AccountBoxIcon fontSize="small" color="secondary"/>Author</Typography>
                <Typography variant="subtitle2" className="resSummary_data">{props.Author}</Typography>
 
-               <Typography variant="button" className="resSummary_category"><ArchitectureIcon fontSize="small"/>Tool</Typography>
+               <Typography variant="button" className="resSummary_category"><ArchitectureIcon fontSize="small" color="secondary"/>Tool</Typography>
                <Typography variant="subtitle2" className="resSummary_data">{props.Tool} Tool</Typography>
 
-               <Typography variant="button" className="resSummary_category"><FiberManualRecordOutlinedIcon fontSize="small"/>Delimiter</Typography>
+               <Typography variant="button" className="resSummary_category"><FiberManualRecordOutlinedIcon fontSize="small" color="secondary"/>Delimiter</Typography>
                <Typography variant="subtitle2" className="resSummary_data">{props.Delimiter}</Typography>
 
             </div>
             <div className = "resSummary_body">
                
-               <Typography  variant="button" className="resSummary_category"><InsertDriveFileOutlinedIcon/>File Name</Typography>
+               <Typography  variant="button" className="resSummary_category"><InsertDriveFileOutlinedIcon color="secondary"/>File Name</Typography>
                <Typography variant="subtitle2" className="resSummary_data">{props.FileDetails ? props.FileDetails?.name : ""}</Typography>
 
-               <Typography variant="button" className="resSummary_category"><UploadFileOutlinedIcon/>File Size</Typography>
+               <Typography variant="button" className="resSummary_category"><UploadFileOutlinedIcon color="secondary"/>File Size</Typography>
                <Typography variant="subtitle2" className="resSummary_data">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</Typography>
 
-               <Typography variant="button" className="resSummary_category"><ViewColumnOutlinedIcon/>Columns</Typography>
+               <Typography variant="button" className="resSummary_category"><ViewColumnOutlinedIcon color="secondary"/>Columns</Typography>
                <Typography variant="subtitle2" className="resSummary_data">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</Typography>
 
-               <Typography variant="button" className="resSummary_category"><TableRowsOutlinedIcon/>Rows</Typography>
+               <Typography variant="button" className="resSummary_category"><TableRowsOutlinedIcon color="secondary"/>Rows</Typography>
                <Typography variant="subtitle2" className="resSummary_data">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</Typography>
            
            </div>

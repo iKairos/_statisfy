@@ -13,24 +13,49 @@ import os
 @app.route("/api/research/<id>")
 @cross_origin()
 def fetch_research(id):
-    research = Research(id)
+    id = id.split(',')
+    data = []
 
-    if not research.is_registered:
-        return {
-            'error': 'Research does not exist.',
-            'code': 'RESEARCH_NOT_EXIST'
-        }
-    
-    return {
-        'data' : {
-            '_id': id, 
+    if len(id) == 1:
+        research = Research(id[0])
+        
+        if not research.is_registered:
+            return {
+                'error': 'Research does not exist.',
+                'code': 'RESEARCH_NOT_EXIST'
+            }
+        
+        data = {
+            '_id': id[0], 
             'research_name': research.research_name,
             'research_description': research.research_description,
             'dataset': research.dataset_directory,
             'authors': [{'uid': u, 'username': User(u).username} for u in research.authors],
             'delimiter': research.delimiter,
             'created_at': research.created_at
-        },
+        }
+    else:
+        for i in id:
+            research = Research(i)
+            
+            if not research.is_registered:
+                return {
+                    'error': 'Research does not exist.',
+                    'code': 'RESEARCH_NOT_EXIST'
+                }
+            
+            data.append({
+                '_id': i, 
+                'research_name': research.research_name,
+                'research_description': research.research_description,
+                'dataset': research.dataset_directory,
+                'authors': [{'uid': u, 'username': User(u).username} for u in research.authors],
+                'delimiter': research.delimiter,
+                'created_at': research.created_at
+            })
+    
+    return {
+        'data' : data,
         'code': "RESEARCH_GET_SUCCESS",
     }
 
@@ -63,8 +88,6 @@ def add_research():
             research_name = data['research_name'],
             research_description = data['research_description'],
             dataset = f"{uuid}_{file.filename}",
-            test_type = data['test_type'],
-            columns = data['columns'].split(','),
             delimiter = data['delimiter'],
             author = data['author'],
             created_at = data['created_at']

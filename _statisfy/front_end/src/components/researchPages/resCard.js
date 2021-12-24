@@ -19,10 +19,10 @@ export default function ResCard(props){
                 {props.description}
             </div>
             <Button 
-                onClick={()=>props.HandleSelected(true)}
+                onClick={()=>props.HandleSelected(props._id)}
                 variant="outlined"
                 
-            >View Study
+            >View Research
             </Button>
             
         </div>

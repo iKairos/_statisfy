@@ -12,13 +12,13 @@ import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Fade, Skeleton, Stepper, Step, StepLabel, Grow, Alert, Typography } from "@mui/material";
+import { Fade, Skeleton, Stepper, Step, StepLabel, Grow, Alert, Typography, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import clsx from 'clsx';
 import { status500, stepsString } from "../../constants/stringConstants";
 import { processUserToken } from "../../actions/userActions";
 import { processDataset } from "../../actions/datasetActions";
-import { saveResearch } from "../../actions/researchAction";
+import { getResearch, saveResearch } from "../../actions/researchAction";
 
 
 import ScienceIcon from '@mui/icons-material/Science';
@@ -40,6 +40,7 @@ import ToolCard from "./ToolCard";
 import ResearchUpload from "./ResearchUpload";
 import ResSummary from "./ResSummary";
 import ResCard from "../researchPages/resCard";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function ResearchList(props){
     
@@ -73,7 +74,7 @@ export default function ResearchList(props){
         setTool(value)
     }
 
-    
+    const history = useHistory();
 
     const handleAdding = (value) => {
         handleToggle();
@@ -81,7 +82,9 @@ export default function ResearchList(props){
         
     };
     const handleSelected = function(value) {
-        setSelected(value)
+        history.push(`/dashboard/${value}`);
+        history.go(0);
+        return;
     };
 
     const handleSort = (value) => {
@@ -130,9 +133,10 @@ export default function ResearchList(props){
         formData.append('research_name', title);
         formData.append('research_description', description);
         formData.append('delimiter', delimiter);
+        formData.append('author', processed?.user._id);
         formData.append('created_at', new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, ''));
         formData.append('dataset', file);
-
+ 
         dispatch(saveResearch(formData));
     }
 
@@ -198,7 +202,11 @@ export default function ResearchList(props){
     }
 
     
-
+    // ======= TOKEN HANDLING ======= //
+    const dataSelector = useSelector((state) => 
+        state.decodedUserToken
+    );
+    const { error, processed } = dataSelector;
 
 
 
@@ -223,6 +231,11 @@ export default function ResearchList(props){
     );
     const {researchSaveRes} = researchSaveSelector;
 
+    const researchGetSelector = useSelector((state) => 
+        state.researchGet
+    )
+
+    const {researchGetRes} = researchGetSelector;
 
     const nextScreen = () => {
         if(title?.length == 0 || description?.length == 0 || typeof title === 'undefined' || typeof description === 'undefined' && showActive === 1){
@@ -302,8 +315,12 @@ export default function ResearchList(props){
         );
     };
    
+    if(props.token && processed?.code === "TOKEN_FAIL"){
+        localStorage.removeItem('token');
+    }
+
     useEffect(() => {
-        dispatch(processUserToken(props.token));
+        dispatch(processUserToken(props.token, 'getResearch'));
     }, [])
 
     return(
@@ -561,6 +578,7 @@ export default function ResearchList(props){
                                         SaveResearchHandler = {handleCreateResearch}
                                         Delimiter = {delimiter}
                                         ResearchRes = {researchSaveRes}
+                                        Author = {processed?.user.username}
                                    />
                                 </div>
                             }
@@ -577,17 +595,19 @@ export default function ResearchList(props){
                     </div>)
                     : (
                         <div className="resList_list">
-                            <ResCard
-                                title = "Title"
-                                description = "Desc"
-                                tool = "Tool"
-                            />
-
-                            <ResCard
-                                title = "Title"
-                                description = "Desc"
-                                tool = "Tool"
-                            />
+                            {
+                                typeof researchGetRes?.data !== 'undefined' ? (
+                                    researchGetRes?.data.map(res => {
+                                        return <ResCard
+                                            title = {res.research_name}
+                                            description = {res.research_description}
+                                            tool = {res.created_at}
+                                            _id = {res._id}
+                                            HandleSelected = {handleSelected}
+                                        />
+                                    })
+                                ) :  <CircularProgress color="info" thickness={2.5} size={30}/>
+                            }
                         </div>
                     )
                 }

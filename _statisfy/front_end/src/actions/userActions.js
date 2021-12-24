@@ -14,6 +14,7 @@ import {
 } from "../constants/userConstants";
 
 import Axios from 'axios';
+import { getResearch } from "./researchAction";
 
 export const getUser = (uid) => async(dispatch) => {
     dispatch({
@@ -83,13 +84,17 @@ export const registerUser = (data) => async(dispatch) => {
     }
 }
 
-export const processUserToken = (token) => async(dispatch) => {
+export const processUserToken = (token, args) => async(dispatch) => {
     dispatch({
         type:USER_TOKEN_PROCESS_REQUEST
     });
 
     try{
         const {data} = await Axios.get(`/api/user/token/decode/${token}`)
+
+        if(args === "getResearch"){
+            dispatch(getResearch(data.user.researches));
+        }
 
         dispatch({
             type: USER_TOKEN_PROCESS_SUCCESS, 

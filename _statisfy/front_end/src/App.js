@@ -57,7 +57,7 @@ function App() {
                   <Route path = "/dashboard/:id?" render={(props) => <ResearchScreen token={token}/>} exact></Route>
                   <Route path = "/dashboard/stats" component={StatScreen} exact></Route>
                   <Route path = "/dashboard/stats/pearson" component={PearsonScreen} exact></Route>
-                  <Route path = "/researchlist" component={ResearchList} exact></Route>
+                  <Route path = "/researchlist" render={(props) => <ResearchList token={token}/>} exact></Route>
                   <Route path = "/signIn" exact render={(props) => <SignInScreen setToken={setToken} token={token} {...props}/>}/>
                   <Route path = "/signUp" exact render={() => <SignUpScreen token={token} />}></Route>
                 </Switch>

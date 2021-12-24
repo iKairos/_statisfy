@@ -101,9 +101,9 @@ export default function Study(props){
                         variant="scrollable"
                         scrollButtons="auto"
                     >
-                        <Tab value={1} label="Details" icon={<HelpIcon/>}/>
-                        <Tab value={2} label="Results" icon={<AutoGraphIcon/>}/>
-                        <Tab value={3} label="Interpretation" icon={<ArticleIcon/>}/>
+                        <Tab value={1} label="Details" icon={<HelpIcon/>} iconPosition="start"/>
+                        <Tab value={2} label="Results" icon={<AutoGraphIcon/>} iconPosition="start"/>
+                        <Tab value={3} label="Interpretation" icon={<ArticleIcon/>} iconPosition="start"/>
                     </Tabs>
                 </Box>
                 <button
