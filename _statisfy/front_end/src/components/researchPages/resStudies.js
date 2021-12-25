@@ -37,7 +37,7 @@ import Study from "../study";
 import Checkbox from "../Checkbox";
 import { DataColumns } from "./dataColumns";
 import { useDispatch, useSelector } from "react-redux";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Fade } from "@mui/material";
 import { DisplayTable, MemoizedTable } from "../DisplayTable";
 import { getStudy, saveStudy } from "../../actions/researchAction";
 
@@ -337,7 +337,11 @@ export default function ResStudies(props){
                 
             {selected
             ?(
-                <Study data={getStudyRes.data.filter(i => i[0] === selected)[0]}/>
+                <Fade in={selected} {...(selected ? { timeout: 1000 } : {})}>
+                    <div>
+                        <Study data={getStudyRes.data.filter(i => i[0] === selected)[0]}/>
+                    </div>
+                </Fade>
             )
             :(
                 <>

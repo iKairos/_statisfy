@@ -1,4 +1,7 @@
 import { 
+    RESEARCHES_GET_FAIL,
+    RESEARCHES_GET_REQUEST,
+    RESEARCHES_GET_SUCCESS,
     RESEARCH_GET_FAIL,
     RESEARCH_GET_REQUEST,
     RESEARCH_GET_SUCCESS,
@@ -55,6 +58,26 @@ export const getResearch = (id) => async(dispatch) => {
     }catch(error){
         dispatch({
             type:RESEARCH_GET_FAIL,
+            payload:error.message
+        });
+    }
+}
+
+export const getResearches = (id) => async(dispatch) => {
+    dispatch({
+        type:RESEARCHES_GET_REQUEST
+    });
+
+    try{
+        const {data} = await Axios.post('/api/researches', {_id: id});
+
+        dispatch({
+            type: RESEARCHES_GET_SUCCESS, 
+            payload: data
+        });
+    }catch(error){
+        dispatch({
+            type:RESEARCHES_GET_FAIL,
             payload:error.message
         });
     }

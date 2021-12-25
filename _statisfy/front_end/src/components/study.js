@@ -62,7 +62,7 @@ export default function Study(props){
         labels: props.data[7],
         datasets: [
           {
-            label: 'Datapoints',
+            label: `(${props.data[7][0]},${props.data[7][1]})`,
             data: datasetFile.data.map(row => {
                 var filter = _.pick(row, props.data[7]);
                 return {x: filter[props.data[7][0]], y: filter[props.data[7][1]]}

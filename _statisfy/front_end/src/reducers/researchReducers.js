@@ -1,4 +1,7 @@
 import { 
+    RESEARCHES_GET_FAIL,
+    RESEARCHES_GET_REQUEST,
+    RESEARCHES_GET_SUCCESS,
     RESEARCH_GET_FAIL,
     RESEARCH_GET_REQUEST,
     RESEARCH_GET_SUCCESS,
@@ -35,6 +38,22 @@ export const researchGetReducers = (state={researchGetRes:{}}, action) => {
             return {loading: false, researchGetRes: action.payload};
         
         case RESEARCH_GET_FAIL:
+            return {loading: false, error: action.payload};
+        
+        default:
+            return state
+    }
+}
+
+export const researchesGetReducers = (state={researchesGetRes:{}}, action) => {
+    switch(action.type){
+        case RESEARCHES_GET_REQUEST:
+            return {loading: true};
+        
+        case RESEARCHES_GET_SUCCESS:
+            return {loading: false, researchesGetRes: action.payload};
+        
+        case RESEARCHES_GET_FAIL:
             return {loading: false, error: action.payload};
         
         default:

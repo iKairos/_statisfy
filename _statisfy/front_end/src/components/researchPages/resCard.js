@@ -12,12 +12,13 @@ export default function ResCard(props){
                 {props.title}
             </div>
             <div className="StudyCard_method">
-                {props.tool}
+                {props.created_at}
             </div>
             
             <div className="StudyCard_desc">
                 {props.description}
             </div>
+            
             <Button 
                 onClick={()=>props.HandleSelected(props._id)}
                 variant="outlined"

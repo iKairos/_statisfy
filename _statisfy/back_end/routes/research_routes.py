@@ -13,51 +13,60 @@ import os
 @app.route("/api/research/<id>")
 @cross_origin()
 def fetch_research(id):
-    id = id.split(',')
-    data = []
-
-    if len(id) == 1:
-        research = Research(id[0])
+    research = Research(id)
         
-        if not research.is_registered:
-            return {
-                'error': 'Research does not exist.',
-                'code': 'RESEARCH_NOT_EXIST'
-            }
-        
-        data = {
-            '_id': id[0], 
-            'research_name': research.research_name,
-            'research_description': research.research_description,
-            'dataset': research.dataset_directory,
-            'authors': [{'uid': u, 'username': User(u).username} for u in research.authors],
-            'delimiter': research.delimiter,
-            'created_at': research.created_at
+    if not research.is_registered:
+        return {
+            'error': 'Research does not exist.',
+            'code': 'RESEARCH_NOT_EXIST'
         }
-    else:
-        for i in id:
-            research = Research(i)
-            
-            if not research.is_registered:
-                return {
-                    'error': 'Research does not exist.',
-                    'code': 'RESEARCH_NOT_EXIST'
-                }
-            
-            data.append({
-                '_id': i, 
-                'research_name': research.research_name,
-                'research_description': research.research_description,
-                'dataset': research.dataset_directory,
-                'authors': [{'uid': u, 'username': User(u).username} for u in research.authors],
-                'delimiter': research.delimiter,
-                'created_at': research.created_at
-            })
+    
+    data = {
+        '_id': id, 
+        'research_name': research.research_name,
+        'research_description': research.research_description,
+        'dataset': research.dataset_directory,
+        'authors': [{'uid': u, 'username': User(u).username} for u in research.authors],
+        'delimiter': research.delimiter,
+        'created_at': research.created_at
+    }
     
     return {
         'data' : data,
         'code': "RESEARCH_GET_SUCCESS",
     }
+
+@app.route("/api/researches", methods=["POST"])
+@cross_origin()
+def fetch_researches():
+    try:
+        data = request.get_json()
+
+        user = User(data['_id'])
+        
+        researches = []
+ 
+        for i in user.research_papers:
+            research = Research(i)
+            
+            researches.append({
+                'id': i,
+                'research_name': research.research_name,
+                'research_description': research.research_description,
+                'created_at': research.created_at
+            })
+        
+        return {
+            'code': 'RESEARCHES_GET_SUCCESS',
+            'researches': researches
+        }
+        
+    except Exception as e:
+        return {
+            'code': 'RESEARCHES_GET_FAIL',
+            'error': str(e)
+        }
+    
 
 @app.route("/api/research/new", methods=["POST"])
 @cross_origin()

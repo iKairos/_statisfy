@@ -18,7 +18,7 @@ import clsx from 'clsx';
 import { status500, stepsString } from "../../constants/stringConstants";
 import { processUserToken } from "../../actions/userActions";
 import { processDataset } from "../../actions/datasetActions";
-import { getResearch, saveResearch } from "../../actions/researchAction";
+import { getResearch, getResearches, saveResearch } from "../../actions/researchAction";
 
 
 import ScienceIcon from '@mui/icons-material/Science';
@@ -231,11 +231,11 @@ export default function ResearchList(props){
     );
     const {researchSaveRes} = researchSaveSelector;
 
-    const researchGetSelector = useSelector((state) => 
-        state.researchGet
+    const researchesGetSelector = useSelector((state) => 
+        state.researchesGet
     )
 
-    const {researchGetRes} = researchGetSelector;
+    const {researchesGetRes} = researchesGetSelector;
 
     const nextScreen = () => {
         if(title?.length == 0 || description?.length == 0 || typeof title === 'undefined' || typeof description === 'undefined' && showActive === 1){
@@ -318,9 +318,9 @@ export default function ResearchList(props){
     if(props.token && processed?.code === "TOKEN_FAIL"){
         localStorage.removeItem('token');
     }
-
+    
     useEffect(() => {
-        dispatch(processUserToken(props.token, 'getResearch'));
+        dispatch(processUserToken(props.token, 'getResearches'));
     }, [])
 
     return(
@@ -596,13 +596,13 @@ export default function ResearchList(props){
                     : (
                         <div className="resList_list">
                             {
-                                typeof researchGetRes?.data !== 'undefined' ? (
-                                    researchGetRes?.data.map(res => {
+                                typeof researchesGetRes?.researches !== 'undefined' ? (
+                                    researchesGetRes?.researches.map(res => {
                                         return <ResCard
                                             title = {res.research_name}
                                             description = {res.research_description}
-                                            tool = {res.created_at}
-                                            _id = {res._id}
+                                            created_at = {res.created_at}
+                                            _id = {res.id}
                                             HandleSelected = {handleSelected}
                                         />
                                     })
