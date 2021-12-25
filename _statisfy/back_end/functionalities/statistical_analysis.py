@@ -41,29 +41,24 @@ def variance(x):
 
 # RELATIONSHIP / ASSOCIATION STATISTICAL ANALYSIS
 
-def pearsonr(x, y):
+def pearsonr(x: np.array, y: np.array):
     n = len(x)
 
     if n != len(y):
         raise ValueError(f"Dataset size is not equal. Size {len(x)} not equal to {len(y)}.")
-
-    numerator_sum = 0
-    term1_sum = 0 
-    term2_sum = 0
-
-    for i in range(n):
-        numerator_sum += (x[i] - mean(x)) * (y[i] - mean(y))
-
-        term1_sum += (x[i] - mean(x)) ** 2
-        term2_sum += (y[i] - mean(y)) ** 2
     
-    r = numerator_sum / (term1_sum * term2_sum) ** 0.5
+    x_num = x - x.mean()
+    y_num = y - y.mean()
     
+    SSx = (x_num * x_num).sum(axis=0)
+    SSy = (y_num * y_num).sum(axis=0)
+    
+    num = np.matmul(x_num.transpose(), y_num)
+    r = num / np.sqrt(np.outer(SSx, SSy))
     t = r * np.sqrt((n-2)/(1-r**2))
-
     p = 2 * sp.t.sf(np.abs(t), n-2)
     
-    return (('R Coefficient', r), ('P-value', p), ('SSxy', numerator_sum), ('SSx', term1_sum), ('SSy', term2_sum))
+    return (('R Coefficient', r[0][0]), ('P-value', p[0][0]), ('SSxy', num), ('SSx', SSx), ('SSy', SSy))
 
 def spearmanrho(x, y):
     n = len(x)
