@@ -144,7 +144,7 @@ def add_study():
         
         research = Research(data['research_id'])
         
-        df = pd.read_csv(os.path.join(dirname(realpath(__file__)), '..\\temp\\datasets\\' + research.dataset_directory))
+        df = pd.read_csv(os.path.join(dirname(realpath(__file__)), '..\\temp\\datasets\\' + research.dataset_directory), delimiter=research.delimiter)
         
         columns = data['columns'].split(',')
         
