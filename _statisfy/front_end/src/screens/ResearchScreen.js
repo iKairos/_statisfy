@@ -58,8 +58,8 @@ export default function ResearchScreen(props){
     );
 
     const { processed } = userdataSelector;
-    const {researchGetRes} = dataSelector;
-    const {datasetFile} = filedataSelector;   
+    const { researchGetRes } = dataSelector;
+    const { datasetFile } = filedataSelector;   
 
     const setTitleFunction = function(newValue){
         setTitle(newValue);

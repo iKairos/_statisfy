@@ -154,7 +154,7 @@ def add_study():
                     'code': 'STUDY_WRONG_VAR_COUNT',
                     'error': 'Pearson R only accepts two variables. Please make sure to only select two columns to analyze.'
                 }
-            
+                
             compute_res = pearsonr(df[columns[0]], df[columns[1]])
             print(compute_res)
         

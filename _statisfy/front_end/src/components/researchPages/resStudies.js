@@ -27,6 +27,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SortIcon from '@mui/icons-material/Sort';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import CloseIcon from '@mui/icons-material/Close';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -37,7 +38,7 @@ import Study from "../study";
 import Checkbox from "../Checkbox";
 import { DataColumns } from "./dataColumns";
 import { useDispatch, useSelector } from "react-redux";
-import { CircularProgress, Fade } from "@mui/material";
+import { Alert, CircularProgress, Fade, IconButton, Snackbar } from "@mui/material";
 import { DisplayTable, MemoizedTable } from "../DisplayTable";
 import { getStudy, saveStudy } from "../../actions/researchAction";
 
@@ -60,6 +61,8 @@ export default function ResStudies(props){
     const [ascending, setAscending] = useState(true);
     const [methodChosen, setMethodChosen] = useState();
     const [tags, setTags] = useState([]);
+    const [error, setError] = useState();
+    const [isOpenErrorSnackbar, setOpenErrorSnackbar] = useState(false);
 
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
@@ -80,6 +83,11 @@ export default function ResStudies(props){
         state.getStudyRes
     );
     const { getStudyRes } = studyDetailsSelector;
+
+    const saveStudySelector = useSelector((state) => 
+        state.saveStudy
+    );
+    const { saveStudyRes } = saveStudySelector;
 
     const callbackCheckbox = (checked) => {
         setTags(checked);
@@ -117,17 +125,33 @@ export default function ResStudies(props){
         setOpen(false);
     };
 
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpenErrorSnackbar(false);
+      };
+
     const handleSubmit = () => {
+        if(typeof studyName === 'undefined' || typeof methodChosen === 'undefined' || studyColumns.length === 0 || typeof studyDesc === 'undefined'){
+            setError("Please fill out all required fields.");
+            setOpenErrorSnackbar(true);
+            return;
+        }
+
+        setError("");
+
         handleAdding(false);
 
-        const formData = new FormData()
-        formData.append("study_name", studyName)
-        formData.append("research_id", researchGetRes.data._id)
-        formData.append("created_by", props.User)
-        formData.append("test_type", methodChosen)
-        formData.append("created_at", new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, ''))
-        formData.append("columns", studyColumns)
-        formData.append("study_description", studyDesc)
+        const formData = new FormData();
+        formData.append("study_name", studyName);
+        formData.append("research_id", researchGetRes.data._id);
+        formData.append("created_by", props.User);
+        formData.append("test_type", methodChosen);
+        formData.append("created_at", new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, ''));
+        formData.append("columns", studyColumns);
+        formData.append("study_description", studyDesc);
 
         dispatch(saveStudy(formData));
     }
@@ -152,6 +176,19 @@ export default function ResStudies(props){
         }
     }
 
+    const action = (
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleCloseSnackbar}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      );
+
     // return focus to the button when we transitioned from !open -> open
     const prevOpen = React.useRef(open);
     React.useEffect(() => {
@@ -170,8 +207,28 @@ export default function ResStudies(props){
     return(
         
         <div className="resStudy_body_container">
-            
-
+            {
+                error && 
+                <Snackbar 
+                    open={isOpenErrorSnackbar} 
+                    onClose={handleCloseSnackbar}
+                    action={action}
+                >
+                    <Alert severity="error" variant="filled">
+                        {error}
+                        <React.Fragment>
+                            <IconButton
+                                size="small"
+                                aria-label="close"
+                                color="inherit"
+                                onClick={handleCloseSnackbar}
+                            >
+                                <CloseIcon fontSize="small" />
+                            </IconButton>
+                        </React.Fragment>
+                    </Alert>
+                </Snackbar>
+            }
             {selected
                 ?(
                     <div className="resStudy_body_add">
@@ -213,25 +270,24 @@ export default function ResStudies(props){
                             <Stack direction="row" spacing={2} className="Sort">
                                 <div>
                                     <Button
-                                    ref={anchorRef}
-                                    id="composition-button"
-                                    aria-controls={open ? 'composition-menu' : undefined}
-                                    aria-expanded={open ? 'true' : undefined}
-                                    aria-haspopup="true"
-                                    onClick={handleToggle}
-                                    color="secondary"
-                                    
+                                        ref={anchorRef}
+                                        id="composition-button"
+                                        aria-controls={open ? 'composition-menu' : undefined}
+                                        aria-expanded={open ? 'true' : undefined}
+                                        aria-haspopup="true"
+                                        onClick={handleToggle}
+                                        color="secondary"
                                     >
                                     Sort
                                     <SortIcon/>
                                     </Button>
                                     <Popper
-                                    open={open}
-                                    anchorEl={anchorRef.current}
-                                    role={undefined}
-                                    placement="bottom-start"
-                                    transition
-                                    disablePortal
+                                        open={open}
+                                        anchorEl={anchorRef.current}
+                                        role={undefined}
+                                        placement="bottom-start"
+                                        transition
+                                        disablePortal
                                     >
                                     {({ TransitionProps, placement }) => (
                                         <Grow
@@ -337,7 +393,7 @@ export default function ResStudies(props){
                 
             {selected
             ?(
-                <Fade in={selected} {...(selected ? { timeout: 1000 } : {})}>
+                <Fade in={selected}>
                     <div>
                         <Study data={getStudyRes.data.filter(i => i[0] === selected)[0]}/>
                     </div>

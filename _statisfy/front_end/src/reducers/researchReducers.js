@@ -10,7 +10,10 @@ import {
     RESEARCH_SAVE_SUCCESS, 
     STUDY_GET_FAIL, 
     STUDY_GET_REQUEST,
-    STUDY_GET_SUCCESS
+    STUDY_GET_SUCCESS,
+    STUDY_SAVE_FAIL,
+    STUDY_SAVE_REQUEST,
+    STUDY_SAVE_SUCCESS
 } from "../constants/researchConstants";
 
 export const researchSaveReducers = (state={researchSaveRes:{}}, action) => {
@@ -63,13 +66,13 @@ export const researchesGetReducers = (state={researchesGetRes:{}}, action) => {
 
 export const studySaveReducers = (state={saveStudyRes:{}}, action) => {
     switch(action.type){
-        case RESEARCH_GET_REQUEST:
+        case STUDY_SAVE_REQUEST:
             return {loading: true};
         
-        case RESEARCH_GET_SUCCESS:
+        case STUDY_SAVE_SUCCESS:
             return {loading: false, saveStudyRes: action.payload};
         
-        case RESEARCH_GET_FAIL:
+        case STUDY_SAVE_FAIL:
             return {loading: false, error: action.payload};
         
         default:
