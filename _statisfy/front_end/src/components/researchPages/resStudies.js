@@ -448,7 +448,7 @@ export default function ResStudies(props){
                             >
                             <Typography>{typeof methodChosen!== "undefined"
                                         ? methodChosen
-                                        : "new"
+                                        : "Select a Method"
                             }</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
