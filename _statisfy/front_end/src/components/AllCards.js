@@ -4,7 +4,7 @@ import Card from "./Card";
 import { useState } from "react";
 
 
-import "../StyleSheets/statpagefolder/statpage.css";
+import "../StyleSheets/cardfolder/card.css"
 
 export default function AllCards(props){
     const filtered = statMethods.filter(([name, tags]) => {
@@ -19,15 +19,12 @@ export default function AllCards(props){
 
 
     return(
-        <div className="statmethod">
+        <div className="statContainer">
             {
                 filtered.length !== 0 ? filtered.map(([method, tags]) => {
-                    return <Card title={method} desc="desc" attributes={tags} display={displayChosen}/>
+                    return <Card title={method} desc="desc" attributes={tags} display={displayChosen} Chosen={chosen}/>
                 }) : <h1>Oops, nothing here!</h1>
             }
-            
-            <p onClick={props.display(chosen)}>
-            </p>
 
            
         </div>

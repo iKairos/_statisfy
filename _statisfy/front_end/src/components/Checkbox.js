@@ -1,6 +1,7 @@
 import { func } from "prop-types";
 import { useState } from "react";
 import "../StyleSheets/checkbox.css";
+import { Typography } from "@mui/material";
 
 export default function Checkbox({callbackFunction}){
     const [ checked, setChecked] = useState([]);
@@ -8,165 +9,162 @@ export default function Checkbox({callbackFunction}){
     return (
         <div className="contStyle">
             <div className = "divStyle">    
-                <span className="upload_span"> Variable Count:</span>
+                <Typography variant="button"> Variable Count:</Typography>
                     
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onChange={callbackFunction(checked)} onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "One Variable"]) : setChecked(checked.filter((i) => i !== "One Variable"))
                     }}/>
                     <label>
-                         One variable
+                         <Typography> One variable</Typography>
                     </label>
                 </div>
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Two Variables"]) : setChecked(checked.filter((i) => i !== "Two Variables"))
                     }}/>
-                    <label>
+                    <label><Typography>
                         Two variables
-                    </label>
+                    </Typography></label>
                 </div>
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Multiple Variables"]) : setChecked(checked.filter((i) => i !== "Multiple Variables"))
                     }}/>
-                    <label>
+                    <label><Typography>
                         Two or more variables
-                    </label>
+                    </Typography></label>
                 </div>
             </div>
 
             
 
             <div className = "divStyle">    
-                <span className="upload_span"> Type of Variable:</span>
+                <Typography variant="button"> Type of Variable:</Typography>
                     
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Ordinal"]) : setChecked(checked.filter((i) => i !== "Ordinal"))
                     }}/>
-                    <label >
-                         Ordinal
-                    </label>
+                    <label><Typography>Ordinal</Typography></label>
                 </div>
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Interval"]) : setChecked(checked.filter((i) => i !== "Interval"))
                     }}/>
-                    <label>
+                    <label><Typography>
                         Interval
-                    </label>
+                    </Typography></label>
                 </div>
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Ratio"]) : setChecked(checked.filter((i) => i !== "Ratio"))
                     }}/>
-                    <label>
+                    <label><Typography>
                         Ratio
-                    </label>
+                    </Typography></label>
                 </div>
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Nominal"]) : setChecked(checked.filter((i) => i !== "Nominal"))
                     }}/>
-                    <label>
+                    <label><Typography>
                         Nominal
-                    </label>
+                    </Typography></label>
                 </div>
                
             </div>
 
             <div className = "divStyle">    
-                <span className="upload_span"> Type of Data:</span>
+                <Typography variant="button"> Type of Data:</Typography>
                     
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Grouped"]) : setChecked(checked.filter((i) => i !== "Grouped"))
                     }}/>
-                    <label >
+                    <label> <Typography>
                          Grouped
-                    </label>
+                    </Typography></label>
                 </div>
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Ungrouped"]) : setChecked(checked.filter((i) => i !== "Ungrouped"))
                     }}/>
-                    <label>
+                    <label><Typography>
                         Ungrouped
-                    </label>
+                    </Typography></label>
                 </div>
                
             </div>
 
             <div className = "divStyle">    
-                <span className="upload_span"> Purpose of Analysis:</span>
-                    
+                <Typography variant="button"> Purpose of Analysis:</Typography>
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Relationship"]) : setChecked(checked.filter((i) => i !== "Relationship"))
                     }}/>
-                    <label >
+                    <label> <Typography>
                          Relationship
-                    </label>
+                    </Typography></label>
                 </div>
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Significant Differences"]) : setChecked(checked.filter((i) => i !== "Significant Differences"))
                     }}/>
-                    <label>
+                    <label><Typography>
                         Significant Differences
-                    </label>
+                    </Typography></label>
                 </div>
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Univariate Analysis"]) : setChecked(checked.filter((i) => i !== "Univariate Analysis"))
                     }}/>
-                    <label>
+                    <label><Typography>
                         Univariate Data Analysis
-                    </label>
+                    </Typography></label>
                 </div>
                
             </div>
 
             <div className = "divStyle">    
-                <span className="upload_span"> Number of Groups:</span>
+                <Typography variant="button"> Number of Groups:</Typography>
                     
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Two Groups"]) : setChecked(checked.filter((i) => i !== "Two Groups"))
                     }}/>
-                    <label >
+                    <label> <Typography>
                         Two
-                    </label>
+                    </Typography></label>
                 </div>
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Multiple Groups"]) : setChecked(checked.filter((i) => i !== "Multiple Groups"))
                     }}/>
-                    <label>
+                    <label><Typography>
                         Three or more
-                    </label>
+                    </Typography></label>
                 </div>
                
             </div>
 
             <div className = "divStyle" >    
-                <span className="upload_span"> Independent Variables:</span>
+                <Typography variant="button"> Independent Variables:</Typography>
                     
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "One Independent Variable"]) : setChecked(checked.filter((i) => i !== "One Independent Variable"))
                     }}/>
-                    <label >
+                    <label> <Typography>
                         One
-                    </label>
+                    </Typography></label>
                 </div>
                 <div className="checkbox_div">
                     <input type="checkbox" className="checkbox_child" onClick={(e) => {
                         e.target.checked ? setChecked([ ...checked, "Two Independent Variables"]) : setChecked(checked.filter((i) => i !== "Two Independent Variables"))
                     }}/>
-                    <label>
-                        Two
+                    <label><Typography>
+                        Two </Typography>
                     </label>
                 </div>
                

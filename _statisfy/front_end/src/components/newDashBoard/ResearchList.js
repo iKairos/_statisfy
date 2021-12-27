@@ -511,37 +511,11 @@ export default function ResearchList(props){
                                         label="Description"
                                         placeholder="Add description"
                                         multiline
-                                        rows={4}
+                                        rows={6}
                                         color = "secondary"
                                         fullWidth
                                         onChange={(e) => handleDescription(e)}
                                     />
-                                    <Typography>
-                                        Select Research Tool:
-                                    </Typography>
-                                    {props.Error && (
-                                        <Grow in={_error.toolPage} {...(_error.toolPage ? { timeout: 1000 } : {})}>
-                                            <Alert variant="outlined" severity="error">{_error.toolPage}</Alert>
-                                        </Grow>
-                                    )}
-                                    <div className="resList_tools">
-                                        <ToolCard
-                                            Title = "Statistical Tool"
-                                            Desc = "this is statistical tool"
-                                            ToolSelected = {tool}
-                                            HandleTool = {handleTool}
-                                            ToolLabel = "Statistical Method"
-                                            img = {StatImg}
-                                        />
-                                        <ToolCard
-                                            Title = "Machine Learning Tool"
-                                            Desc = " this is Machine Learning Tool"
-                                            ToolSelected = {tool}
-                                            HandleTool = {handleTool}
-                                            ToolLabel = "Machine Learning"
-                                            img = {MLImg}
-                                        />
-                                    </div>
                                    
 
                                 </div>

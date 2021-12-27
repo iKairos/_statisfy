@@ -1,17 +1,25 @@
 import "../StyleSheets/cardfolder/card.css"
+import Chip from '@mui/material/Chip';
+import { Typography } from "@mui/material";
 export default function Card(props){
 
    // const attributes = props.attribute
     return(
-        <div className ="card" onClick={()=>props.display(props.title)}>
+        <div className =
+          {props.Chosen === props.title
+            ?"selected"
+            :"cards"
+          }
+          onClick={()=>props.display(props.title)}>
             
-                <h4 className="card_title">{props.title}</h4>
-                <div className="card_desc">{props.desc}</div>
-                <div className="card_tagcont">{props.attributes.map(i=>{
-                  return <div className="card_tags">{i}</div>
+              <Typography variant="h5" gutterBottom component="div">{props.title}</Typography>
+                <div className="cards_desc">{props.desc}</div>
+                
+                <div className="cards_tagcont">{props.attributes.map(i=>{
+                  return <Chip label={i} variant="filled" />
                 })}</div>
 
            
         </div>
-    ); 
+    );  
 }

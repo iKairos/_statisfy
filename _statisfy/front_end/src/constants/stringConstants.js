@@ -17,6 +17,12 @@ export const stepsString = [
     'Verify your choices.'
 ];
 
+export const studyStepsString = [
+    'Name your Study.',
+    'Select appropriate tool',
+    'Select columns of data to be processed.'
+];
+
 export const passwordRequirement = "Password should be at least eight characters, has at least one uppercase letter, one lowercase letter, one number and one special character.";
 
 export const status500 = "Request from server returned an error status 500. The server might be offline or down, please try again later.";

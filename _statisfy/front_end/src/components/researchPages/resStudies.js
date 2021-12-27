@@ -1,7 +1,7 @@
 import "../../StyleSheets/resstudyfolder/resstudy.css"
 
 
-
+import Navigator from "../navigator";
 
 import Button from '@mui/material/Button';
 import * as React from 'react';
@@ -14,12 +14,13 @@ import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import {Skeleton, Stepper, Step, StepLabel, Typography } from "@mui/material";
 import { useState } from "react";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-
+import { status500, studyStepsString } from "../../constants/stringConstants";
+import { makeStyles } from "@mui/styles";
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -28,9 +29,16 @@ import SortIcon from '@mui/icons-material/Sort';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CloseIcon from '@mui/icons-material/Close';
+import ScienceIcon from '@mui/icons-material/Science';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import FilterAltSharpIcon from '@mui/icons-material/FilterAltSharp';
+import CloseSharpIcon from '@mui/icons-material/CloseSharp';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import Backdrop from '@mui/material/Backdrop';
+import clsx from 'clsx';
 
 import AllCards from "../AllCards";
 import StudyCard from "../StudyCard";
@@ -42,8 +50,9 @@ import { Alert, CircularProgress, Fade, IconButton, Snackbar } from "@mui/materi
 import { DisplayTable, MemoizedTable } from "../DisplayTable";
 import { getStudy, saveStudy } from "../../actions/researchAction";
 
-
-
+import StatImg from '../../images/statisticsHeader.png'
+import MLImg from '../../images/mlHeader.png'
+import ToolCard from "../newDashBoard/ToolCard";
 
 //<span className ="text_topic">{researchGetRes?.data.test_type}</span>
 
@@ -54,8 +63,10 @@ export default function ResStudies(props){
     const [studyDesc, setStudyDesc] = useState();
     const [studyMethod, setStudyMethod] = useState();
     const [studyColumns, setStudyColumns] = useState([]);
+    const [tool, setTool] = useState();
 
     const [isAdding, setAdding] = useState(false);
+    const [showActive, setShowActive] = useState(1);
     const [selected, setSelected] = useState(false);
     const [sort, setSort] = useState(1);
     const [ascending, setAscending] = useState(true);
@@ -66,6 +77,15 @@ export default function ResStudies(props){
 
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
+
+
+    const [openFilter, setFilter] = React.useState(false);
+    const handleFilter = () => {
+        setFilter(false);
+    };
+    const toggleFilter = () => {
+        setFilter(!openFilter);
+    };
 
     const dispatch = useDispatch();
 
@@ -124,6 +144,9 @@ export default function ResStudies(props){
 
         setOpen(false);
     };
+    const handleTool = function(value){
+        setTool(value)
+    }
 
     const handleCloseSnackbar = (event, reason) => {
         if (reason === 'clickaway') {
@@ -203,6 +226,52 @@ export default function ResStudies(props){
 
         prevOpen.current = open;
     }, [open]);
+
+    const useStyles = makeStyles(() => ({
+        root: {
+            backgroundColor: '#b5b5b5',
+            color: '#ffffff',
+            padding: 1,
+            borderRadius: '50%',
+
+        },
+        active: {
+            backgroundColor: '#A742C5',
+            color: '#ffffff',
+        },
+        completed: {
+            backgroundColor: '#e7e7e7',
+            color: '#A742C5',
+        },
+    }));
+
+    const CustomStepIcon = (props) => {
+        const classes = useStyles();
+        const { active, completed } = props;
+    
+        const stepIcons = {
+          1: <ScienceIcon />,
+          2: <FileUploadIcon />,
+          3: <SummarizeIcon />
+        };
+
+        return (
+          <div
+            className={clsx(classes.root, {
+              [classes.active]: active,
+              [classes.completed]: completed,
+            })}
+          >
+            {stepIcons[String(props.icon)]}
+          </div>
+        );
+    };
+    const nextScreen = () => {
+        setShowActive(showActive + 1);
+    }
+    const prevScreen = () => {
+        setShowActive(showActive - 1);
+    }
     
     return(
         
@@ -403,97 +472,139 @@ export default function ResStudies(props){
                 <>
                 {isAdding
                     ? (
+                        
                     <div className = "resStudy_body_content">
-                        <Box
+                        <Stepper activeStep={showActive-1} alternativeLabel>
+                            {studyStepsString.map((label) => (
+                                <Step key={label}>
+                                    <StepLabel StepIconComponent={CustomStepIcon} >
+                                        <div className="stepper_div">{label}</div>
+                                    </StepLabel>
+                                </Step>
+                            ))}
+                        </Stepper>
+                        {showActive === 1 &&
+                            <Box
                             component="form"
                             noValidate
                             autoComplete="off"
                             
                             className = "StudyTitle"
                             
-                        >
-                            <div>
-                                <TextField
-                                    id="outlined-textarea"
-                                    label="Study Title"
-                                    placeholder="Add new title"
-                                    multiline
-                                    rows={2}
-                                    color = "secondary"
-                                    onChange={e => setStudyName(e.target.value)}
-                                    fullWidth
-                                />
-                            </div>
-                        <div style={{paddingTop:"1rem"}}>
-                            <TextField
-                                id="outlined-textarea"
-                                label="Description"
-                                placeholder="Add description"
-                                multiline
-                                rows={4}
-                                color = "secondary"
-                                onChange={e => setStudyDesc(e.target.value)}
-                                fullWidth
-                            />
-                        </div>
-                        
-                        </Box>
-                        <Box className = "StudyTitle">
-                            <Typography>Select Method:</Typography>
-                            <Accordion  >
-                            <AccordionSummary
-                                expandIcon={<AddCircleOutlineIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
                             >
-                            <Typography>{typeof methodChosen!== "undefined"
-                                        ? methodChosen
-                                        : "new"
-                            }</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <div className = "resStudy_stats">
-                                    <div className = "resStudy_stats_filter">
-                                        <Accordion className = "StudyFilter">
-                                            <AccordionSummary
-                                                expandIcon={<AddCircleOutlineIcon />}
-                                                aria-controls="panel1a-content"
-                                                id="panel1a-header"
-                                            >
-                                            <Typography>Filters</Typography>
-                                            </AccordionSummary>
-                                            <AccordionDetails>
-                                                
-                                                <Checkbox callbackFunction={callbackCheckbox}/>
-                                            </AccordionDetails>
-                                        </Accordion>
-                                    </div>
-                                    <div className = "resStudy_stats_methods">
-                                        
-                                        <AllCards tags={tags} display={displayMethodChosen}/>
-                                    </div>
+                                <div>
+                                    <TextField
+                                        id="outlined-textarea"
+                                        label="Study Title"
+                                        placeholder="Add new title"
+                                        multiline
+                                        rows={2}
+                                        color = "secondary"
+                                        onChange={e => setStudyName(e.target.value)}
+                                        fullWidth
+                                    />
+                                </div>
+                                <div style={{paddingTop:"1rem"}}>
+                                    <TextField
+                                        id="outlined-textarea"
+                                        label="Description"
+                                        placeholder="Add description"
+                                        multiline
+                                        rows={4}
+                                        color = "secondary"
+                                        onChange={e => setStudyDesc(e.target.value)}
+                                        fullWidth
+                                    />
                                 </div>
                             
-                            </AccordionDetails>
-                            </Accordion>
-                        </Box>
-                        
-                        {typeof datasetDetails !== 'undefined' ? 
-                            <MemoizedTable
-                                data={datasetDetails.details} 
-                                Header={true} 
-                                rowNumber={15}
-                                checked={true}
-                                callbackSetSelectedRows={callbackSetSelectedRows}
-                            /> : <CircularProgress color="info" thickness={2.5} size={30}/>
+                            </Box>
                         }
+                        {showActive === 2 &&
+                            <Box className = "StudyTitle">
+                                <Typography>Select Tool:</Typography>
+                                <div className="resList_tools">
+                                    <ToolCard
+                                        Title = "Statistical Tool"
+                                        Desc = "this is statistical tool"
+                                        ToolSelected = {tool}
+                                        HandleTool = {handleTool}
+                                        ToolLabel = "Statistical Method"
+                                        img = {StatImg}
+                                    />
+                                    <ToolCard
+                                        Title = "Machine Learning Tool"
+                                        Desc = " this is Machine Learning Tool"
+                                        ToolSelected = {tool}
+                                        HandleTool = {handleTool}
+                                        ToolLabel = "Machine Learning"
+                                        img = {MLImg}
+                                    />
+                                </div>
+                                {tool === "Statistical Method" &&
+                                    <>
+                                        <div className="filterContainer">
+                                            <Typography>Select Statistical Method :</Typography>
+                                            <IconButton onClick={toggleFilter}><FilterAltSharpIcon/></IconButton>
+                                        </div>
+                                        
+                                        <Backdrop
+                                            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                                            open={openFilter}
+                                        >   
+                                            
+                                        <div className = "resStudy_statfilter">
+                                            <IconButton 
+                                                onClick={handleFilter}
+                                                sx={{ position:"absolute", right: 0, top: 0}}
+                                            >
+                                                <CloseSharpIcon/>
+                                            </IconButton>
+                                            <Checkbox callbackFunction={callbackCheckbox}/>
+                                        </div>
+                                            
+                                        </Backdrop>
+                                        <AllCards tags={tags} display={displayMethodChosen}/>
+                                    </>
+                                
+                                }
 
-                        <Button
-                            onClick={handleSubmit}
-                            color="secondary"
-                        >
-                        Compute
-                        </Button>
+
+                               
+                            </Box>
+                        }
+                        {showActive === 3 &&
+                        <>
+                            {typeof datasetDetails !== 'undefined' ? 
+                                <MemoizedTable
+                                    data={datasetDetails.details} 
+                                    Header={true} 
+                                    rowNumber={15}
+                                    checked={true}
+                                    callbackSetSelectedRows={callbackSetSelectedRows}
+                                /> : <CircularProgress color="info" thickness={2.5} size={30}/>
+                            }
+
+                            <Button
+                                onClick={handleSubmit}
+                                color="secondary"
+                            >
+                            Compute
+                            </Button>
+                        </>
+                            
+                        
+                        }
+                        
+                        
+                        
+
+
+                        <Navigator
+                            NextScreen={nextScreen}
+                            PrevScreen={prevScreen}
+                            ActiveStep = {showActive -1}
+                            prevDisabled={true}
+                        />
                     
                     </div>)
                     : (
