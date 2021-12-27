@@ -22,7 +22,7 @@ export default function AllCards(props){
         <div className="statContainer">
             {
                 filtered.length !== 0 ? filtered.map(([method, tags]) => {
-                    return <Card title={method} desc="desc" attributes={tags} display={displayChosen} Chosen={chosen}/>
+                    return <Card title={method} desc="desc" attributes={tags} display={props.display} Chosen={props.chosen}/>
                 }) : <h1>Oops, nothing here!</h1>
             }
 

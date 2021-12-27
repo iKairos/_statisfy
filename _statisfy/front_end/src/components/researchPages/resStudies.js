@@ -157,9 +157,11 @@ export default function ResStudies(props){
       };
 
     const handleSubmit = () => {
-        if(typeof studyName === 'undefined' || typeof methodChosen === 'undefined' || studyColumns.length === 0 || typeof studyDesc === 'undefined'){
+        if(typeof studyName === 'undefined' || typeof methodChosen === 'undefined' || typeof tool === 'undefined' || studyColumns.length === 0 || typeof studyDesc === 'undefined'){
             setError("Please fill out all required fields.");
             setOpenErrorSnackbar(true);
+
+            console.log(studyName, methodChosen, tool, studyColumns, studyDesc)
             return;
         }
 
@@ -563,7 +565,7 @@ export default function ResStudies(props){
                                         </div>
                                             
                                         </Backdrop>
-                                        <AllCards tags={tags} display={displayMethodChosen}/>
+                                        <AllCards tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
                                     </>
                                 
                                 }
