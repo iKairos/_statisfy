@@ -29,9 +29,6 @@ ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 export default function Study(props){
     const [studyPage, setStudyPage] = useState(1);
-    const [colData, setColData] = useState();
-
-    const dispatch = useDispatch()
     
     const switchStudyPage = (event, newValue) => {
         setStudyPage(newValue);

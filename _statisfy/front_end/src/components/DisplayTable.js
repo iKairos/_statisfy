@@ -27,7 +27,7 @@ export const DisplayTable = (props) => {
       })
       
       const rows = data.map((i, index) => ({id: index, ...i}));
-
+      
       return (
         <div style={{ height:660, width: '100%' }}>
           {props.checked? (

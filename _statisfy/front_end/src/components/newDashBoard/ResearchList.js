@@ -274,7 +274,6 @@ export default function ResearchList(props){
         setShowActive(showActive - 1);
     }
 
-
     const useStyles = makeStyles(() => ({
         root: {
             backgroundColor: '#b5b5b5',
@@ -569,19 +568,23 @@ export default function ResearchList(props){
                     </div>)
                     : (
                         <div className="resList_list">
-                            {
-                                typeof researchesGetRes?.researches !== 'undefined' ? (
-                                    researchesGetRes?.researches.map(res => {
-                                        return <ResCard
-                                            title = {res.research_name}
-                                            description = {res.research_description}
-                                            created_at = {res.created_at}
-                                            _id = {res.id}
-                                            HandleSelected = {handleSelected}
-                                        />
-                                    })
-                                ) :  <CircularProgress color="info" thickness={2.5} size={30}/>
-                            }
+                            <Fade in={true} {...(true ? { timeout: 500 } : {})}>
+                                <div>
+                                {
+                                    typeof researchesGetRes?.researches !== 'undefined' ? (
+                                        researchesGetRes?.researches.map(res => {
+                                            return <ResCard
+                                                title = {res.research_name}
+                                                description = {res.research_description}
+                                                created_at = {res.created_at}
+                                                _id = {res.id}
+                                                HandleSelected = {handleSelected}
+                                            />
+                                        })
+                                    ) :  <CircularProgress color="info" thickness={2.5} size={30}/>
+                                }
+                                </div>
+                            </Fade>
                         </div>
                     )
                 }
