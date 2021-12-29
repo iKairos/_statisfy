@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash"
 import { MemoizedTable } from "./DisplayTable";
 import { height, maxHeight } from "@mui/system";
+import ResultCards from "./newDashBoard/ResultCards";
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 
@@ -132,13 +133,11 @@ export default function Study(props){
                         {
                             props.data[8].map(([var_name, var_val]) => {
                                 return (
-                                    <div className="Study_cards">
-                                        
-                                        <Typography sx={{ fontSize: "1.5rem", fontWeight: 600 }}> {var_val}</Typography>
-                                        <Typography variant="button" sx={{color:"#a742c5"}}>{var_name}</Typography>
-                                        
-                                      
-                                    </div>
+                                    <ResultCards
+                                        value = {var_val}
+                                        variable = {var_name}
+                                    />
+                                    
                                 )
                             })
                         }

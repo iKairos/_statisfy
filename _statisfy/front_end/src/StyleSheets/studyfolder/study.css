@@ -30,16 +30,19 @@
 }
 
 .Study_cards {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  position: relative;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  word-wrap: break-word;
+  overflow: hidden;
   padding: 1rem;
   border: none;
   border-left: 3px solid #dfa9ff;
@@ -47,6 +50,7 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   background-color: #eeeeee;
+  cursor: pointer;
 }
 
 .Study_cards_container {
@@ -57,6 +61,31 @@
       grid-template-columns: 1fr;
   gap: 0.5rem;
   padding: 1rem;
+}
+
+.Study_cards_text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.Study_cards_icon {
+  height: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  right: 10px;
 }
 
 @media screen and (min-width: 900px) {

@@ -12,6 +12,7 @@ $maxwidth: 40rem;
   height: 100%;
   background-color: transparent;
   margin-bottom: 2rem;
+
   &_tabs {
     display: grid;
     grid-template-columns: 1fr;
@@ -31,9 +32,13 @@ $maxwidth: 40rem;
     }
   }
   &_cards {
-    width: fit-content;
+    position: relative;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    word-wrap: break-word;
+    overflow: hidden;
     padding: 1rem;
     border: none;
     border-left: 3px solid $pink;
@@ -41,12 +46,27 @@ $maxwidth: 40rem;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     background-color: $white1;
+    cursor: pointer;
+
     &_container {
       width: 100%;
       display: grid;
       grid-template-columns: 1fr;
       gap: 0.5rem;
       padding: 1rem;
+    }
+
+    &_text {
+      display: flex;
+      flex-direction: column;
+    }
+    &_icon {
+      height: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      right: 10px;
     }
   }
 }

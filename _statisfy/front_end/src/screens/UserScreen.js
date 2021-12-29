@@ -29,7 +29,7 @@ export default function UserScreen(props){
     }
 
     useEffect(() => {
-        dispatch(processUserToken(props.token, 'getResearches'));
+        dispatch(processUserToken(props.token));
         
         if(id){
             dispatch(getUser(id));
@@ -41,7 +41,7 @@ export default function UserScreen(props){
             <div>
                 <div className = "container">
                     <UserProfile user={processed.user} editable={true}/>
-                    <ResearchList token={processed}/>
+                    <ResearchList/>
                     
                 </div> 
             </div>
