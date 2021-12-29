@@ -9,23 +9,51 @@ $buttonbg: #a742c5;
 $maxwidth: 40rem;
 
 .Study {
-  height: 50rem;
+  height: 100%;
   background-color: transparent;
+  margin-bottom: 2rem;
   &_tabs {
     display: grid;
-    grid-template-columns: 2rem 1fr 2rem;
+    grid-template-columns: 1fr;
     border-bottom: 1px solid $white1;
     width: 100%;
   }
   &_header {
     padding: 1rem;
   }
+  &_content {
+    padding: 1rem;
+    &_details {
+      color: #414141;
+    }
+    &_graphs {
+      width: 100%;
+    }
+  }
+  &_cards {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border: none;
+    border-left: 3px solid $pink;
+    border-radius: 0.25rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: $white1;
+    &_container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      padding: 1rem;
+    }
+  }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 900px) {
   .Study {
-    height: 50rem;
-    background-color: transparent;
+    height: 100%;
     &_tabs {
       display: grid;
       grid-template-columns: 1fr;
@@ -36,6 +64,13 @@ $maxwidth: 40rem;
       padding: 1rem;
       &_details {
         color: #414141;
+      }
+    }
+    &_cards {
+      &_container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
       }
     }
   }

@@ -1,5 +1,5 @@
 import "../StyleSheets/studyfolder/study.css"
-import { Button, CircularProgress } from "@mui/material";
+import { Button, CircularProgress, Typography } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import * as React from 'react';
@@ -23,6 +23,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash"
 import { MemoizedTable } from "./DisplayTable";
+import { height, maxHeight } from "@mui/system";
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 
@@ -76,42 +77,37 @@ export default function Study(props){
                 <h4>{props.data[1]} | {props.data[5]}</h4>
                 <h6>{props.data[2]}</h6>
             </div>
-           
-            <div className = "Study_tabs">
-                <button
-                    className="resData_arrow"
-                    onClick={prevStudy}
-                    disabled = {studyPage === 1 ? true : false}
-                >
-                    <ArrowBackIosNewIcon/>
-                </button>
-                <Box sx = {{ 
-                    minWidth: 100,
-                    width: '1fr'
-                    }}>
-                    <Tabs
-                        value={studyPage}
-                        onChange={switchStudyPage}
-                        textColor="secondary"
-                        indicatorColor="secondary"
-                        aria-label="scrollable tabs"
-                        variant="scrollable"
-                        scrollButtons="auto"
-                    >
-                        <Tab value={1} label="Details" icon={<HelpIcon/>} iconPosition="start"/>
-                        <Tab value={2} label="Results" icon={<AutoGraphIcon/>} iconPosition="start"/>
-                        <Tab value={3} label="Interpretation" icon={<ArticleIcon/>} iconPosition="start"/>
-                    </Tabs>
-                </Box>
-                <button
-                    className="resData_arrow"
-                    onClick={nextStudy}
-                    disabled = {studyPage === 4 ? true : false}
-                >
-                    <ArrowForwardIosIcon/>
-                </button>
+            <div className="Study_tabs_container">
+                <div className = "Study_tabs">
+                    
+                    <Box sx = {{ 
+                        minWidth: 100,
+                        width: '1fr',
+                        height: 50
+                        }}>
+                        <Tabs
+                            value={studyPage}
+                            onChange={switchStudyPage}
+                            textColor="secondary"
+                            indicatorColor="secondary"
+                            aria-label="scrollable tabs"
+                            variant="scrollable"
+                            scrollButtons="auto"
+                            sx = {{ 
+                                maxHeight: 100,
+                                height: 50,
+                                alignItems: "center"
+                            }}
+                        >
+                            <Tab value={1} label="Details" icon={<HelpIcon/>} iconPosition="start"/>
+                            <Tab value={2} label="Results" icon={<AutoGraphIcon/>} iconPosition="start"/>
+                            <Tab value={3} label="Interpretation" icon={<ArticleIcon/>} iconPosition="start"/>
+                        </Tabs>
+                    </Box>
 
+                </div>
             </div>
+                
             <div className = "Study_content">
                 {studyPage === 1 &&
                     <div className = "Study_content_details">
@@ -132,11 +128,21 @@ export default function Study(props){
                 }
                 {studyPage === 2 &&
                     <div className = "Study_content_graphs">
+                        <div className = "Study_cards_container">
                         {
                             props.data[8].map(([var_name, var_val]) => {
-                                return <p><strong>{var_name}</strong>: {var_val}</p>
+                                return (
+                                    <div className="Study_cards">
+                                        
+                                        <Typography sx={{ fontSize: "1.5rem", fontWeight: 600 }}> {var_val}</Typography>
+                                        <Typography variant="button" sx={{color:"#a742c5"}}>{var_name}</Typography>
+                                        
+                                      
+                                    </div>
+                                )
                             })
                         }
+                        </div>
                         <Scatter data={pearsonDataChart} options={options}/>
                     </div>
                 }

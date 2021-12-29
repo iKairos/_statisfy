@@ -109,9 +109,8 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  height: 80vw;
+  overflow-y: auto;
   padding: 1rem;
   color: #23272a;
   position: relative;
@@ -182,6 +181,18 @@
     display: grid;
     -ms-grid-columns: 1fr 2fr;
         grid-template-columns: 1fr 2fr;
+  }
+  .resStudy_statfilter {
+    background-color: white;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 1rem;
+    color: #23272a;
+    position: relative;
   }
 }
 /*# sourceMappingURL=resstudy.css.map */
