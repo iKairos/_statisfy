@@ -29,7 +29,7 @@ export default function UserScreen(props){
     }
 
     useEffect(() => {
-        dispatch(processUserToken(props.token));
+        dispatch(processUserToken(props.token, 'getResearches'));
         
         if(id){
             dispatch(getUser(id));

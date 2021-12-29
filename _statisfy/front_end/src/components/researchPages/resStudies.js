@@ -160,8 +160,6 @@ export default function ResStudies(props){
         if(typeof studyName === 'undefined' || typeof methodChosen === 'undefined' || typeof tool === 'undefined' || studyColumns.length === 0 || typeof studyDesc === 'undefined'){
             setError("Please fill out all required fields.");
             setOpenErrorSnackbar(true);
-
-            console.log(studyName, methodChosen, tool, studyColumns, studyDesc)
             return;
         }
 
