@@ -300,6 +300,7 @@
     -ms-grid-columns: 10vw 60vw;
         grid-template-columns: 10vw 60vw;
     padding: 1rem;
+    gap: 1rem;
     height: 15rem;
   }
   .datapage_drop {

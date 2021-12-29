@@ -68,7 +68,6 @@ export default function ResearchUpload(props) {
                 <div ref={containerRef} style={{overflow:"hidden"}}>
                     <Slide direction="down" in ={!props.Loading} container={containerRef.current} {...(!props.Loading ? { timeout: 1200 } : {})}>
                         <div className="datapage_details">
-                                <>
                                     <span className="data_span">File Name</span>
                                     {<p className="data_span">{props.FileDetails ? props.FileDetails?.name : ""}</p>}
                                     <span className="data_span">File Size</span>
@@ -79,7 +78,6 @@ export default function ResearchUpload(props) {
                                     <p className="data_span">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</p>
                                     <span className="data_span">Rows</span>
                                     <p className="data_span">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</p>
-                                </>
                         </div> 
                     </Slide>
                 </div>

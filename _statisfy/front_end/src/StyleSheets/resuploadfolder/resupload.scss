@@ -41,6 +41,7 @@ $black: #23272a;
       flex-direction: column;
       padding-bottom: 1rem;
       justify-content: center;
+      width: 100%;
     }
     &_dispTable {
       max-width: 100%;
@@ -109,6 +110,13 @@ $black: #23272a;
       width: 20vw;
       display: flex;
       flex-direction: column;
+    }
+  }
+  .resUpload {
+    &_upload {
+      &_cont {
+        width: 45vw;
+      }
     }
   }
 }

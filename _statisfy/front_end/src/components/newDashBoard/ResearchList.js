@@ -314,13 +314,6 @@ export default function ResearchList(props){
         );
     };
    
-    if(props.token && processed?.code === "TOKEN_FAIL"){
-        localStorage.removeItem('token');
-    }
-    
-    useEffect(() => {
-        dispatch(processUserToken(props.token, 'getResearches'));
-    }, [])
 
     return(
         <div className="resList_body_container">

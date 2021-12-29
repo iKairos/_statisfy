@@ -1,4 +1,4 @@
-
+import ResearchList from "./newDashBoard/ResearchList";
 
 export default function UserProfile(props){
     const stringifyDatetime = datetime => {
@@ -19,6 +19,8 @@ export default function UserProfile(props){
             <p>Registered since: {stringifyDatetime(props.user.created_at)}</p>
             <p>{props.user.bio}</p>
             {props.editable && <h1>Edit</h1>}
+
+           
         </div>
     ); 
 }

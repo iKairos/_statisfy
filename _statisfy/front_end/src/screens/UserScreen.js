@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Alert, Grow, Skeleton } from "@mui/material";
 
+import ResearchList from "../components/newDashBoard/ResearchList";
+
 export default function UserScreen(props){
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -39,6 +41,8 @@ export default function UserScreen(props){
             <div>
                 <div className = "container">
                     <UserProfile user={processed.user} editable={true}/>
+                    <ResearchList token={processed}/>
+                    
                 </div> 
             </div>
         )
@@ -48,6 +52,7 @@ export default function UserScreen(props){
             <div>
                 <div className = "container">
                     <UserProfile user={userData.user} editable={editable}/>
+                    
                 </div> 
             </div>
         )
