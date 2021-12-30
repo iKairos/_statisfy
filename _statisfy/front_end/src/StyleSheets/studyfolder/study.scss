@@ -8,6 +8,58 @@ $boxshadow: 0 0 10px 5px rgb(252, 252, 252);
 $buttonbg: #a742c5;
 $maxwidth: 40rem;
 
+.Correlation {
+  width: 100%;
+  padding: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  &_Header {
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+    width: fit-content;
+    display: flex;
+    text-align: center;
+    border: 1px solid #a742c5;
+  }
+}
+.Bar {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  border: 1px solid $gray1;
+  padding: 0.2rem;
+  border-radius: 0.4rem;
+
+  &_Left {
+    &_cont {
+      width: 1fr;
+      height: 1rem;
+      position: relative;
+    }
+  }
+
+  &_Right {
+    &_cont {
+      width: 1fr;
+      height: 1rem;
+    }
+  }
+}
+.Numerics {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .Study {
   height: 100%;
   background-color: transparent;

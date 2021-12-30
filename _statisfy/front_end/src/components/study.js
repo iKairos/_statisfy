@@ -26,6 +26,7 @@ import _ from "lodash"
 import { MemoizedTable } from "./DisplayTable";
 import { height, maxHeight } from "@mui/system";
 import ResultCards from "./newDashBoard/ResultCards";
+import BarCor from "./newDashBoard/bar";
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, Title);
 
@@ -154,10 +155,25 @@ export default function Study(props){
                 }
                 {studyPage === 2 &&
                     <div className = "Study_content_graphs">
+                        {
+                            props.data[8].map(([var_name, var_val]) => {
+                               return(
+                                   <>
+                                   {var_name === "R Coefficient"
+                                    ?(<BarCor value = {var_val}/>)
+                                    :null
+                                   }
+                                   </>
+                               ) 
+                            })
+                        }
+                        
                         <div className = "Study_cards_container">
+                            
                         {
                             props.data[8].map(([var_name, var_val]) => {
                                 return (
+
                                     <ResultCards
                                         value = {var_val.toFixed(2) == 0 ? '< 0':var_val.toFixed(2)}
                                         variable = {var_name}
@@ -165,6 +181,7 @@ export default function Study(props){
                                     
                                 )
                             })
+                            
                         }
                         </div>
                         <Scatter data={pearsonDataChart} options={options}/>

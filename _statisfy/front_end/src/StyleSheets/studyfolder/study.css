@@ -1,3 +1,75 @@
+.Correlation {
+  width: 100%;
+  padding: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+}
+
+.Correlation_Header {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  margin-bottom: 0.5rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  border: 1px solid #a742c5;
+}
+
+.Bar {
+  margin-top: 1rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  width: 100%;
+  border: 1px solid #b5b5b5;
+  padding: 0.2rem;
+  border-radius: 0.4rem;
+}
+
+.Bar_Left_cont {
+  width: 1fr;
+  height: 1rem;
+  position: relative;
+}
+
+.Bar_Right_cont {
+  width: 1fr;
+  height: 1rem;
+}
+
+.Numerics {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .Study {
   height: 100%;
   background-color: transparent;
