@@ -8,12 +8,11 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 export default function ResultCards(props) {
     const [onTrigger, setTrigger] = useState(false);
-
     const matches = useMediaQuery('(min-width:900px)');
     console.log(matches);
 
     const cardHover = useSpring({
-        width: onTrigger? "20rem":"10rem"
+        width: onTrigger? "15rem":"10rem"
     })
   return (
       <>

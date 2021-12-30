@@ -33,6 +33,7 @@
     "react-spring": "^9.3.0",
     "react-table": "^7.7.0",
     "react-token-auth": "^2.2.0",
+    "react-use-measure": "^2.1.1",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.0",
     "sass": "^1.43.4",
