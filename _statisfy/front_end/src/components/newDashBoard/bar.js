@@ -10,13 +10,11 @@ import useMeasure from 'react-use-measure'
 
 export default function BarCor(props) {
     const [ref, { width }] = useMeasure()
-    const [barValue, setValue] = useState(true);
     const PosBar = useSpring({
         width: props.value > 0 ?  props.value * width : 1,
         backgroundColor: "#a742c5",
         height: "1rem"
     })
-    console.log(width);
     const NegBar = useSpring({
         minWidth: props.value < 0 ? props.value * width * -1 : 1,
         backgroundColor: "#b5b5b5",
