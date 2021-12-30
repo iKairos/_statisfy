@@ -19,6 +19,7 @@ import {
     LineElement,
     Tooltip,
     Legend,
+    Title,
   } from 'chart.js';
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash"
@@ -26,7 +27,7 @@ import { MemoizedTable } from "./DisplayTable";
 import { height, maxHeight } from "@mui/system";
 import ResultCards from "./newDashBoard/ResultCards";
 
-ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
+ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, Title);
 
 
 export default function Study(props){
@@ -50,15 +51,39 @@ export default function Study(props){
     const {datasetFile} = filedataSelector; 
 
     const options = {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: `${props.data[7][0]} x ${props.data[7][1]} Graph`,
+                fullSize: true,
+                font: {
+                    size: 18
+                }
+            },
+            legend: {
+                position: 'bottom'
+            }
+        },
         scales: {
           y: {
             beginAtZero: false,
+            title:{
+                display: true,
+                text: props.data[7][1]
+            }
           },
+          x: {
+            title:{
+                display: true,
+                text: props.data[7][0]
+            }
+          }
         },
       };
 
     const pearsonDataChart = {
-        labels: props.data[7],
+        label: props.data[7],
         datasets: [
           {
             label: `(${props.data[7][0]},${props.data[7][1]})`,
@@ -134,7 +159,7 @@ export default function Study(props){
                             props.data[8].map(([var_name, var_val]) => {
                                 return (
                                     <ResultCards
-                                        value = {var_val}
+                                        value = {var_val.toFixed(2) == 0 ? '< 0':var_val.toFixed(2)}
                                         variable = {var_name}
                                     />
                                     
