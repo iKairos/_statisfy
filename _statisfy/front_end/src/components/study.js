@@ -55,7 +55,7 @@ export default function Study(props){
         plugins: {
             title: {
                 display: true,
-                text: `${props.data[7][0]} x ${props.data[7][1]} Graph`,
+                text: `${props.data[7][0]} vs. ${props.data[7][1]} Graph`,
                 fullSize: true,
                 font: {
                     size: 18
