@@ -71,6 +71,7 @@ export default function Header(props){
             <AppBar 
                 position="static"
                 color = "transparent"
+                elevation={0}
             >
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
@@ -123,15 +124,11 @@ export default function Header(props){
                                     <Typography textAlign="center">Profile</Typography>
                                 </Link>
                             </MenuItem>
+                            
                             <MenuItem key={3} onClick={handleCloseNavMenu}>
-                                <Link className="menuLink" to="/dashboard">
-                                    <Typography textAlign="center">Dashboard</Typography>
-                                </Link>
-                            </MenuItem>
-                            <MenuItem key={4} onClick={handleCloseNavMenu}>
                                 <Typography textAlign="center">Guides</Typography>
                             </MenuItem>
-                            <MenuItem key={5} onClick={handleCloseNavMenu}>
+                            <MenuItem key={4} onClick={handleCloseNavMenu}>
                                 <Typography textAlign="center">About</Typography>
                             </MenuItem>
                         </Menu>
@@ -163,24 +160,16 @@ export default function Header(props){
                                 Profile
                             </Button>
                         </Link>
-                        <Link className="menuLink" to="/dashboard">
-                            <Button
-                                key={"3"}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                Dashboard
-                            </Button>
-                        </Link>
+                        
                         <Button
-                            key={"4"}
+                            key={"3"}
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >
                             Guides
                         </Button>
                         <Button
-                            key={"5"}
+                            key={"4"}
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >
@@ -231,7 +220,6 @@ export default function Header(props){
                         ) : (
                         <div>
                             <Link className="menuLink" to="/signIn"style={{alignContent:"end", padding:"5px"}}>Sign in</Link>
-                            <Link className="menuLink" to="/signUp"style={{alignContent:"end", padding:"5px"}}>Sign up</Link>
                         </div>
                         )
                     }
@@ -240,7 +228,7 @@ export default function Header(props){
                     
                     </Toolbar>
                 </Container>
-                </AppBar>
+            </AppBar>
         </div>
     )
 }

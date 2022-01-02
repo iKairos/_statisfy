@@ -92,7 +92,7 @@
           align-items: center;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 900px) {
   .summary_container {
     width: 60vw;
   }

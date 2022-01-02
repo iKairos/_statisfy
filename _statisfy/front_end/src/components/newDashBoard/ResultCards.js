@@ -8,14 +8,18 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import useMeasure from 'react-use-measure'
+
 
 export default function ResultCards(props) {
+    const [ref, { width }] = useMeasure()
     const [onTrigger, setTrigger] = useState(false);
     const matches = useMediaQuery('(min-width:900px)');
-    console.log(matches);
 
     const cardHover = useSpring({
-        width: onTrigger? "15rem":"10rem"
+        width: onTrigger? width : 0,
+        alignItems: "center"
+        
     })
 
 
@@ -47,46 +51,32 @@ export default function ResultCards(props) {
                         }
                         placement="bottom-start"
                     >
+                        
 
-                        <animated.div style = {cardHover}>
                             <div className="Study_cards" onClick={()=>setTrigger(!onTrigger)}>                      
-                                <div className='Study_cards_text'>
+                                <div className='Study_cards_text'  >
                                     <Typography sx={{ fontSize: "1.5rem", fontWeight: 600 }}> {props.value}</Typography>
                                     <Typography variant="button" sx={{color:"#a742c5"}}>{props.variable}</Typography>
                                 </div>
-                                {onTrigger
-                                    ? (
-                                        <div className="Study_cards_icon">
-                                            
-                                        <IconButton ><ContentCopyIcon/></IconButton> 
-                                        </div>
-                                    )
-                                    : null
-                                }
+                                
+                                    <animated.div style = {cardHover}>
+                                        {onTrigger
+                                        ?(<IconButton ref= {ref} ><ContentCopyIcon/></IconButton> )
+                                        : null
+                                        }
+                                    </animated.div>
+                                    
                                 
                             </div>
-                        </animated.div>
                 </HtmlTooltip>
                 )
                 :(
-                    <animated.div style = {cardHover}>
-                        <div className="Study_cards" onClick={()=>setTrigger(!onTrigger)}>                      
-                            <div className='Study_cards_text'>
-                                <Typography sx={{ fontSize: "1.5rem", fontWeight: 600 }}> {props.value}</Typography>
-                                <Typography variant="button" sx={{color:"#a742c5"}}>{props.variable}</Typography>
-                            </div>
-                            {onTrigger
-                                ? (
-                                    <div className="Study_cards_icon">
-                                        
-                                    <IconButton ><ContentCopyIcon/></IconButton> 
-                                    </div>
-                                )
-                                : null
-                            }
-                            
+                    <div className="Study_cards" onClick={()=>setTrigger(!onTrigger)}>                      
+                        <div className='Study_cards_text'>
+                            <Typography sx={{ fontSize: "1.5rem", fontWeight: 600 }}> {props.value}</Typography>
+                            <Typography variant="button" sx={{color:"#a742c5"}}>{props.variable}</Typography>
                         </div>
-                    </animated.div>
+                    </div>
                 )}
             
             </>
@@ -98,7 +88,7 @@ export default function ResultCards(props) {
                     <Typography sx={{ fontSize: "1.5rem", fontWeight: 600 }}> {props.value}</Typography>
                     <Typography variant="button" sx={{color:"#a742c5"}}>{props.variable}</Typography>
                 </div>
-                <IconButton/>                      
+                <IconButton><ContentCopyIcon/></IconButton>                     
             </div>
         )
     

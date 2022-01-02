@@ -503,7 +503,7 @@ body {
   width: 100%;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 900px) {
   .dashboard {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;

@@ -103,7 +103,7 @@
   height: min-content;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 900px) {
   .cards {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;

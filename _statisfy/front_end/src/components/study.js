@@ -123,7 +123,6 @@ export default function Study(props){
                             sx = {{ 
                                 maxHeight: 100,
                                 height: 50,
-                                alignItems: "center"
                             }}
                         >
                             <Tab value={1} label="Details" icon={<HelpIcon/>} iconPosition="start"/>

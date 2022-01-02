@@ -246,7 +246,7 @@
   margin: 0.5rem;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 900px) {
   .datapage_navigator {
     display: -ms-grid;
     display: grid;
