@@ -68,7 +68,6 @@ export default function Study(props){
         },
         scales: {
           y: {
-            beginAtZero: false,
             title:{
                 display: true,
                 text: props.data[7][1]
@@ -175,7 +174,7 @@ export default function Study(props){
                                 return (
 
                                     <ResultCards
-                                        value = {var_val.toFixed(2) == 0 ? '< 0':var_val.toFixed(2)}
+                                        value = {var_val.toFixed(4) == 0 ? '< 0':var_val.toFixed(4)}
                                         variable = {var_name}
                                     />
                                     
