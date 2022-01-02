@@ -11,7 +11,7 @@ export default function UserProfile(props){
     }
 
     return(
-        <div style={{minHeight:"5rem"}}>
+        <div style={{minHeight:"5rem", paddingTop:"5rem"}}>
             <h1>{props.user.first_name} {props.user.last_name}</h1>
             <p>UID: {props.user._id}</p>
             <p>Username: {props.user.username}</p>

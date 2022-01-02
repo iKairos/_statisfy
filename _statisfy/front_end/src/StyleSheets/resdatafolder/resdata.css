@@ -100,7 +100,7 @@
   background-color: transparent;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 900px) {
   .resData_body {
     max-width: 50vw;
   }

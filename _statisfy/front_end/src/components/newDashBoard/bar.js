@@ -8,14 +8,12 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 export default function BarCor(props) {
-    const [ref, { width }] = useMeasure();
-    const [barValue, setValue] = useState(true);
+    const [ref, { width }] = useMeasure()
     const PosBar = useSpring({
         width: props.value > 0 ?  props.value * width : 1,
         backgroundColor: "#a742c5",
         height: "1rem"
-    });
-
+    })
     const NegBar = useSpring({
         minWidth: props.value < 0 ? props.value * width * -1 : 1,
         backgroundColor: "#b5b5b5",

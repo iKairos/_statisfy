@@ -5,7 +5,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: gray;
+  background-image: url(./images/Top-Header-Background.png),
+    url(./images/bgDummy.png);
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed;
+  background-attachment: scroll;
 }
 .account {
   right: 0;
@@ -26,7 +30,7 @@
   color: inherit;
   text-decoration: inherit;
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 900px) {
   .pagewrapper {
     z-index: 999;
     margin: 0;

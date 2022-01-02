@@ -84,14 +84,13 @@ $maxwidth: 40rem;
     }
   }
   &_cards {
-    position: relative;
     width: 100%;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    word-wrap: break-word;
+    justify-content: space-between;
     overflow: hidden;
     padding: 1rem;
+
     border: none;
     border-left: 3px solid $pink;
     border-radius: 0.25rem;
@@ -113,12 +112,11 @@ $maxwidth: 40rem;
       flex-direction: column;
     }
     &_icon {
-      height: 50%;
+      width: 100%;
       display: flex;
       justify-content: center;
+      background-color: #414141;
       align-items: center;
-      position: absolute;
-      right: 10px;
     }
   }
 }
@@ -139,6 +137,11 @@ $maxwidth: 40rem;
       }
     }
     &_cards {
+      width: fit-content;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      padding: 1rem;
       &_container {
         display: flex;
         flex-direction: row;
