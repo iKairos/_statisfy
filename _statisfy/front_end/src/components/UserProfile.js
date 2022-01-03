@@ -24,7 +24,6 @@ export default function UserProfile(props){
         //return `${d.getMonth()}/${d.getDay()}/${d.getFullYear()} ${d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`
         return d
     }
-
     return(
         <div className = "profile">
             <div className="profile_avatar_container">
@@ -162,25 +161,28 @@ export default function UserProfile(props){
                             </div>
                         </div>
                         <div className="profile_details">
-                            <div className="profile_content"> 
-                                <Typography variant="overline" display="block" gutterBottom>UserName :</Typography>
-                                <Typography variant="body2" display="block" gutterBottom>{props.user.username}</Typography>
-                            </div>
-                            <div className="profile_content"> 
-                                <Typography variant="overline" display="block" gutterBottom>fullname :</Typography>
-                                <Typography variant="body2" display="block" gutterBottom>{props.user.first_name} {props.user.last_name} </Typography>
-                            </div>
-                            <div className="profile_content"> 
-                                <Typography variant="overline" display="block" gutterBottom>EMAIL :</Typography>
-                                <Typography variant="body2" display="block" gutterBottom>{props.user.email_address}</Typography>
-                            </div>
+
 
                             <div className="profile_content"> 
-                                <Typography variant="overline" display="block" gutterBottom>JOINED:</Typography>
-                                <Typography variant="body2" display="block" gutterBottom>{stringifyDatetime(props.user.created_at)}</Typography>
-                            </div>
-
-                            <div className="profile_content"> 
+                            
+                            <TextField
+                                id="standard-multiline-static"
+                                label="USERNAME"
+                                defaultValue={props.user.username}
+                                variant="standard"
+                            />
+                            <TextField
+                                id="standard-multiline-static"
+                                label="FULLNAME"
+                                defaultValue={props.user.last_name + ", " + props.user.first_name}
+                                variant="standard"
+                            />
+                            <TextField
+                                id="standard-multiline-static"
+                                label="EMAIL"
+                                defaultValue={props.user.email_address}
+                                variant="standard"
+                            />
                                 <TextField id="standard-basic" label="EDUCATION" variant="standard" color="secondary" />
                                 <TextField id="standard-basic" label="PROFESSION" variant="standard" color="secondary" />
                                 <TextField

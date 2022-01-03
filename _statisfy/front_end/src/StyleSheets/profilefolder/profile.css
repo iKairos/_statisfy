@@ -62,6 +62,7 @@
 }
 
 .profile_content {
+  gap: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
