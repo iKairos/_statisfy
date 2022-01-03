@@ -12,6 +12,18 @@ $black: #23272a;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 
+  &_backdrop {
+    width: 90vw;
+    margin-top: 5rem;
+    height: 90vh;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 0;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    margin-bottom: 5rem;
+  }
+
   &_avatar {
     display: flex;
     flex-direction: column;
@@ -40,7 +52,21 @@ $black: #23272a;
     }
   }
   &_details {
+    position: relative;
     padding: 2rem;
+    color: #23272a;
+  }
+  &_content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+  }
+  &_upload {
+    padding: 1rem;
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
@@ -48,6 +74,13 @@ $black: #23272a;
   .profile {
     margin-top: 5rem;
     background-color: white;
+
+    &_backdrop {
+      width: 50vw;
+      margin-top: 5rem;
+      background-color: white;
+      height: fit-content;
+    }
 
     &_avatar {
       display: flex;

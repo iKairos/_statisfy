@@ -32,8 +32,6 @@ import SortIcon from '@mui/icons-material/Sort';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
-import StatImg from '../../images/statisticsHeader.png'
-import MLImg from '../../images/mlHeader.png'
 
 import Navigator from "../../components/navigator";
 import ToolCard from "./ToolCard";
@@ -332,130 +330,130 @@ export default function ResearchList(props){
             )
             :(
                 <div className="resStudy_body_add">
-                            <Button 
-                                color="secondary" 
-                                className="resStudy_body_add_button"
-                                onClick={()=>handleAdding(true)}
+                    <Button 
+                        color="secondary" 
+                        className="resStudy_body_add_button"
+                        onClick={()=>handleAdding(true)}
+                    >
+                        <AddIcon className="AddIcon"/>
+                        add new research
+                    </Button>
+                    <Stack direction="row" spacing={2} className="Sort">
+                        <div>
+                            <Button
+                            ref={anchorRef}
+                            id="composition-button"
+                            aria-controls={open ? 'composition-menu' : undefined}
+                            aria-expanded={open ? 'true' : undefined}
+                            aria-haspopup="true"
+                            onClick={handleToggle}
+                            color="secondary"
+                            
                             >
-                                <AddIcon className="AddIcon"/>
-                                add new research
+                            Sort
+                            <SortIcon/>
                             </Button>
-                            <Stack direction="row" spacing={2} className="Sort">
-                                <div>
-                                    <Button
-                                    ref={anchorRef}
-                                    id="composition-button"
-                                    aria-controls={open ? 'composition-menu' : undefined}
-                                    aria-expanded={open ? 'true' : undefined}
-                                    aria-haspopup="true"
-                                    onClick={handleToggle}
-                                    color="secondary"
-                                    
+                            <Popper
+                            open={open}
+                            anchorEl={anchorRef.current}
+                            role={undefined}
+                            placement="bottom-start"
+                            transition
+                            disablePortal
+                            >
+                            {({ TransitionProps, placement }) => (
+                                <Grow
+                                {...TransitionProps}
+                                style={{
+                                    transformOrigin:
+                                    placement === 'bottom-start' ? 'left top' : 'left bottom',
+                                }}
+                                >
+                                <Paper>
+                                    <ClickAwayListener onClickAway={handleClose}>
+                                    <MenuList
+                                        autoFocusItem={open}
+                                        id="composition-menu"
+                                        aria-labelledby="composition-button"
+                                        onKeyDown={handleListKeyDown}
                                     >
-                                    Sort
-                                    <SortIcon/>
-                                    </Button>
-                                    <Popper
-                                    open={open}
-                                    anchorEl={anchorRef.current}
-                                    role={undefined}
-                                    placement="bottom-start"
-                                    transition
-                                    disablePortal
-                                    >
-                                    {({ TransitionProps, placement }) => (
-                                        <Grow
-                                        {...TransitionProps}
-                                        style={{
-                                            transformOrigin:
-                                            placement === 'bottom-start' ? 'left top' : 'left bottom',
-                                        }}
-                                        >
-                                        <Paper>
-                                            <ClickAwayListener onClickAway={handleClose}>
-                                            <MenuList
-                                                autoFocusItem={open}
-                                                id="composition-menu"
-                                                aria-labelledby="composition-button"
-                                                onKeyDown={handleListKeyDown}
-                                            >
-                                                <MenuItem 
-                                                    onClick={ sort === 1
-                                                        ? ()=>handleAscending(!ascending)
-                                                        :()=>handleSort(1)}
-                                                    sx={ sort === 1
-                                                        ? {
-                                                        width: "10rem",
-                                                        color: "#a742c5"}
-                                                        :{
-                                                            width: "10rem",
-                                                            color: "#23272a"
-                                                        } 
-                                                    }
-                                                    
-                                                >
-                                                    Name
-                                                    {sort === 1 
-                                                        ?  (ascending 
-                                                            ? <ArrowUpwardIcon/>
-                                                            : <ArrowDownwardIcon/>)
-                                                        :  null
-                                                    }
-                                                </MenuItem>
-                                                <MenuItem 
-                                                    onClick={ sort === 2
-                                                        ? ()=>handleAscending(!ascending)
-                                                        :()=>handleSort(2)}
-                                                    sx={ sort === 2
-                                                        ? {
-                                                        width: "10rem",
-                                                        color: "#a742c5"}
-                                                        :{
-                                                            width: "10rem",
-                                                            color: "#23272a"
-                                                        } 
-                                                    }
-                                                >
-                                                    Date Created
-                                                    {sort === 2 
-                                                        ?  (ascending 
-                                                            ? <ArrowUpwardIcon/>
-                                                            : <ArrowDownwardIcon/>)
-                                                        :  null
-                                                    }
-                                                </MenuItem>
-                                                <MenuItem 
-                                                    onClick={ sort === 3
-                                                        ? ()=>handleAscending(!ascending)
-                                                        :()=>handleSort(3)}
-                                                    sx={ sort === 3
-                                                        ? {
-                                                        width: "10rem",
-                                                        color: "#a742c5"}
-                                                        :{
-                                                            width: "10rem",
-                                                            color: "#23272a"
-                                                        } 
-                                                    }
-                                                >
-                                                    Last Changed
-                                                    {sort === 3 
-                                                        ?  (ascending 
-                                                            ? <ArrowUpwardIcon/>
-                                                            : <ArrowDownwardIcon/>)
-                                                        :  null
-                                                    }
-                                                </MenuItem>
+                                        <MenuItem 
+                                            onClick={ sort === 1
+                                                ? ()=>handleAscending(!ascending)
+                                                :()=>handleSort(1)}
+                                            sx={ sort === 1
+                                                ? {
+                                                width: "10rem",
+                                                color: "#a742c5"}
+                                                :{
+                                                    width: "10rem",
+                                                    color: "#23272a"
+                                                } 
+                                            }
                                             
-                                            </MenuList>
-                                            </ClickAwayListener>
-                                        </Paper>
-                                        </Grow>
-                                    )}
-                                    </Popper>
-                                </div>
-                            </Stack>
+                                        >
+                                            Name
+                                            {sort === 1 
+                                                ?  (ascending 
+                                                    ? <ArrowUpwardIcon/>
+                                                    : <ArrowDownwardIcon/>)
+                                                :  null
+                                            }
+                                        </MenuItem>
+                                        <MenuItem 
+                                            onClick={ sort === 2
+                                                ? ()=>handleAscending(!ascending)
+                                                :()=>handleSort(2)}
+                                            sx={ sort === 2
+                                                ? {
+                                                width: "10rem",
+                                                color: "#a742c5"}
+                                                :{
+                                                    width: "10rem",
+                                                    color: "#23272a"
+                                                } 
+                                            }
+                                        >
+                                            Date Created
+                                            {sort === 2 
+                                                ?  (ascending 
+                                                    ? <ArrowUpwardIcon/>
+                                                    : <ArrowDownwardIcon/>)
+                                                :  null
+                                            }
+                                        </MenuItem>
+                                        <MenuItem 
+                                            onClick={ sort === 3
+                                                ? ()=>handleAscending(!ascending)
+                                                :()=>handleSort(3)}
+                                            sx={ sort === 3
+                                                ? {
+                                                width: "10rem",
+                                                color: "#a742c5"}
+                                                :{
+                                                    width: "10rem",
+                                                    color: "#23272a"
+                                                } 
+                                            }
+                                        >
+                                            Last Changed
+                                            {sort === 3 
+                                                ?  (ascending 
+                                                    ? <ArrowUpwardIcon/>
+                                                    : <ArrowDownwardIcon/>)
+                                                :  null
+                                            }
+                                        </MenuItem>
+                                    
+                                    </MenuList>
+                                    </ClickAwayListener>
+                                </Paper>
+                                </Grow>
+                            )}
+                            </Popper>
                         </div>
+                    </Stack>
+                </div>
             )
             }
 

@@ -79,9 +79,7 @@ $black: #23272a;
   .resList {
     display: grid;
     grid-template-columns: 1fr;
-    justify-content: center;
     gap: 1rem;
-    align-items: center;
     &_body {
       &_container {
         margin-top: 1rem;
