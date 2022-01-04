@@ -109,7 +109,6 @@ export default function Study(props){
                     <Box sx = {{ 
                         minWidth: 100,
                         width: '1fr',
-                        height: 50
                         }}>
                         <Tabs
                             value={studyPage}
@@ -120,13 +119,11 @@ export default function Study(props){
                             variant="scrollable"
                             scrollButtons="auto"
                             sx = {{ 
-                                maxHeight: 100,
-                                height: 50,
                             }}
                         >
-                            <Tab value={1} label="Details" icon={<HelpIcon/>} iconPosition="start"/>
-                            <Tab value={2} label="Results" icon={<AutoGraphIcon/>} iconPosition="start"/>
-                            <Tab value={3} label="Interpretation" icon={<ArticleIcon/>} iconPosition="start"/>
+                            <Tab value={1} label="Details" icon={<HelpIcon fontSize="small"/>}> </Tab>
+                            <Tab value={2} label="Results" icon={<AutoGraphIcon fontSize="small"/>} />
+                            <Tab value={3} label="Interpretation" icon={<ArticleIcon fontSize="small"/>} />
                         </Tabs>
                     </Box>
 

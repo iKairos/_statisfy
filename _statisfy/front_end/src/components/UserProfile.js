@@ -163,7 +163,7 @@ export default function UserProfile(props){
                         <div className="profile_details">
 
 
-                            <div className="profile_content"> 
+                            <div className="profile_edit"> 
                             
                             <TextField
                                 id="standard-multiline-static"

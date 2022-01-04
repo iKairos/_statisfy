@@ -573,27 +573,28 @@ export default function ResStudies(props){
                             </Box>
                         }
                         {showActive === 3 &&
-                        <>
-                            {typeof datasetDetails !== 'undefined' ? 
-                                <MemoizedTable
-                                    data={datasetDetails.details} 
-                                    Header={true} 
-                                    rowNumber={15}
-                                    checked={true}
-                                    callbackSetSelectedRows={callbackSetSelectedRows}
-                                /> : <CircularProgress color="info" thickness={2.5} size={30}/>
-                            }
+                            <div className="resList_column">
+                                {typeof datasetDetails !== 'undefined' ? 
+                                    <MemoizedTable
+                                        data={datasetDetails.details} 
+                                        Header={true} 
+                                        rowNumber={15}
+                                        checked={true}
+                                        callbackSetSelectedRows={callbackSetSelectedRows}
+                                    /> : <CircularProgress color="info" thickness={2.5} size={30}/>
+                                }
 
+                                
+                            </div>
+                        }
+                         {showActive === 3 &&
                             <Button
                                 onClick={handleSubmit}
                                 color="secondary"
                             >
                             Compute
                             </Button>
-                        </>
-                            
-                        
-                        }
+                         }
                         
                         
                         

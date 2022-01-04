@@ -17,11 +17,13 @@ export default function ResultCards(props) {
     const [onTrigger, setTrigger] = useState(false);
     const matches = useMediaQuery('(min-width:900px)');
 
-    const cardHover = useSpring({
-        width: onTrigger? width : 0,
-        alignItems: "center"
-        
+    const cardOpen = useSpring({
+        to: { 
+            width: onTrigger ? width :0,
+        },
+        from: { width: 0}
     })
+    
 
 
 
@@ -40,47 +42,33 @@ export default function ResultCards(props) {
       <>
     {matches 
         ? (
-            <>
-                {onTrigger
-                ?(
-                    <HtmlTooltip
-                        title={
-                        <React.Fragment>
-                            <Typography color="inherit">{props.variable}</Typography>
-                            {variableTooltip[props.variable]}
-                        </React.Fragment>
-                        }
-                        placement="bottom-start"
-                    >
-                        
-
-                            <div className="Study_cards" onClick={()=>setTrigger(!onTrigger)}>                      
-                                <div className='Study_cards_text'  >
-                                    <Typography sx={{ fontSize: "1.5rem", fontWeight: 600 }}> {props.value}</Typography>
-                                    <Typography variant="button" sx={{color:"#a742c5"}}>{props.variable}</Typography>
-                                </div>
-                                
-                                    <animated.div style = {cardHover}>
-                                        {onTrigger
-                                        ?(<IconButton ref= {ref} ><ContentCopyIcon/></IconButton> )
-                                        : null
-                                        }
-                                    </animated.div>
-                                    
-                                
-                            </div>
-                </HtmlTooltip>
-                )
-                :(
-                    <div className="Study_cards" onClick={()=>setTrigger(!onTrigger)}>                      
-                        <div className='Study_cards_text'>
-                            <Typography sx={{ fontSize: "1.5rem", fontWeight: 600 }}> {props.value}</Typography>
-                            <Typography variant="button" sx={{color:"#a742c5"}}>{props.variable}</Typography>
-                        </div>
+            <HtmlTooltip
+                title={
+                    onTrigger
+                    ?(<React.Fragment>
+                        <Typography color="inherit">{props.variable}</Typography>
+                        {variableTooltip[props.variable]}
+                    </React.Fragment>)
+                    :null
+                }
+                placement="bottom-start"
+            >
+            <div className="Study_cards" onClick={()=>setTrigger(!onTrigger)}  >  
+                
+                    <div className='Study_cards_text'  >
+                        <Typography sx={{ fontSize: "1.5rem", fontWeight: 600 }}> {props.value}</Typography>
+                        <Typography variant="button" sx={{color:"#a742c5"}}>{props.variable}</Typography>
                     </div>
-                )}
-            
-            </>
+                    
+                    <animated.div style = {cardOpen} >
+                        {onTrigger
+                        ? (<IconButton ref= {ref} ><ContentCopyIcon/></IconButton>)
+                        : null
+                        }
+                     </animated.div>     
+            </div>
+                    
+        </HtmlTooltip>
         
         )
         :(
