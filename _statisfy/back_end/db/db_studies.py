@@ -91,7 +91,7 @@ class StudiesBackbone(DatabaseBackbone):
             fetched = self.fetch_row(
                 "studies",
                 _id = rid
-            )[4]
+            )[0][5]
 
             return fetched
         except Exception as e:

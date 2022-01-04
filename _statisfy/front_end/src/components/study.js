@@ -187,7 +187,11 @@ export default function Study(props){
                 }
                 {studyPage === 3 &&
                     <div className = "Study_content_interpretation">
-                        Interpretation
+                        {
+                            props.data[9].map(i => {
+                                return <p>{i}</p>
+                            })
+                        }
                     </div>
                 }
             </div>

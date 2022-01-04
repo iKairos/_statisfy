@@ -7,6 +7,7 @@ from objects.user import User
 from objects.research import Research
 from os.path import dirname, realpath
 from functionalities.statistical_analysis import *
+from functionalities.interpretation import interpret
 import pandas as pd
 import os
 
@@ -141,6 +142,7 @@ def add_study():
                 break
         
         compute_res = None
+        interpretation = []
         
         research = Research(data['research_id'])
         
@@ -156,7 +158,8 @@ def add_study():
                 }
                 
             compute_res = pearsonr(df[columns[0]], df[columns[1]])
-            print(compute_res)
+
+            interpretation = interpret(data['test_type'], compute_res)
         
         Study.new_study(
             _id = uuid,
@@ -195,6 +198,7 @@ def get_studies():
             i = list(i)
             i.append(list(Study(i[0]).columns))
             i.append(list(Study(i[0]).variables))
+            i.append(interpret(Study(i[0]).test_type, list(Study(i[0]).variables)))
             res_data.append(list(i))
 
         return {
