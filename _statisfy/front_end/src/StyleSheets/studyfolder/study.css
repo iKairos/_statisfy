@@ -233,6 +233,21 @@
           align-items: center;
 }
 
+.Study_Correlation_level {
+  background-color: #5a5a5a;
+  color: white;
+  border: 1px solid #b5b5b5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .Study_Correlation_header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -341,19 +356,6 @@
     background-color: white;
     width: 20vw;
     border: 1px solid #b5b5b5;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    padding: 0.4rem;
-  }
-  .Study_Correlation_level {
-    background-color: #eeeeee;
-    width: 20vw;
-    border: 1px solid #eeeeee;
-    color: white;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
