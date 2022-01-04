@@ -26,6 +26,7 @@ import _ from "lodash"
 import { MemoizedTable } from "./DisplayTable";
 import { height, maxHeight } from "@mui/system";
 import ResultCards from "./newDashBoard/ResultCards";
+import CorrelationDegree from "./CorrelationDegree";
 import BarCor from "./newDashBoard/bar";
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, Title);
@@ -185,10 +186,28 @@ export default function Study(props){
                 {studyPage === 3 &&
                     <div className = "Study_content_interpretation">
                         {
-                            props.data[9].map(i => {
-                                return <p>{i}</p>
+                            props.data[8].map(([var_name, var_val]) => {
+                               return(
+                                   <>
+                                   {var_name === "R Coefficient"
+                                    ?(
+                                    <CorrelationDegree value = {var_val}/>)
+                                    :null
+                                   }
+                                   </>
+                               ) 
                             })
                         }
+                        <div className = "Study_content_text">
+                            <Typography>INTERPRETATION</Typography>
+                            {
+                                props.data[9].map(i => {
+                                    return <p>{i}</p>
+                                })
+                            }
+                            
+                            <Button color="secondary">Generate PDF</Button>
+                        </div>
                     </div>
                 }
             </div>

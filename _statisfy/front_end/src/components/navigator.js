@@ -33,7 +33,7 @@ export default function Navigator(props){
                 color = "secondary"
                 sx={{ maxWidth: 400, flexGrow: 1 , backgroundColor: 'transparent'}}
                 nextButton={
-                    <Button size="small" onClick={nextStep} disabled={props.ActiveStep === 5} color = "secondary">
+                    <Button size="small" onClick={nextStep} disabled={props.ActiveStep === 2} color = "secondary">
                     Next
                     {theme.direction === 'rtl' ? (
                         <KeyboardArrowLeft />

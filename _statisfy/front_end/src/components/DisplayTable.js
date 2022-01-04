@@ -25,9 +25,6 @@ export const DisplayTable = (props) => {
       const columnHeader = columns.map(i => {
         return {field: i , headerName: i, width: 140}
       })
-      columnHeader.map(i=>{
-        console.log(i);
-      })
       const rows = data.map((i, index) => ({id: index, ...i}));
       
       return (

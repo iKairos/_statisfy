@@ -544,7 +544,10 @@ export default function ResStudies(props){
                                     <>
                                         <div className="filterContainer">
                                             <Typography>Select Statistical Method :</Typography>
-                                            <IconButton onClick={toggleFilter}><FilterAltSharpIcon/></IconButton>
+                                            <Button onClick={toggleFilter} color="secondary" variant="outlined">
+                                                <Typography>Filter</Typography>
+                                                <FilterAltSharpIcon/>
+                                            </Button>
                                         </div>
                                         
                                         <Backdrop

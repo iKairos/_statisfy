@@ -22,7 +22,7 @@ export default function ResCard(props){
             <Button 
                 onClick={()=>props.HandleSelected(props._id)}
                 variant="outlined"
-                
+                color="secondary"
             >View Research
             </Button>
             
