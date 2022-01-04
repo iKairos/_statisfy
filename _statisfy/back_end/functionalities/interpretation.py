@@ -17,7 +17,7 @@ def interpret(stat_method, compute_res, alpha=0.05):
         elif abs(r) < 0.49 and abs(r) >= 0.30:
             interpretations.append(f"The two variables have a medium degree of linear correlation having a strength of {r * 100:.2f}%. Though not strong, a significant amount of correlation is seen between the two variables. Their graph might not be as explicit in showing these, but it will have a trend either upward and downward depending on the sign of the correlation value.")
         elif abs(r) < 0.29:
-            interpretations.append(f"The two variables have a weak correlation having a strength of {r * 100:.2f}%. Both variables do not have a clear correlation at this rate. Their graphs might not give any inferences on their trend and direction having this low correlation value.")
+            interpretations.append(f"The two variables have a weak correlation having a strength of {r * 100:.2f}%. Both variables have a weak sign of correlation. Their graphs might not give any inferences on their trend and direction having this low correlation value.")
         elif abs(r) == 0:
             interpretations.append(f"The two variables are not correlated with each other having a strength of {r * 100:.2f}%. The two variables do not have a linear relationship and is not related to each other statistically. Their graph do not constitute a linear relationship.")
 
