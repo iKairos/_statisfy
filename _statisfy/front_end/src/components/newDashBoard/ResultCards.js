@@ -9,6 +9,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import useMeasure from 'react-use-measure'
+import { variableTooltip } from '../../constants/stringConstants';
 
 
 export default function ResultCards(props) {
@@ -46,7 +47,7 @@ export default function ResultCards(props) {
                         title={
                         <React.Fragment>
                             <Typography color="inherit">{props.variable}</Typography>
-                            {"This variable is responsible for my child <3 rovvicvic"}
+                            {variableTooltip[props.variable]}
                         </React.Fragment>
                         }
                         placement="bottom-start"

@@ -29,3 +29,11 @@ export const status500 = "Request from server returned an error status 500. The 
 
 export const researchSuccessTitle = "Research created successfully!";
 export const researchSuccess = "You may now view and customize your research. Proceed by creating a study, which selects certain colums for you to analyze by our preset statistical or machine learning methods.";
+
+export const variableTooltip = {
+    'R Coefficient': 'R Coefficient determines the strength of linear relationship of the two variables. The closer it is to 1.0, the higher the strength of the relationship is. If the coefficient is positive that means the relationship has an upward trend and if the coefficient is negative that means the relationship has a downward trend.',
+    'P-value': 'P-value tells the probability of obtaining results at least as extreme as the observed results of a statistical hypothesis test',
+    'SSxy': 'Sum of Squares of X and Y variables.',
+    'SSx': 'Sum of Squares of X variable.',
+    'SSy': 'Sum of Squares of Y variable'
+};
