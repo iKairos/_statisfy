@@ -39,11 +39,8 @@ export default function UserScreen(props){
     if(props.isUser && processed?.code === 'TOKEN_SUCCESS'){ // no id, logged in, render self profile
         return(
             <div>
-                <div className = "container">
                     <UserProfile user={processed.user} editable={true}/>
                     <ResearchList/>
-                    
-                </div> 
             </div>
         )
     }else if(userData?.code === 'USER_FETCH_SUCCESS'){ // provided id, render id profile

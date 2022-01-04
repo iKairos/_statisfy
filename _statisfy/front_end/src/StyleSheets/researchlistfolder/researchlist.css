@@ -1,5 +1,5 @@
 .resList_body_container {
-  margin-top: 5rem;
+  margin-top: 1rem;
   height: 100%;
   width: 90vw;
   display: -ms-grid;
@@ -105,16 +105,10 @@
     display: grid;
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
     gap: 1rem;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
   }
   .resList_body_container {
-    margin-top: 5rem;
+    margin-top: 1rem;
     height: 100%;
     width: 50vw;
     margin-bottom: 1rem;
