@@ -68,6 +68,7 @@
 }
 
 .resStudy_body_content {
+  width: 100%;
   height: 100%;
   padding: 1rem;
   display: -webkit-box;

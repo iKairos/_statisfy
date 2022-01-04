@@ -6,6 +6,11 @@ $purple: #a742c5;
 $black: #23272a;
 
 .resList {
+  &_column {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
   &_body {
     &_container {
       margin-top: 1rem;
@@ -80,6 +85,12 @@ $black: #23272a;
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
+
+    &_column {
+      width: 47vw;
+      display: flex;
+      justify-content: center;
+    }
     &_body {
       &_container {
         margin-top: 1rem;

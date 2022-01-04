@@ -57,6 +57,11 @@ $black: #23272a;
     color: #23272a;
   }
   &_content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+  }
+  &_edit {
     gap: 1rem;
     display: flex;
     flex-direction: column;

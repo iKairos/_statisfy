@@ -1,3 +1,13 @@
+.resList_column {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .resList_body_container {
   margin-top: 1rem;
   height: 100%;
@@ -106,6 +116,15 @@
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
     gap: 1rem;
+  }
+  .resList_column {
+    width: 47vw;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
   .resList_body_container {
     margin-top: 1rem;
