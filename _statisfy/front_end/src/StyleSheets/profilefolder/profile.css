@@ -1,5 +1,6 @@
 .profile {
   margin-top: 5rem;
+  width: 90vw;
   background-color: white;
   border-radius: 0;
   border-top-left-radius: 0.25rem;
@@ -103,6 +104,7 @@
   .profile {
     margin-top: 5rem;
     background-color: white;
+    width: 50vw;
   }
   .profile_backdrop {
     width: 50vw;
