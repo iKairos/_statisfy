@@ -13,9 +13,11 @@ def interpret(stat_method, compute_res, alpha=0.05):
         if abs(r) == 1:
             interpretations.append(f"The two variables have perfect linear correlation having a strength of {r * 100:.2f}%. It is shown that the two variables have 100% strength of linear relationship which means X is perfectly correlated to Y and vice versa. Their graph would look like a straight line.")
         elif abs(r) < 1 and abs(r) >= 0.5:
-            interpretations.append(f"The two variables have a high degree of linear correlation. A strength of {r * 100:.2f}% is detected from both variables which means they have a high degree of linear correlation. Their graph would look like a compressed line trending upwards or downwards depending on the sign of the correlation value.")
+            sign = " upwards because the sign of r is positive." if r > 0 else " downwards because the sign of r is negative."
+            interpretations.append(f"The two variables have a high degree of linear correlation. A strength of {r * 100:.2f}% is detected from both variables which means they have a high degree of linear correlation. Their graph would look like a line trending" + sign)
         elif abs(r) < 0.49 and abs(r) >= 0.30:
-            interpretations.append(f"The two variables have a medium degree of linear correlation having a strength of {r * 100:.2f}%. Though not strong, a significant amount of correlation is seen between the two variables. Their graph might not be as explicit in showing these, but it will have a trend either upward and downward depending on the sign of the correlation value.")
+            sign = " upwards because the sign of r is positive." if r > 0 else " downwards because the sign of r is negative."
+            interpretations.append(f"The two variables have a medium degree of linear correlation having a strength of {r * 100:.2f}%. Though not strong, a significant amount of correlation is seen between the two variables. Their graph might not be as explicit in showing these, but it will have a trend" + sign)
         elif abs(r) < 0.29:
             interpretations.append(f"The two variables have a weak correlation having a strength of {r * 100:.2f}%. Both variables have a weak sign of correlation. Their graphs might not give any inferences on their trend and direction having this low correlation value.")
         elif abs(r) == 0:
@@ -27,7 +29,7 @@ def interpret(stat_method, compute_res, alpha=0.05):
             interpretations.append("The trend of both variables are upward since their r value is positive.")
 
         if p < alpha:
-            interpretations.append(f"Since the P-value {p} is less than the set alpha {alpha}, reject the hypothesis that says there is a relationship between the two variables. Meaning, the two variables are correlated.")
+            interpretations.append(f"Since the P-value {p} is less than the set alpha {alpha}, reject the hypothesis that says there is no relationship between the two variables. Meaning, the two variables are correlated.")
         elif p > alpha:
             interpretations.append(f"Since the P-value {p} is greater than the set alpha {alpha}, accept the hypothesis that there is no relationship between the two variables.")
         else:
