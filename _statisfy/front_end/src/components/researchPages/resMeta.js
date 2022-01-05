@@ -1,4 +1,5 @@
 import "../../StyleSheets/resmetafolder/resmeta.css"
+import { Typography } from "@mui/material";
 export default function ResMeta(props){
 
    // const attributes = props.attribute
@@ -6,16 +7,16 @@ export default function ResMeta(props){
         <div className ="resMeta" >
             <div className="resMeta_table">
                 <div className="resMeta_row">
-                    <div className="resMeta_title">Usage Information</div>
+                    <Typography variant ="h6" className="resMeta_title">Usage Information</Typography>
                     <div className="resMeta_content_container">
                         <div className="resMeta_category">
-                                <p>License</p>
+                            <Typography variant="button">License</Typography>
                                 <div className="resMeta_content">
                                     <p>Ipsum elit ea minim culpa pariatur cupidatat dolor cupidatat pariatur cillum culpa laboris.</p>
                                 </div>
                         </div>
                         <div className="resMeta_category">
-                                <p>Visibility</p>
+                            <Typography variant="button">Visibility</Typography>
                                 <div className="resMeta_content">
                                     <p>2</p>
                                 </div>
@@ -25,10 +26,10 @@ export default function ResMeta(props){
                 </div>
 
                 <div className="resMeta_row">
-                    <div className="resMeta_title">Maintainers</div>
+                    <Typography variant ="h6" className="resMeta_title">Maintainers</Typography>
                     <div className="resMeta_content_container">
                         <div className="resMeta_category">
-                                <p>Dataset Owner/s</p>
+                                <Typography variant="button">Dataset Owner/s</Typography>
                                 <div className="resMeta_content">
                                     <p>2</p>
                                 </div>
@@ -39,28 +40,28 @@ export default function ResMeta(props){
                 </div>
 
                 <div className="resMeta_row">
-                    <div className="resMeta_title">Updates</div>
+                    <Typography variant ="h6" className="resMeta_title">Updates</Typography>
                     <div className="resMeta_content_container">
                         <div className="resMeta_category">
-                                <p>Expected Update Frequency</p>
+                            <Typography variant="button">Expected Update Frequency</Typography>
                                 <div className="resMeta_content">
                                     <p>2</p>
                                 </div>
                         </div>
                         <div className="resMeta_category">
-                                <p>Last Updated</p>
+                            <Typography variant="button">Last Updated</Typography>
                                 <div className="resMeta_content">
                                     <p>2</p>
                                 </div>
                         </div>
                         <div className="resMeta_category">
-                                <p>Date Created</p>
+                            <Typography variant="button">Date Created</Typography>
                                 <div className="resMeta_content">
                                     <p>2</p>
                                 </div>
                         </div>
                         <div className="resMeta_category">
-                                <p>Current Version</p>
+                                <Typography variant="button">Current Version</Typography>
                                 <div className="resMeta_content">
                                     <p>2</p>
                                 </div>

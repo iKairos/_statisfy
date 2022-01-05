@@ -5,6 +5,8 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+
+import { Typography } from "@mui/material";
 import { CircularProgress } from '@mui/material';
 
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
@@ -94,19 +96,19 @@ export default function ResData(props){
             {contentPage === 1 &&
                 
                     <div className = "resData_dataset">
-                        <div className = "resData_dataset_heading">
-                            Description
-                        </div>
+                        <Typography variant="button" className = "resData_dataset_heading">
+                            Dataset Description
+                        </Typography>
                         <div className = "resData_dataset_desc">
-                            <p className = "text_topic"> Context</p>
+                            <Typography variant="h6"> Context</Typography>
                             <p className = " text_content">
                                 This Dataset ChuChu
                             </p>
-                            <p className = "text_topic"> Content</p>
+                            <Typography variant="h6"> Content</Typography>
                             <p className = " text_content">
                                 This Dataset ChuChu
                             </p>
-                            <p className = "text_topic"> Acknowledgements</p>
+                            <Typography variant="h6"> Acknowledgements</Typography>
                             <p className = " text_content">
                                 This Dataset ChuChu
                             </p>

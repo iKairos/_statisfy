@@ -7,7 +7,7 @@ import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getResearch } from "../actions/researchAction";
 import { useState } from "react";
-import { Alert, AlertTitle, Fade, Grow, Skeleton } from "@mui/material";
+import { Alert, AlertTitle, Fade, Grow, Skeleton, Typography } from "@mui/material";
 
 import TableChartIcon from '@mui/icons-material/TableChart';
 import TimelineIcon from '@mui/icons-material/Timeline';
@@ -135,49 +135,29 @@ export default function ResearchScreen(props){
                                 </Alert>
                             </Grow>
                         }
-                        {
-                            editTitle? (
-                                <div className = "text_content">
-                                    <span className ="text_title">{researchGetRes?.data.research_name}
-                                        <EditIcon
-                                            onClick={()=>setTitleFunction(false)}
-                                        />
-                                    
-                                    </span>
-                                    
-                                </div>
-                                
-                            ):(
-                                <div className = "text_content">
-                                    <TextField 
-                                        id="standard-basic" 
-                                        label="New Research Title" 
-                                        variant="standard"
-                                        size="small"
-                                    />
-                                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end' }}>
-                                        <p>1</p>
-                                        <p>2</p>
-                                    </Box>
-                                </div>
-                            )
-                        }
+                        <div className = "text_content">
+                            <Typography variant="h5" sx={{fontWeight: 600}}>{researchGetRes?.data.research_name}
+                            
+                            </Typography>
+                            
+                        </div>
+                        
 
                         {researchGetRes?.data.authors.map(author => {
                             return <p className="text_button">
                             <Link to={`/profile/${author['uid']}`}
                             style={{ textDecoration: 'none' }}
                             >
-                                <p className="text_button">
-                                    {author['username'].toUpperCase()}
-                                </p>
+                                <Typography variant="body1" className="text_button">
+                                    {author['username']}
+                                </Typography>
                             </Link>
                             </p>
                             
                         })}
-                        <span className = "text_content">
+                        <Typography variant = "body2">
                             {researchGetRes?.data.research_description}
-                        </span>
+                        </Typography>
                     </div>
                     <div className = "research_heading_tabs">
                         <button
