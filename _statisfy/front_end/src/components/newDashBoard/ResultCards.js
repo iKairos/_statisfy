@@ -49,7 +49,7 @@ export default function ResultCards(props) {
                         <Typography color="inherit">{props.variable}</Typography>
                         {variableTooltip[props.variable]}
                     </React.Fragment>)
-                    :null
+                    :""
                 }
                 placement="bottom-start"
             >
