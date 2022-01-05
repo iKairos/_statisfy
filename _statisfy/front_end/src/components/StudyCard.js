@@ -21,7 +21,7 @@ export default function StudyCard(props){
             <Button 
                 onClick={()=>props.HandleSelected(props.id)}
                 variant="outlined"
-                
+                color="secondary"
             >View Study
             </Button>
             

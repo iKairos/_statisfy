@@ -13,23 +13,21 @@ export default function CorrelationDegree(props){
                     <div className="Study_Correlation_header">
                         <Typography variant="overline">Size of Correlation</Typography>
                     </div>
+
                     <div className={level == 1 ? "Study_Correlation_level" : "Study_Correlation_content"} >
                         <Typography variant="body2">Coefficient value is near ±1</Typography>
                     </div>
-                    <div className={level >= 0.9 ? level < 1.0 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
-                        <Typography variant="body2">90% - 100% (±) (0.9 - 1.0)</Typography>
-                    </div>
-                    <div className={level >= 0.7 ? level < 0.9 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
-                        <Typography variant="body2">70% - 90% (±) (0.7 - 0.9)</Typography>
-                    </div>
-                    <div className={level >= 0.5 ? level < 0.7 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
-                        <Typography variant="body2">50% - 70% (±) (0.5 - 0.7)</Typography>
+                    <div className={level >= 0.5 ? level < 1.0 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
+                        <Typography variant="body2">50% - 100% (±) (0.5 - 1.0)</Typography>
                     </div>
                     <div className={level >= 0.3 ? level < 0.5 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
-                        <Typography variant="body2">30% - 50% (±) (0.3 - 0.5)</Typography>
+                        <Typography variant="body2">30% - 49% (±) (0.3 - 0.5)</Typography>
                     </div>
-                    <div className={level >= 0 ? level < 0.3 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
-                        <Typography variant="body2">0% - 30% (±) (0.0 - 0.3)</Typography>
+                    <div className={level > 0 ? level < 0.3 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
+                        <Typography variant="body2">1% - 29% (±) (0.1 - 0.3)</Typography>
+                    </div>
+                    <div className={level == 0 ? level < 0.1 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
+                        <Typography variant="body2">0% (0.0)</Typography>
                     </div>
                 </div>
                 <div className="Study_Correlation_label">
@@ -37,24 +35,23 @@ export default function CorrelationDegree(props){
                     <div className="Study_Correlation_header">
                         <Typography variant="overline">Interpretation</Typography>
                     </div>
+
                     <div className={level == 1 ? "Study_Correlation_level" : "Study_Correlation_content"} >
                         <Typography variant="body2">Perfect Correlation</Typography>
                     </div>
-                    <div className={level >= 0.9 ? level < 1.0 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
-                        <Typography variant="body2">Very High Degree of Correlation</Typography>
-                    </div>
-                    <div className={level >= 0.7 ? level < 0.9 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
+                    <div className={level >= 0.5 ? level < 1.0 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
                         <Typography variant="body2">High Degree of Correlation</Typography>
                     </div>
-                    <div className={level >= 0.5 ? level < 0.7 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
+                    <div className={level >= 0.3 ? level < 0.5 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
                         <Typography variant="body2">Moderate Degree of Correlation</Typography>
                     </div>
-                    <div className={level >= 0.3 ? level < 0.5 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
+                    <div className={level > 0 ? level < 0.3 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
                         <Typography variant="body2">Low Degree of Correlation</Typography>
                     </div>
-                    <div className={level >= 0 ? level < 0.3 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
-                        <Typography variant="body2">Negligible Correlation</Typography>
+                    <div className={level == 0 ? level < 0.1 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
+                        <Typography variant="body2">No Correlation</Typography>
                     </div>
+
                 </div>
             </div>
             

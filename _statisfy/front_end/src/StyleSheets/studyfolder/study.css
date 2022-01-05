@@ -197,8 +197,8 @@
   gap: 0.25rem;
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: (60px)[7] 20px;
-      grid-template-rows: repeat(7, 60px) 20px;
+  -ms-grid-rows: (60px)[6] 20px;
+      grid-template-rows: repeat(6, 60px) 20px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -211,8 +211,8 @@
   gap: 0.25rem;
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: (60px)[7] 20px;
-      grid-template-rows: repeat(7, 60px) 20px;
+  -ms-grid-rows: (60px)[6] 20px;
+      grid-template-rows: repeat(6, 60px) 20px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -332,8 +332,8 @@
     gap: 0.25rem;
     display: -ms-grid;
     display: grid;
-    -ms-grid-rows: (50px)[7] 20px;
-        grid-template-rows: repeat(7, 50px) 20px;
+    -ms-grid-rows: (50px)[6] 20px;
+        grid-template-rows: repeat(6, 50px) 20px;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
@@ -345,8 +345,8 @@
     gap: 0.25rem;
     display: -ms-grid;
     display: grid;
-    -ms-grid-rows: (50px)[7] 20px;
-        grid-template-rows: repeat(7, 50px) 20px;
+    -ms-grid-rows: (50px)[6] 20px;
+        grid-template-rows: repeat(6, 50px) 20px;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
