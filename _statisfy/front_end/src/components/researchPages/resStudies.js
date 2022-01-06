@@ -16,11 +16,9 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {Skeleton, Stepper, Step, StepLabel, Typography } from "@mui/material";
 import { useState } from "react";
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
 import { status500, studyStepsString } from "../../constants/stringConstants";
 import { makeStyles } from "@mui/styles";
+import Popover from '@mui/material/Popover';
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -33,8 +31,7 @@ import ScienceIcon from '@mui/icons-material/Science';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import SummarizeIcon from '@mui/icons-material/Summarize';
-import FilterAltSharpIcon from '@mui/icons-material/FilterAltSharp';
-import CloseSharpIcon from '@mui/icons-material/CloseSharp';
+
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Backdrop from '@mui/material/Backdrop';
@@ -49,6 +46,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Alert, CircularProgress, Fade, IconButton, Snackbar } from "@mui/material";
 import { DisplayTable, MemoizedTable } from "../DisplayTable";
 import { getStudy, saveStudy } from "../../actions/researchAction";
+
 
 import StatImg from '../../images/statisticsHeader.png'
 import MLImg from '../../images/mlHeader.png'
@@ -79,14 +77,7 @@ export default function ResStudies(props){
     const anchorRef = React.useRef(null);
 
 
-    const [openFilter, setFilter] = React.useState(false);
-    const handleFilter = () => {
-        setFilter(false);
-    };
-    const toggleFilter = () => {
-        setFilter(!openFilter);
-    };
-
+ 
     const dispatch = useDispatch();
 
     const dataSelector = useSelector((state) => 
@@ -541,33 +532,20 @@ export default function ResStudies(props){
                                     />
                                 </div>
                                 {tool === "Statistical Method" &&
-                                    <>
-                                        <div className="filterContainer">
-                                            <Typography>Select Statistical Method :</Typography>
-                                            <Button onClick={toggleFilter} color="secondary" variant="outlined">
-                                                <Typography>Filter</Typography>
-                                                <FilterAltSharpIcon/>
-                                            </Button>
-                                        </div>
+                                    <div className="resList_column">
+                                        {typeof datasetDetails !== 'undefined' ? 
+                                            <MemoizedTable
+                                                data={datasetDetails.details} 
+                                                Header={true} 
+                                                rowNumber={15}
+                                                checked={true}
+                                                callbackSetSelectedRows={callbackSetSelectedRows}
+                                            /> : <CircularProgress color="info" thickness={2.5} size={30}/>
+                                        }
+        
                                         
-                                        <Backdrop
-                                            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                                            open={openFilter}
-                                        >   
-                                            
-                                        <div className = "resStudy_statfilter">
-                                            <IconButton 
-                                                onClick={handleFilter}
-                                                sx={{ position:"absolute", right: 0, top: 0}}
-                                            >
-                                                <CloseSharpIcon/>
-                                            </IconButton>
-                                            <Checkbox callbackFunction={callbackCheckbox}/>
-                                        </div>
-                                            
-                                        </Backdrop>
-                                        <AllCards tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
-                                    </>
+                                    </div>
+                                    
                                 
                                 }
 
@@ -576,19 +554,18 @@ export default function ResStudies(props){
                             </Box>
                         }
                         {showActive === 3 &&
-                            <div className="resList_column">
-                                {typeof datasetDetails !== 'undefined' ? 
-                                    <MemoizedTable
-                                        data={datasetDetails.details} 
-                                        Header={true} 
-                                        rowNumber={15}
-                                        checked={true}
-                                        callbackSetSelectedRows={callbackSetSelectedRows}
-                                    /> : <CircularProgress color="info" thickness={2.5} size={30}/>
-                                }
-
+                            <>
+                                <div className="filterContainer">
+                                    <Typography>Select Statistical Method :</Typography>
+                                    
+                                </div>
                                 
-                            </div>
+                                <Checkbox 
+                                    callbackFunction={callbackCheckbox}
+
+                                />
+                                <AllCards tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
+                            </>
                         }
                          {showActive === 3 &&
                             <Button
@@ -599,10 +576,6 @@ export default function ResStudies(props){
                             </Button>
                          }
                         
-                        
-                        
-
-
                         <Navigator
                             NextScreen={nextScreen}
                             PrevScreen={prevScreen}
@@ -633,9 +606,6 @@ export default function ResStudies(props){
                 }
                 </>
             )}
-            
-            
-            
         </div>
     );
 }
