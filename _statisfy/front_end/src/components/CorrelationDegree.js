@@ -21,10 +21,10 @@ export default function CorrelationDegree(props){
                         <Typography variant="body2">50% - 100% (±) (0.5 - 1.0)</Typography>
                     </div>
                     <div className={level >= 0.3 ? level < 0.5 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
-                        <Typography variant="body2">30% - 49% (±) (0.3 - 0.5)</Typography>
+                        <Typography variant="body2">30% - 49% (±) (0.3 - 0.49)</Typography>
                     </div>
                     <div className={level > 0 ? level < 0.3 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
-                        <Typography variant="body2">1% - 29% (±) (0.1 - 0.3)</Typography>
+                        <Typography variant="body2">1% - 29% (±) (0.1 - 0.29)</Typography>
                     </div>
                     <div className={level == 0 ? level < 0.1 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
                         <Typography variant="body2">0% (0.0)</Typography>
