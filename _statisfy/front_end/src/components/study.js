@@ -10,6 +10,7 @@ import HelpIcon from '@mui/icons-material/Help';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import ArticleIcon from '@mui/icons-material/Article';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import DownloadIcon from '@mui/icons-material/Download';
 import { useState } from "react";
 import { Scatter } from 'react-chartjs-2';
 import {
@@ -135,7 +136,7 @@ export default function Study(props){
                 {studyPage === 1 &&
                     <div className = "Study_content_details">
                         
-                        <h6>DataSet</h6>
+                        <h6>Variables</h6>
                         {typeof datasetFile !== 'undefined' ? 
                             <MemoizedTable
                                 data={datasetFile.data.map(row => {
@@ -146,7 +147,6 @@ export default function Study(props){
                                 checked={false}
                             /> : <CircularProgress color="info" thickness={2.5} size={30}/>
                         }
-                        <h6>Variables</h6>
                     </div>
                 }
                 {studyPage === 2 &&
@@ -206,7 +206,7 @@ export default function Study(props){
                                 })
                             }
                             
-                            <Button color="secondary">Generate PDF</Button>
+                            <Button color="secondary"><DownloadIcon/>Generate PDF</Button>
                         </div>
                     </div>
                 }
