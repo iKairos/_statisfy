@@ -5,26 +5,37 @@ import { useState } from "react";
 
 
 import "../StyleSheets/cardfolder/card.css"
+import { Typography } from "@mui/material";
 
 export default function AllCards(props){
     const filtered = statMethods.filter(([name, tags]) => {
         return props.tags.every(tag => tags.includes(tag))
     })
 
-    const [chosen, setChosen] = useState();
+    const [isClicked, setClicked] = useState(true);
 
-    const displayChosen = (choice) =>{
-        setChosen(choice);
+    const handleHighlight = function(highlight){
+        setClicked(highlight);
     }
-
 
     return(
         <div className="statContainer">
-            {
-                filtered.length !== 0 ? filtered.map(([method, tags]) => {
-                    return <Card title={method} desc="desc" attributes={tags} display={props.display} Chosen={props.chosen}/>
-                }) : <h1>Oops, nothing here!</h1>
-            }
+            <div className="statContainer_sub">
+                <Typography>Recommended</Typography>
+                {
+                    filtered.length !== 0 ? filtered.map(([method, tags]) => {
+                        return <Card title={method}  display={props.display} Chosen={props.chosen} isFiltered = {true} handleHighlight = {handleHighlight} isClicked = {isClicked} />
+                    }) : <h1>Oops, nothing here!</h1>
+                }
+            </div>
+            <div className="statContainer_sub">
+                <Typography>All Methods</Typography>
+                {
+                    statMethods.map(([method,tags]) => {
+                        return <Card title={method} display={props.display} Chosen={props.chosen} isFiltered = {false} handleHighlight = {handleHighlight} isClicked = {isClicked}/>
+                    })
+                }
+            </div>
 
            
         </div>

@@ -1,11 +1,8 @@
-$radius: 0.25rem;
 $white1: #eeeeee;
 $gray1: #b5b5b5;
 $pink: #dfa9ff;
 $purple: #a742c5;
 $black: #23272a;
-$boxshadow: 0 0 10px 5px rgb(252, 252, 252);
-$buttonbg: #a742c5;
 
 .AddIcon {
   color: #a742c5;
@@ -26,9 +23,9 @@ $buttonbg: #a742c5;
 }
 .filterContainer {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   margin-bottom: 0.5rem;
+  width: 80vw;
 }
 .resStudy {
   &_body {
@@ -97,6 +94,13 @@ $buttonbg: #a742c5;
   .StudyFilter {
     width: 15vw;
     margin-top: 1rem;
+  }
+  .filterContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: 0.5rem;
+    width: 40vw;
+    gap: 1rem;
   }
   .Sort {
     position: absolute;

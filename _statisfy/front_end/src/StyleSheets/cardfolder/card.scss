@@ -1,37 +1,46 @@
+$white1: #eeeeee;
+$gray1: #b5b5b5;
+$pink: #dfa9ff;
+$purple: #a742c5;
+$black: #23272a;
+
 .statContainer {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
-  min-height: 26rem;
-  max-height: 26rem;
-  overflow-y: auto;
-  padding: 1rem;
-  border: 1px solid #838383;
+  &_sub {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
 }
 
 .selected {
   width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
+  height: 3rem;
   cursor: pointer;
   border-radius: 0.25;
-  padding: 1rem;
-  transition: transform 200ms ease-in;
-  border: 3px solid #a742c5;
+  padding: 0.5rem;
+  background-color: rgb(90, 90, 90);
+  color: white;
+}
+.filteredselected {
+  width: 100%;
+  height: 3rem;
+  cursor: pointer;
+  border-radius: 0.25;
+  padding: 0.5rem;
+  background-color: #a742c5;
+  color: white;
 }
 
 .cards {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  height: 3rem;
   cursor: pointer;
   border-radius: 0.25;
-  padding: 1rem;
-  transition: transform 200ms ease-in;
-  border: 3px solid #f0f0f0;
+  padding: 0.5rem;
   background-color: #f0f0f0;
 
   &_title {
@@ -72,27 +81,32 @@
 
 @media screen and (min-width: 900px) {
   .statContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
   .cards {
     flex-direction: column;
-    width: 100%;
+    width: 1fr;
     position: relative;
     flex-wrap: nowrap;
-    height: fit-content;
-
-    &:hover {
-      transform: scale(1.01);
-    }
+    height: 3rem;
   }
   .selected {
     flex-direction: column;
-    width: 100%;
+    width: 1fr;
     position: relative;
     flex-wrap: nowrap;
-    height: fit-content;
-
-    &:hover {
-      transform: scale(1.01);
-    }
+    height: 3rem;
   }
+  .filteredselected {
+    flex-direction: column;
+    width: 1fr;
+    position: relative;
+    flex-wrap: nowrap;
+    height: 3rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
 }

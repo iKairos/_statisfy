@@ -20,6 +20,11 @@ import { status500, studyStepsString } from "../../constants/stringConstants";
 import { makeStyles } from "@mui/styles";
 import Popover from '@mui/material/Popover';
 
+import InputLabel from "@mui/material/InputLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import AddIcon from '@mui/icons-material/Add';
@@ -75,6 +80,11 @@ export default function ResStudies(props){
 
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
+
+    const [purpose, setPurpose] = React.useState("");
+    const handlePurpose = (event) => {
+        setPurpose(event.target.value);
+    };
 
 
  
@@ -498,7 +508,7 @@ export default function ResStudies(props){
                                 <div style={{paddingTop:"1rem"}}>
                                     <TextField
                                         id="outlined-textarea"
-                                        label="Description"
+                                        label="Description DescriptionDescriptionDescriptionDescriptionDescription"
                                         placeholder="Add description"
                                         multiline
                                         rows={4}
@@ -506,6 +516,24 @@ export default function ResStudies(props){
                                         onChange={e => setStudyDesc(e.target.value)}
                                         fullWidth
                                     />
+                                </div>
+                                <div style={{paddingTop:"1rem"}}>
+                                    <FormControl sx={{ width:"100%"}}>
+                                        <InputLabel id="demo-simple-select-helper-label" color = "secondary">Purpose of Analysis</InputLabel>
+                                        <Select
+                                        labelId="demo-simple-select-helper-label"
+                                        id="purposeSelector"
+                                        value={purpose}
+                                        label="Purpose of Analysis"
+                                        onChange={handlePurpose}
+                                        color = "secondary"
+                                        >
+                                        <MenuItem value={"relationship"}>Relationship</MenuItem>
+                                        <MenuItem value={"difference"}>Significant Differences</MenuItem>
+                                        <MenuItem value={"univariate"}>Univariate Analysis</MenuItem>
+                                        </Select>
+                                    </FormControl>
+
                                 </div>
                             
                             </Box>
@@ -554,18 +582,8 @@ export default function ResStudies(props){
                             </Box>
                         }
                         {showActive === 3 &&
-                            <>
-                                <div className="filterContainer">
-                                    <Typography>Select Statistical Method :</Typography>
-                                    
-                                </div>
                                 
-                                <Checkbox 
-                                    callbackFunction={callbackCheckbox}
-
-                                />
-                                <AllCards tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
-                            </>
+                            <AllCards tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
                         }
                          {showActive === 3 &&
                             <Button
