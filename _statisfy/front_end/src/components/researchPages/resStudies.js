@@ -189,6 +189,21 @@ export default function ResStudies(props){
         });
 
         setStudyColumns(selectedColumns)
+
+        const varTags = ["One Variable", "Two Variables", "Multiple Variables"]
+
+        setTags([...tags.filter(x => varTags.includes(x)), purpose]);
+        if(selectedColumns.length === 1){
+            setTags([...tags, "One Variable"]);
+        }else if(selectedColumns.length === 2){
+            setTags([...tags, "Two Variables"]);
+        }else if(selectedColumns.length >= 3){
+            setTags([...tags, "Multiple Variables"]);
+        }else{
+            setTags([...tags]);
+        }
+
+        //setTags([...tags, purpose]);
     }
 
     function handleListKeyDown(event) {
@@ -273,7 +288,7 @@ export default function ResStudies(props){
     const prevScreen = () => {
         setShowActive(showActive - 1);
     }
-    
+
     return(
         
         <div className="resStudy_body_container">
@@ -528,9 +543,9 @@ export default function ResStudies(props){
                                         onChange={handlePurpose}
                                         color = "secondary"
                                         >
-                                        <MenuItem value={"relationship"}>Relationship</MenuItem>
-                                        <MenuItem value={"difference"}>Significant Differences</MenuItem>
-                                        <MenuItem value={"univariate"}>Univariate Analysis</MenuItem>
+                                        <MenuItem value="Relationship" onClick={(event) => setTags([event.target.innerText])}>Relationship</MenuItem>
+                                        <MenuItem value="Significant Differences" onClick={(event) => setTags([event.target.innerText])}>Significant Differences</MenuItem>
+                                        <MenuItem value="Univariate Analysis" onClick={(event) => setTags([event.target.innerText])}>Univariate Analysis</MenuItem>
                                         </Select>
                                     </FormControl>
 

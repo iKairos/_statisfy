@@ -262,3 +262,10 @@ def mann_whitney_u(x, y, alpha = 0.05):
     U = U1 if U1 < U2 else U2
 
     return U
+
+# =========================================================================
+
+# TEST FOR NORMALITY
+def k_s_test():
+    from scipy.stats import kstest
+    pass
