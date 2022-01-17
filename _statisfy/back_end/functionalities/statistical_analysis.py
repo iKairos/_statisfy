@@ -266,6 +266,9 @@ def mann_whitney_u(x, y, alpha = 0.05):
 # =========================================================================
 
 # TEST FOR NORMALITY
-def k_s_test():
-    from scipy.stats import kstest
-    pass
+def anderson_test(data):
+    from scipy.stats import anderson
+    
+    result = anderson(data)
+
+    return result.statistic, result.critical_values

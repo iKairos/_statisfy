@@ -2,6 +2,7 @@ from __main__ import app
 from flask import request, jsonify
 from flask.helpers import send_file
 from flask_cors import cross_origin
+from functionalities.statistical_analysis import anderson_test
 import pandas as pd
 import os
 
@@ -26,11 +27,13 @@ def dataset_details():
             median = "NA"
             max = "NA"
             min = "NA"
+            normal = "NA"
             try:
                 if df[i].dtypes != 'O':
                     mean = round(float(df[i].mean()), 2) # temporary fix
                     std = round(float(df[i].std()), 2)
                     median = round(float(df[i].median()), 2)
+                    normal = anderson_test(df[i])
                 try:
                     max = float(df[i].max())
                     min = float(df[i].min())
@@ -39,7 +42,7 @@ def dataset_details():
                     min = df[i].min()
             except:
                 pass 
-
+            print(normal)
             details.append({
                 'column': i,
                 'null_count': int(df.isna().sum()[i]),
@@ -47,7 +50,8 @@ def dataset_details():
                 'std': std,
                 'median': median,
                 'max': max,
-                'min': min
+                'min': min,
+                'is_normal': "Prob. Normal" if normal[0] < normal[1][0] else "Prob. Not Normal"
             })
 
         return {

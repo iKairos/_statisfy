@@ -142,7 +142,6 @@ export default function ResData(props){
                         {typeof datasetDetails !== 'undefined' ? 
                             <MemoizedTable 
                                 data={datasetDetails.details} 
-                                Header={true} 
                                 rowNumber={15}
                                 checked={false}
                             /> : <CircularProgress color="info" thickness={2.5} size={30}/>
