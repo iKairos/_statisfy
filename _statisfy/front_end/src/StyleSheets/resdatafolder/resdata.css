@@ -17,6 +17,7 @@
   width: 90vw;
   display: -ms-grid;
   display: grid;
+  margin-bottom: 2rem;
   -ms-grid-rows: 1fr;
       grid-template-rows: 1fr;
   border-bottom-left-radius: 0.25rem;
@@ -112,6 +113,12 @@
   background-color: #eeeeee;
   border: 1px solid #b5b5b5;
   word-wrap: break-word;
+}
+
+.resData_container {
+  max-height: 85vh;
+  overflow-y: auto;
+  width: 100%;
 }
 
 .colCard {
@@ -242,6 +249,12 @@
   }
   .resData_arrow {
     display: none;
+  }
+  .resData_container {
+    max-height: 85vh;
+    overflow-y: auto;
+    width: 100%;
+    padding: 1rem;
   }
 }
 /*# sourceMappingURL=resdata.css.map */

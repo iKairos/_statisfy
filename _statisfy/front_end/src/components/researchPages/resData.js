@@ -140,7 +140,7 @@ export default function ResData(props){
                 </div>
             }
             {contentPage === 3 &&
-                <div className = "resData_dataset">
+                <div className = "resData_container">
                     {
                         typeof datasetDetails !== "undefined" ? (
                             datasetDetails.details.map( data => {
