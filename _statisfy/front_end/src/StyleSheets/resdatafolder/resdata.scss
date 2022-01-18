@@ -19,6 +19,7 @@ $maxwidth: 40rem;
       height: 100%;
       width: 90vw;
       display: grid;
+      margin-bottom: 2rem;
       grid-template-rows: 1fr;
       border-bottom-left-radius: $radius;
       border-bottom-right-radius: $radius;
@@ -86,6 +87,11 @@ $maxwidth: 40rem;
     background-color: $white1;
     border: 1px solid $gray1;
     word-wrap: break-word;
+  }
+  &_container {
+    max-height: 85vh;
+    overflow-y: auto;
+    width: 100%;
   }
 }
 
@@ -183,7 +189,11 @@ $maxwidth: 40rem;
     &_arrow {
       display: none;
     }
-    &_details {
+    &_container {
+      max-height: 85vh;
+      overflow-y: auto;
+      width: 100%;
+      padding: 1rem;
     }
   }
 }
