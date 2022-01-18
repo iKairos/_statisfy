@@ -42,7 +42,7 @@ def dataset_details():
                     min = df[i].min()
             except:
                 pass 
-            print(normal)
+            
             details.append({
                 'column': i,
                 'null_count': int(df.isna().sum()[i]),
@@ -51,7 +51,7 @@ def dataset_details():
                 'median': median,
                 'max': max,
                 'min': min,
-                'is_normal': "Prob. Normal" if normal[0] < normal[1][0] else "Prob. Not Normal"
+                'distribution': "Normal" if normal[0] < normal[1][0] else "Not Normal"
             })
 
         return {
