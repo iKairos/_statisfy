@@ -1,28 +1,32 @@
 import "../../StyleSheets/resdatafolder/resdata.css"
 import { Button, Tooltip } from "@mui/material";
 import { Typography, Divider, useMediaQuery } from "@mui/material";
-import { Bar } from "react-chartjs-2";
+import { Bar, Doughnut } from "react-chartjs-2";
 import {CategoryScale , 
     Chart as ChartJS,
     LinearScale,
     BarElement,
     Title,
     Tooltip as tp,
-    Legend
+    Legend,
+    DoughnutController,
+    ArcElement
 } from 'chart.js'; 
 
 ChartJS.register(
     CategoryScale,
     LinearScale,
     BarElement,
+    DoughnutController,
     Title,
     tp,
-    Legend
+    Legend,
+    ArcElement
 );
 
 export default function ColumnGraphs(props){
     const matches = useMediaQuery('(min-width:900px)');
-
+    
     return(
         <div className ="colCard">
             <div className="colCard_title">
@@ -32,7 +36,7 @@ export default function ColumnGraphs(props){
             <div className="colCard_content">
                 <div className="colCard_graph">
                     {
-                        typeof props.data.vis === "string" ? "Placeholder for string columns" :
+                        props.data.type === "numerical" && 
                         <Bar
                             data={{
                                 datasets: [
@@ -85,6 +89,33 @@ export default function ColumnGraphs(props){
                                     
                                 }
                             }
+                        />
+                    }
+
+                    {
+                        props.data.type === "object" && 
+                        <Doughnut
+                            data={{
+                                datasets: [
+                                  {
+                                    data: Object.keys(props.data.vis).map((e, i) => props.data.vis[e]),
+                                    borderWidth: 8,
+                                    backgroundColor: 'rgba(167, 66, 197, 0.2)',
+                                    borderColor: 'rgba(167, 66, 197, 1)',
+                                    borderWidth: 0.5
+                                  }
+                                ],
+                                labels: Object.keys(props.data.vis).map((e) => e)
+                              }}
+
+                              options={{
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                        display: false,
+                                    }
+                                },
+                              }}
                         />
                     }
                 </div>
