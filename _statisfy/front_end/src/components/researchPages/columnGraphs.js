@@ -99,6 +99,7 @@ export default function ColumnGraphs(props){
                                 datasets: [
                                   {
                                     data: Object.keys(props.data.vis).map((e, i) => props.data.vis[e]),
+                                    label: 'Frequency',
                                     borderWidth: 8,
                                     backgroundColor: 'rgba(167, 66, 197, 0.2)',
                                     borderColor: 'rgba(167, 66, 197, 1)',
