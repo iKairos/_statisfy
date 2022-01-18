@@ -10,7 +10,7 @@ export default function ColumnGraphs(props){
     return(
         <div className ="colCard">
             <div className="colCard_title">
-                <Typography variant="h6">Variable Name</Typography>
+                <Typography variant="h6">{props.data.column}</Typography>
             </div>
                 <Divider/>
             <div className="colCard_content">
@@ -22,13 +22,13 @@ export default function ColumnGraphs(props){
                         <Divider/> : null
                     }
                     
-                    <Typography variant="button">Mean:</Typography>
-                    <Typography variant="button">Median:</Typography>
-                    <Typography variant="button">Min:</Typography>
-                    <Typography variant="button">Max:</Typography>
-                    <Typography variant="button">std.dev:</Typography>
-                    <Typography variant="button">Normality:</Typography>
-                    <Typography variant="button">Null Count:</Typography>
+                    <Typography variant="button">Mean: {props.data.mean}</Typography>
+                    <Typography variant="button">Normality: {props.data.distribution}</Typography>
+                    <Typography variant="button">Median: {props.data.median}</Typography>
+                    <Typography variant="button">Min: {props.data.min}</Typography>
+                    <Typography variant="button">Max: {props.data.max}</Typography>
+                    <Typography variant="button">std.dev: {props.data.std}</Typography>
+                    <Typography variant="button">Null Count: {props.data.null_count} {((props.data.null_count / props.size) * 100).toFixed(2)}%</Typography>
                 </div>
             </div>
             

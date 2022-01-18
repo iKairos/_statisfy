@@ -49,7 +49,7 @@ export default function ResData(props){
         state.datasetDetails
     );
     const {datasetDetails} = fileDetailsSelector;
-
+    
     return(
         <div className="resData_body_container">
             <div className="resData_body_heading">
@@ -135,13 +135,16 @@ export default function ResData(props){
             }
             {contentPage === 3 &&
                 <div className = "resData_dataset">
-                    <ColumnGraphs/>
-                    <ColumnGraphs/>
-                    <ColumnGraphs/>
+                    {
+                        typeof datasetDetails !== "undefined" ? (
+                            datasetDetails.details.map( data => {
+                                return <ColumnGraphs size={datasetDetails.rows} data={data}/>
+                            })
+                        ) : <CircularProgress color="info" thickness={2.5} size={30}/>
+                    }
                 </div>
             }
             </div>
-            
         </div>
     );
 }
