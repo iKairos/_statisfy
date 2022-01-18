@@ -100,6 +100,41 @@
   background-color: transparent;
 }
 
+.colCard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border: 1px solid #b5b5b5;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+  width: 100%;
+  padding: 1rem;
+}
+
+.colCard_content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.colCard_details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 @media screen and (min-width: 900px) {
   .resData_body {
     max-width: 50vw;
@@ -167,6 +202,12 @@
   }
   .resData_arrow {
     display: none;
+  }
+  .colCard_content {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
   }
 }
 /*# sourceMappingURL=resdata.css.map */

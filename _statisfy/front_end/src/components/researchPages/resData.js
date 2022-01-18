@@ -25,7 +25,7 @@ import { formatBytes } from '../../utils';
 import { useDispatch, useSelector } from "react-redux";
 import { processDataset } from "../../actions/datasetActions";
 
-
+import ColumnGraphs from "./columnGraphs";
 
 //<span className ="text_topic">{researchGetRes?.data.test_type}</span>
 
@@ -135,18 +135,9 @@ export default function ResData(props){
             }
             {contentPage === 3 &&
                 <div className = "resData_dataset">
-                    <div className = "resData_dataset_table">
-                        <div className = "resData_dataset_table_heading">
-                            Column Data
-                        </div>
-                        {typeof datasetDetails !== 'undefined' ? 
-                            <MemoizedTable 
-                                data={datasetDetails.details} 
-                                rowNumber={15}
-                                checked={false}
-                            /> : <CircularProgress color="info" thickness={2.5} size={30}/>
-                        }
-                    </div>
+                    <ColumnGraphs/>
+                    <ColumnGraphs/>
+                    <ColumnGraphs/>
                 </div>
             }
             </div>

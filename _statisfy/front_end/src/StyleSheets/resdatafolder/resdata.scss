@@ -80,6 +80,24 @@ $maxwidth: 40rem;
   }
 }
 
+.colCard {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #b5b5b5;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+  width: 100%;
+  padding: 1rem;
+  &_content {
+    display: flex;
+    flex-direction: column;
+  }
+  &_details {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 @media screen and (min-width: 900px) {
   .resData {
     &_body {
@@ -135,6 +153,12 @@ $maxwidth: 40rem;
 
     &_arrow {
       display: none;
+    }
+  }
+  .colCard {
+    &_content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
     }
   }
 }
