@@ -51,6 +51,7 @@ export default function ColumnGraphs(props){
                         />
                     }
                 </div>
+                
                 <div className="colCard_details">
                     {!matches? 
                         <Divider/> : null
@@ -62,14 +63,6 @@ export default function ColumnGraphs(props){
                     <div className="colCard_row">
                         <Typography variant="button">Normality:</Typography>
                         <Typography variant="button">{props.data.distribution}</Typography>
-                    </div>
-                    <div className="colCard_row">
-                        <Typography variant="button">Normality</Typography>
-                        <Typography variant="button">{props.data.distribution}</Typography>
-                    </div>
-                    <div className="colCard_row">
-                        <Typography variant="button">Median:</Typography>
-                        <Typography variant="button">{props.data.median}</Typography>
                     </div>
                     <div className="colCard_row">
                         <Typography variant="button">Median:</Typography>
@@ -90,18 +83,9 @@ export default function ColumnGraphs(props){
                     <div className="colCard_row">
                         <Typography variant="button">Null Count: </Typography>
                         <Typography variant="button">{props.data.null_count} {((props.data.null_count / props.size) * 100).toFixed(2)}%</Typography>
-                    </div>
-                    
-                    
-                    
-                   
-                    
-                    
-                    
+                    </div>      
                 </div>
-            </div>
-            
-               
+            </div>         
         </div>
     ); 
 }
