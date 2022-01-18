@@ -96,6 +96,10 @@ $maxwidth: 40rem;
     display: flex;
     flex-direction: column;
   }
+  &_row {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 @media screen and (min-width: 900px) {
