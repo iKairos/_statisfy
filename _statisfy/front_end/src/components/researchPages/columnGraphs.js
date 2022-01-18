@@ -55,14 +55,49 @@ export default function ColumnGraphs(props){
                     {!matches? 
                         <Divider/> : null
                     }
+                    <div className="colCard_row">
+                        <Typography variant="button">Mean:</Typography>
+                        <Typography variant="button">{props.data.mean}</Typography>
+                    </div>
+                    <div className="colCard_row">
+                        <Typography variant="button">Normality:</Typography>
+                        <Typography variant="button">{props.data.distribution}</Typography>
+                    </div>
+                    <div className="colCard_row">
+                        <Typography variant="button">Normality</Typography>
+                        <Typography variant="button">{props.data.distribution}</Typography>
+                    </div>
+                    <div className="colCard_row">
+                        <Typography variant="button">Median:</Typography>
+                        <Typography variant="button">{props.data.median}</Typography>
+                    </div>
+                    <div className="colCard_row">
+                        <Typography variant="button">Median:</Typography>
+                        <Typography variant="button">{props.data.median}</Typography>
+                    </div>
+                    <div className="colCard_row">
+                        <Typography variant="button">Min:</Typography>
+                        <Typography variant="button">{props.data.min}</Typography>
+                    </div>
+                    <div className="colCard_row">
+                        <Typography variant="button">Max:</Typography>
+                        <Typography variant="button">{props.data.max}</Typography>
+                    </div>
+                    <div className="colCard_row">
+                        <Typography variant="button">std.dev:</Typography>
+                        <Typography variant="button">{props.data.std}</Typography>
+                    </div>
+                    <div className="colCard_row">
+                        <Typography variant="button">Null Count: </Typography>
+                        <Typography variant="button">{props.data.null_count} {((props.data.null_count / props.size) * 100).toFixed(2)}%</Typography>
+                    </div>
                     
-                    <Typography variant="button">Mean: {props.data.mean}</Typography>
-                    <Typography variant="button">Normality: {props.data.distribution}</Typography>
-                    <Typography variant="button">Median: {props.data.median}</Typography>
-                    <Typography variant="button">Min: {props.data.min}</Typography>
-                    <Typography variant="button">Max: {props.data.max}</Typography>
-                    <Typography variant="button">std.dev: {props.data.std}</Typography>
-                    <Typography variant="button">Null Count: {props.data.null_count} {((props.data.null_count / props.size) * 100).toFixed(2)}%</Typography>
+                    
+                    
+                   
+                    
+                    
+                    
                 </div>
             </div>
             
