@@ -15,6 +15,12 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import DetailsIcon from '@mui/icons-material/Details';
 import DescriptionIcon from '@mui/icons-material/Description';
 
+
+import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
+import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
+import ViewColumnOutlinedIcon from '@mui/icons-material/ViewColumnOutlined';
+import TableRowsOutlinedIcon from '@mui/icons-material/TableRowsOutlined';
+
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useState } from "react";
@@ -142,6 +148,26 @@ export default function ResData(props){
                             })
                         ) : <CircularProgress color="info" thickness={2.5} size={30}/>
                     }
+                </div>
+            }
+            {contentPage === 4 &&
+                <div className = "resData_dataset">
+                    <Typography variant="button" className = "resData_dataset_heading">
+                        Dataset Details
+                    </Typography>
+                    <div className = "resData_details">
+                        <Typography  variant="button" ><InsertDriveFileOutlinedIcon/>File Name</Typography>
+                        <Typography variant="subtitle2" >1{props.FileDetails ? props.FileDetails?.name : ""}</Typography>
+
+                        <Typography variant="button" ><UploadFileOutlinedIcon />File Size</Typography>
+                        <Typography variant="subtitle2" >1{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</Typography>
+
+                        <Typography variant="button" ><ViewColumnOutlinedIcon />Columns</Typography>
+                        <Typography variant="subtitle2" >1{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</Typography>
+
+                        <Typography variant="button" ><TableRowsOutlinedIcon />Rows</Typography>
+                        <Typography variant="subtitle2">1{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</Typography>
+                    </div>
                 </div>
             }
             </div>
