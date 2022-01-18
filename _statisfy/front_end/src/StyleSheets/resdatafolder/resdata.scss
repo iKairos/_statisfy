@@ -88,17 +88,33 @@ $maxwidth: 40rem;
   margin-top: 1rem;
   width: 100%;
   padding: 1rem;
+
   &_content {
     display: flex;
     flex-direction: column;
+    padding-top: 1rem;
+    gap: 1rem;
   }
   &_details {
     display: flex;
     flex-direction: column;
+    width: 1fr;
   }
   &_row {
     display: flex;
     justify-content: space-between;
+  }
+  &_graph {
+    padding-top: 1rem;
+    width: 1fr;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .colCard {
+    &_content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }
 
@@ -157,12 +173,6 @@ $maxwidth: 40rem;
 
     &_arrow {
       display: none;
-    }
-  }
-  .colCard {
-    &_content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
     }
   }
 }
