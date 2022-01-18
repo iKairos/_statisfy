@@ -37,6 +37,7 @@ def dataset_details():
                     median = round(float(df[i].median()), 2)
                     normal = anderson_test(df[i])
                     vis = freq_dist(df[i])
+
                 try:
                     max = float(df[i].max())
                     min = float(df[i].min())

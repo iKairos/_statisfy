@@ -48,10 +48,47 @@ export default function ColumnGraphs(props){
                                 ],
                                 labels: props.data.vis.map(i => i[0])
                             }}
+
+                            options={{
+                                    responsive: true,
+                                    plugins: {
+                                        legend: {
+                                            display: false,
+                                        }
+                                    },
+                                    scales: {
+                                        x: {
+                                            ticks: {
+                                                display: false,
+                                            },
+                                            grid: {
+                                                display: false,
+                                                drawBorder: false,
+                                            }
+                                        },
+                                        y: {
+                                            ticks: {
+                                                display: false
+                                            },
+                                            grid: {
+                                                display: false,
+                                                drawBorder: false,
+                                            }
+                                        },
+                                        xAxes: [{
+                                            display: false
+                                        }],
+                                        yAxes: [{
+                                            display: false
+                                        }]
+                                    },
+                                    
+                                }
+                            }
                         />
                     }
                 </div>
-                
+
                 <div className="colCard_details">
                     {!matches? 
                         <Divider/> : null
@@ -82,7 +119,9 @@ export default function ColumnGraphs(props){
                     </div>
                     <div className="colCard_row">
                         <Typography variant="button">Null Count: </Typography>
-                        <Typography variant="button">{props.data.null_count} {((props.data.null_count / props.size) * 100).toFixed(2)}%</Typography>
+                        <Typography variant="button">
+                            <span style={{'color': (props.data.null_count / props.size) * 100 > 60 ? "red" : "green"}}>{props.data.null_count} </span> • <span style={{'color': (props.data.null_count / props.size) * 100 > 60 ? "red" : "green"}}>{((props.data.null_count / props.size) * 100).toFixed(2)}%</span>
+                        </Typography>
                     </div>      
                 </div>
             </div>         
