@@ -2,6 +2,7 @@ from __main__ import app
 from flask import request, jsonify
 from flask.helpers import send_file
 from flask_cors import cross_origin
+from functionalities.statistical_analysis import freq_dist
 from functionalities.statistical_analysis import anderson_test
 import pandas as pd
 import os
@@ -28,12 +29,14 @@ def dataset_details():
             max = "NA"
             min = "NA"
             normal = "NA"
+            vis = "NA"
             try:
                 if df[i].dtypes != 'O':
                     mean = round(float(df[i].mean()), 2) # temporary fix
                     std = round(float(df[i].std()), 2)
                     median = round(float(df[i].median()), 2)
                     normal = anderson_test(df[i])
+                    vis = freq_dist(df[i])
                 try:
                     max = float(df[i].max())
                     min = float(df[i].min())
@@ -51,7 +54,8 @@ def dataset_details():
                 'median': median,
                 'max': max,
                 'min': min,
-                'distribution': "Normal" if normal[0] < normal[1][0] else "Not Normal"
+                'distribution': "Normal" if normal[0] < normal[1][0] else "Not Normal",
+                'vis': vis
             })
 
         return {

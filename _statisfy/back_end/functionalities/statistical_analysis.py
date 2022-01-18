@@ -5,6 +5,7 @@ from scipy import stats as sp
 from itertools import chain
 import pandas as pd 
 import numpy as np
+import math
 
 # UNIVARIATE STATISTICAL ANALYSIS
 def mean(x):
@@ -272,3 +273,45 @@ def anderson_test(data):
     result = anderson(data)
 
     return result.statistic, result.critical_values
+
+# =========================================================================
+
+# FREQUENCY DISTRIBUTION
+
+def freq_dist(data: pd.DataFrame):
+    size = len(data)
+
+    num_classes = 1
+
+    while(True):
+        if 2 ** num_classes >= size:
+            break
+        else:
+            num_classes += 1
+
+    rng = data.max() - data.min()
+
+    class_width = rng / num_classes
+    class_width = math.ceil(class_width)
+
+    lower_limits = []
+    upper_limits = []
+
+    epoch = data.min()
+
+    for _ in range(num_classes):
+        lower_limits.append(epoch)
+        epoch += class_width
+
+        upper_limits.append(epoch - 1)
+    
+    freq_distrib = []
+
+    for index in range(num_classes):
+        lower = lower_limits[index]
+        upper = upper_limits[index]
+
+        res = data[(data >= lower) & (data <= upper)]
+        freq_distrib.append((f"{lower} - {upper}", int(len(res))))
+    
+    return freq_distrib

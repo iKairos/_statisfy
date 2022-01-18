@@ -1,12 +1,28 @@
 import "../../StyleSheets/resdatafolder/resdata.css"
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import { Typography, Divider, useMediaQuery } from "@mui/material";
+import { Bar } from "react-chartjs-2";
+import {CategoryScale , 
+    Chart as ChartJS,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip as tp,
+    Legend
+} from 'chart.js'; 
 
-
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    tp,
+    Legend
+);
 
 export default function ColumnGraphs(props){
     const matches = useMediaQuery('(min-width:900px)');
-   // const attributes = props.attribute
+
     return(
         <div className ="colCard">
             <div className="colCard_title">
@@ -15,7 +31,25 @@ export default function ColumnGraphs(props){
                 <Divider/>
             <div className="colCard_content">
                 <div className="colCard_graph">
-                    Graph Here
+                    {
+                        typeof props.data.vis === "string" ? "Placeholder for string columns" :
+                        <Bar
+                            data={{
+                                datasets: [
+                                    {
+                                        data: props.data.vis.map(i => i[1]),
+                                        label: 'Frequency',
+                                        barPercentage: 1.0,
+                                        categoryPercentage: 1.0,
+                                        backgroundColor: 'rgba(167, 66, 197, 0.2)',
+                                        borderColor: 'rgba(167, 66, 197, 1)',
+                                        borderWidth: 0.5
+                                    },
+                                ],
+                                labels: props.data.vis.map(i => i[0])
+                            }}
+                        />
+                    }
                 </div>
                 <div className="colCard_details">
                     {!matches? 

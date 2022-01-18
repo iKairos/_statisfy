@@ -138,7 +138,7 @@ export default function ResData(props){
                     {
                         typeof datasetDetails !== "undefined" ? (
                             datasetDetails.details.map( data => {
-                                return <ColumnGraphs size={datasetDetails.rows} data={data}/>
+                                return <ColumnGraphs size={datasetDetails.size} data={data}/>
                             })
                         ) : <CircularProgress color="info" thickness={2.5} size={30}/>
                     }
