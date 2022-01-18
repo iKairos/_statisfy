@@ -30,6 +30,7 @@ def dataset_details():
             min = "NA"
             normal = "NA"
             vis = "NA"
+            type = "NA"
             try:
                 if df[i].dtypes != 'O':
                     mean = round(float(df[i].mean()), 2) # temporary fix
@@ -37,6 +38,11 @@ def dataset_details():
                     median = round(float(df[i].median()), 2)
                     normal = anderson_test(df[i])
                     vis = freq_dist(df[i])
+                    type = "numerical"
+                else:
+                    vis = df[i].value_counts()
+                    vis = vis.to_dict()
+                    type = "object"
                 try:
                     max = float(df[i].max())
                     min = float(df[i].min())
@@ -55,7 +61,8 @@ def dataset_details():
                 'max': max,
                 'min': min,
                 'distribution': "Normal" if normal[0] < normal[1][0] else "Not Normal",
-                'vis': vis
+                'vis': vis,
+                'type': type
             })
 
         return {
