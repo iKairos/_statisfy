@@ -25,7 +25,7 @@ export default function AllCards(props){
                 {
                     filtered.length !== 0 ? filtered.map(([method, tags]) => {
                         return <Card title={method}  display={props.display} Chosen={props.chosen} isFiltered = {true} handleHighlight = {handleHighlight} isClicked = {isClicked} />
-                    }) : <h1>Oops, nothing here!</h1>
+                    }) : <h1>not available</h1>
                 }
             </div>
             <div className="statContainer_sub">
