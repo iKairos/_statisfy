@@ -37,6 +37,16 @@
   padding-bottom: 1rem;
 }
 
+.resSummary_table {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  border-bottom: 1px solid #eeeeee;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .resSummary_category {
   width: 1fr;
   font-size: 2rem;

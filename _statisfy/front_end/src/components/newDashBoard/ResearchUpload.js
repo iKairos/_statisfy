@@ -215,20 +215,6 @@ export default function ResearchUpload(props) {
                     </RadioGroup>
                 </FormControl>
             </div>
-
-            {props.DatasetDetails?.error ? null : 
-            
-            <div className = "resUpload_upload_dispTable">
-                <div className = "resUpload_upload_dummy">
-                <Typography>Cleaned Dataset</Typography>
-                    <DisplayTable 
-                        data={props.DataArray}
-                        Header = {header}
-                        rowNumber = {10}
-                    />
-                </div>
-            </div>
-        }
             
         </div>
 

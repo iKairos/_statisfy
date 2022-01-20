@@ -538,6 +538,7 @@ export default function ResearchList(props){
                                             'name': file.name,
                                             'size': file.size
                                         } : undefined}
+                                        DataArray = {dataArray}
                                         DatasetDetails = {datasetDetails}
                                         SaveResearchHandler = {handleCreateResearch}
                                         Delimiter = {delimiter}
