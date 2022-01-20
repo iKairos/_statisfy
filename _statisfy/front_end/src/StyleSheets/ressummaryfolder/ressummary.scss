@@ -25,6 +25,13 @@ $black: #23272a;
     padding-top: 1rem;
     padding-bottom: 1rem;
   }
+  &_table {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-bottom: 1px solid $white1;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
   &_category {
     width: 1fr;
     font-size: 2rem;
