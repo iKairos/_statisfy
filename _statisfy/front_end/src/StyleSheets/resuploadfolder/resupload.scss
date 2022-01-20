@@ -11,6 +11,31 @@ $black: #23272a;
   justify-content: center;
   padding: 0.5rem;
   min-height: 100%;
+
+  &_cleaning {
+    display: flex;
+    flex-direction: column;
+    &_title {
+      display: flex;
+      flex-direction: row;
+      width: 11rem;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+  }
+  &_outerCont {
+    display: flex;
+    flex-direction: column;
+  }
+  &_detailsCont {
+    display: flex;
+    flex-direction: column;
+  }
+  &_delimeter {
+    display: flex;
+    flex-direction: column;
+    width: 14rem;
+  }
   &_content {
     padding: 0.5rem;
     gap: 1rem;
@@ -20,17 +45,16 @@ $black: #23272a;
     border: 1px solid #a8a8a8;
     background-color: #ffffff;
     cursor: pointer;
-    height: 1.5rem;
-    width: 10rem;
+    height: 2rem;
+    width: 14rem;
     text-align: center;
     vertical-align: middle;
     border-radius: 0.2rem;
     margin-bottom: 2rem;
 
     &:hover {
-      background-color: #a8a8a8;
-      border: 1px solid #a8a8a8;
-      color: white;
+      border: 1px solid $purple;
+      color: $purple;
     }
     &_input {
       display: none;
@@ -49,6 +73,12 @@ $black: #23272a;
     }
     &_dummy {
       transform: rotateX(180deg);
+    }
+    &_title {
+      display: flex;
+      width: 14rem;
+      justify-content: space-between;
+      padding-right: 0.5rem;
     }
   }
   &_drop {
@@ -117,6 +147,20 @@ $black: #23272a;
       &_cont {
         width: 45vw;
       }
+    }
+    &_detailsCont {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    &_outerCont {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+    &_cleaning {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-left: 2rem;
     }
   }
 }

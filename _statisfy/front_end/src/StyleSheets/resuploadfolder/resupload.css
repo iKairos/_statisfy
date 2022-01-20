@@ -10,6 +10,62 @@
   min-height: 100%;
 }
 
+.resUpload_cleaning {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.resUpload_cleaning_title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 11rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.resUpload_outerCont {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.resUpload_detailsCont {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.resUpload_delimeter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 14rem;
+}
+
 .resUpload_content {
   padding: 0.5rem;
   gap: 1rem;
@@ -20,8 +76,8 @@
   border: 1px solid #a8a8a8;
   background-color: #ffffff;
   cursor: pointer;
-  height: 1.5rem;
-  width: 10rem;
+  height: 2rem;
+  width: 14rem;
   text-align: center;
   vertical-align: middle;
   border-radius: 0.2rem;
@@ -29,9 +85,8 @@
 }
 
 .resUpload_upload:hover {
-  background-color: #a8a8a8;
-  border: 1px solid #a8a8a8;
-  color: white;
+  border: 1px solid #a742c5;
+  color: #a742c5;
 }
 
 .resUpload_upload_input {
@@ -63,6 +118,17 @@
 .resUpload_upload_dummy {
   -webkit-transform: rotateX(180deg);
           transform: rotateX(180deg);
+}
+
+.resUpload_upload_title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 14rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-right: 0.5rem;
 }
 
 .resUpload_drop_button {
@@ -138,6 +204,31 @@
   }
   .resUpload_upload_cont {
     width: 45vw;
+  }
+  .resUpload_detailsCont {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .resUpload_outerCont {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 2fr;
+        grid-template-columns: 1fr 2fr;
+  }
+  .resUpload_cleaning {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    padding-left: 2rem;
   }
 }
 /*# sourceMappingURL=resupload.css.map */
