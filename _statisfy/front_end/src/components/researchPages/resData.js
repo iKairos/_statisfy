@@ -31,7 +31,7 @@ import { formatBytes } from '../../utils';
 import { useDispatch, useSelector } from "react-redux";
 import { processDataset } from "../../actions/datasetActions";
 
-import ColumnGraphs from "./columnGraphs";
+import ColumnGraphs, { MemoizedColumnGraphs } from "./columnGraphs";
 
 //<span className ="text_topic">{researchGetRes?.data.test_type}</span>
 
@@ -144,7 +144,7 @@ export default function ResData(props){
                     {
                         typeof datasetDetails !== "undefined" ? (
                             datasetDetails.details.map( data => {
-                                return <ColumnGraphs size={datasetDetails.rows} data={data}/>
+                                return <MemoizedColumnGraphs size={datasetDetails.rows} data={data}/>
                             })
                         ) : <CircularProgress color="info" thickness={2.5} size={30}/>
                     }
@@ -157,16 +157,16 @@ export default function ResData(props){
                     </Typography>
                     <div className = "resData_details">
                         <Typography  variant="button" ><InsertDriveFileOutlinedIcon/>File Name</Typography>
-                        <Typography variant="subtitle2" >1{props.FileDetails ? props.FileDetails?.name : ""}</Typography>
+                        <Typography variant="subtitle2" >{props.DataSetFile ? `${props.DataSetFile?.filename.slice(9,)}` : <CircularProgress color="info" thickness={2.5} size={30}/>}</Typography>
 
                         <Typography variant="button" ><UploadFileOutlinedIcon />File Size</Typography>
-                        <Typography variant="subtitle2" >1{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</Typography>
+                        <Typography variant="subtitle2" >{props.DataSetFile && formatBytes(props.DataSetFile?.filesize)}</Typography>
 
                         <Typography variant="button" ><ViewColumnOutlinedIcon />Columns</Typography>
-                        <Typography variant="subtitle2" >1{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</Typography>
+                        <Typography variant="subtitle2" >{typeof datasetDetails?.columns !== 'undefined' ? `${datasetDetails?.columns} columns`: ""}</Typography>
 
                         <Typography variant="button" ><TableRowsOutlinedIcon />Rows</Typography>
-                        <Typography variant="subtitle2">1{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</Typography>
+                        <Typography variant="subtitle2">{typeof datasetDetails?.rows !== 'undefined' ? `${datasetDetails?.rows} rows`: ""}</Typography>
                     </div>
                 </div>
             }

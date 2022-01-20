@@ -190,20 +190,16 @@ export default function ResStudies(props){
 
         setStudyColumns(selectedColumns)
 
-        const varTags = ["One Variable", "Two Variables", "Multiple Variables"]
-
-        setTags([...tags.filter(x => varTags.includes(x)), purpose]);
         if(selectedColumns.length === 1){
-            setTags([...tags, "One Variable"]);
+            setTags([purpose, "One Variable"]);
         }else if(selectedColumns.length === 2){
-            setTags([...tags, "Two Variables"]);
+            setTags([purpose, "Two Variables"]);
         }else if(selectedColumns.length >= 3){
-            setTags([...tags, "Multiple Variables"]);
+            setTags([purpose, "Multiple Variables"]);
         }else{
             setTags([...tags]);
         }
 
-        //setTags([...tags, purpose]);
     }
 
     function handleListKeyDown(event) {

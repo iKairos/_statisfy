@@ -180,7 +180,10 @@ export default function Study(props){
                             
                         }
                         </div>
-                        <Scatter data={pearsonDataChart} options={options}/>
+                        
+                        {
+                            props.data[5] === "Pearson R Correlation Test" ? <Scatter data={pearsonDataChart} options={options}/> : null
+                        }
                     </div>
                 }
                 {studyPage === 3 &&

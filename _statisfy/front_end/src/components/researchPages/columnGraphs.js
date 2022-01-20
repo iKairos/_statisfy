@@ -2,6 +2,7 @@ import "../../StyleSheets/resdatafolder/resdata.css"
 import { Button, Tooltip } from "@mui/material";
 import { Typography, Divider, useMediaQuery } from "@mui/material";
 import { Bar, Doughnut } from "react-chartjs-2";
+import React from 'react';
 import {CategoryScale , 
     Chart as ChartJS,
     LinearScale,
@@ -26,7 +27,7 @@ ChartJS.register(
 
 export default function ColumnGraphs(props){
     const matches = useMediaQuery('(min-width:900px)');
-    
+
     return(
         <div className ="colCard">
             <div className="colCard_title">
@@ -79,12 +80,6 @@ export default function ColumnGraphs(props){
                                                 drawBorder: false,
                                             }
                                         },
-                                        xAxes: [{
-                                            display: false
-                                        }],
-                                        yAxes: [{
-                                            display: false
-                                        }]
                                     },
                                     
                                 }
@@ -160,3 +155,5 @@ export default function ColumnGraphs(props){
         </div>
     ); 
 }
+
+export const MemoizedColumnGraphs = React.memo(ColumnGraphs);

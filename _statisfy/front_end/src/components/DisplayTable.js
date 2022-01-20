@@ -51,8 +51,4 @@ export const DisplayTable = (props) => {
       );
   }};
 
-  const areEqual = (prev, curr) => {
-    return JSON.stringify(prev.data) == JSON.stringify(curr.data)
-  }
-
-  export const MemoizedTable = React.memo(DisplayTable, areEqual);
+  export const MemoizedTable = React.memo(DisplayTable);
