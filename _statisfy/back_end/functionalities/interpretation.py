@@ -10,9 +10,9 @@ def interpret(stat_method, compute_res, alpha=0.05):
             elif var_name == 'P-value':
                 p = var_val 
 
-        if abs(r) == 1:
-            interpretations.append(f"The two variables have perfect linear correlation having a strength of {r * 100:.2f}%. It is shown that the two variables have 100% strength of linear relationship which means X is perfectly correlated to Y and vice versa. Their graph would look like a straight line.")
-        elif abs(r) < 1 and abs(r) >= 0.5:
+        if abs(r) <= 1 and abs(r) >= 0.99:
+            interpretations.append(f"The two variables have perfect linear correlation having a strength of {r * 100:.2f}%. It is shown that the two variables have almost 100% strength of linear relationship which means X is perfectly correlated to Y and vice versa. Their graph would look like a straight line.")
+        elif abs(r) < 0.99 and abs(r) >= 0.5:
             sign = " upwards because the sign of r is positive." if r > 0 else " downwards because the sign of r is negative."
             interpretations.append(f"The two variables have a high degree of linear correlation. A strength of {r * 100:.2f}% is detected from both variables which means they have a high degree of linear correlation. Their graph would look like a line trending" + sign)
         elif abs(r) < 0.49 and abs(r) >= 0.30:
