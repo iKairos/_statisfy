@@ -1,6 +1,4 @@
 import React from 'react'
-import MOCK_DATA from './MOCK_DATA.json'
-import  "../StyleSheets/tablesFolder/tables.css";
 //import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
