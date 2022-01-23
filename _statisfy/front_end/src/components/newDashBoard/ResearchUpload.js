@@ -133,9 +133,9 @@ export default function ResearchUpload(props) {
         {
             props.DatasetDetails?.error || props.Error ? (
             <div className = "resUpload_upload_cont">
-                <button className="resUpload_error" onClick={() => setShow(!show)}>
+                <Button className="resUpload_error" onClick={() => setShow(!show)}>
                     Error {show ? <FaAngleDown/> : <FaAngleUp/>}
-                </button>
+                </Button>
                 <Collapse in={show}>
                     <Alert variant="outlined" severity="error">
                         <AlertTitle>Error</AlertTitle>
