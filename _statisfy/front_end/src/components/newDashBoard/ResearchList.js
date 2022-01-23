@@ -250,12 +250,7 @@ export default function ResearchList(props){
             setError({
                 'titlePage': undefined
             });
-        } else if(typeof tool === 'undefined' && showActive === 1){
-            setError({
-                'toolPage': 'Please select a tool before proceeding.'
-            })
-            return;
-        }
+        } 
 
         if(typeof file === 'undefined' && showActive === 2){
             setError({
@@ -264,6 +259,9 @@ export default function ResearchList(props){
                     'message': 'Please upload a file before proceeding.'
                 }
             });
+            return;
+        }
+        if(datasetDetails.error){
             return;
         }
         setShowActive(showActive + 1);
@@ -487,9 +485,11 @@ export default function ResearchList(props){
                                         </Grow>
                                     )}
                                     <TextField
+                                        required
                                         id="outlined-textarea"
                                         label="Research Title"
                                         placeholder="Add new title"
+                                        defaultValue={title}
                                         multiline
                                         rows={2}
                                         color = "secondary"
@@ -497,8 +497,10 @@ export default function ResearchList(props){
                                         onChange={(e) => handleTitle(e)}
                                     />
                                     <TextField
+                                        required
                                         id="outlined-textarea"
                                         label="Description"
+                                        defaultValue={description}
                                         placeholder="Add description"
                                         multiline
                                         rows={6}
