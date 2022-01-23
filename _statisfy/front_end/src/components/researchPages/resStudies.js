@@ -528,24 +528,7 @@ export default function ResStudies(props){
                                         fullWidth
                                     />
                                 </div>
-                                <div style={{paddingTop:"1rem"}}>
-                                    <FormControl sx={{ width:"100%"}}>
-                                        <InputLabel id="demo-simple-select-helper-label" color = "secondary">Purpose of Analysis</InputLabel>
-                                        <Select
-                                        labelId="demo-simple-select-helper-label"
-                                        id="purposeSelector"
-                                        value={purpose}
-                                        label="Purpose of Analysis"
-                                        onChange={handlePurpose}
-                                        color = "secondary"
-                                        >
-                                        <MenuItem value="Relationship" onClick={(event) => setTags([event.target.innerText])}>Relationship</MenuItem>
-                                        <MenuItem value="Significant Differences" onClick={(event) => setTags([event.target.innerText])}>Significant Differences</MenuItem>
-                                        <MenuItem value="Univariate Analysis" onClick={(event) => setTags([event.target.innerText])}>Univariate Analysis</MenuItem>
-                                        </Select>
-                                    </FormControl>
-
-                                </div>
+                                
                             
                             </Box>
                         }
@@ -572,6 +555,24 @@ export default function ResStudies(props){
                                 </div>
                                 {tool === "Statistical Method" &&
                                     <div className="resList_column">
+                                        <div style={{paddingBottom:"1rem"}}>
+                                            <FormControl sx={{ width:"100%"}}>
+                                                <InputLabel id="demo-simple-select-helper-label" color = "secondary">Purpose of Analysis</InputLabel>
+                                                <Select
+                                                labelId="demo-simple-select-helper-label"
+                                                id="purposeSelector"
+                                                value={purpose}
+                                                label="Purpose of Analysis"
+                                                onChange={handlePurpose}
+                                                color = "secondary"
+                                                >
+                                                <MenuItem value="Relationship" onClick={(event) => setTags([event.target.innerText])}>Relationship</MenuItem>
+                                                <MenuItem value="Significant Differences" onClick={(event) => setTags([event.target.innerText])}>Significant Differences</MenuItem>
+                                                <MenuItem value="Univariate Analysis" onClick={(event) => setTags([event.target.innerText])}>Univariate Analysis</MenuItem>
+                                                </Select>
+                                            </FormControl>
+
+                                        </div>
                                         {typeof datasetDetails !== 'undefined' ? 
                                             <MemoizedTable
                                                 data={datasetDetails.details} 

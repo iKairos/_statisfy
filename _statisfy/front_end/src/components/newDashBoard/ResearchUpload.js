@@ -2,7 +2,8 @@ import * as React from 'react';
 import { useRef, useState } from "react";
 import { Alert, AlertTitle, Collapse, Tooltip, CircularProgress, Fade, Slide } from '@mui/material';
 import { instDataPage, tooltipDataCleaning, tooltipDataset, tooltipDelimiter } from "../../constants/stringConstants";
-import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import { formatBytes } from '../../utils';
@@ -133,8 +134,8 @@ export default function ResearchUpload(props) {
         {
             props.DatasetDetails?.error || props.Error ? (
             <div className = "resUpload_upload_cont">
-                <Button className="resUpload_error" onClick={() => setShow(!show)}>
-                    Error {show ? <FaAngleDown/> : <FaAngleUp/>}
+                <Button variant="contained" color="error" sx={{marginBottom:"0.5rem"}} onClick={() => setShow(!show)}>
+                    Error {show ? <KeyboardArrowDownIcon sx={{paddingLeft:"0.5rem", fontSize:"2rem"}}/> : <ErrorOutlineIcon sx={{paddingLeft:"0.5rem", fontSize:"2rem"}}/>}
                 </Button>
                 <Collapse in={show}>
                     <Alert variant="outlined" severity="error">
@@ -172,63 +173,58 @@ export default function ResearchUpload(props) {
                 </div>
             </div>
         }
-        {props.DatasetDetails === undefined ? null:
-            <>
-            {props.DatasetDetails?.error|| props.Error ? null : 
-                <div className="resUpload_upload_cont">
-                   <div className="resUpload_cleaning_title">
-                       <Typography>Clean your dataset</Typography>
-                       <Tooltip
-                           title={tooltipDataCleaning}
-                           placement="right"
-                           arrow
-                           color='secondary'
-                           >
-                           <HelpOutlineIcon fontSize='medium' color='secondary'/>
-                       </Tooltip>
-                   </div>
-                   
-                   <div className="resUpload_cleaning">
-                       <FormControl component="fieldset">
-                           <FormLabel component="legend" color="secondary">Null Values</FormLabel>
-                           <RadioGroup
-                               aria-label="gender"
-                               name="controlled-radio-buttons-group"
-                               value={nullCleaning}
-                               onChange={handleCleaning}
-                               color="secondary"
-                           >
-                               <FormControlLabel value="delete" control={<Radio />} label="Delete Rows" color="secondary" />
-                               <FormControlLabel value="replace" control={<Radio />} label="Replace Value"  color="secondary"/>
-                               <FormControlLabel value="nothing" control={<Radio />} label="Do Nothing" color="secondary"/>
-                           </RadioGroup>
-                       </FormControl>
-                       <FormControl component="fieldset">
-                           <FormLabel component="legend" color="secondary">Outliers</FormLabel>
-                           <RadioGroup
-                               aria-label="gender"
-                               name="controlled-radio-buttons-group"
-                               value={outlierCleaning}
-                               onChange={handleOutlier}
-                               color="secondary"
-                           >
-                               <FormControlLabel value="delete" control={<Radio />} label="Delete Rows" color="secondary" />
-                               <FormControlLabel value="nothing" control={<Radio />} label="Do Nothing" color="secondary"/>
-                           </RadioGroup>
-                       </FormControl>
-                   </div>
-                   <Button 
-                       color="secondary" 
-                       variant="outlined" 
-                       sx={{marginTop:"1rem"}}
-                       
-                   >Clean Data</Button>
-               </div>
-               }
-               </>
-         
-        }
         
+        {props.DatasetDetails?.error|| props.Error ? null : 
+         <div className="resUpload_upload_cont">
+            <div className="resUpload_cleaning_title">
+                <Typography>Clean your dataset</Typography>
+                <Tooltip
+                    title={tooltipDataCleaning}
+                    placement="right"
+                    arrow
+                    color='secondary'
+                    >
+                    <HelpOutlineIcon fontSize='medium' color='secondary'/>
+                </Tooltip>
+            </div>
+            
+            <div className="resUpload_cleaning">
+                <FormControl component="fieldset">
+                    <FormLabel component="legend" color="secondary">Null Values</FormLabel>
+                    <RadioGroup
+                        aria-label="gender"
+                        name="controlled-radio-buttons-group"
+                        value={nullCleaning}
+                        onChange={handleCleaning}
+                        color="secondary"
+                    >
+                        <FormControlLabel value="delete" control={<Radio />} label="Delete Rows" color="secondary" />
+                        <FormControlLabel value="replace" control={<Radio />} label="Replace Value"  color="secondary"/>
+                        <FormControlLabel value="nothing" control={<Radio />} label="Do Nothing" color="secondary"/>
+                    </RadioGroup>
+                </FormControl>
+                <FormControl component="fieldset">
+                    <FormLabel component="legend" color="secondary">Outliers</FormLabel>
+                    <RadioGroup
+                        aria-label="gender"
+                        name="controlled-radio-buttons-group"
+                        value={outlierCleaning}
+                        onChange={handleOutlier}
+                        color="secondary"
+                    >
+                        <FormControlLabel value="delete" control={<Radio />} label="Delete Rows" color="secondary" />
+                        <FormControlLabel value="nothing" control={<Radio />} label="Do Nothing" color="secondary"/>
+                    </RadioGroup>
+                </FormControl>
+            </div>
+            <Button 
+                color="secondary" 
+                variant="outlined" 
+                sx={{marginTop:"1rem"}}
+                
+            >Clean Data</Button>
+        </div>
+        }
     </div>
   );
 }
