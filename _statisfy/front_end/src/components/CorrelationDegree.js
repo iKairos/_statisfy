@@ -36,7 +36,7 @@ export default function CorrelationDegree(props){
                         <Typography variant="overline">Interpretation</Typography>
                     </div>
 
-                    <div className={level >= 0.99 ? level <= 1.00 ? "Study_Correlation_level" : "Study_Correlation_content"} >
+                    <div className={level >= 0.99 ? level <= 1.00 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"} >
                         <Typography variant="body2">Perfect Correlation</Typography>
                     </div>
                     <div className={level >= 0.5 ? level < 0.99 ? "Study_Correlation_level" : "Study_Correlation_content" : "Study_Correlation_content"}>
