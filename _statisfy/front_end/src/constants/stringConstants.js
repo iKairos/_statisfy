@@ -40,3 +40,6 @@ export const variableTooltip = {
 
 export const studySuccessTitle = "Study Calculation Successful!";
 export const studySuccess = "Study successfuly created! Check the results of your study under the studies tab and proceed to results.";
+
+export const userUpdateSuccessTitle = "Information Saved!"
+export const userUpdateSuccess = "Profile details successfully edited!"

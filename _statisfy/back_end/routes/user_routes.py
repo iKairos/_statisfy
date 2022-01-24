@@ -1,4 +1,5 @@
-from __main__ import app 
+from __main__ import app
+from audioop import cross 
 from flask import request
 from random import randint
 from objects.user import User
@@ -100,3 +101,33 @@ def register_user():
                 'code': 'REGISTER_INTERNAL_FAILURE',
                 'type': 'error'
             }
+
+@app.route("/api/user/update", methods = ['POST'])
+@cross_origin()
+def update_user():
+    try:
+        data = request.form
+
+        user = User(data['_id'])
+
+        for key, value in dict(data).items():
+            if key == "username":
+                user.set_username(value)
+            elif key == "email_address":
+                user.set_email_address(value)
+            elif key == "education":
+                user.set_educ_level(value)
+            elif key == "major":
+                user.set_major(value)
+            elif key == "occupation":
+                user.set_occupation(value)
+            elif key == "bio":
+                user.set_bio(value)
+
+        return {'s': True}
+    except Exception as e:
+        return {
+            'error': str(e),
+            'code': 'UPDATE_USER_INTERNAL_FAILURE',
+            'type': 'error'
+        }

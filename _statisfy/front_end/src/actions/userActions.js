@@ -10,7 +10,10 @@ import {
     USER_REGISTER_SUCCESS, 
     USER_TOKEN_PROCESS_FAIL, 
     USER_TOKEN_PROCESS_REQUEST, 
-    USER_TOKEN_PROCESS_SUCCESS
+    USER_TOKEN_PROCESS_SUCCESS,
+    USER_UPDATE_FAIL,
+    USER_UPDATE_REQUEST,
+    USER_UPDATE_SUCCESS
 } from "../constants/userConstants";
 
 import Axios from 'axios';
@@ -105,5 +108,24 @@ export const processUserToken = (token, args) => async(dispatch) => {
             type:USER_TOKEN_PROCESS_FAIL,
             payload:error.message
         });
+    }
+}
+
+export const updateUser = (formData) => async(dispatch) => {
+    dispatch({
+        type: USER_UPDATE_REQUEST
+    });
+
+    try{
+        const {data} = await Axios.post('/api/user/update', formData);
+
+        dispatch({
+            type: USER_UPDATE_SUCCESS,
+            payload: data
+        });
+    }catch(error){
+        dispatch({
+            type: USER_UPDATE_FAIL
+        })
     }
 }
