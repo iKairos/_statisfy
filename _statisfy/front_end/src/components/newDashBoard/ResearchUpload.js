@@ -120,8 +120,6 @@ export default function ResearchUpload(props) {
                         <Typography variant='body2'>{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""} </Typography>
                     </div>
 
-                    
-
                     <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
                         <Typography variant='button'>Initial Datapoints : </Typography>
                         <Typography variant='body2'>{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</Typography>

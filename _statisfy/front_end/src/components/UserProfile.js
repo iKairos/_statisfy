@@ -15,6 +15,10 @@ export default function UserProfile(props){
         setOpen(!open);
     };
 
+    const handleSave = () => {
+        return;
+    };
+ 
     const matches = useMediaQuery('(min-width:900px)');
     const stringifyDatetime = datetime => {
         const d = new Date(datetime).toLocaleString('en-US', {
@@ -98,23 +102,28 @@ export default function UserProfile(props){
                 </div>
 
                 <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom>EDUCATION :</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>unibersidad placeholder</Typography>
-                </div>
-
-                <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom>PROFESSION:</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>labandera</Typography>
-                </div>
-
-                <div className="profile_content"> 
                     <Typography variant="overline" display="block" gutterBottom>JOINED:</Typography>
                     <Typography variant="body2" display="block" gutterBottom>{stringifyDatetime(props.user.created_at)}</Typography>
                 </div>
 
                 <div className="profile_content"> 
+                    <Typography variant="overline" display="block" gutterBottom>EDUCATION :</Typography>
+                    <Typography variant="body2" display="block" gutterBottom>{props.user.educ_level ? props.user.educ_level !== null : '-'}</Typography>
+                </div>
+
+                <div className="profile_content"> 
+                    <Typography variant="overline" display="block" gutterBottom>MAJOR:</Typography>
+                    <Typography variant="body2" display="block" gutterBottom>{props.user.major ? props.user.major !== null : '-'}</Typography>
+                </div>
+
+                <div className="profile_content"> 
+                    <Typography variant="overline" display="block" gutterBottom>OCCUPATION:</Typography>
+                    <Typography variant="body2" display="block" gutterBottom>{props.user.occupation ? props.user.occupatio !== null : '-'}</Typography>
+                </div>
+
+                <div className="profile_content"> 
                     <Typography variant="overline" display="block" gutterBottom>BIO:</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>{props.user.bio} placeholder</Typography>
+                    <Typography variant="body2" display="block" gutterBottom>{props.user.bio ? props.user.bio !== null : '-'}</Typography>
                 </div>
 
                 <Backdrop
@@ -197,7 +206,7 @@ export default function UserProfile(props){
                             </div>
                             <div>
                                 <Button onClick={handleToggle} color="secondary">Cancel</Button>
-                                <Button color="secondary">Save</Button>
+                                <Button onClick={handleSave} color="secondary">Save</Button>
                             </div>
                         </div>
                         

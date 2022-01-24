@@ -37,3 +37,6 @@ export const variableTooltip = {
     'SSx': 'Sum of Squares of X variable.',
     'SSy': 'Sum of Squares of Y variable'
 };
+
+export const studySuccessTitle = "Study Calculation Successful!";
+export const studySuccess = "Study successfuly created! Check the results of your study under the studies tab and proceed to results.";

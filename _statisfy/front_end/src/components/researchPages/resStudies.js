@@ -16,7 +16,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {Skeleton, Stepper, Step, StepLabel, Typography } from "@mui/material";
 import { useState } from "react";
-import { status500, studyStepsString } from "../../constants/stringConstants";
+import { status500, studyStepsString, studySuccess, studySuccessTitle } from "../../constants/stringConstants";
 import { makeStyles } from "@mui/styles";
 import Popover from '@mui/material/Popover';
 
@@ -56,29 +56,39 @@ import { getStudy, saveStudy } from "../../actions/researchAction";
 import StatImg from '../../images/statisticsHeader.png'
 import MLImg from '../../images/mlHeader.png'
 import ToolCard from "../newDashBoard/ToolCard";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 //<span className ="text_topic">{researchGetRes?.data.test_type}</span>
 
 export default function ResStudies(props){
 
     // main study variables
-    const [studyName, setStudyName] = useState();
-    const [studyDesc, setStudyDesc] = useState();
+    const [studyName, setStudyName] = useState("");
+    const [studyDesc, setStudyDesc] = useState("");
     const [studyMethod, setStudyMethod] = useState();
     const [studyColumns, setStudyColumns] = useState([]);
-    const [tool, setTool] = useState();
+    const [tool, setTool] = useState("");
 
     const [isAdding, setAdding] = useState(false);
     const [showActive, setShowActive] = useState(1);
     const [selected, setSelected] = useState(false);
     const [sort, setSort] = useState(1);
     const [ascending, setAscending] = useState(true);
-    const [methodChosen, setMethodChosen] = useState();
+    const [methodChosen, setMethodChosen] = useState("");
     const [tags, setTags] = useState([]);
     const [error, setError] = useState();
     const [isOpenErrorSnackbar, setOpenErrorSnackbar] = useState(false);
 
     const [open, setOpen] = React.useState(false);
+
+    const [backdropOpen, setBackdropOpen] = useState(false);
+    const handleBackdropClose = () => {
+        setBackdropOpen(false);
+    };
+    const handleBackdropToggle = () => {
+        setBackdropOpen(!open);
+    };
+
     const anchorRef = React.useRef(null);
 
     const [purpose, setPurpose] = React.useState("");
@@ -158,15 +168,15 @@ export default function ResStudies(props){
       };
 
     const handleSubmit = () => {
-        if(typeof studyName === 'undefined' || typeof methodChosen === 'undefined' || typeof tool === 'undefined' || studyColumns.length === 0 || typeof studyDesc === 'undefined'){
-            setError("Please fill out all required fields.");
+        if(methodChosen.length === 0){
+            setError("Please select a method for your analysis. You can either pick the recommended methods for your selection or pick anything that you think might suit your needs.");
             setOpenErrorSnackbar(true);
             return;
         }
 
         setError("");
 
-        handleAdding(false);
+        handleBackdropToggle();
 
         const formData = new FormData();
         formData.append("study_name", studyName);
@@ -279,10 +289,58 @@ export default function ResStudies(props){
         );
     };
     const nextScreen = () => {
+        console.log(studyName.length, studyDesc.length)
+        if(showActive === 1){
+            if(studyName.length === 0 || studyDesc.length === 0){
+                setError("Please name and describe your study.");
+                setOpenErrorSnackbar(true);
+                return;
+            }
+        }else if(showActive === 2){
+            if(tool.length === 0){
+                setError("Please select an analysis tool for your study.");
+                setOpenErrorSnackbar(true);
+                return;
+            }
+
+            if(purpose.length === 0){
+                setError("Please select a purpose for your study.");
+                setOpenErrorSnackbar(true);
+                return;
+            }
+
+            if(studyColumns.length === 0){
+                setError("Please select a column to analyze.");
+                setOpenErrorSnackbar(true);
+                return;
+            }
+        }else if(showActive === 3){
+            if(methodChosen.length === 0){
+                setError("Please select a method for your analysis. You can either pick the recommended methods for your selection or pick anything that you think might suit your needs.");
+                setOpenErrorSnackbar(true);
+                return;
+            }
+        }
+
         setShowActive(showActive + 1);
     }
     const prevScreen = () => {
         setShowActive(showActive - 1);
+    }
+    const history = useHistory();
+
+    if(saveStudyRes?.code === "STUDY_ADD_SUCCESS"){
+        history.push({
+            pathname: `/dashboard/${props.Parent}`,
+            state: {
+                message: {
+                    'title': studySuccessTitle,
+                    'body': studySuccess
+                }
+            }
+        });
+        history.go(0);
+        return;
     }
 
     return(
@@ -495,6 +553,12 @@ export default function ResStudies(props){
                                 </Step>
                             ))}
                         </Stepper>
+                        <Backdrop
+                            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                            open={open}
+                        >
+                            <CircularProgress color="inherit" />
+                        </Backdrop>
                         {showActive === 1 &&
                             <Box
                             component="form"
@@ -513,18 +577,20 @@ export default function ResStudies(props){
                                         rows={2}
                                         color = "secondary"
                                         onChange={e => setStudyName(e.target.value)}
+                                        value={studyName}
                                         fullWidth
                                     />
                                 </div>
                                 <div style={{paddingTop:"1rem"}}>
                                     <TextField
                                         id="outlined-textarea"
-                                        label="Description DescriptionDescriptionDescriptionDescriptionDescription"
+                                        label="Study Description"
                                         placeholder="Add description"
                                         multiline
                                         rows={4}
                                         color = "secondary"
                                         onChange={e => setStudyDesc(e.target.value)}
+                                        value={studyDesc}
                                         fullWidth
                                     />
                                 </div>

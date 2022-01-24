@@ -84,20 +84,6 @@ export default function Study(props){
         },
       };
 
-    const pearsonDataChart = {
-        label: props.data[7],
-        datasets: [
-          {
-            label: `(${props.data[7][0]},${props.data[7][1]})`,
-            data: datasetFile.data.map(row => {
-                var filter = _.pick(row, props.data[7]);
-                return {x: filter[props.data[7][0]], y: filter[props.data[7][1]]}
-            }),
-            backgroundColor: 'rgba(167, 66, 197, 1)',
-          },
-        ],
-      };
-
    // const attributes = props.attribute
     return(
         <div className ="Study">
@@ -182,7 +168,21 @@ export default function Study(props){
                         </div>
                         
                         {
-                            props.data[5] === "Pearson R Correlation Test" ? <Scatter data={pearsonDataChart} options={options}/> : null
+                            props.data[5] === "Pearson R Correlation Test" ? 
+                                <Scatter data={{
+                                    label: props.data[7],
+                                    datasets: [
+                                      {
+                                        label: `(${props.data[7][0]},${props.data[7][1]})`,
+                                        data: datasetFile?.data.map(row => {
+                                            var filter = _.pick(row, props.data[7]);
+                                            return {x: filter[props.data[7][0]], y: filter[props.data[7][1]]}
+                                        }),
+                                        backgroundColor: 'rgba(167, 66, 197, 1)',
+                                      },
+                                    ],
+                                  }} options={options}/> 
+                            : null
                         }
                     </div>
                 }

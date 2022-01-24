@@ -142,8 +142,8 @@ export default function ResData(props){
             {contentPage === 3 &&
                 <div className = "resData_container">
                     {
-                        typeof datasetDetails !== "undefined" ? (
-                            datasetDetails.details.map( data => {
+                        typeof datasetDetails?.details !== "undefined" ? (
+                            datasetDetails?.details?.map( data => {
                                 return <MemoizedColumnGraphs size={datasetDetails.rows} data={data}/>
                             })
                         ) : <CircularProgress color="info" thickness={2.5} size={30}/>

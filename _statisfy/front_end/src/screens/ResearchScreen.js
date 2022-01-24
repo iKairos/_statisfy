@@ -220,6 +220,7 @@ export default function ResearchScreen(props){
                             <ResStudies
                                 DataSetFile = {datasetFile}
                                 User = {processed?.user?._id}
+                                Parent = {id}
                             />
                         </div>
                     </Fade>
