@@ -1,7 +1,7 @@
 import ResearchList from "./newDashBoard/ResearchList";
 import { useState } from "react";
 import "../StyleSheets/profilefolder/profile.css"
-import { Typography, Avatar, Button, Grow, Alert, AlertTitle } from "@mui/material";
+import { Typography, Avatar, Button, Grow, Alert, AlertTitle, InputAdornment } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Backdrop from '@mui/material/Backdrop';
 import TextField from '@mui/material/TextField';
@@ -13,6 +13,10 @@ import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import PersonIcon from '@mui/icons-material/Person';
+import BadgeIcon from '@mui/icons-material/Badge';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
 
 export default function UserProfile(props){
     const dispatch = useDispatch();
@@ -128,32 +132,32 @@ export default function UserProfile(props){
 
                
                 <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom><MailIcon fontSize="small"/> EMAIL :</Typography>
+                    <Typography variant="overline" display="block" gutterBottom><MailIcon color="secondary" fontSize="small"/> EMAIL :</Typography>
                     <Typography variant="body2" display="block" gutterBottom>{newEmail}</Typography>
                 </div>
 
                 <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom><EventNoteIcon fontSize="small"/> JOINED:</Typography>
+                    <Typography variant="overline" display="block" gutterBottom><EventNoteIcon color="secondary" fontSize="small"/> JOINED:</Typography>
                     <Typography variant="body2" display="block" gutterBottom>{stringifyDatetime(props.user.created_at)}</Typography>
                 </div>
 
                 <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom><SchoolIcon fontSize="small"/> EDUCATION LEVEL:</Typography>
+                    <Typography variant="overline" display="block" gutterBottom><SchoolIcon color="secondary" fontSize="small"/> EDUCATION LEVEL:</Typography>
                     <Typography variant="body2" display="block" gutterBottom>{props.user.educ_level != null ? newEduc : '-'}</Typography>
                 </div>
 
                 <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom><LightbulbIcon fontSize="small"/> MAJOR:</Typography>
+                    <Typography variant="overline" display="block" gutterBottom><LightbulbIcon color="secondary" fontSize="small"/> MAJOR:</Typography>
                     <Typography variant="body2" display="block" gutterBottom>{props.user.major != null ? newMajor : '-'}</Typography>
                 </div>
 
                 <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom><WorkIcon fontSize="small"/> OCCUPATION:</Typography>
+                    <Typography variant="overline" display="block" gutterBottom><WorkIcon color="secondary" fontSize="small"/> OCCUPATION:</Typography>
                     <Typography variant="body2" display="block" gutterBottom>{props.user.occupation != null ? newOccupation : '-'}</Typography>
                 </div>
 
                 <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom><QuestionAnswerIcon fontSize="small"/> BIO:</Typography>
+                    <Typography variant="overline" display="block" gutterBottom><QuestionAnswerIcon color="secondary" fontSize="small"/> BIO:</Typography>
                     <Typography variant="body2" display="block" gutterBottom>{props.user.bio != null ? newBio : '-'}</Typography>
                 </div>
 
@@ -204,7 +208,7 @@ export default function UserProfile(props){
 
                             {
                                 message && 
-                                <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
+                                <Grow in={true} {...(true ? { timeout: 500 } : {})}>
                                     <Alert variant="outlined" severity="success">
                                         <AlertTitle><b>{messageTitle}</b></AlertTitle>
                                         { message }
@@ -220,6 +224,16 @@ export default function UserProfile(props){
                                 defaultValue={props.user.username}
                                 variant="standard"
                                 onChange={e => setNewUsername(e.target.value)}
+                                color="secondary" 
+                                InputProps={
+                                    {
+                                        startAdornment: (
+                                            <InputAdornment position="start"> 
+                                                <PersonIcon fontSize="medium" color="secondary"/>
+                                            </InputAdornment>
+                                        )
+                                    }
+                                }
                             />
                             <TextField
                                 id="standard-multiline-static"
@@ -232,13 +246,32 @@ export default function UserProfile(props){
                                 label="GIVEN NAME"
                                 defaultValue={props.user.first_name}
                                 variant="standard"
+                                InputProps={
+                                    {
+                                        startAdornment: (
+                                            <InputAdornment position="start"> 
+                                                <BadgeIcon fontSize="medium" color="secondary"/>
+                                            </InputAdornment>
+                                        )
+                                    }
+                                }
                             />
                             <TextField
                                 id="standard-multiline-static"
                                 label="EMAIL ADDRESS"
                                 defaultValue={props.user.email_address}
+                                color="secondary" 
                                 variant="standard"
                                 onChange={e => setNewEmail(e.target.value)}
+                                InputProps={
+                                    {
+                                        startAdornment: (
+                                            <InputAdornment position="start"> 
+                                                <AlternateEmailIcon fontSize="medium" color="secondary"/>
+                                            </InputAdornment>
+                                        )
+                                    }
+                                }
                             />
                             <TextField 
                                 id="standard-basic" 
@@ -247,6 +280,15 @@ export default function UserProfile(props){
                                 color="secondary" 
                                 defaultValue={props.user.educ_level}
                                 onChange={e => setNewEduc(e.target.value)}
+                                InputProps={
+                                    {
+                                        startAdornment: (
+                                            <InputAdornment position="start"> 
+                                                <SchoolIcon fontSize="medium" color="secondary"/>
+                                            </InputAdornment>
+                                        )
+                                    }
+                                }
                             />
                             <TextField 
                                 id="standard-basic" 
@@ -255,14 +297,32 @@ export default function UserProfile(props){
                                 color="secondary" 
                                 defaultValue={props.user.major}
                                 onChange={e => setNewMajor(e.target.value)}
+                                InputProps={
+                                    {
+                                        startAdornment: (
+                                            <InputAdornment position="start"> 
+                                                <LightbulbIcon fontSize="medium" color="secondary"/>
+                                            </InputAdornment>
+                                        )
+                                    }
+                                }
                             />
                             <TextField 
                                 id="standard-basic" 
-                                label="PROFESSION" 
+                                label="OCCUPATION" 
                                 variant="standard" 
                                 color="secondary" 
                                 defaultValue={props.user.occupation}
                                 onChange={e => setNewOccupation(e.target.value)}
+                                InputProps={
+                                    {
+                                        startAdornment: (
+                                            <InputAdornment position="start"> 
+                                                <WorkIcon fontSize="small" color="secondary"/>
+                                            </InputAdornment>
+                                        )
+                                    }
+                                }
                             />
                             <TextField
                                 id="standard-multiline-static"
@@ -277,7 +337,7 @@ export default function UserProfile(props){
                             </div>
                             <div>
                                 <Button onClick={handleToggle} color="secondary">Close</Button>
-                                <Button onClick={handleSave} color="secondary">Save</Button>
+                                <Button onClick={handleSave} color="secondary">Save&nbsp;<SaveAltIcon fontSize="small" color="secondary"/></Button>
                             </div>
                         </div>
                         
