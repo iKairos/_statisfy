@@ -26,12 +26,9 @@ export const DataColumns = (props) => {
       })*/
 
       const columnHeader = [
-         { field: 'columnName', headerName: 'Column Name', width: 140 },
-         { field: 'data', headerName: 'Data', width: 140 },
-         { field: 'mean', headerName: 'Mean', width: 140 },
-         { field: 'std', headerName: 'Standard Deviation', width: 140 },
-         { field: 'min', headerName: 'MIN', width: 140 },
-         { field: 'max', headerName: 'MAX', width: 140 }
+         { field: 'columnName', headerName: 'Variables', width: 140 },
+         { field: 'nullValues', headerName: 'Null Values', width: 140 },
+         { field: 'outliers', headerName: 'Outliers', width: 140 }
       ]
       //{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
       //const rows = data.map((i, index) => ({id: index, ...i}));
