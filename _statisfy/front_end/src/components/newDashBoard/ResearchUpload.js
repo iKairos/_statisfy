@@ -41,7 +41,7 @@ export default function ResearchUpload(props) {
     const handleCleaning = (event) => {
         setCleaning(event.target.value);
     };
-    const [nullReplace, setNullReplace] = useState('nothing');
+    const [nullReplace, setNullReplace] = useState('mean');
     const handleNullReplace = (event) => {
         setNullReplace(event.target.value);
     };
@@ -49,6 +49,10 @@ export default function ResearchUpload(props) {
     const [outlierCleaning, setOutlier] = useState('nothing');
     const handleOutlier = (event) => {
         setOutlier(event.target.value);
+    };
+    const [outlierReplace, setOutlierReplace] = useState('mean');
+    const handleOutlierReplace = (event) => {
+        setOutlierReplace(event.target.value);
     };
 
   return (
@@ -267,6 +271,26 @@ export default function ResearchUpload(props) {
                             color="secondary"
                         >
                             <FormControlLabel value="delete" control={<Radio color="secondary"/>} label="Delete Rows" color="secondary" />
+                            <FormControlLabel value="replace" control={<Radio color="secondary"/>} label="Replace Value"  color="secondary"/>
+                            {outlierCleaning === "replace"?
+                                <FormControl component="fieldset" sx={{paddingLeft:"1rem"}}>
+                                    <FormLabel component="legend" color="secondary">Replace Null Values with:</FormLabel>
+                                    <RadioGroup
+                                        aria-label="gender"
+                                        name="controlled-radio-buttons-group"
+                                        value={outlierReplace}
+                                        onChange={handleOutlierReplace}
+                                        color="secondary"
+                                    >
+                                        <FormControlLabel value="mean" control={<Radio color="secondary"/>} label="Mean" color="secondary" />
+                                        <FormControlLabel value="median" control={<Radio color="secondary"/>} label="Median"  color="secondary"/>
+                                        <FormControlLabel value="mode" control={<Radio color="secondary"/>} label="Mode" color="secondary"/>
+                                    </RadioGroup>
+                                </FormControl> : null
+                            }
+                                
+                            
+                            
                             <FormControlLabel value="nothing" control={<Radio color="secondary"/>} label="Do Nothing" color="secondary"/>
                         </RadioGroup>
                     </FormControl>
