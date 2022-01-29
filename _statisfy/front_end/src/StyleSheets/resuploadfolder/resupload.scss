@@ -6,12 +6,22 @@ $purple: #a742c5;
 $black: #23272a;
 
 .resUpload {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   padding: 0.5rem;
   min-height: 100%;
-
+  &_exit {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  &_columns {
+    height: 100%;
+    display: flex;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
   &_cleaning {
     display: flex;
     flex-direction: column;
@@ -21,6 +31,7 @@ $black: #23272a;
       width: 11rem;
       justify-content: space-between;
       margin-bottom: 1rem;
+      margin-top: 1rem;
     }
   }
   &_outerCont {
@@ -37,7 +48,6 @@ $black: #23272a;
     width: 14rem;
   }
   &_content {
-    padding: 0.5rem;
     gap: 1rem;
     width: 100%;
   }
@@ -65,7 +75,22 @@ $black: #23272a;
       flex-direction: column;
       padding-bottom: 1rem;
       justify-content: center;
-      width: 100%;
+      width: 80vw;
+      background-color: white;
+      color: $black;
+      padding: 1rem;
+    }
+    &_backdrop {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      width: 80vw;
+      height: 90vh;
+      background-color: white;
+      color: $black;
+      padding: 1rem;
+      border-radius: 0.25rem;
+      overflow-y: auto;
     }
     &_dispTable {
       max-width: 100%;
@@ -146,6 +171,10 @@ $black: #23272a;
     &_upload {
       &_cont {
         width: 45vw;
+      }
+      &_backdrop {
+        width: 45vw;
+        padding-top: 0;
       }
     }
     &_detailsCont {

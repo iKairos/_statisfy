@@ -5,10 +5,11 @@ import { instDataPage, tooltipDataCleaning, tooltipDataset, tooltipDelimiter } f
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import CloseIcon from '@mui/icons-material/Close';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import { formatBytes } from '../../utils';
 import { DisplayTable } from "../DisplayTable";
-import { Typography, TextField, Button} from '@mui/material';
+import { Typography, TextField, Button, Backdrop, IconButton} from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 
@@ -18,6 +19,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
+import { DataColumns } from '../researchPages/dataColumns';
+
 
 import "../../StyleSheets/resuploadfolder/resupload.css";
 
@@ -26,15 +29,30 @@ export default function ResearchUpload(props) {
     const [header, setHeader] = useState(true);
     const containerRef = useRef(null);
     const [show, setShow] = useState(true);
+    const [openCleaning, setOpenCleaning] = useState(false);
+    const handleOpenCleaning = () => {
+        setOpenCleaning(true);
+    };
+    const handleCloseCleaning = () => {
+        setOpenCleaning(false);
+    };
     
     const [nullCleaning, setCleaning] = useState('nothing');
     const handleCleaning = (event) => {
         setCleaning(event.target.value);
     };
+    const [nullReplace, setNullReplace] = useState('mean');
+    const handleNullReplace = (event) => {
+        setNullReplace(event.target.value);
+    };
 
     const [outlierCleaning, setOutlier] = useState('nothing');
     const handleOutlier = (event) => {
         setOutlier(event.target.value);
+    };
+    const [outlierReplace, setOutlierReplace] = useState('mean');
+    const handleOutlierReplace = (event) => {
+        setOutlierReplace(event.target.value);
     };
 
   return (
@@ -158,6 +176,131 @@ export default function ResearchUpload(props) {
             </div>
             ) : null
         }
+        {typeof props.DataArray !== 'undefined' ? 
+            <Button 
+                color="secondary" 
+                variant="outlined" 
+                sx={{marginTop:"1rem"}}
+                onClick = {handleOpenCleaning}
+                
+            >Clean Data</Button>: null
+            
+        }
+        <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={openCleaning}
+        >
+            <div className="resUpload_upload_backdrop">
+                <div className="resUpload_exit">
+                    <IconButton 
+                        onClick={handleCloseCleaning}
+                        
+                    > <CloseIcon/></IconButton>
+                </div>
+                
+                <div className="resUpload_cleaning_title">
+                    <Typography>Clean your dataset</Typography>
+                    <Tooltip
+                        title={tooltipDataCleaning}
+                        placement="right"
+                        arrow
+                        color='secondary'
+                        >
+                        <HelpOutlineIcon fontSize='medium' color='secondary'/>
+                    </Tooltip>
+                </div>
+                <Alert variant="outlined" severity="info" color="secondary">
+                    <AlertTitle><strong>Instructions:</strong></AlertTitle>
+                    {
+                        instDataPage.map((i) => (
+                            <><b>{i[0]}.</b> {i[1]} <br/></>
+                        ))
+                    }
+                </Alert>
+                <div className="resUpload_columns">
+                    
+                    <DataColumns
+                        data={props.DataArray}
+                        checked = {true}
+                    />
+
+                </div>
+                
+                
+                <div className="resUpload_cleaning">
+                    <FormControl component="fieldset">
+                        <FormLabel component="legend" color="secondary">Null Values</FormLabel>
+                        <RadioGroup
+                            aria-label="gender"
+                            name="controlled-radio-buttons-group"
+                            value={nullCleaning}
+                            onChange={handleCleaning}
+                            color="secondary"
+                        >
+                            <FormControlLabel value="delete" control={<Radio color="secondary"/>} label="Delete Rows" color="secondary" />
+                            <FormControlLabel value="replace" control={<Radio color="secondary"/>} label="Replace Value"  color="secondary"/>
+                                {nullCleaning === "replace" ?
+                                    <FormControl component="fieldset" sx={{paddingLeft:"1rem"}}>
+                                        <FormLabel component="legend" color="secondary">Replace Null Values with:</FormLabel>
+                                        <RadioGroup
+                                            aria-label="gender"
+                                            name="controlled-radio-buttons-group"
+                                            value={nullReplace}
+                                            onChange={handleNullReplace}
+                                            color="secondary"
+                                        >
+                                            <FormControlLabel value="mean" control={<Radio color="secondary"/>} label="Mean" color="secondary" />
+                                            <FormControlLabel value="median" control={<Radio color="secondary"/>} label="Median"  color="secondary"/>
+                                            <FormControlLabel value="mode" control={<Radio color="secondary"/>} label="Mode" color="secondary"/>
+                                        </RadioGroup>
+                                    </FormControl>
+                                    :null
+                                }
+                                
+
+                            <FormControlLabel value="nothing" control={<Radio color="secondary"/>} label="Do Nothing" color="secondary"/>
+                        </RadioGroup>
+                    </FormControl>
+                    <FormControl component="fieldset">
+                        <FormLabel component="legend" color="secondary">Outliers</FormLabel>
+                        <RadioGroup
+                            aria-label="gender"
+                            name="controlled-radio-buttons-group"
+                            value={outlierCleaning}
+                            onChange={handleOutlier}
+                            color="secondary"
+                        >
+                            <FormControlLabel value="delete" control={<Radio color="secondary"/>} label="Delete Rows" color="secondary" />
+                            <FormControlLabel value="replace" control={<Radio color="secondary"/>} label="Replace Value"  color="secondary"/>
+                            {outlierCleaning === "replace"?
+                                <FormControl component="fieldset" sx={{paddingLeft:"1rem"}}>
+                                    <FormLabel component="legend" color="secondary">Replace Null Values with:</FormLabel>
+                                    <RadioGroup
+                                        aria-label="gender"
+                                        name="controlled-radio-buttons-group"
+                                        value={outlierReplace}
+                                        onChange={handleOutlierReplace}
+                                        color="secondary"
+                                    >
+                                        <FormControlLabel value="mean" control={<Radio color="secondary"/>} label="Mean" color="secondary" />
+                                        <FormControlLabel value="median" control={<Radio color="secondary"/>} label="Median"  color="secondary"/>
+                                        <FormControlLabel value="mode" control={<Radio color="secondary"/>} label="Mode" color="secondary"/>
+                                    </RadioGroup>
+                                </FormControl> : null
+                            }
+                                
+                            
+                            
+                            <FormControlLabel value="nothing" control={<Radio color="secondary"/>} label="Do Nothing" color="secondary"/>
+                        </RadioGroup>
+                    </FormControl>
+                </div>
+                <Button onClick={handleCloseCleaning} sx={{marginTop:"1rem"}} color="secondary">Save</Button>
+                <Button onClick={handleCloseCleaning} color="secondary">Cancel</Button>
+                
+            </div>
+        </Backdrop>
+        
         {props.DatasetDetails?.error ? null : 
             
             <div className = "resUpload_upload_dispTable">
@@ -171,58 +314,7 @@ export default function ResearchUpload(props) {
                 </div>
             </div>
         }
-        
-        {props.DatasetDetails?.error|| props.Error ? null : 
-         <div className="resUpload_upload_cont">
-            <div className="resUpload_cleaning_title">
-                <Typography>Clean your dataset</Typography>
-                <Tooltip
-                    title={tooltipDataCleaning}
-                    placement="right"
-                    arrow
-                    color='secondary'
-                    >
-                    <HelpOutlineIcon fontSize='medium' color='secondary'/>
-                </Tooltip>
-            </div>
-            
-            <div className="resUpload_cleaning">
-                <FormControl component="fieldset">
-                    <FormLabel component="legend" color="secondary">Null Values</FormLabel>
-                    <RadioGroup
-                        aria-label="gender"
-                        name="controlled-radio-buttons-group"
-                        value={nullCleaning}
-                        onChange={handleCleaning}
-                        color="secondary"
-                    >
-                        <FormControlLabel value="delete" control={<Radio />} label="Delete Rows" color="secondary" />
-                        <FormControlLabel value="replace" control={<Radio />} label="Replace Value"  color="secondary"/>
-                        <FormControlLabel value="nothing" control={<Radio />} label="Do Nothing" color="secondary"/>
-                    </RadioGroup>
-                </FormControl>
-                <FormControl component="fieldset">
-                    <FormLabel component="legend" color="secondary">Outliers</FormLabel>
-                    <RadioGroup
-                        aria-label="gender"
-                        name="controlled-radio-buttons-group"
-                        value={outlierCleaning}
-                        onChange={handleOutlier}
-                        color="secondary"
-                    >
-                        <FormControlLabel value="delete" control={<Radio />} label="Delete Rows" color="secondary" />
-                        <FormControlLabel value="nothing" control={<Radio />} label="Do Nothing" color="secondary"/>
-                    </RadioGroup>
-                </FormControl>
-            </div>
-            <Button 
-                color="secondary" 
-                variant="outlined" 
-                sx={{marginTop:"1rem"}}
-                
-            >Clean Data</Button>
-        </div>
-        }
+       
     </div>
   );
 }

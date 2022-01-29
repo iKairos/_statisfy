@@ -86,7 +86,8 @@ $black: #23272a;
       width: 50vw;
       margin-top: 5rem;
       background-color: white;
-      height: fit-content;
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     &_avatar {

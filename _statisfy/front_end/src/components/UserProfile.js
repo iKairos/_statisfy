@@ -249,9 +249,23 @@ export default function UserProfile(props){
                             />
                             <TextField
                                 id="standard-multiline-static"
-                                label="FULLNAME"
-                                defaultValue={props.user.last_name + ", " + props.user.first_name}
-                                color="secondary" 
+                                label="SURNAME"
+                                defaultValue={props.user.last_name}
+                                variant="standard"
+                                InputProps={
+                                    {
+                                        startAdornment: (
+                                            <InputAdornment position="start"> 
+                                                 <BadgeIcon fontSize="medium" color="secondary"/>
+                                            </InputAdornment>
+                                        )
+                                    }
+                                }
+                            />
+                             <TextField
+                                id="standard-multiline-static"
+                                label="GIVEN NAME"
+                                defaultValue={props.user.first_name}
                                 variant="standard"
                                 InputProps={
                                     {
