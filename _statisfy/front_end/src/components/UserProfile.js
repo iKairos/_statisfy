@@ -1,12 +1,12 @@
 import ResearchList from "./newDashBoard/ResearchList";
 import { useState } from "react";
 import "../StyleSheets/profilefolder/profile.css"
-import { Typography, Avatar, Button, Grow, Alert, AlertTitle, InputAdornment } from "@mui/material";
+import { Typography, Avatar, Button, Grow, Alert, AlertTitle, InputAdornment, MenuItem, CircularProgress } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Backdrop from '@mui/material/Backdrop';
 import TextField from '@mui/material/TextField';
 import { updateUser } from "../actions/userActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MailIcon from '@mui/icons-material/Mail';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import SchoolIcon from '@mui/icons-material/School';
@@ -17,6 +17,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import BadgeIcon from '@mui/icons-material/Badge';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function UserProfile(props){
     const dispatch = useDispatch();
@@ -66,6 +67,13 @@ export default function UserProfile(props){
             });
         return d
     }
+
+    const userUpdateSelector = useSelector((state) =>
+        state.userUpdate
+    );
+
+    const { loading, updateRes } = userUpdateSelector;
+
     return(
         <div className = "profile">
             <div className="profile_avatar_container">
@@ -106,7 +114,8 @@ export default function UserProfile(props){
            
             <div className="profile_details">
             
-                {matches
+                {
+                    props.editable ? matches
                     ? <Button 
                         variant="outlined" 
                         color="secondary" 
@@ -115,7 +124,8 @@ export default function UserProfile(props){
                             position: "absolute", 
                             right:"2rem"}}
                         onClick={handleToggle}
-                        >Edit Profile
+                        >
+                            <EditIcon color="secondary" fontSize="small"/> &nbsp; Edit Profile
                     </Button>
                     : (
                         <div style={{display:"flex", justifyContent:"center"}}>
@@ -124,10 +134,11 @@ export default function UserProfile(props){
                                 color="secondary" 
                                 sx={{borderRadius: "5rem"}}
                                 onClick={handleToggle}
-                                >Edit Profile
+                                >
+                                    <EditIcon color="secondary" fontSize="small"/> &nbsp; Edit Profile
                             </Button>
                         </div>
-                    )
+                    ) : null
                 }
 
                
@@ -138,27 +149,29 @@ export default function UserProfile(props){
 
                 <div className="profile_content"> 
                     <Typography variant="overline" display="block" gutterBottom><EventNoteIcon color="secondary" fontSize="small"/> JOINED:</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>{stringifyDatetime(props.user.created_at)}</Typography>
+                    <Typography variant="body2" display="block" gutterBottom>{stringifyDatetime(props.user.created_at)} GMT +8</Typography>
                 </div>
 
                 <div className="profile_content"> 
                     <Typography variant="overline" display="block" gutterBottom><SchoolIcon color="secondary" fontSize="small"/> EDUCATION LEVEL:</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>{props.user.educ_level != null ? newEduc : '-'}</Typography>
+                    <Typography variant="body2" display="block" gutterBottom>{newEduc != null ? newEduc : '-'}</Typography>
                 </div>
 
                 <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom><LightbulbIcon color="secondary" fontSize="small"/> MAJOR:</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>{props.user.major != null ? newMajor : '-'}</Typography>
+                    <Typography variant="overline" display="block" gutterBottom><LightbulbIcon color="secondary" fontSize="small"/> MAJOR/SPECIALIZATION:</Typography>
+                    <Typography variant="body2" display="block" gutterBottom>{newMajor != null ? newMajor : '-'}</Typography>
                 </div>
 
                 <div className="profile_content"> 
                     <Typography variant="overline" display="block" gutterBottom><WorkIcon color="secondary" fontSize="small"/> OCCUPATION:</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>{props.user.occupation != null ? newOccupation : '-'}</Typography>
+                    <Typography variant="body2" display="block" gutterBottom>{newOccupation != null ? newOccupation : '-'}</Typography>
                 </div>
 
                 <div className="profile_content"> 
                     <Typography variant="overline" display="block" gutterBottom><QuestionAnswerIcon color="secondary" fontSize="small"/> BIO:</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>{props.user.bio != null ? newBio : '-'}</Typography>
+                    <Typography variant="body2" display="block" gutterBottom style={ {'white-space': 'pre-line'}}>
+                        {newBio != null ? newBio : '-'}
+                    </Typography>
                 </div>
 
                 <Backdrop
@@ -199,21 +212,20 @@ export default function UserProfile(props){
                                             hidden
                                         />
                                     </Button>
-                                    
-                                    
                                 </div>
                             </div>
                         </div>
                         <div className="profile_details">
 
                             {
-                                message && 
+                                updateRes?.code === "USER_UPDATE_SUCCESS" && message ?
                                 <Grow in={true} {...(true ? { timeout: 500 } : {})}>
                                     <Alert variant="outlined" severity="success">
                                         <AlertTitle><b>{messageTitle}</b></AlertTitle>
                                         { message }
                                     </Alert>
                                 </Grow>
+                                : null
                             }
                             <br/>
                             <div className="profile_edit"> 
@@ -271,9 +283,10 @@ export default function UserProfile(props){
                             <TextField 
                                 id="standard-basic" 
                                 label="EDUCATION LEVEL" 
+                                select
                                 variant="standard" 
                                 color="secondary" 
-                                defaultValue={props.user.educ_level}
+                                value={newEduc}
                                 onChange={e => setNewEduc(e.target.value)}
                                 InputProps={
                                     {
@@ -284,10 +297,20 @@ export default function UserProfile(props){
                                         )
                                     }
                                 }
-                            />
+                            >
+                                <MenuItem value={"Doctorate degree"}>Doctorate degree</MenuItem>
+                                <MenuItem value={"Master's degree"}>Master's degree</MenuItem>
+                                <MenuItem value={"Bachelor's degree"}>Bachelor's degree</MenuItem>
+                                <MenuItem value={"Associate degree"}>Associate degree</MenuItem>
+                                <MenuItem value={"Secondary / Senior High School"}>Secondary / Senior High School</MenuItem>
+                                <MenuItem value={"Junior / Junior High School / Middle School"}>Junior / Junior High School / Middle School</MenuItem>
+                                <MenuItem value={"Elementary school"}>Elementary school</MenuItem>
+                                <MenuItem value={"No formal education"}>No formal education</MenuItem>
+                                <MenuItem value={"Other education"}>Other education</MenuItem>
+                            </TextField>
                             <TextField 
                                 id="standard-basic" 
-                                label="MAJOR" 
+                                label="MAJOR / SPECIALIZATION" 
                                 variant="standard" 
                                 color="secondary" 
                                 defaultValue={props.user.major}
@@ -318,6 +341,7 @@ export default function UserProfile(props){
                                         )
                                     }
                                 }
+                                helperText="Preferably in the format: <Occupation> at <Organization Name>"
                             />
                             <TextField
                                 id="standard-multiline-static"
@@ -332,7 +356,10 @@ export default function UserProfile(props){
                             </div>
                             <div>
                                 <Button onClick={handleToggle} color="secondary">Close</Button>
-                                <Button onClick={handleSave} color="secondary">Save&nbsp;<SaveAltIcon fontSize="small" color="secondary"/></Button>
+                                {
+                                    loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/> :  
+                                    <Button onClick={handleSave} color="secondary">Save&nbsp;<SaveAltIcon fontSize="small" color="secondary"/></Button>
+                                }
                             </div>
                         </div>
                         

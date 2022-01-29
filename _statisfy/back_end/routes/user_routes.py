@@ -31,7 +31,8 @@ def fetch_user(id):
                 'occupation': user.occupation,
                 'profile_picture': user.profile_picture,
                 'researches': user.research_papers,
-                'created_at': user.created_at
+                'created_at': user.created_at,
+                'bio': user.bio
             },
             'code': 'USER_FETCH_SUCCESS'
         }
@@ -124,7 +125,10 @@ def update_user():
             elif key == "bio":
                 user.set_bio(value)
 
-        return {'s': True}
+        return {
+            'code': 'USER_UPDATE_SUCCESS',
+            'message': 'User information updated successfully!'
+        }
     except Exception as e:
         return {
             'error': str(e),

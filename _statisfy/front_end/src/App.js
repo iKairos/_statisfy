@@ -48,7 +48,7 @@ function App() {
                 <Switch>
                   <Route path = "/" exact component={HomeScreen}></Route>
                   <Route path = "/profile" render={(props) => <UserScreen token={token} isUser={true}/>} exact></Route>
-                  <Route path = "/profile/:id?" render={(props) => <UserScreen token={token} />} exact></Route>
+                  <Route path = "/profile/:id?" render={(props) => <UserScreen token={token}/>} exact></Route>
                   <Route path = "/dashboard/:id?" render={(props) => <ResearchScreen token={token}/>} exact></Route>
                   <Route path = "/signIn" exact render={(props) => <SignInScreen setToken={setToken} token={token} {...props}/>}/>
                   <Route path = "/signUp" exact render={() => <SignUpScreen token={token} />}></Route>

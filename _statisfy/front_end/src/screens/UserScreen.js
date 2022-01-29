@@ -40,7 +40,7 @@ export default function UserScreen(props){
         return(
             <div>
                     <UserProfile user={processed.user} editable={true}/>
-                    <ResearchList/>
+                    <ResearchList editable={true}/>
             </div>
         )
     }else if(userData?.code === 'USER_FETCH_SUCCESS'){ // provided id, render id profile
@@ -49,7 +49,7 @@ export default function UserScreen(props){
             <div>
                 <div className = "container">
                     <UserProfile user={userData.user} editable={editable}/>
-                    
+                    <ResearchList editable={editable}/>
                 </div> 
             </div>
         )

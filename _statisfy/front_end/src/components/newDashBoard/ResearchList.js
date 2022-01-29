@@ -309,7 +309,6 @@ export default function ResearchList(props){
           </div>
         );
     };
-   
 
     return(
         <div className="resList_body_container">
@@ -328,14 +327,19 @@ export default function ResearchList(props){
             )
             :(
                 <div className="resStudy_body_add">
-                    <Button 
-                        color="secondary" 
-                        className="resStudy_body_add_button"
-                        onClick={()=>handleAdding(true)}
-                    >
-                        <AddIcon className="AddIcon"/>
-                        add new research
-                    </Button>
+                    {
+                        props.editable ? 
+                        <Button 
+                            color="secondary" 
+                            className="resStudy_body_add_button"
+                            onClick={()=>handleAdding(true)}
+                        >
+                            <AddIcon className="AddIcon"/>
+                            add new research
+                        </Button>
+                        :
+                        null
+                    }
                     <Stack direction="row" spacing={2} className="Sort">
                         <div>
                             <Button
