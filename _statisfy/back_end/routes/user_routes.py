@@ -124,6 +124,10 @@ def update_user():
                 user.set_occupation(value)
             elif key == "bio":
                 user.set_bio(value)
+            elif key == "first_name":
+                user.set_first_name(value)
+            elif key == "last_name":
+                user.set_last_name(value)
 
         return {
             'code': 'USER_UPDATE_SUCCESS',

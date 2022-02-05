@@ -29,9 +29,9 @@ def interpret(stat_method, compute_res, alpha=0.05):
             interpretations.append("The trend of both variables are upward since their r value is positive.")
 
         if p < alpha:
-            interpretations.append(f"Since the P-value {p} is less than the set alpha {alpha}, the resulting r correlation is not likely caused by chance and randomness.")
+            interpretations.append(f"Since the P-value {p:.4f} is less than the set alpha {alpha}, the resulting r correlation is not likely caused by chance and randomness.")
         elif p > alpha:
-            interpretations.append(f"Since the P-value {p} is greater than the set alpha {alpha}, the resulting r correlation is non-significant and is likely caused by chance.")
+            interpretations.append(f"Since the P-value {p:.4f} is greater than the set alpha {alpha}, the resulting r correlation is non-significant and is likely caused by chance.")
         else:
             interpretations.append("error on comparing p-value of both variables x and y.")
     

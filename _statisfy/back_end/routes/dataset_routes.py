@@ -61,7 +61,6 @@ def dataset_details():
                 'max': max,
                 'min': min,
                 'distribution': "Normal" if normal[0] < normal[1][0] else "Not Normal",
-                'vis': vis,
                 'type': type
             })
 
