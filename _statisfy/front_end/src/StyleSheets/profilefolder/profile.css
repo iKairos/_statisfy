@@ -7,6 +7,14 @@
   border-top-right-radius: 0.25rem;
 }
 
+.profile_names {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
 .profile_backdrop {
   width: 90vw;
   margin-top: 5rem;

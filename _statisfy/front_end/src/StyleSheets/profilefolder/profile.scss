@@ -12,6 +12,12 @@ $black: #23272a;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 
+  &_names {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
   &_backdrop {
     width: 90vw;
     margin-top: 5rem;
