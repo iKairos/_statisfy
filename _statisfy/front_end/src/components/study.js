@@ -157,7 +157,7 @@ export default function Study(props){
                                 return (
 
                                     <ResultCards
-                                        value = {var_val.toFixed(4) == 0 ? '< 0':var_val.toFixed(4)}
+                                        value = {var_val.toFixed(4)}
                                         variable = {var_name}
                                     />
                                     

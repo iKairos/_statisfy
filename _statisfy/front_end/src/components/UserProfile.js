@@ -33,6 +33,8 @@ export default function UserProfile(props){
     };
 
     const [newUsername, setNewUsername] = useState(props.user.username);
+    const [newFirstName, setNewFirstName] = useState(props.user.first_name);
+    const [newLastName, setNewLastName] = useState(props.user.last_name);
     const [newEmail, setNewEmail] = useState(props.user.email_address);
     const [newEduc, setNewEduc] = useState(props.user.educ_level);
     const [newOccupation, setNewOccupation] = useState(props.user.occupation);
@@ -46,6 +48,8 @@ export default function UserProfile(props){
         const formData = new FormData();
         formData.append("_id", props.user._id);
         formData.append("username", newUsername);
+        formData.append("first_name", newFirstName);
+        formData.append("last_name", newLastName);
         formData.append("email_address", newEmail);
         formData.append("education", newEduc);
         formData.append("major", newMajor);
@@ -104,7 +108,7 @@ export default function UserProfile(props){
                                 display="block" gutterBottom
                                 color="white"
                             >
-                                {props.user.first_name} {props.user.last_name} 
+                                {newFirstName} {newLastName} 
                             </Typography>
                             <Typography variant="overline" display="block" gutterBottom color="white"> FULLNAME</Typography>
                         </div>
@@ -276,6 +280,9 @@ export default function UserProfile(props){
                                                 </InputAdornment>
                                             )
                                         }
+
+                           
+                             
                                     }
                                 />
 
