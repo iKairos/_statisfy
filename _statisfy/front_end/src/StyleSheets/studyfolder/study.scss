@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 $radius: 0.25rem;
 $white1: #eeeeee;
 $gray1: #b5b5b5;
@@ -101,31 +102,41 @@ $maxwidth: 40rem;
   }
   &_cards {
     width: 100%;
+
+    height: 10rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     overflow: hidden;
     padding: 1rem;
 
-    border: none;
-    border-left: 3px solid $pink;
-    border-radius: 0.25rem;
+    border: 1px solid $pink;
+    border-left: 1rem solid $pink;
+    border-radius: 1rem;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    background-color: $white1;
+    background-color: white;
     cursor: pointer;
 
     &_container {
       width: 100%;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 0.5rem;
+
+      gap: 1rem;
       padding: 1rem;
     }
 
     &_text {
       display: flex;
       flex-direction: column;
+      gap: 0.5rem;
+      &_value {
+        font-family: "Roboto", sans-serif;
+        font-size: 1.75rem;
+        font-weight: bold;
+      }
     }
     &_icon {
       width: 100%;
@@ -188,6 +199,16 @@ $maxwidth: 40rem;
   }
 }
 
+@media screen and (min-width: 600px) {
+  .Study {
+    &_cards {
+      &_container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  }
+}
 @media screen and (min-width: 900px) {
   .Study {
     height: 100%;
@@ -204,15 +225,14 @@ $maxwidth: 40rem;
       }
     }
     &_cards {
-      width: fit-content;
+      width: 1fr;
       display: flex;
       flex-direction: row;
       overflow: hidden;
       padding: 1rem;
       &_container {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
       }
     }
 
