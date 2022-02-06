@@ -11,6 +11,7 @@ import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import ArticleIcon from '@mui/icons-material/Article';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DownloadIcon from '@mui/icons-material/Download';
+import CalculateIcon from '@mui/icons-material/Calculate';
 import { useState } from "react";
 import { Scatter } from 'react-chartjs-2';
 import {
@@ -29,6 +30,7 @@ import { height, maxHeight } from "@mui/system";
 import ResultCards from "./newDashBoard/ResultCards";
 import CorrelationDegree from "./CorrelationDegree";
 import BarCor from "./newDashBoard/bar";
+import Computation from "./studyComponents/Computation"
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, Title);
 
@@ -110,8 +112,9 @@ export default function Study(props){
                             }}
                         >
                             <Tab value={1} label="Details" icon={<HelpIcon fontSize="small"/>}> </Tab>
-                            <Tab value={2} label="Results" icon={<AutoGraphIcon fontSize="small"/>} />
-                            <Tab value={3} label="Interpretation" icon={<ArticleIcon fontSize="small"/>} />
+                            <Tab value={2} label="Computation" icon={<CalculateIcon fontSize="small"/>} />
+                            <Tab value={3} label="Results" icon={<AutoGraphIcon fontSize="small"/>} />
+                            <Tab value={4} label="Interpretation" icon={<ArticleIcon fontSize="small"/>} />
                         </Tabs>
                     </Box>
 
@@ -136,6 +139,11 @@ export default function Study(props){
                     </div>
                 }
                 {studyPage === 2 &&
+                    <div className = "Study_content_computation">
+                        <Computation/>
+                    </div>
+                }
+                {studyPage === 3 &&
                     <div className = "Study_content_graphs">
                         {
                             props.data[8].map(([var_name, var_val]) => {
@@ -186,7 +194,7 @@ export default function Study(props){
                         }
                     </div>
                 }
-                {studyPage === 3 &&
+                {studyPage === 4 &&
                     <div className = "Study_content_interpretation">
                         {
                             props.data[8].map(([var_name, var_val]) => {
