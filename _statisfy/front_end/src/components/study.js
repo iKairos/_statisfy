@@ -37,7 +37,8 @@ ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, Title)
 
 export default function Study(props){
     const [studyPage, setStudyPage] = useState(1);
-    
+    const blackListedVariables = ['SSxy', 'SSx', 'SSy', 'Numerator', 'Denominator']
+
     const switchStudyPage = (event, newValue) => {
         setStudyPage(newValue);
     };
@@ -140,7 +141,7 @@ export default function Study(props){
                 }
                 {studyPage === 2 &&
                     <div className = "Study_content_computation">
-                        <Computation/>
+                        <Computation method={props.data[5]} variables={props.data[8]}/>
                     </div>
                 }
                 {studyPage === 3 &&
@@ -162,13 +163,15 @@ export default function Study(props){
                             
                         {
                             props.data[8].map(([var_name, var_val]) => {
+                                if(blackListedVariables.includes(var_name)){
+                                    return null;
+                                }
+                                
                                 return (
-
                                     <ResultCards
                                         value = {var_val.toFixed(4)}
                                         variable = {var_name}
                                     />
-                                    
                                 )
                             })
                             

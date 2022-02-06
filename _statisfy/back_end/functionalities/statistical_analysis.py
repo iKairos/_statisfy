@@ -55,11 +55,15 @@ def pearsonr(x: np.array, y: np.array):
     SSy = (y_num * y_num).sum(axis=0)
     
     num = np.matmul(x_num.transpose(), y_num)
-    r = num / np.sqrt(np.outer(SSx, SSy))
+    den = np.sqrt(np.outer(SSx, SSy))
+    r = num / den
     t = r * np.sqrt((n-2)/(1-r**2))
     p = 2 * sp.t.sf(np.abs(t), n-2)
-    
-    return (('R Coefficient', r[0][0]), ('P-value', p[0][0]), ('SSxy', num), ('SSx', SSx), ('SSy', SSy))
+
+    return (
+        ('R Coefficient', r[0][0]), ('P-value', p[0][0]), ('SSxy', num), ('SSx', SSx), ('SSy', SSy),
+        ('X Mean', x.mean()), ('Y Mean', y.mean()), ('Numerator', num), ('Denominator', den[0][0])
+    )
 
 def spearmanrho(x, y):
     n = len(x)
