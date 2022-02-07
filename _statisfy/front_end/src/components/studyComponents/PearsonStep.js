@@ -121,7 +121,7 @@ export default function PearsonStep(props){
             </Latex>
 
             <p>
-                The resulting answer will be the R Correlation value <Latex>{"$r$"}</Latex> which is equal to <Latex>{"$\\boxed{" + `${Number(vars['R Coefficient']).toFixed(4)}` + "}$"}</Latex>
+                The resulting answer will be the R Correlation value <Latex>{"$r$"}</Latex> which is equal to <Latex>{"$\\boxed{" + `${Number(vars['R Coefficient']).toFixed(4)}` + "}$"}</Latex>.
             </p>
         </div>
     )

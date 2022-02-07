@@ -32,10 +32,12 @@ export const researchSuccess = "You may now view and customize your research. Pr
 
 export const variableTooltip = {
     'R Coefficient': 'R Coefficient determines the strength of linear relationship of the two variables. The closer it is to 1.0, the higher the strength of the relationship is. If the coefficient is positive that means the relationship has an upward trend and if the coefficient is negative that means the relationship has a downward trend.',
-    'P-value': 'P-value tells the probability of obtaining results at least as extreme as the observed results of a statistical hypothesis test',
+    'P-value': 'P value is a measure of the probability that an observed difference could have occurred just by random chance.',
     'SSxy': 'Sum of Squares of X and Y variables.',
     'SSx': 'Sum of Squares of X variable.',
-    'SSy': 'Sum of Squares of Y variable'
+    'SSy': 'Sum of Squares of Y variable',
+    'X Mean': 'The mean or average value of the variable X.',
+    'Y Mean': 'The mean or average value of the variable Y.'
 };
 
 export const studySuccessTitle = "Study Calculation Successful!";

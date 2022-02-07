@@ -257,6 +257,7 @@ export default function UserProfile(props){
                                     label="SURNAME"
                                     defaultValue={props.user.last_name}
                                     variant="standard"
+                                    color="secondary" 
                                     InputProps={
                                         {
                                             startAdornment: (
@@ -272,6 +273,7 @@ export default function UserProfile(props){
                                     label="GIVEN NAME"
                                     defaultValue={props.user.first_name}
                                     variant="standard"
+                                    color="secondary" 
                                     InputProps={
                                         {
                                             startAdornment: (
