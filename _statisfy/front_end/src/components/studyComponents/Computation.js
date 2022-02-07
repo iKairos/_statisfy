@@ -1,10 +1,10 @@
 import 'katex/dist/katex.min.css'
 import PearsonStep from "./PearsonStep";
+import "../../StyleSheets/computationscss/computation.css"
 
 export default function Computation(props){
   return(
-      <div>
-        <h3>Computation</h3>
+      <div className="Computation_container">
 
         {
           props.method == "Pearson R Correlation Test" ? 

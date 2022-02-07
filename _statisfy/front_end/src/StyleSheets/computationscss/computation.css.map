@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACG,AAAD,sBAAW,CAAC;EACV,MAAM,EAAE,WAAW;EACnB,OAAO,EAAE,IAAI;CACd",
+    "sources": [
+        "computation.scss"
+    ],
+    "names": [],
+    "file": "computation.css"
+}
