@@ -68,13 +68,31 @@ export default function ResSummary(props){
                <Typography variant="button" className="resSummary_category"><AccountBoxIcon fontSize="small" color="secondary"/>Author</Typography>
                <Typography variant="subtitle2" className="resSummary_data">{props.Author}</Typography>
 
-               <Typography variant="button" className="resSummary_category"><ArchitectureIcon fontSize="small" color="secondary"/>Tool</Typography>
-               <Typography variant="subtitle2" className="resSummary_data">{props.Tool} Tool</Typography>
-
                <Typography variant="button" className="resSummary_category"><FiberManualRecordOutlinedIcon fontSize="small" color="secondary"/>Delimiter</Typography>
                <Typography variant="subtitle2" className="resSummary_data">{props.Delimiter}</Typography>
 
             </div>
+
+            <div className = "resSummary_body">
+                <Typography variant="button" className="resSummary_category"><FiberManualRecordOutlinedIcon fontSize="small" color="secondary"/>Missing Data Handling</Typography>
+                <Typography variant="subtitle2" className="resSummary_data">
+                    {
+                        props.NullCleaning === "replace" ?
+                        `Replace with ${props.NullReplace}`
+                        : props.NullCleaning
+                    }
+                </Typography>
+
+                <Typography variant="button" className="resSummary_category"><FiberManualRecordOutlinedIcon fontSize="small" color="secondary"/>Outlier Handling</Typography>
+                <Typography variant="subtitle2" className="resSummary_data">
+                    {
+                        props.OutlierCleaning === "replace" ? 
+                        `Replace with ${props.OutlierReplace}`
+                        : props.OutlierCleaning
+                    }
+                </Typography>
+            </div>
+
             <div className = "resSummary_body">
                
                <Typography  variant="button" className="resSummary_category"><InsertDriveFileOutlinedIcon color="secondary"/>File Name</Typography>

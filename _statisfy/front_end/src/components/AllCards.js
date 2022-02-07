@@ -17,7 +17,7 @@ export default function AllCards(props){
     const handleHighlight = function(highlight){
         setClicked(highlight);
     }
-    console.log(props.tags)
+
     return(
         <div className="statContainer">
             <div className="statContainer_sub">

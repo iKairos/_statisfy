@@ -56,6 +56,11 @@ export default function ResearchList(props){
     const [columns, setColumns] = useState([]);
     const [delimiter, setDelimiter] = useState(',');
     const [dataArray, setDataArray] = useState();
+    const [callbackNullCleaning, setCallbackNullCleaning] = useState();
+    const [callbackNullReplace, setCallbackNullReplace] = useState();
+    const [callbackOutlierCleaning, setCallbackOutlierCleaning] = useState();
+    const [callbackOutlierReplace, setCallbackOutlierReplace] = useState();
+
     const [display, setDisplay] = useState(false);
     const [file, setFile] = useState();
     const [_error, setError] = useState({});
@@ -134,6 +139,10 @@ export default function ResearchList(props){
         formData.append('author', processed?.user._id);
         formData.append('created_at', new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, ''));
         formData.append('dataset', file);
+        formData.append('null_cleaning', callbackNullCleaning);
+        formData.append('null_replace', callbackNullReplace);
+        formData.append('outlier_cleaning', callbackOutlierCleaning);
+        formData.append('outlier_repalce', callbackOutlierReplace);
  
         dispatch(saveResearch(formData));
     }
@@ -521,6 +530,10 @@ export default function ResearchList(props){
                                     <ResearchUpload
                                          CallbackColumns = {callbackColumns}
                                          CallbackDelimiter = {callbackDelimiter}
+                                         CallbackNullCleaning = {setCallbackNullCleaning}
+                                         CallbackNullReplace = {setCallbackNullReplace}
+                                         CallbackOutlierCleaning = {setCallbackOutlierCleaning}
+                                         CallbackOutlierReplace = {setCallbackOutlierReplace}
                                          ChangeHandler = {changeHandler}
                                          DataArray = {dataArray}
                                          DatasetDetails = {datasetDetails}
@@ -550,6 +563,10 @@ export default function ResearchList(props){
                                         Delimiter = {delimiter}
                                         ResearchRes = {researchSaveRes}
                                         Author = {processed?.user.username}
+                                        NullCleaning = {callbackNullCleaning}
+                                        NullReplace = {callbackNullReplace}
+                                        OutlierCleaning = {callbackOutlierCleaning}
+                                        OutlierReplace = {callbackOutlierReplace}
                                    />
                                 </div>
                             }

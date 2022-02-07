@@ -40,19 +40,23 @@ export default function ResearchUpload(props) {
     const [nullCleaning, setCleaning] = useState('nothing');
     const handleCleaning = (event) => {
         setCleaning(event.target.value);
+        props.CallbackNullCleaning(event.target.value);
     };
     const [nullReplace, setNullReplace] = useState('mean');
     const handleNullReplace = (event) => {
         setNullReplace(event.target.value);
+        props.CallbackNullReplace(event.target.value);
     };
 
     const [outlierCleaning, setOutlier] = useState('nothing');
     const handleOutlier = (event) => {
         setOutlier(event.target.value);
+        props.CallbackOutlierCleaning(event.target.value);
     };
     const [outlierReplace, setOutlierReplace] = useState('mean');
     const handleOutlierReplace = (event) => {
         setOutlierReplace(event.target.value);
+        props.CallbackOutlierReplace(event.target.value);
     };
 
   return (
