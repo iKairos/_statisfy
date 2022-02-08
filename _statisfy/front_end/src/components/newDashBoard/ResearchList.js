@@ -31,7 +31,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SortIcon from '@mui/icons-material/Sort';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 
 import Navigator from "../../components/navigator";
 import ToolCard from "./ToolCard";
@@ -56,6 +56,11 @@ export default function ResearchList(props){
     const [columns, setColumns] = useState([]);
     const [delimiter, setDelimiter] = useState(',');
     const [dataArray, setDataArray] = useState();
+    const [callbackNullCleaning, setCallbackNullCleaning] = useState('nothing');
+    const [callbackNullReplace, setCallbackNullReplace] = useState('mean');
+    const [callbackOutlierCleaning, setCallbackOutlierCleaning] = useState('nothing');
+    const [callbackOutlierReplace, setCallbackOutlierReplace] = useState('mean');
+
     const [display, setDisplay] = useState(false);
     const [file, setFile] = useState();
     const [_error, setError] = useState({});
@@ -134,6 +139,10 @@ export default function ResearchList(props){
         formData.append('author', processed?.user._id);
         formData.append('created_at', new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, ''));
         formData.append('dataset', file);
+        formData.append('null_cleaning', callbackNullCleaning);
+        formData.append('null_replace', callbackNullReplace);
+        formData.append('outlier_cleaning', callbackOutlierCleaning);
+        formData.append('outlier_repalce', callbackOutlierReplace);
  
         dispatch(saveResearch(formData));
     }
@@ -488,6 +497,17 @@ export default function ResearchList(props){
                                             <Alert variant="outlined" severity="error">{_error.titlePage}</Alert>
                                         </Grow>
                                     )}
+
+                                    <div className="resSummary_header">
+                                            <DriveFileRenameOutlineIcon fontSize="large" color="secondary"/>
+                                            <Typography variant="h5">
+                                                Describe Your Dataset
+                                            </Typography>
+
+                                            <Typography variant="subtitle2" className="resSummary_data">
+                                                Assign a name and description for your dataset for others to know them better! 🧠
+                                            </Typography>
+                                    </div>
                                     <TextField
                                         required
                                         id="outlined-textarea"
@@ -521,6 +541,10 @@ export default function ResearchList(props){
                                     <ResearchUpload
                                          CallbackColumns = {callbackColumns}
                                          CallbackDelimiter = {callbackDelimiter}
+                                         CallbackNullCleaning = {setCallbackNullCleaning}
+                                         CallbackNullReplace = {setCallbackNullReplace}
+                                         CallbackOutlierCleaning = {setCallbackOutlierCleaning}
+                                         CallbackOutlierReplace = {setCallbackOutlierReplace}
                                          ChangeHandler = {changeHandler}
                                          DataArray = {dataArray}
                                          DatasetDetails = {datasetDetails}
@@ -550,6 +574,10 @@ export default function ResearchList(props){
                                         Delimiter = {delimiter}
                                         ResearchRes = {researchSaveRes}
                                         Author = {processed?.user.username}
+                                        NullCleaning = {callbackNullCleaning}
+                                        NullReplace = {callbackNullReplace}
+                                        OutlierCleaning = {callbackOutlierCleaning}
+                                        OutlierReplace = {callbackOutlierReplace}
                                    />
                                 </div>
                             }

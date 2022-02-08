@@ -188,6 +188,12 @@ export default function ResStudies(props){
         formData.append("study_description", studyDesc);
 
         dispatch(saveStudy(formData));
+
+        if(saveStudyRes?.code == "STUDY_WRONG_VAR_COUNT"){
+            setError(saveStudyRes?.error);
+            setOpenErrorSnackbar(true);
+            return;
+        }
     }
 
     const callbackSetSelectedRows = (ids) => {

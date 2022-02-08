@@ -13,7 +13,9 @@ import { Typography, TextField, Button, Backdrop, IconButton} from '@mui/materia
 import InputAdornment from '@mui/material/InputAdornment';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 
+
 import CleaningOptions from './CleaningOptions';
+
 
 import { DataColumns } from '../researchPages/dataColumns';
 
@@ -33,10 +35,20 @@ export default function ResearchUpload(props) {
         setOpenCleaning(false);
     };
     
-    
 
   return (
     <div className="resUpload_content">
+        <div className="resSummary_header">
+                <DownloadForOfflineOutlinedIcon fontSize="large" color="secondary"/>
+                <Typography variant="h5">
+                    Data Preprocessing
+                </Typography>
+
+                <Typography variant="subtitle2" className="resSummary_data">
+                    Upload and clean your data before saving and starting some analysis! ✅
+                </Typography>
+        </div>
+        
         <div className="resUpload_upload_cont">
             <Alert variant="outlined" severity="info" color="secondary">
                 <AlertTitle><strong>Instructions:</strong></AlertTitle>
@@ -47,6 +59,7 @@ export default function ResearchUpload(props) {
                 }
             </Alert>
         </div>
+
         <div className="resUpload_upload_cont">
             <div className="resUpload_delimeter">
                 <Typography>Set delimeter for your dataset</Typography>
@@ -199,15 +212,30 @@ export default function ResearchUpload(props) {
                 </Alert>
                 <div className="resUpload_columns">
                     
-                    <DataColumns
-                        data={props.DataArray}
-                        checked = {true}
-                    />
+                    {
+                        typeof props.DatasetDetails?.details !== 'undefined' ? 
+                        <DataColumns
+                            data={props.DatasetDetails?.details?.map(row => _.pick(row, ['column', 'null_count', 'outliers']))}
+                            checked = {true}
+                        />
+                        : null
+                    }
 
                 </div>
                 
-                <CleaningOptions/>
-                <CleaningOptions/>
+                <CleaningOptions 
+                    CallbackNullCleaning = {props.CallbackNullCleaning}
+                    CallbackNullReplace = {props.CallbackNullReplace}
+                    CallbackOutlierCleaning = {props.CallbackOutlierCleaning}
+                    CallbackOutlierReplace = {props.CallbackOutlierReplace}
+
+                />
+                <CleaningOptions
+                    CallbackNullCleaning = {props.CallbackNullCleaning}
+                    CallbackNullReplace = {props.CallbackNullReplace}
+                    CallbackOutlierCleaning = {props.CallbackOutlierCleaning}
+                    CallbackOutlierReplace = {props.CallbackOutlierReplace}
+                />
 
 
                 <Button onClick={handleCloseCleaning} color="secondary">Close</Button>
