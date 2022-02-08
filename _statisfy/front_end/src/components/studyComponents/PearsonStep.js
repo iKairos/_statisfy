@@ -80,7 +80,7 @@ export default function PearsonStep(props){
 
                     <Typography>
                         <b>1.3 </b>
-                        Subsitute each datapoint for <Latex>{"$\\bar{x}$"}</Latex> and <Latex>{"$\\bar{y}$"}</Latex> at index <Latex>{"$i$"}</Latex> and subtract it to the mean of the 
+                        Subsitute each datapoint for <Latex>{"$x$"}</Latex> and <Latex>{"$y$"}</Latex> at index <Latex>{"$i$"}</Latex> and subtract it to the mean of the 
                         respective variables.
                     </Typography>
 
@@ -101,7 +101,7 @@ export default function PearsonStep(props){
 
 
             <Accordion
-                defaultExpanded = {true}
+                defaultExpanded = {false}
                 TransitionProps={{ unmountOnExit: true }} 
             >
                 <AccordionSummary
@@ -169,7 +169,7 @@ export default function PearsonStep(props){
             
 
             <Accordion
-                defaultExpanded = {true}
+                defaultExpanded = {false}
                 TransitionProps={{ unmountOnExit: true }} 
                 exit={false}
             >

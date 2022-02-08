@@ -145,6 +145,10 @@ export default function ColumnGraphs(props){
                         <Typography variant="button">{props.data.std}</Typography>
                     </div>
                     <div className="colCard_row">
+                        <Typography variant="button">outliers:</Typography>
+                        <Typography variant="button">{props.data.outliers}</Typography>
+                    </div>
+                    <div className="colCard_row">
                         <Typography variant="button">Null Count: </Typography>
                         <Typography variant="button">
                             <span style={{'color': (props.data.null_count / props.size) * 100 > 60 ? "red" : "green"}}>{props.data.null_count} </span> • <span style={{'color': (props.data.null_count / props.size) * 100 > 60 ? "red" : "green"}}>{((props.data.null_count / props.size) * 100).toFixed(2)}%</span>

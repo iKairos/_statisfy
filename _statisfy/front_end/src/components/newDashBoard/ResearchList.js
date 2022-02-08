@@ -31,7 +31,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SortIcon from '@mui/icons-material/Sort';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 
 import Navigator from "../../components/navigator";
 import ToolCard from "./ToolCard";
@@ -56,10 +56,10 @@ export default function ResearchList(props){
     const [columns, setColumns] = useState([]);
     const [delimiter, setDelimiter] = useState(',');
     const [dataArray, setDataArray] = useState();
-    const [callbackNullCleaning, setCallbackNullCleaning] = useState();
-    const [callbackNullReplace, setCallbackNullReplace] = useState();
-    const [callbackOutlierCleaning, setCallbackOutlierCleaning] = useState();
-    const [callbackOutlierReplace, setCallbackOutlierReplace] = useState();
+    const [callbackNullCleaning, setCallbackNullCleaning] = useState('nothing');
+    const [callbackNullReplace, setCallbackNullReplace] = useState('mean');
+    const [callbackOutlierCleaning, setCallbackOutlierCleaning] = useState('nothing');
+    const [callbackOutlierReplace, setCallbackOutlierReplace] = useState('mean');
 
     const [display, setDisplay] = useState(false);
     const [file, setFile] = useState();
@@ -497,6 +497,17 @@ export default function ResearchList(props){
                                             <Alert variant="outlined" severity="error">{_error.titlePage}</Alert>
                                         </Grow>
                                     )}
+
+                                    <div className="resSummary_header">
+                                            <DriveFileRenameOutlineIcon fontSize="large" color="secondary"/>
+                                            <Typography variant="h5">
+                                                Describe Your Dataset
+                                            </Typography>
+
+                                            <Typography variant="subtitle2" className="resSummary_data">
+                                                Assign a name and description for your dataset for others to know them better! 🧠
+                                            </Typography>
+                                    </div>
                                     <TextField
                                         required
                                         id="outlined-textarea"

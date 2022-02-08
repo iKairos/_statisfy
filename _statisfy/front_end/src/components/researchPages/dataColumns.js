@@ -25,19 +25,16 @@ export const DataColumns = (props) => {
         return {field: i , headerName: i, width: 100}
       })*/
 
-      const columnHeader = [
-         { field: 'columnName', headerName: 'Variables', width: 140 },
-         { field: 'nullValues', headerName: 'Null Values', width: 140 },
-         { field: 'outliers', headerName: 'Outliers', width: 140 }
-      ]
+      const columnHeader = columns.map(i => {
+        return {field: i , headerName: i, width: 140}
+      })
       //{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
       //const rows = data.map((i, index) => ({id: index, ...i}));
       const columnNames = columns.map(i => {
           return {columnName: i}
       })
 
-      const rows = columnNames.map((i, index) => ({id: index, ...i}));
-
+      const rows = data.map((i, index) => ({id: index, ...i}));
 
       return (
         <div style={{ height: 400, width: '100%' }}>

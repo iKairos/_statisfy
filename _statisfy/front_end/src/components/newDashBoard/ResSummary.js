@@ -53,6 +53,10 @@ export default function ResSummary(props){
                 <Typography variant="h5">
                     Summary
                 </Typography>
+
+                <Typography variant="subtitle2" className="resSummary_data">
+                    Make sure to check everything before saving your dataset! 😉
+                </Typography>
            </div>
            
            <div className = "resSummary_body">
@@ -107,14 +111,6 @@ export default function ResSummary(props){
                <Typography variant="button" className="resSummary_category"><TableRowsOutlinedIcon color="secondary"/>Rows</Typography>
                <Typography variant="subtitle2" className="resSummary_data">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</Typography>
            
-           </div>
-
-           <div className = "resSummary_table">
-                <DisplayTable 
-                    data={props.DataArray}
-                    Header = {true}
-                    rowNumber = {10}
-                />
            </div>
 
            <div className="resSummary_header">
