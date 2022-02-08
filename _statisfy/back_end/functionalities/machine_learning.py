@@ -79,4 +79,5 @@ class LinearRegression:
         """
         Calculates the r-squared value accuracy of the linear regression model.
         """
-        pass
+        corr = np.corrcoef(y_true.tolist(), y_pred[0].tolist())
+        return corr[0,1] ** 2
