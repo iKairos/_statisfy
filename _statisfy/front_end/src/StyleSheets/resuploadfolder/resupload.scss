@@ -25,6 +25,7 @@ $black: #23272a;
   &_cleaning {
     display: flex;
     flex-direction: column;
+    padding: 1rem;
     &_title {
       display: flex;
       flex-direction: row;
@@ -32,6 +33,19 @@ $black: #23272a;
       justify-content: space-between;
       margin-bottom: 1rem;
       margin-top: 1rem;
+    }
+    &_container {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid $gray1;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      border-radius: 0.25rem;
+    }
+    &_variable {
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid $gray1;
     }
   }
   &_outerCont {

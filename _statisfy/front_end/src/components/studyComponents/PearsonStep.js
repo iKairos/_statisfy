@@ -2,12 +2,61 @@ import Latex from "react-latex-next";
 import "../../StyleSheets/computationscss/computation.css"
 
 import * as React from 'react';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
+import { styled } from '@mui/material/styles';
+import MuiAccordion from '@mui/material/Accordion';
+import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+
+const Accordion = styled((props) => (
+    <MuiAccordion disableGutters elevation={0} square {...props} />
+  ))(({ theme }) => ({
+    border: `1px solid #b5b5b5`,
+    '&:before': {
+      display: 'none',
+    },
+    marginBottom: `0.5rem`,
+    borderRadius: `0.5rem`,
+    backgroundColor:
+      theme.palette.mode === 'dark'
+        ? '#eeeeee'
+        : '#eeeeee',
+  }));
+
+const AccordionSummary = styled((props) => (
+    <MuiAccordionSummary
+      expandIcon={<ExpandMoreIcon sx={{ fontSize: '0.9rem', color:"white"}} />}
+      {...props}
+    />
+  ))(({ theme }) => ({
+    backgroundColor:
+      theme.palette.mode === 'dark'
+        ? '#eeeeee'
+        : '#eeeeee',
+    flexDirection: 'row-reverse',
+    '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+      transform: 'rotate(180deg)',
+    },
+    '& .MuiAccordionSummary-content': {
+      marginLeft: theme.spacing(1),
+    },
+    borderRadius: `0.5rem`
+  }));
+
+  const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+    padding: theme.spacing(2),
+    backgroundColor:
+      theme.palette.mode === 'dark'
+        ? '#ffffff'
+        : '#ffffff',
+    borderTop: `1px solid #b5b5b5`,
+    borderBottomLeftRadius: `0.5rem`,
+    borderBottomRightRadius: `0.5rem`
+  }));
+
+  
 
 export default function PearsonStep(props){
     const pr = "$$r = \\frac{\\sum{(x_i-\\bar{x})\\sum{(y_i-\\bar{y})}}}{\\sqrt{\\sum{(x_i-\\bar{x})^2} \\sum{y_i-\\bar{y})^2}}}$$";
@@ -19,14 +68,16 @@ export default function PearsonStep(props){
 
     return(
         <div className="Computation_pearson">
-            <Typography variant="button" sx={{fontWeight:"bold", fontSize:"1.5rem", color:"GrayText"}}>Pearson R Correlation</Typography>
+            <Typography variant="button" sx={{fontWeight:"bold", fontSize:"1.5rem", color:"GrayText", marginBottom:"1rem"}}>Pearson R Correlation</Typography>
 
             <Accordion
                 defaultExpanded = {true}
                 TransitionProps={{ unmountOnExit: true }} 
+                
             >
                 <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
+                color="secondary"
                 >
                 <Typography variant="h6">Formula</Typography>
                 </AccordionSummary>
