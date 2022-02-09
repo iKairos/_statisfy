@@ -96,7 +96,7 @@ export default function PearsonStep(props){
                 <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 >
-                <Typography variant="h6">Step 1</Typography>
+                <Typography variant="h6">Step 1: Evaluate Numerator</Typography>
                 </AccordionSummary>
                 <AccordionDetails sx={{gap:"1rem"}}>
                     <Typography>
@@ -158,7 +158,7 @@ export default function PearsonStep(props){
                 <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 >
-                <Typography variant="h6">Step 2</Typography>
+                <Typography variant="h6">Step 2: Evaluate Denominator</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                 <Typography>
@@ -172,7 +172,7 @@ export default function PearsonStep(props){
                 </Latex>
                 <Typography>
                 <b>2.2 </b>
-                    Square the results of <b>2.1</b> and calculate the summation. This is called the <b>Sum of Squares</b> of <Latex>{"$x$"}</Latex> and Sum of Squares of <Latex>{"$y$"}</Latex>. This gives the values:
+                    Square the results of <b>2.1</b> and calculate the summation. This is called the <b>Sum of Squares</b> of <Latex>{"$x$"}</Latex> and <b>Sum of Squares</b> of <Latex>{"$y$"}</Latex>. This gives the values:
                 </Typography>
 
                 <Latex strict>
@@ -189,7 +189,7 @@ export default function PearsonStep(props){
 
                 <Typography>
                     <b>2.3 </b>
-                    Calculate the square root of the product of both <b>Sum of Squares</b> of <Latex>{"$x$"}</Latex> and Sum of Squares of <Latex>{"$y$"}</Latex>.
+                    Calculate the square root of the product of both <b>Sum of Squares</b> of <Latex>{"$x$"}</Latex> and <b>Sum of Squares</b> of <Latex>{"$y$"}</Latex>.
                 </Typography>
 
                 <Latex strict>
@@ -215,10 +215,6 @@ export default function PearsonStep(props){
                 </AccordionDetails>
             </Accordion>
 
-
-
-            
-
             <Accordion
                 defaultExpanded = {false}
                 TransitionProps={{ unmountOnExit: true }} 
@@ -227,7 +223,7 @@ export default function PearsonStep(props){
                 <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 >
-                <Typography variant="h6">Step 3</Typography>
+                <Typography variant="h6">Step 3: Calculate <Latex>{"$r$"}</Latex> Coefficient</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                 <Typography>
