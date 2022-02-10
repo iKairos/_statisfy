@@ -9,6 +9,7 @@ $black: #23272a;
   &_column {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
   }
   &_body {

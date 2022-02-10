@@ -45,6 +45,7 @@ import clsx from 'clsx';
 import AllCards from "../AllCards";
 import StudyCard from "../StudyCard";
 import Study from "../study";
+import DataTypeNormalize from "./datatypeNormalize";
 import Checkbox from "../Checkbox";
 import { DataColumns } from "./dataColumns";
 import { useDispatch, useSelector } from "react-redux";
@@ -649,10 +650,16 @@ export default function ResStudies(props){
                                             <MemoizedTable
                                                 data={datasetDetails.details} 
                                                 Header={true} 
-                                                rowNumber={15}
+                                                rowNumber={10}
                                                 checked={true}
                                                 callbackSetSelectedRows={callbackSetSelectedRows}
                                             /> : <CircularProgress color="info" thickness={2.5} size={30}/>
+                                        }
+
+                                        {typeof datasetDetails !== 'undefined' 
+                                            ?
+                                            <DataTypeNormalize/>
+                                            :null
                                         }
         
                                         
