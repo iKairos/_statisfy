@@ -7,6 +7,32 @@ export const DataColumns = (props) => {
     var data = props.data;
     var columns;
 
+    const setSelectedColumns = ids => {
+          const selectedIDs = new Set(ids);
+          const selectedColumns = [];
+
+          selectedIDs.forEach(id => {
+              selectedColumns.push(data[id].column)
+          });
+
+          props.CallbackSelectedColumns(selectedColumns);
+          props.CallbackColumnOptions(selectedColumns.map(col => 
+            {
+              return {
+                'column': col,
+                'null_option': {
+                  'method': 'nothing',
+                  'replace_by': 'mean'
+                },
+                'outlier_option': {
+                  'method': 'nothing',
+                  'replace_by': 'mean'
+                }
+              }
+            }  
+          ));
+    }
+
     if(typeof data === 'undefined'){
       return null;
     }else{
@@ -44,6 +70,7 @@ export const DataColumns = (props) => {
               columns={columnHeader}
               pageSize={props.rowNumber}
               rowsPerPageOptions={[props.rowNumber]}
+              onSelectionModelChange={setSelectedColumns}
               checkboxSelection
             />
           ):(

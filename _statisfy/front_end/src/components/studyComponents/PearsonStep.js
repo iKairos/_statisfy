@@ -69,7 +69,7 @@ export default function PearsonStep(props){
     return(
         <div className="Computation_pearson">
             <Typography variant="button" sx={{fontWeight:"bold", fontSize:"1.5rem", color:"GrayText", marginBottom:"1rem"}}>Pearson R Correlation</Typography>
-
+            <p><i>Note: All values are rounded in four (4) decimal points.</i></p>
             <Accordion
                 defaultExpanded = {true}
                 TransitionProps={{ unmountOnExit: true }} 

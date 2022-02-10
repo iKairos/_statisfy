@@ -204,7 +204,7 @@ export default function ResStudies(props){
             selectedColumns.push(datasetDetails.details[id].column)
         });
 
-        setStudyColumns(selectedColumns)
+        setStudyColumns(selectedColumns);
 
         if(selectedColumns.length === 1){
             setTags([purpose, "One Variable"]);

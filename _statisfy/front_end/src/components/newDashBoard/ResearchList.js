@@ -60,6 +60,8 @@ export default function ResearchList(props){
     const [callbackNullReplace, setCallbackNullReplace] = useState('mean');
     const [callbackOutlierCleaning, setCallbackOutlierCleaning] = useState('nothing');
     const [callbackOutlierReplace, setCallbackOutlierReplace] = useState('mean');
+    const [callbackSelectedCleanColumns, setCallbackSelectedCleanColumns] = useState([]);
+    const [callbackColumnsCleanOptions, setCallbackColumnsCleanOptions] = useState([]);
 
     const [display, setDisplay] = useState(false);
     const [file, setFile] = useState();
@@ -179,6 +181,9 @@ export default function ResearchList(props){
             formData.append("delimiter", delimiter);
 
             dispatch(processDataset(formData));
+
+            setCallbackColumnsCleanOptions([]);
+            setCallbackSelectedCleanColumns([]);
 
             setFile(e.target.files[0])
             setDisplay(true);
@@ -545,6 +550,10 @@ export default function ResearchList(props){
                                          CallbackNullReplace = {setCallbackNullReplace}
                                          CallbackOutlierCleaning = {setCallbackOutlierCleaning}
                                          CallbackOutlierReplace = {setCallbackOutlierReplace}
+                                         CallbackSelectedCleanColumns = {setCallbackSelectedCleanColumns}
+                                         SelectedColumns = {callbackSelectedCleanColumns}
+                                         CallbackColumnOptions = {setCallbackColumnsCleanOptions}
+                                         CleanOptions = {callbackColumnsCleanOptions}
                                          ChangeHandler = {changeHandler}
                                          DataArray = {dataArray}
                                          DatasetDetails = {datasetDetails}

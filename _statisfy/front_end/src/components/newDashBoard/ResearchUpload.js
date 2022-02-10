@@ -6,13 +6,13 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import CloseIcon from '@mui/icons-material/Close';
-import TableChartIcon from '@mui/icons-material/TableChart';
 import { formatBytes } from '../../utils';
 import { DisplayTable } from "../DisplayTable";
 import { Typography, TextField, Button, Backdrop, IconButton} from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import DownloadForOfflineOutlinedIcon from '@mui/icons-material/DownloadForOfflineOutlined';
+import CleaningServicesOutlinedIcon from '@mui/icons-material/CleaningServicesOutlined';
 import _ from "lodash"
 
 
@@ -178,7 +178,7 @@ export default function ResearchUpload(props) {
                 sx={{marginTop:"1rem"}}
                 onClick = {handleOpenCleaning}
                 
-            >Clean Data</Button>: null
+            ><CleaningServicesOutlinedIcon fontSize="small" color="secondary"/> &nbsp;Clean Data</Button>: null
             
         }
         <Backdrop
@@ -219,26 +219,24 @@ export default function ResearchUpload(props) {
                         <DataColumns
                             data={props.DatasetDetails?.details?.map(row => _.pick(row, ['column', 'null_count', 'outliers']))}
                             checked = {true}
+                            CallbackSelectedColumns = {props.CallbackSelectedCleanColumns}
+                            CallbackColumnOptions = {props.CallbackColumnOptions}
                         />
                         : null
                     }
 
                 </div>
                 
-                <CleaningOptions 
-                    CallbackNullCleaning = {props.CallbackNullCleaning}
-                    CallbackNullReplace = {props.CallbackNullReplace}
-                    CallbackOutlierCleaning = {props.CallbackOutlierCleaning}
-                    CallbackOutlierReplace = {props.CallbackOutlierReplace}
+                {
+                    props.SelectedColumns.map(i => 
+                        <CleaningOptions
+                            Variable = {i}
+                            CleanOptions = {props.CleanOptions}
+                            CallbackColumnOptions = {props.CallbackColumnOptions}
 
-                />
-                <CleaningOptions
-                    CallbackNullCleaning = {props.CallbackNullCleaning}
-                    CallbackNullReplace = {props.CallbackNullReplace}
-                    CallbackOutlierCleaning = {props.CallbackOutlierCleaning}
-                    CallbackOutlierReplace = {props.CallbackOutlierReplace}
-                />
-
+                        />    
+                    )
+                }
 
                 <Button onClick={handleCloseCleaning} color="secondary">Close</Button>
                 

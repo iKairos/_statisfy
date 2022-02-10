@@ -9,33 +9,84 @@ import { Typography } from '@mui/material';
 import { useState } from 'react';
 
 export default function CleaningOptions(props) {
-
     const [nullCleaning, setCleaning] = useState('nothing');
     const handleCleaning = (event) => {
         setCleaning(event.target.value);
-        props.CallbackNullCleaning(event.target.value);
+        const current_option = []
+        
+        props.CleanOptions.forEach(option => {
+            const o = option;
+            if(o.column === props.Variable){
+                o['null_option']['method'] = event.target.value;
+            }
+
+            current_option.push(o);
+        })
+ 
+        props.CallbackColumnOptions(
+            current_option
+        )
     };
     const [nullReplace, setNullReplace] = useState('mean');
     const handleNullReplace = (event) => {
         setNullReplace(event.target.value);
-        props.CallbackNullReplace(event.target.value);
+        const current_option = []
+        
+        props.CleanOptions.forEach(option => {
+            const o = option;
+            if(o.column === props.Variable){
+                o['null_option']['replace_by'] = event.target.value;
+            }
+
+            current_option.push(o);
+        })
+ 
+        props.CallbackColumnOptions(
+            current_option
+        )
     };
 
     const [outlierCleaning, setOutlier] = useState('nothing');
     const handleOutlier = (event) => {
         setOutlier(event.target.value);
-        props.CallbackOutlierCleaning(event.target.value);
+        const current_option = []
+        
+        props.CleanOptions.forEach(option => {
+            const o = option;
+            if(o.column === props.Variable){
+                o['outlier_option']['method'] = event.target.value;
+            }
+
+            current_option.push(o);
+        })
+ 
+        props.CallbackColumnOptions(
+            current_option
+        )
     };
     const [outlierReplace, setOutlierReplace] = useState('mean');
     const handleOutlierReplace = (event) => {
         setOutlierReplace(event.target.value);
-        props.CallbackOutlierReplace(event.target.value);
+        const current_option = []
+        
+        props.CleanOptions.forEach(option => {
+            const o = option;
+            if(o.column === props.Variable){
+                o['outlier_option']['replace_by'] = event.target.value;
+            }
+
+            current_option.push(o);
+        })
+ 
+        props.CallbackColumnOptions(
+            current_option
+        )
     };
 
   return (
       <div className="resUpload_cleaning_container">
           <div className="resUpload_cleaning_variable">
-              <Typography>Variable Name</Typography>
+              <Typography>{props.Variable}</Typography>
           </div>
           <div className="resUpload_cleaning">
             <FormControl component="fieldset">
