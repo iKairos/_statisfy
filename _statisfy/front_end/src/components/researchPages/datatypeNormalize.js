@@ -116,6 +116,13 @@ export default function DataTypeNormalize(props){
                         <Button onClick={handleCloseDataType}>Apply Changes</Button>
                         </DialogActions>
                     </Dialog>
+
+                    <Typography sx={{fontWeight:"550"}}>Mean</Typography>
+                    <Typography>1.5</Typography>
+                    <Typography sx={{fontWeight:"550"}}>Median</Typography>
+                    <Typography>1.5</Typography>
+                    <Typography sx={{fontWeight:"550"}}>Mode</Typography>
+                    <Typography>1.5</Typography>
                 </div>
                 
             </div>
