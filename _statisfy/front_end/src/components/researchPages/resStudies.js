@@ -656,11 +656,14 @@ export default function ResStudies(props){
                                             /> : <CircularProgress color="info" thickness={2.5} size={30}/>
                                         }
 
-                                        {typeof datasetDetails !== 'undefined' 
-                                            ?
-                                            <DataTypeNormalize/>
-                                            :null
-                                        }
+                                        <div className="Datatype">
+                                                <DataTypeNormalize/>
+                                                <DataTypeNormalize/>
+                                                <DataTypeNormalize/>
+                                                <DataTypeNormalize/>
+                                        </div>
+
+                                       
         
                                         
                                     </div>

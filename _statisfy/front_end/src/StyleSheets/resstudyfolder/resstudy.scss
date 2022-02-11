@@ -89,9 +89,12 @@ $radius: 0.25rem;
 }
 
 .Datatype {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
   &_container {
     margin-top: 1rem;
-    width: 100%;
+    width: 1fr;
     border-radius: 0.25rem;
     border: 1px solid $gray1;
     display: flex;
@@ -205,6 +208,8 @@ $radius: 0.25rem;
     }
   }
   .Datatype {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     &_backdrop {
       width: 45vw;
       min-height: 10rem;

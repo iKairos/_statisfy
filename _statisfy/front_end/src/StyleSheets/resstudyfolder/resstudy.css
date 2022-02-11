@@ -117,9 +117,17 @@
   position: relative;
 }
 
+.Datatype {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
 .Datatype_container {
   margin-top: 1rem;
-  width: 100%;
+  width: 1fr;
   border-radius: 0.25rem;
   border: 1px solid #b5b5b5;
   display: -webkit-box;
@@ -291,6 +299,12 @@
     padding: 1rem;
     color: #23272a;
     position: relative;
+  }
+  .Datatype {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
   }
   .Datatype_backdrop {
     width: 45vw;
