@@ -15,8 +15,10 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
-
+import CleaningOptions from "../newDashBoard/CleaningOptions";
 import { Bar, Doughnut } from "react-chartjs-2";
 import React from 'react';
 
@@ -50,7 +52,7 @@ export default function DataTypeNormalize(props){
     return(
         <div className="Datatype_container">
             <div className="Datatype_header">
-                <Typography variant="h5">Variable Name</Typography>
+                <Typography variant="h5">Variable Names</Typography>
                 
                 <IconButton 
                     sx={{position:"absolute", right:"0", top:"0", margin:"0.5rem"}} 
@@ -75,45 +77,37 @@ export default function DataTypeNormalize(props){
                     <Typography>{datatype}</Typography>
                     
                     <Dialog disableEscapeKeyDown open={modifyDataType} onClose={handleCloseDataType}>
-                        <DialogContent><Typography variant="h5"> Variable Name</Typography></DialogContent>
-                        
-                        <DialogTitle>Normality</DialogTitle>
+                        <DialogTitle>Modify Variable</DialogTitle>
                         <DialogContent>
-                            <Typography>The distribution for the variable *redacted* is already normal</Typography>
-                            <Button 
-                                variant ="outlined" 
-                                color ="secondary" 
-                                onClick={handleModify}
-                                disabled={true}
-                                sx={{width:"10rem"}}
-                            >
-                                Normalize
-                            </Button>
-                        </DialogContent>
-                        
-                        <DialogTitle>Modify Data Type</DialogTitle>
-                        <DialogContent>
-                        <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                            <FormControl sx={{ m: 1, minWidth: 200 }}>
-                                <InputLabel id="demo-dialog-select-label">Data Type</InputLabel>
-                                <Select
-                                    labelId="demo-dialog-select-label"
-                                    id="demo-dialog-select"
-                                    value={datatype}
-                                    onChange={handleDataType}
-                                    input={<OutlinedInput label="Data Type" />}
-                                >
-                                    <MenuItem value="Nominal">Nominal</MenuItem>
-                                    <MenuItem value="Ordinal">Ordinal</MenuItem>
-                                    <MenuItem value="Interval">Interval</MenuItem>
-                                    <MenuItem value="Ratio">Ratio</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Box>
+                            <Typography>Data Distribution</Typography>
+                            <FormControlLabel control={<Switch defaultChecked color="secondary"/>} label="Normalize" />
+
+                            <Typography>Modify Data Type</Typography>
+                            <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                                <FormControl sx={{marginTop:"1rem", marginBottom:"2rem", minWidth: "100%" }}>
+                                    <InputLabel id="demo-dialog-select-label" color="secondary">Data Type</InputLabel>
+                                    <Select
+                                        labelId="demo-dialog-select-label"
+                                        id="demo-dialog-select"
+                                        value={datatype}
+                                        onChange={handleDataType}
+                                        input={<OutlinedInput label="Data Type" />}
+                                        color="secondary"
+                                    >
+                                        <MenuItem value="Nominal">Nominal</MenuItem>
+                                        <MenuItem value="Ordinal">Ordinal</MenuItem>
+                                        <MenuItem value="Interval">Interval</MenuItem>
+                                        <MenuItem value="Ratio">Ratio</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Box>
+
+                            <Typography> Clean data</Typography>
+                            <CleaningOptions/>
                         </DialogContent>
                         <DialogActions>
-                        <Button onClick={handleCloseDataType}>Cancel</Button>
-                        <Button onClick={handleCloseDataType}>Apply Changes</Button>
+                        <Button onClick={handleCloseDataType} color="secondary">Cancel</Button>
+                        <Button onClick={handleCloseDataType} color="secondary">Apply Changes</Button>
                         </DialogActions>
                     </Dialog>
 
@@ -124,6 +118,8 @@ export default function DataTypeNormalize(props){
                     <Typography sx={{fontWeight:"550"}}>Mode</Typography>
                     <Typography>1.5</Typography>
                 </div>
+
+                
                 
             </div>
         </div>
