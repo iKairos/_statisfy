@@ -226,7 +226,7 @@ export default function ResearchUpload(props) {
                     }
 
                 </div>
-                
+                <div className="resUpload_cleaning_grid">
                 {
                     props.SelectedColumns.map(i => 
                         <CleaningOptions
@@ -237,6 +237,9 @@ export default function ResearchUpload(props) {
                         />    
                     )
                 }
+
+                </div>
+               
 
                 <Button onClick={handleCloseCleaning} color="secondary">Close</Button>
                 

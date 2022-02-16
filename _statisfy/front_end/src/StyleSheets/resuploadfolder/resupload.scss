@@ -26,6 +26,11 @@ $black: #23272a;
     display: flex;
     flex-direction: column;
     padding: 1rem;
+    &_grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
     &_title {
       display: flex;
       flex-direction: row;
@@ -35,6 +40,7 @@ $black: #23272a;
       margin-top: 1rem;
     }
     &_container {
+      width: 1fr;
       display: flex;
       flex-direction: column;
       border: 1px solid $gray1;
@@ -204,6 +210,11 @@ $black: #23272a;
       display: grid;
       grid-template-columns: 1fr 1fr;
       padding-left: 2rem;
+      &_grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
     }
   }
 }

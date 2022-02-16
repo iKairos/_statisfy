@@ -83,11 +83,24 @@ export default function CleaningOptions(props) {
         )
     };
 
+    //dummy functions for testing
+    //tanggalin ko muna functionality kase galing sa research originally yung props
+
+    const handleCleaningDummy = (event) => {
+        setCleaning(event.target.value);
+    }
+    const handleNullReplaceDummy = (event) => {
+        setNullReplace(event.target.value);
+    }
+    const handleOutlierDummy = (event) => {
+        setOutlier(event.target.value);
+    }
+    const handleOutlierReplaceDummy = (event) => {
+        setOutlierReplace(event.target.value);
+    }
+
   return (
       <div className="resUpload_cleaning_container">
-          <div className="resUpload_cleaning_variable">
-              <Typography>{props.Variable}</Typography>
-          </div>
           <div className="resUpload_cleaning">
             <FormControl component="fieldset">
                 <FormLabel component="legend" color="secondary">Null Values</FormLabel>
@@ -95,7 +108,7 @@ export default function CleaningOptions(props) {
                     aria-label="gender"
                     name="controlled-radio-buttons-group"
                     value={nullCleaning}
-                    onChange={handleCleaning}
+                    onChange={handleCleaningDummy}
                     color="secondary"
                 >
                     <FormControlLabel value="delete" control={<Radio color="secondary"/>} label="Delete Rows" color="secondary" />
@@ -107,7 +120,7 @@ export default function CleaningOptions(props) {
                                     aria-label="gender"
                                     name="controlled-radio-buttons-group"
                                     value={nullReplace}
-                                    onChange={handleNullReplace}
+                                    onChange={handleNullReplaceDummy}
                                     color="secondary"
                                 >
                                     <FormControlLabel value="mean" control={<Radio color="secondary"/>} label="Mean" color="secondary" />
@@ -128,7 +141,7 @@ export default function CleaningOptions(props) {
                     aria-label="gender"
                     name="controlled-radio-buttons-group"
                     value={outlierCleaning}
-                    onChange={handleOutlier}
+                    onChange={handleOutlierDummy}
                     color="secondary"
                 >
                     <FormControlLabel value="delete" control={<Radio color="secondary"/>} label="Delete Rows" color="secondary" />
@@ -140,7 +153,7 @@ export default function CleaningOptions(props) {
                                 aria-label="gender"
                                 name="controlled-radio-buttons-group"
                                 value={outlierReplace}
-                                onChange={handleOutlierReplace}
+                                onChange={handleOutlierReplaceDummy}
                                 color="secondary"
                             >
                                 <FormControlLabel value="mean" control={<Radio color="secondary"/>} label="Mean" color="secondary" />

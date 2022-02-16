@@ -307,7 +307,7 @@
         grid-template-columns: 1fr 1fr;
   }
   .Datatype_backdrop {
-    width: 45vw;
+    width: 50vw;
     min-height: 10rem;
   }
 }
