@@ -58,7 +58,7 @@ import StatImg from '../../images/statisticsHeader.png'
 import MLImg from '../../images/mlHeader.png'
 import ToolCard from "../newDashBoard/ToolCard";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
+import _ from "lodash";
 //<span className ="text_topic">{researchGetRes?.data.test_type}</span>
 
 export default function ResStudies(props){
@@ -304,7 +304,7 @@ export default function ResStudies(props){
                 return;
             }
         }else if(showActive === 2){
-            if(tool.length === 0){
+            if(tool?.length === 0 || typeof tool === "undefined"){
                 setError("Please select an analysis tool for your study.");
                 setOpenErrorSnackbar(true);
                 return;
@@ -657,10 +657,20 @@ export default function ResStudies(props){
                                         }
 
                                         <div className="Datatype">
-                                                <DataTypeNormalize/>
-                                                <DataTypeNormalize/>
-                                                <DataTypeNormalize/>
-                                                <DataTypeNormalize/>
+                                            {
+                                                studyColumns.map(col => {
+                                                    var data = {};
+                                            
+                                                    datasetDetails?.details?.forEach(deets => {
+                                                        if(deets.column === col){
+                                                            data = deets;
+                                                            return;
+                                                        }
+                                                    })
+                                            
+                                                    return <DataTypeNormalize details={data}/>;
+                                                })
+                                            }
                                         </div>
 
                                        

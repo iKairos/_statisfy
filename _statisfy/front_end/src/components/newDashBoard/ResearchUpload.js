@@ -13,7 +13,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import DownloadForOfflineOutlinedIcon from '@mui/icons-material/DownloadForOfflineOutlined';
 import CleaningServicesOutlinedIcon from '@mui/icons-material/CleaningServicesOutlined';
-import _ from "lodash"
+import _ from "lodash";
 
 
 import CleaningOptions from './CleaningOptions';

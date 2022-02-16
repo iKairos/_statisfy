@@ -15,10 +15,34 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 
-import { Bar, Doughnut } from "react-chartjs-2";
+import {CategoryScale , 
+    Chart as ChartJS,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip as tp,
+    Legend,
+    DoughnutController,
+    ArcElement
+} from 'chart.js'; 
+
 import React from 'react';
+import { Bar, Doughnut } from "react-chartjs-2";
+import { iqrTooltip } from "../../constants/stringConstants";
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    DoughnutController,
+    Title,
+    tp,
+    Legend,
+    ArcElement
+);
 
 export default function DataTypeNormalize(props){
     const matches = useMediaQuery('(min-width:900px)');
@@ -50,7 +74,7 @@ export default function DataTypeNormalize(props){
     return(
         <div className="Datatype_container">
             <div className="Datatype_header">
-                <Typography variant="h5">Variable Name</Typography>
+                <Typography variant="h5">{props.details.column}</Typography>
                 
                 <IconButton 
                     sx={{position:"absolute", right:"0", top:"0", margin:"0.5rem"}} 
@@ -64,18 +88,95 @@ export default function DataTypeNormalize(props){
             </div>
             <div className="Datatype_graph">
                 <Typography>Distribution Table</Typography>
-                1
+                {
+                        props.details.type === "numerical" && 
+                        <Bar
+                            data={{
+                                datasets: [
+                                    {
+                                        data: props.details.vis.map(i => i[1]),
+                                        label: 'Frequency',
+                                        barPercentage: 1.0,
+                                        categoryPercentage: 1.0,
+                                        backgroundColor: 'rgba(167, 66, 197, 0.2)',
+                                        borderColor: 'rgba(167, 66, 197, 1)',
+                                        borderWidth: 0.5
+                                    },
+                                ],
+                                labels: props.details.vis.map(i => i[0])
+                            }}
+
+                            options={{
+                                    responsive: true,
+                                    plugins: {
+                                        legend: {
+                                            display: false,
+                                        }
+                                    },
+                                    scales: {
+                                        x: {
+                                            ticks: {
+                                                display: false,
+                                            },
+                                            grid: {
+                                                display: false,
+                                                drawBorder: false,
+                                            }
+                                        },
+                                        y: {
+                                            ticks: {
+                                                display: false
+                                            },
+                                            grid: {
+                                                display: false,
+                                                drawBorder: false,
+                                            }
+                                        },
+                                    },
+                                    
+                                }
+                            }
+                        />
+                    }
+
+                    {
+                        props.details.type === "object" && 
+                        <Doughnut
+                            data={{
+                                datasets: [
+                                  {
+                                    data: Object.keys(props.details.vis).map((e, i) => props.details.vis[e]),
+                                    label: 'Frequency',
+                                    borderWidth: 8,
+                                    backgroundColor: 'rgba(167, 66, 197, 0.2)',
+                                    borderColor: 'rgba(167, 66, 197, 1)',
+                                    borderWidth: 0.5
+                                  }
+                                ],
+                                labels: Object.keys(props.details.vis).map((e) => e)
+                              }}
+
+                              options={{
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                        display: false,
+                                    }
+                                },
+                              }}
+                        />
+                    }
             </div>
             <div className="Datatype_info">
                 <div className="Datatype_info_var">
                     
                     <Typography sx={{fontWeight:"550"}}>Distribution</Typography>
-                    <Typography>Normal Distribution</Typography>
+                    <Typography>{props.details.distribution}</Typography>
                     <Typography sx={{fontWeight:"550"}}>Data Type</Typography>
-                    <Typography>{datatype}</Typography>
+                    <Typography>{props.details.type}</Typography>
                     
                     <Dialog disableEscapeKeyDown open={modifyDataType} onClose={handleCloseDataType}>
-                        <DialogContent><Typography variant="h5"> Variable Name</Typography></DialogContent>
+                        <DialogContent><Typography variant="h5"> {props.details.column}</Typography></DialogContent>
                         
                         <DialogTitle>Normality</DialogTitle>
                         <DialogContent>
@@ -118,11 +219,23 @@ export default function DataTypeNormalize(props){
                     </Dialog>
 
                     <Typography sx={{fontWeight:"550"}}>Mean</Typography>
-                    <Typography>1.5</Typography>
+                    <Typography>{props.details.mean}</Typography>
                     <Typography sx={{fontWeight:"550"}}>Median</Typography>
-                    <Typography>1.5</Typography>
-                    <Typography sx={{fontWeight:"550"}}>Mode</Typography>
-                    <Typography>1.5</Typography>
+                    <Typography>{props.details.median}</Typography>
+                    <Typography sx={{fontWeight:"550"}}>Null Values</Typography>
+                    <Typography>{props.details.null_count}</Typography>
+                    <Typography sx={{fontWeight:"550"}}>
+                        Outliers (IQR method)
+                        <Tooltip
+                            title={iqrTooltip}
+                            placement="bottom"
+                            arrow
+                            color='secondary'
+                            >
+                            <HelpOutlineIcon fontSize='small' color='secondary'/>
+                        </Tooltip>
+                    </Typography>
+                    <Typography>{props.details.outliers}</Typography>
                 </div>
                 
             </div>
