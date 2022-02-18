@@ -96,7 +96,6 @@ export default function Study(props){
             </div>
             <div className="Study_tabs_container">
                 <div className = "Study_tabs">
-                    
                     <Box sx = {{ 
                         minWidth: 100,
                         width: '1fr',
@@ -118,14 +117,12 @@ export default function Study(props){
                             <Tab value={4} label="Interpretation" icon={<ArticleIcon fontSize="small"/>} />
                         </Tabs>
                     </Box>
-
                 </div>
             </div>
                 
             <div className = "Study_content">
                 {studyPage === 1 &&
                     <div className = "Study_content_details">
-                        
                         <h6>Variables</h6>
                         {typeof datasetFile !== 'undefined' ? 
                             <MemoizedTable
@@ -158,9 +155,7 @@ export default function Study(props){
                                ) 
                             })
                         }
-                        
-                        <div className = "Study_cards_container">
-                            
+                        <div className = "Study_cards_container">       
                         {
                             props.data[8].map(([var_name, var_val]) => {
                                 if(blackListedVariables.includes(var_name)){
@@ -177,7 +172,6 @@ export default function Study(props){
                             
                         }
                         </div>
-                        
                         {
                             props.data[5] === "Pearson R Correlation Test" ? 
                                 <Scatter data={{

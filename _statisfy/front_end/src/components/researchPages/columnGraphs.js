@@ -154,6 +154,14 @@ export default function ColumnGraphs(props){
                             <span style={{'color': (props.data.null_count / props.size) * 100 > 60 ? "red" : "green"}}>{props.data.null_count} </span> • <span style={{'color': (props.data.null_count / props.size) * 100 > 60 ? "red" : "green"}}>{((props.data.null_count / props.size) * 100).toFixed(2)}%</span>
                         </Typography>
                     </div>      
+                    <div className="colCard_row">
+                        <Typography variant="button">skew:</Typography>
+                        <Typography variant="button">{props.data.skew}</Typography>
+                    </div>
+                    <div className="colCard_row">
+                        <Typography variant="button">kurtosis:</Typography>
+                        <Typography variant="button">{props.data.kurtosis}</Typography>
+                    </div>
                 </div>
             </div>         
         </div>

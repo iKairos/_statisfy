@@ -34,13 +34,17 @@ def dataset_details():
             vis = "NA"
             type = "NA"
             outliers = "NA"
+            skew = "NA"
+            kurtosis = "NA"
             try:
                 if df[i].dtypes != 'O':
                     mean = round(float(df[i].mean()), 2) # temporary fix
                     std = round(float(df[i].std()), 2)
                     median = round(float(df[i].median()), 2)
                     normal = anderson_test(df[i])
+                    normal = "Normal" if normal[0] < normal[1][4] else "Not Normal"
                     vis = freq_dist(df[i])
+                    """
                     q1 = df[i].quantile(0.25)
                     q3 = df[i].quantile(0.75)
                     iqr = q3 - q1
@@ -49,7 +53,13 @@ def dataset_details():
                     outliers_15_low = (df[i] < lower_lim)
                     outliers_15_up = (df[i] > upper_lim)
                     outliers = int(len(df[i][outliers_15_low | outliers_15_up]))
+                    """
+                    low = df[i].quantile(0.10)
+                    hi = df[i].quantile(0.90)
+                    outliers = int(len(df[i][(df[i] < low) | (df[i] > hi)]))
                     type = "numerical"
+                    skew = round(float(df[i].skew()), 2)
+                    kurtosis = round(float(df[i].kurtosis()), 2)
                 else:
                     vis = df[i].value_counts()
                     vis = vis.to_dict()
@@ -62,7 +72,7 @@ def dataset_details():
                     min = df[i].min()
             except Exception as e:
                 pass
-            
+
             details.append({
                 'column': i,
                 'null_count': int(df.isna().sum()[i]),
@@ -71,10 +81,12 @@ def dataset_details():
                 'median': median,
                 'max': max,
                 'min': min,
-                'distribution': "Normal" if normal[0] < normal[1][0] else "Not Normal",
+                'distribution': normal,
                 'outliers': outliers,
                 'type': type,
-                'vis': vis
+                'vis': vis,
+                'skew': skew,
+                'kurtosis': kurtosis
             })
 
         return {

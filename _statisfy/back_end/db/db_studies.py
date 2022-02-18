@@ -18,7 +18,7 @@ class StudiesBackbone(DatabaseBackbone):
                 study_description = kwargs['study_description']
             )
             
-            for col in kwargs['columns'].split(','): # temp
+            for col in kwargs['columns']:
                 self.add_column(kwargs['_id'], col)
             
             for var_name, var_val in kwargs['variables']:
@@ -128,7 +128,7 @@ class StudiesBackbone(DatabaseBackbone):
                 "variables",
                 study_id = rid
             )
-            
+
             res = []
             
             for id, var_name, var_value in fetched:

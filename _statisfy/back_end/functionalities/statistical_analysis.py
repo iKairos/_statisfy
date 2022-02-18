@@ -47,7 +47,7 @@ def pearsonr(x: np.array, y: np.array):
 
     if n != len(y):
         raise ValueError(f"Dataset size is not equal. Size {len(x)} not equal to {len(y)}.")
-    
+    print(n, len(y))
     x_num = x - x.mean()
     y_num = y - y.mean()
     
@@ -59,7 +59,7 @@ def pearsonr(x: np.array, y: np.array):
     r = num / den
     t = r * np.sqrt((n-2)/(1-r**2))
     p = 2 * sp.t.sf(np.abs(t), n-2)
-
+    
     return (
         ('R Coefficient', r[0][0]), ('P-value', p[0][0]), ('SSxy', num), ('SSx', SSx), ('SSy', SSy),
         ('X Mean', x.mean()), ('Y Mean', y.mean()), ('Numerator', num), ('Denominator', den[0][0])

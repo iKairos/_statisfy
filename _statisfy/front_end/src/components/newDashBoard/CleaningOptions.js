@@ -27,6 +27,7 @@ export default function CleaningOptions(props) {
             current_option
         )
     };
+    
     const [nullReplace, setNullReplace] = useState('mean');
     const handleNullReplace = (event) => {
         setNullReplace(event.target.value);
@@ -39,11 +40,11 @@ export default function CleaningOptions(props) {
             }
 
             current_option.push(o);
-        })
+        });
  
         props.CallbackColumnOptions(
             current_option
-        )
+        );
     };
 
     const [outlierCleaning, setOutlier] = useState('nothing');
@@ -81,23 +82,8 @@ export default function CleaningOptions(props) {
         props.CallbackColumnOptions(
             current_option
         )
+        console.log(props.CleanOptions)
     };
-
-    //dummy functions for testing
-    //tanggalin ko muna functionality kase galing sa research originally yung props
-
-    const handleCleaningDummy = (event) => {
-        setCleaning(event.target.value);
-    }
-    const handleNullReplaceDummy = (event) => {
-        setNullReplace(event.target.value);
-    }
-    const handleOutlierDummy = (event) => {
-        setOutlier(event.target.value);
-    }
-    const handleOutlierReplaceDummy = (event) => {
-        setOutlierReplace(event.target.value);
-    }
 
   return (
       <div className="resUpload_cleaning_container">
@@ -108,7 +94,7 @@ export default function CleaningOptions(props) {
                     aria-label="gender"
                     name="controlled-radio-buttons-group"
                     value={nullCleaning}
-                    onChange={handleCleaningDummy}
+                    onChange={handleCleaning}
                     color="secondary"
                 >
                     <FormControlLabel value="delete" control={<Radio color="secondary"/>} label="Delete Rows" color="secondary" />
@@ -120,7 +106,7 @@ export default function CleaningOptions(props) {
                                     aria-label="gender"
                                     name="controlled-radio-buttons-group"
                                     value={nullReplace}
-                                    onChange={handleNullReplaceDummy}
+                                    onChange={handleNullReplace}
                                     color="secondary"
                                 >
                                     <FormControlLabel value="mean" control={<Radio color="secondary"/>} label="Mean" color="secondary" />
@@ -141,7 +127,7 @@ export default function CleaningOptions(props) {
                     aria-label="gender"
                     name="controlled-radio-buttons-group"
                     value={outlierCleaning}
-                    onChange={handleOutlierDummy}
+                    onChange={handleOutlier}
                     color="secondary"
                 >
                     <FormControlLabel value="delete" control={<Radio color="secondary"/>} label="Delete Rows" color="secondary" />
@@ -153,7 +139,7 @@ export default function CleaningOptions(props) {
                                 aria-label="gender"
                                 name="controlled-radio-buttons-group"
                                 value={outlierReplace}
-                                onChange={handleOutlierReplaceDummy}
+                                onChange={handleOutlierReplace}
                                 color="secondary"
                             >
                                 <FormControlLabel value="mean" control={<Radio color="secondary"/>} label="Mean" color="secondary" />

@@ -78,6 +78,10 @@ export default function ResStudies(props){
     const [error, setError] = useState();
     const [isOpenErrorSnackbar, setOpenErrorSnackbar] = useState(false);
 
+    const [callbackColumnsCleanOptions, setCallbackColumnsCleanOptions] = useState([]);
+
+    
+
     const [open, setOpen] = React.useState(false);
 
     const [backdropOpen, setBackdropOpen] = useState(false);
@@ -175,10 +179,26 @@ export default function ResStudies(props){
         formData.append("created_at", new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, ''));
         formData.append("columns", studyColumns);
         formData.append("study_description", studyDesc);
+        formData.append("options", callbackColumnsCleanOptions);
 
-        dispatch(saveStudy(formData));
+        const dataObject = {
+            'study_name': studyName,
+            'research_id': researchGetRes.data._id,
+            'created_by': props.User,
+            'test_type': methodChosen,
+            'created_at': new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+            'columns': studyColumns,
+            'study_description': studyDesc,
+            'options': callbackColumnsCleanOptions
+        };
 
-        if(saveStudyRes?.code == "STUDY_WRONG_VAR_COUNT"){
+        dispatch(saveStudy(dataObject));
+
+        if(saveStudyRes?.code === "STUDY_WRONG_VAR_COUNT"){
+            setError(saveStudyRes?.error);
+            setOpenErrorSnackbar(true);
+            return;
+        }else if(saveStudyRes?.code === "STUDY_DATA_HAS_NULL"){
             setError(saveStudyRes?.error);
             setOpenErrorSnackbar(true);
             return;
@@ -193,6 +213,23 @@ export default function ResStudies(props){
             selectedColumns.push(datasetDetails.details[id].column)
         });
 
+        setCallbackColumnsCleanOptions(selectedColumns.map(col => 
+            {
+              return {
+                'column': col,
+                'normalize': false,
+                'null_option': {
+                  'method': 'nothing',
+                  'replace_by': 'mean'
+                },
+                'outlier_option': {
+                  'method': 'nothing',
+                  'replace_by': 'mean'
+                }
+              }
+            }  
+          ));
+
         setStudyColumns(selectedColumns);
 
         if(selectedColumns.length === 1){
@@ -206,7 +243,6 @@ export default function ResStudies(props){
         }
 
     }
-
 
     const action = (
         <React.Fragment>
@@ -276,7 +312,7 @@ export default function ResStudies(props){
         );
     };
     const nextScreen = () => {
-        console.log(studyName.length, studyDesc.length)
+
         if(showActive === 1){
             if(studyName.length === 0 || studyDesc.length === 0){
                 setError("Please name and describe your study.");
@@ -535,21 +571,12 @@ export default function ResStudies(props){
                                                         }
                                                     })
                                             
-                                                    return <DataTypeNormalize details={data}/>;
+                                                    return <DataTypeNormalize details={data} options={callbackColumnsCleanOptions} setOptions={setCallbackColumnsCleanOptions}/>;
                                                 })
                                             }
                                         </div>
-
-                                       
-        
-                                        
                                     </div>
-                                    
-                                
                                 }
-
-
-                               
                             </Box>
                         }
                         {showActive === 3 &&

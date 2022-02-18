@@ -17,11 +17,10 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import CleaningOptions from "../newDashBoard/CleaningOptions";
 import { Bar, Doughnut } from "react-chartjs-2";
 import React from 'react';
-import { Bar, Doughnut } from "react-chartjs-2";
 import { iqrTooltip } from "../../constants/stringConstants";
 import {CategoryScale , 
     Chart as ChartJS,
@@ -48,6 +47,7 @@ ChartJS.register(
 export default function DataTypeNormalize(props){
     const matches = useMediaQuery('(min-width:900px)');
     const [modify, setModify] = useState(false);
+    const [normalize, setNormalize] = useState(false);
 
     const handleModify = () =>{
         setModify(!modify);
@@ -64,7 +64,23 @@ export default function DataTypeNormalize(props){
         }
     }
 
-    
+    const handleNormalize = (e) => {
+        setNormalize(e.target.checked);
+        const current_option = []
+        
+        props.options.forEach(option => {
+            const o = option;
+            if(o.column === props.details.column){
+                o['normalize'] = e.target.checked;
+            }
+
+            current_option.push(o);
+        })
+
+        props.setOptions(
+            current_option
+        )
+    }
 
     const [datatype, setDataType] = useState("Nominal");
 
@@ -75,7 +91,7 @@ export default function DataTypeNormalize(props){
     return(
         <div className="Datatype_container">
             <div className="Datatype_header">
-                <Typography variant="h5">Variable Names</Typography>
+                <Typography variant="h5">{props.details.column}</Typography>
                 
                 <IconButton 
                     sx={{position:"absolute", right:"0", top:"0", margin:"0.5rem"}} 
@@ -88,7 +104,7 @@ export default function DataTypeNormalize(props){
                 </IconButton>
             </div>
             <div className="Datatype_graph">
-                <Typography>Distribution Table</Typography>
+                
                 {
                         props.details.type === "numerical" && 
                         <Bar
@@ -177,10 +193,10 @@ export default function DataTypeNormalize(props){
                     <Typography>{props.details.type}</Typography>
                     
                     <Dialog disableEscapeKeyDown open={modifyDataType} onClose={handleCloseDataType}>
-                        <DialogTitle>Modify Variable</DialogTitle>
+                        <DialogTitle>Modify {props.details.column}</DialogTitle>
                         <DialogContent>
                             <Typography>Data Distribution</Typography>
-                            <FormControlLabel control={<Switch defaultChecked color="secondary"/>} label="Normalize" />
+                            <FormControlLabel control={<Switch onChange={handleNormalize} color="secondary"/>} label="Normalize" />
 
                             <Typography>Modify Data Type</Typography>
                             <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -203,7 +219,7 @@ export default function DataTypeNormalize(props){
                             </Box>
 
                             <Typography> Clean data</Typography>
-                            <CleaningOptions/>
+                            <CleaningOptions CleanOptions={props.options} CallbackColumnOptions={props.setOptions} Variable={props.details.column}/>
                         </DialogContent>
                         <DialogActions>
                         <Button onClick={handleCloseDataType} color="secondary">Cancel</Button>

@@ -127,7 +127,7 @@ def add_research():
 @cross_origin()
 def add_study():
     try:
-        data = request.form 
+        data = request.get_json()
 
         uuid = randint(10000000, 99999999)
             
@@ -140,7 +140,7 @@ def add_study():
 
             if not study.is_registered:
                 break
-        
+
         compute_res = None
         interpretation = []
         
@@ -148,8 +148,50 @@ def add_study():
         
         df = pd.read_csv(os.path.join(dirname(realpath(__file__)), '..\\temp\\datasets\\' + research.dataset_directory), delimiter=research.delimiter)
         
-        columns = data['columns'].split(',')
-        
+        columns = data['columns']
+        options = data['options']
+        for col in columns:
+
+            for option in options:
+                if option['column'] == col:
+                    if option['null_option']['method'] == 'delete':
+                        df.dropna(subset=[col], inplace=True)
+                    elif option['null_option']['method'] == 'replace':
+                        if option['null_option']['replace_by'] == 'mean':
+                            df[col].fillna(df[col].mean(), inplace=True)
+                        elif option['null_option']['replace_by'] == 'median':
+                            df[col].fillna(df[col].median(), inplace=True)
+                        elif option['null_option']['replace_by'] == 'mode':
+                            df[col].fillna(df[col].mode(), inplace=True)
+                    elif option['null_option']['method'] == 'nothing':
+                        pass
+                    
+                    if df[col].isnull().values.any():
+                        return {
+                            'code': 'STUDY_DATA_HAS_NULL',
+                            'error': f'Statisfy detected null values on the variable {col} which may be detrimental to the computation process. Please clean your dataset first.'
+                        }
+                    
+                    low = df[col].quantile(0.10)
+                    hi = df[col].quantile(0.90)
+                    #print(len(df[col][(df[col] < low) | (df[col] > hi)]), col, df[col].skew())
+                    if option['outlier_option']['method'] == 'delete':
+                        index = df[col][(df[col] < low) | (df[col] > hi)].index 
+                        df.drop(index, inplace=True)
+                    elif option['outlier_option']['method'] == 'replace':
+                        if option['outlier_option']['method'] == 'mean':
+                            df[col] = np.where(df[col] < low, df[col].mean(), df[col])
+                            df[col] = np.where(df[col] > hi, df[col].mean(), df[col])
+                        elif option['outlier_option']['method'] == 'median':
+                            df[col] = np.where(df[col] < low, df[col].median(), df[col])
+                            df[col] = np.where(df[col] > hi, df[col].median(), df[col])
+                        elif option['outlier_option']['method'] == 'mode':
+                            df[col] = np.where(df[col] < low, df[col].mode(), df[col])
+                            df[col] = np.where(df[col] > hi, df[col].mode(), df[col])
+                    #print(len(df[col][(df[col] < low) | (df[col] > hi)]), col, df[col].skew())
+                    elif option['null_option']['method'] == 'nothing':
+                        pass
+
         if data['test_type'] == 'Pearson R Correlation Test':
             if len(columns) != 2:
                 return {
@@ -160,7 +202,7 @@ def add_study():
             compute_res = pearsonr(df[columns[0]], df[columns[1]])
 
             interpretation = interpret(data['test_type'], compute_res)
-        
+
         Study.new_study(
             _id = uuid,
             study_name = data['study_name'],
@@ -179,10 +221,7 @@ def add_study():
         }
 
     except Exception as e:
-        return {
-            'code': 'STUDY_ADD_FAIL',
-            'error': str(e)
-        }
+        raise e
 
 @app.route("/api/research/study/fetch", methods=["POST"])
 @cross_origin()
@@ -206,7 +245,4 @@ def get_studies():
             'data': list(res_data),
         }
     except Exception as e:
-        return {
-            'code': 'STUDY_GET_FAIL',
-            'error': str(e)
-        }
+        raise e
