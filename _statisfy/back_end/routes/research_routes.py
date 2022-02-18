@@ -174,7 +174,7 @@ def add_study():
                     
                     low = df[col].quantile(0.10)
                     hi = df[col].quantile(0.90)
-                    #print(len(df[col][(df[col] < low) | (df[col] > hi)]), col, df[col].skew())
+
                     if option['outlier_option']['method'] == 'delete':
                         index = df[col][(df[col] < low) | (df[col] > hi)].index 
                         df.drop(index, inplace=True)
@@ -200,8 +200,6 @@ def add_study():
                 }
                 
             compute_res = pearsonr(df[columns[0]], df[columns[1]])
-
-            interpretation = interpret(data['test_type'], compute_res)
 
         Study.new_study(
             _id = uuid,

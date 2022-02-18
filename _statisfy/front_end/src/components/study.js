@@ -87,7 +87,6 @@ export default function Study(props){
         },
       };
 
-   // const attributes = props.attribute
     return(
         <div className ="Study">
             <div className = "Study_header">
@@ -99,7 +98,7 @@ export default function Study(props){
                     <Box sx = {{ 
                         minWidth: 100,
                         width: '1fr',
-                        }}>
+                    }}>
                         <Tabs
                             value={studyPage}
                             onChange={switchStudyPage}
@@ -142,53 +141,52 @@ export default function Study(props){
                     </div>
                 }
                 {studyPage === 3 &&
-                    <div className = "Study_content_graphs">
-                        {
-                            props.data[8].map(([var_name, var_val]) => {
-                               return(
-                                   <>
-                                   {var_name === "R Coefficient"
-                                    ?(<BarCor value = {var_val}/>)
-                                    :null
-                                   }
-                                   </>
-                               ) 
-                            })
-                        }
+                        <div className = "Study_content_graphs">
+                            {
+                                props.data[8].map(([var_name, var_val]) => {
+                                return(
+                                    <>
+                                    {var_name === "R Coefficient"
+                                        ?(<BarCor value = {var_val}/>)
+                                        :null
+                                    }
+                                    </>
+                                ) 
+                                })
+                            }
                         <div className = "Study_cards_container">       
-                        {
-                            props.data[8].map(([var_name, var_val]) => {
-                                if(blackListedVariables.includes(var_name)){
-                                    return null;
-                                }
-                                
-                                return (
-                                    <ResultCards
-                                        value = {var_val.toFixed(4)}
-                                        variable = {var_name}
-                                    />
-                                )
-                            })
-                            
-                        }
+                            {
+                                props.data[8].map(([var_name, var_val]) => {
+                                    if(blackListedVariables.includes(var_name)){
+                                        return null;
+                                    }
+                                    
+                                    return (
+                                        <ResultCards
+                                            value = {var_val.toFixed(4)}
+                                            variable = {var_name}
+                                        />
+                                    )
+                                })
+                            }
                         </div>
-                        {
-                            props.data[5] === "Pearson R Correlation Test" ? 
-                                <Scatter data={{
-                                    label: props.data[7],
-                                    datasets: [
-                                      {
-                                        label: `(${props.data[7][0]},${props.data[7][1]})`,
-                                        data: datasetFile?.data.map(row => {
-                                            var filter = _.pick(row, props.data[7]);
-                                            return {x: filter[props.data[7][0]], y: filter[props.data[7][1]]}
-                                        }),
-                                        backgroundColor: 'rgba(167, 66, 197, 1)',
-                                      },
-                                    ],
-                                  }} options={options}/> 
-                            : null
-                        }
+                            {
+                                props.data[5] === "Pearson R Correlation Test" ? 
+                                    <Scatter data={{
+                                        label: props.data[7],
+                                        datasets: [
+                                        {
+                                            label: `(${props.data[7][0]},${props.data[7][1]})`,
+                                            data: datasetFile?.data.map(row => {
+                                                var filter = _.pick(row, props.data[7]);
+                                                return {x: filter[props.data[7][0]], y: filter[props.data[7][1]]}
+                                            }),
+                                            backgroundColor: 'rgba(167, 66, 197, 1)',
+                                        },
+                                        ],
+                                    }} options={options}/> 
+                                : null
+                            }
                     </div>
                 }
                 {studyPage === 4 &&
