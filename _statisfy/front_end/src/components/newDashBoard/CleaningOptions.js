@@ -82,7 +82,6 @@ export default function CleaningOptions(props) {
         props.CallbackColumnOptions(
             current_option
         )
-        console.log(props.CleanOptions)
     };
 
   return (

@@ -245,6 +245,10 @@ export default function DataTypeNormalize(props){
                         </Tooltip>
                     </Typography>
                     <Typography>{props.details.outliers}</Typography>
+                    <Typography sx={{fontWeight:"550"}}>Skew</Typography>
+                    <Typography>{props.details.skew}</Typography>
+                    <Typography sx={{fontWeight:"550"}}>Kurtosis</Typography>
+                    <Typography>{props.details.kurtosis}</Typography>
                 </div>
 
                 
