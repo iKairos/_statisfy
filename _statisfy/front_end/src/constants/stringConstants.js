@@ -46,4 +46,4 @@ export const studySuccess = "Study successfuly created! Check the results of you
 export const userUpdateSuccessTitle = "Information Saved!"
 export const userUpdateSuccess = "Profile details successfully edited!"
 
-export const iqrTooltip = "Interquartile range (IQR) is a measure of variability based on the statistical dispersion of the data. IQR can be used to identify outliers by specifying the upper and lower boundaries of your data based on their quartile ranges and datapoints that are outside that range are considered to be outliers.";
+export const iqrTooltip = "Determined using Interquartile range (IQR). IQR is a measure of variability based on the statistical dispersion of the data. IQR can be used to identify outliers by specifying the upper and lower boundaries of your data based on their quartile ranges and datapoints that are outside that range are considered to be outliers.";
