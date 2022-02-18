@@ -105,6 +105,7 @@ export default function ColumnGraphs(props){
                               }}
 
                               options={{
+                                maintainAspectRatio: false,
                                 responsive: true,
                                 plugins: {
                                     legend: {

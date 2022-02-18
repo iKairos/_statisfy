@@ -1,7 +1,5 @@
 import "../StyleSheets/studyfolder/study.css"
 import { Button, CircularProgress, Typography } from "@mui/material";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -31,6 +29,7 @@ import ResultCards from "./newDashBoard/ResultCards";
 import CorrelationDegree from "./CorrelationDegree";
 import BarCor from "./newDashBoard/bar";
 import Computation from "./studyComponents/Computation"
+import StudyDetails from "./studyComponents/studyDetails"
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, Title);
 
@@ -122,17 +121,11 @@ export default function Study(props){
             <div className = "Study_content">
                 {studyPage === 1 &&
                     <div className = "Study_content_details">
-                        <h6>Variables</h6>
-                        {typeof datasetFile !== 'undefined' ? 
-                            <MemoizedTable
-                                data={datasetFile.data.map(row => {
-                                    return _.pick(row, props.data[7]);
-                                })} 
-                                Header={true} 
-                                rowNumber={15}
-                                checked={false}
-                            /> : <CircularProgress color="info" thickness={2.5} size={30}/>
-                        }
+                        <StudyDetails
+                            data = {datasetFile.data.map(row => {
+                                return _.pick(row, props.data[7]);
+                            })}
+                        />
                     </div>
                 }
                 {studyPage === 2 &&

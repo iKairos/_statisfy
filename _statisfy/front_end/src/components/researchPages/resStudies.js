@@ -9,6 +9,7 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
+
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
@@ -36,6 +37,8 @@ import ScienceIcon from '@mui/icons-material/Science';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import SummarizeIcon from '@mui/icons-material/Summarize';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -474,9 +477,7 @@ export default function ResStudies(props){
                             component="form"
                             noValidate
                             autoComplete="off"
-                            
                             className = "StudyTitle"
-                            
                             >
                                 <div>
                                     <TextField
@@ -510,7 +511,10 @@ export default function ResStudies(props){
                         }
                         {showActive === 2 &&
                             <Box className = "StudyTitle">
-                                <Typography>Select Tool:</Typography>
+                                <Alert icon={tool !== "" ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem"}}>
+                                    Select your preferred tool
+                                </Alert>
+                                
                                 <div className="resList_tools">
                                     <ToolCard
                                         Title = "Statistical Tool"
@@ -532,6 +536,9 @@ export default function ResStudies(props){
                                 {tool === "Statistical Method" &&
                                     <div className="resList_column">
                                         <div style={{paddingBottom:"1rem"}}>
+                                            <Alert icon={purpose !== "" ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem"}}>
+                                                Select the purpose of the analysis
+                                            </Alert>
                                             <FormControl sx={{ width:"100%"}}>
                                                 <InputLabel id="demo-simple-select-helper-label" color = "secondary">Purpose of Analysis</InputLabel>
                                                 <Select
@@ -549,6 +556,12 @@ export default function ResStudies(props){
                                             </FormControl>
 
                                         </div>
+                                        {typeof datasetDetails !== 'undefined' ? 
+                                            <Alert icon={purpose !== "" ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem", marginTop:"2rem"}}>
+                                                Select variables to be processed
+                                            </Alert>
+                                            :null
+                                        }
                                         {typeof datasetDetails !== 'undefined' ? 
                                             <MemoizedTable
                                                 data={datasetDetails.details} 

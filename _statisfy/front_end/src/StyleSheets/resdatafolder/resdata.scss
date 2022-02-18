@@ -122,6 +122,7 @@ $maxwidth: 40rem;
   &_graph {
     padding-top: 1rem;
     width: 1fr;
+    max-height: 15rem;
   }
 }
 @media screen and (min-width: 1100px) {

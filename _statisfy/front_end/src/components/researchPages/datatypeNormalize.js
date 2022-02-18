@@ -73,7 +73,6 @@ export default function DataTypeNormalize(props){
             if(o.column === props.details.column){
                 o['normalize'] = e.target.checked;
             }
-
             current_option.push(o);
         })
 
@@ -117,13 +116,15 @@ export default function DataTypeNormalize(props){
                                         categoryPercentage: 1.0,
                                         backgroundColor: 'rgba(167, 66, 197, 0.2)',
                                         borderColor: 'rgba(167, 66, 197, 1)',
-                                        borderWidth: 0.5
+                                        borderWidth: 0.5,
+                                        height: '15rem'
                                     },
                                 ],
                                 labels: props.details.vis.map(i => i[0])
                             }}
 
                             options={{
+                                    maintainAspectRatio: false,
                                     responsive: true,
                                     plugins: {
                                         legend: {
@@ -147,7 +148,7 @@ export default function DataTypeNormalize(props){
                                             grid: {
                                                 display: false,
                                                 drawBorder: false,
-                                            }
+                                            },
                                         },
                                     },
                                     
@@ -174,6 +175,7 @@ export default function DataTypeNormalize(props){
                               }}
 
                               options={{
+                                maintainAspectRatio: false,
                                 responsive: true,
                                 plugins: {
                                     legend: {
@@ -234,7 +236,7 @@ export default function DataTypeNormalize(props){
                     <Typography sx={{fontWeight:"550"}}>Null Values</Typography>
                     <Typography>{props.details.null_count}</Typography>
                     <Typography sx={{fontWeight:"550"}}>
-                        Outliers (IQR method)
+                        Outliers 
                         <Tooltip
                             title={iqrTooltip}
                             placement="bottom"
