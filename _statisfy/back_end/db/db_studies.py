@@ -23,11 +23,33 @@ class StudiesBackbone(DatabaseBackbone):
             
             for var_name, var_val in kwargs['variables']:
                 self.add_variable(kwargs['_id'], var_name, var_val)
+            
+            for option in kwargs['options']:
+                self.append_row(
+                    "studies_clean_options",
+                    study_id = kwargs['_id'],
+                    _column = option['column'],
+                    _normalize = 'T' if option['normalize'] else 'F',
+                    null_method = option['null_option']['method'],
+                    null_replace = option['null_option']['replace_by'],
+                    outlier_method = option['outlier_option']['method'],
+                    outlier_replace = option['outlier_option']['replace_by']
+                )
+            
+            for change in kwargs['changes']:
+                self.append_row(
+                    "studies_cleaning_stats",
+                    _column = change['column'],
+                    study_id = kwargs['_id'],
+                    null_deleted = change['null_deleted'],
+                    null_replaced = change['null_replaced'],
+                    outlier_deleted = change['outlier_deleted'],
+                    outlier_replaced = change['outlier_replaced']
+                )
 
             return True, res
         except Exception as e:
-            print(e)
-            return False
+            raise e
     
     def is_registered(self, rid):
         try:
@@ -135,6 +157,25 @@ class StudiesBackbone(DatabaseBackbone):
                 res.append((var_name, float(var_value)))
             
             return tuple(res)
+        except Exception as e:
+            print(e)
+            return False
+    
+    def get_clean_stats(self, rid, column):
+        try:
+            fetched = self.fetch_row(
+                "studies_cleaning_stats",
+                study_id = rid,
+                _column = column
+            )[0]
+
+            return {
+                'column': fetched[1],
+                'null_deleted': fetched[2],
+                'null_replaced': fetched[3],
+                'outlier_deleted': fetched[4],
+                'outlier_replaced': fetched[5]
+            }
         except Exception as e:
             print(e)
             return False

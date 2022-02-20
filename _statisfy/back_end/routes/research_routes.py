@@ -9,7 +9,10 @@ from os.path import dirname, realpath
 from functionalities.statistical_analysis import *
 from functionalities.interpretation import interpret
 import pandas as pd
+import warnings
 import os
+
+warnings.filterwarnings('ignore')
 
 @app.route("/api/research/<id>")
 @cross_origin()
@@ -150,22 +153,30 @@ def add_study():
         
         columns = data['columns']
         options = data['options']
-        for col in columns:
 
+        changes = []
+        null_deleted = 0 
+        null_replaced = 0
+        outlier_deleted = 0
+        outlier_replaced = 0
+        for col in columns:
             for option in options:
                 if option['column'] == col:
                     if option['null_option']['method'] == 'delete':
+                        init_rows = int(df.shape[0])
                         df.dropna(subset=[col], inplace=True)
+                        null_deleted = init_rows - int(df.shape[0])
                     elif option['null_option']['method'] == 'replace':
+                        init_na = df[col].isna().sum()
                         if option['null_option']['replace_by'] == 'mean':
                             df[col].fillna(df[col].mean(), inplace=True)
                         elif option['null_option']['replace_by'] == 'median':
                             df[col].fillna(df[col].median(), inplace=True)
                         elif option['null_option']['replace_by'] == 'mode':
                             df[col].fillna(df[col].mode(), inplace=True)
+                        null_replaced = init_na - df[col].isna().sum()
                     elif option['null_option']['method'] == 'nothing':
                         pass
-                    
                     if df[col].isnull().values.any():
                         return {
                             'code': 'STUDY_DATA_HAS_NULL',
@@ -177,8 +188,11 @@ def add_study():
 
                     if option['outlier_option']['method'] == 'delete':
                         index = df[col][(df[col] < low) | (df[col] > hi)].index 
+                        init_rows = int(df.shape[0])
                         df.drop(index, inplace=True)
+                        outlier_deleted = init_rows - int(df.shape[0]) 
                     elif option['outlier_option']['method'] == 'replace':
+                        init_outliers = len(df[col][(df[col] < low) | (df[col] > hi)])
                         if option['outlier_option']['method'] == 'mean':
                             df[col] = np.where(df[col] < low, df[col].mean(), df[col])
                             df[col] = np.where(df[col] > hi, df[col].mean(), df[col])
@@ -188,9 +202,22 @@ def add_study():
                         elif option['outlier_option']['method'] == 'mode':
                             df[col] = np.where(df[col] < low, df[col].mode(), df[col])
                             df[col] = np.where(df[col] > hi, df[col].mode(), df[col])
-                    #print(len(df[col][(df[col] < low) | (df[col] > hi)]), col, df[col].skew())
+                        outlier_replaced = init_outliers - (init_outliers - len(df[col][(df[col] < low) | (df[col] > hi)]))
                     elif option['null_option']['method'] == 'nothing':
                         pass
+            changes.append(
+                {
+                    'column': col,
+                    'null_deleted': null_deleted,
+                    'null_replaced': null_replaced,
+                    'outlier_deleted': outlier_deleted,
+                    'outlier_replaced': outlier_replaced
+                }
+            )
+            null_deleted = 0 
+            null_replaced = 0
+            outlier_deleted = 0
+            outlier_replaced = 0
 
         if data['test_type'] == 'Pearson R Correlation Test':
             if len(columns) != 2:
@@ -210,7 +237,9 @@ def add_study():
             created_at = data['created_at'],
             columns = data['columns'],
             study_description = data['study_description'],
-            variables = compute_res
+            variables = compute_res,
+            options = data['options'],
+            changes = changes
         )
 
         return {
@@ -236,6 +265,10 @@ def get_studies():
             i.append(list(Study(i[0]).columns))
             i.append(list(Study(i[0]).variables))
             i.append(interpret(Study(i[0]).test_type, list(Study(i[0]).variables)))
+            temp = []
+            for col in Study(i[0]).columns:
+                temp.append(Study(i[0]).clean_stats(col))
+            i.append(temp)
             res_data.append(list(i))
 
         return {

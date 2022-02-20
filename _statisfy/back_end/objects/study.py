@@ -41,6 +41,9 @@ class Study:
     def variables(self):
         return self.db.get_variables(self.id)
     
+    def clean_stats(self, column):
+        return self.db.get_clean_stats(self.id, column)
+    
     def set_study_name(self, name):
         return self.db.set_study_name(self.id, name)
     
@@ -59,5 +62,7 @@ class Study:
             created_at = kwargs['created_at'],
             columns = kwargs['columns'],
             study_description = kwargs['study_description'],
-            variables = kwargs['variables']
+            variables = kwargs['variables'],
+            options = kwargs['options'],
+            changes = kwargs['changes']
         )

@@ -47,7 +47,7 @@ def pearsonr(x: np.array, y: np.array):
 
     if n != len(y):
         raise ValueError(f"Dataset size is not equal. Size {len(x)} not equal to {len(y)}.")
-    print(n, len(y))
+
     x_num = x - x.mean()
     y_num = y - y.mean()
     

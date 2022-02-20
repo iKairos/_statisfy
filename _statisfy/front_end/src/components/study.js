@@ -125,6 +125,9 @@ export default function Study(props){
                             data = {datasetFile.data.map(row => {
                                 return _.pick(row, props.data[7]);
                             })}
+
+                            details = {props.details}
+                            changes = {props.data[10]}
                         />
                     </div>
                 }

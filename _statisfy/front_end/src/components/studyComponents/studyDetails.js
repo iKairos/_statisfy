@@ -66,22 +66,28 @@ export default function StudyDetails(props){
                     /> : <CircularProgress color="info" thickness={2.5} size={30}/>
                 }
             </div>
-            
         </div>
 
-        <Typography variant="h6">Data Changes</Typography>
+        <Typography variant="h6">Data Preprocessing Results</Typography>
 
         <div className="Study_details_changes">
-            <Typography>Number of Rows: 2 <DoubleArrowIcon/> 1</Typography>
+            <Typography>Number of Rows: {props.details?.rows} <DoubleArrowIcon/> 1</Typography>
             <Typography>Data Distribution: Not normal <DoubleArrowIcon/> Normal </Typography>
-            <Typography>Null Value Cleaning Method : Deletion</Typography>
-            <Typography>Null Values: 100 <DoubleArrowIcon/> 0 </Typography>
-            <Typography>Outliers Cleaning Method : Replacement with Mean</Typography>
-            <Typography>Outliers: 100 <DoubleArrowIcon/> 0 </Typography>
-            
+            <hr/>
+            {
+                props.changes.map(change => {
+                    return(
+                        <div>
+                            <Typography>Null Values Deleted in {change.column}: {change.null_deleted} row(s)</Typography>
+                            <Typography>Null Values Replaced in {change.column}: {change.null_replaced} row(s)</Typography>
+                            <Typography>Outliers Deleted in {change.column}: {change.outlier_deleted} row(s)</Typography>
+                            <Typography>Outliers Replaced in {change.column}: {change.outlier_replaced} row(s)</Typography>
+                            <hr/>
+                        </div>
+                    )
+                })
+            }
         </div>
-        
-
     </div>
   );  
 }

@@ -447,7 +447,7 @@ export default function ResStudies(props){
             ?(
                 <Fade in={selected}>
                     <div>
-                        <Study data={getStudyRes.data.filter(i => i[0] === selected)[0]}/>
+                        <Study data={getStudyRes.data.filter(i => i[0] === selected)[0]} details={datasetDetails}/>
                     </div>
                 </Fade>
             )
