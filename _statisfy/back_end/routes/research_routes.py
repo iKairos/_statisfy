@@ -174,7 +174,7 @@ def add_study():
                             df[col].fillna(df[col].median(), inplace=True)
                         elif option['null_option']['replace_by'] == 'mode':
                             df[col].fillna(df[col].mode(), inplace=True)
-                        null_replaced = init_na - df[col].isna().sum()
+                        null_replaced = int(init_na - df[col].isna().sum())
                     elif option['null_option']['method'] == 'nothing':
                         pass
                     if df[col].isnull().values.any():
@@ -205,6 +205,7 @@ def add_study():
                         outlier_replaced = init_outliers - (init_outliers - len(df[col][(df[col] < low) | (df[col] > hi)]))
                     elif option['null_option']['method'] == 'nothing':
                         pass
+
             changes.append(
                 {
                     'column': col,

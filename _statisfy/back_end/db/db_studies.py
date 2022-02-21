@@ -35,7 +35,6 @@ class StudiesBackbone(DatabaseBackbone):
                     outlier_method = option['outlier_option']['method'],
                     outlier_replace = option['outlier_option']['replace_by']
                 )
-            
             for change in kwargs['changes']:
                 self.append_row(
                     "studies_cleaning_stats",
