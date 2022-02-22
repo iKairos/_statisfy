@@ -5,26 +5,14 @@ import Navigator from "../navigator";
 
 import Button from '@mui/material/Button';
 import * as React from 'react';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
 
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {Skeleton, Stepper, Step, StepLabel, Typography } from "@mui/material";
 import { useState } from "react";
 import { status500, studyStepsString, studySuccess, studySuccessTitle } from "../../constants/stringConstants";
 import { makeStyles } from "@mui/styles";
-import Popover from '@mui/material/Popover';
 
-import InputLabel from "@mui/material/InputLabel";
-import FormHelperText from "@mui/material/FormHelperText";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -46,14 +34,18 @@ import Backdrop from '@mui/material/Backdrop';
 import clsx from 'clsx';
 
 import AllCards from "../AllCards";
+import StatisticalChoices from "./resStudiesSelections/statisticalChoices";
+import MachineLearningChoices from "./resStudiesSelections/machineLearningChoices";
 import StudyCard from "../StudyCard";
 import Study from "../study";
-import DataTypeNormalize from "./datatypeNormalize";
+import { StatisticalSelection } from "./resStudiesSelections/statisticalSelection";
+import { MachineLearningSelection } from "./resStudiesSelections/machineLearningSelection";
+
 import Checkbox from "../Checkbox";
 import { DataColumns } from "./dataColumns";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, CircularProgress, Fade, IconButton, Snackbar } from "@mui/material";
-import { DisplayTable, MemoizedTable } from "../DisplayTable";
+
 import { getStudy, saveStudy } from "../../actions/researchAction";
 
 import { Sorter } from "../sorter";
@@ -534,67 +526,43 @@ export default function ResStudies(props){
                                     />
                                 </div>
                                 {tool === "Statistical Method" &&
-                                    <div className="resList_column">
-                                        <div style={{paddingBottom:"1rem"}}>
-                                            <Alert icon={purpose !== "" ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem"}}>
-                                                Select the purpose of the analysis
-                                            </Alert>
-                                            <FormControl sx={{ width:"100%"}}>
-                                                <InputLabel id="demo-simple-select-helper-label" color = "secondary">Purpose of Analysis</InputLabel>
-                                                <Select
-                                                labelId="demo-simple-select-helper-label"
-                                                id="purposeSelector"
-                                                value={purpose}
-                                                label="Purpose of Analysis"
-                                                onChange={handlePurpose}
-                                                color = "secondary"
-                                                >
-                                                <MenuItem value="Relationship" onClick={(event) => setTags([event.target.innerText])}>Relationship</MenuItem>
-                                                <MenuItem value="Significant Differences" onClick={(event) => setTags([event.target.innerText])}>Significant Differences</MenuItem>
-                                                <MenuItem value="Univariate Analysis" onClick={(event) => setTags([event.target.innerText])}>Univariate Analysis</MenuItem>
-                                                </Select>
-                                            </FormControl>
-
-                                        </div>
-                                        {typeof datasetDetails !== 'undefined' ? 
-                                            <Alert icon={purpose !== "" ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem", marginTop:"2rem"}}>
-                                                Select variables to be processed
-                                            </Alert>
-                                            :null
-                                        }
-                                        {typeof datasetDetails !== 'undefined' ? 
-                                            <MemoizedTable
-                                                data={datasetDetails.details} 
-                                                Header={true} 
-                                                rowNumber={10}
-                                                checked={true}
-                                                callbackSetSelectedRows={callbackSetSelectedRows}
-                                            /> : <CircularProgress color="info" thickness={2.5} size={30}/>
-                                        }
-
-                                        <div className="Datatype">
-                                            {
-                                                studyColumns.map(col => {
-                                                    var data = {};
-                                            
-                                                    datasetDetails?.details?.forEach(deets => {
-                                                        if(deets.column === col){
-                                                            data = deets;
-                                                            return;
-                                                        }
-                                                    })
-                                            
-                                                    return <DataTypeNormalize details={data} options={callbackColumnsCleanOptions} setOptions={setCallbackColumnsCleanOptions}/>;
-                                                })
-                                            }
-                                        </div>
-                                    </div>
+                                    <StatisticalSelection
+                                        purpose = {purpose}
+                                        handlePurpose = {handlePurpose}
+                                        setTags = {setTags}
+                                        datasetDetails = {datasetDetails}
+                                        callbackSetSelectedRows = {callbackSetSelectedRows}
+                                        studyColumns = {studyColumns}
+                                        callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
+                                        setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
+                                    />
                                 }
+                                {tool === "Machine Learning" &&
+                                    <MachineLearningSelection
+                                        purpose = {purpose}
+                                        handlePurpose = {handlePurpose}
+                                        setTags = {setTags}
+                                        datasetDetails = {datasetDetails}
+                                        callbackSetSelectedRows = {callbackSetSelectedRows}
+                                        studyColumns = {studyColumns}
+                                        callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
+                                        setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
+                                    />
+                                }
+
+                                
                             </Box>
                         }
                         {showActive === 3 &&
-                                
-                            <AllCards tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
+                            <div>
+                                {tool === "Statistical Method" 
+                                    ? <StatisticalChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
+                                    : <MachineLearningChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
+                                }
+                            </div>
+                            
+                           
+                           
                         }
                          {showActive === 3 &&
                             <Button

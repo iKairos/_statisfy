@@ -77,12 +77,28 @@ export default function StudyDetails(props){
             {
                 props.changes.map(change => {
                     return(
-                        <div>
-                            <Typography>Null Values Deleted in {change.column}: {change.null_deleted} row(s)</Typography>
-                            <Typography>Null Values Replaced in {change.column}: {change.null_replaced} row(s)</Typography>
-                            <Typography>Outliers Deleted in {change.column}: {change.outlier_deleted} row(s)</Typography>
-                            <Typography>Outliers Replaced in {change.column}: {change.outlier_replaced} row(s)</Typography>
+                        <div className = "Study_details_changes_rows">
+                            <Typography>{change.column}</Typography>
+                            <div className="Study_details_changes_grid">
+                                <div className = "Study_details_changes_category">
+                                    <Typography>Null Values Deleted: </Typography>
+                                    <Typography>Null Values Replaced :</Typography>
+                                    <Typography>Outliers Deleted: </Typography>
+                                    <Typography>Outliers Replaced: </Typography>
+                                
+                                </div>
+
+                                <div className = "Study_details_changes_results">
+                                    <Typography>{change.null_deleted} row(s)</Typography>
+                                    <Typography>{change.null_replaced} row(s)</Typography>
+                                    <Typography>{change.outlier_deleted} row(s)</Typography>
+                                    <Typography>{change.outlier_replaced} row(s)</Typography>
+
+                                </div>
+
+                            </div>
                             <hr/>
+                            
                         </div>
                     )
                 })

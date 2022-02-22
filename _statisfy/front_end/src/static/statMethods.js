@@ -40,3 +40,9 @@ export const statMethods = [
         ["Multiple Variables", "Interval", "Ratio", "Ordinal", "Nominal", "Relationship"]
     ]
 ]
+
+export const MLTechniques = [
+    ["K-means Clustering", ["idk","dsa"]],
+    ["Linear Regression", ["idk","dsa"]],
+    ["Logistic Regression", ["idk","dsa"]]
+]

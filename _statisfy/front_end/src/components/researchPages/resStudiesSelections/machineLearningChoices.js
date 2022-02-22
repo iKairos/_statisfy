@@ -1,14 +1,14 @@
 import { func } from "prop-types";
-import { statMethods } from "../static/statMethods";
-import Card from "./Card";
+import { MLTechniques } from "../../../static/statMethods";
+import Card from "../../Card";
 import { useState } from "react";
 
 
-import "../StyleSheets/cardfolder/card.css"
+import "../../../StyleSheets/cardfolder/card.css"
 import { Typography } from "@mui/material";
 
-export default function AllCards(props){
-    const filtered = statMethods.filter(([name, tags]) => {
+export default function MachineLearningChoices(props){
+    const filtered = MLTechniques.filter(([name, tags]) => {
         return props.tags.every(tag => tags.includes(tag))
     })
 
@@ -31,7 +31,7 @@ export default function AllCards(props){
             <div className="statContainer_sub">
                 <Typography>All Methods</Typography>
                 {
-                    statMethods.map(([method,tags]) => {
+                    MLTechniques.map(([method,tags]) => {
                         return <Card title={method} display={props.display} Chosen={props.chosen} isFiltered = {false} handleHighlight = {handleHighlight} isClicked = {isClicked}/>
                     })
                 }
