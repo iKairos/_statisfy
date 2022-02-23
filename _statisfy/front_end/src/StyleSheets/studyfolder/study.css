@@ -116,6 +116,8 @@
 .Study_details_graph {
   width: 1fr;
   border: 1px solid #e0e0e0;
+  max-height: 25rem;
+  min-height: 20rem;
   border-radius: 0.25rem;
 }
 

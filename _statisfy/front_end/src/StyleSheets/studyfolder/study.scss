@@ -91,6 +91,8 @@ $maxwidth: 40rem;
     &_graph {
       width: 1fr;
       border: 1px solid rgb(224, 224, 224);
+      max-height: 25rem;
+      min-height: 20rem;
       border-radius: 0.25rem;
     }
     &_changes {
