@@ -59,7 +59,7 @@ const AccordionSummary = styled((props) => (
   
 
 export default function PearsonStep(props){
-    const pr = "$$r = \\frac{\\sum{(x_i-\\bar{x})\\sum{(y_i-\\bar{y})}}}{\\sqrt{\\sum{(x_i-\\bar{x})^2} \\sum{y_i-\\bar{y})^2}}}$$";
+    const pr = "$$r = \\frac{\\sum{(x_i-\\bar{x})\\sum{(y_i-\\bar{y})}}}{\\sqrt{\\sum{(x_i-\\bar{x})^2} \\sum({y_i-\\bar{y})^2}}}$$";
     const vars = {};
 
     props.variables.map(([var_name, var_value]) => {
