@@ -26,11 +26,6 @@ export default function UserProfile(props){
     const handleClose = () => {
         setOpen(false);
     };
-    const handleToggle = () => {
-        setOpen(!open);
-        setMessageTitle("");
-        setMessage("");
-    };
 
     const [newUsername, setNewUsername] = useState(props.user.username);
     const [newFirstName, setNewFirstName] = useState(props.user.first_name);
@@ -43,6 +38,12 @@ export default function UserProfile(props){
 
     const [message, setMessage] = useState();
     const [messageTitle, setMessageTitle] = useState();
+
+    const handleToggle = () => {
+        setOpen(!open);
+        setMessageTitle("");
+        setMessage("");
+    };
 
     const handleSave = () => {
         const formData = new FormData();
