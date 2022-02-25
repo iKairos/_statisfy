@@ -2,6 +2,7 @@ from __main__ import app
 from random import randint 
 from flask import request
 from flask_cors import cross_origin
+from db.db_blob import BlobDatabase
 from objects.study import Study
 from objects.user import User
 from objects.research import Research
@@ -91,16 +92,15 @@ def add_research():
                 break
 
         file = request.files['dataset']
+        file_name = f"{uuid}_{file.filename}"
 
-        UPLOADS_PATH = os.path.join(dirname(realpath(__file__)), '..\\temp\\datasets\\'+ f"{uuid}_{file.filename}")
-        
-        file.save(UPLOADS_PATH)
+        BlobDatabase.upload_dataset(file_name, file)
 
         res = Research.register_research(
             _id = uuid,
             research_name = data['research_name'],
             research_description = data['research_description'],
-            dataset = f"{uuid}_{file.filename}",
+            dataset = file_name,
             delimiter = data['delimiter'],
             author = data['author'],
             created_at = data['created_at']
@@ -149,7 +149,7 @@ def add_study():
         
         research = Research(data['research_id'])
         
-        df = pd.read_csv(os.path.join(dirname(realpath(__file__)), '..\\temp\\datasets\\' + research.dataset_directory), delimiter=research.delimiter)
+        df = pd.read_csv(BlobDatabase.get_dataset(research.dataset_directory), delimiter=research.delimiter)
         
         columns = data['columns']
         options = data['options']

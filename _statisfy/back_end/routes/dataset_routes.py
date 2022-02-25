@@ -2,10 +2,12 @@ from __main__ import app
 from flask import request, jsonify
 from flask.helpers import send_file
 from flask_cors import cross_origin
+from db.db_blob import BlobDatabase
 from functionalities.statistical_analysis import freq_dist
 from functionalities.statistical_analysis import anderson_test
 from scipy import stats
 import pandas as pd
+import urllib.request
 import numpy as np
 import os
 
@@ -18,7 +20,7 @@ def dataset_details():
         try:
             file = request.files['file']
         except:
-            file = data['filepath']
+            file = BlobDatabase.get_dataset(data['filepath'])
 
         df = pd.read_csv(file, delimiter=data['delimiter'])
         
@@ -44,16 +46,6 @@ def dataset_details():
                     normal = anderson_test(df[i])
                     normal = "Normal" if normal[0] < normal[1][4] else "Not Normal"
                     vis = freq_dist(df[i])
-                    """
-                    q1 = df[i].quantile(0.25)
-                    q3 = df[i].quantile(0.75)
-                    iqr = q3 - q1
-                    lower_lim = q1 - 1.5 * iqr
-                    upper_lim = q3 + 1.5 * iqr
-                    outliers_15_low = (df[i] < lower_lim)
-                    outliers_15_up = (df[i] > upper_lim)
-                    outliers = int(len(df[i][outliers_15_low | outliers_15_up]))
-                    """
                     low = df[i].quantile(0.10)
                     hi = df[i].quantile(0.90)
                     outliers = int(len(df[i][(df[i] < low) | (df[i] > hi)]))
@@ -105,18 +97,15 @@ def dataset_details():
 @cross_origin()
 def get_dataset(filename,cols):
     try:
-        directory = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..\\temp\\datasets\\')
-
-        df = pd.read_csv(directory+filename)
-        #df = df.head(50) if df.shape[0] > 50 else df
+        df = pd.read_csv(BlobDatabase.get_dataset(filename))
         df = df.fillna('')
 
         return {
             'code': 'DATASET_GET_SUCCESS',
             'data': df.to_dict(orient='records'),
             'filename': filename,
-            'filesize': os.path.getsize(directory+filename),
-            'directory': directory+filename
+            'filesize': urllib.request.urlopen('https://statisfyblobstorage.blob.core.windows.net/datasets/66692512_AEGISDataset.csv').length,
+            'directory': filename
         }
     except Exception as e:
         return {
