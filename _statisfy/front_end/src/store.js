@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import { getDatasetReducers, getStudyDatasetReducers, processDatasetReducers } from './reducers/datasetReducers';
-import { researchesGetReducers, researchGetReducers, researchSaveReducers, studyGetReducers, studySaveReducers } from './reducers/researchReducers';
+import { researchDeleteReducers, researchesGetReducers, researchGetReducers, researchSaveReducers, studyGetReducers, studySaveReducers } from './reducers/researchReducers';
 import { expireTokenReducers } from './reducers/tokenReducers';
 import {processTokenReducers, userDataReducers, userLoginReducers, userRegisterReducers, userUpdateReducers} from './reducers/userReducers';
 
@@ -21,8 +21,9 @@ const reducer = combineReducers({
     getStudyRes: studyGetReducers,
     researchesGet: researchesGetReducers,
     userUpdate: userUpdateReducers,
-    studyDatasetFile: getStudyDatasetReducers
-})
+    studyDatasetFile: getStudyDatasetReducers,
+    researchDelete: researchDeleteReducers
+});
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

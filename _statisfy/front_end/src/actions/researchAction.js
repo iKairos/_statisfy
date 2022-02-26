@@ -2,6 +2,9 @@ import {
     RESEARCHES_GET_FAIL,
     RESEARCHES_GET_REQUEST,
     RESEARCHES_GET_SUCCESS,
+    RESEARCH_DELETE_FAIL,
+    RESEARCH_DELETE_REQUEST,
+    RESEARCH_DELETE_SUCCESS,
     RESEARCH_GET_FAIL,
     RESEARCH_GET_REQUEST,
     RESEARCH_GET_SUCCESS,
@@ -78,6 +81,26 @@ export const getResearches = (id) => async(dispatch) => {
     }catch(error){
         dispatch({
             type:RESEARCHES_GET_FAIL,
+            payload:error.message
+        });
+    }
+}
+
+export const deleteResearch = (id) => async(dispatch) => {
+    dispatch({
+        type:RESEARCH_DELETE_REQUEST
+    });
+
+    try{
+        const {data} = await Axios.post('/api/research/delete', {_id: id});
+
+        dispatch({
+            type: RESEARCH_DELETE_SUCCESS, 
+            payload: data
+        });
+    }catch(error){
+        dispatch({
+            type:RESEARCH_DELETE_FAIL,
             payload:error.message
         });
     }

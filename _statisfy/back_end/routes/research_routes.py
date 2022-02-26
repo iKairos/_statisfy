@@ -255,6 +255,36 @@ def add_study():
     except Exception as e:
         raise e
 
+@app.route("/api/research/delete", methods=["POST"])
+@cross_origin()
+def delete_research():
+    try:
+        data = request.get_json()
+
+        research = Research(data['_id'])
+
+        studies = research.studies
+
+        for i in studies:
+            BlobDatabase.delete_study_dataset(f"{i[0]}_{research.dataset_directory}")
+        
+        BlobDatabase.delete_dataset(research.dataset_directory)
+
+        research_name = research.research_name
+
+        research.delete_research()
+
+        return {
+            'deleted_research': research_name,
+            'code': 'RESEARCH_DELETE_SUCCESS',
+            'message': f'Research {research_name} has been deleted successfully.'
+        }
+    except Exception as e:
+        return {
+            'code': 'RESEARCH_DELETE_FAILED',
+            'message': str(e)
+        }
+
 @app.route("/api/research/study/fetch", methods=["POST"])
 @cross_origin()
 def get_studies():

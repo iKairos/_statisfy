@@ -12,14 +12,15 @@ import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Fade, Skeleton, Stepper, Step, StepLabel, Grow, Alert, Typography, CircularProgress } from "@mui/material";
+import { Fade, Skeleton, Stepper, Step, StepLabel, Grow, Alert, Typography, CircularProgress, Snackbar, IconButton } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import clsx from 'clsx';
 import { status500, stepsString } from "../../constants/stringConstants";
 import { processUserToken } from "../../actions/userActions";
 import { processDataset } from "../../actions/datasetActions";
 import { getResearch, getResearches, saveResearch } from "../../actions/researchAction";
-
+import createHistory from 'history/createBrowserHistory';
+import CloseIcon from '@mui/icons-material/Close';
 
 import ScienceIcon from '@mui/icons-material/Science';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
@@ -38,7 +39,7 @@ import ToolCard from "./ToolCard";
 import ResearchUpload from "./ResearchUpload";
 import ResSummary from "./ResSummary";
 import ResCard from "../researchPages/resCard";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function ResearchList(props){
     
@@ -275,9 +276,6 @@ export default function ResearchList(props){
             });
             return;
         }
-        if(datasetDetails.error){
-            return;
-        }
         setShowActive(showActive + 1);
     }
     const prevScreen = () => {
@@ -324,8 +322,62 @@ export default function ResearchList(props){
         );
     };
 
+    const location = useLocation();
+    const [message, setMessage] = useState();
+
+    const handleCloseSnackbar = () => {
+        setOpenErrorSnackbar(false);
+    }
+
+    const [isOpenSnackbar, setOpenErrorSnackbar] = useState(false);
+
+    const action = (
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleCloseSnackbar}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+    );
+
+    React.useEffect(() => {
+        if(location.state){
+            setMessage(location.state.message);
+            setOpenErrorSnackbar(location.state.openSnackbar)
+        }
+
+        const history = createHistory();
+        history.replace();
+    }, [location]);
+
     return(
         <div className="resList_body_container">
+            {
+                message &&
+                <Snackbar
+                    open={isOpenSnackbar} 
+                    onClose={handleCloseSnackbar}
+                    action={action}
+                >
+                    <Alert severity="success" variant="filled">
+                        {message.body}
+                        <React.Fragment>
+                            <IconButton
+                                size="small"
+                                aria-label="close"
+                                color="inherit"
+                                onClick={handleCloseSnackbar}
+                            >
+                                <CloseIcon fontSize="small" />
+                            </IconButton>
+                        </React.Fragment>
+                    </Alert>
+                </Snackbar>
+            }
             {isAdding
             ?(
                 <div className="resList_body_add">

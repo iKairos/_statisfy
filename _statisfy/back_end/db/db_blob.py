@@ -39,3 +39,19 @@ class BlobDatabase:
             return blob_client.url
         except Exception as e :
             raise e 
+    
+    def delete_dataset(name):
+        try:
+            dataset_client = ContainerClient.from_connection_string(AZURE_STORAGE_CONN_STRING, AZURE_DATASETS_CONTAINER)
+
+            return dataset_client.delete_blob(name)
+        except Exception as e:
+            raise e 
+    
+    def delete_study_dataset(name):
+        try:
+            dataset_client = ContainerClient.from_connection_string(AZURE_STORAGE_CONN_STRING, AZURE_STUDY_DATASETS_CONTAINER)
+
+            return dataset_client.delete_blob(name)
+        except Exception as e:
+            raise e 

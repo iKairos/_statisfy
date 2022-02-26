@@ -216,3 +216,15 @@ class ResearchesBackbone(DatabaseBackbone):
         except Exception as e:
             print(e)
             return False
+    
+    def delete_research(self, rid):
+        try:
+            self.purge_row(
+                "researches",
+                _id = rid
+            )
+
+            return True
+        except Exception as e:
+            print(e)
+            return False

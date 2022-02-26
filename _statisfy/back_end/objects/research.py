@@ -67,3 +67,6 @@ class Research:
             delimiter = kwargs['delimiter'],
             created_at = kwargs['created_at']
         )
+    
+    def delete_research(self):
+        return self.db.delete_research(self.rid)

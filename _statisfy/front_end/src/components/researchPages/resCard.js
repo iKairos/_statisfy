@@ -1,12 +1,17 @@
 import "../../StyleSheets/studycardfolder/studycard.css"
-import { useState } from "react";
-import { IconButton, Button, Typography} from "@mui/material";
+import React, { useState } from "react";
+import { IconButton, Button, Typography, Snackbar, Alert} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Backdrop from '@mui/material/Backdrop';
+import CloseIcon from '@mui/icons-material/Close';
+import { useDispatch, useSelector } from "react-redux";
+import { deleteResearch, getResearches } from "../../actions/researchAction";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function ResCard(props){
 
     const [openBackdrop, setOpenBackdrop] = useState(false);
+    const [isOpenSnackbar, setOpenErrorSnackbar] = useState(false);
     const handleClose = () => {
         setOpenBackdrop(false);
     };
@@ -14,7 +19,33 @@ export default function ResCard(props){
         setOpenBackdrop(!openBackdrop);
     };
 
-   // const attributes = props.attribute
+    const dispatch = useDispatch();
+
+    const dataSelector = useSelector((state) => 
+        state.researchDelete
+    );
+    const { researchDeleteRes } = dataSelector;
+
+    const handleDelete = () => {
+        dispatch(deleteResearch(props._id));
+    };
+    
+    const history = useHistory();
+
+    if(researchDeleteRes?.code === "RESEARCH_DELETE_SUCCESS"){
+        history.push({
+            pathname: `/profile`,
+            state: {
+                message: {
+                    'body': researchDeleteRes.message
+                },
+                openSnackbar: true
+            }
+        });
+        history.go(0);
+        return;
+    }
+
     return(
         <div className ="StudyCard">
             <div className="StudyCard_title">
@@ -40,7 +71,7 @@ export default function ResCard(props){
                 <div className="StudyCard_confirmation">
                     <Typography variant="h6">Are you sure you want to delete the research "{props.title}"?</Typography>
                     <div className="StudyCard_confirmation_actions">
-                        <Button variant="contained" color="error">
+                        <Button variant="contained" color="secondary" onClick={handleDelete}>
                             Delete
                         </Button>
                         <Button variant="outlined" color="secondary">

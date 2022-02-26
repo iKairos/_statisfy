@@ -2,6 +2,9 @@ import {
     RESEARCHES_GET_FAIL,
     RESEARCHES_GET_REQUEST,
     RESEARCHES_GET_SUCCESS,
+    RESEARCH_DELETE_FAIL,
+    RESEARCH_DELETE_REQUEST,
+    RESEARCH_DELETE_SUCCESS,
     RESEARCH_GET_FAIL,
     RESEARCH_GET_REQUEST,
     RESEARCH_GET_SUCCESS,
@@ -57,6 +60,22 @@ export const researchesGetReducers = (state={researchesGetRes:{}}, action) => {
             return {loading: false, researchesGetRes: action.payload};
         
         case RESEARCHES_GET_FAIL:
+            return {loading: false, error: action.payload};
+        
+        default:
+            return state
+    }
+}
+
+export const researchDeleteReducers = (state={researchDeleteRes:{}}, action) => {
+    switch(action.type){
+        case RESEARCH_DELETE_REQUEST:
+            return {loading: true};
+        
+        case RESEARCH_DELETE_SUCCESS:
+            return {loading: false, researchDeleteRes: action.payload};
+        
+        case RESEARCH_DELETE_FAIL:
             return {loading: false, error: action.payload};
         
         default:
