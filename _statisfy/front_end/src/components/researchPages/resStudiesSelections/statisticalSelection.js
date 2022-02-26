@@ -1,6 +1,6 @@
 
 
-import { Alert, FormControl, MenuItem, Select, InputLabel, CircularProgress } from "@mui/material";
+import { Alert, FormControl, MenuItem, Select, InputLabel, CircularProgress, Typography } from "@mui/material";
 import {MemoizedTable } from "../../DisplayTable";
 import DataTypeNormalize from "../datatypeNormalize";
 
@@ -32,9 +32,16 @@ export const StatisticalSelection = (props) => {
                 </FormControl>
 
             </div>
-            {typeof datasetDetails !== 'undefined' ? 
-                <Alert icon={props.purpose !== "" ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem", marginTop:"2rem"}}>
-                    Select variables to be processed
+            {typeof props.datasetDetails !== 'undefined' ? 
+                <Alert icon={props.studyColumns.length !== 0 ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem", marginTop:"2rem"}}>
+                    <div style={{display:"flex", flexDirection:"row", gap:"0.5rem"}}>
+                        Select variables to be processed 
+                        {props.studyColumns.length !==0 
+                        ? <Typography variant="inherit">(Selected Variables: {props.studyColumns.length})</Typography> 
+                        : null}
+                    </div>
+                    
+                    
                 </Alert>
                 :null
             }
