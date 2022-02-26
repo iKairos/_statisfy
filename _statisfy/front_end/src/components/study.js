@@ -30,6 +30,7 @@ import CorrelationDegree from "./CorrelationDegree";
 import BarCor from "./newDashBoard/bar";
 import Computation from "./studyComponents/Computation"
 import StudyDetails from "./studyComponents/studyDetails"
+import { getStudyDataset } from "../actions/datasetActions";
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, Title);
 
@@ -55,6 +56,12 @@ export default function Study(props){
 
     const {datasetFile} = filedataSelector; 
 
+    const studyDataSelector = useSelector((state) =>
+        state.studyDatasetFile
+    );
+
+    const {studyDatasetFile} = studyDataSelector; 
+    console.log(studyDatasetFile)
     const options = {
         responsive: true,
         plugins: {
@@ -85,6 +92,11 @@ export default function Study(props){
           }
         },
       };
+
+    const dispatch = useDispatch();
+    React.useEffect(() => {
+        dispatch(getStudyDataset(`${props.data[0]}_${props.data[11]}`));
+    }, []);
 
     return(
         <div className ="Study">
@@ -173,9 +185,8 @@ export default function Study(props){
                                         datasets: [
                                         {
                                             label: `(${props.data[7][0]},${props.data[7][1]})`,
-                                            data: datasetFile?.data.map(row => {
-                                                var filter = _.pick(row, props.data[7]);
-                                                return {x: filter[props.data[7][0]], y: filter[props.data[7][1]]}
+                                            data: studyDatasetFile?.data.map(row => {
+                                                return {x: row[props.data[7][0]], y: row[props.data[7][1]]}
                                             }),
                                             backgroundColor: 'rgba(167, 66, 197, 1)',
                                         },

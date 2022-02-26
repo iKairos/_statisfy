@@ -11,7 +11,7 @@ from functionalities.statistical_analysis import *
 from functionalities.interpretation import interpret
 import pandas as pd
 import warnings
-import os
+import io
 
 warnings.filterwarnings('ignore')
 
@@ -226,7 +226,7 @@ def add_study():
                     'code': 'STUDY_WRONG_VAR_COUNT',
                     'error': 'Pearson R only accepts two variables. Please make sure to only select two columns to analyze.'
                 }
-                
+
             compute_res = pearsonr(df[columns[0]], df[columns[1]])
 
         Study.new_study(
@@ -242,6 +242,10 @@ def add_study():
             options = data['options'],
             changes = changes
         )
+
+        df = df[[columns[0], columns[1]]]
+        blob = io.StringIO(df.to_csv(index=False))
+        BlobDatabase.upload_study_dataset(f"{uuid}_{Research(data['research_id']).dataset_directory}", blob.read())
 
         return {
             'code': 'STUDY_ADD_SUCCESS',
@@ -270,6 +274,7 @@ def get_studies():
             for col in Study(i[0]).columns:
                 temp.append(Study(i[0]).clean_stats(col))
             i.append(temp)
+            i.append(research.dataset_directory)
             res_data.append(list(i))
 
         return {

@@ -5,7 +5,10 @@ import {
     DATASET_FILE_SUCCESS,
     DATASET_PROCESS_FAIL,
     DATASET_PROCESS_REQUEST, 
-    DATASET_PROCESS_SUCCESS } 
+    DATASET_PROCESS_SUCCESS, 
+    STUDY_DATASET_FAIL, 
+    STUDY_DATASET_REQUEST,
+    STUDY_DATASET_SUCCESS} 
 from "../constants/datasetConstants";
 
 export const processDataset = (formData) => async(dispatch) =>{
@@ -47,6 +50,26 @@ export const getDataset = (file, columns) => async(dispatch) => {
     }catch(error){
         dispatch({
             type:DATASET_FILE_FAIL,
+            payload:error.message
+        });
+    }
+}
+
+export const getStudyDataset = (file) => async(dispatch) => {
+    dispatch({
+        type:STUDY_DATASET_REQUEST
+    });
+
+    try{
+        const {data} = await Axios.get(`/api/dataset/study/get/${file}`);
+
+        dispatch({
+            type: STUDY_DATASET_SUCCESS, 
+            payload: data
+        });
+    }catch(error){
+        dispatch({
+            type:STUDY_DATASET_FAIL,
             payload:error.message
         });
     }

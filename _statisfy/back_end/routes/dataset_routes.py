@@ -97,18 +97,40 @@ def dataset_details():
 @cross_origin()
 def get_dataset(filename,cols):
     try:
-        df = pd.read_csv(BlobDatabase.get_dataset(filename))
+        url = BlobDatabase.get_dataset(filename)
+        df = pd.read_csv(url)
         df = df.fillna('')
 
         return {
             'code': 'DATASET_GET_SUCCESS',
             'data': df.to_dict(orient='records'),
             'filename': filename,
-            'filesize': urllib.request.urlopen('https://statisfyblobstorage.blob.core.windows.net/datasets/66692512_AEGISDataset.csv').length,
+            'filesize': urllib.request.urlopen(url).length,
             'directory': filename
         }
     except Exception as e:
         return {
             'code': 'DATASET_GET_FAIL',
+            'error': str(e)
+        }
+
+@app.route("/api/dataset/study/get/<filename>", methods=['GET'])
+@cross_origin()
+def get_study_dataset(filename):
+    try:
+        url = BlobDatabase.get_study_dataset(filename)
+        df = pd.read_csv(url)
+        df = df.fillna('')
+        
+        return {
+            'code': 'STUDY_DATASET_GET_SUCCESS',
+            'data': df.to_dict(orient='records'),
+            'filename': filename,
+            'filesize': urllib.request.urlopen(url).length,
+            'directory': filename
+        }
+    except Exception as e:
+        return {
+            'code': 'STUDY_DATASET_GET_FAIL',
             'error': str(e)
         }
