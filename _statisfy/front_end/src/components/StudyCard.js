@@ -1,15 +1,51 @@
 import "../StyleSheets/studycardfolder/studycard.css"
-import { Button } from "@mui/material";
-
+import { useState } from "react";
+import { IconButton, Button, Typography} from "@mui/material";
+import Backdrop from '@mui/material/Backdrop';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 export default function StudyCard(props){
-
+    const [openBackdrop, setOpenBackdrop] = useState(false);
+    const handleClose = () => {
+        setOpenBackdrop(false);
+    };
+    const handleToggle = () => {
+        setOpenBackdrop(!openBackdrop);
+    };
    // const attributes = props.attribute
     return(
         <div className ="StudyCard">
             <div className="StudyCard_title">
                 {props.title}
+                <IconButton
+                    onClick={handleToggle}
+                    sx={{
+                        position:"absolute",
+                        right: 5,
+                        top: 5
+                    }}
+                >
+                    <DeleteIcon color="filled"/>
+                </IconButton>
+
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={openBackdrop}
+                    onClick={handleClose}
+                >
+                    <div className="StudyCard_confirmation">
+                        <Typography variant="h6">Are you sure you want to delete the study "{props.title}"?</Typography>
+                        <div className="StudyCard_confirmation_actions">
+                            <Button variant="contained" color="error">
+                                Delete
+                            </Button>
+                            <Button variant="outlined" color="secondary">
+                                Cancel
+                            </Button>
+                        </div>
+                    </div>
+                </Backdrop>
             </div>
             <div className="StudyCard_method">
                 {props.method}

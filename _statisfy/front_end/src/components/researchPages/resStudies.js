@@ -535,6 +535,7 @@ export default function ResStudies(props){
                                         studyColumns = {studyColumns}
                                         callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
                                         setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
+                                        studyColumns = {studyColumns}
                                     />
                                 }
                                 {tool === "Machine Learning" &&
