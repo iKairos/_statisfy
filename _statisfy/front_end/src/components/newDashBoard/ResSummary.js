@@ -128,11 +128,11 @@ export default function ResSummary(props){
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}
             >
-                <CircularProgress color="inherit" />
-            </Backdrop>
-
-
-           
+                <div>
+                    <h3>We are uploading the dataset. Please wait for a while...</h3> <br/>
+                    <CircularProgress color="inherit" />
+                </div>
+            </Backdrop>           
        </div>
      ); 
  }
