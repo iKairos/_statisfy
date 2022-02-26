@@ -169,6 +169,7 @@
 
 .Study_content {
   padding: 1rem;
+  min-height: 30rem;
 }
 
 .Study_content_details {
