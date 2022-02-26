@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { Alert, Grow, Skeleton } from "@mui/material";
 
 import ResearchList from "../components/newDashBoard/ResearchList";
+import { getResearches } from "../actions/researchAction";
 
 export default function UserScreen(props){
     const { id } = useParams();
@@ -29,10 +30,11 @@ export default function UserScreen(props){
     }
 
     useEffect(() => {
-        dispatch(processUserToken(props.token, 'getResearches'));
-        
+        dispatch(processUserToken(props.token));
+
         if(id){
             dispatch(getUser(id));
+            dispatch(getResearches(id));
         }
     }, [])
 
@@ -49,7 +51,7 @@ export default function UserScreen(props){
             <div>
                 <div className = "container">
                     <UserProfile user={userData.user} editable={editable}/>
-                    <ResearchList editable={editable}/>
+                    <ResearchList editable={editable} id={id}/>
                 </div> 
             </div>
         )

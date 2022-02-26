@@ -345,6 +345,12 @@ export default function ResearchList(props){
     );
 
     React.useEffect(() => {
+        if(props.id){
+            dispatch(getResearches(props.id));
+        }else{
+            dispatch(getResearches(processed?.user._id));
+        }
+        
         if(location.state){
             setMessage(location.state.message);
             setOpenErrorSnackbar(location.state.openSnackbar)
@@ -404,7 +410,15 @@ export default function ResearchList(props){
                             add new research
                         </Button>
                         :
-                        null
+                        <Button 
+                            color="secondary" 
+                            className="resStudy_body_add_button"
+                            onClick={()=>handleAdding(true)}
+                            disabled
+                        >
+                            <AddIcon className="AddIcon"/>
+                            cannot add research
+                        </Button>
                     }
                     <Stack direction="row" spacing={2} className="Sort">
                         <div>
@@ -666,6 +680,7 @@ export default function ResearchList(props){
                                                 created_at = {res.created_at}
                                                 _id = {res.id}
                                                 HandleSelected = {handleSelected}
+                                                editable={props.editable}
                                             />
                                         })
                                     ) :  <CircularProgress color="info" thickness={2.5} size={30}/>
