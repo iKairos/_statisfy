@@ -66,3 +66,6 @@ class Study:
             options = kwargs['options'],
             changes = kwargs['changes']
         )
+    
+    def delete_study(self):
+        return self.db.delete_study(self.id)

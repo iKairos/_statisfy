@@ -40,7 +40,8 @@ export default function ResSummary(props){
                 message: {
                     'title': researchSuccessTitle,
                     'body': researchSuccess
-                }
+                },
+                openSnackbar: true
             }
         });
         history.go(0);

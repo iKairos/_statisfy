@@ -11,6 +11,9 @@ import {
     RESEARCH_SAVE_FAIL,
     RESEARCH_SAVE_REQUEST, 
     RESEARCH_SAVE_SUCCESS, 
+    STUDY_DELETE_FAIL, 
+    STUDY_DELETE_REQUEST, 
+    STUDY_DELETE_SUCCESS, 
     STUDY_GET_FAIL, 
     STUDY_GET_REQUEST,
     STUDY_GET_SUCCESS,
@@ -108,6 +111,22 @@ export const studyGetReducers = (state={getStudyRes:{}}, action) => {
             return {loading: false, getStudyRes: action.payload};
         
         case STUDY_GET_FAIL:
+            return {loading: false, error: action.payload};
+        
+        default:
+            return state
+    }
+}
+
+export const studyDeleteReducers = (state={deleteStudyRes:{}}, action) => {
+    switch(action.type){
+        case STUDY_DELETE_REQUEST:
+            return {loading: true};
+        
+        case STUDY_DELETE_SUCCESS:
+            return {loading: false, deleteStudyRes: action.payload};
+        
+        case STUDY_DELETE_FAIL:
             return {loading: false, error: action.payload};
         
         default:

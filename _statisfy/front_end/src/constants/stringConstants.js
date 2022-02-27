@@ -28,7 +28,7 @@ export const passwordRequirement = "Password should be at least eight characters
 export const status500 = "Request from server returned an error status 500. The server might be offline or down, please try again later.";
 
 export const researchSuccessTitle = "Research created successfully!";
-export const researchSuccess = "You may now view and customize your research. Proceed by creating a study, which selects certain colums for you to analyze by our preset statistical or machine learning methods.";
+export const researchSuccess = "Research created successfully! Proceed by creating a study at the Study tab.";
 
 export const variableTooltip = {
     'R Coefficient': 'R Coefficient determines the strength of linear relationship of the two variables. The closer it is to 1.0, the higher the strength of the relationship is. If the coefficient is positive that means the relationship has an upward trend and if the coefficient is negative that means the relationship has a downward trend.',

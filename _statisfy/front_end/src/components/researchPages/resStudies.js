@@ -354,7 +354,8 @@ export default function ResStudies(props){
                 message: {
                     'title': studySuccessTitle,
                     'body': studySuccess
-                }
+                },
+                openSnackbar: true
             }
         });
         history.go(0);
@@ -594,6 +595,7 @@ export default function ResStudies(props){
                                                 method={i[5]}
                                                 description={i[2]}
                                                 id={i[0]}
+                                                parent={i[3]}
                                             />
                                         )
                                     }) : <CircularProgress color="info" thickness={2.5} size={30}/>

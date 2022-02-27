@@ -64,7 +64,7 @@ class StudiesBackbone(DatabaseBackbone):
             fetched = self.fetch_row(
                 "studies",
                 _id = rid
-            )[1]
+            )[0][1]
 
             return fetched
         except Exception as e:
@@ -88,7 +88,7 @@ class StudiesBackbone(DatabaseBackbone):
             fetched = self.fetch_row(
                 "studies",
                 _id = rid
-            )[2]
+            )[0][3]
 
             return fetched
         except Exception as e:
@@ -213,6 +213,18 @@ class StudiesBackbone(DatabaseBackbone):
                 study_id = rid,
                 variable_name = var_name,
                 variable_value = var_value
+            )
+
+            return True
+        except Exception as e:
+            print(e)
+            return False
+    
+    def delete_study(self, rid):
+        try:
+            self.purge_row(
+                "studies",
+                _id = rid
             )
 
             return True

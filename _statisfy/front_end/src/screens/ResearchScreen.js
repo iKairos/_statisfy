@@ -7,8 +7,8 @@ import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getResearch } from "../actions/researchAction";
 import { useState } from "react";
-import { Alert, AlertTitle, Fade, Grow, Skeleton, Typography } from "@mui/material";
-
+import { Alert, AlertTitle, Fade, Grow, IconButton, Skeleton, Snackbar, Typography } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
@@ -100,6 +100,7 @@ export default function ResearchScreen(props){
 
         if(location.state){
             setMessage(location.state.message);
+            setOpenErrorSnackbar(location.state.openSnackbar);
         }
 
         const history = createHistory();
@@ -120,6 +121,24 @@ export default function ResearchScreen(props){
         },
     });
 
+    // snackbar utils
+    const [isOpenSnackbar, setOpenErrorSnackbar] = useState(false);
+    const handleCloseSnackbar = () => {
+        setOpenErrorSnackbar(false);
+    }
+    const action = (
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleCloseSnackbar}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+    );
+
     if(researchGetRes?.code === 'RESEARCH_GET_SUCCESS'){
 
         return(
@@ -128,12 +147,25 @@ export default function ResearchScreen(props){
                     <div className = "research_heading">
                         {
                             message &&
-                            <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
-                                <Alert variant="outlined" severity="success">
-                                    <AlertTitle><b>{message.title}</b></AlertTitle>
-                                    { message.body }
+                            <Snackbar
+                                open={isOpenSnackbar} 
+                                onClose={handleCloseSnackbar}
+                                action={action}
+                            >
+                                <Alert severity="success" variant="filled">
+                                    {message.body}
+                                    <React.Fragment>
+                                        <IconButton
+                                            size="small"
+                                            aria-label="close"
+                                            color="inherit"
+                                            onClick={handleCloseSnackbar}
+                                        >
+                                            <CloseIcon fontSize="small" />
+                                        </IconButton>
+                                    </React.Fragment>
                                 </Alert>
-                            </Grow>
+                            </Snackbar>
                         }
                         <div className = "text_content">
                             <Typography variant="h5" sx={{fontWeight: 600}}>{researchGetRes?.data.research_name}

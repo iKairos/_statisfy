@@ -312,4 +312,29 @@ def get_studies():
             'data': list(res_data),
         }
     except Exception as e:
-        raise e
+        return {
+            'code': 'STUDY_GET_FAIL',
+            'message': 'Study fetching failed.',
+        }
+
+@app.route("/api/research/study/delete", methods=["POST"])
+@cross_origin()
+def delete_study():
+    try:
+        data = request.get_json()
+
+        study = Study(data['_id'])
+        name = study.name
+
+        BlobDatabase.delete_study_dataset(f"{data['_id']}_{Research(study.research_parent).dataset_directory}")
+        study.delete_study()
+
+        return {
+            'code': 'STUDY_DELETE_SUCCESS',
+            'message': f'Study {name} successfully deleted.'
+        }
+    except Exception as e:
+        return {
+            'code': 'STUDY_DELETE_FAIL',
+            'message': str(e)
+        }

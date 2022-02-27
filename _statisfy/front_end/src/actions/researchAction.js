@@ -11,6 +11,9 @@ import {
     RESEARCH_SAVE_FAIL,
     RESEARCH_SAVE_REQUEST,
     RESEARCH_SAVE_SUCCESS, 
+    STUDY_DELETE_FAIL, 
+    STUDY_DELETE_REQUEST, 
+    STUDY_DELETE_SUCCESS, 
     STUDY_GET_FAIL, 
     STUDY_GET_REQUEST, 
     STUDY_GET_SUCCESS, 
@@ -141,6 +144,26 @@ export const getStudy = (formData) => async(dispatch) => {
     }catch(error){
         dispatch({
             type:STUDY_GET_FAIL,
+            payload:error.message
+        });
+    }
+}
+
+export const deleteStudy = (id) => async(dispatch) => {
+    dispatch({
+        type:STUDY_DELETE_REQUEST
+    });
+
+    try{
+        const {data} = await Axios.post('/api/research/study/delete', {'_id': id});
+
+        dispatch({
+            type: STUDY_DELETE_SUCCESS, 
+            payload: data
+        });
+    }catch(error){
+        dispatch({
+            type:STUDY_DELETE_FAIL,
             payload:error.message
         });
     }

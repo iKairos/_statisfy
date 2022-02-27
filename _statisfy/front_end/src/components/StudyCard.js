@@ -3,6 +3,9 @@ import { useState } from "react";
 import { IconButton, Button, Typography} from "@mui/material";
 import Backdrop from '@mui/material/Backdrop';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useDispatch, useSelector } from "react-redux";
+import { deleteStudy } from "../actions/researchAction";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 export default function StudyCard(props){
@@ -13,7 +16,34 @@ export default function StudyCard(props){
     const handleToggle = () => {
         setOpenBackdrop(!openBackdrop);
     };
-   // const attributes = props.attribute
+    
+    const dispatch = useDispatch();
+
+    const dataSelector = useSelector((state) => 
+        state.studyDelete
+    );
+    const { loading, deleteStudyRes } = dataSelector;
+
+    const handleDelete = () => {
+        dispatch(deleteStudy(props.id));
+    };
+
+    const history = useHistory();
+
+    if(deleteStudyRes?.code === "STUDY_DELETE_SUCCESS"){
+        history.push({
+            pathname: `/dashboard/${props.parent}`,
+            state: {
+                message: {
+                    'body': deleteStudyRes.message
+                },
+                openSnackbar: true
+            }
+        });
+        history.go(0);
+        return;
+    }
+
     return(
         <div className ="StudyCard">
             <div className="StudyCard_title">
@@ -37,7 +67,7 @@ export default function StudyCard(props){
                     <div className="StudyCard_confirmation">
                         <Typography variant="h6">Are you sure you want to delete the study "{props.title}"?</Typography>
                         <div className="StudyCard_confirmation_actions">
-                            <Button variant="contained" color="error">
+                            <Button variant="contained" color="secondary" onClick={handleDelete}>
                                 Delete
                             </Button>
                             <Button variant="outlined" color="secondary">
