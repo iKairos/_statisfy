@@ -144,7 +144,9 @@ export default function ResStudies(props){
         setOpen(false);
     };
     const handleTool = function(value){
-        setTool(value)
+        setTool(value);
+        setStudyColumns([]);
+        setPurpose("");
     }
 
     const handleCloseSnackbar = (event, reason) => {
@@ -536,7 +538,7 @@ export default function ResStudies(props){
                                         studyColumns = {studyColumns}
                                         callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
                                         setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
-                                        studyColumns = {studyColumns}
+                                        
                                     />
                                 }
                                 {tool === "Machine Learning" &&
@@ -549,6 +551,7 @@ export default function ResStudies(props){
                                         studyColumns = {studyColumns}
                                         callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
                                         setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
+                                        
                                     />
                                 }
 
@@ -556,7 +559,7 @@ export default function ResStudies(props){
                             </Box>
                         }
                         {showActive === 3 &&
-                            <div>
+                            <div className="ToolChoices">
                                 {tool === "Statistical Method" 
                                     ? <StatisticalChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
                                     : <MachineLearningChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}/>

@@ -55,6 +55,19 @@ export const StatisticalSelection = (props) => {
                 /> : <CircularProgress color="info" thickness={2.5} size={30}/>
             }
 
+
+            {props.studyColumns.length !== 0 ? 
+                <Alert icon={props.studyColumns.length !== 0 ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem", marginTop:"2rem"}}>
+                    <div style={{display:"flex", flexDirection:"row", gap:"0.5rem"}}>
+                        Configure variables as necessary.
+                    
+                    </div>
+                    
+                    
+                </Alert>
+                :null
+            }
+
             <div className="Datatype">
                 {
                     props.studyColumns.map(col => {
@@ -67,7 +80,7 @@ export const StatisticalSelection = (props) => {
                             }
                         })
                 
-                        return <DataTypeNormalize details={data} options={props.callbackColumnsCleanOptions} setOptions={props.setCallbackColumnsCleanOptions}/>;
+                        return <DataTypeNormalize tool="stats" details={data} options={props.callbackColumnsCleanOptions} setOptions={props.setCallbackColumnsCleanOptions}/>;
                     })
                 }
             </div>
