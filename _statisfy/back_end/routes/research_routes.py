@@ -150,7 +150,7 @@ def add_study():
         research = Research(data['research_id'])
         
         df = pd.read_csv(BlobDatabase.get_dataset(research.dataset_directory), delimiter=research.delimiter)
-        
+
         columns = data['columns']
         options = data['options']
 
@@ -194,14 +194,14 @@ def add_study():
                     elif option['outlier_option']['method'] == 'replace':
                         init_outliers = len(df[col][(df[col] < low) | (df[col] > hi)])
                         if option['outlier_option']['method'] == 'mean':
-                            df[col] = np.where(df[col] < low, df[col].mean(), df[col])
-                            df[col] = np.where(df[col] > hi, df[col].mean(), df[col])
+                            df[col].where(df[col] < low, df[col].mean(), inplace=True)
+                            df[col].where(df[col] > hi, df[col].mean(), inplace=True)
                         elif option['outlier_option']['method'] == 'median':
-                            df[col] = np.where(df[col] < low, df[col].median(), df[col])
-                            df[col] = np.where(df[col] > hi, df[col].median(), df[col])
+                            df[col].where(df[col] < low, df[col].median(), inplace=True)
+                            df[col].where(df[col] > hi, df[col].median(), inplace=True)
                         elif option['outlier_option']['method'] == 'mode':
-                            df[col] = np.where(df[col] < low, df[col].mode(), df[col])
-                            df[col] = np.where(df[col] > hi, df[col].mode(), df[col])
+                            df[col].where(df[col] < low, df[col].mode(), inplace=True)
+                            df[col].where(df[col] > hi, df[col].mode(), inplace=True)
                         outlier_replaced = init_outliers - (init_outliers - len(df[col][(df[col] < low) | (df[col] > hi)]))
                     elif option['null_option']['method'] == 'nothing':
                         pass

@@ -253,6 +253,7 @@ export default function ResearchScreen(props){
                                 DataSetFile = {datasetFile}
                                 User = {processed?.user?._id}
                                 Parent = {id}
+                                IsAuthor = {isAuthor()}
                             />
                         </div>
                     </Fade>

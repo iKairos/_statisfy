@@ -415,7 +415,7 @@ export default function ResStudies(props){
                                 </Button>
                             </div>
                         )
-                        :(
+                        : props.IsAuthor ?
                         <div className="resStudy_body_add">
                             <Button 
                                 color="secondary" 
@@ -427,7 +427,19 @@ export default function ResStudies(props){
                             </Button>
                             <Sorter/>
                         </div>
-                        )
+                        : 
+                        <div className="resStudy_body_add">
+                            <Button 
+                                color="secondary" 
+                                className="resStudy_body_add_button"
+                                onClick={()=>handleAdding(true)}
+                                disabled
+                            >
+                                <AddIcon className="AddIcon"/>
+                                cannot add study
+                            </Button>
+                        <Sorter/>
+                    </div>
                     }
                     </>
 

@@ -1,5 +1,5 @@
 import { MemoizedTable } from "../DisplayTable";
-import { CircularProgress} from "@mui/material";
+import { CircularProgress, Skeleton} from "@mui/material";
 import { Bar, Doughnut } from "react-chartjs-2";
 import { Typography } from "@mui/material";
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
@@ -8,6 +8,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import DataObjectIcon from '@mui/icons-material/DataObject';
 
 import {CategoryScale , 
     Chart as ChartJS,
@@ -81,9 +82,9 @@ const AccordionSummary = styled((props) => (
 export default function StudyDetails(props){
   return(
     <div className="Study_details">
-        <Typography variant="h6">Data Preprocessing Results</Typography>
+        <Typography variant="h6"><DataObjectIcon/> Data Preprocessing Results</Typography>
         <div className="Study_details_changes">
-            <Typography>Number of Rows: {props.details?.rows} <DoubleArrowIcon/> 1</Typography>
+            <Typography>Number of Rows: {props.details?.rows} <DoubleArrowIcon/> {props.studyData?.length}</Typography>
             <Typography>Data Distribution: Not normal <DoubleArrowIcon/> Normal </Typography>
         </div>
         <Accordion
@@ -106,16 +107,26 @@ export default function StudyDetails(props){
                             Header={true} 
                             rowNumber={5}
                             checked={false}
-                        /> : <CircularProgress color="info" thickness={2.5} size={30}/>
+                        /> : <Skeleton variant="rectangular" height={400} animation="wave" />
                     }
 
-                    {typeof props.data !== 'undefined' ? 
+                    {typeof props.studyData !== 'undefined' ? 
                         <MemoizedTable
-                            data= {props.data}
+                            data= {props.studyData}
                             Header={true} 
                             rowNumber={5}
                             checked={false}
-                        /> : <CircularProgress color="info" thickness={2.5} size={30}/>
+                        /> : 
+                        <div>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                        </div>
                     }
                 </div>
             </AccordionDetails>

@@ -121,7 +121,7 @@ export default function Study(props){
                             sx = {{ 
                             }}
                         >
-                            <Tab value={1} label="Details" icon={<HelpIcon fontSize="small"/>}> </Tab>
+                            <Tab value={1} label="Preprocessing" icon={<HelpIcon fontSize="small"/>}> </Tab>
                             <Tab value={2} label="Computation" icon={<CalculateIcon fontSize="small"/>} />
                             <Tab value={3} label="Results" icon={<AutoGraphIcon fontSize="small"/>} />
                             <Tab value={4} label="Interpretation" icon={<ArticleIcon fontSize="small"/>} />
@@ -137,7 +137,7 @@ export default function Study(props){
                             data = {datasetFile.data.map(row => {
                                 return _.pick(row, props.data[7]);
                             })}
-
+                            studyData = {studyDatasetFile?.data}
                             details = {props.details}
                             changes = {props.data[10]}
                         />

@@ -53,8 +53,12 @@ def dataset_details():
                     skew = round(float(df[i].skew()), 2)
                     kurtosis = round(float(df[i].kurtosis()), 2)
                 else:
-                    vis = df[i].value_counts()
-                    vis = vis.to_dict()
+                    counts = df[i].value_counts()
+                    if len(counts) > 2:
+                        vis = counts[0:2].to_dict()
+                        vis['others'] = int(counts[2:].sum())
+                    else:
+                        vis = counts.to_dict()
                     type = "object"
                 try:
                     max = float(df[i].max())

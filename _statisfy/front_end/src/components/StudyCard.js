@@ -65,7 +65,8 @@ export default function StudyCard(props){
                     onClick={handleClose}
                 >
                     <div className="StudyCard_confirmation">
-                        <Typography variant="h6">Are you sure you want to delete the study "{props.title}"?</Typography>
+                        <Typography variant="h6">Study Deletion</Typography>
+                        <p>Are you sure you want to delete <i>{props.title}</i>? This cannot be undone.</p>
                         <div className="StudyCard_confirmation_actions">
                             <Button variant="contained" color="secondary" onClick={handleDelete}>
                                 Delete

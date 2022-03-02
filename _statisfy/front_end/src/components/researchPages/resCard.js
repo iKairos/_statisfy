@@ -39,7 +39,7 @@ export default function ResCard(props){
                 message: {
                     'body': researchDeleteRes.message
                 },
-                openSnackbar: true
+                openSnackbar: true,
             }
         });
         history.go(0);
