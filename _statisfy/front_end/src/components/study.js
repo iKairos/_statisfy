@@ -31,6 +31,7 @@ import BarCor from "./newDashBoard/bar";
 import Computation from "./studyComponents/Computation"
 import StudyDetails from "./studyComponents/studyDetails"
 import { getStudyDataset } from "../actions/datasetActions";
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, Title);
 
@@ -82,12 +83,25 @@ export default function Study(props){
             title:{
                 display: true,
                 text: props.data[7][1]
+            },
+            ticks: {
+                display: false,
+            },
+            grid: {
+                display: false,
             }
           },
           x: {
             title:{
                 display: true,
                 text: props.data[7][0]
+            },
+            ticks: {
+                display: false
+            },
+            grid: {
+                display: false,
+
             }
           }
         },
@@ -121,10 +135,10 @@ export default function Study(props){
                             sx = {{ 
                             }}
                         >
-                            <Tab value={1} label="Preprocessing" icon={<HelpIcon fontSize="small"/>}> </Tab>
-                            <Tab value={2} label="Computation" icon={<CalculateIcon fontSize="small"/>} />
-                            <Tab value={3} label="Results" icon={<AutoGraphIcon fontSize="small"/>} />
-                            <Tab value={4} label="Interpretation" icon={<ArticleIcon fontSize="small"/>} />
+                            <Tab value={1} label="Preprocessing" icon={<QueryStatsIcon fontSize="medium"/>}> </Tab>
+                            <Tab value={2} label="Computation" icon={<CalculateIcon fontSize="medium"/>} />
+                            <Tab value={3} label="Results" icon={<AutoGraphIcon fontSize="medium"/>} />
+                            <Tab value={4} label="Interpretation" icon={<ArticleIcon fontSize="medium"/>} />
                         </Tabs>
                     </Box>
                 </div>
@@ -134,7 +148,7 @@ export default function Study(props){
                 {studyPage === 1 &&
                     <div className = "Study_content_details">
                         <StudyDetails
-                            data = {datasetFile.data.map(row => {
+                            data = {datasetFile?.data.map(row => {
                                 return _.pick(row, props.data[7]);
                             })}
                             studyData = {studyDatasetFile?.data}

@@ -107,7 +107,17 @@ export default function StudyDetails(props){
                             Header={true} 
                             rowNumber={5}
                             checked={false}
-                        /> : <Skeleton variant="rectangular" height={400} animation="wave" />
+                        /> : 
+                        <div>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                            <Skeleton variant="text" height={50} animation="wave"/>
+                        </div>
                     }
 
                     {typeof props.studyData !== 'undefined' ? 

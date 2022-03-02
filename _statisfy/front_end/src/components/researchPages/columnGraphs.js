@@ -46,9 +46,10 @@ export default function ColumnGraphs(props){
                                         label: 'Frequency',
                                         barPercentage: 1.0,
                                         categoryPercentage: 1.0,
-                                        backgroundColor: 'rgba(167, 66, 197, 0.2)',
-                                        borderColor: 'rgba(167, 66, 197, 1)',
-                                        borderWidth: 0.5
+                                        backgroundColor: 'rgba(100, 87, 196, 1)',
+                                        borderColor: 'white',
+                                        borderWidth: 0.5,
+                                        borderRadius: 10,
                                     },
                                 ],
                                 labels: props.data.vis.map(i => i[0])
@@ -95,10 +96,10 @@ export default function ColumnGraphs(props){
                                   {
                                     data: Object.keys(props.data.vis).map((e, i) => props.data.vis[e]),
                                     label: 'Frequency',
-                                    borderWidth: 8,
-                                    backgroundColor: Object.keys(props.data.vis).length === 3 ? ['rgba(53, 113, 148, 0.5)','rgba(100, 87, 196, 0.5)', 'rgba(230, 150, 232, 0.5)'] : ['rgba(53, 113, 148, 0.5)', 'rgba(100, 87, 196, 0.5)'],
-                                    borderColor: '#ffffff',
-                                    borderWidth: 0.5
+                                    borderWidth: 10,
+                                    borderRadius: 30,
+                                    backgroundColor: Object.keys(props.data.vis).length === 3 ? ['rgba(53, 113, 148, 1)','rgba(100, 87, 196, 1)', 'rgba(230, 150, 232, 1)'] : ['rgba(53, 113, 148, 1)', 'rgba(100, 87, 196, 1)'],
+
                                   }
                                 ],
                                 labels: Object.keys(props.data.vis).map((e) => e)
@@ -110,8 +111,9 @@ export default function ColumnGraphs(props){
                                 plugins: {
                                     legend: {
                                         display: false,
-                                    }
+                                    },
                                 },
+                                cutout: '75%',
                               }}
                         />
                     }
