@@ -91,16 +91,44 @@ export default function DataTypeNormalize(props){
         <div className="Datatype_container">
             <div className="Datatype_header">
                 <Typography variant="h5">{props.details.column}</Typography>
-                
-                <IconButton 
-                    sx={{position:"absolute", right:"0", top:"0", margin:"0.5rem"}} 
-                    color="secondary" 
-                    variant="outlined"
-                    size="medium"
-                    onClick={handleOpenDataType}
-                >
-                    <SettingsIcon/>
-                </IconButton>
+                <div style={{display:"flex", flexDirection:"row", position:"absolute", right:"0", top:"0", margin:"0.5rem"}}>
+                   {props.tool === "ml"
+                   &&
+                   <>
+                    {props.label === props.details.column
+                        ?
+                        <Button
+                            onClick={()=>{props.handleLabel("")}}
+                            variant="contained"
+                            color="secondary"
+                        >
+                        Label
+                        </Button>
+                        :
+                        <Button
+                            onClick={()=>{props.handleLabel(props.details.column)}}
+                            variant="outlined"
+                            color="secondary"
+                        >
+                        Set Label
+                        </Button>
+                    }
+                    
+                    </>
+                   }
+                   
+                    
+                    
+
+                    <IconButton 
+                        color="secondary" 
+                        variant="outlined"
+                        size="medium"
+                        onClick={handleOpenDataType}
+                    >
+                        <SettingsIcon/>
+                    </IconButton>
+                </div>
             </div>
             <div className="Datatype_graph">
                 

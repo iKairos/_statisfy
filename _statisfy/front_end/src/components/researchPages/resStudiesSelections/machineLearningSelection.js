@@ -1,14 +1,17 @@
 
 
-import { Alert, FormControl, MenuItem, Select, InputLabel, CircularProgress } from "@mui/material";
+import { Alert, FormControl, MenuItem, Select, InputLabel, CircularProgress, Typography } from "@mui/material";
 import {MemoizedTable } from "../../DisplayTable";
 import DataTypeNormalize from "../datatypeNormalize";
-
+import { useState } from "react";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 
 export const MachineLearningSelection = (props) => {
-
+    const [label, setLabel] = useState("");
+    const handleLabel = (choice) => {
+        setLabel(choice);
+    };
     return (
         <div className="resList_column">
             <div style={{paddingBottom:"1rem"}}>
@@ -32,9 +35,16 @@ export const MachineLearningSelection = (props) => {
                 </FormControl>
 
             </div>
-            {typeof datasetDetails !== 'undefined' ? 
-                <Alert icon={props.purpose !== "" ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem", marginTop:"2rem"}}>
-                    Select variables to be processed
+            {typeof props.datasetDetails !== 'undefined' ? 
+                <Alert icon={props.studyColumns.length !== 0 ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem", marginTop:"2rem"}}>
+                    <div style={{display:"flex", flexDirection:"row", gap:"0.5rem"}}>
+                        Select variables to be processed 
+                        {props.studyColumns.length !==0 
+                        ? <Typography variant="inherit">(Selected Variables: {props.studyColumns.length})</Typography> 
+                        : null}
+                    </div>
+                    
+                    
                 </Alert>
                 :null
             }
@@ -46,6 +56,19 @@ export const MachineLearningSelection = (props) => {
                     checked={true}
                     callbackSetSelectedRows={props.callbackSetSelectedRows}
                 /> : <CircularProgress color="info" thickness={2.5} size={30}/>
+            }
+
+
+            {props.studyColumns.length !== 0 ? 
+                <Alert icon={props.studyColumns.length !== 0 ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem", marginTop:"2rem"}}>
+                    <div style={{display:"flex", flexDirection:"row", gap:"0.5rem"}}>
+                        Configure variables as necessary. You can also select a label variable (optional)
+                    
+                    </div>
+                    
+                    
+                </Alert>
+                :null
             }
 
             <div className="Datatype">
@@ -60,7 +83,7 @@ export const MachineLearningSelection = (props) => {
                             }
                         })
                 
-                        return <DataTypeNormalize details={data} options={props.callbackColumnsCleanOptions} setOptions={props.setCallbackColumnsCleanOptions}/>;
+                        return <DataTypeNormalize tool="ml" handleLabel={handleLabel} label={label} details={data} options={props.callbackColumnsCleanOptions} setOptions={props.setCallbackColumnsCleanOptions}/>;
                     })
                 }
             </div>

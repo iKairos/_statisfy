@@ -33,6 +33,17 @@
   width: 80vw;
 }
 
+.ToolChoices {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 80vw;
+}
+
 .resStudy_body_container {
   height: 100%;
   width: 90vw;
@@ -140,6 +151,13 @@
 }
 
 .Datatype_header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   padding: 1rem;
   border-bottom: 1px solid #b5b5b5;
   position: relative;
@@ -215,6 +233,9 @@
 }
 
 @media screen and (min-width: 900px) {
+  .ToolChoices {
+    width: 45vw;
+  }
   .StudyTitle {
     width: 48vw;
     margin-bottom: 1rem;

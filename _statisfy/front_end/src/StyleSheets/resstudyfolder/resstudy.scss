@@ -28,6 +28,12 @@ $radius: 0.25rem;
   margin-bottom: 0.5rem;
   width: 80vw;
 }
+
+.ToolChoices {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+}
 .resStudy {
   &_body {
     &_container {
@@ -101,6 +107,8 @@ $radius: 0.25rem;
     flex-direction: column;
   }
   &_header {
+    display: flex;
+    flex-direction: row;
     padding: 1rem;
     border-bottom: 1px solid $gray1;
     position: relative;
@@ -144,6 +152,9 @@ $radius: 0.25rem;
   }
 }
 @media screen and (min-width: 900px) {
+  .ToolChoices {
+    width: 45vw;
+  }
   .StudyTitle {
     width: 48vw;
     margin-bottom: 1rem;
