@@ -48,16 +48,19 @@ export default function StudyCard(props){
         <div className ="StudyCard">
             <div className="StudyCard_title">
                 {props.title}
-                <IconButton
-                    onClick={handleToggle}
-                    sx={{
-                        position:"absolute",
-                        right: 5,
-                        top: 5
-                    }}
-                >
-                    <DeleteIcon color="filled"/>
-                </IconButton>
+                {
+                    props.isAuthor &&
+                    <IconButton
+                        onClick={handleToggle}
+                        sx={{
+                            position:"absolute",
+                            right: 5,
+                            top: 5
+                        }}
+                    >
+                        <DeleteIcon color="filled"/>
+                    </IconButton>
+                }
 
                 <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}

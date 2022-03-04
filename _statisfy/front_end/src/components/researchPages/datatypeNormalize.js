@@ -142,17 +142,16 @@ export default function DataTypeNormalize(props){
                                         label: 'Frequency',
                                         barPercentage: 1.0,
                                         categoryPercentage: 1.0,
-                                        backgroundColor: 'rgba(167, 66, 197, 0.2)',
-                                        borderColor: 'rgba(167, 66, 197, 1)',
+                                        backgroundColor: 'rgba(100, 87, 196, 1)',
+                                        borderColor: 'white',
                                         borderWidth: 0.5,
-                                        height: '15rem'
+                                        borderRadius: 10,
                                     },
                                 ],
                                 labels: props.details.vis.map(i => i[0])
                             }}
 
                             options={{
-                                    maintainAspectRatio: false,
                                     responsive: true,
                                     plugins: {
                                         legend: {
@@ -176,7 +175,7 @@ export default function DataTypeNormalize(props){
                                             grid: {
                                                 display: false,
                                                 drawBorder: false,
-                                            },
+                                            }
                                         },
                                     },
                                     
@@ -193,10 +192,10 @@ export default function DataTypeNormalize(props){
                                   {
                                     data: Object.keys(props.details.vis).map((e, i) => props.details.vis[e]),
                                     label: 'Frequency',
-                                    borderWidth: 8,
-                                    backgroundColor: 'rgba(167, 66, 197, 0.2)',
-                                    borderColor: 'rgba(167, 66, 197, 1)',
-                                    borderWidth: 0.5
+                                    borderWidth: 10,
+                                    borderRadius: 30,
+                                    backgroundColor: Object.keys(props.details.vis).length === 3 ? ['rgba(53, 113, 148, 1)','rgba(100, 87, 196, 1)', 'rgba(230, 150, 232, 1)'] : ['rgba(53, 113, 148, 1)', 'rgba(100, 87, 196, 1)'],
+
                                   }
                                 ],
                                 labels: Object.keys(props.details.vis).map((e) => e)
@@ -208,8 +207,9 @@ export default function DataTypeNormalize(props){
                                 plugins: {
                                     legend: {
                                         display: false,
-                                    }
+                                    },
                                 },
+                                cutout: '75%',
                               }}
                         />
                     }

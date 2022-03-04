@@ -6,7 +6,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
-import { Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import { CircularProgress } from '@mui/material';
 
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
@@ -20,6 +20,7 @@ import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutl
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import ViewColumnOutlinedIcon from '@mui/icons-material/ViewColumnOutlined';
 import TableRowsOutlinedIcon from '@mui/icons-material/TableRowsOutlined';
+import DownloadSharpIcon from '@mui/icons-material/DownloadSharp';
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -55,12 +56,20 @@ export default function ResData(props){
         state.datasetDetails
     );
     const {datasetDetails} = fileDetailsSelector;
-    
+
     return(
         <div className="resData_body_container">
             <div className="resData_body_heading">
                 <span className ="text_topic">Dataset</span>
-                <p className ="text_label">{props.DataSetFile ? `${props.DataSetFile?.filename.slice(9,)} (${formatBytes(props.DataSetFile?.filesize)})` : <CircularProgress color="info" thickness={2.5} size={30}/>} </p>
+                <p className ="text_label">{props.DataSetFile ? 
+                <div>
+                {`${props.DataSetFile?.filename.slice(9,)} (${formatBytes(props.DataSetFile?.filesize)})` }
+                <IconButton color="secondary" href={props.Url}>
+                    <DownloadSharpIcon color="filled"/>
+                </IconButton>
+                </div>
+                : <CircularProgress color="info" thickness={2.5} size={30}/>} </p>
+
             </div>
 
             <div className="resData_body_tabs">

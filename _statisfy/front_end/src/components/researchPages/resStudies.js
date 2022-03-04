@@ -150,10 +150,6 @@ export default function ResStudies(props){
     }
 
     const handleCloseSnackbar = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-    
         setOpenErrorSnackbar(false);
       };
 
@@ -191,13 +187,12 @@ export default function ResStudies(props){
 
         dispatch(saveStudy(dataObject));
 
-        if(saveStudyRes?.code === "STUDY_WRONG_VAR_COUNT"){
-            setError(saveStudyRes?.error);
-            setOpenErrorSnackbar(true);
-            return;
-        }else if(saveStudyRes?.code === "STUDY_DATA_HAS_NULL"){
-            setError(saveStudyRes?.error);
-            setOpenErrorSnackbar(true);
+        while(typeof saveStudyRes !== 'undefined'){
+            if(saveStudyRes?.code === "STUDY_ADD_FAIL"){
+                setOpenErrorSnackbar(true);
+                setError(saveStudyRes?.error);
+            }
+
             return;
         }
     }
@@ -368,7 +363,7 @@ export default function ResStudies(props){
         
         <div className="resStudy_body_container">
             {
-                error && 
+                error &&
                 <Snackbar 
                     open={isOpenErrorSnackbar} 
                     onClose={handleCloseSnackbar}
@@ -611,6 +606,7 @@ export default function ResStudies(props){
                                                 description={i[2]}
                                                 id={i[0]}
                                                 parent={i[3]}
+                                                isAuthor={props.IsAuthor}
                                             />
                                         )
                                     }) : <CircularProgress color="info" thickness={2.5} size={30}/>

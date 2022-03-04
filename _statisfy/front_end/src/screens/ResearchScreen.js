@@ -239,6 +239,7 @@ export default function ResearchScreen(props){
                     <div>
                         <ResData
                             DataSetFile = {datasetFile}
+                            Url = {researchGetRes?.data.research_url}
                         />
                     </div>
                         

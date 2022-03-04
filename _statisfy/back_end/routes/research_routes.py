@@ -33,6 +33,7 @@ def fetch_research(id):
         'dataset': research.dataset_directory,
         'authors': [{'uid': u, 'username': User(u).username} for u in research.authors],
         'delimiter': research.delimiter,
+        'research_url': BlobDatabase.get_dataset(research.dataset_directory),
         'created_at': research.created_at
     }
     
@@ -153,6 +154,14 @@ def add_study():
 
         columns = data['columns']
         options = data['options']
+        """
+        if data['test_type'] == 'Pearson R Correlation Test':
+            if len(set(df[[columns[0], columns[1]]].dtypes.tolist())) != 1:
+                return {
+                    'code': 'STUDY_ADD_FAIL',
+                    'error': 'The variables selected have different data types which is unsuited for this calculation.',
+                }
+        """
 
         changes = []
         null_deleted = 0 
@@ -179,7 +188,7 @@ def add_study():
                         pass
                     if df[col].isnull().values.any():
                         return {
-                            'code': 'STUDY_DATA_HAS_NULL',
+                            'code': 'STUDY_ADD_FAIL',
                             'error': f'Statisfy detected null values on the variable {col} which may be detrimental to the computation process. Please clean your dataset first.'
                         }
                     
@@ -223,10 +232,10 @@ def add_study():
         if data['test_type'] == 'Pearson R Correlation Test':
             if len(columns) != 2:
                 return {
-                    'code': 'STUDY_WRONG_VAR_COUNT',
+                    'code': 'STUDY_ADD_FAIL',
                     'error': 'Pearson R only accepts two variables. Please make sure to only select two columns to analyze.'
                 }
-
+            
             compute_res = pearsonr(df[columns[0]], df[columns[1]])
 
         Study.new_study(
@@ -252,8 +261,17 @@ def add_study():
             'message': 'Study is successfully registered and computed.',
         }
 
+    except TypeError as e:
+        return {
+            'code': 'STUDY_ADD_FAIL',
+            'error': f"An error occurred while calculating. Error message: {str(e)}",
+        }
+        
     except Exception as e:
-        raise e
+        return {
+            'code': 'STUDY_ADD_FAIL',
+            'error': str(e),
+        }
 
 @app.route("/api/research/delete", methods=["POST"])
 @cross_origin()
