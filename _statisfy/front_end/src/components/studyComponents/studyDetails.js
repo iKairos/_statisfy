@@ -85,7 +85,7 @@ export default function StudyDetails(props){
         <Typography variant="h6"><DataObjectIcon/> Data Preprocessing Results</Typography>
         <div className="Study_details_changes">
             <Typography>Number of Rows: {props.details?.rows} <DoubleArrowIcon/> {props.studyData?.length}</Typography>
-            <Typography>Data Distribution: Not normal <DoubleArrowIcon/> Normal </Typography>
+            <Typography>Data Distribution: Not normal <DoubleArrowIcon/> __placeholder__ </Typography>
         </div>
         <Accordion
             defaultExpanded = {true}

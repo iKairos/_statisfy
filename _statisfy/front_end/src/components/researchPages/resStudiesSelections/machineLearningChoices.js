@@ -2,7 +2,7 @@ import { func } from "prop-types";
 import { MLTechniques } from "../../../static/statMethods";
 import Card from "../../Card";
 import { useState } from "react";
-import { Alert} from "@mui/material";
+import { Alert, InputAdornment} from "@mui/material";
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -11,6 +11,8 @@ import { Typography } from "@mui/material";
 import Backdrop from '@mui/material/Backdrop';
 import { IconButton, Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
+import PercentIcon from '@mui/icons-material/Percent';
+import LoopIcon from '@mui/icons-material/Loop';
 
 export default function MachineLearningChoices(props){
     const filtered = MLTechniques.filter(([name, tags]) => {
@@ -35,7 +37,7 @@ export default function MachineLearningChoices(props){
     const [validation, setValidation] = useState(20);
     const [testing, setTesting] = useState(70);
     const [iteration, setIteration] = useState(1000);
-    const [learning, setLearning] = useState(0.5);
+    const [learning, setLearning] = useState(0.05);
 
     return(
         <div className="ChoicesCont">
@@ -98,37 +100,58 @@ export default function MachineLearningChoices(props){
                                     <div style={{display:"flex", flexDirection:"row", gap:"0.25rem"}}>
                                         <TextField
                                         id="outlined-helperText"
-                                        label="Training"
-                                        value={training}
-                                        onChange={(e) => setTraining(e.target.value)}
-                                        />
-                                        <TextField
-                                        id="outlined-helperText"
-                                        label="Validation"
-                                        value={validation}
-                                        onChange={(e) => setValidation(e.target.value)}
-                                        />
-                                        <TextField
-                                        id="outlined-helperText"
-                                        label="Testing"
+                                        label="Test Size (in percent)"
+                                        type="Number"
                                         value={testing}
                                         onChange={(e) => setTesting(e.target.value)}
+                                        color="secondary"
+                                        InputProps={
+                                            {
+                                                endAdornment: (
+                                                    <InputAdornment position="end"> 
+                                                        <PercentIcon fontSize="small" color="secondary"/>
+                                                    </InputAdornment>
+                                                )
+                                            }
+                                        }
                                         />
 
                                     </div>
                                     <Typography> Iterations</Typography>
                                     <TextField
                                         id="outlined-helperText"
+                                        type="Number"
                                         label="Iterations"
                                         value={iteration}
+                                        color="secondary"
                                         onChange={(e) => setIteration(e.target.value)}
+                                        InputProps={
+                                            {
+                                                endAdornment: (
+                                                    <InputAdornment position="end"> 
+                                                        <LoopIcon fontSize="small" color="secondary"/>
+                                                    </InputAdornment>
+                                                )
+                                            }
+                                        }
                                     />
                                     <Typography> Learning Rate</Typography>
                                     <TextField
                                         id="outlined-helperText"
+                                        type="Number"
                                         label="alpha"
                                         value={learning}
+                                        color="secondary"
                                         onChange={(e) => setLearning(e.target.value)}
+                                        InputProps={
+                                            {
+                                                endAdornment: (
+                                                    <InputAdornment position="end"> 
+                                                        <Typography color="secondary">α</Typography>
+                                                    </InputAdornment>
+                                                )
+                                            }
+                                        }
                                     />
                                 </div>
                                 <div 
@@ -140,7 +163,7 @@ export default function MachineLearningChoices(props){
                                         bottom: 5,
                                         }}
                                     >
-                                    <Button onClick={handleClose}>
+                                    <Button color="secondary" onClick={handleClose}>
                                         Close
                                     </Button>
                                 </div>
@@ -148,8 +171,10 @@ export default function MachineLearningChoices(props){
                         </Backdrop>
 
                         <div className="statContainer_details_contents_divider">
-                        <Typography> Train Test Split</Typography>
-                        <Typography>{training}|{validation}|{testing}</Typography>
+                        <Typography>Training Dataset Size</Typography>
+                        <Typography>{100-Number(testing)}%</Typography>
+                        <Typography>Test Dataset Size</Typography>
+                        <Typography>{testing}%</Typography>
                         <Typography> Iterations</Typography>
                         <Typography>{iteration}</Typography>
                         <Typography> Learning Rate</Typography>

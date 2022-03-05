@@ -58,7 +58,7 @@ export default function StudyCard(props){
                             top: 5
                         }}
                     >
-                        <DeleteIcon color="filled"/>
+                        <DeleteIcon color="error"/>
                     </IconButton>
                 }
 
