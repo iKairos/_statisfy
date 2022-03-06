@@ -33,11 +33,21 @@ export default function MachineLearningChoices(props){
         setOpen(!open);
     };
 
-    const [training, setTraining] = useState(10);
-    const [validation, setValidation] = useState(20);
     const [testing, setTesting] = useState(70);
     const [iteration, setIteration] = useState(1000);
     const [learning, setLearning] = useState(0.05);
+
+    const handleTesting = (event) => {
+        setTesting(event.target.value);
+    };
+
+    const handleIteration = (event) => {
+        setIteration(event.target.value);
+    };
+
+    const handleLearning = (event) => {
+        setLearning(event.target.value);
+    }
 
     return(
         <div className="ChoicesCont">
@@ -85,7 +95,7 @@ export default function MachineLearningChoices(props){
                                 sx={{position:"absolute", right:0, top : 0}}
                                 onClick={handleToggle}
                             >
-                            <SettingsIcon/>
+                            <SettingsIcon color="secondary"/>
                             </IconButton>
                         </div>
                         <Backdrop
@@ -103,7 +113,7 @@ export default function MachineLearningChoices(props){
                                         label="Test Size (in percent)"
                                         type="Number"
                                         value={testing}
-                                        onChange={(e) => setTesting(e.target.value)}
+                                        onChange={handleTesting}
                                         color="secondary"
                                         InputProps={
                                             {
@@ -124,7 +134,7 @@ export default function MachineLearningChoices(props){
                                         label="Iterations"
                                         value={iteration}
                                         color="secondary"
-                                        onChange={(e) => setIteration(e.target.value)}
+                                        onChange={handleIteration}
                                         InputProps={
                                             {
                                                 endAdornment: (
@@ -142,7 +152,7 @@ export default function MachineLearningChoices(props){
                                         label="alpha"
                                         value={learning}
                                         color="secondary"
-                                        onChange={(e) => setLearning(e.target.value)}
+                                        onChange={handleLearning}
                                         InputProps={
                                             {
                                                 endAdornment: (

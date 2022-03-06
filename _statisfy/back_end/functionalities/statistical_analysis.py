@@ -59,7 +59,10 @@ def pearsonr(x: np.array, y: np.array):
     r = num / den
     t = r * np.sqrt((n-2)/(1-r**2))
     p = 2 * sp.t.sf(np.abs(t), n-2)
-    
+
+    if np.isnan(r[0][0]):
+        raise TypeError("Pearson R computation returned NaN.")
+
     return (
         ('R Coefficient', r[0][0]), ('P-value', p[0][0]), ('SSxy', num), ('SSx', SSx), ('SSy', SSy),
         ('X Mean', x.mean()), ('Y Mean', y.mean()), ('Numerator', num), ('Denominator', den[0][0])

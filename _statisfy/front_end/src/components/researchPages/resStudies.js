@@ -152,7 +152,7 @@ export default function ResStudies(props){
     const handleCloseSnackbar = (event, reason) => {
         setOpenErrorSnackbar(false);
       };
-    console.log(callbackColumnsCleanOptions)
+
     const handleSubmit = () => {
         if(methodChosen.length === 0){
             setError("Please select a method for your analysis. You can either pick the recommended methods for your selection or pick anything that you think might suit your needs.");

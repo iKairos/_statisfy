@@ -9,7 +9,6 @@ from scipy import stats
 import pandas as pd
 import urllib.request
 import numpy as np
-import os
 
 @app.route("/api/dataset/process", methods = ['POST'])
 @cross_origin()
@@ -40,9 +39,9 @@ def dataset_details():
             kurtosis = "NA"
             try:
                 if df[i].dtypes != 'O':
-                    mean = round(float(df[i].mean()), 2) # temporary fix
-                    std = round(float(df[i].std()), 2)
-                    median = round(float(df[i].median()), 2)
+                    mean = "NaN" if np.isnan(round(float(df[i].mean()), 2)) else round(float(df[i].mean()), 2)
+                    std = "NaN" if np.isnan(round(float(df[i].std()), 2)) else round(float(df[i].std()), 2)
+                    median = "NaN" if np.isnan(round(float(df[i].median()), 2)) else round(float(df[i].median()), 2)
                     normal = anderson_test(df[i])
                     normal = "Normal" if normal[0] < normal[1][4] else "Not Normal"
                     vis = freq_dist(df[i])
@@ -50,8 +49,8 @@ def dataset_details():
                     hi = df[i].quantile(0.90)
                     outliers = int(len(df[i][(df[i] < low) | (df[i] > hi)]))
                     type = "numerical"
-                    skew = round(float(df[i].skew()), 2)
-                    kurtosis = round(float(df[i].kurtosis()), 2)
+                    skew = "NaN" if np.isnan(round(float(df[i].skew()), 2)) else round(float(df[i].skew()), 2)
+                    kurtosis = "NaN" if np.isnan(round(float(df[i].kurtosis()), 2)) else round(float(df[i].kurtosis()), 2)
                 else:
                     counts = df[i].value_counts()
                     if len(counts) > 2:
