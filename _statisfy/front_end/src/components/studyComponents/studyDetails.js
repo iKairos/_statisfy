@@ -1,5 +1,8 @@
+
+
+import "../../StyleSheets/StudyDetailsFolder/studyDetails.css";
 import { MemoizedTable } from "../DisplayTable";
-import { CircularProgress, Skeleton} from "@mui/material";
+import { Button, CircularProgress, Skeleton} from "@mui/material";
 import { Bar, Doughnut } from "react-chartjs-2";
 import { Typography } from "@mui/material";
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
@@ -9,6 +12,11 @@ import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DataObjectIcon from '@mui/icons-material/DataObject';
+import * as React from 'react';
+import { useState } from "react";
+import ButtonGroup from '@mui/material/ButtonGroup';
+import { Tabs, Tab, Box, Divider} from "@mui/material";
+
 
 import {CategoryScale , 
     Chart as ChartJS,
@@ -79,121 +87,169 @@ const AccordionSummary = styled((props) => (
 }));
 
 
+
+
 export default function StudyDetails(props){
+    const [value, setValue] = useState(0);
+
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    const [variable, setVariable] = useState(0);
+
+    const handleVariable = (varName) => {
+        setVariable(varName);
+    }
+
   return(
-    <div className="Study_details">
+    <div className="StudyDetails">
         <Typography variant="h6"><DataObjectIcon/> Data Preprocessing Results</Typography>
-        <div className="Study_details_changes">
-            <Typography>Number of Rows: {props.details?.rows} <DoubleArrowIcon/> {props.studyData?.length}</Typography>
-            <Typography>Data Distribution: Not normal <DoubleArrowIcon/> __placeholder__ </Typography>
-        </div>
-        <Accordion
-            defaultExpanded = {true}
-            TransitionProps={{ unmountOnExit: true }} 
-        >
-            <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            color="secondary"
-            >
-            <Typography variant="h6">Dataset</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-                <div className="Study_details_row">
-                    <Typography variant="h6">Initial Data</Typography>
-                    <Typography variant="h6">Processed Data</Typography>
-                    {typeof props.data !== 'undefined' ? 
-                        <MemoizedTable
-                            data= {props.data}
-                            Header={true} 
-                            rowNumber={5}
-                            checked={false}
-                        /> : 
-                        <div>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                        </div>
-                    }
+        <div className="StudyDetails_section">
+            <Box sx={{ width:"100%", bgcolor: 'background.paper' }}>
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    variant="scrollable"
+                    scrollButtons="auto"
+                    textColor="secondary"
+                    indicatorColor="secondary"
+                    
+                >
+                    <Tab label="Dataset" />
+                    <Tab label="Variables" />
+                    <Tab label="Changes" />
+                </Tabs>
+            </Box>
+            {value === 0 &&
+                <div className = "StudyDetails_Dataset">
+                    <div className="Study_details_row">
+                        <Typography variant="h6">Initial Data</Typography>
+                        <Typography variant="h6">Processed Data</Typography>
+                        {typeof props.data !== 'undefined' ? 
+                            <MemoizedTable
+                                data= {props.data}
+                                Header={true} 
+                                rowNumber={5}
+                                checked={false}
+                            /> : 
+                            <div>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                            </div>
+                        }
 
-                    {typeof props.studyData !== 'undefined' ? 
-                        <MemoizedTable
-                            data= {props.studyData}
-                            Header={true} 
-                            rowNumber={5}
-                            checked={false}
-                        /> : 
-                        <div>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                            <Skeleton variant="text" height={50} animation="wave"/>
-                        </div>
-                    }
+                        {typeof props.studyData !== 'undefined' ? 
+                            <MemoizedTable
+                                data= {props.studyData}
+                                Header={true} 
+                                rowNumber={5}
+                                checked={false}
+                            /> : 
+                            <div>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                                <Skeleton variant="text" height={50} animation="wave"/>
+                            </div>
+                        }
+                    </div>
+                    <Typography>Number of Rows: {props.details?.rows} <DoubleArrowIcon/> {props.studyData?.length}</Typography>
+                    <Typography>Data Distribution: Not normal <DoubleArrowIcon/> __placeholder__ </Typography>
                 </div>
-            </AccordionDetails>
-        </Accordion>
-        {
-            props.changes.map(change => {
-                return(
-                    <Accordion
-                        defaultExpanded = {true}
-                        TransitionProps={{ unmountOnExit: true }} 
-                    >
-                        <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
+            }
+            {value === 1 &&
+                <div className = "StudyDetails_Variables">
+                    <div className="StudyDetails_Variables_Selection">
+                    <ButtonGroup
+                        orientation="vertical"
+                        aria-label="vertical contained button group"
+                        variant="text"
                         color="secondary"
+                    >
+                        {props.changes.map(change => {
+                            return(
+                                <Button>{change.column}</Button>
+                        )})}
+                    </ButtonGroup>
+                    
+                    </div>  
+                    <Divider orientation="vertical" flexItem  style={{height:'100%'}}/>
+                    <div className="StudyDetails_Variables_Container">
+                        Variables
+                    </div>
+                </div>
+            
+            }
+
+            {value === 2 &&
+                <div className = "StudyDetails_Variables">
+                    <div className="StudyDetails_Variables_Selection">
+                        <ButtonGroup
+                            orientation="vertical"
+                            aria-label="vertical contained button group"
+                            variant="contained"
+                            color="secondary"
+                            disableElevation
                         >
-                        <Typography variant="h6">{change.column} Details</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
+                            {props.changes.map((change, index) => {
+                                return(
+                                    <Button onClick={()=> handleVariable(index)}>{change.column}</Button>
+                            )})}
+                        </ButtonGroup>
+                    </div>  
+                    <Divider orientation="vertical" flexItem  style={{height:'100%'}}/>
+                    <div className="StudyDetails_Variables_Container">
 
-                            
+                        <div>{props.changes[variable].column}</div>
 
-                            <div className="Study_details_row">
-                                <Typography variant="h6">Initial Data Distribution</Typography>
-                                <Typography variant="h6">Processed Data Distribution</Typography>
-                                <div className="Study_details_graph">
-                                    <p>graph here</p>
-                                </div>
-
-                                <div className="Study_details_graph">
-                                    <p>graph here</p>
-                                </div>
-
+                        <div className="Study_details_row">
+                            <Typography variant="h6">Initial Data Distribution</Typography>
+                            <Typography variant="h6">Processed Data Distribution</Typography>
+                            <div className="Study_details_graph">
+                                <p>graph here</p>
                             </div>
 
-                            <div className="Study_details_changes_grid">
-                                <div className = "Study_details_changes_category">
-                                    <Typography>Null Values Deleted: </Typography>
-                                    <Typography>Null Values Replaced :</Typography>
-                                    <Typography>Outliers Deleted: </Typography>
-                                    <Typography>Outliers Replaced: </Typography>
+                            <div className="Study_details_graph">
+                                <p>graph here</p>
+                            </div>
+
+                        </div>
+
+                        <div className="Study_details_changes_grid">
+                            <div className = "Study_details_changes_category">
+                                <Typography>Null Values Deleted: </Typography>
+                                <Typography>Null Values Replaced :</Typography>
+                                <Typography>Outliers Deleted: </Typography>
+                                <Typography>Outliers Replaced: </Typography>
                                 
-                                </div>
+                            </div>
 
-                                <div className = "Study_details_changes_results">
-                                    <Typography>{change.null_deleted} row(s)</Typography>
-                                    <Typography>{change.null_replaced} row(s)</Typography>
-                                    <Typography>{change.outlier_deleted} row(s)</Typography>
-                                    <Typography>{change.outlier_replaced} row(s)</Typography>
-
-                                </div>
+                            <div className = "Study_details_changes_results">
+                                <Typography>{props.changes[variable].null_deleted} row(s)</Typography>
+                                <Typography>{props.changes[variable].null_replaced} row(s)</Typography>
+                                <Typography>{props.changes[variable].outlier_deleted} row(s)</Typography>
+                                <Typography>{props.changes[variable].outlier_replaced} row(s)</Typography>
 
                             </div>
-                        </AccordionDetails>
-                    </Accordion>
-                )
-            })
-        }
+
+                        </div>
+                    </div>
+                </div>
+            
+            }
+        </div>
     </div>
   );  
 }
