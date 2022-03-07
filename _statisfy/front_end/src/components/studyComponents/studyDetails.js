@@ -28,6 +28,9 @@ import {CategoryScale ,
     DoughnutController,
     ArcElement
 } from 'chart.js'; 
+import { useSelector } from "react-redux";
+import { MemoizedColumnGraphs } from "../researchPages/columnGraphs";
+import VariableGraph from "../researchPages/variableGraph";
 
 ChartJS.register(
     CategoryScale,
@@ -86,9 +89,6 @@ const AccordionSummary = styled((props) => (
     borderBottomRightRadius: `0.5rem`
 }));
 
-
-
-
 export default function StudyDetails(props){
     const [value, setValue] = useState(0);
 
@@ -97,11 +97,17 @@ export default function StudyDetails(props){
         setValue(newValue);
     };
 
-    const [variable, setVariable] = useState(0);
+    const [variable, setVariable] = useState(props.changes[0].column);
+    const [variable1, setVariable1] = useState(props.changes[0].column);
 
     const handleVariable = (varName) => {
         setVariable(varName);
     }
+
+    const fileDetailsSelector = useSelector((state) => 
+        state.datasetDetails
+    );
+    const {datasetDetails} = fileDetailsSelector;
 
   return(
     <div className="StudyDetails">
@@ -180,14 +186,20 @@ export default function StudyDetails(props){
                     >
                         {props.changes.map(change => {
                             return(
-                                <Button>{change.column}</Button>
+                                <Button onClick={()=> setVariable1(change.column)}>{change.column}</Button>
                         )})}
                     </ButtonGroup>
                     
                     </div>  
                     <Divider orientation="vertical" flexItem  style={{height:'100%'}}/>
                     <div className="StudyDetails_Variables_Container">
-                        Variables
+                        {
+                        typeof datasetDetails?.details !== "undefined" ? (
+                            datasetDetails?.details?.filter(data => data.column == variable1).map( data => {
+                                return <MemoizedColumnGraphs size={datasetDetails.rows} data={data}/>
+                            })
+                        ) : <CircularProgress color="info" thickness={2.5} size={30}/>
+                        }
                     </div>
                 </div>
             
@@ -205,20 +217,26 @@ export default function StudyDetails(props){
                         >
                             {props.changes.map((change, index) => {
                                 return(
-                                    <Button onClick={()=> handleVariable(index)}>{change.column}</Button>
+                                    <Button onClick={()=> setVariable(change.column)}>{change.column}</Button>
                             )})}
                         </ButtonGroup>
                     </div>  
                     <Divider orientation="vertical" flexItem  style={{height:'100%'}}/>
                     <div className="StudyDetails_Variables_Container">
 
-                        <div>{props.changes[variable].column}</div>
+                        <div>{variable}</div>
 
                         <div className="Study_details_row">
                             <Typography variant="h6">Initial Data Distribution</Typography>
                             <Typography variant="h6">Processed Data Distribution</Typography>
                             <div className="Study_details_graph">
-                                <p>graph here</p>
+                                    {
+                                        typeof datasetDetails?.details !== "undefined" ? (
+                                            datasetDetails?.details.filter(data => data.column == variable).map( data => {
+                                                return <VariableGraph data={data}/>
+                                            })
+                                        ) : <CircularProgress color="secondary" thickness={2.5} size={30}/>
+                                    }
                             </div>
 
                             <div className="Study_details_graph">
@@ -237,10 +255,10 @@ export default function StudyDetails(props){
                             </div>
 
                             <div className = "Study_details_changes_results">
-                                <Typography>{props.changes[variable].null_deleted} row(s)</Typography>
-                                <Typography>{props.changes[variable].null_replaced} row(s)</Typography>
-                                <Typography>{props.changes[variable].outlier_deleted} row(s)</Typography>
-                                <Typography>{props.changes[variable].outlier_replaced} row(s)</Typography>
+                                <Typography>{props.changes.filter(data => data.column == variable)[0].null_deleted} row(s)</Typography>
+                                <Typography>{props.changes.filter(data => data.column == variable)[0].null_replaced} row(s)</Typography>
+                                <Typography>{props.changes.filter(data => data.column == variable)[0].outlier_deleted} row(s)</Typography>
+                                <Typography>{props.changes.filter(data => data.column == variable)[0].outlier_replaced} row(s)</Typography>
 
                             </div>
 

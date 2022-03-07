@@ -1,11 +1,9 @@
 import { Typography } from '@mui/material';
-import { height } from '@mui/system';
 import * as React from 'react';
-import { useState } from 'react';
 import {useSpring, animated} from 'react-spring';
 import useMeasure from 'react-use-measure'
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 
 export default function BarCor(props) {
     const [ref, { width }] = useMeasure()
@@ -25,7 +23,7 @@ export default function BarCor(props) {
   return (
     <div className='Correlation'>
         <Typography variant="h6" className ="Correlation_Header">
-            Correlation Strength: {Math.abs((props.value * 100).toFixed(2))}% {props.value > 0 ? <ArrowUpwardIcon color='success' fontSize='medium'/> : props.value < 0 ? <ArrowDownwardIcon color='error' fontSize='medium'/> : null}
+            Correlation Strength: {Math.abs((props.value * 100).toFixed(2))}% {props.value > 0 ? <TrendingUpIcon color='success' fontSize='medium'/> : props.value < 0 ? <TrendingDownIcon color='error' fontSize='medium'/> : null}
         </Typography>
         <div className ="Bar">
             <div className = "Bar_Left_cont">
