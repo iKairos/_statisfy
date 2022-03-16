@@ -213,7 +213,7 @@ export default function StudyDetails(props){
                         <ButtonGroup
                             orientation="vertical"
                             aria-label="vertical contained button group"
-                            variant="contained"
+                            variant="text"
                             color="secondary"
                             disableElevation
                         >
