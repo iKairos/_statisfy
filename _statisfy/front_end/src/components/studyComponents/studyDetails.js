@@ -112,6 +112,7 @@ export default function StudyDetails(props){
   return(
     <div className="StudyDetails">
         <Typography variant="h6"><DataObjectIcon/> Data Preprocessing Results</Typography>
+        
         <div className="StudyDetails_section">
             <Box sx={{ width:"100%", bgcolor: 'background.paper' }}>
                 <Tabs
@@ -181,8 +182,9 @@ export default function StudyDetails(props){
                     <ButtonGroup
                         orientation="vertical"
                         aria-label="vertical contained button group"
-                        variant="text"
+                        variant="contained"
                         color="secondary"
+                        disableElevation
                     >
                         {props.changes.map(change => {
                             return(
@@ -224,7 +226,7 @@ export default function StudyDetails(props){
                     <Divider orientation="vertical" flexItem  style={{height:'100%'}}/>
                     <div className="StudyDetails_Variables_Container">
 
-                        <div>{variable}</div>
+                        <Typography variant="overline">{variable}</Typography>
 
                         <div className="Study_details_row">
                             <Typography variant="h6">Initial Data Distribution</Typography>

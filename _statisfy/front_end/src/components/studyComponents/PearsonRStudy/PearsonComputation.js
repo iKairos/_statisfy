@@ -1,5 +1,6 @@
 import Latex from "react-latex-next";
-import "../../StyleSheets/computationscss/computation.css"
+import "../../../StyleSheets/computationscss/computation.css"
+
 
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
@@ -58,7 +59,7 @@ const AccordionSummary = styled((props) => (
 
   
 
-export default function PearsonStep(props){
+export default function PearsonComputation(props){
     const pr = "$$r = \\frac{\\sum{(x_i-\\bar{x})\\sum{(y_i-\\bar{y})}}}{\\sqrt{\\sum{(x_i-\\bar{x})^2} \\sum({y_i-\\bar{y})^2}}}$$";
     const vars = {};
 
@@ -68,7 +69,7 @@ export default function PearsonStep(props){
 
     return(
         <div className="Computation_pearson">
-            <Typography variant="button" sx={{fontWeight:"bold", fontSize:"1.5rem", color:"GrayText", marginBottom:"1rem"}}>Pearson R Correlation</Typography>
+            <Typography variant="h6"> Pearson R Correlation</Typography>
             <p><i>Note: All values are rounded in four (4) decimal points.</i></p>
             <Accordion
                 defaultExpanded = {true}

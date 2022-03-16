@@ -102,7 +102,7 @@ export default function DataTypeNormalize(props){
                             variant="contained"
                             color="secondary"
                         >
-                        Label
+                        Dependent
                         </Button>
                         :
                         <Button
@@ -110,7 +110,7 @@ export default function DataTypeNormalize(props){
                             variant="outlined"
                             color="secondary"
                         >
-                        Set Label
+                        Independent
                         </Button>
                     }
                     

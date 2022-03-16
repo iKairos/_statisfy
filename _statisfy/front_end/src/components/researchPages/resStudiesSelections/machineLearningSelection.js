@@ -9,6 +9,7 @@ import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutli
 
 export const MachineLearningSelection = (props) => {
     const [label, setLabel] = useState("");
+    
     const handleLabel = (choice) => {
         setLabel(choice);
     };

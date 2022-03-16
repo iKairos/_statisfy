@@ -116,8 +116,7 @@
 .Study_details_graph {
   width: 1fr;
   border: 1px solid #e0e0e0;
-  max-height: 25rem;
-  min-height: 20rem;
+  height: 100%;
   border-radius: 0.25rem;
 }
 
@@ -380,6 +379,9 @@
   }
   .Study_content_details {
     color: #414141;
+  }
+  .Study_content_computation {
+    min-height: 90vh;
   }
   .Study_cards {
     width: 1fr;
