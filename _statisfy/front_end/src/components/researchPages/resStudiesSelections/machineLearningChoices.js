@@ -33,20 +33,20 @@ export default function MachineLearningChoices(props){
         setOpen(!open);
     };
 
-    const [testing, setTesting] = useState(70);
+    const [testing, setTesting] = useState(30);
     const [iteration, setIteration] = useState(1000);
     const [learning, setLearning] = useState(0.05);
 
     const handleTesting = (event) => {
-        setTesting(event.target.value);
+        props.setCallbackTestSize(event.target.value);
     };
 
     const handleIteration = (event) => {
-        setIteration(event.target.value);
+        props.setCallbackIteration(event.target.value);
     };
 
     const handleLearning = (event) => {
-        setLearning(event.target.value);
+        props.setCallbackLearningRate(event.target.value);
     }
 
     return(
@@ -112,7 +112,7 @@ export default function MachineLearningChoices(props){
                                         id="outlined-helperText"
                                         label="Test Size (in percent)"
                                         type="Number"
-                                        value={testing}
+                                        value={props.callbackTestSize}
                                         onChange={handleTesting}
                                         color="secondary"
                                         InputProps={
@@ -132,7 +132,7 @@ export default function MachineLearningChoices(props){
                                         id="outlined-helperText"
                                         type="Number"
                                         label="Iterations"
-                                        value={iteration}
+                                        value={props.callbackIteration}
                                         color="secondary"
                                         onChange={handleIteration}
                                         InputProps={
@@ -150,7 +150,7 @@ export default function MachineLearningChoices(props){
                                         id="outlined-helperText"
                                         type="Number"
                                         label="alpha"
-                                        value={learning}
+                                        value={props.callbackLearningRate}
                                         color="secondary"
                                         onChange={handleLearning}
                                         InputProps={
@@ -182,13 +182,13 @@ export default function MachineLearningChoices(props){
 
                         <div className="statContainer_details_contents_divider">
                         <Typography>Training Dataset Size</Typography>
-                        <Typography>{100-Number(testing)}%</Typography>
+                        <Typography>{100-Number(props.callbackTestSize)}%</Typography>
                         <Typography>Test Dataset Size</Typography>
-                        <Typography>{testing}%</Typography>
+                        <Typography>{props.callbackTestSize}%</Typography>
                         <Typography> Iterations</Typography>
-                        <Typography>{iteration}</Typography>
+                        <Typography>{props.callbackIteration}</Typography>
                         <Typography> Learning Rate</Typography>
-                        <Typography>{learning}</Typography>
+                        <Typography>{props.callbackLearningRate}</Typography>
                         </div>
                     </div>
 

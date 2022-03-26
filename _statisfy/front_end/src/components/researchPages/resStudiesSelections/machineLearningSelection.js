@@ -7,12 +7,11 @@ import { useState } from "react";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 
-export const MachineLearningSelection = (props) => {
-    const [label, setLabel] = useState("");
-    
+export const MachineLearningSelection = (props) => {    
     const handleLabel = (choice) => {
-        setLabel(choice);
+        props.setLabel(choice);
     };
+    
     return (
         <div className="resList_column">
             <div style={{paddingBottom:"1rem"}}>
@@ -84,7 +83,7 @@ export const MachineLearningSelection = (props) => {
                             }
                         })
                 
-                        return <DataTypeNormalize tool="ml" handleLabel={handleLabel} label={label} details={data} options={props.callbackColumnsCleanOptions} setOptions={props.setCallbackColumnsCleanOptions}/>;
+                        return <DataTypeNormalize tool="ml" handleLabel={handleLabel} label={props.label} details={data} options={props.callbackColumnsCleanOptions} setOptions={props.setCallbackColumnsCleanOptions}/>;
                     })
                 }
             </div>

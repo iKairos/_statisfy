@@ -4,15 +4,19 @@ import PearsonRStudy from "./studyComponents/PearsonRStudy/PearsonRStudy";
 
 
 export default function Study(props){
-    
+    console.log(props)
     return(
         <>
-        <PearsonRStudy
-            data = {props.data}
-        />
-        <LinearStudy
-            data = {props.data}
-        />
+            {
+                props.data[5] == 'Pearson R Correlation Test' ? 
+                <PearsonRStudy
+                    data = {props.data}
+                />
+                : props.data[5] == 'Linear Regression' ?
+                <LinearStudy
+                    data = {props.data}
+                /> : null
+            }
         </>
         
     );  

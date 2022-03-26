@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.metrics import mean_absolute_percentage_error
 
 class LinearRegression:
     """
@@ -71,9 +72,12 @@ class LinearRegression:
     def mape(self, y_true, y_pred):
         """
         Mean absolute percent error that calculates the average error in the model.
-        """
+        
         y_true, y_pred = np.array(y_true), np.array(y_pred)
         return np.mean(np.abs((y_true - y_pred) / y_true))
+        """
+
+        return mean_absolute_percentage_error(y_true, y_pred) * 100
     
     def r_squared(self, y_true, y_pred):
         """

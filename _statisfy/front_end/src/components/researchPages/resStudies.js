@@ -64,6 +64,7 @@ export default function ResStudies(props){
     const [studyMethod, setStudyMethod] = useState();
     const [studyColumns, setStudyColumns] = useState([]);
     const [tool, setTool] = useState("");
+    const [label, setLabel] = useState("");
 
     const [isAdding, setAdding] = useState(false);
     const [showActive, setShowActive] = useState(1);
@@ -74,7 +75,9 @@ export default function ResStudies(props){
     const [isOpenErrorSnackbar, setOpenErrorSnackbar] = useState(false);
 
     const [callbackColumnsCleanOptions, setCallbackColumnsCleanOptions] = useState([]);
-
+    const [callbackTestSize, setCallbackTestSize] = useState(30);
+    const [callbackIteration, setCallbackIteration] = useState(1000);
+    const [callbackLearningRate, setCallbackLearningRate] = useState(0.05);
     
 
     const [open, setOpen] = React.useState(false);
@@ -173,6 +176,10 @@ export default function ResStudies(props){
         formData.append("columns", studyColumns);
         formData.append("study_description", studyDesc);
         formData.append("options", callbackColumnsCleanOptions);
+        formData.append("label", label);
+        formData.append("testSize", callbackTestSize);
+        formData.append("iterations", callbackIteration);
+        formData.append("learningRate", callbackLearningRate);
         
         const dataObject = {
             'study_name': studyName,
@@ -182,7 +189,11 @@ export default function ResStudies(props){
             'created_at': new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, ''),
             'columns': studyColumns,
             'study_description': studyDesc,
-            'options': callbackColumnsCleanOptions
+            'options': callbackColumnsCleanOptions,
+            'label': label,
+            'testSize': callbackTestSize,
+            'iterations': callbackIteration,
+            'learningRate': callbackLearningRate
         };
 
         dispatch(saveStudy(dataObject));
@@ -558,7 +569,8 @@ export default function ResStudies(props){
                                         studyColumns = {studyColumns}
                                         callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
                                         setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
-                                        
+                                        setLabel = {setLabel}
+                                        label = {label}        
                                     />
                                 }
 
@@ -569,7 +581,14 @@ export default function ResStudies(props){
                             <div className="ToolChoices">
                                 {tool === "Statistical Method" 
                                     ? <StatisticalChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
-                                    : <MachineLearningChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
+                                    : <MachineLearningChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}
+                                        callbackTestSize = {callbackTestSize}
+                                        setCallbackTestSize = {setCallbackTestSize}
+                                        callbackIteration = {callbackIteration}
+                                        setCallbackIteration = {setCallbackIteration}
+                                        callbackLearningRate = {callbackLearningRate}
+                                        setCallbackLearningRate = {setCallbackLearningRate}
+                                    />
                                 }
                             </div>
                             

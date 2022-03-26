@@ -1,5 +1,5 @@
 from __main__ import app
-from random import randint 
+from random import randint
 from flask import request
 from flask_cors import cross_origin
 from db.db_blob import BlobDatabase
@@ -8,7 +8,9 @@ from objects.user import User
 from objects.research import Research
 from os.path import dirname, realpath
 from functionalities.statistical_analysis import *
+from functionalities.machine_learning import *
 from functionalities.interpretation import interpret
+from sklearn.model_selection import train_test_split
 import pandas as pd
 import warnings
 import io
@@ -132,7 +134,7 @@ def add_research():
 def add_study():
     try:
         data = request.get_json()
-
+        print(data)
         uuid = randint(10000000, 99999999)
             
         study = Study(uuid)
@@ -228,7 +230,7 @@ def add_study():
             null_replaced = 0
             outlier_deleted = 0
             outlier_replaced = 0
-
+        print(data)
         if data['test_type'] == 'Pearson R Correlation Test':
             if len(columns) != 2:
                 return {
@@ -237,7 +239,25 @@ def add_study():
                 }
             
             compute_res = pearsonr(df[columns[0]], df[columns[1]])
+        elif data['test_type'] == 'Linear Regression':
+            new_cols = columns
+            new_cols.remove(data['label'])
+            X = df[new_cols]
+            y = df[data['label']]
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=data['testSize'], random_state=99)
+            model = LinearRegression()
+            model.fit_data(X_train, y_train)
+            model.gradient_descent(iterations = data['iterations'], learning_rate=data['learningRate'])
 
+            pred = model.predict(X_test)
+            print(model.r_squared(y_test, pred), model.mape(y_test, pred))
+
+            compute_res = (('R Squared', model.r_squared(y_test, pred)), 
+                ('R Squared (%)', model.r_squared(y_test, pred)*100), 
+                ('Mean Absolute Percentage Error', model.mape(y_test, pred))
+            )
+            print(compute_res)
+        """
         Study.new_study(
             _id = uuid,
             study_name = data['study_name'],
@@ -255,7 +275,7 @@ def add_study():
         df = df[[columns[0], columns[1]]]
         blob = io.StringIO(df.to_csv(index=False))
         BlobDatabase.upload_study_dataset(f"{uuid}_{Research(data['research_id']).dataset_directory}", blob.read())
-
+        """
         return {
             'code': 'STUDY_ADD_SUCCESS',
             'message': 'Study is successfully registered and computed.',
