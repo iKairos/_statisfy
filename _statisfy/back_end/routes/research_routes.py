@@ -230,7 +230,7 @@ def add_study():
             null_replaced = 0
             outlier_deleted = 0
             outlier_replaced = 0
-        print(data)
+
         if data['test_type'] == 'Pearson R Correlation Test':
             if len(columns) != 2:
                 return {
@@ -242,12 +242,14 @@ def add_study():
         elif data['test_type'] == 'Linear Regression':
             new_cols = columns
             new_cols.remove(data['label'])
+            
             X = df[new_cols]
             y = df[data['label']]
-            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=data['testSize'], random_state=99)
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=float(data['testSize'])/100, random_state=99)
+
             model = LinearRegression()
             model.fit_data(X_train, y_train)
-            model.gradient_descent(iterations = data['iterations'], learning_rate=data['learningRate'])
+            model.gradient_descent(iterations = int(data['iterations']), learning_rate=float(data['learningRate']))
 
             pred = model.predict(X_test)
             print(model.r_squared(y_test, pred), model.mape(y_test, pred))
@@ -288,6 +290,7 @@ def add_study():
         }
         
     except Exception as e:
+        raise e
         return {
             'code': 'STUDY_ADD_FAIL',
             'error': str(e),

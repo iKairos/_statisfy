@@ -7,16 +7,12 @@ export default function Study(props){
     console.log(props)
     return(
         <>
-            {
-                props.data[5] == 'Pearson R Correlation Test' ? 
-                <PearsonRStudy
-                    data = {props.data}
-                />
-                : props.data[5] == 'Linear Regression' ?
-                <LinearStudy
-                    data = {props.data}
-                /> : null
-            }
+            <PearsonRStudy
+                data = {props.data}
+            />
+            <LinearStudy
+                data = {props.data}
+            />
         </>
         
     );  
