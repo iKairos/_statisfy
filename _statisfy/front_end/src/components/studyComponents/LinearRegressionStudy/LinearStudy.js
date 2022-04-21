@@ -165,16 +165,20 @@ export default function LinearStudy(props){
                 }
                 {studyPage === 2 &&
                     <div className = "Study_content_computation">
-                        <LinearConfiguration/>
+                        <LinearConfiguration configs={props.data[12]}/>
                     </div>
                 }
                 {studyPage === 3 &&
                     <div className = "Study_content_graphs">
                         <div className = "Study_cards_container">       
-                            <ResultCards
-                                value = {5 + "%"}
-                                variable = {"accuracy"}
-                            />
+                            {
+                                props.data[8].map(([var_name, var_val]) => 
+                                    <ResultCards
+                                        value = {var_val.toFixed(4)}
+                                        variable = {var_name}
+                                    />
+                                )
+                            }
                         </div>
                     </div>
                 }

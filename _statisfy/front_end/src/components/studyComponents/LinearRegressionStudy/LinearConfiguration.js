@@ -13,9 +13,9 @@ export default function LinearConfiguration(props){
                     <Typography  variant="h6">Training Set Details</Typography>
                     <div className="LinearConfig_container_content_grid">
                         <Typography>Training Set Percentage: </Typography>
-                        <Typography>30</Typography>
+                        <Typography>{100 - props.configs['test_size']}%</Typography>
                         <Typography>Number of Rows : </Typography>
-                        <Typography>30</Typography>
+                        <Typography>__placeholder__</Typography>
                     </div>
                     
                 </div>
@@ -30,9 +30,9 @@ export default function LinearConfiguration(props){
                     <Typography  variant="h6">Testing Set Details</Typography>
                     <div className="LinearConfig_container_content_grid">
                         <Typography>Testing Set Percentage: </Typography>
-                        <Typography>30</Typography>
+                        <Typography>{props.configs['test_size']}%</Typography>
                         <Typography>Number of Rows : </Typography>
-                        <Typography>30</Typography>
+                        <Typography>__placeholder__</Typography>
                     </div>
                     
                 </div>

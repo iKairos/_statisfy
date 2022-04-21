@@ -45,6 +45,17 @@ class StudiesBackbone(DatabaseBackbone):
                     outlier_deleted = change['outlier_deleted'],
                     outlier_replaced = change['outlier_replaced']
                 )
+            
+
+            if kwargs['regression_configuration'] is not None:
+                reg_conf = kwargs['regression_configuration']
+
+                self.add_regression_configuration(
+                    kwargs['_id'],
+                    reg_conf['test_size'],
+                    reg_conf['iterations'],
+                    reg_conf['learning_rate']
+                )
 
             return True, res
         except Exception as e:
@@ -231,3 +242,38 @@ class StudiesBackbone(DatabaseBackbone):
         except Exception as e:
             print(e)
             return False
+    
+    def get_regression_configuration(self, rid):
+        try:
+            fetched = self.fetch_row(
+                "regression_configurations",
+                study_id = rid
+            )
+            if len(fetched) == 0 :
+                return None 
+            else:
+                fetched = fetched[0]
+                
+                return {
+                    'test_size': fetched[1],
+                    'iterations': fetched[2],
+                    'learning_rate': fetched[3]
+                }
+        except Exception as e:
+            print(e)
+            raise e
+    
+    def add_regression_configuration(self, rid, test_size, iterations, learning_rate):
+        try:
+            self.append_row(
+                'regression_configurations',
+                study_id = rid,
+                test_size = test_size,
+                iterations = iterations, 
+                learning_rate = learning_rate
+            )
+
+            return True
+        except Exception as e:
+            print(e)
+            raise e

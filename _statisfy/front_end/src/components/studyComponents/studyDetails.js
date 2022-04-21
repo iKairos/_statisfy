@@ -92,7 +92,6 @@ const AccordionSummary = styled((props) => (
 export default function StudyDetails(props){
     const [value, setValue] = useState(0);
 
-
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -172,7 +171,7 @@ export default function StudyDetails(props){
                             </div>
                         }
                     </div>
-                    <Typography>Number of Rows: {props.details?.rows} <DoubleArrowIcon/> {props.studyData?.length}</Typography>
+                    <Typography>Number of Rows: {datasetDetails?.rows} <DoubleArrowIcon/> {props.studyData?.length}</Typography>
                     <Typography>Data Distribution: Not normal <DoubleArrowIcon/> __placeholder__ </Typography>
                 </div>
             }
@@ -182,7 +181,7 @@ export default function StudyDetails(props){
                     <ButtonGroup
                         orientation="vertical"
                         aria-label="vertical contained button group"
-                        variant="contained"
+                        variant="text"
                         color="secondary"
                         disableElevation
                     >

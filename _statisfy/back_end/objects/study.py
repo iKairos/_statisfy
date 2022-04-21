@@ -31,7 +31,7 @@ class Study:
     
     @property 
     def created_at(self):
-        return self.db.get_created_at(self.id)
+        return self.db.get_created_at(self.id) 
     
     @property 
     def columns(self):
@@ -41,6 +41,10 @@ class Study:
     def variables(self):
         return self.db.get_variables(self.id)
     
+    @property
+    def regression_configuration(self):
+        return self.db.get_regression_configuration(self.id)
+
     def clean_stats(self, column):
         return self.db.get_clean_stats(self.id, column)
     
@@ -49,6 +53,9 @@ class Study:
     
     def add_column(self, column):
         return self.db.add_column(self.id, column)
+    
+    def add_regression_configuration(self, test_size, iterations, learning_rate):
+        return self.db.add_regression_configuration(self.id, test_size, iterations, learning_rate)
     
     @staticmethod
     def new_study(**kwargs):
@@ -64,7 +71,8 @@ class Study:
             study_description = kwargs['study_description'],
             variables = kwargs['variables'],
             options = kwargs['options'],
-            changes = kwargs['changes']
+            changes = kwargs['changes'],
+            regression_configuration = kwargs['regression_configuration']
         )
     
     def delete_study(self):

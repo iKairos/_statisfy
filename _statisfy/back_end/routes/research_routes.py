@@ -134,7 +134,7 @@ def add_research():
 def add_study():
     try:
         data = request.get_json()
-        print(data)
+
         uuid = randint(10000000, 99999999)
             
         study = Study(uuid)
@@ -148,7 +148,7 @@ def add_study():
                 break
 
         compute_res = None
-        interpretation = []
+        regression_configuration = None
         
         research = Research(data['research_id'])
         
@@ -240,26 +240,33 @@ def add_study():
             
             compute_res = pearsonr(df[columns[0]], df[columns[1]])
         elif data['test_type'] == 'Linear Regression':
-            new_cols = columns
+            new_cols = columns.copy()
             new_cols.remove(data['label'])
             
             X = df[new_cols]
             y = df[data['label']]
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=float(data['testSize'])/100, random_state=99)
 
+            train = pd.concat([X_train, y_train], axis=1).to_csv((f"LINREG_TRAIN_{uuid}_{Research(data['research_id']).dataset_directory}"))
+            test = pd.concat([y_train, y_test], axis=1).to_csv((f"LINREG_TEST_{uuid}_{Research(data['research_id']).dataset_directory}"))
+
             model = LinearRegression()
             model.fit_data(X_train, y_train)
             model.gradient_descent(iterations = int(data['iterations']), learning_rate=float(data['learningRate']))
 
             pred = model.predict(X_test)
-            print(model.r_squared(y_test, pred), model.mape(y_test, pred))
 
             compute_res = (('R Squared', model.r_squared(y_test, pred)), 
                 ('R Squared (%)', model.r_squared(y_test, pred)*100), 
                 ('Mean Absolute Percentage Error', model.mape(y_test, pred))
             )
-            print(compute_res)
-        """
+
+            regression_configuration = {
+                'test_size': data['testSize'],
+                'iterations': data['iterations'],
+                'learning_rate': data['learningRate']
+            }
+
         Study.new_study(
             _id = uuid,
             study_name = data['study_name'],
@@ -271,13 +278,14 @@ def add_study():
             study_description = data['study_description'],
             variables = compute_res,
             options = data['options'],
-            changes = changes
+            changes = changes,
+            regression_configuration = regression_configuration
         )
 
-        df = df[[columns[0], columns[1]]]
+        df = df[[col for col in columns]]
         blob = io.StringIO(df.to_csv(index=False))
         BlobDatabase.upload_study_dataset(f"{uuid}_{Research(data['research_id']).dataset_directory}", blob.read())
-        """
+
         return {
             'code': 'STUDY_ADD_SUCCESS',
             'message': 'Study is successfully registered and computed.',
@@ -346,6 +354,7 @@ def get_studies():
                 temp.append(Study(i[0]).clean_stats(col))
             i.append(temp)
             i.append(research.dataset_directory)
+            i.append(Study(i[0]).regression_configuration)
             res_data.append(list(i))
 
         return {
@@ -355,7 +364,7 @@ def get_studies():
     except Exception as e:
         return {
             'code': 'STUDY_GET_FAIL',
-            'message': 'Study fetching failed.',
+            'message': str(e),
         }
 
 @app.route("/api/research/study/delete", methods=["POST"])
