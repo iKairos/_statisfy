@@ -31,6 +31,7 @@ import Computation from "../Computation";
 import { getStudyDataset} from "../../../actions/datasetActions";
 import StudyDetails from "../studyDetails";
 import LinearConfiguration from "./LinearConfiguration";
+import LinearModel from "./LinearModel";
 import BarCor from "../../newDashBoard/bar";
 import CorrelationDegree from "../../CorrelationDegree";
 
@@ -183,8 +184,8 @@ export default function LinearStudy(props){
                     </div>
                 }
                 {studyPage === 4 &&
-                    <div className = "Study_content_interpretation">
-                        
+                    <div className = "Study_content_graphs">
+                        <LinearModel/>
                     </div>
                 }
             </div>
