@@ -2,13 +2,32 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../actions/userActions';
-import '../StyleSheets/signup.css'
+import "../StyleSheets/NewCSSFiles/SignInSignUpFolder/SignInSignUp.css"
 import { Redirect } from "react-router"
-import { Alert, Fade, Grow } from '@mui/material';
+import { Alert, Fade, Grow, TextField, Button } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { passwordRequirement, status500 } from '../constants/stringConstants';
+
+
+const useStyles = makeStyles ({
+  field:{
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    borderRadius: '0.25rem'
+  },
+  btn:{
+    borderRadius: '1.5rem',
+    width:'8rem',
+    height:'2.5rem',
+    color:'white',
+    fontWeight:'500',
+    paddingLeft:'0.5rem',
+    paddingRight:'0.5rem'
+  }
+})
 
 export default function SignUpScreen1(props) {
   // ======= FUNCTION-WIDE VARIABLES ======= //
+  const classes = useStyles();
   const [email, setEmail] = useState('');
   const [uname, setUsername] = useState('');
   const [firstname, setFirstname] = useState('');
@@ -80,145 +99,219 @@ export default function SignUpScreen1(props) {
   };
 
   return (
-    <Fade in={true}>
       <div className="display" type="signup">
-        <h1>Sign Up</h1>
-        {
-          registerRes?.message ? (
-            <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
-              <Alert variant="outlined" severity={registerRes?.type}>{registerRes?.message + " Code: " + registerRes?.code}</Alert>
-            </Grow>
-          ) : registerRes?.error ? (
-            <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
-              <Alert variant="outlined" severity={registerRes?.type}>{registerRes?.error + " Code: " + registerRes?.code }</Alert>
-            </Grow>
-          ) : (password != confirmpassword) ? (
-            <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
-              <Alert variant="outlined" severity="warning">Password do not match.</Alert>
-            </Grow>
-          ) : (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/) && showSecond) ? (
-            <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
-              <Alert variant="outlined" severity="warning">{passwordRequirement}</Alert>
-            </Grow>
-          ) : typeof processed === "string" ?
-            <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
-                <Alert variant="outlined" severity="error">{status500}</Alert>
-            </Grow>
-          : null
-        }
-        <form className="post" onSubmit={submitHandler}>
-          {
-            showFirst ? (
-              <div>
-                <div className="division">
-                  <input 
-                    type="text"
-                    id="username"
-                    required
-                    value={uname}
-                    onChange={(e) => setUsername(e.target.value)}>
-                  </input> 
-                  <span></span>
-                  <label>Username</label>
+        <div className="SignInSignUp">
+            
+            <div className="SignInSignUp_container">
+            
+                <div className="SignInSignUp_SignIn1">
+                  <form className="post" onSubmit={submitHandler}>
+                  
+                    <div className="SignInSignUp_SignIn1_header">
+                        <h1 className='SignText_SectionHeader'>Sign Up</h1>
+                    </div>
+
+                    {
+                      registerRes?.message ? (
+                        <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
+                          <Alert variant="filled" severity={registerRes?.type}>{registerRes?.message + " Code: " + registerRes?.code}</Alert>
+                        </Grow>
+                      ) : registerRes?.error ? (
+                        <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
+                          <Alert variant="filled" severity={registerRes?.type}>{registerRes?.error + " Code: " + registerRes?.code }</Alert>
+                        </Grow>
+                      ) : (password != confirmpassword) ? (
+                        <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
+                          <Alert variant="filled" severity="warning">Password do not match.</Alert>
+                        </Grow>
+                      ) : (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/) && showSecond) ? (
+                        <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
+                          <Alert variant="filled" severity="warning">{passwordRequirement}</Alert>
+                        </Grow>
+                      ) : typeof processed === "string" ?
+                        <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
+                            <Alert variant="filled" severity="error">{status500}</Alert>
+                        </Grow>
+                      : null
+                    }
+                    {
+                      showFirst ? (
+                    <div className="SignInSignUp_SignIn1_fields">
+                      
+                        <div className="SignInSignUp_SignIn1_fields_column">
+                          <h6 className='SignText_Section'>Username</h6>
+                          <TextField
+                            hiddenLabel
+                            variant="filled"
+                            size="small"
+                            color="secondary"
+                            id="username"
+                            required
+                            className={classes.field}
+                            value={uname}
+                            onChange={(e) => setUsername(e.target.value)}
+                            type="text"
+                          />
+                        </div>
+
+                        <div className="SignInSignUp_SignIn1_fields_column">
+                          <h6 className='SignText_Section'>First Name</h6>
+                          <TextField
+                            hiddenLabel
+                            variant="filled"
+                            size="small"
+                            color="secondary"
+                            required
+                            className={classes.field}
+                            type="text"
+                            id="firstname"
+                            value={firstname}
+                            onChange={(e) => setFirstname(e.target.value)}
+                          />
+                        </div>
+
+                        <div className="SignInSignUp_SignIn1_fields_column">
+                          <h6 className='SignText_Section'>E-mail</h6>
+                          <TextField
+                            hiddenLabel
+                            variant="filled"
+                            size="small"
+                            color="secondary"
+                            className={classes.field}
+                            type="email"
+                            id="email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </div>
+
+                        <div className="SignInSignUp_SignIn1_fields_column">
+                          <h6 className='SignText_Section'>Middle Name</h6>
+                          <TextField
+                            hiddenLabel
+                            variant="filled"
+                            size="small"
+                            color="secondary"
+                            required
+                            className={classes.field}
+                            type="text"
+                            id="middlename"
+                            value={middlename}
+                            onChange={(e) => setMiddlename(e.target.value)}
+                          />
+                        </div>
+
+                        <div className="SignInSignUp_SignIn1_fields_column">
+                        </div>
+                        <div className="SignInSignUp_SignIn1_fields_column">
+                          <h6 className='SignText_Section'>Last Name</h6>
+                          <TextField
+                            hiddenLabel
+                            variant="filled"
+                            size="small"
+                            color="secondary"
+                            className={classes.field}
+                            type="text"
+                            id="lastname"
+                            required
+                            value={lastname}
+                            onChange={(e) => setLastname(e.target.value)}
+                          />
+                        </div>
+                        
+                        
+                    </div>
+                      ) : showSecond ? (
+                        <div className="SignInSignUp_SignIn1_fields">
+                          <div className="SignInSignUp_SignIn1_fields_column">
+                            <h6 className='SignText_Section'>Password</h6>
+                            <TextField
+                              hiddenLabel
+                              variant="filled"
+                              size="small"
+                              color="secondary"
+                              className={classes.field}
+                              type="password"
+                              id="password"
+                              required
+                              value={password}
+                              onChange={(e) => setPassword(e.target.value)}
+                            />
+                          </div>
+
+                          <div className="SignInSignUp_SignIn1_fields_column">
+                            <h6 className='SignText_Section'>Confirm Password</h6>
+                            <TextField
+                              hiddenLabel
+                              variant="filled"
+                              size="small"
+                              color="secondary"
+                              className={classes.field}
+                              id="confirmpassword"
+                              required
+                              value={confirmpassword}
+                              onChange={(e) => setConfirmPassword(e.target.value)}
+                              type="password"
+                            />
+                          </div>
+
+                        </div>
+                      
+                      
+                        ):null
+                    }
+                    <div className="SignInSignUp_SignIn1_footer">
+                      {
+                        showFirst ? (
+                          <div className="SignInSignUp_SignIn1_footer_btnCont">
+                              <div></div>
+                              <Button
+                                variant="outlined"
+                                color="secondary"
+                                size = "medium"
+                                className={classes.btn}
+                                type="next_signup1" 
+                                onClick={switchToSecond}
+                              >
+                              Next</Button>
+                          </div>
+                          
+                        ) : showSecond ? (
+                          <div className="SignInSignUp_SignIn1_footer_btnCont">
+                              <Button
+                                variant="outlined"
+                                color="secondary"
+                                size = "medium"
+                                className={classes.btn}
+                                type="back_signup2" 
+                                onClick={switchToFirst}
+                              >
+                              Back</Button>
+                              <Button
+                                variant="outlined"
+                                color="secondary"
+                                size = "medium"
+                                className={classes.btn}
+                                type="next_signup2"
+                              >
+                              Submit</Button>
+                          </div>
+                        ):null
+                      }   
+                        <p className='SignText_btn'>Already a member? <Link to="/SignIn">Sign In</Link> </p>
+                    </div>
+                  
+                  </form>
+                </div>
+                    
+                <div className="SignInSignUp_section2">
+                  <h1 className='SignText_journey'>Start Your <n/> Journey</h1>
                 </div>
 
-                <div className="division">
-                  <input 
-                    type="email"
-                    id="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}></input>
-                    <span></span>
-                  <label>Email</label>
-                </div>
-
-                <div className="division">
-                  <input 
-                    type="text"
-                    id="firstname"
-                    required
-                    value={firstname}
-                    onChange={(e) => setFirstname(e.target.value)}>
-                  </input> 
-                  <span></span>
-                  <label>First Name</label>
-                </div>
-
-                <div className="division">
-                  <input 
-                    type="text"
-                    id="middlename"
-                    required
-                    value={middlename}
-                    onChange={(e) => setMiddlename(e.target.value)}>
-                  </input> 
-                  <span></span>
-                  <label>Middle Name</label>
-                </div>
-
-                <div className="division">
-                  <input 
-                    type="text"
-                    id="lastname"
-                    required
-                    value={lastname}
-                    onChange={(e) => setLastname(e.target.value)}>
-                  </input> 
-                  <span></span>
-                  <label>Last Name</label>
-                </div>
-
-                <div className="btn_container">
-                  <button className="btn_next" type="next_signup1" onClick={switchToSecond}>
-                    Next
-                  </button>
-                </div>
-              </div>
-            ) : showSecond ? (
-              <div>
-                <div className="division">
-                  <input 
-                    type="password"
-                    id="password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}>
-                  </input>
-                  <span></span>
-                  <label>Password</label>
-                </div>
-
-                <div className="division">
-                  <input 
-                    type="password"
-                    id="confirmpassword"
-                    required
-                    value={confirmpassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}>
-                  </input> 
-                  <span></span>
-                  <label>Confirm Password</label>
-                </div>
-
-                <div className="btn_container">
-                  <button className="btn_back" type="back_signup2" onClick={switchToFirst}>
-                    Back
-                  </button>
-                  <button className="btn_next" type="next_signup2">
-                    Submit
-                  </button>
-                </div>
-              </div>
-            ) : <p></p>
-          }
-          <div className="signin">
-            Already have an Account?
-              <Link to="/SignIn">Sign In</Link>
-          </div>
-
-        </form>
+              
+            </div>
+        </div>
       </div>
-    </Fade>
   );
 }

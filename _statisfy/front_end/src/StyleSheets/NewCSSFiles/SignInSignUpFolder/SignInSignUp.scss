@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); 
+$violet : #7051b8;
+$white1: #eeeeee;
+$gray1: #b5b5b5;
+$pink: #dfa9ff;
+$purple: #a742c5;
+$black: #23272a;
+
+.SignInSignUp{
+    padding-top: 5rem;
+    width: 100vw;
+    min-height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &_container{
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        width: 45vw;
+        justify-content: center;
+        align-items: center;
+        max-height: 33rem;
+        min-height: 33rem;
+    }
+    &_section1{
+        width: 3fr;
+        background-color: $black;
+        border-top-left-radius: 20%;
+        border-bottom-left-radius: 20%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding-top: 5rem;
+
+        &_header{
+            width: 80%;
+            display: flex;
+            max-height: min-content;
+        }
+        &_fields{
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+        &_footer{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+    }
+    &_section2{
+        height: 33rem;
+        width: 1fr;
+        background-image: url('../../../images/homePage/SignIn_SignUp.png');
+        background-size: contain;
+        display: flex;
+        gap: 0;
+        flex-direction: column;
+        justify-content: left;
+        align-items: baseline;
+        position: relative;
+        
+    }
+    &_SignIn1{
+        width: 3fr;
+        background-color: $black;
+        border-top-left-radius: 20%;
+        border-bottom-left-radius: 20%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        
+        padding: 1rem;
+        padding-top: 5rem;
+
+        &_header{
+            display: flex;
+            max-height: min-content;
+            padding-left: 5rem;
+
+        }
+        &_fields{
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            &_column{
+                display: flex;
+                flex-direction: column;
+            }
+            
+        }
+        &_footer{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            &_btnCont{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+                justify-content: center;
+                align-items: center;
+                
+            }
+        }
+    }
+}
+
+.SignText{
+    &_SectionHeader{
+        color: $white1;
+        font-family: Poppins;
+        font-weight: 700;
+    }
+    &_Section{
+        color: $white1;
+        font-family: Poppins;
+    }
+    &_Subtext{
+        color: #b5b5b5;
+        font-family: Poppins;
+        font-weight: 600;
+    }
+    &_btn{
+        color: $white1;
+        display: flex;
+        align-self: center;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: Poppins;
+        font-size: small;
+
+    }
+    &_journey{
+        color: white;
+        font-size: 2.5rem;
+        font-family: Poppins;
+        font-weight: 700;
+        text-align: left;
+        position:absolute;
+        bottom: 0;
+        left: 0;
+    }
+}
