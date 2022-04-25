@@ -140,7 +140,7 @@ export default function ResearchList(props){
         formData.append('research_description', description);
         formData.append('delimiter', delimiter);
         formData.append('author', processed?.user._id);
-        formData.append('created_at', new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, ''));
+        formData.append('created_at', new Date(Date.now()).toISOString());
         formData.append('dataset', file);
         formData.append('null_cleaning', callbackNullCleaning);
         formData.append('null_replace', callbackNullReplace);
@@ -678,7 +678,7 @@ export default function ResearchList(props){
                                                 title = {res.research_name}
                                                 description = {res.research_description}
                                                 created_at = {res.created_at}
-                                                _id = {res.id}
+                                                _id = {res._id}
                                                 HandleSelected = {handleSelected}
                                                 editable={props.editable}
                                             />

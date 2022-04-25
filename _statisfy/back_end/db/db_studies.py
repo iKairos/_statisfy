@@ -1,279 +1,73 @@
-from .db_backbone import DatabaseBackbone
-from secret import CONN_STRING
+from secret import MONGO_CONN_STRING, MONGO_DB, MONGO_STUDY_COLLECTION
+from pymongo import MongoClient
+from bson.objectid import ObjectId
 
-class StudiesBackbone(DatabaseBackbone):
+class StudiesBackbone():
     def __init__(self):
-        self.conn_string = CONN_STRING
+        self.db = MongoClient(MONGO_CONN_STRING)[MONGO_DB][MONGO_STUDY_COLLECTION]
     
     def new_study(self, **kwargs):
         try:
-            res = self.append_row(
-                "studies",
-                _id = kwargs['_id'],
-                study_name = kwargs['study_name'],
-                research_id = kwargs['research_id'],
-                created_by = kwargs['created_by'],
-                test_type = kwargs['test_type'],
-                created_at = kwargs['created_at'],
-                study_description = kwargs['study_description']
-            )
-            
-            for col in kwargs['columns']:
-                self.add_column(kwargs['_id'], col)
-            
-            for var_name, var_val in kwargs['variables']:
-                self.add_variable(kwargs['_id'], var_name, var_val)
-            
-            for option in kwargs['options']:
-                self.append_row(
-                    "studies_clean_options",
-                    study_id = kwargs['_id'],
-                    _column = option['column'],
-                    _normalize = 'T' if option['normalize'] else 'F',
-                    null_method = option['null_option']['method'],
-                    null_replace = option['null_option']['replace_by'],
-                    outlier_method = option['outlier_option']['method'],
-                    outlier_replace = option['outlier_option']['replace_by']
-                )
-            for change in kwargs['changes']:
-                self.append_row(
-                    "studies_cleaning_stats",
-                    _column = change['column'],
-                    study_id = kwargs['_id'],
-                    null_deleted = change['null_deleted'],
-                    null_replaced = change['null_replaced'],
-                    outlier_deleted = change['outlier_deleted'],
-                    outlier_replaced = change['outlier_replaced']
-                )
-            
-
-            if kwargs['regression_configuration'] is not None:
-                reg_conf = kwargs['regression_configuration']
-
-                self.add_regression_configuration(
-                    kwargs['_id'],
-                    reg_conf['test_size'],
-                    reg_conf['iterations'],
-                    reg_conf['learning_rate']
-                )
-
-            return True, res
-        except Exception as e:
-            raise e
-    
-    def is_registered(self, rid):
-        try:
-            fetched = self.fetch_row("studies", _id = rid)
-
-            return False if len(fetched[0]) == 0 else True
-        except Exception as e :
-            print(e)  
-            return False
-    
-    def get_study_name(self, rid):
-        try:
-            fetched = self.fetch_row(
-                "studies",
-                _id = rid
-            )[0][1]
-
-            return fetched
-        except Exception as e:
-            print(e)
-            return False
-
-    def get_study_description(self, rid):
-        try:
-            fetched = self.fetch_row(
-                "studies",
-                _id = rid
-            )[6]
-
-            return fetched
-        except Exception as e:
-            print(e)
-            return False
-
-    def get_research_id(self, rid):
-        try:
-            fetched = self.fetch_row(
-                "studies",
-                _id = rid
-            )[0][3]
-
-            return fetched
-        except Exception as e:
-            print(e)
-            return False
-            
-    def get_author(self, rid):
-        try:
-            fetched = self.fetch_row(
-                "studies",
-                _id = rid
-            )[3]
-
-            return fetched
-        except Exception as e:
-            print(e)
-            return False
-
-    def get_test_type(self, rid):
-        try:
-            fetched = self.fetch_row(
-                "studies",
-                _id = rid
-            )[0][5]
-
-            return fetched
-        except Exception as e:
-            print(e)
-            return False
-
-    def get_created_at(self, rid):
-        try:
-            fetched = self.fetch_row(
-                "studies",
-                _id = rid
-            )[5]
-
-            return fetched
-        except Exception as e:
-            print(e)
-            return False
-    
-    def get_columns(self, rid):
-        try:
-            fetched = self.fetch_row(
-                "dataset_columns",
-                study_id = rid
-            )
-            
-            return [i[1] for i in fetched]
-        except Exception as e:
-            print(e)
-            return False
-    
-    def get_variables(self, rid):
-        try:
-            fetched = self.fetch_row(
-                "variables",
-                study_id = rid
-            )
-
-            res = []
-            
-            for id, var_name, var_value in fetched:
-                res.append((var_name, float(var_value)))
-            
-            return tuple(res)
-        except Exception as e:
-            print(e)
-            return False
-    
-    def get_clean_stats(self, rid, column):
-        try:
-            fetched = self.fetch_row(
-                "studies_cleaning_stats",
-                study_id = rid,
-                _column = column
-            )[0]
+            self.db.insert_one({
+                'study_name': kwargs['study_name'],
+                'study_description': kwargs['study_description'],
+                'research_id': ObjectId(kwargs['research_id']),
+                'created_by': ObjectId(kwargs['created_by']),
+                'test_type': kwargs['test_type'],
+                'study_dataset': kwargs['study_dataset'],
+                'interpretations': kwargs['interpretations'],
+                'columns': kwargs['columns'],
+                'variables': kwargs['variables'],
+                'options': kwargs['options'],
+                'changes': kwargs['changes'],
+                'configurations': kwargs['regression_configuration'],
+                'created_at': kwargs['created_at']
+            })
 
             return {
-                'column': fetched[1],
-                'null_deleted': fetched[2],
-                'null_replaced': fetched[3],
-                'outlier_deleted': fetched[4],
-                'outlier_replaced': fetched[5]
+                'status': True
             }
         except Exception as e:
-            print(e)
-            return False
+            return {
+                'status': False,
+                'message': str(e)
+            }
     
-    def set_study_name(self, rid, name):
+    def is_registered(self, uid):
         try:
-            self.update_data(
-                "studies",
-                "study_name",
-                name,
-                _id = rid
-            )
-
-            return True
-        except Exception as e:
-            print(e)
-            return False
+            fetched = self.db.find_one({
+                '_id': ObjectId(uid)
+            })
+            
+            return False if fetched is None else True
+        except Exception as e :
+            return {
+                'status': False,
+                'message': str(e)
+            }
     
-    def add_column(self, rid, column):
-        try:
-            self.append_row(
-                "dataset_columns",
-                study_id = rid,
-                _column = column
-            )
+    def get_study(self, uid):
+        try: 
+            study = self.db.find_one({
+                '_id': ObjectId(uid)
+            })
 
-            return True
+            return study
         except Exception as e:
-            print(e)
-            return False
-    
-    def add_variable(self, rid, var_name, var_value):
-        try:
-            self.append_row(
-                "variables",
-                study_id = rid,
-                variable_name = var_name,
-                variable_value = var_value
-            )
-
-            return True
-        except Exception as e:
-            print(e)
-            return False
+            return {
+                'status': False,
+                'message': str(e)
+            }
     
     def delete_study(self, rid):
         try:
-            self.purge_row(
-                "studies",
-                _id = rid
-            )
+            self.db.delete_one({
+                '_id': ObjectId(rid)
+            })
 
             return True
         except Exception as e:
-            print(e)
-            return False
-    
-    def get_regression_configuration(self, rid):
-        try:
-            fetched = self.fetch_row(
-                "regression_configurations",
-                study_id = rid
-            )
-            if len(fetched) == 0 :
-                return None 
-            else:
-                fetched = fetched[0]
-                
-                return {
-                    'test_size': fetched[1],
-                    'iterations': fetched[2],
-                    'learning_rate': fetched[3]
-                }
-        except Exception as e:
-            print(e)
-            raise e
-    
-    def add_regression_configuration(self, rid, test_size, iterations, learning_rate):
-        try:
-            self.append_row(
-                'regression_configurations',
-                study_id = rid,
-                test_size = test_size,
-                iterations = iterations, 
-                learning_rate = learning_rate
-            )
-
-            return True
-        except Exception as e:
-            print(e)
-            raise e
+            return {
+                'status': False,
+                'message': str(e)
+            }

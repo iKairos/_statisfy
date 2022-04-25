@@ -195,9 +195,9 @@ export default function StudyDetails(props){
                     <Divider orientation="vertical" flexItem  style={{height:'100%'}}/>
                     <div className="StudyDetails_Variables_Container">
                         {
-                        typeof datasetDetails?.details !== "undefined" ? (
-                            datasetDetails?.details?.filter(data => data.column == variable1).map( data => {
-                                return <MemoizedColumnGraphs size={datasetDetails.rows} data={data}/>
+                        typeof props.details !== "undefined" ? (
+                            props.details.details.filter(data => data.column == variable1).map( data => {
+                                return <MemoizedColumnGraphs size={props.details.rows} data={data}/>
                             })
                         ) : <CircularProgress color="info" thickness={2.5} size={30}/>
                         }
@@ -232,8 +232,8 @@ export default function StudyDetails(props){
                             <Typography variant="h6">Processed Data Distribution</Typography>
                             <div className="Study_details_graph">
                                     {
-                                        typeof datasetDetails?.details !== "undefined" ? (
-                                            datasetDetails?.details.filter(data => data.column == variable).map( data => {
+                                        typeof props.details !== "undefined" ? (
+                                            props.details.details.filter(data => data.column == variable).map( data => {
                                                 return <VariableGraph data={data}/>
                                             })
                                         ) : <CircularProgress color="secondary" thickness={2.5} size={30}/>

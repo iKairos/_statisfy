@@ -76,7 +76,7 @@ export default function ResearchScreen(props){
     
     const isAuthor = () => {
         const x = researchGetRes?.data.authors.map(author => {
-            return author['uid'] === processed?.user?._id;
+            return author['user'] === processed?.user?._id;
         });
 
         return x.includes(true);
@@ -85,7 +85,7 @@ export default function ResearchScreen(props){
     if(props.token && processed?.code === "TOKEN_FAIL"){
         localStorage.removeItem('token');
     }
-
+/*
     if(typeof datasetFile !== 'undefined'){
         const formData = new FormData();
         formData.append("filepath", datasetFile.directory);
@@ -93,7 +93,7 @@ export default function ResearchScreen(props){
 
         dispatch(processDataset(formData))
     }
-
+*/
     React.useEffect(() => {
         dispatch(processUserToken(props.token));
         dispatch(getResearch(id));
@@ -140,7 +140,6 @@ export default function ResearchScreen(props){
     );
 
     if(researchGetRes?.code === 'RESEARCH_GET_SUCCESS'){
-
         return(
             <div className = "research">
                 <div className = "research_header_container">
@@ -177,7 +176,7 @@ export default function ResearchScreen(props){
 
                         {researchGetRes?.data.authors.map(author => {
                             return <p className="text_button">
-                            <Link to={`/profile/${author['uid']}`}
+                            <Link to={`/profile/${author['user']}`}
                             style={{ textDecoration: 'none' }}
                             >
                                 <Typography variant="body1" className="text_button">
@@ -235,15 +234,16 @@ export default function ResearchScreen(props){
                 </div>
                 {value === 1 &&
                 <>
-                <Fade in={value === 1}>
-                    <div>
-                        <ResData
-                            DataSetFile = {datasetFile}
-                            Url = {researchGetRes?.data.research_url}
-                        />
-                    </div>
-                        
-                </Fade>
+                    <Fade in={value === 1}>
+                        <div>
+                            <ResData
+                                DataSetFile = {datasetFile}
+                                DatasetDetails = {researchGetRes?.data.dataset_details}
+                                Url = {researchGetRes?.data.research_url}
+                            />
+                        </div>
+                            
+                    </Fade>
                 </>
                 }
                 {value === 2 &&
@@ -252,6 +252,7 @@ export default function ResearchScreen(props){
                         <div>
                             <ResStudies
                                 DataSetFile = {datasetFile}
+                                DatasetDetails = {researchGetRes?.data.dataset_details}
                                 User = {processed?.user?._id}
                                 Parent = {id}
                                 IsAuthor = {isAuthor()}
@@ -309,8 +310,8 @@ export default function ResearchScreen(props){
         return(
             <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
                 <Alert variant="outlined" severity="error">
-                    <AlertTitle>404 not found</AlertTitle>
-                    This page does not exist. Please check the URL thoroughly or notify us if this is a mistake.
+                    <AlertTitle>Status Code: {researchGetRes?.code}</AlertTitle>
+                    This research does not exist. Please check the URL thoroughly or notify us if this is a mistake.
                 </Alert>
             </Grow>
         )
@@ -318,6 +319,15 @@ export default function ResearchScreen(props){
         return(
             <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
                 <Alert variant="outlined" severity="error">{status500}</Alert>
+            </Grow>
+        )
+    }else if(researchGetRes?.code === 'RESEARCH_GET_FAIL'){
+        return(
+            <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
+                <Alert variant="outlined" severity="error">
+                    <AlertTitle>Research Fetch Failed</AlertTitle>
+                    {researchGetRes?.message}
+                </Alert>
             </Grow>
         )
     }else{

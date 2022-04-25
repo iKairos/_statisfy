@@ -9,65 +9,16 @@ class User:
         self.rdb = db_authors.AuthorsBackbone()
         self.uid = uid
     
-    @property
-    def first_name(self):
-        return self.db.get_first_name(self.uid)
-    
-    @property
-    def middle_name(self):
-        return self.db.get_middle_name(self.uid)
-    
-    @property
-    def last_name(self):
-        return self.db.get_last_name(self.uid)
-    
-    @property
-    def username(self):
-        return self.db.get_username(self.uid)
-    
-    @property
-    def password_hash(self):
-        return self.db.get_password_hash(self.uid)
-    
-    @property
-    def email_address(self):
-        return self.db.get_email_address(self.uid)
-    
-    @property
-    def nickname(self):
-        return self.db.get_nickname(self.uid)
-    
-    @property
-    def educ_level(self):
-        return self.db.get_educ_level(self.uid)
-    
-    @property
-    def major(self):
-        return self.db.get_major(self.uid)
-    
-    @property
-    def occupation(self):
-        return self.db.get_occupation(self.uid)
-    
-    @property
-    def profile_picture(self):
-        return self.db.get_profile_pic_directory(self.uid)
-    
-    @property
+    @property 
     def is_registered(self):
         return self.db.is_registered(self.uid)
     
-    @property
+    @property 
     def research_papers(self):
-        return self.rdb.get_researches_author(self.uid)
+        return self.db.get_researches(self.uid)
     
-    @property
-    def created_at(self):
-        return self.db.get_created_at(self.uid)
-    
-    @property
-    def bio(self):
-        return self.db.get_bio(self.uid)
+    def get_user(self):
+        return self.db.get_user(self.uid)
     
     def set_first_name(self, new_first_name):
         return self.db.set_first_name(self.uid, new_first_name)
@@ -105,34 +56,44 @@ class User:
     def set_bio(self, new_bio):
         return self.db.set_bio(self.uid, new_bio)
     
-    def check_availability(param, value):
+    def check_email_availability(email):
         db = db_users.UsersBackbone()
         
-        return True if db.get_user(param, value) is None else False
+        return db.check_email_availability(email)
+
+    def check_username_availability(uname):
+        db = db_users.UsersBackbone()
+        
+        return db.check_username_availability(uname)
     
     def register_user(**kwargs):
         db = db_users.UsersBackbone()
 
         return db.register_user(
-                _id = kwargs['_id'],
                 first_name = kwargs['first_name'],
                 middle_name = kwargs['middle_name'],
                 last_name = kwargs['last_name'],
                 username = kwargs['username'],
                 password_hash = kwargs['password_hash'],
                 email_address = kwargs['email_address'],
+                nickname = kwargs['nickname'], 
+                educ_level = kwargs['educ_level'], 
+                major = kwargs['major'],
+                occupation = kwargs['occupation'],
+                profile_picture = kwargs['profile_picture'],
+                bio = kwargs['bio'],
                 created_at = kwargs['created_at']
             )
     
     def authenticate(username, password, secret_key):
         db = db_users.UsersBackbone()
 
-        user = db.get_user("uname", username)
+        user = db.login_credentials(username)
 
         if user is None:
             return False, "Username does not match any account.", None
 
-        pword = user[5]
+        pword = user['password_hash']
 
         if not bcrypt.checkpw(password.encode('utf-8'), pword.encode('utf-8')):
             return False, "Credentials failed to authenticate.", None
@@ -140,7 +101,7 @@ class User:
         try:
             payload = {
                 'flush': randint(10000000, 99999999),
-                'sub': user[0]
+                'sub': user['_id']
             } 
                                 
             token = jwt.encode(
@@ -151,7 +112,7 @@ class User:
         except Exception as e:
             return False, f"Token generation failed returning with error message: {e}.", None
         
-        return True, user[0], token
+        return True, user['_id'], token
     
     @staticmethod
     def decode_auth_token(auth_token, secret_key):
@@ -160,6 +121,8 @@ class User:
 
             return payload['sub']
         except jwt.ExpiredSignatureError:
-            return 'Token already expired.'
+            return {'error': 'Token already expired.'}
         except jwt.InvalidTokenError:
-            return f'Token is not valid. Token value: {auth_token}'
+            return {'error': f'Token is not valid. Token value: {auth_token}'}
+        except Exception as e:
+            raise e

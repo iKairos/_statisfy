@@ -74,7 +74,7 @@ export default function PearsonRStudy(props){
         plugins: {
             title: {
                 display: true,
-                text: `${props.data[7][0]} vs. ${props.data[7][1]} Graph`,
+                text: `${props.data['columns'][0]} vs. ${props.data['columns'][1]} Graph`,
                 fullSize: true,
                 font: {
                     size: 18
@@ -88,7 +88,7 @@ export default function PearsonRStudy(props){
           y: {
             title:{
                 display: true,
-                text: props.data[7][1]
+                text: props.data['columns'][1]
             },
             ticks: {
                 display: false,
@@ -100,7 +100,7 @@ export default function PearsonRStudy(props){
           x: {
             title:{
                 display: true,
-                text: props.data[7][0]
+                text: props.data['columns'][0]
             },
             ticks: {
                 display: false
@@ -115,13 +115,13 @@ export default function PearsonRStudy(props){
 
     const dispatch = useDispatch();
     React.useEffect(() => {
-        dispatch(getStudyDataset(`${props.data[0]}_${props.data[11]}`));
+        dispatch(getStudyDataset(props.data['study_dataset']));
     }, []);
   return(
         <div className ="Study">
             <div className = "Study_header">
-                <h4>{props.data[1]} | {props.data[5]}</h4>
-                <h6>{props.data[2]}</h6>
+                <h4>{props.data['study_name']} | {props.data['test_type']}</h4>
+                <h6>{props.data['study_description']}</h6>
             </div>
             <div className="Study_tabs_container">
                 <div className = "Study_tabs">
@@ -154,23 +154,23 @@ export default function PearsonRStudy(props){
                     <div className = "Study_content_details">
                         <StudyDetails
                             data = {datasetFile?.data.map(row => {
-                                return _.pick(row, props.data[7]);
+                                return _.pick(row, props.data['columns']);
                             })}
                             studyData = {studyDatasetFile?.data}
                             details = {props.details}
-                            changes = {props.data[10]}
+                            changes = {props.data['changes']}
                         />
                     </div>
                 }
                 {studyPage === 2 &&
                     <div className = "Study_content_computation">
-                        <Computation method={props.data[5]} variables={props.data[8]}/>
+                        <Computation method={props.data['test_type']} variables={props.data['variables']}/>
                     </div>
                 }
                 {studyPage === 3 &&
                         <div className = "Study_content_graphs">
                             {
-                                props.data[8].map(([var_name, var_val]) => {
+                                props.data['variables'].map(([var_name, var_val]) => {
                                 return(
                                     <>
                                     {var_name === "R Coefficient"
@@ -183,7 +183,7 @@ export default function PearsonRStudy(props){
                             }
                         <div className = "Study_cards_container">       
                             {
-                                props.data[8].map(([var_name, var_val]) => {
+                                props.data['variables'].map(([var_name, var_val]) => {
                                     if(blackListedVariables.includes(var_name)){
                                         return null;
                                     }
@@ -198,14 +198,14 @@ export default function PearsonRStudy(props){
                             }
                         </div>
                             {
-                                props.data[5] === "Pearson R Correlation Test" ? 
+                                props.data['test_type'] === "Pearson R Correlation Test" ? 
                                     <Scatter data={{
-                                        label: props.data[7],
+                                        label: props.data['columns'],
                                         datasets: [
                                         {
-                                            label: `(${props.data[7][0]},${props.data[7][1]})`,
+                                            label: `(${props.data['columns'][0]},${props.data['columns'][1]})`,
                                             data: studyDatasetFile?.data.map(row => {
-                                                return {x: row[props.data[7][0]], y: row[props.data[7][1]]}
+                                                return {x: row[props.data['columns'][0]], y: row[props.data['columns'][1]]}
                                             }),
                                             backgroundColor: 'rgba(167, 66, 197, 1)',
                                         },
@@ -218,7 +218,7 @@ export default function PearsonRStudy(props){
                 {studyPage === 4 &&
                     <div className = "Study_content_interpretation">
                         {
-                            props.data[8].map(([var_name, var_val]) => {
+                            props.data['variables'].map(([var_name, var_val]) => {
                                return(
                                    <>
                                    {var_name === "R Coefficient"
@@ -233,7 +233,7 @@ export default function PearsonRStudy(props){
                         <div className = "Study_content_text">
                             <Typography>INTERPRETATION</Typography>
                             {
-                                props.data[9].map(i => {
+                                props.data['interpretations'].map(i => {
                                     return <p>{i}</p>
                                 })
                             }

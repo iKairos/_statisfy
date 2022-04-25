@@ -46,7 +46,7 @@ export default function UserScreen(props){
             </div>
         )
     }else if(userData?.code === 'USER_FETCH_SUCCESS'){ // provided id, render id profile
-        const editable = Number(id) === processed?.user._id;
+        const editable = id === processed?.user._id;
         return(
             <div>
                 <div className = "container">

@@ -106,11 +106,6 @@ export default function ResStudies(props){
     );
     const { researchGetRes } = dataSelector;
 
-    const fileDetailsSelector = useSelector((state) => 
-        state.datasetDetails
-    );
-    const { datasetDetails } = fileDetailsSelector;
-
     const studyDetailsSelector = useSelector((state) => 
         state.getStudyRes
     );
@@ -213,7 +208,7 @@ export default function ResStudies(props){
         const selectedColumns = [];
 
         selectedIDs.forEach(id => {
-            selectedColumns.push(datasetDetails.details[id].column)
+            selectedColumns.push(props.DatasetDetails.details[id].column)
         });
 
         setCallbackColumnsCleanOptions(selectedColumns.map(col => 
@@ -460,7 +455,7 @@ export default function ResStudies(props){
             ?(
                 <Fade in={selected}>
                     <div>
-                        <Study data={getStudyRes.data.filter(i => i[0] === selected)[0]} details={datasetDetails}/>
+                        <Study data={getStudyRes?.data.filter(i => i['_id'] === selected)[0]} details={props.DatasetDetails}/>
                     </div>
                 </Fade>
             )
@@ -551,7 +546,7 @@ export default function ResStudies(props){
                                         purpose = {purpose}
                                         handlePurpose = {handlePurpose}
                                         setTags = {setTags}
-                                        datasetDetails = {datasetDetails}
+                                        datasetDetails = {props.DatasetDetails}
                                         callbackSetSelectedRows = {callbackSetSelectedRows}
                                         studyColumns = {studyColumns}
                                         callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
@@ -564,7 +559,7 @@ export default function ResStudies(props){
                                         purpose = {purpose}
                                         handlePurpose = {handlePurpose}
                                         setTags = {setTags}
-                                        datasetDetails = {datasetDetails}
+                                        datasetDetails = {props.DatasetDetails}
                                         callbackSetSelectedRows = {callbackSetSelectedRows}
                                         studyColumns = {studyColumns}
                                         callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
@@ -620,11 +615,11 @@ export default function ResStudies(props){
                                         return (
                                             <StudyCard
                                                 HandleSelected = {handleSelected}
-                                                title={i[1]}
-                                                method={i[5]}
-                                                description={i[2]}
-                                                id={i[0]}
-                                                parent={i[3]}
+                                                title={i['study_name']}
+                                                method={i['test_type']}
+                                                description={i['study_description']}
+                                                id={i['_id']}
+                                                parent={i['research_id']}
                                                 isAuthor={props.IsAuthor}
                                             />
                                         )

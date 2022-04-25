@@ -55,7 +55,6 @@ export default function ResData(props){
     const fileDetailsSelector = useSelector((state) => 
         state.datasetDetails
     );
-    const {datasetDetails} = fileDetailsSelector;
 
     return(
         <div className="resData_body_container">
@@ -151,9 +150,9 @@ export default function ResData(props){
             {contentPage === 3 &&
                 <div className = "resData_container">
                     {
-                        typeof datasetDetails?.details !== "undefined" ? (
-                            datasetDetails?.details?.map( data => {
-                                return <MemoizedColumnGraphs size={datasetDetails.rows} data={data}/>
+                        typeof props.DatasetDetails?.details !== "undefined" ? (
+                            props.DatasetDetails?.details.map( data => {
+                                return <MemoizedColumnGraphs size={props.DatasetDetails.rows} data={data}/>
                             })
                         ) : <CircularProgress color="info" thickness={2.5} size={30}/>
                     }
@@ -172,10 +171,10 @@ export default function ResData(props){
                         <Typography variant="subtitle2" >{props.DataSetFile && formatBytes(props.DataSetFile?.filesize)}</Typography>
 
                         <Typography variant="button" ><ViewColumnOutlinedIcon />Columns</Typography>
-                        <Typography variant="subtitle2" >{typeof datasetDetails?.columns !== 'undefined' ? `${datasetDetails?.columns} columns`: ""}</Typography>
+                        <Typography variant="subtitle2" >{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</Typography>
 
                         <Typography variant="button" ><TableRowsOutlinedIcon />Rows</Typography>
-                        <Typography variant="subtitle2">{typeof datasetDetails?.rows !== 'undefined' ? `${datasetDetails?.rows} rows`: ""}</Typography>
+                        <Typography variant="subtitle2">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</Typography>
                     </div>
                 </div>
             }

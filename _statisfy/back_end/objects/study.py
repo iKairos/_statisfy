@@ -66,6 +66,8 @@ class Study:
             research_id = kwargs['research_id'],
             created_by = kwargs['created_by'],
             test_type = kwargs['test_type'],
+            study_dataset = kwargs['study_dataset'],
+            interpretations = kwargs['interpretations'],
             created_at = kwargs['created_at'],
             columns = kwargs['columns'],
             study_description = kwargs['study_description'],

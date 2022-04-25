@@ -7,41 +7,17 @@ class Research:
         self.rdb = db_authors.AuthorsBackbone()
         self.rid = rid 
     
-    @property
-    def research_name(self):
-        return self.db.get_research_name(self.rid)
-    
-    @property
-    def research_description(self):
-        return self.db.get_research_description(self.rid)
-    
-    @property
-    def dataset_directory(self):
-        return self.db.get_dataset(self.rid)
-    
-    @property
-    def test_type(self):
-        return self.db.get_test_type(self.rid)
-    
-    @property
-    def authors(self):
-        return self.rdb.get_authors(self.rid)
     
     @property
     def is_registered(self):
         return self.db.is_registered(self.rid)
     
-    @property
-    def delimiter(self):
-        return self.db.get_delimiter(self.rid)
-    
-    @property
-    def created_at(self):
-        return self.db.get_created_at(self.rid)
-    
     @property 
     def studies(self):
         return self.db.get_studies(self.rid)
+    
+    def get_research(self):
+        return self.db.get_research(self.rid)
 
     def set_research_name(self, new_name):
         return self.db.set_research_name(self.rid, new_name)
@@ -59,10 +35,10 @@ class Research:
         db = db_researches.ResearchesBackbone()
 
         return db.register_research(
-            _id = kwargs['_id'],
             research_name = kwargs['research_name'],
             research_description = kwargs['research_description'],
             dataset = kwargs['dataset'],
+            dataset_details = kwargs['dataset_details'],
             author = kwargs['author'],
             delimiter = kwargs['delimiter'],
             created_at = kwargs['created_at']

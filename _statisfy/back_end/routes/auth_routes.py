@@ -23,9 +23,9 @@ def decode_token(token):
 
     decoded = User.decode_auth_token(token, secret_key)
 
-    if type(decoded) == str:
+    if type(decoded) == dict:
         return {
-            'error': decoded,
+            'error': decoded['error'],
             'code': 'TOKEN_FAIL'
         }
     else:
@@ -44,22 +44,7 @@ def decode_token(token):
             }
 
         return {
-            'user': {
-                '_id': decoded,
-                'first_name': u.first_name,
-                'middle_name': u.middle_name,
-                'last_name': u.last_name,
-                'username': u.username,
-                'email_address': u.email_address,
-                'nickname': u.nickname,
-                'educ_level': u.educ_level,
-                'major': u.major,
-                'occupation': u.occupation,
-                'profile_picture': u.profile_picture,
-                'researches': u.research_papers,
-                'created_at': u.created_at,
-                'bio': u.bio
-            },
+            'user': u.get_user(),
             'code': 'TOKEN_SUCCESS'
         }
 
@@ -71,9 +56,9 @@ def expire_token(token):
 
         decoded = User.decode_auth_token(token, secret_key)
 
-        if type(decoded) == str:
+        if type(decoded) == dict:
             return {
-                'error': decoded,
+                'error': decoded['error'],
                 'code': 'TOKEN_FAIL'
             }
         else:

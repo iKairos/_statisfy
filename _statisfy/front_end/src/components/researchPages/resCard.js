@@ -32,6 +32,13 @@ export default function ResCard(props){
     
     const history = useHistory();
 
+    const stringifyDatetime = datetime => {
+        const d = new Date(datetime).toLocaleString('en-US', {
+            timeZone: 'Asia/Manila'
+            });
+        return d
+    }
+
     if(researchDeleteRes?.code === "RESEARCH_DELETE_SUCCESS"){
         history.push({
             pathname: `/profile`,
@@ -88,7 +95,7 @@ export default function ResCard(props){
 
             </div>
             <div className="StudyCard_method">
-                {props.created_at}
+                {stringifyDatetime(props.created_at)}
             </div>
             
             <div className="StudyCard_desc">

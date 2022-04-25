@@ -10,6 +10,7 @@ from os.path import dirname, realpath
 from functionalities.statistical_analysis import *
 from functionalities.machine_learning import *
 from functionalities.interpretation import interpret
+from functionalities.dataset_ops import describe_dataset
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import warnings
@@ -20,29 +21,39 @@ warnings.filterwarnings('ignore')
 @app.route("/api/research/<id>")
 @cross_origin()
 def fetch_research(id):
-    research = Research(id)
+    try:
+        research = Research(id)
+
+        if not research.is_registered:
+            return {
+                'error': 'Research does not exist.',
+                'code': 'RESEARCH_NOT_EXIST'
+            }
         
-    if not research.is_registered:
+        data = research.get_research()
+        data['research_url'] = BlobDatabase.get_dataset(data['dataset'])
+
+        authors = []
+
+        for author in data['authors']:
+            u = User(author['user']).get_user()['username']
+            authors.append({
+                'user': author['user'],
+                'username': u,
+                'type': author['type']
+            })
+        
+        data['authors'] = authors
+        
         return {
-            'error': 'Research does not exist.',
-            'code': 'RESEARCH_NOT_EXIST'
+            'data' : data,
+            'code': "RESEARCH_GET_SUCCESS",
         }
-    
-    data = {
-        '_id': id, 
-        'research_name': research.research_name,
-        'research_description': research.research_description,
-        'dataset': research.dataset_directory,
-        'authors': [{'uid': u, 'username': User(u).username} for u in research.authors],
-        'delimiter': research.delimiter,
-        'research_url': BlobDatabase.get_dataset(research.dataset_directory),
-        'created_at': research.created_at
-    }
-    
-    return {
-        'data' : data,
-        'code': "RESEARCH_GET_SUCCESS",
-    }
+    except Exception as e:
+        return {
+            'code': "RESEARCH_GET_FAIL",
+            'message': str(e)
+        }
 
 @app.route("/api/researches", methods=["POST"])
 @cross_origin()
@@ -52,17 +63,7 @@ def fetch_researches():
 
         user = User(data['_id'])
         
-        researches = []
- 
-        for i in user.research_papers:
-            research = Research(i)
-            
-            researches.append({
-                'id': i,
-                'research_name': research.research_name,
-                'research_description': research.research_description,
-                'created_at': research.created_at
-            })
+        researches = user.research_papers
         
         return {
             'code': 'RESEARCHES_GET_SUCCESS',
@@ -83,35 +84,28 @@ def add_research():
         data = request.form
 
         uuid = randint(10000000, 99999999)
-            
-        research = Research(uuid)
-        
-        while research.is_registered:
-            uuid = randint(10000000, 99999999)
-
-            research = Research(uuid)
-
-            if not research.is_registered:
-                break
 
         file = request.files['dataset']
         file_name = f"{uuid}_{file.filename}"
 
         BlobDatabase.upload_dataset(file_name, file)
 
+        df = pd.read_csv(BlobDatabase.get_dataset(file_name), delimiter=data['delimiter'])
+        details = describe_dataset(df)
+
         res = Research.register_research(
-            _id = uuid,
             research_name = data['research_name'],
             research_description = data['research_description'],
             dataset = file_name,
+            dataset_details = details,
             delimiter = data['delimiter'],
             author = data['author'],
             created_at = data['created_at']
         )
 
-        if not res[0]:
+        if not res['status']:
             return {
-                'message': res[1],
+                'message': res['message'],
                 'code': 'RESEARCH_SAVE_UNEXPECTED_FAILURE',
                 'type': 'error'
             }
@@ -120,7 +114,7 @@ def add_research():
             'message': 'Research saved successfully.',
             'code': 'RESEARCH_SAVE_SUCCESS',
             'type': 'success',
-            'uuid': uuid
+            'uuid': res['_id']
         }
     except Exception as e:
         return {
@@ -136,35 +130,18 @@ def add_study():
         data = request.get_json()
 
         uuid = randint(10000000, 99999999)
-            
-        study = Study(uuid)
-        
-        while study.is_registered:
-            uuid = randint(10000000, 99999999)
-
-            study = Study(uuid)
-
-            if not study.is_registered:
-                break
 
         compute_res = None
         regression_configuration = None
         
         research = Research(data['research_id'])
         
-        df = pd.read_csv(BlobDatabase.get_dataset(research.dataset_directory), delimiter=research.delimiter)
+        df = pd.read_csv(BlobDatabase.get_dataset(research.get_research()['dataset']), delimiter=research.get_research()['delimiter'])
 
         columns = data['columns']
         options = data['options']
-        """
-        if data['test_type'] == 'Pearson R Correlation Test':
-            if len(set(df[[columns[0], columns[1]]].dtypes.tolist())) != 1:
-                return {
-                    'code': 'STUDY_ADD_FAIL',
-                    'error': 'The variables selected have different data types which is unsuited for this calculation.',
-                }
-        """
 
+        interprets = []
         changes = []
         null_deleted = 0 
         null_replaced = 0
@@ -247,8 +224,8 @@ def add_study():
             y = df[data['label']]
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=float(data['testSize'])/100, random_state=99)
 
-            train = pd.concat([X_train, y_train], axis=1).to_csv((f"LINREG_TRAIN_{uuid}_{Research(data['research_id']).dataset_directory}"))
-            test = pd.concat([y_train, y_test], axis=1).to_csv((f"LINREG_TEST_{uuid}_{Research(data['research_id']).dataset_directory}"))
+            train = pd.concat([X_train, y_train], axis=1).to_csv((f"LINREG_TRAIN_{uuid}_{Research(data['research_id']).get_research()['dataset']}"))
+            test = pd.concat([y_train, y_test], axis=1).to_csv((f"LINREG_TEST_{uuid}_{Research(data['research_id']).get_research()['dataset']}"))
 
             model = LinearRegression()
             model.fit_data(X_train, y_train)
@@ -267,24 +244,32 @@ def add_study():
                 'learning_rate': data['learningRate']
             }
 
-        Study.new_study(
+        res = Study.new_study(
             _id = uuid,
             study_name = data['study_name'],
             research_id = data['research_id'],
             created_by = data['created_by'],
             test_type = data['test_type'],
+            study_dataset = f"{uuid}_{Research(data['research_id']).get_research()['dataset']}",
             created_at = data['created_at'],
             columns = data['columns'],
             study_description = data['study_description'],
+            interpretations = interpret(data['test_type'], compute_res),
             variables = compute_res,
             options = data['options'],
             changes = changes,
             regression_configuration = regression_configuration
         )
 
+        if not res['status']:
+            return {
+                'code': 'STUDY_ADD_FAIL',
+                'error': f"An error occurred while calculating. Error message: {res['message']}",
+            }
+
         df = df[[col for col in columns]]
         blob = io.StringIO(df.to_csv(index=False))
-        BlobDatabase.upload_study_dataset(f"{uuid}_{Research(data['research_id']).dataset_directory}", blob.read())
+        BlobDatabase.upload_study_dataset(f"{uuid}_{Research(data['research_id']).get_research()['dataset']}", blob.read())
 
         return {
             'code': 'STUDY_ADD_SUCCESS',
@@ -311,15 +296,16 @@ def delete_research():
         data = request.get_json()
 
         research = Research(data['_id'])
+        r_obj = research.get_research()
 
-        studies = research.studies
+        studies = r_obj['studies']
 
-        for i in studies:
-            BlobDatabase.delete_study_dataset(f"{i[0]}_{research.dataset_directory}")
+        #for i in studies:
+        #    BlobDatabase.delete_study_dataset(f"{i[0]}_{research.dataset_directory}")
         
-        BlobDatabase.delete_dataset(research.dataset_directory)
+        BlobDatabase.delete_dataset(r_obj['dataset'])
 
-        research_name = research.research_name
+        research_name = r_obj['research_name']
 
         research.delete_research()
 
@@ -341,25 +327,10 @@ def get_studies():
         data = request.form 
 
         research = Research(data['research_id'])
-        
-        res_data = []
-        
-        for i in research.studies:
-            i = list(i)
-            i.append(list(Study(i[0]).columns))
-            i.append(list(Study(i[0]).variables))
-            i.append(interpret(Study(i[0]).test_type, list(Study(i[0]).variables)))
-            temp = []
-            for col in Study(i[0]).columns:
-                temp.append(Study(i[0]).clean_stats(col))
-            i.append(temp)
-            i.append(research.dataset_directory)
-            i.append(Study(i[0]).regression_configuration)
-            res_data.append(list(i))
 
         return {
             'code': 'STUDY_GET_SUCCESS',
-            'data': list(res_data),
+            'data': research.studies,
         }
     except Exception as e:
         return {

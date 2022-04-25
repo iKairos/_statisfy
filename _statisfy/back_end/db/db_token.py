@@ -1,29 +1,34 @@
 from .db_backbone import DatabaseBackbone
 from secret import CONN_STRING
+from secret import MONGO_CONN_STRING, MONGO_DB, MONGO_TOKEN_COLLECTION
+from pymongo import MongoClient
 
-class TokenBackbone(DatabaseBackbone):
+class TokenBackbone():
     def __init__(self):
-        self.conn_string = CONN_STRING
+        self.db = MongoClient(MONGO_CONN_STRING)[MONGO_DB][MONGO_TOKEN_COLLECTION]
     
     def token_expired(self, token):
         try:
-            fetched = self.fetch_row_string_strict(
-                "expired_tokens",
-                token=str(token)
-            )
+            fetched = self.db.find_one({
+                'token': str(token) 
+            })
 
-            return True if len(fetched) == 1 else False
+            return True if fetched else False
         except Exception as e:
-            print(e)
-            return e
+            return {
+                'status': False,
+                'message': str(e)
+            }
     
     def expire_token(self, token):
         try:
-            res = self.append_row(
-                "expired_tokens",
-                token=token
-            )
+            self.db.insert_one({
+                'token': str(token)
+            })
 
-            return res, True
+            return True
         except Exception as e:
-            return e
+            return {
+                'status': False,
+                'message': str(e)
+            }

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { registerUser } from '../actions/userActions';
 import "../StyleSheets/NewCSSFiles/SignInSignUpFolder/SignInSignUp.css"
 import { Redirect } from "react-router"
-import { Alert, Fade, Grow, TextField, Button } from '@mui/material';
+import { Alert, Fade, Grow, TextField, Button, AlertTitle } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { passwordRequirement, status500 } from '../constants/stringConstants';
 
@@ -114,11 +114,17 @@ export default function SignUpScreen1(props) {
                     {
                       registerRes?.message ? (
                         <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
-                          <Alert variant="filled" severity={registerRes?.type}>{registerRes?.message + " Code: " + registerRes?.code}</Alert>
+                          <Alert variant="filled" severity={registerRes?.type}>
+                            <AlertTitle>{`Error Code: ${registerRes?.code }`}</AlertTitle>
+                            {registerRes?.message}
+                          </Alert>
                         </Grow>
                       ) : registerRes?.error ? (
                         <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
-                          <Alert variant="filled" severity={registerRes?.type}>{registerRes?.error + " Code: " + registerRes?.code }</Alert>
+                          <Alert variant="filled" severity={registerRes?.type}>
+                            <AlertTitle>{`Error Code: ${registerRes?.code }`}</AlertTitle>
+                            {registerRes?.error}
+                          </Alert>
                         </Grow>
                       ) : (password != confirmpassword) ? (
                         <Grow in={true} {...(true ? { timeout: 1000 } : {})}>

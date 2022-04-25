@@ -8,11 +8,12 @@ export default function Study(props){
     return(
         <>
             {
-                props.data[5] == 'Pearson R Correlation' ? 
+                props.data['test_type'] == "Pearson R Correlation Test" ? 
                 <PearsonRStudy
                     data = {props.data}
+                    details = {props.details}
                 /> :
-                props.data[5] == 'Linear Regression' ? 
+                props.data['test_type'] == 'Linear Regression' ? 
                 <LinearStudy
                     data = {props.data}
                 />
