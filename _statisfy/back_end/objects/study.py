@@ -44,6 +44,9 @@ class Study:
     @property
     def regression_configuration(self):
         return self.db.get_regression_configuration(self.id)
+    
+    def get_study(self):
+        return self.db.get_study(self.id)
 
     def clean_stats(self, column):
         return self.db.get_clean_stats(self.id, column)
@@ -74,7 +77,8 @@ class Study:
             variables = kwargs['variables'],
             options = kwargs['options'],
             changes = kwargs['changes'],
-            regression_configuration = kwargs['regression_configuration']
+            regression_configuration = kwargs['regression_configuration'],
+            graphing = kwargs['graphing']
         )
     
     def delete_study(self):

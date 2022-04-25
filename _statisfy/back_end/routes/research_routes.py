@@ -133,6 +133,7 @@ def add_study():
 
         compute_res = None
         regression_configuration = None
+        graphing = None
         
         research = Research(data['research_id'])
         
@@ -224,12 +225,26 @@ def add_study():
             y = df[data['label']]
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=float(data['testSize'])/100, random_state=99)
 
-            train = pd.concat([X_train, y_train], axis=1).to_csv((f"LINREG_TRAIN_{uuid}_{Research(data['research_id']).get_research()['dataset']}"))
-            test = pd.concat([y_train, y_test], axis=1).to_csv((f"LINREG_TEST_{uuid}_{Research(data['research_id']).get_research()['dataset']}"))
+            #train = pd.concat([X_train, y_train], axis=1).to_csv((f"LINREG_TRAIN_{uuid}_{Research(data['research_id']).get_research()['dataset']}"))
+            #test = pd.concat([y_train, y_test], axis=1).to_csv((f"LINREG_TEST_{uuid}_{Research(data['research_id']).get_research()['dataset']}"))
 
             model = LinearRegression()
             model.fit_data(X_train, y_train)
             model.gradient_descent(iterations = int(data['iterations']), learning_rate=float(data['learningRate']))
+
+            reactified_cost_history = []
+            reactified_gradient_history = []
+
+            for _  in range(len(model.cost_history)):
+                reactified_cost_history.append({
+                    'x': _+1, 
+                    'y': model.cost_history[_][0]
+                })
+
+                reactified_gradient_history.append({
+                    'x': float(model.theta_history[_][0][0]),
+                    'y': abs(float(model.gradient_history[_][0][0]))
+                })
 
             pred = model.predict(X_test)
 
@@ -242,6 +257,11 @@ def add_study():
                 'test_size': data['testSize'],
                 'iterations': data['iterations'],
                 'learning_rate': data['learningRate']
+            }
+
+            graphing = {
+                'cost_history': reactified_cost_history,
+                'gradient_history': reactified_gradient_history
             }
 
         res = Study.new_study(
@@ -258,7 +278,8 @@ def add_study():
             variables = compute_res,
             options = data['options'],
             changes = changes,
-            regression_configuration = regression_configuration
+            regression_configuration = regression_configuration,
+            graphing = graphing
         )
 
         if not res['status']:
@@ -283,7 +304,6 @@ def add_study():
         }
         
     except Exception as e:
-        raise e
         return {
             'code': 'STUDY_ADD_FAIL',
             'error': str(e),
@@ -344,11 +364,11 @@ def delete_study():
     try:
         data = request.get_json()
 
-        study = Study(data['_id'])
-        name = study.name
+        study = Study(data['_id']).get_study()
+        name = study['study_name']
 
-        BlobDatabase.delete_study_dataset(f"{data['_id']}_{Research(study.research_parent).dataset_directory}")
-        study.delete_study()
+        BlobDatabase.delete_study_dataset(study['study_dataset'])
+        Study(data['_id']).delete_study()
 
         return {
             'code': 'STUDY_DELETE_SUCCESS',

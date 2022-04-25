@@ -11,7 +11,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import ResultCards from "../../newDashBoard/ResultCards";
 import { useState } from "react";
-import { Scatter } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     LinearScale,
@@ -27,22 +27,12 @@ import _ from "lodash"
 
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
-import Computation from "../Computation";
 import { getStudyDataset} from "../../../actions/datasetActions";
 import StudyDetails from "../studyDetails";
 import LinearConfiguration from "./LinearConfiguration";
 import LinearModel from "./LinearModel";
-import BarCor from "../../newDashBoard/bar";
-import CorrelationDegree from "../../CorrelationDegree";
 
-
-
-ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, Title);
-
-
-
-
-
+//ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, Title);
 
 export default function LinearStudy(props){
     const [studyPage, setStudyPage] = useState(1);
@@ -70,13 +60,13 @@ export default function LinearStudy(props){
     );
 
     const {studyDatasetFile} = studyDataSelector; 
-    console.log(studyDatasetFile)
+
     const options = {
         responsive: true,
         plugins: {
             title: {
                 display: true,
-                text: `${props.data[7][0]} vs. ${props.data[7][1]} Graph`,
+                text: 'Cost History',
                 fullSize: true,
                 font: {
                     size: 18
@@ -90,7 +80,7 @@ export default function LinearStudy(props){
           y: {
             title:{
                 display: true,
-                text: props.data[7][1]
+                text: props.data['columns'][1]
             },
             ticks: {
                 display: false,
@@ -102,7 +92,7 @@ export default function LinearStudy(props){
           x: {
             title:{
                 display: true,
-                text: props.data[7][0]
+                text: props.data['columns'][0]
             },
             ticks: {
                 display: false
@@ -117,13 +107,13 @@ export default function LinearStudy(props){
 
     const dispatch = useDispatch();
     React.useEffect(() => {
-        dispatch(getStudyDataset(`${props.data[0]}_${props.data[11]}`));
+        dispatch(getStudyDataset(props.data['study_dataset']));
     }, []);
   return(
         <div className ="Study">
             <div className = "Study_header">
-                <h4>{props.data[1]} | {props.data[5]}</h4>
-                <h6>{props.data[2]}</h6>
+                <h4>{props.data['study_name']} | {props.data['test_type']}</h4>
+                <h6>{props.data['study_description']}</h6>
             </div>
             <div className="Study_tabs_container">
                 <div className = "Study_tabs">
@@ -156,24 +146,24 @@ export default function LinearStudy(props){
                     <div className = "Study_content_details">
                         <StudyDetails
                             data = {datasetFile?.data.map(row => {
-                                return _.pick(row, props.data[7]);
+                                return _.pick(row, props.data['columns']);
                             })}
                             studyData = {studyDatasetFile?.data}
                             details = {props.details}
-                            changes = {props.data[10]}
+                            changes = {props.data['changes']}
                         />
                     </div>
                 }
                 {studyPage === 2 &&
                     <div className = "Study_content_computation">
-                        <LinearConfiguration configs={props.data[12]}/>
+                        <LinearConfiguration configs={props.data['configurations']}/>
                     </div>
                 }
                 {studyPage === 3 &&
                     <div className = "Study_content_graphs">
                         <div className = "Study_cards_container">       
                             {
-                                props.data[8].map(([var_name, var_val]) => 
+                                props.data['variables'].map(([var_name, var_val]) => 
                                     <ResultCards
                                         value = {var_val.toFixed(4)}
                                         variable = {var_name}
@@ -181,6 +171,32 @@ export default function LinearStudy(props){
                                 )
                             }
                         </div>
+                        <Line data={{
+                                labels: props.data['graphing']['cost_history'].map(data => data['x']),
+
+                                datasets: [
+                                    {
+                                        label: 'Cost History',
+                                        data: props.data['graphing']['cost_history'].map(data => data['y']),
+                                        borderColor: 'rgba(167, 66, 197, 1)',
+                                        lineTension: 0,
+                                        pointRadius: 0
+                                    },
+                                ],
+                        }}/> 
+
+                        <Line data={{
+                                labels: props.data['graphing']['gradient_history'].map(data => data['x'].toFixed(4)),
+                                datasets: [
+                                    {
+                                        label: 'Gradient History',
+                                        data: props.data['graphing']['gradient_history'].map(data => data['y']),
+                                        borderColor: 'rgba(167, 66, 197, 1)',
+                                        lineTension: 0,
+                                        pointRadius: 0
+                                    },
+                                ],
+                        }}/> 
                     </div>
                 }
                 {studyPage === 4 &&

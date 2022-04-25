@@ -23,7 +23,7 @@ export default function BarCor(props) {
   return (
     <div className='Correlation'>
         <Typography variant="h6" className ="Correlation_Header">
-            Correlation Strength: {Math.abs((props.value * 100).toFixed(2))}% {props.value > 0 ? <TrendingUpIcon color='success' fontSize='medium'/> : props.value < 0 ? <TrendingDownIcon color='error' fontSize='medium'/> : null}
+            Correlation Strength: {Math.abs((props.value * 100).toFixed(2))}%  {props.value > 0 ? <TrendingUpIcon color='success' fontSize='medium'/> : props.value < 0 ? <TrendingDownIcon color='error' fontSize='medium'/> : null}
         </Typography>
         <div className ="Bar">
             <div className = "Bar_Left_cont">

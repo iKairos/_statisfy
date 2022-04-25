@@ -16,6 +16,7 @@ export default function Study(props){
                 props.data['test_type'] == 'Linear Regression' ? 
                 <LinearStudy
                     data = {props.data}
+                    details = {props.details}
                 />
                 : null
             }

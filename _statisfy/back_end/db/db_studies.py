@@ -21,7 +21,8 @@ class StudiesBackbone():
                 'options': kwargs['options'],
                 'changes': kwargs['changes'],
                 'configurations': kwargs['regression_configuration'],
-                'created_at': kwargs['created_at']
+                'created_at': kwargs['created_at'],
+                'graphing': kwargs['graphing']
             })
 
             return {
