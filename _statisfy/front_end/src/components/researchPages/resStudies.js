@@ -27,6 +27,7 @@ import AnalyticsIcon from '@mui/icons-material/Analytics';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import DoNotDisturbOutlinedIcon from '@mui/icons-material/DoNotDisturbOutlined';
 
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -435,11 +436,10 @@ export default function ResStudies(props){
                             <Button 
                                 color="secondary" 
                                 className="resStudy_body_add_button"
-                                onClick={()=>handleAdding(true)}
                                 disabled
                             >
-                                <AddIcon className="AddIcon"/>
-                                cannot add study
+                                <DoNotDisturbOutlinedIcon className="AddIcon"/>
+                                only authors can add studies
                             </Button>
                         <Sorter/>
                     </div>

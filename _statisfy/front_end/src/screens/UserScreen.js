@@ -51,7 +51,7 @@ export default function UserScreen(props){
             <div>
                 <div className = "container">
                     <UserProfile user={userData.user} editable={editable}/>
-                    <ResearchList editable={editable} id={id}/>
+                    <ResearchList editable={editable} id={id} username={userData.user.username}/>
                 </div> 
             </div>
         )

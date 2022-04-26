@@ -33,6 +33,7 @@ import SortIcon from '@mui/icons-material/Sort';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import DoNotDisturbOutlinedIcon from '@mui/icons-material/DoNotDisturbOutlined';
 
 import Navigator from "../../components/navigator";
 import ToolCard from "./ToolCard";
@@ -413,11 +414,10 @@ export default function ResearchList(props){
                         <Button 
                             color="secondary" 
                             className="resStudy_body_add_button"
-                            onClick={()=>handleAdding(true)}
                             disabled
                         >
-                            <AddIcon className="AddIcon"/>
-                            cannot add research
+                            <DoNotDisturbOutlinedIcon className="AddIcon"/>
+                            only {props.username} can add researches
                         </Button>
                     }
                     <Stack direction="row" spacing={2} className="Sort">
