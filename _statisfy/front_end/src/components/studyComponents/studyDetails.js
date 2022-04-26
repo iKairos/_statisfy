@@ -171,7 +171,7 @@ export default function StudyDetails(props){
                             </div>
                         }
                     </div>
-                    <Typography>Number of Rows: {datasetDetails?.rows} <DoubleArrowIcon/> {props.studyData?.length}</Typography>
+                    <Typography>Number of Rows: {props.details.rows} <DoubleArrowIcon/> {props.studyData?.length}</Typography>
                     <Typography>Data Distribution: Not normal <DoubleArrowIcon/> __placeholder__ </Typography>
                 </div>
             }

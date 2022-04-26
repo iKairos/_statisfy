@@ -68,7 +68,7 @@ export default function ResCard(props){
                         top: 5
                     }}
                 >
-                    <DeleteIcon color="error"/>
+                    <DeleteIcon color="secondary"/>
                 </IconButton>
                 :
                 null

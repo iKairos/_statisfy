@@ -173,20 +173,27 @@ export default function LinearStudy(props){
                         </div>
                         <Line data={{
                                 labels: props.data['graphing']['cost_history'].map(data => data['x']),
-
                                 datasets: [
                                     {
                                         label: 'Cost History',
-                                        data: props.data['graphing']['cost_history'].map(data => data['y']),
+                                        data: props.data['graphing']['cost_history'].map(data => data['y'].toExponential()),
                                         borderColor: 'rgba(167, 66, 197, 1)',
                                         lineTension: 0,
                                         pointRadius: 0
                                     },
                                 ],
-                        }}/> 
+                        }} options={{
+                            scales: {
+                                y: {
+                                ticks: {
+                                    callback: (val) => (val.toExponential())
+                                }
+                              }
+                            }
+                          }}/> 
 
                         <Line data={{
-                                labels: props.data['graphing']['gradient_history'].map(data => data['x'].toFixed(4)),
+                                labels: props.data['graphing']['gradient_history'].map(data => data['x'].toFixed(2)),
                                 datasets: [
                                     {
                                         label: 'Gradient History',
