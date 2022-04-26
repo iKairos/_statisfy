@@ -96,6 +96,9 @@ class UsersBackbone():
                 'username': uname
             })
 
+            if user is None:
+                return None
+
             return {'_id': str(user['_id']), 'username': user['username'], 'password_hash': user['password_hash']}
         except Exception as e:
             return {
