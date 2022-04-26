@@ -417,7 +417,7 @@ export default function ResearchList(props){
                             disabled
                         >
                             <DoNotDisturbOutlinedIcon className="AddIcon"/>
-                            only {props.username} can add researches
+                            only {props.first_name} can add researches
                         </Button>
                     }
                     <Stack direction="row" spacing={2} className="Sort">

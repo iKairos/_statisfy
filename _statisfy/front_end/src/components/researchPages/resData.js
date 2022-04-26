@@ -52,17 +52,13 @@ export default function ResData(props){
         setContentPage(newValue);
     };
 
-    const fileDetailsSelector = useSelector((state) => 
-        state.datasetDetails
-    );
-
     return(
         <div className="resData_body_container">
             <div className="resData_body_heading">
                 <span className ="text_topic">Dataset</span>
                 <p className ="text_label">{props.DataSetFile ? 
                 <div>
-                {`${props.DataSetFile?.filename.slice(9,)} (${formatBytes(props.DataSetFile?.filesize)})` }
+                {`${props.DataSetFile?.filename?.slice(9,)} (${formatBytes(props.DataSetFile?.filesize)})` }
                 <IconButton color="secondary" href={props.Url}>
                     <DownloadSharpIcon color="filled"/>
                 </IconButton>

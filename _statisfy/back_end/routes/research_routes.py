@@ -323,10 +323,12 @@ def delete_research():
         research = Research(data['_id'])
         r_obj = research.get_research()
 
-        studies = r_obj['studies']
+        studies = research.studies
 
-        #for i in studies:
-        #    BlobDatabase.delete_study_dataset(f"{i[0]}_{research.dataset_directory}")
+        for study in studies:
+            s = Study(study['_id'])
+            BlobDatabase.delete_study_dataset(s.get_study()['study_dataset'])
+            s.delete_study()
         
         BlobDatabase.delete_dataset(r_obj['dataset'])
 

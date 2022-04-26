@@ -1,6 +1,6 @@
 import "../../StyleSheets/studycardfolder/studycard.css"
 import React, { useState } from "react";
-import { IconButton, Button, Typography, Snackbar, Alert} from "@mui/material";
+import { IconButton, Button, Typography, Snackbar, Alert, CircularProgress} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Backdrop from '@mui/material/Backdrop';
 import CloseIcon from '@mui/icons-material/Close';
@@ -24,7 +24,7 @@ export default function ResCard(props){
     const dataSelector = useSelector((state) => 
         state.researchDelete
     );
-    const { researchDeleteRes } = dataSelector;
+    const { loading, researchDeleteRes } = dataSelector;
 
     const handleDelete = () => {
         dispatch(deleteResearch(props._id));
@@ -60,6 +60,11 @@ export default function ResCard(props){
                 
             {
                 props.editable ?
+                loading ? <CircularProgress sx={{
+                    position:"absolute",
+                    right: 5,
+                    top: 5
+                }}color="secondary" thickness={2.5} size={30}/> :
                 <IconButton
                     onClick={handleToggle}
                     sx={{
