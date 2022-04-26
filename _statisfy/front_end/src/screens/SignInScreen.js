@@ -5,7 +5,7 @@ import "../StyleSheets/NewCSSFiles/SignInSignUpFolder/SignInSignUp.css"
 import { authenticateUser } from '../actions/userActions';
 import PropTypes from 'prop-types';
 import { Redirect, useHistory } from "react-router"
-import { Alert, Fade, Grow, Typography, TextField, Button} from '@mui/material';
+import { Alert, Fade, Grow, Typography, TextField, Button, CircularProgress} from '@mui/material';
 import SignInImage from '../images/homePage/SignIn_SignUp.png'
 import { makeStyles } from '@mui/styles';
 import { status500 } from '../constants/stringConstants';
@@ -35,7 +35,7 @@ export default function SignInScreen(props) {
   const dataSelector = useSelector((state) => 
     state.userAuth
   );
-  const { error, userAuth } = dataSelector;
+  const { loading, error, userAuth } = dataSelector;
 
   // process token
   const tokSelector = useSelector((state) => 
@@ -135,14 +135,17 @@ export default function SignInScreen(props) {
                         <p className='SignText_Subtext'>Forgot Password?</p>
                     </div>
                     <div className="SignInSignUp_section1_footer">
-                        <Button
-                          variant="outlined"
-                          color="secondary"
-                          size = "medium"
-                          className={classes.btn}
-                          type="signin"
-                        >
-                          Sign In</Button>
+                        {
+                          loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/> :
+                          <Button
+                            variant="outlined"
+                            color="secondary"
+                            size = "medium"
+                            className={classes.btn}
+                            type="signin"
+                          >
+                            Sign In</Button>
+                        }
                         <p className='SignText_btn'>Not a member? <Link to="/SignUp">Sign Up</Link> </p>
                     </div>
                   
