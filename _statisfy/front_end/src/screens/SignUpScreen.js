@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { registerUser } from '../actions/userActions';
 import "../StyleSheets/NewCSSFiles/SignInSignUpFolder/SignInSignUp.css"
 import { Redirect } from "react-router"
-import { Alert, Fade, Grow, TextField, Button, AlertTitle } from '@mui/material';
+import { Alert, Fade, Grow, TextField, Button, AlertTitle, CircularProgress } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { passwordRequirement, status500 } from '../constants/stringConstants';
 
@@ -35,6 +35,7 @@ export default function SignUpScreen1(props) {
   const [lastname, setLastname] = useState('');
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmPassword] = useState('');
+  const [submitError, setSubmitError] = useState(null)
 
   const [showFirst, setShowFirst] = useState(true);
   const [showSecond, setShowSecond] = useState(false);
@@ -44,7 +45,7 @@ export default function SignUpScreen1(props) {
   const dataSelector = useSelector((state) => 
     state.registerRes
   );
-  const {registerRes} = dataSelector;
+  const {loading, registerRes} = dataSelector;
 
   // ======= TOKEN HANDLING ======= //
   const tokSelector = useSelector((state) => 
@@ -87,14 +88,19 @@ export default function SignUpScreen1(props) {
       return;
     }
 
+    if(uname === "" || password === "" || firstname == "" || lastname == "" || email == ""){
+      setSubmitError("One of the required fields are missing. Please complete the form to proceed.");
+      return;
+    }
+
     dispatch(registerUser({
       first_name: firstname,
-      middle_name: middlename,
+      middle_name: middlename === "" ? null : middlename,
       last_name: lastname,
       username: uname,
       password: password,
       email_address: email,
-      created_at: new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, '')
+      created_at: new Date(Date.now()).toISOString()
     }))
   };
 
@@ -136,7 +142,16 @@ export default function SignUpScreen1(props) {
                         </Grow>
                       ) : typeof processed === "string" ?
                         <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
-                            <Alert variant="filled" severity="error">{status500}</Alert>
+                            <Alert variant="filled" severity="error">
+                              <AlertTitle>Response Code 500</AlertTitle>
+                              {status500}
+                            </Alert>
+                        </Grow>
+                      : submitError ?
+                        <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
+                          <Alert variant="filled" severity="warning">
+                            {submitError}
+                          </Alert>
                         </Grow>
                       : null
                     }
@@ -284,23 +299,24 @@ export default function SignUpScreen1(props) {
                           </div>
                           
                         ) : showSecond ? (
+                          loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/>:
                           <div className="SignInSignUp_SignIn1_footer_btnCont">
                               <Button
-                                variant="outlined"
-                                color="secondary"
-                                size = "medium"
-                                className={classes.btn}
-                                type="back_signup2" 
-                                onClick={switchToFirst}
-                              >
-                              Back</Button>
+                                  variant="outlined"
+                                  color="secondary"
+                                  size = "medium"
+                                  className={classes.btn}
+                                  type="back_signup2" 
+                                  onClick={switchToFirst}
+                                >
+                                Back</Button>
                               <Button
-                                variant="outlined"
-                                color="secondary"
-                                size = "medium"
-                                className={classes.btn}
-                                type="next_signup2"
-                              >
+                                  variant="outlined"
+                                  color="secondary"
+                                  size = "medium"
+                                  className={classes.btn}
+                                  type="next_signup2"
+                                >
                               Submit</Button>
                           </div>
                         ):null
