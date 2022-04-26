@@ -1,6 +1,6 @@
 import "../StyleSheets/studycardfolder/studycard.css"
 import { useState } from "react";
-import { IconButton, Button, Typography} from "@mui/material";
+import { IconButton, Button, Typography, CircularProgress} from "@mui/material";
 import Backdrop from '@mui/material/Backdrop';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from "react-redux";
@@ -49,7 +49,12 @@ export default function StudyCard(props){
             <div className="StudyCard_title">
                 {props.title}
                 {
-                    props.isAuthor &&
+                    props.isAuthor ?
+                    loading ? <CircularProgress sx={{
+                        position:"absolute",
+                        right: 5,
+                        top: 5
+                    }}color="secondary" thickness={2.5} size={30}/> :
                     <IconButton
                         onClick={handleToggle}
                         sx={{
@@ -60,6 +65,7 @@ export default function StudyCard(props){
                     >
                         <DeleteIcon color="secondary"/>
                     </IconButton>
+                    : null
                 }
 
                 <Backdrop

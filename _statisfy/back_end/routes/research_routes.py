@@ -218,6 +218,11 @@ def add_study():
             
             compute_res = pearsonr(df[columns[0]], df[columns[1]])
         elif data['test_type'] == 'Linear Regression':
+            if int(data['iterations']) > 10000:
+                return {
+                    'code': 'STUDY_ADD_FAIL',
+                    'error': 'The number of iterations is too big for the server to handle. Please reduce the number of iterations and try again.',
+                }
             new_cols = columns.copy()
             new_cols.remove(data['label'])
             

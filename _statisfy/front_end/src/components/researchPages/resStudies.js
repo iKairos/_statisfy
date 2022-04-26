@@ -115,7 +115,7 @@ export default function ResStudies(props){
     const saveStudySelector = useSelector((state) => 
         state.saveStudy
     );
-    const { saveStudyRes } = saveStudySelector;
+    const { loading, saveStudyRes } = saveStudySelector;
 
     const callbackCheckbox = (checked) => {
         setTags(checked);
@@ -182,7 +182,7 @@ export default function ResStudies(props){
             'research_id': researchGetRes.data._id,
             'created_by': props.User,
             'test_type': methodChosen,
-            'created_at': new Date(Date.now()).toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+            'created_at': new Date(Date.now()).toISOString(),
             'columns': studyColumns,
             'study_description': studyDesc,
             'options': callbackColumnsCleanOptions,
@@ -590,13 +590,15 @@ export default function ResStudies(props){
                            
                            
                         }
-                         {showActive === 3 &&
+                         {showActive === 3 ?
+                            loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/>:
                             <Button
                                 onClick={handleSubmit}
                                 color="secondary"
                             >
                             Compute
                             </Button>
+                            : null
                          }
                         
                         <Navigator
@@ -623,7 +625,7 @@ export default function ResStudies(props){
                                                 isAuthor={props.IsAuthor}
                                             />
                                         )
-                                    }) : <CircularProgress color="info" thickness={2.5} size={30}/>
+                                    }) : <CircularProgress color="secondary" thickness={2.5} size={30}/>
                                 }
                             </div>
                         </div>
