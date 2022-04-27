@@ -83,9 +83,7 @@ export default function SignInScreen(props) {
                   
                     <div className="SignInSignUp_section1_header">
                         <h1 className='SignText_SectionHeader'>Sign In</h1>
-                    </div>
-
-                      {
+                        {
                         userAuth?.access_token === null ? 
                           <Grow in={true} {...(true ? { timeout: 1000 } : {})}>
                               <Alert variant="filled" severity="error">{userAuth?.payload}</Alert>
@@ -104,6 +102,9 @@ export default function SignInScreen(props) {
                           </Grow>
                         : null
                       }
+                    </div>
+
+                      
                     <div className="SignInSignUp_section1_fields">
                         <h6 className='SignText_Section'>Username</h6>
                         <TextField
