@@ -81,7 +81,7 @@ export default function SignUpScreen1(props) {
   const switchToSecond = () => {
     
 
-    if(uname === "" || password === "" || firstname === "" || lastname === "" || email === ""){
+    if(uname === "" || firstname === "" || lastname === "" || email === ""){
       setSubmitError("One of the required fields are missing. Please complete the form to proceed.");
       return;
     }

@@ -68,16 +68,11 @@ export default function SignInScreen(props) {
       <Redirect to={{pathname: "/profile"}}></Redirect>
     )
   }
-  
 
   return (
       <div className="display" type="signin">
-        
-
         <div className="SignInSignUp">
-            
             <div className="SignInSignUp_container">
-            
                 <div className="SignInSignUp_section1">
                   <form method="post" onSubmit={submitHandler}>
                   
@@ -137,7 +132,7 @@ export default function SignInScreen(props) {
                     </div>
                     <div className="SignInSignUp_section1_footer">
                         {
-                          loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/> :
+                          loading ? <div><CircularProgress color="secondary" thickness={2.5} size={30}/>  <p className='SignText_btn'>Logging you in</p></div> :
                           <Button
                             variant="outlined"
                             color="secondary"

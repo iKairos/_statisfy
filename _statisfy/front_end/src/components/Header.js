@@ -21,6 +21,11 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import SettingsIcon from '@mui/icons-material/Settings';
+import { CircularProgress } from '@mui/material';
+
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -180,7 +185,7 @@ export default function Header(props){
 
                     <div className="account">
                     {
-                        props.loading ? <p>Loading...</p> : typeof props.user != 'undefined' ? (
+                        props.loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/> : typeof props.user != 'undefined' ? (
                         <div>
                             <Box sx={{ flexGrow: 0 }}>
                                 <Tooltip title="Open settings">
@@ -206,13 +211,23 @@ export default function Header(props){
                                 >
                                     <Link className="menuLink" to="/profile">
                                         <MenuItem key={1} onClick={handleCloseUserMenu}>
-                                            <Typography textAlign="center">{props.user?.first_name} {props.user?.last_name}</Typography>
+                                            <Typography textAlign="center">
+                                                <AccountCircleIcon color='secondary' size='small'/> My Profile
+                                            </Typography>
                                         </MenuItem>
                                     </Link>
+
+                                    <MenuItem key={2}>
+                                        <Typography textAlign="center">
+                                            <SettingsIcon color='secondary' size='small'/>    Settings
+                                        </Typography>
+                                    </MenuItem>
                                         
                                    
                                     <MenuItem key={2} onClick={handleExitLogOut}>
-                                        <Typography textAlign="center">Log Out</Typography>
+                                        <Typography textAlign="center">
+                                            <LogoutIcon color='secondary' size='small'/>    Log Out
+                                        </Typography>
                                     </MenuItem>
                                 </Menu>
                             </Box>
