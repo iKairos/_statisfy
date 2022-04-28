@@ -89,7 +89,7 @@ def update_user():
         user = User(data['_id'])
 
         for key, value in dict(data).items():
-            print(value)
+
             if key == "username":
                 user.set_username(value)
             elif key == "email_address":

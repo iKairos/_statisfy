@@ -258,6 +258,7 @@ export default function UserProfile(props){
                                     label="SURNAME"
                                     defaultValue={props.user.last_name}
                                     variant="standard"
+                                    onChange={e => setNewLastName(e.target.value)}
                                     color="secondary" 
                                     InputProps={
                                         {
@@ -274,6 +275,7 @@ export default function UserProfile(props){
                                     label="GIVEN NAME"
                                     defaultValue={props.user.first_name}
                                     variant="standard"
+                                    onChange={e => setNewFirstName(e.target.value)}
                                     color="secondary" 
                                     InputProps={
                                         {
