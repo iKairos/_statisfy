@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../actions/userActions';
-import "../StyleSheets/NewCSSFiles/SignInSignUpFolder/SignInSignUp.css"
+import "../StyleSheets/NewCSSFiles/SignInSignUpFolder/SignUp.css"
 import { Redirect } from "react-router"
 import { Alert, Fade, Grow, TextField, Button, AlertTitle, CircularProgress } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -120,12 +120,12 @@ export default function SignUpScreen1(props) {
 
   return (
       <div className="display" type="signup">
-        <div className="SignInSignUp">
+        <div className="SignUp">
         {showFirst &&(
-          <div className="SignInSignUp_container">
-              <div className="SignInSignUp_SignIn1">
+          <div className="SignUp_container">
+              <div className="SignUp_SignIn1">
                 <form className="post" onSubmit={submitHandlerFirst}>
-                  <div className="SignInSignUp_SignIn1_header">
+                  <div className="SignUp_SignIn1_header">
                       <h1 className='SignText_SectionHeader'>Sign Up</h1>
                       {
                         registerRes?.message ? (
@@ -167,8 +167,9 @@ export default function SignUpScreen1(props) {
                       }
                   </div>
 
-                  <div className="SignInSignUp_SignIn1_fields">
-                      <div className="SignInSignUp_SignIn1_fields_column">
+                  <div className="SignUp_SignIn1_fields">
+                    <div className="SignUp_SignIn1_fields_container">
+                      <div className="SignUp_SignIn1_fields_column">
                         <h6 className='SignText_Section'>Username</h6>
                         <TextField
                           hiddenLabel
@@ -183,23 +184,6 @@ export default function SignUpScreen1(props) {
                           type="text"
                         />
                       </div>
-
-                      <div className="SignInSignUp_SignIn1_fields_column">
-                        <h6 className='SignText_Section'>First Name</h6>
-                        <TextField
-                          hiddenLabel
-                          variant="filled"
-                          size="small"
-                          color="secondary"
-                          required
-                          className={classes.field}
-                          type="text"
-                          id="firstname"
-                          value={firstname}
-                          onChange={(e) => setFirstname(e.target.value)}
-                        />
-                      </div>
-
                       <div className="SignInSignUp_SignIn1_fields_column">
                         <h6 className='SignText_Section'>E-mail</h6>
                         <TextField
@@ -216,7 +200,27 @@ export default function SignUpScreen1(props) {
                         />
                       </div>
 
-                      <div className="SignInSignUp_SignIn1_fields_column">
+                    </div>
+                    <div className="SignUp_SignIn1_fields_container">
+                    <div className="SignUp_SignIn1_fields_column">
+                        <h6 className='SignText_Section'>First Name</h6>
+                        <TextField
+                          hiddenLabel
+                          variant="filled"
+                          size="small"
+                          color="secondary"
+                          required
+                          className={classes.field}
+                          type="text"
+                          id="firstname"
+                          value={firstname}
+                          onChange={(e) => setFirstname(e.target.value)}
+                        />
+                      </div>
+
+                      
+
+                      <div className="SignUp_SignIn1_fields_column">
                         <h6 className='SignText_Section'>Middle Name</h6>
                         <TextField
                           hiddenLabel
@@ -232,7 +236,7 @@ export default function SignUpScreen1(props) {
                         />
                       </div>
 
-                      <div className="SignInSignUp_SignIn1_fields_column">
+                      <div className="SignUp_SignIn1_fields_column">
                       </div>
                       <div className="SignInSignUp_SignIn1_fields_column">
                         <h6 className='SignText_Section'>Last Name</h6>
@@ -249,8 +253,11 @@ export default function SignUpScreen1(props) {
                           onChange={(e) => setLastname(e.target.value)}
                         />
                       </div>
+                    </div>
+                      
+                      
                   </div>
-                  <div className="SignInSignUp_SignIn1_footer_btnCont">
+                  <div className="SignUp_SignIn1_footer_btnCont">
                       <div></div>
                       <Button
                         variant="outlined"
@@ -266,16 +273,16 @@ export default function SignUpScreen1(props) {
                 </form>
               </div>
               
-            <div className="SignInSignUp_section2">
+            <div className="SignUp_section2">
               <h1 className='SignText_journey'>Start Your <n/> Journey</h1>
             </div> 
           </div>
         )}
         {showSecond &&(
-          <div className="SignInSignUp_container">
-            <div className="SignInSignUp_SignIn1">
+          <div className="SignUp_container">
+            <div className="SignUp_SignIn1">
               <form className="post" onSubmit={submitHandlerSecond}>
-                <div className="SignInSignUp_SignIn1_header">
+                <div className="SignUp_SignIn1_header">
                     <h1 className='SignText_SectionHeader'>Sign Up</h1>
                     {
                       registerRes?.message ? (
@@ -316,8 +323,8 @@ export default function SignUpScreen1(props) {
                       : null
                     }
                 </div>
-                <div className="SignInSignUp_SignIn1_fields">
-                  <div className="SignInSignUp_SignIn1_fields_column">
+                <div className="SignUp_SignIn1_fields">
+                  <div className="SignUp_SignIn1_fields_column">
                     <h6 className='SignText_Section'>Password</h6>
                     <TextField
                       hiddenLabel
@@ -333,7 +340,7 @@ export default function SignUpScreen1(props) {
                     />
                   </div>
 
-                  <div className="SignInSignUp_SignIn1_fields_column">
+                  <div className="SignUp_SignIn1_fields_column">
                     <h6 className='SignText_Section'>Confirm Password</h6>
                     <TextField
                       hiddenLabel
@@ -352,7 +359,7 @@ export default function SignUpScreen1(props) {
                 </div>
                 {
                   loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/>:
-                  <div className="SignInSignUp_SignIn1_footer_btnCont">
+                  <div className="SignUp_SignIn1_footer_btnCont">
                       <Button
                           variant="outlined"
                           color="secondary"
@@ -376,7 +383,7 @@ export default function SignUpScreen1(props) {
                 
               </form>
             </div>
-            <div className="SignInSignUp_section2">
+            <div className="SignUp_section2">
               <h1 className='SignText_journey'>Start Your <n/> Journey</h1>
             </div> 
         </div>
