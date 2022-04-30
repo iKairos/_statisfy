@@ -167,6 +167,16 @@ export default function ResearchList(props){
                 return;
             }
 
+            if(e.target.files[0].size >= 50000000){
+                setError({
+                    'datasetPage': {
+                        'code': 'FILE_TOO_BIG',
+                        'message': "File is too big for the server to handle. Your file should be at least less than 50 MB."
+                    }
+                });
+                return;
+            }
+
             setError({
                 'datasetPage': undefined
             });

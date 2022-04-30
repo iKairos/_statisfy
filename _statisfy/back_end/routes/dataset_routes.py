@@ -41,6 +41,9 @@ def get_dataset(filename,cols):
         df = pd.read_csv(url)
         df = df.fillna('')
 
+        if df.shape[0] > 50:
+            df = df[:50]
+
         return {
             'code': 'DATASET_GET_SUCCESS',
             'data': df.to_dict(orient='records'),

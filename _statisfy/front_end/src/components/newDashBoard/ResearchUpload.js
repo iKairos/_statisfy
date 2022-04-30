@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useRef, useState } from "react";
-import { Alert, AlertTitle, Collapse, Tooltip, CircularProgress, Fade, Slide } from '@mui/material';
+import { Alert, AlertTitle, Collapse, Tooltip, CircularProgress, Fade, Slide, Snackbar } from '@mui/material';
 import { instDataPage, tooltipDataCleaning, tooltipDataset, tooltipDelimiter } from "../../constants/stringConstants";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
@@ -36,7 +36,22 @@ export default function ResearchUpload(props) {
     const handleCloseCleaning = () => {
         setOpenCleaning(false);
     };
+    const handleCloseSnackbar = () => {
+        setShow(false);
+    }
     
+    const action = (
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleCloseSnackbar}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+    );
 
   return (
     <div className="resUpload_content">
@@ -142,34 +157,16 @@ export default function ResearchUpload(props) {
             </div>
             
         </div>
+        
         {
-            props.DatasetDetails?.error || props.Error ? (
-            <div className = "resUpload_upload_cont">
-                <Button variant="contained" color="error" sx={{marginBottom:"0.5rem"}} onClick={() => setShow(!show)}>
-                    Error {show ? <KeyboardArrowDownIcon sx={{paddingLeft:"0.5rem", fontSize:"2rem"}}/> : <ErrorOutlineIcon sx={{paddingLeft:"0.5rem", fontSize:"2rem"}}/>}
-                </Button>
-                <Collapse in={show}>
-                    <Alert variant="outlined" severity="error">
-                        <AlertTitle>Error</AlertTitle>
-                        {
-                            props.DatasetDetails?.error ? (
-                                <>
-                                    <b>Code:</b> {props.DatasetDetails?.code} <br/>
-                                    <b>Message:</b> {props.DatasetDetails?.error}
-                                </>
-                            ) : props.Error ? (
-                                <>
-                                    <b>Code:</b> {props.Error.code} <br/>
-                                    <b>Message:</b> {props.Error.message}
-                                </>
-                            ):null
-                        }
-                        <hr/>
-                        Dataset errors should be resolved before uploading. Errors can occur when the dataset is not in the correct format as required by the system.
-                    </Alert>
-                </Collapse>
-            </div>
-            ) : null
+            <Snackbar
+                open={typeof props.DatasetDetails?.error !== 'undefined' || typeof props.Error !== 'undefined'} 
+                onClose={typeof props.DatasetDetails?.error !== 'undefined' || typeof props.Error !== 'undefined'}
+            >
+                <Alert severity="error" variant="filled">
+                    {props.DatasetDetails?.error ? props.DatasetDetails?.error : props.Error ? props.Error.message : null}
+                </Alert>
+            </Snackbar>
         }
         {typeof props.DataArray !== 'undefined' ? 
             <Button 

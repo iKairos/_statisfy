@@ -40,8 +40,6 @@ export default function ResData(props){
     
     const [contentPage, setContentPage] = useState(1);
 
-    const dispatch = useDispatch();
-
     const nextContent = function(){
         setContentPage(contentPage+1);
     };
@@ -63,7 +61,7 @@ export default function ResData(props){
                     <DownloadSharpIcon color="filled"/>
                 </IconButton>
                 </div>
-                : <CircularProgress color="info" thickness={2.5} size={30}/>} </p>
+                : <CircularProgress color="secondary" thickness={2.5} size={30}/>}</p>
 
             </div>
 
@@ -130,7 +128,7 @@ export default function ResData(props){
                 <div className = "resData_dataset">
                     <div className = "resData_dataset_table">
                         <div className = "resData_dataset_table_heading">
-                        {props.DataSetFile ? `${props.DataSetFile?.filename.slice(9,)} (${formatBytes(props.DataSetFile?.filesize)})` : <CircularProgress color="info" thickness={2.5} size={30}/>}
+                        {props.DataSetFile ? `${props.DataSetFile?.filename.slice(9,)} (${formatBytes(props.DataSetFile?.filesize)})` : <CircularProgress color="secondary" thickness={2.5} size={30}/>}
                         </div>
                         {typeof props.DataSetFile !== 'undefined' ? 
                             <MemoizedTable 
@@ -138,7 +136,7 @@ export default function ResData(props){
                                 Header={true} 
                                 rowNumber={15}
                                 checked={false}
-                            /> : <CircularProgress color="info" thickness={2.5} size={30}/>
+                            /> : <CircularProgress color="secondary" thickness={2.5} size={30}/>
                         }
                     </div>
                 </div>
@@ -150,7 +148,7 @@ export default function ResData(props){
                             props.DatasetDetails?.details.map( data => {
                                 return <MemoizedColumnGraphs size={props.DatasetDetails.rows} data={data}/>
                             })
-                        ) : <CircularProgress color="info" thickness={2.5} size={30}/>
+                        ) : <CircularProgress color="secondary" thickness={2.5} size={30}/>
                     }
                 </div>
             }
@@ -161,7 +159,7 @@ export default function ResData(props){
                     </Typography>
                     <div className = "resData_details">
                         <Typography  variant="button" ><InsertDriveFileOutlinedIcon/>File Name</Typography>
-                        <Typography variant="subtitle2" >{props.DataSetFile ? `${props.DataSetFile?.filename.slice(9,)}` : <CircularProgress color="info" thickness={2.5} size={30}/>}</Typography>
+                        <Typography variant="subtitle2" >{props.DataSetFile ? `${props.DataSetFile?.filename.slice(9,)}` : <CircularProgress color="secondary" thickness={2.5} size={30}/>}</Typography>
 
                         <Typography variant="button" ><UploadFileOutlinedIcon />File Size</Typography>
                         <Typography variant="subtitle2" >{props.DataSetFile && formatBytes(props.DataSetFile?.filesize)}</Typography>
