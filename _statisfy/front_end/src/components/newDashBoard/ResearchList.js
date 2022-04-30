@@ -693,7 +693,7 @@ export default function ResearchList(props){
                                                 editable={props.editable}
                                             />
                                         })
-                                    ) :  <CircularProgress color="info" thickness={2.5} size={30}/>
+                                    ) :  <CircularProgress color="secondary" thickness={2.5} size={30}/>
                                 }
                                 </div>
                             </Fade>
