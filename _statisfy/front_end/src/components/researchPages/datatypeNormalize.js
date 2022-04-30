@@ -116,10 +116,6 @@ export default function DataTypeNormalize(props){
                     
                     </>
                    }
-                   
-                    
-                    
-
                     <IconButton 
                         color="secondary" 
                         variant="outlined"
