@@ -1,4 +1,4 @@
-import "../StyleSheets/NewCSSFiles/homeFolder/homepage.css"
+import "../StyleSheets/NewCSSFiles/HomeFolder/homepage.css"
 import CardMedia from '@mui/material/CardMedia';
 import landingPage from '../images/homePage/Landing_Page - Explore.png'
 import tryAndJoin from '../images/homePage/Landing_Page - TryAndJoin.png'

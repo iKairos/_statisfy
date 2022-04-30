@@ -1,7 +1,7 @@
 import React, { useState  } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import "../StyleSheets/NewCSSFiles/SignInSignUpFolder/SignInSignUp.css"
+import "../StyleSheets/NewCSSFiles/SignInSignUpFolder/SignIn.css"
 import { authenticateUser } from '../actions/userActions';
 import PropTypes from 'prop-types';
 import { Redirect, useHistory } from "react-router"
@@ -71,12 +71,12 @@ export default function SignInScreen(props) {
 
   return (
       <div className="display" type="signin">
-        <div className="SignInSignUp">
-            <div className="SignInSignUp_container">
-                <div className="SignInSignUp_section1">
+        <div className="SignIn">
+            <div className="SignIn_container">
+                <div className="SignIn_section1">
                   <form method="post" onSubmit={submitHandler}>
                   
-                    <div className="SignInSignUp_section1_header">
+                    <div className="SignIn_section1_header">
                         <h1 className='SignText_SectionHeader'>Sign In</h1>
                         {
                         userAuth?.access_token === null ? 
@@ -100,7 +100,7 @@ export default function SignInScreen(props) {
                     </div>
 
                       
-                    <div className="SignInSignUp_section1_fields">
+                    <div className="SignIn_section1_fields">
                         <h6 className='SignText_Section'>Username</h6>
                         <TextField
                           hiddenLabel
@@ -130,7 +130,7 @@ export default function SignInScreen(props) {
                         />
                         <p className='SignText_Subtext'>Forgot Password?</p>
                     </div>
-                    <div className="SignInSignUp_section1_footer">
+                    <div className="SignIn_section1_footer">
                         {
                           loading ? <div><CircularProgress color="secondary" thickness={2.5} size={30}/>  <p className='SignText_btn'>Logging you in</p></div> :
                           <Button
@@ -148,7 +148,7 @@ export default function SignInScreen(props) {
                   </form>
                 </div>
                     
-                <div className="SignInSignUp_section2">
+                <div className="SignIn_section2">
                   <h1 className='SignText_journey'>Start Your <n/> Journey</h1>
                 </div>
 
