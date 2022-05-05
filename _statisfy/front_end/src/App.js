@@ -38,7 +38,7 @@ function App() {
   useEffect(() => {
     dispatch(processUserToken(token));
   }, [])
-
+  console.log(processed)
   return (
     <BrowserRouter>
       <div className="wrapper">

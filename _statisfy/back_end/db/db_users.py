@@ -36,6 +36,9 @@ class UsersBackbone():
     
     def is_registered(self, uid):
         try:
+            if len(uid) < 12: 
+                return False 
+                
             fetched = self.db.find_one({
                 '_id': ObjectId(uid)
             })

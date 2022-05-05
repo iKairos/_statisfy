@@ -70,7 +70,7 @@ export default function Header(props){
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-
+    
     return(
         <div className="pagewrapper ">
             <AppBar 
@@ -156,7 +156,7 @@ export default function Header(props){
                                 Home
                             </Button>
                         </Link>
-                        <Link className="menuLink" to="/profile">
+                        <Link className="menuLink" to={`/profile/${props.user?._id}`}>
                             <Button
                                 key={"2"}
                                 onClick={handleCloseNavMenu}
@@ -209,7 +209,7 @@ export default function Header(props){
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                                 >
-                                    <Link className="menuLink" to="/profile">
+                                    <Link className="menuLink" to={`/profile/${props.user?._id}`}>
                                         <MenuItem key={1} onClick={handleCloseUserMenu}>
                                             <Typography textAlign="center">
                                                 <AccountCircleIcon color='secondary' size='small'/> My Profile

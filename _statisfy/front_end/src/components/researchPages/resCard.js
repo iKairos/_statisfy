@@ -101,11 +101,7 @@ export default function ResCard(props){
 
                 {
                     props.editable ?
-                    loading ? <CircularProgress sx={{
-                        position:"absolute",
-                        right: 5,
-                        top: 5
-                    }}color="secondary" thickness={2.5} size={30}/> :
+                    loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/> :
                     <IconButton
                         onClick={handleToggle}
                         variant='outlined'
