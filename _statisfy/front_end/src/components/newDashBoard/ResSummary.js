@@ -2,7 +2,8 @@ import { Backdrop, Button, CircularProgress, Typography } from "@mui/material";
 import { useState } from "react";
 import { useHistory } from "react-router";
 import { researchSuccess, researchSuccessTitle } from "../../constants/stringConstants";
-import "../../StyleSheets/ressummaryfolder/ressummary.css";
+import  "../../StyleSheets/NewCSSFiles/UserProfileFolder/ResearchList.css";
+import { Divider } from "@mui/material";
 
 import TitleIcon from '@mui/icons-material/Title';
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -16,9 +17,27 @@ import ViewColumnOutlinedIcon from '@mui/icons-material/ViewColumnOutlined';
 import TableRowsOutlinedIcon from '@mui/icons-material/TableRowsOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 
-import { DisplayTable } from "../DisplayTable";
+import { makeStyles } from "@mui/styles";
+const buttonStyles = makeStyles ({
+    field:{
+      backgroundColor: "black",
+      borderRadius: '0.25rem'
+    },
+    btn:{
+      borderRadius: '1.5rem',
+      width:'15rem',
+      height:'2.5rem',
+      color:'white',
+      fontWeight:'500',
+      backgroundColor: '#7051b8'
+    },
+    icon:{
+        color:'#7051b8',
+    }
+})
 
 export default function ResSummary(props){
+    const ButtonClasses = buttonStyles();
     const history = useHistory();
     const [open, setOpen] = useState(false);
     const handleClose = () => {
@@ -48,79 +67,89 @@ export default function ResSummary(props){
         return;
     }
     return(
-       <div className="resSummary">
-           <div className="resSummary_header">
-                <CheckCircleOutlineOutlinedIcon fontSize="large" color="secondary"/>
-                <Typography variant="h5">
+       <div className="ResearchList_Page3">
+           <div className="ResearchList_Page3_header">
+                <CheckCircleOutlineOutlinedIcon fontSize="large" className={ButtonClasses.icon} />
+                <h5  className='ResearchText_title'>
                     Summary
-                </Typography>
+                </h5>
 
-                <Typography variant="subtitle2" className="resSummary_data">
+                <h6  className='ResearchText_content'>
                     Make sure to check everything before saving your dataset! 😉
-                </Typography>
+                </h6>
            </div>
            
-           <div className = "resSummary_body">
-               <Typography variant="button" className="resSummary_category"><TitleIcon fontSize="small" color="secondary"/> Title</Typography>
-               <Typography variant="subtitle2" className="resSummary_data">{props.Title}</Typography>
+           <div className = "ResearchList_Page3_body">
+                <h6 className="ResearchText_instruction_title">
+                    <TitleIcon fontSize="small" className={ButtonClasses.icon}/> Title
+                </h6>
+                <h6 className="ResearchText_instruction">
+                    {props.Title}
+                </h6>
 
-                <div className="resSummary_desc">
-                <Typography variant="button" className="resSummary_category"><DescriptionIcon fontSize="small" color="secondary"/> Description</Typography>
-                </div>
-               
-               <Typography variant="subtitle2" className="resSummary_data">{props.Description}</Typography>
+                <h6 className="ResearchText_instruction_title">
+                    <DescriptionIcon fontSize="small" className={ButtonClasses.icon}/> Description
+                </h6>
+                <h6 className="ResearchText_instruction">
+                    {props.Description}
+                </h6>
 
-               <Typography variant="button" className="resSummary_category"><AccountBoxIcon fontSize="small" color="secondary"/>Author</Typography>
-               <Typography variant="subtitle2" className="resSummary_data">{props.Author}</Typography>
+                <h6 className="ResearchText_instruction_title">
+                    <AccountBoxIcon fontSize="small" className={ButtonClasses.icon}/>Author
+                </h6>
+                <h6 className="ResearchText_instruction">
+                    {props.Author}
+                </h6>
 
-               <Typography variant="button" className="resSummary_category"><FiberManualRecordOutlinedIcon fontSize="small" color="secondary"/>Delimiter</Typography>
-               <Typography variant="subtitle2" className="resSummary_data">{props.Delimiter}</Typography>
+                <h6 className="ResearchText_instruction_title">
+                    <FiberManualRecordOutlinedIcon fontSize="small" className={ButtonClasses.icon}/>Delimiter
+                </h6>
+                <h6 className="ResearchText_instruction">
+                    {props.Delimiter}
+                </h6>
+            
+                
+            </div>
+            <Divider/>
+            <div className = "ResearchList_Page3_body">
+            <h6 className="ResearchText_instruction_title">
+                    <InsertDriveFileOutlinedIcon fontSize="small" className={ButtonClasses.icon}/>File Name
+                </h6>
+                <h6 className="ResearchText_instruction">
+                    {props.FileDetails ? props.FileDetails?.name : ""}
+                </h6>
 
+                <h6 className="ResearchText_instruction_title">
+                    <UploadFileOutlinedIcon fontSize="small" className={ButtonClasses.icon}/>File Size
+                </h6>
+                <h6 className="ResearchText_instruction">
+                    {typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}
+                </h6>
+
+                <h6 className="ResearchText_instruction_title">
+                    <ViewColumnOutlinedIcon fontSize="small" className={ButtonClasses.icon}/>Columns
+                </h6>
+                <h6 className="ResearchText_instruction">
+                    {typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}
+                </h6>
+
+                <h6 className="ResearchText_instruction_title">
+                    <TableRowsOutlinedIcon fontSize="small" className={ButtonClasses.icon}/>Rows
+                </h6>
+                <h6 className="ResearchText_instruction">
+                    {typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}
+                </h6>
             </div>
 
-            <div className = "resSummary_body">
-                <Typography variant="button" className="resSummary_category"><FiberManualRecordOutlinedIcon fontSize="small" color="secondary"/>Missing Data Handling</Typography>
-                <Typography variant="subtitle2" className="resSummary_data">
-                    {
-                        props.NullCleaning === "replace" ?
-                        `Replace with ${props.NullReplace}`
-                        : props.NullCleaning
-                    }
-                </Typography>
 
-                <Typography variant="button" className="resSummary_category"><FiberManualRecordOutlinedIcon fontSize="small" color="secondary"/>Outlier Handling</Typography>
-                <Typography variant="subtitle2" className="resSummary_data">
-                    {
-                        props.OutlierCleaning === "replace" ? 
-                        `Replace with ${props.OutlierReplace}`
-                        : props.OutlierCleaning
-                    }
-                </Typography>
-            </div>
-
-            <div className = "resSummary_body">
-               
-               <Typography  variant="button" className="resSummary_category"><InsertDriveFileOutlinedIcon color="secondary"/>File Name</Typography>
-               <Typography variant="subtitle2" className="resSummary_data">{props.FileDetails ? props.FileDetails?.name : ""}</Typography>
-
-               <Typography variant="button" className="resSummary_category"><UploadFileOutlinedIcon color="secondary"/>File Size</Typography>
-               <Typography variant="subtitle2" className="resSummary_data">{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</Typography>
-
-               <Typography variant="button" className="resSummary_category"><ViewColumnOutlinedIcon color="secondary"/>Columns</Typography>
-               <Typography variant="subtitle2" className="resSummary_data">{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}</Typography>
-
-               <Typography variant="button" className="resSummary_category"><TableRowsOutlinedIcon color="secondary"/>Rows</Typography>
-               <Typography variant="subtitle2" className="resSummary_data">{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}</Typography>
-           
-           </div>
+            
 
            <div className="resSummary_header">
             <Button 
-                className="resSummary_button"
+                className={ButtonClasses.btn}
                 onClick={saveResearch}
-                color = "secondary"
                 sx={{width:"15rem"}}
-                variant="outlined"
+                variant="filled"
             >Create Research
             </Button>
             </div>

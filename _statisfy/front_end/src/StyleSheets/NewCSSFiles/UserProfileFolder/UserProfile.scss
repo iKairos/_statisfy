@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); 
+$violet : #7051b8;
+$white1: #eeeeee;
+$gray1: #b5b5b5;
+$pink: #dfa9ff;
+$purple: #a742c5;
+$black: #23272a;
+
+
+.UserProfile{
+    width: 90vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 5rem;
+
+    &_Header{
+        width: 90vw;
+        position: relative;
+        &_Banner{
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            height: 20vh;
+            width: 100%;
+            object-fit:cover;
+            overflow: hidden;
+        }
+        &_User{
+            min-height: 12vh;
+            height: fit-content;
+            width: 100%;
+            background-color: white;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            padding-top:5rem;
+            padding-bottom: 2rem;
+            position: relative;
+        }
+        &_Avatar{
+            
+            left:calc(50% - 64px);
+            bottom: calc(100% - 20vh - 64px);
+            position: absolute;
+            z-index: 9;
+            
+        }
+    }
+
+    &_Section{
+        width: 90vw;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    &_Details{
+        background-color: white;
+        border-radius: 0.5rem;
+        margin-top: 2rem;
+        padding: 1rem;
+        width: 90vw;
+        &_Container{
+            margin-bottom: 2rem;
+        }
+    }
+}
+
+.ProfileText{
+    &_name{
+        font-family: Poppins;
+        font-weight: 700;
+        color: $black;
+    }
+    &_address{
+        font-family: Poppins;
+        font-weight: 600;
+        color: $gray1;
+        word-break: normal;
+    }
+    &_detailsHeader{
+        color: $violet;
+        font-family: Poppins;
+        font-weight: 600;
+    }
+    &_detailsContent{
+        color: $black;
+        font-family: Poppins;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .UserProfile{
+        width: 80vw;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    
+        &_Header{
+            width: 80vw;
+            position: relative;
+            &_Banner{
+                border-top-left-radius: 0.5rem;
+                border-top-right-radius: 0.5rem;
+                height: 20vh;
+                width: 100%;
+                object-fit:cover;
+                overflow: hidden;
+            }
+            &_User{
+                padding-top: 1rem;
+                padding-left: calc(128px + 3rem);
+                padding-bottom: 1rem;
+            }
+            &_Avatar{
+                left: 2rem;
+                
+            }
+        }
+        &_Section{
+            width: 90vw;
+            display: grid;
+            grid-template-columns: 1fr 4fr;
+            gap: 1rem;
+        }
+        
+        &_Details{
+            background-color: white;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+            padding: 1rem;
+            width: 20vw;
+
+        }
+    }
+}

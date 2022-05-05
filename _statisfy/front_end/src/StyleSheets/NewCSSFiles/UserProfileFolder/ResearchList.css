@@ -1,0 +1,356 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+.ResearchList {
+  background-color: white;
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.ResearchList_header {
+  height: 5rem;
+  padding: 1rem;
+  position: relative;
+  border-bottom: 1px solid #7051b8;
+}
+
+.ResearchList_header_buttons {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.ResearchList_content {
+  padding: 1rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 40rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.ResearchList_Page1 {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+
+.ResearchList_Page1_header {
+  padding: 2rem;
+}
+
+.ResearchList_Page2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.ResearchList_Page2_header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.ResearchList_Page2_instruction {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 1rem;
+}
+
+.ResearchList_Page2_Section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+
+.ResearchList_Page2_delimeter {
+  max-width: 15rem;
+  padding: 1rem;
+}
+
+.ResearchList_Page2_upload {
+  max-width: 15rem;
+  padding: 1rem;
+}
+
+.ResearchList_Page2_upload_button {
+  border: 1px solid #a8a8a8;
+  background-color: #ffffff;
+  cursor: pointer;
+  height: 3rem;
+  width: 12rem;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 0.2rem;
+  margin-bottom: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.ResearchList_Page2_upload_button:hover {
+  border: 1px solid #7051b8;
+  color: #a742c5;
+}
+
+.ResearchList_Page2_upload_input {
+  display: none;
+}
+
+.ResearchList_Page2_details {
+  width: 100%;
+  padding: 1rem;
+}
+
+.ResearchList_Page2_table {
+  width: 100%;
+  padding: 1rem;
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+}
+
+.ResearchList_Page2_table_dummy {
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+}
+
+.ResearchList_Page3 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.ResearchList_Page3_header {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  padding-top: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #b5b5b5;
+}
+
+.ResearchList_Page3_body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.ResearchList_List {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.ResearchList_List_Card {
+  width: 100%;
+  border-bottom: 1px solid #7051b8;
+  padding: 1rem;
+}
+
+.ResearchList_List_Card_title {
+  position: relative;
+}
+
+.ResearchList_List_Card_description {
+  position: relative;
+  padding-bottom: 3rem;
+}
+
+.ResearchList_List_Card_date {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.ResearchList_List_Card_footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  gap: 0.5rem;
+}
+
+.ResearchText_header {
+  font-family: Poppins;
+  color: #7051b8;
+  font-weight: 900;
+}
+
+.ResearchText_title {
+  font-family: Poppins;
+  color: #23272a;
+  font-weight: 900;
+}
+
+.ResearchText_content {
+  font-family: Poppins;
+  color: #23272a;
+}
+
+.ResearchText_subHeader {
+  font-family: Poppins;
+  color: #7051b8;
+  text-align: left;
+}
+
+.ResearchText_instruction {
+  font-family: Poppins;
+  color: #23272a;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.ResearchText_instruction_title {
+  font-family: Poppins;
+  color: #23272a;
+  text-align: left;
+  font-weight: 900;
+}
+
+.ResearchText_delimeter {
+  font-family: Poppins;
+  color: #23272a;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+@media screen and (min-width: 600px) {
+  .ResearchList_Page3_body {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 3fr;
+        grid-template-columns: 1fr 3fr;
+    gap: 0.5rem;
+    width: 100%;
+    word-wrap: break-word;
+  }
+}
+/*# sourceMappingURL=ResearchList.css.map */

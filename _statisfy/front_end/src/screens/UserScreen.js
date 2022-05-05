@@ -1,6 +1,8 @@
-import "../StyleSheets/dashboard.css";
+import "../StyleSheets/NewCSSFiles/UserProfileFolder/UserProfile.css";
 
 import UserProfile from "../components/UserProfile";
+import UserProfileHeader from "../components/UserProfileComponents/UserProfileHeader";
+import UserProfileSection from "../components/UserProfileComponents/UserProfileSection";
 import { Redirect, useParams } from "react-router";
 import { getUser, processUserToken } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,19 +42,26 @@ export default function UserScreen(props){
 
     if(props.isUser && processed?.code === 'TOKEN_SUCCESS'){ // no id, logged in, render self profile
         return(
-            <div>
-                    <UserProfile user={processed.user} editable={true}/>
-                    <ResearchList editable={true}/>
+            <div className="UserProfile">
+                    <UserProfileHeader user={processed.user} editable={true}/>
+                    <div className="UserProfile_Section">
+                        <UserProfileSection user={processed.user} editable={true}/>
+                        <ResearchList editable={true}/>
+                    </div>
+                    
             </div>
         )
     }else if(userData?.code === 'USER_FETCH_SUCCESS'){ // provided id, render id profile
         const editable = id === processed?.user._id;
         return(
-            <div>
-                <div className = "container">
-                    <UserProfile user={userData.user} editable={editable}/>
+            <div className="UserProfile">
+                    <UserProfileHeader user={userData.user} editable={editable}/>
+                <div className="UserProfile_Section">
+                    
+                    <UserProfileSection user={userData.user} editable={editable}/>
                     <ResearchList editable={editable} id={id} first_name={userData.user.first_name}/>
-                </div> 
+                </div>
+                
             </div>
         )
     }else if(userData?.code === 'USER_NOT_EXIST'){

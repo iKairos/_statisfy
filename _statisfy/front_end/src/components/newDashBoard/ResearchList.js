@@ -1,4 +1,4 @@
-import  "../../StyleSheets/researchlistfolder/researchlist.css"
+import  "../../StyleSheets/NewCSSFiles/UserProfileFolder/ResearchList.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from '@mui/material/Button';
@@ -12,8 +12,8 @@ import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Fade, Skeleton, Stepper, Step, StepLabel, Grow, Alert, Typography, CircularProgress, Snackbar, IconButton } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Fade, Skeleton, Stepper, Step, StepLabel, Grow, Alert, Typography, CircularProgress, Snackbar, IconButton, Divider } from "@mui/material";
+
 import clsx from 'clsx';
 import { status500, stepsString } from "../../constants/stringConstants";
 import { processUserToken } from "../../actions/userActions";
@@ -41,9 +41,27 @@ import ResearchUpload from "./ResearchUpload";
 import ResSummary from "./ResSummary";
 import ResCard from "../researchPages/resCard";
 import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { makeStyles } from "@mui/styles";
+const buttonStyles = makeStyles ({
+    field:{
+      backgroundColor: "black",
+      borderRadius: '0.25rem'
+    },
+    btn:{
+      borderRadius: '1.5rem',
+      width:'15rem',
+      height:'2.5rem',
+      color:'white',
+      fontWeight:'500',
+      backgroundColor: '#7051b8'
+    },
+    icon:{
+        color:'#7051b8',
+    }
+})
 
 export default function ResearchList(props){
-    
+    const ButtonClasses = buttonStyles();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
@@ -302,12 +320,12 @@ export default function ResearchList(props){
 
         },
         active: {
-            backgroundColor: '#A742C5',
+            backgroundColor: '#7051b8',
             color: '#ffffff',
         },
         completed: {
             backgroundColor: '#e7e7e7',
-            color: '#A742C5',
+            color: '#7051b8',
         },
     }));
 
@@ -372,227 +390,118 @@ export default function ResearchList(props){
     }, [location]);
 
     return(
-        <div className="resList_body_container">
-            {
-                message &&
-                <Snackbar
-                    open={isOpenSnackbar} 
-                    onClose={handleCloseSnackbar}
-                    action={action}
-                >
-                    <Alert severity="success" variant="filled">
-                        {message.body}
-                        <React.Fragment>
-                            <IconButton
-                                size="small"
-                                aria-label="close"
-                                color="inherit"
-                                onClick={handleCloseSnackbar}
+            <div className = "ResearchList">
+                <div className = "ResearchList_header">
+                    <h5 className="ResearchText_header">
+                        DATASET LIST
+                    </h5>
+                        {
+                            message &&
+                            <Snackbar
+                                open={isOpenSnackbar} 
+                                onClose={handleCloseSnackbar}
+                                action={action}
                             >
-                                <CloseIcon fontSize="small" />
-                            </IconButton>
-                        </React.Fragment>
-                    </Alert>
-                </Snackbar>
-            }
-            {isAdding
-            ?(
-                <div className="resList_body_add">
-                    <Button 
-                        color="secondary" 
-                        className="resList_body_add_button"
-                        onClick={()=>handleAdding(false)}
-                    >
-                        <ArrowBackIosNewIcon/>
-                        Back to Research List
-                    </Button>
-                </div>
-            )
-            :(
-                <div className="resStudy_body_add">
-                    {
-                        props.editable ? 
-                        <Button 
-                            color="secondary" 
-                            className="resStudy_body_add_button"
-                            onClick={()=>handleAdding(true)}
-                        >
-                            <AddIcon className="AddIcon"/>
-                            add new research
-                        </Button>
-                        :
-                        <Button 
-                            color="secondary" 
-                            className="resStudy_body_add_button"
-                            disabled
-                        >
-                            <DoNotDisturbOutlinedIcon className="AddIcon"/>
-                            only {props.first_name} can add researches
-                        </Button>
-                    }
-                    <Stack direction="row" spacing={2} className="Sort">
-                        <div>
-                            <Button
-                            ref={anchorRef}
-                            id="composition-button"
-                            aria-controls={open ? 'composition-menu' : undefined}
-                            aria-expanded={open ? 'true' : undefined}
-                            aria-haspopup="true"
-                            onClick={handleToggle}
-                            color="secondary"
-                            
-                            >
-                            Sort
-                            <SortIcon/>
-                            </Button>
-                            <Popper
-                            open={open}
-                            anchorEl={anchorRef.current}
-                            role={undefined}
-                            placement="bottom-start"
-                            transition
-                            disablePortal
-                            >
-                            {({ TransitionProps, placement }) => (
-                                <Grow
-                                {...TransitionProps}
-                                style={{
-                                    transformOrigin:
-                                    placement === 'bottom-start' ? 'left top' : 'left bottom',
-                                }}
+                                <Alert severity="success" variant="filled">
+                                    {message.body}
+                                    <React.Fragment>
+                                        <IconButton
+                                            size="small"
+                                            aria-label="close"
+                                            color="inherit"
+                                            onClick={handleCloseSnackbar}
+                                        >
+                                            <CloseIcon fontSize="small" />
+                                        </IconButton>
+                                    </React.Fragment>
+                                </Alert>
+                            </Snackbar>
+                        }
+                    
+                        
+                        {isAdding
+                        ?(
+                            <div className = "ResearchList_header_buttons">
+                                <Button 
+                                    color="secondary" 
+                                    className={ButtonClasses.icon}
+                                    onClick={()=>handleAdding(false)}
                                 >
-                                <Paper>
-                                    <ClickAwayListener onClickAway={handleClose}>
-                                    <MenuList
-                                        autoFocusItem={open}
-                                        id="composition-menu"
-                                        aria-labelledby="composition-button"
-                                        onKeyDown={handleListKeyDown}
+                                    <ArrowBackIosNewIcon/>
+                                    Back 
+                                </Button>
+                            </div>
+                        )
+                        :(
+                            <div className = "ResearchList_header_buttons">
+                                {
+                                    props.editable ? 
+                                    <IconButton 
+                                        color="secondary" 
+                                        
+                                        onClick={()=>handleAdding(true)}
                                     >
-                                        <MenuItem 
-                                            onClick={ sort === 1
-                                                ? ()=>handleAscending(!ascending)
-                                                :()=>handleSort(1)}
-                                            sx={ sort === 1
-                                                ? {
-                                                width: "10rem",
-                                                color: "#a742c5"}
-                                                :{
-                                                    width: "10rem",
-                                                    color: "#23272a"
-                                                } 
-                                            }
-                                            
-                                        >
-                                            Name
-                                            {sort === 1 
-                                                ?  (ascending 
-                                                    ? <ArrowUpwardIcon/>
-                                                    : <ArrowDownwardIcon/>)
-                                                :  null
-                                            }
-                                        </MenuItem>
-                                        <MenuItem 
-                                            onClick={ sort === 2
-                                                ? ()=>handleAscending(!ascending)
-                                                :()=>handleSort(2)}
-                                            sx={ sort === 2
-                                                ? {
-                                                width: "10rem",
-                                                color: "#a742c5"}
-                                                :{
-                                                    width: "10rem",
-                                                    color: "#23272a"
-                                                } 
-                                            }
-                                        >
-                                            Date Created
-                                            {sort === 2 
-                                                ?  (ascending 
-                                                    ? <ArrowUpwardIcon/>
-                                                    : <ArrowDownwardIcon/>)
-                                                :  null
-                                            }
-                                        </MenuItem>
-                                        <MenuItem 
-                                            onClick={ sort === 3
-                                                ? ()=>handleAscending(!ascending)
-                                                :()=>handleSort(3)}
-                                            sx={ sort === 3
-                                                ? {
-                                                width: "10rem",
-                                                color: "#a742c5"}
-                                                :{
-                                                    width: "10rem",
-                                                    color: "#23272a"
-                                                } 
-                                            }
-                                        >
-                                            Last Changed
-                                            {sort === 3 
-                                                ?  (ascending 
-                                                    ? <ArrowUpwardIcon/>
-                                                    : <ArrowDownwardIcon/>)
-                                                :  null
-                                            }
-                                        </MenuItem>
-                                    
-                                    </MenuList>
-                                    </ClickAwayListener>
-                                </Paper>
-                                </Grow>
-                            )}
-                            </Popper>
-                        </div>
-                    </Stack>
+                                        <AddIcon className={ButtonClasses.icon}/>
+                                    </IconButton>
+                                    :
+                                    <IconButton 
+                                        color="secondary" 
+                                        disabled
+                                        onClick={()=>handleAdding(true)}
+                                    >
+                                        <AddIcon className={ButtonClasses.icon}/>
+                                    </IconButton>
+                                }
+                            </div>
+                        )
+                        }
                 </div>
-            )
-            }
-
-            {isAdding
+                
+                    {isAdding
                     ? (
-                    <div className = "resList_body_content">
-                        <div className="resList_stepper">
-                            <Stepper activeStep={showActive-1} alternativeLabel>
-                                {stepsString.map((label) => (
-                                    <Step key={label}>
-                                        <StepLabel StepIconComponent={CustomStepIcon} >
-                                            <div className="stepper_div">{label}</div>
-                                        </StepLabel>
-                                    </Step>
-                                ))}
-                            </Stepper>
-                        </div>
+                        <div className="ResearchList_content">
+                        <Stepper activeStep={showActive-1} alternativeLabel>
+                            {stepsString.map((label) => (
+                                <Step key={label}>
+                                    <StepLabel StepIconComponent={CustomStepIcon} >
+                                        <div className="stepper_div">{label}</div>
+                                    </StepLabel>
+                                </Step>
+                            ))}
+                        </Stepper>
+
                         <Box
                             component="form"
                             noValidate
                             autoComplete="off"
-                            
                             className = "StudyTitle"
-                            
                         >
                             {showActive === 1 &&
-                                <div className="resList_textField">
+                                <div className="ResearchList_Page1">
                                     {_error.titlePage && (
                                         <Grow in={_error.titlePage} {...(_error.titlePage ? { timeout: 1000 } : {})}>
-                                            <Alert variant="outlined" severity="error">{_error.titlePage}</Alert>
+                                            <Alert variant="filled" severity="error">{_error.titlePage}</Alert>
                                         </Grow>
                                     )}
 
-                                    <div className="resSummary_header">
-                                            <DriveFileRenameOutlineIcon fontSize="large" color="secondary"/>
-                                            <Typography variant="h5">
-                                                Describe Your Dataset
-                                            </Typography>
+                                    <div className="ResearchList_Page1_header">
+                                        <DriveFileRenameOutlineIcon fontSize="large" className={ButtonClasses.icon}/>
+                                        <h5 className="ResearchText_title">
+                                            Describe Your Dataset
+                                        </h5>
 
-                                            <Typography variant="subtitle2" className="resSummary_data">
-                                                Assign a name and description for your dataset for others to know them better! 🧠
-                                            </Typography>
+                                        <h6 className="ResearchText_content">
+                                            Assign a name and description for your dataset for others to know them better! 🧠
+                                        </h6>
                                     </div>
+                                    <Divider/>
+                                    <h5 className="ResearchText_subHeader">
+                                        Research Title
+                                    </h5>
                                     <TextField
                                         required
                                         id="outlined-textarea"
-                                        label="Research Title"
+                                        hiddenLabel
                                         placeholder="Add new title"
                                         defaultValue={title}
                                         multiline
@@ -600,11 +509,17 @@ export default function ResearchList(props){
                                         color = "secondary"
                                         fullWidth
                                         onChange={(e) => handleTitle(e)}
+                                        variant="filled"
+                                        InputProps={{disableUnderline: true}}
                                     />
+                                    <h5 className="ResearchText_subHeader">
+                                        Research Description
+                                    </h5>
                                     <TextField
                                         required
                                         id="outlined-textarea"
-                                        label="Description"
+                                        hiddenLabel
+                                        variant="filled"
                                         defaultValue={description}
                                         placeholder="Add description"
                                         multiline
@@ -612,9 +527,8 @@ export default function ResearchList(props){
                                         color = "secondary"
                                         fullWidth
                                         onChange={(e) => handleDescription(e)}
+                                        InputProps={{disableUnderline: true}}
                                     />
-                                   
-
                                 </div>
                             }
                             {showActive === 2 && 
@@ -675,32 +589,34 @@ export default function ResearchList(props){
                             ActiveStep = {showActive -1}
                             prevDisabled={true}
                         />
-                    
-                    </div>)
-                    : (
-                        <div className="resList_list">
-                            <Fade in={true} {...(true ? { timeout: 500 } : {})}>
-                                <div>
-                                {
-                                    typeof researchesGetRes?.researches !== 'undefined' ? (
-                                        researchesGetRes?.researches.map(res => {
-                                            return <ResCard
-                                                title = {res.research_name}
-                                                description = {res.research_description}
-                                                created_at = {res.created_at}
-                                                _id = {res._id}
-                                                HandleSelected = {handleSelected}
-                                                editable={props.editable}
-                                            />
-                                        })
-                                    ) :  <CircularProgress color="secondary" thickness={2.5} size={30}/>
-                                }
-                                </div>
-                            </Fade>
                         </div>
+                    ): (
+                        <Fade in={true} {...(true ? { timeout: 500 } : {})}>
+                            <div className="ResearchList_List">
+                            {
+                                typeof researchesGetRes?.researches !== 'undefined' ? (
+                                    researchesGetRes?.researches.map(res => {
+                                        return <ResCard
+                                            title = {res.research_name}
+                                            description = {res.research_description}
+                                            created_at = {res.created_at}
+                                            _id = {res._id}
+                                            HandleSelected = {handleSelected}
+                                            editable={props.editable}
+                                        />
+                                    })
+                                ) :  <CircularProgress color="secondary" thickness={2.5} size={30}/>
+                            }
+                            </div>
+                        </Fade>
                     )
-                }
+                    }
+               
+
+
+            </div>
             
-        </div>
+            
+          
     ); 
 }

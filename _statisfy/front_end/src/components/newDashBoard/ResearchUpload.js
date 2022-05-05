@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useRef, useState } from "react";
-import { Alert, AlertTitle, Collapse, Tooltip, CircularProgress, Fade, Slide, Snackbar } from '@mui/material';
+import { Alert, AlertTitle, Collapse, Tooltip, CircularProgress, Fade, Slide, Snackbar, Divider } from '@mui/material';
 import { instDataPage, tooltipDataCleaning, tooltipDataset, tooltipDelimiter } from "../../constants/stringConstants";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
@@ -21,11 +21,36 @@ import CleaningOptions from './CleaningOptions';
 
 import { DataColumns } from '../researchPages/dataColumns';
 
+import  "../../StyleSheets/NewCSSFiles/UserProfileFolder/ResearchList.css";
+import { makeStyles } from "@mui/styles";
 
-import "../../StyleSheets/resuploadfolder/resupload.css";
+const buttonStyles = makeStyles ({
+    field:{
+      backgroundColor: "black",
+      borderRadius: '0.25rem'
+    },
+    btn:{
+      borderRadius: '1.5rem',
+      width:'15rem',
+      height:'2.5rem',
+      color:'white',
+      fontWeight:'500',
+      backgroundColor: '#7051b8'
+    },
+    icon:{
+        color:'#7051b8',
+        borderColor:'#7051b8'
+    }
+})
+
+
+
 
 
 export default function ResearchUpload(props) {
+
+    const ButtonClasses = buttonStyles();
+
     const [header, setHeader] = useState(true);
     const containerRef = useRef(null);
     const [show, setShow] = useState(true);
@@ -54,109 +79,116 @@ export default function ResearchUpload(props) {
     );
 
   return (
-    <div className="resUpload_content">
-        <div className="resSummary_header">
-                <DownloadForOfflineOutlinedIcon fontSize="large" color="secondary"/>
-                <Typography variant="h5">
-                    Data Preprocessing
-                </Typography>
+    <div className="ResearchList_Page3">
+        <div className="ResearchList_Page3_header">
+                <DownloadForOfflineOutlinedIcon fontSize="large" className={ButtonClasses.icon}/>
+                <h5 className='ResearchText_title'>
+                    Dataset 
+                </h5>
 
-                <Typography variant="subtitle2" className="resSummary_data">
-                    Upload and clean your data before saving and starting some analysis! ✅
-                </Typography>
+                <h6 className='ResearchText_content'>
+                    Upload your data and save it in the cloud to conduct some analysis! ✅
+                </h6>
         </div>
+
         
-        <div className="resUpload_upload_cont">
-            <Alert variant="outlined" severity="info" color="secondary">
-                <AlertTitle><strong>Instructions:</strong></AlertTitle>
+        
+        <div className="ResearchList_Page2_instruction">
+            <Alert variant="outlined" severity="info" className={ButtonClasses.icon}>
+                <AlertTitle><p className='ResearchText_instruction_title'>Instructions:</p></AlertTitle>
                 {
                     instDataPage.map((i) => (
-                        <><b>{i[0]}.</b> {i[1]} <br/></>
+                        <>
+                        <p className='ResearchText_instruction_title'>
+                            {i[0]}. {i[1]}
+                        </p>
+                        <br/>
+                        </>
                     ))
                 }
             </Alert>
         </div>
 
-        <div className="resUpload_upload_cont">
-            <div className="resUpload_delimeter">
-                <Typography>Set delimeter for your dataset</Typography>
+        <div className="ResearchList_Page2_Section">
+            <div className = "ResearchList_Page2_delimeter">
+                <h6 className="ResearchText_delimeter">
+                    Set delimeter
+                    <Tooltip
+                        title={tooltipDelimiter}
+                        placement="bottom"
+                        arrow
+                        color='secondary'
+                        >
+                        <HelpOutlineIcon fontSize='medium' className={ButtonClasses.icon} sx={{fontSize:"large"}}/>
+                    </Tooltip>
+                </h6>
                 <TextField
                     placeholder="Delimeter"
                     defaultValue=","
                     onChange={(e) => props.CallbackDelimiter(e.target.value)}
                     InputProps={{
-                    endAdornment: (
-                        <InputAdornment position="start">
-                            <Tooltip
-                                title={tooltipDelimiter}
-                                placement="bottom"
-                                arrow
-                                color='secondary'
-                                >
-                                <HelpOutlineIcon fontSize='medium' color='secondary'/>
-                            </Tooltip>
-                        </InputAdornment>
-                    ),
+                        disableUnderline: true
                     }}
-                    variant="standard"
-                    sx={{display:"flex", justifyContent:"center"}}
+                    variant="filled"
+                    sx={{display:"flex", textAlign:"center"}}
+                    size="small"
                 />
             </div>
-        </div>
-
-        
-        <div className="resUpload_upload_cont">
-            <div className="resUpload_outerCont">
-                <div className="resUpload_innerCont">
-                    <div className="resUpload_upload_title">
-                        <Typography>Upload a dataset</Typography>
-                        <Tooltip
-                            title={tooltipDataset}
-                            placement="right"
-                            arrow
-                        >
-                            <HelpOutlineIcon  fontSize='medium' color='secondary'/>
-                        </Tooltip>
-                    </div>
+            <div className = "ResearchList_Page2_upload">
+                <h6 className="ResearchText_delimeter">
+                    Upload a dataset 
+                    <Tooltip
+                        title={tooltipDataset}
+                        placement="right"
+                        arrow
+                    >
+                        <HelpOutlineIcon  fontSize='medium' className={ButtonClasses.icon} sx={{fontSize:"large"}}/>
+                    </Tooltip>
+                </h6>
                     
-                    <label className="resUpload_upload">
-                        <input className="resUpload_upload_input" type="file" name="file" accept=".csv" 
-                        onChange={(e) => props.ChangeHandler(e)} 
-                        />
-                        <FileUploadIcon color = "secondary"/>
-                        
-                    </label> 
-                </div>
-                <div className="resUpload_detailsCont">
-                    <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
-                        <Typography variant='button'>File Name : </Typography>
-                        <Typography variant='body2'>{props.FileDetails ? props.FileDetails?.name : ""} </Typography>
-                    </div>
-
-                    <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
-                        <Typography variant='button'>File Size : </Typography>
-                        <Typography variant='body2'>{props.FileDetails ? formatBytes(props.FileDetails?.size): ""} </Typography>
-                    </div>
-
-                    <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
-                        <Typography variant='button'>Columns : </Typography>
-                        <Typography variant='body2'>{typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""} </Typography>
-                    </div>
-
-                    <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
-                        <Typography variant='button'>Initial Rows : </Typography>
-                        <Typography variant='body2'>{typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""} </Typography>
-                    </div>
-
-                    <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
-                        <Typography variant='button'>Initial Datapoints : </Typography>
-                        <Typography variant='body2'>{typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}</Typography>
-                    </div>
+                <label className="ResearchList_Page2_upload_button">
+                    <input className="ResearchList_Page2_upload_input" type="file" name="file" accept=".csv" 
+                    onChange={(e) => props.ChangeHandler(e)} 
+                    />
+                    <FileUploadIcon className={ButtonClasses.icon}/>
                     
-                </div>
+                </label> 
             </div>
             
+            
         </div>
+        <div className="ResearchList_Page2_details">
+            <h6 className="ResearchText_delimeter">
+                File Name : {props.FileDetails ? props.FileDetails?.name : ""}
+            </h6>
+            <h6 className="ResearchText_delimeter">
+                File Size : {props.FileDetails ? formatBytes(props.FileDetails?.size): ""}
+            </h6>
+            <h6 className="ResearchText_delimeter">
+                Columns : {typeof props.DatasetDetails?.columns !== 'undefined' ? `${props.DatasetDetails?.columns} columns`: ""}
+            </h6>
+            <h6 className="ResearchText_delimeter">
+                Rows : {typeof props.DatasetDetails?.rows !== 'undefined' ? `${props.DatasetDetails?.rows} rows`: ""}
+            </h6>
+            <h6 className="ResearchText_delimeter">
+                Datapoints : {typeof props.DatasetDetails?.size !== 'undefined' ? `${props.DatasetDetails?.size} datapoints`: ""}
+            </h6>
+        </div>
+
+        {props.DatasetDetails?.error ? null : 
+            
+            <div className = "ResearchList_Page2_table">
+                <div className = "ResearchList_Page2_table_dummy">
+                    
+                    <DisplayTable 
+                        data={props.DataArray}
+                        Header = {header}
+                        rowNumber = {10}
+                    />
+                </div>
+            </div>
+        }
+       
         
         {
             <Snackbar
@@ -168,96 +200,9 @@ export default function ResearchUpload(props) {
                 </Alert>
             </Snackbar>
         }
-        {typeof props.DataArray !== 'undefined' ? 
-            <Button 
-                color="secondary" 
-                variant="outlined" 
-                sx={{marginTop:"1rem"}}
-                onClick = {handleOpenCleaning}
-                
-            ><CleaningServicesOutlinedIcon fontSize="small" color="secondary"/> &nbsp;Clean Data</Button>: null
-            
-        }
-        <Backdrop
-            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            open={openCleaning}
-        >
-            <div className="resUpload_upload_backdrop">
-                <div className="resUpload_exit">
-                    <IconButton 
-                        onClick={handleCloseCleaning}
-                        
-                    > <CloseIcon/></IconButton>
-                </div>
-                
-                <div className="resUpload_cleaning_title">
-                    <Typography>Clean your dataset</Typography>
-                    <Tooltip
-                        title={tooltipDataCleaning}
-                        placement="right"
-                        arrow
-                        color='secondary'
-                        >
-                        <HelpOutlineIcon fontSize='medium' color='secondary'/>
-                    </Tooltip>
-                </div>
-                <Alert variant="outlined" severity="info" color="secondary">
-                    <AlertTitle><strong>Instructions:</strong></AlertTitle>
-                    {
-                        instDataPage.map((i) => (
-                            <><b>{i[0]}.</b> {i[1]} <br/></>
-                        ))
-                    }
-                </Alert>
-                <div className="resUpload_columns">
-                    
-                    {
-                        typeof props.DatasetDetails?.details !== 'undefined' ? 
-                        <DataColumns
-                            data={props.DatasetDetails?.details?.map(row => _.pick(row, ['column', 'null_count', 'outliers']))}
-                            checked = {true}
-                            CallbackSelectedColumns = {props.CallbackSelectedCleanColumns}
-                            CallbackColumnOptions = {props.CallbackColumnOptions}
-                        />
-                        : null
-                    }
-
-                </div>
-                <div className="resUpload_cleaning_grid">
-                {
-                    props.SelectedColumns.map(i => 
-                        <CleaningOptions
-                            Variable = {i}
-                            CleanOptions = {props.CleanOptions}
-                            CallbackColumnOptions = {props.CallbackColumnOptions}
-
-                        />    
-                    )
-                }
-
-                </div>
-               
-
-                <Button onClick={handleCloseCleaning} color="secondary">Close</Button>
-                
-                
-                
-            </div>
-        </Backdrop>
         
-        {props.DatasetDetails?.error ? null : 
-            
-            <div className = "resUpload_upload_dispTable">
-                <div className = "resUpload_upload_dummy">
-                    
-                    <DisplayTable 
-                        data={props.DataArray}
-                        Header = {header}
-                        rowNumber = {10}
-                    />
-                </div>
-            </div>
-        }
+        
+        
        
     </div>
   );

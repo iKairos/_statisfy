@@ -1,4 +1,5 @@
-import "../../StyleSheets/studycardfolder/studycard.css"
+import "../../StyleSheets/NewCSSFiles/UserProfileFolder/ResearchList.css";
+import { Divider } from "@mui/material";
 import React, { useState } from "react";
 import { IconButton, Button, Typography, Snackbar, Alert, CircularProgress} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -7,9 +8,28 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteResearch, getResearches } from "../../actions/researchAction";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { makeStyles } from "@mui/styles";
+const buttonStyles = makeStyles ({
+    field:{
+      backgroundColor: "black",
+      borderRadius: '0.25rem'
+    },
+    btn:{
+      borderRadius: '0.25rem',
+      border: '2px solid #7051b8',
+      width:'15rem',
+      height:'2.5rem',
+      color:'#7051b8',
+      fontWeight:'500',
+      backgroundColor: 'white'
+    },
+    icon:{
+        color:'#7051b8',
+    }
+})
 
 export default function ResCard(props){
-
+    const ButtonClasses = buttonStyles();
     const [openBackdrop, setOpenBackdrop] = useState(false);
     const [isOpenSnackbar, setOpenErrorSnackbar] = useState(false);
     const handleClose = () => {
@@ -54,65 +74,79 @@ export default function ResCard(props){
     }
 
     return(
-        <div className ="StudyCard">
-            <div className="StudyCard_title">
-                {props.title}
+        <div className ="ResearchList_List_Card">
+             <div className ="ResearchList_List_Card_title">
+                <h5 className = "ResearchText_title">
+                    {props.title}
+                </h5>
+                <div className ="ResearchList_List_Card_date">
+                    <p className = "ResearchText_instruction">
+                        {stringifyDatetime(props.created_at)}
+                    </p>
+                   
+                </div>
                 
-            {
-                props.editable ?
-                loading ? <CircularProgress sx={{
-                    position:"absolute",
-                    right: 5,
-                    top: 5
-                }}color="secondary" thickness={2.5} size={30}/> :
-                <IconButton
-                    onClick={handleToggle}
-                    sx={{
+            
+
+
+            
+            
+            <div className ="ResearchList_List_Card_description">
+                <p className = "ResearchText_instruction">
+                    {props.description}
+                </p>
+                
+                <div className ="ResearchList_List_Card_footer">
+                
+
+                {
+                    props.editable ?
+                    loading ? <CircularProgress sx={{
                         position:"absolute",
                         right: 5,
                         top: 5
-                    }}
+                    }}color="secondary" thickness={2.5} size={30}/> :
+                    <IconButton
+                        onClick={handleToggle}
+                        variant='outlined'
+                    >
+                        <DeleteIcon className={ButtonClasses.icon}/>
+                    </IconButton>
+                    :
+                    null
+                }
+
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={openBackdrop}
+                    onClick={handleClose}
                 >
-                    <DeleteIcon color="secondary"/>
-                </IconButton>
-                :
-                null
-            }
-
-            <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={openBackdrop}
-                onClick={handleClose}
-            >
-                <div className="StudyCard_confirmation">
-                    <Typography variant="h6">Are you sure you want to delete the research "{props.title}"?</Typography>
-                    <div className="StudyCard_confirmation_actions">
-                        <Button variant="contained" color="secondary" onClick={handleDelete}>
-                            Delete
-                        </Button>
-                        <Button variant="outlined" color="secondary">
-                            Cancel
-                        </Button>
+                    <div className="StudyCard_confirmation">
+                        <Typography variant="h6">Are you sure you want to delete the research "{props.title}"?</Typography>
+                        <div className="StudyCard_confirmation_actions">
+                            <Button variant="contained" color="secondary" onClick={handleDelete}>
+                                Delete
+                            </Button>
+                            <Button variant="outlined" color="secondary">
+                                Cancel
+                            </Button>
+                        </div>
                     </div>
-                </div>
-            </Backdrop>
-
-
+                </Backdrop>
+                <Button 
+                    onClick={()=>props.HandleSelected(props._id)}
+                    className={ButtonClasses.btn}
+                    color="secondary"
+                    variant="outlined"
+                >View Research
+                </Button>
+             </div>
             </div>
-            <div className="StudyCard_method">
-                {stringifyDatetime(props.created_at)}
+
+            
             </div>
             
-            <div className="StudyCard_desc">
-                {props.description}
-            </div>
             
-            <Button 
-                onClick={()=>props.HandleSelected(props._id)}
-                variant="outlined"
-                color="secondary"
-            >View Research
-            </Button>
             
         </div>
     ); 

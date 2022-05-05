@@ -1,10 +1,11 @@
-import ResearchList from "./newDashBoard/ResearchList";
+
+import ResearchList from "../newDashBoard/ResearchList";
 import { useState } from "react";
 import { Typography, Avatar, Button, Grow, Alert, AlertTitle, InputAdornment, MenuItem, CircularProgress } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Backdrop from '@mui/material/Backdrop';
 import TextField from '@mui/material/TextField';
-import { updateUser } from "../actions/userActions";
+import { updateUser } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import MailIcon from '@mui/icons-material/Mail';
 import EventNoteIcon from '@mui/icons-material/EventNote';
@@ -17,9 +18,35 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import EditIcon from '@mui/icons-material/Edit';
-import "../StyleSheets/NewCSSFiles/UserProfileFolder/UserProfile.css";
+import "../../StyleSheets/NewCSSFiles/UserProfileFolder/UserProfile.css";
 
-export default function UserProfile(props){
+import ProfileHeader from '../../images/Profile/header.png';
+import { makeStyles } from '@mui/styles';
+
+
+const useStyles = makeStyles ({
+    field:{
+      backgroundColor: "black",
+      borderRadius: '0.25rem'
+    },
+    btn:{
+      borderRadius: '1.5rem',
+      width:'15rem',
+      height:'2.5rem',
+      color:'white',
+      fontWeight:'500',
+      backgroundColor: '#7051b8'
+    },
+    icon:{
+        color:'white',
+    }
+})
+
+export default function UserProfileHeader(props){
+    
+    
+    
+    const classes = useStyles();
     const dispatch = useDispatch();
 
     const [open, setOpen] = useState(false);
@@ -81,105 +108,57 @@ export default function UserProfile(props){
 
     return(
         <div className = "profile">
-            <div className="profile_avatar_container">
-                <div className="profile_avatar">
-                    <div className="profile_avatar_icon">
+            <div className = "UserProfile_Header">
+                <img src={ProfileHeader} className = "UserProfile_Header_Banner"/>
+                <div className = "UserProfile_Header_User">
+                    <h5 className="ProfileText_name">
+                        {newUsername}
+                    </h5>
+                    <h6 className="ProfileText_address">
+                        Bicol Estates, Bicolandia 
+                    </h6>
+                    <h6 className="ProfileText_address">
+                        Joined: {stringifyDatetime(props.user.created_at)} GMT +8
+                    </h6>
+                    {
+                        props.editable ? matches
+                        ? <Button 
+                            variant="contained" 
+                            color="secondary" 
+                            className={classes.btn}
+                            sx={{
+                                borderRadius: "5rem", 
+                                position: "absolute", 
+                                right:"2rem"}}
+                            onClick={handleToggle}
+                            >
+                                <EditIcon className={classes.icon} color="secondary" fontSize="small"/> &nbsp; Edit Profile
+                        </Button>
+                        : (
+                            <div style={{display:"flex", justifyContent:"center"}}>
+                                <Button
+                                    variant="contained" 
+                                    color="secondary" 
+                                    className={classes.btn}
+                                    sx={{borderRadius: "5rem"}}
+                                    onClick={handleToggle}
+                                    >
+                                        <EditIcon className={classes.icon} color="secondary" fontSize="small"/> &nbsp; Edit Profile
+                                </Button>
+                            </div>
+                        ) : null
+                    }
+                </div>
+
+                <div className = "UserProfile_Header_Avatar">
                         <Avatar
                             alt= {props.user.first_name}
                             sx={{ width: 128, height: 128 }}
                         />
-                    </div>
-                    
-                    <div className="profile_name">
-                        <div className="profile_name_container">
-                            <Typography 
-                                variant ="h5" 
-                                sx={{ fontWeight: 700}} 
-                                display="block" 
-                                gutterBottom
-                                color="white"
-                            >
-                                {newUsername}
-                            </Typography>
-                        </div>
-                        <div className="profile_name_container">
-                            <Typography 
-                                variant ="h6" 
-                                sx={{ padding: 0, margin: 0}} 
-                                display="block" gutterBottom
-                                color="white"
-                            >
-                                {newFirstName} {newLastName} 
-                            </Typography>
-                            <Typography variant="overline" display="block" gutterBottom color="white"> FULLNAME</Typography>
-                        </div>
-                        </div>
-                    </div>
                 </div>
-           
-            <div className="profile_details">
+            </div>
             
-                {
-                    props.editable ? matches
-                    ? <Button 
-                        variant="outlined" 
-                        color="secondary" 
-                        sx={{
-                            borderRadius: "5rem", 
-                            position: "absolute", 
-                            right:"2rem"}}
-                        onClick={handleToggle}
-                        >
-                            <EditIcon color="secondary" fontSize="small"/> &nbsp; Edit Profile
-                    </Button>
-                    : (
-                        <div style={{display:"flex", justifyContent:"center"}}>
-                            <Button
-                                variant="outlined" 
-                                color="secondary" 
-                                sx={{borderRadius: "5rem"}}
-                                onClick={handleToggle}
-                                >
-                                    <EditIcon color="secondary" fontSize="small"/> &nbsp; Edit Profile
-                            </Button>
-                        </div>
-                    ) : null
-                }
-
-               
-                <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom><MailIcon color="secondary" fontSize="small"/> EMAIL :</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>{newEmail}</Typography>
-                </div>
-
-                <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom><EventNoteIcon color="secondary" fontSize="small"/> JOINED:</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>{stringifyDatetime(props.user.created_at)} GMT +8</Typography>
-                </div>
-
-                <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom><SchoolIcon color="secondary" fontSize="small"/> EDUCATION LEVEL:</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>{newEduc != null ? newEduc : '-'}</Typography>
-                </div>
-
-                <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom><LightbulbIcon color="secondary" fontSize="small"/> MAJOR/SPECIALIZATION:</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>{newMajor != null ? newMajor : '-'}</Typography>
-                </div>
-
-                <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom><WorkIcon color="secondary" fontSize="small"/> OCCUPATION:</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>{newOccupation != null ? newOccupation : '-'}</Typography>
-                </div>
-
-                <div className="profile_content"> 
-                    <Typography variant="overline" display="block" gutterBottom><QuestionAnswerIcon color="secondary" fontSize="small"/> BIO:</Typography>
-                    <Typography variant="body2" display="block" gutterBottom style={ {'white-space': 'pre-line'}}>
-                        {newBio != null ? newBio : '-'}
-                    </Typography>
-                </div>
-
-                <Backdrop
+            <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                     open={open}
                 >
@@ -397,9 +376,8 @@ export default function UserProfile(props){
                     </div>
                 </Backdrop>
                
-            </div>
-            
-            
         </div>
+            
+            
     ); 
 }
