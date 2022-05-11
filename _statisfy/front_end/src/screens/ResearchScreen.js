@@ -1,4 +1,5 @@
-import "../StyleSheets/researchfolder/research.css"
+//import "../StyleSheets/researchfolder/research.css"
+import "../StyleSheets/NewCSSFiles/researchFolder/ResearchScreen.css"
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -7,20 +8,17 @@ import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getResearch } from "../actions/researchAction";
 import { useState } from "react";
-import { Alert, AlertTitle, Fade, Grow, IconButton, Skeleton, Snackbar, Typography } from "@mui/material";
+import { Alert, AlertTitle, Fade, Grow, IconButton, Skeleton, Snackbar, Typography} from "@mui/material";
+import { Button } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import TableChartIcon from '@mui/icons-material/TableChart';
-import TimelineIcon from '@mui/icons-material/Timeline';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
-import CalculateIcon from '@mui/icons-material/Calculate';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import TextField from '@mui/material/TextField';
-import EditIcon from '@mui/icons-material/Edit';
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+
+
+import AnalyticsIcon from '@mui/icons-material/Analytics';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import ForumIcon from '@mui/icons-material/Forum';
+import HelpCenterIcon from '@mui/icons-material/HelpCenter';
+import SettingsIcon from '@mui/icons-material/Settings';
+
 
 import { processUserToken } from "../actions/userActions";
 import { useLocation } from "react-router-dom";
@@ -36,9 +34,71 @@ import ResMeta from "../components/researchPages/resMeta";
 import { status500 } from "../constants/stringConstants";
 import { processDataset } from "../actions/datasetActions";
 
+import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
+import InfoOutlined from "@mui/icons-material/InfoOutlined";
 
+const ButtonStyles = makeStyles ({
+    btn:{
+      borderRadius: '0.5rem',
+      width:'8rem',
+      height:'2.5rem',
+      color:'white',
+      backgroundColor:'#7051b8',
+      fontWeight:'500',
+      paddingLeft:'0.5rem',
+      paddingRight:'0.5rem',
+      fontFamily:'Poppins'
+    },
+    tabs:{
+        textColor:'white'
+    }
+  })
+
+  const StyledTabs = styled((props) => (
+    <Tabs
+      {...props}
+      TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+    />
+  ))({
+    '& .MuiTabs-indicator': {
+      display: 'flex',
+      justifyContent: 'center',
+      backgroundColor: 'transparent',
+    },
+    '& .MuiTabs-indicatorSpan': {
+      maxWidth: 0,
+      width: '100%',
+      height: '2rem',
+      backgroundColor: '#23272a',
+    },
+    
+  });
+  
+  const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
+    ({ theme }) => ({
+        minHeight:'auto',
+      textTransform: 'none',
+      fontWeight: theme.typography.fontWeightRegular,
+      fontSize: theme.typography.pxToRem(18),
+      marginRight: theme.spacing(1),
+      color: '#23272a',
+      '&.Mui-selected': {
+        color: '#fff',
+        backgroundColor: '#7051b8',
+      },
+      '&.Mui-focusVisible': {
+        backgroundColor: '#000',
+      },
+      borderRadius: '0.5rem',
+      backgroundColor: 'transparent',
+    }),
+  );
 
 export default function ResearchScreen(props){
+
+    const ButtonClasses = ButtonStyles();
+
     const { id } = useParams();
     const location = useLocation();
     const [value, setValue] = useState(1);
@@ -142,8 +202,9 @@ export default function ResearchScreen(props){
     if(researchGetRes?.code === 'RESEARCH_GET_SUCCESS'){
         return(
             <div className = "research">
-                <div className = "research_header_container">
-                    <div className = "research_heading">
+
+                <div className = "ResearchScreen">
+                    <div className = "ResearchScreen_header">
                         {
                             message &&
                             <Snackbar
@@ -166,85 +227,73 @@ export default function ResearchScreen(props){
                                 </Alert>
                             </Snackbar>
                         }
-                        <div className = "text_content">
-                            <Typography variant="h5" sx={{fontWeight: 600}}>{researchGetRes?.data.research_name}
-                            
-                            </Typography>
-                            
-                        </div>
-                        
 
                         {researchGetRes?.data.authors.map(author => {
-                            return <p className="text_button">
+                            return <p className="ResearchScreenText_profName">
                             <Link to={`/profile/${author['user']}`}
                             style={{ textDecoration: 'none' }}
                             >
-                                <Typography variant="body1" className="text_button">
-                                    {author['username']}
-                                </Typography>
+                                    {author['username']} 
                             </Link>
+                            - CREATED 2 MONTHS AGO
                             </p>
                             
                         })}
-                        <Typography variant = "body2">
+                        <h5 className="ResearchScreenText_resTitle">
+                            {researchGetRes?.data.research_name}
+                        </h5>
+                        <h6 className="ResearchScreenText_resDesc">
                             {researchGetRes?.data.research_description}
-                        </Typography>
-                    </div>
-                    <div className = "research_heading_tabs">
-                        <button
-                            className="research_arrow"
-                            onClick={prevTab}
-                            disabled = {value === 1 ? true : false}
+                        </h6>
+
+                        <div className = "ResearchScreen_header_footer">
+                            <p className="ResearchScreenText_resFooter">
+                                Author: Placeholder
+                            </p>
+                        </div>
+                        <Button 
+                            sx={{position:'absolute', bottom:'1rem', right:'1rem'}}
+                            className={ButtonClasses.btn}
+                            variant="contained"
+                            color="secondary"
                         >
-                            <ArrowBackIosNewIcon/>
-                        </button>
-                        <Box sx = {{ 
-                            minWidth: 100,
-                            width: '1fr'
+                            Edit Profile
+                        </Button>
+                    </div>
+                    <div className = "ResearchScreen_tabs">
+                        <Box sx = {{
+                            maxWidth: { xs: 320, sm: 480, md: 900 },
+                            minWidth: { xs: 320, sm: 480, md: 900 },
                          }}>
                             
-                            <Tabs
+                            <StyledTabs
                                 value={value}
                                 onChange={switchTabs}
-                                textColor="secondary"
                                 indicatorColor="secondary"
                                 aria-label="scrollable tabs"
                                 variant="scrollable"
-                                scrollButtons="auto"
+                                scrollButtons
+                                allowScrollButtonsMobile
                             >
                                 
-                                <Tab value={1} label="Dataset"/>
-                                <Tab value={2} label="Studies" />
-                                <Tab value={3} label="Discussions" />
-                                <Tab value={4} label="Metadata" />
+                                <StyledTab icon={<AnalyticsIcon fontSize='inherit'/>} iconPosition="start" value={1} label="Dataset" />
+                                <StyledTab icon={<MenuBookIcon fontSize='inherit'/>} iconPosition="start" value={2} label="Studies" />
+                                <StyledTab icon={<ForumIcon fontSize='inherit'/>} iconPosition="start" value={3} label="Discussions" />
+                                <StyledTab icon={<HelpCenterIcon fontSize='inherit'/>} iconPosition="start" value={4} label="Metadata" />
                                 {
                                     isAuthor() &&
-                                    <Tab value={5} label="Settings"/>
+                                    <StyledTab icon={<SettingsIcon fontSize='inherit'/>} iconPosition="start" value={5} label="Settings"/>
                                 }
-                            </Tabs>
+                            </StyledTabs>
                         </Box>
-                        <button
-                            className="research_arrow"
-                            onClick={nextTab}
-                            disabled = {value === 5 ? true : false}
-                        >
-                            <ArrowForwardIosIcon/>
-                        </button>
                     </div>
                 </div>
                 {value === 1 &&
-                <>
-                    <Fade in={value === 1}>
-                        <div>
-                            <ResData
-                                DataSetFile = {datasetFile}
-                                DatasetDetails = {researchGetRes?.data.dataset_details}
-                                Url = {researchGetRes?.data.research_url}
-                            />
-                        </div>
-                            
-                    </Fade>
-                </>
+                    <ResData
+                        DataSetFile = {datasetFile}
+                        DatasetDetails = {researchGetRes?.data.dataset_details}
+                        Url = {researchGetRes?.data.research_url}
+                    />
                 }
                 {value === 2 &&
                 <>

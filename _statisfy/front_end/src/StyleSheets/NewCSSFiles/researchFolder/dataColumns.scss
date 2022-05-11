@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); 
+$violet : #7051b8;
+$white1: #eeeeee;
+$gray1: #b5b5b5;
+$pink: #dfa9ff;
+$purple: #a742c5;
+$black: #23272a;
+
+.DataColumns{
+    display: flex;
+    flex-direction: column;
+    width: 25rem;
+    padding: 1rem;
+    border: 1px solid $gray1;
+    border-radius: 0.5rem;
+    &_graph{
+        width: 100%;
+    }
+    &_details{
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        &_row{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+        }
+    }
+}
+
+.DataColumnsText{
+    &_title{
+        font-family: Poppins;
+        font-weight: 900;
+    }
+    &_content{
+        font-family: Poppins;
+    }
+}

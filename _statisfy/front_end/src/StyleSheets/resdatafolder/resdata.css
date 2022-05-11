@@ -134,6 +134,9 @@
   margin-top: 1rem;
   width: 100%;
   padding: 1rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .colCard_content {
@@ -169,17 +172,25 @@
 }
 
 .colCard_graph {
-  padding-top: 1rem;
   width: 1fr;
-  max-height: 15rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: solid 1px #b5b5b5;
 }
 
 @media screen and (min-width: 1100px) {
   .colCard_content {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
   }
 }
 
