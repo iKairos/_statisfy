@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 .ResearchScreen {
-  width: 80vw;
+  width: 90vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -37,6 +37,7 @@
   position: absolute;
   left: 1rem;
   bottom: 0;
+  height: 3rem;
 }
 
 .ResearchScreen_tabs {
@@ -49,29 +50,27 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .ResearchData {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  width: 100%;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 90vw;
   background-color: white;
   min-height: 25rem;
   margin-bottom: 2rem;
 }
 
 .ResearchData_tabs {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 90vw;
   border-right: 1px solid #b5b5b5;
 }
 
@@ -145,5 +144,31 @@
   font-family: Poppins;
   color: #23272a;
   font-weight: 900;
+}
+
+@media screen and (min-width: 900px) {
+  .ResearchScreen {
+    width: 80vw;
+  }
+  .ResearchScreen_tabs {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+  .ResearchData {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    width: 100%;
+  }
+  .ResearchData_tabs {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
 }
 /*# sourceMappingURL=ResearchScreen.css.map */

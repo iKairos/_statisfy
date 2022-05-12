@@ -7,17 +7,18 @@ $purple: #a742c5;
 $black: #23272a;
 
 .ResearchScreen{
-    
-    width: 80vw;
+    width: 90vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+
     &_header{
         width: 100%;
         background-color: white;
         border-radius: 0.5rem;
-        min-height: 10rem;
+        min-height:10rem;
         height: fit-content;
+        
         padding: 1rem;
         display: flex;
         flex-direction: column;
@@ -27,6 +28,7 @@ $black: #23272a;
             position: absolute;
             left: 1rem;
             bottom: 0;
+            height: 3rem;
         }
     }
     &_tabs{
@@ -35,20 +37,20 @@ $black: #23272a;
         padding-bottom: 1rem;
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         
     }
     
 }
 .ResearchData{
     display: flex;
-    flex-direction: row;
-    width: 100%;
+    flex-direction: column;
+    width: 90vw;
     background-color: white;
     min-height: 25rem;
     margin-bottom: 2rem;
     &_tabs{
-        width: fit-content;
+        width: 90vw;
         border-right: 1px solid #b5b5b5;
     }
     &_content{
@@ -108,4 +110,24 @@ $black: #23272a;
         }
 
     }
+}
+
+
+@media screen and (min-width: 900px) {
+.ResearchScreen{
+    width: 80vw;
+    &_tabs{
+        justify-content: flex-start;
+    }
+}
+.ResearchData{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    &_tabs{
+        width: fit-content;
+    }
+}
+
+
 }

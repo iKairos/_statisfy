@@ -9,7 +9,7 @@ $black: #23272a;
 .DataColumns{
     display: flex;
     flex-direction: column;
-    width: 25rem;
+    max-width: 100%;
     padding: 1rem;
     border: 1px solid $gray1;
     border-radius: 0.5rem;
@@ -37,5 +37,15 @@ $black: #23272a;
     }
     &_content{
         font-family: Poppins;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .DataColumns{
+        width: 25rem;
+        &_graph{
+            
+            width: 100%;
+        }
     }
 }

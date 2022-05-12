@@ -34,6 +34,7 @@ import { processDataset } from "../../actions/datasetActions";
 
 import ColumnGraphs, { MemoizedColumnGraphs } from "./columnGraphs";
 import { styled } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 //<span className ="text_topic">{researchGetRes?.data.test_type}</span>
 
 const StyledTabs = styled((props) => (
@@ -73,7 +74,7 @@ const StyledTabs = styled((props) => (
 
 
 export default function ResData(props){
-    
+    const matches = useMediaQuery('(min-width:600px)');
     const [contentPage, setContentPage] = useState(1);
 
     const nextContent = function(){
@@ -90,27 +91,54 @@ export default function ResData(props){
         <div className="ResearchData">
                 
           <div className="ResearchData_tabs">
+            {matches ?(
               <Box sx = {{ 
-                  minWidth: 100,
-                  width: '1fr'
-                  }}>
-                  <StyledTabs
-                      value={contentPage}
-                      onChange={switchContentPage}
-                      textColor="secondary"
-                      indicatorColor="secondary"
-                      aria-label="scrollable tabs"
-                      variant="scrollable"
-                      scrollButtons="auto"
-                      orientation="vertical"
-                      visibleScrollbar
-                  >
-                      <StyledTab value={1} label="Description" icon={<DescriptionIcon  fontSize='inherit'/>}  iconPosition="start"/>
-                      <StyledTab value={2} label="Data" icon={<TimelineIcon  fontSize='inherit'/>} iconPosition="start"/>
-                      <StyledTab value={3} label="Columns" icon={<ViewColumnIcon  fontSize='inherit'/>} iconPosition="start"/>
-                      <StyledTab value={4} label="Details" icon={<DetailsIcon  fontSize='inherit'/>} iconPosition="start"/>
-                  </StyledTabs>
-              </Box>
+                minWidth: 100,
+                width: '1fr'
+                }}>
+                <StyledTabs
+                    value={contentPage}
+                    onChange={switchContentPage}
+                    textColor="secondary"
+                    indicatorColor="secondary"
+                    aria-label="scrollable tabs"
+                    variant="scrollable"
+                    scrollButtons="auto"
+                    orientation="vertical"
+                    visibleScrollbar
+                >
+                    <StyledTab value={1} label="Description" icon={<DescriptionIcon  fontSize='inherit'/>}  iconPosition="start"/>
+                    <StyledTab value={2} label="Data" icon={<TimelineIcon  fontSize='inherit'/>} iconPosition="start"/>
+                    <StyledTab value={3} label="Columns" icon={<ViewColumnIcon  fontSize='inherit'/>} iconPosition="start"/>
+                    <StyledTab value={4} label="Details" icon={<DetailsIcon  fontSize='inherit'/>} iconPosition="start"/>
+                </StyledTabs>
+            </Box>
+            ):(
+              <Box sx = {{ 
+                minWidth: 100,
+                width: '1fr'
+                }}>
+                <StyledTabs
+                    value={contentPage}
+                    onChange={switchContentPage}
+                    textColor="secondary"
+                    indicatorColor="secondary"
+                    aria-label="scrollable tabs"
+                    variant="scrollable"
+                    scrollButtons="auto"
+                >
+                    <StyledTab value={1} label="Description" icon={<DescriptionIcon  fontSize='inherit'/>}  iconPosition="start"/>
+                    <StyledTab value={2} label="Data" icon={<TimelineIcon  fontSize='inherit'/>} iconPosition="start"/>
+                    <StyledTab value={3} label="Columns" icon={<ViewColumnIcon  fontSize='inherit'/>} iconPosition="start"/>
+                    <StyledTab value={4} label="Details" icon={<DetailsIcon  fontSize='inherit'/>} iconPosition="start"/>
+                </StyledTabs>
+            </Box>
+            )
+              
+
+            
+            }
+              
           </div>
           
               {contentPage === 1 &&
