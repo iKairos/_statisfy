@@ -2,6 +2,8 @@
 import ResearchList from "../newDashBoard/ResearchList";
 import { useState } from "react";
 import { Typography, Avatar, Button, Grow, Alert, AlertTitle, InputAdornment, MenuItem, CircularProgress } from "@mui/material";
+import CardMedia from '@mui/material/CardMedia';
+
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Backdrop from '@mui/material/Backdrop';
 import TextField from '@mui/material/TextField';
@@ -37,8 +39,27 @@ const useStyles = makeStyles ({
       fontWeight:'500',
       backgroundColor: '#7051b8'
     },
+    uploadbtn:{
+      borderRadius: '1.5rem',
+      height:'2.5rem',
+      fontWeight:'500',
+      fontFamily:'Poppins',
+      color: '#7051b8'
+    },
+    savebtn:{
+        borderRadius: '1.5rem',
+        height:'2.5rem',
+        fontWeight:'500',
+        fontFamily:'Poppins',
+        color: '#7051b8',
+        border: '1px solid #7051b8',
+        width: '7rem',
+    },
     icon:{
         color:'white',
+    },
+    saveIcon:{
+        color:'#7051b8',
     }
 })
 
@@ -162,45 +183,68 @@ export default function UserProfileHeader(props){
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                     open={open}
                 >
-                    <div className = "profile_backdrop">
-                        <div className="profile_avatar_container">
-                            <div className="profile_avatar">
-                                <div className="profile_avatar_icon">
-                                    <Avatar
-                                        alt= {props.user.first_name}
-                                        sx={{ width: 128, height: 128 }}
+                    <div className = "EditInfo">
+                        <div className = "EditInfo_Upload">
+                            <h6 className="ProfileText_name">Profile Picture</h6>
+                            <div className="EditInfo_icon">
+                                <Avatar
+                                    alt= {props.user.first_name}
+                                    sx={{ width: 128, height: 128 }}
+                                />
+                            </div>
+                            <div className = "EditInfo_editbtn">
+                                <Button
+                                    className={classes.uploadbtn}
+                                >
+                                    Upload
+                                    <input
+                                        type="file"
+                                        hidden
                                     />
-                                </div>
-                                
-                                <div className="profile_upload">
-                                    
-                                    <Button
-                                        variant="contained"
-                                        component="label"
-                                        color = "secondary"
-                                        >
-                                        Upload Avatar
-                                        <input
-                                            type="file"
-                                            hidden
-                                        />
-                                    </Button>
-                                    <Button
-                                        variant="contained"
-                                        component="label"
-                                        color = "secondary"
-                                        >
-                                        Upload Header
-                                        <input
-                                            type="file"
-                                            hidden
-                                        />
-                                    </Button>
-                                </div>
+                                </Button>
+                            </div>
+                            
+                        </div>
+
+                        <div className = "EditInfo_Upload">
+                            <h6 className="ProfileText_name">Header Picture</h6>
+                            <div className="EditInfo_header">
+                               <CardMedia
+                                component="img"
+                                height="194"
+                                image={ProfileHeader}
+                                alt="Paella dish"
+                                />
+                            </div>
+                            <div className = "EditInfo_editbtn">
+                                <Button
+                                    className={classes.uploadbtn}
+                                >
+                                    Upload
+                                    <input
+                                        type="file"
+                                        hidden
+                                    />
+                                </Button>
                             </div>
                         </div>
-                        <div className="profile_details">
 
+                        <div className = "EditInfo_Info">
+                            <h6 className="ProfileText_name">Bio</h6>
+                            <TextField
+                                id="standard-multiline-static"
+                                hiddenLabel
+                                multiline
+                                fullWidth
+                                rows={4}
+                                defaultValue={props.user.bio === "null"? "Add Bio": props.user.bio} 
+                                variant="standard"
+                                color="secondary" 
+                                onChange={e => setNewBio(e.target.value)}
+                            />
+                        </div>
+
+                        <div className = "EditInfo_Info">
                             {
                                 updateRes?.code === "USER_UPDATE_SUCCESS" && message ?
                                 <Grow in={true} {...(true ? { timeout: 500 } : {})}>
@@ -212,8 +256,8 @@ export default function UserProfileHeader(props){
                                 : null
                             }
                             <br/>
-                            <div className="profile_edit"> 
-                            
+                            <h6 className="ProfileText_name">About</h6>
+
                             <TextField
                                 id="standard-multiline-static"
                                 label="USERNAME"
@@ -231,7 +275,8 @@ export default function UserProfileHeader(props){
                                     }
                                 }
                             />
-                            <div className="profile_names">
+
+                            <div className="EditInfo_info_name">
                                 <TextField
                                     id="standard-multiline-static"
                                     label="SURNAME"
@@ -265,13 +310,13 @@ export default function UserProfileHeader(props){
                                             )
                                         }
 
-                           
-                             
+                        
+                            
                                     }
                                 />
-
+                                
                             </div>
-                            
+
                             <TextField
                                 id="standard-multiline-static"
                                 label="EMAIL ADDRESS"
@@ -289,6 +334,13 @@ export default function UserProfileHeader(props){
                                     }
                                 }
                             />
+                            
+
+
+                        </div>
+
+                        <div className = "EditInfo_Info">
+                            <h6 className="ProfileText_name">Bio</h6>
                             <TextField 
                                 id="standard-basic" 
                                 label="EDUCATION LEVEL" 
@@ -307,15 +359,15 @@ export default function UserProfileHeader(props){
                                     }
                                 }
                             >
-                                <MenuItem value={"Doctorate degree"}>Doctorate degree</MenuItem>
-                                <MenuItem value={"Master's degree"}>Master's degree</MenuItem>
-                                <MenuItem value={"Bachelor's degree"}>Bachelor's degree</MenuItem>
-                                <MenuItem value={"Associate degree"}>Associate degree</MenuItem>
-                                <MenuItem value={"Secondary / Senior High School"}>Secondary / Senior High School</MenuItem>
-                                <MenuItem value={"Junior / Junior High School / Middle School"}>Junior / Junior High School / Middle School</MenuItem>
-                                <MenuItem value={"Elementary school"}>Elementary school</MenuItem>
-                                <MenuItem value={"No formal education"}>No formal education</MenuItem>
-                                <MenuItem value={"Other education"}>Other education</MenuItem>
+                                    <MenuItem value={"Doctorate degree"}>Doctorate degree</MenuItem>
+                                    <MenuItem value={"Master's degree"}>Master's degree</MenuItem>
+                                    <MenuItem value={"Bachelor's degree"}>Bachelor's degree</MenuItem>
+                                    <MenuItem value={"Associate degree"}>Associate degree</MenuItem>
+                                    <MenuItem value={"Secondary / Senior High School"}>Secondary / Senior High School</MenuItem>
+                                    <MenuItem value={"Junior / Junior High School / Middle School"}>Junior / Junior High School / Middle School</MenuItem>
+                                    <MenuItem value={"Elementary school"}>Elementary school</MenuItem>
+                                    <MenuItem value={"No formal education"}>No formal education</MenuItem>
+                                    <MenuItem value={"Other education"}>Other education</MenuItem>
                             </TextField>
                             <TextField 
                                 id="standard-basic" 
@@ -352,27 +404,14 @@ export default function UserProfileHeader(props){
                                 }
                                 helperText="Preferably in the format: <Occupation> at <Organization Name>"
                             />
-                            <TextField
-                                id="standard-multiline-static"
-                                label="BIO"
-                                multiline
-                                rows={4}
-                                defaultValue={props.user.bio} 
-                                variant="standard"
-                                color="secondary" 
-                                onChange={e => setNewBio(e.target.value)}
-                            />
-                            </div>
-                            <div>
-                                <Button onClick={handleToggle} color="secondary">Close</Button>
-                                {
-                                    loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/> :  
-                                    <Button onClick={handleSave} color="secondary">Save&nbsp;<SaveAltIcon fontSize="small" color="secondary"/></Button>
-                                }
-                            </div>
                         </div>
-                        
-                        
+                        <div className="EditInfo_Save">
+                            <Button className={classes.savebtn} onClick={handleToggle} color="secondary">Close</Button>
+                            {
+                                loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/> :  
+                                <Button className={classes.savebtn}  onClick={handleSave} color="secondary">Save&nbsp;<SaveAltIcon fontSize="small" className={classes.saveIcon}/></Button>
+                            }
+                        </div>
                     </div>
                 </Backdrop>
                
