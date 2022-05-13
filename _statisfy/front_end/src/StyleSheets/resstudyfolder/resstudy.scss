@@ -183,7 +183,7 @@ $radius: 0.25rem;
     &_body {
       &_container {
         height: 100%;
-        width: 50vw;
+        width: 80vw;
         display: grid;
         grid-template-rows: 1fr;
         border-bottom-left-radius: $radius;
@@ -192,7 +192,7 @@ $radius: 0.25rem;
         margin-bottom: 1rem;
       }
       &_add {
-        width: 50vw;
+        width: 80vw;
         display: flex;
         flex-direction: row;
         border-bottom: 1px solid $white1;

@@ -272,7 +272,7 @@
   }
   .resStudy_body_container {
     height: 100%;
-    width: 50vw;
+    width: 80vw;
     display: -ms-grid;
     display: grid;
     -ms-grid-rows: 1fr;
@@ -283,7 +283,7 @@
     margin-bottom: 1rem;
   }
   .resStudy_body_add {
-    width: 50vw;
+    width: 80vw;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;

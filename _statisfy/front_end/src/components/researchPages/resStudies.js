@@ -1,4 +1,5 @@
-import "../../StyleSheets/resstudyfolder/resstudy.css"
+//import "../../StyleSheets/resstudyfolder/resstudy.css"
+import "../../StyleSheets/NewCSSFiles/StudyFolder/StudySection.css"
 
 
 import Navigator from "../navigator";
@@ -67,7 +68,7 @@ export default function ResStudies(props){
     const [tool, setTool] = useState("");
     const [label, setLabel] = useState("");
 
-    const [isAdding, setAdding] = useState(false);
+    const [isAdding, setAdding] = useState(true);
     const [showActive, setShowActive] = useState(1);
     const [selected, setSelected] = useState(false);
     const [methodChosen, setMethodChosen] = useState("");
@@ -127,11 +128,12 @@ export default function ResStudies(props){
 
 
     const handleAdding = (value) => {
-        setAdding(value)
+        setAdding(value);
      };
 
      const handleSelected = function(value) {
-        setSelected(value)
+        setSelected(value);
+        setAdding(false);
      };
 
 
@@ -367,8 +369,7 @@ export default function ResStudies(props){
     }
 
     return(
-        
-        <div className="resStudy_body_container">
+        <div className = "StudySection">
             {
                 error &&
                 <Snackbar 
@@ -391,248 +392,219 @@ export default function ResStudies(props){
                     </Alert>
                 </Snackbar>
             }
-            {selected
-                ?(
+            <div className="StudySection_header">
+                {props.IsAuthor?(
                     <div className="resStudy_body_add">
                         <Button 
                             color="secondary" 
                             className="resStudy_body_add_button"
-                            onClick={()=>handleSelected(false)}
+                            onClick={()=>handleAdding(true)}
                         >
-                            <ArrowBackIosNewIcon/>
-                            Back to List
+                            <AddIcon className="AddIcon"/>
+                            add new study
                         </Button>
                     </div>
-                )
-                :(
-                    <>
-                    {isAdding
-                        ?(
-                            <div className="resStudy_body_add">
-                                <Button 
-                                    color="secondary" 
-                                    className="resStudy_body_add_button"
-                                    onClick={()=>handleAdding(false)}
-                                >
-                                    <ArrowBackIosNewIcon/>
-                                    Back to List
-                                </Button>
-                            </div>
-                        )
-                        : props.IsAuthor ?
-                        <div className="resStudy_body_add">
-                            <Button 
-                                color="secondary" 
-                                className="resStudy_body_add_button"
-                                onClick={()=>handleAdding(true)}
-                            >
-                                <AddIcon className="AddIcon"/>
-                                add new study
-                            </Button>
-                            <Sorter/>
-                        </div>
-                        : 
-                        <div className="resStudy_body_add">
-                            <Button 
-                                color="secondary" 
-                                className="resStudy_body_add_button"
-                                disabled
-                            >
-                                <DoNotDisturbOutlinedIcon className="AddIcon"/>
-                                only authors can add studies
-                            </Button>
-                        <Sorter/>
-                    </div>
-                    }
-                    </>
-
-                )
-            
-            }
-            
-                
-            {selected
-            ?(
-                <Fade in={selected}>
-                    <div>
-                        <Study data={getStudyRes?.data.filter(i => i['_id'] === selected)[0]} details={props.DatasetDetails}/>
-                    </div>
-                </Fade>
-            )
-            :(
-                <>
-                {isAdding
-                    ? (
-                        
-                    <div className = "resStudy_body_content">
-                        <Stepper activeStep={showActive-1} alternativeLabel>
-                            {studyStepsString.map((label) => (
-                                <Step key={label}>
-                                    <StepLabel StepIconComponent={CustomStepIcon} >
-                                        <div className="stepper_div">{label}</div>
-                                    </StepLabel>
-                                </Step>
-                            ))}
-                        </Stepper>
-                        <Backdrop
-                            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                            open={open}
+                ):(
+                    <div className="resStudy_body_add">
+                        <Button 
+                            color="secondary" 
+                            className="resStudy_body_add_button"
+                            disabled
                         >
-                            <CircularProgress color="inherit" />
-                        </Backdrop>
-                        {showActive === 1 &&
-                            <Box
-                            component="form"
-                            noValidate
-                            autoComplete="off"
-                            className = "StudyTitle"
-                            >
-                                <div>
-                                    <TextField
-                                        id="outlined-textarea"
-                                        label="Study Title"
-                                        placeholder="Add new title"
-                                        multiline
-                                        rows={2}
-                                        color = "secondary"
-                                        onChange={e => setStudyName(e.target.value)}
-                                        value={studyName}
-                                        fullWidth
-                                    />
-                                </div>
-                                <div style={{paddingTop:"1rem"}}>
-                                    <TextField
-                                        id="outlined-textarea"
-                                        label="Study Description"
-                                        placeholder="Add description"
-                                        multiline
-                                        rows={4}
-                                        color = "secondary"
-                                        onChange={e => setStudyDesc(e.target.value)}
-                                        value={studyDesc}
-                                        fullWidth
-                                    />
-                                </div>
-                                
-                            
-                            </Box>
-                        }
-                        {showActive === 2 &&
-                            <Box className = "StudyTitle">
-                                <Alert icon={tool !== "" ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem"}}>
-                                    Select your preferred tool
-                                </Alert>
-                                
-                                <div className="resList_tools">
-                                    <ToolCard
-                                        Title = "Statistical Tool"
-                                        Desc = "this is statistical tool"
-                                        ToolSelected = {tool}
-                                        HandleTool = {handleTool}
-                                        ToolLabel = "Statistical Method"
-                                        img = {StatImg}
-                                    />
-                                    <ToolCard
-                                        Title = "Machine Learning Tool"
-                                        Desc = " this is Machine Learning Tool"
-                                        ToolSelected = {tool}
-                                        HandleTool = {handleTool}
-                                        ToolLabel = "Machine Learning"
-                                        img = {MLImg}
-                                    />
-                                </div>
-                                {tool === "Statistical Method" &&
-                                    <StatisticalSelection
-                                        purpose = {purpose}
-                                        handlePurpose = {handlePurpose}
-                                        setTags = {setTags}
-                                        datasetDetails = {props.DatasetDetails}
-                                        callbackSetSelectedRows = {callbackSetSelectedRows}
-                                        studyColumns = {studyColumns}
-                                        callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
-                                        setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
-                                        
-                                    />
-                                }
-                                {tool === "Machine Learning" &&
-                                    <MachineLearningSelection
-                                        purpose = {purpose}
-                                        handlePurpose = {handlePurpose}
-                                        setTags = {setTags}
-                                        datasetDetails = {props.DatasetDetails}
-                                        callbackSetSelectedRows = {callbackSetSelectedRows}
-                                        studyColumns = {studyColumns}
-                                        callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
-                                        setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
-                                        setLabel = {setLabel}
-                                        label = {label}        
-                                    />
-                                }
+                            <DoNotDisturbOutlinedIcon className="AddIcon"/>
+                            only authors can add studies
+                        </Button>
+                    </div>
+                )}
+            </div>
 
-                                
-                            </Box>
-                        }
-                        {showActive === 3 &&
-                            <div className="ToolChoices">
-                                {tool === "Statistical Method" 
-                                    ? <StatisticalChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
-                                    : <MachineLearningChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}
-                                        callbackTestSize = {callbackTestSize}
-                                        setCallbackTestSize = {setCallbackTestSize}
-                                        callbackIteration = {callbackIteration}
-                                        setCallbackIteration = {setCallbackIteration}
-                                        callbackLearningRate = {callbackLearningRate}
-                                        setCallbackLearningRate = {setCallbackLearningRate}
-                                    />
-                                }
-                            </div>
-                            
-                           
-                           
-                        }
-                         {showActive === 3 ?
-                            loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/>:
-                            <Button
-                                onClick={handleSubmit}
-                                color="secondary"
-                            >
-                            Compute
-                            </Button>
-                            : null
-                         }
-                        
-                        <Navigator
-                            NextScreen={nextScreen}
-                            PrevScreen={prevScreen}
-                            ActiveStep = {showActive -1}
-                            prevDisabled={true}
-                        />
-                    
-                    </div>)
-                    : (
+            
+            <div className = "StudySection_body">
+                <div className = "StudySection_body_list">
+                    {
+                        typeof getStudyRes !== 'undefined' ? getStudyRes.data?.map((i) => {
+                            return (
+                                <StudyCard
+                                    HandleSelected = {handleSelected}
+                                    title={i['study_name']}
+                                    method={i['test_type']}
+                                    description={i['study_description']}
+                                    id={i['_id']}
+                                    parent={i['research_id']}
+                                    isAuthor={props.IsAuthor}
+                                />
+                            )
+                        }) : <CircularProgress color="secondary" thickness={2.5} size={30}/>
+                    }
+                </div>
+                <div className = "StudySection_body_study">
+                    {isAdding 
+                    ?(
                         <div className = "resStudy_body_content">
-                            <div className = "resStudy_body_study">
-                                {
-                                    typeof getStudyRes !== 'undefined' ? getStudyRes.data?.map((i) => {
-                                        return (
-                                            <StudyCard
-                                                HandleSelected = {handleSelected}
-                                                title={i['study_name']}
-                                                method={i['test_type']}
-                                                description={i['study_description']}
-                                                id={i['_id']}
-                                                parent={i['research_id']}
-                                                isAuthor={props.IsAuthor}
+                                <Stepper activeStep={showActive-1} alternativeLabel>
+                                    {studyStepsString.map((label) => (
+                                        <Step key={label}>
+                                            <StepLabel StepIconComponent={CustomStepIcon} >
+                                                <div className="stepper_div">{label}</div>
+                                            </StepLabel>
+                                        </Step>
+                                    ))}
+                                </Stepper>
+                                <Backdrop
+                                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                                    open={open}
+                                >
+                                    <CircularProgress color="inherit" />
+                                </Backdrop>
+                                {showActive === 1 &&
+                                    <Box
+                                    component="form"
+                                    noValidate
+                                    autoComplete="off"
+                                    className = "StudyTitle"
+                                    >
+                                        <div>
+                                            <TextField
+                                                id="outlined-textarea"
+                                                label="Study Title"
+                                                placeholder="Add new title"
+                                                multiline
+                                                rows={2}
+                                                color = "secondary"
+                                                onChange={e => setStudyName(e.target.value)}
+                                                value={studyName}
+                                                fullWidth
                                             />
-                                        )
-                                    }) : <CircularProgress color="secondary" thickness={2.5} size={30}/>
+                                        </div>
+                                        <div style={{paddingTop:"1rem"}}>
+                                            <TextField
+                                                id="outlined-textarea"
+                                                label="Study Description"
+                                                placeholder="Add description"
+                                                multiline
+                                                rows={4}
+                                                color = "secondary"
+                                                onChange={e => setStudyDesc(e.target.value)}
+                                                value={studyDesc}
+                                                fullWidth
+                                            />
+                                        </div>
+                                        
+                                    
+                                    </Box>
                                 }
+                                {showActive === 2 &&
+                                    <Box className = "StudyTitle">
+                                        <Alert icon={tool !== "" ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem"}}>
+                                            Select your preferred tool
+                                        </Alert>
+                                        
+                                        <div className="resList_tools">
+                                            <ToolCard
+                                                Title = "Statistical Tool"
+                                                Desc = "this is statistical tool"
+                                                ToolSelected = {tool}
+                                                HandleTool = {handleTool}
+                                                ToolLabel = "Statistical Method"
+                                                img = {StatImg}
+                                            />
+                                            <ToolCard
+                                                Title = "Machine Learning Tool"
+                                                Desc = " this is Machine Learning Tool"
+                                                ToolSelected = {tool}
+                                                HandleTool = {handleTool}
+                                                ToolLabel = "Machine Learning"
+                                                img = {MLImg}
+                                            />
+                                        </div>
+                                        {tool === "Statistical Method" &&
+                                            <StatisticalSelection
+                                                purpose = {purpose}
+                                                handlePurpose = {handlePurpose}
+                                                setTags = {setTags}
+                                                datasetDetails = {props.DatasetDetails}
+                                                callbackSetSelectedRows = {callbackSetSelectedRows}
+                                                studyColumns = {studyColumns}
+                                                callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
+                                                setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
+                                                
+                                            />
+                                        }
+                                        {tool === "Machine Learning" &&
+                                            <MachineLearningSelection
+                                                purpose = {purpose}
+                                                handlePurpose = {handlePurpose}
+                                                setTags = {setTags}
+                                                datasetDetails = {props.DatasetDetails}
+                                                callbackSetSelectedRows = {callbackSetSelectedRows}
+                                                studyColumns = {studyColumns}
+                                                callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
+                                                setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
+                                                setLabel = {setLabel}
+                                                label = {label}        
+                                            />
+                                        }
+    
+                                        
+                                    </Box>
+                                }
+                                {showActive === 3 &&
+                                    <div className="ToolChoices">
+                                        {tool === "Statistical Method" 
+                                            ? <StatisticalChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
+                                            : <MachineLearningChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}
+                                                callbackTestSize = {callbackTestSize}
+                                                setCallbackTestSize = {setCallbackTestSize}
+                                                callbackIteration = {callbackIteration}
+                                                setCallbackIteration = {setCallbackIteration}
+                                                callbackLearningRate = {callbackLearningRate}
+                                                setCallbackLearningRate = {setCallbackLearningRate}
+                                            />
+                                        }
+                                    </div>
+                                    
+                                
+                                
+                                }
+                                {showActive === 3 ?
+                                    loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/>:
+                                    <Button
+                                        onClick={handleSubmit}
+                                        color="secondary"
+                                    >
+                                    Compute
+                                    </Button>
+                                    : null
+                                }
+                                
+                                <Navigator
+                                    NextScreen={nextScreen}
+                                    PrevScreen={prevScreen}
+                                    ActiveStep = {showActive -1}
+                                    prevDisabled={true}
+                                />
+                            
                             </div>
-                        </div>
                     )
-                }
-                </>
-            )}
+                    :(<>
+                        {selected &&
+                            (
+                                <Study 
+                                    data={getStudyRes?.data.filter(i => i['_id'] === selected)[0]} 
+                                    details={props.DatasetDetails}
+                                />     
+                            )
+                        }
+                    
+                    </>)
+                    }
+                    
+                    
+
+                </div>
+            </div>
+            
         </div>
+        
     );
 }

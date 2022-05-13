@@ -3,7 +3,7 @@
   border: 1px solid #b5b5b5;
   border-radius: 0.25rem;
   padding: 1rem;
-  width: 70vw;
+  width: 90%;
   margin-top: 1rem;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -60,7 +60,7 @@
 
 @media screen and (min-width: 900px) {
   .StudyCard {
-    width: 45vw;
+    width: 90%;
   }
   .StudyCard_desc {
     display: block;

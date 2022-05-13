@@ -103,6 +103,7 @@
           flex-direction: row;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  max-width: 100%;
   width: 100%;
   gap: 1rem;
 }
@@ -164,6 +165,7 @@
         -ms-flex-direction: row;
             flex-direction: row;
     width: 100%;
+    max-width: 80vw;
   }
   .ResearchData_tabs {
     width: -webkit-fit-content;
