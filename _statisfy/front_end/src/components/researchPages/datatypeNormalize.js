@@ -22,6 +22,8 @@ import CleaningOptions from "../newDashBoard/CleaningOptions";
 import { Bar, Doughnut } from "react-chartjs-2";
 import React from 'react';
 import { iqrTooltip } from "../../constants/stringConstants";
+import { makeStyles } from "@mui/styles";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {CategoryScale , 
     Chart as ChartJS,
     LinearScale,
@@ -44,7 +46,42 @@ ChartJS.register(
     ArcElement
 );
 
+
+
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#7051b8',
+      },
+      secondary: {
+        main: '#7051b8',
+      },
+    },
+  });
+
+  const ButtonStyles = makeStyles ({
+    btn:{
+      borderRadius: '0.5rem',
+      width:'fit-content',
+      height:'2.5rem',
+      color:'#7051b8',
+      backgroundColor:'white',
+      fontWeight:'700',
+      paddingLeft:'0.5rem',
+      paddingRight:'0.5rem',
+      fontFamily:'Poppins',
+      border:'1px solid #7051b8',
+    },
+    icons:{
+        color: '#7051b8'
+    },
+    inputText:{
+        fontFamily:'Poppins',
+    }
+  })
+
 export default function DataTypeNormalize(props){
+    const ButtonClasses = ButtonStyles();    
     const matches = useMediaQuery('(min-width:900px)');
     const [modify, setModify] = useState(false);
     const [normalize, setNormalize] = useState(false);
@@ -89,8 +126,10 @@ export default function DataTypeNormalize(props){
 
     return(
         <div className="Datatype_container">
+            <ThemeProvider theme={theme}>
             <div className="Datatype_header">
-                <Typography variant="h5">{props.details.column}</Typography>
+                
+                <Typography variant="h6" className={ButtonClasses.inputText}>{props.details.column}</Typography>
                 <div style={{display:"flex", flexDirection:"row", position:"absolute", right:"0", top:"0", margin:"0.5rem"}}>
                    {props.tool === "ml"
                    &&
@@ -101,6 +140,7 @@ export default function DataTypeNormalize(props){
                             onClick={()=>{props.handleLabel("")}}
                             variant="contained"
                             color="secondary"
+                            className={ButtonClasses.inputText}
                         >
                         Dependent
                         </Button>
@@ -109,6 +149,7 @@ export default function DataTypeNormalize(props){
                             onClick={()=>{props.handleLabel(props.details.column)}}
                             variant="outlined"
                             color="secondary"
+                            className={ButtonClasses.inputText}
                         >
                         Independent
                         </Button>
@@ -213,21 +254,21 @@ export default function DataTypeNormalize(props){
             <div className="Datatype_info">
                 <div className="Datatype_info_var">
                     
-                    <Typography sx={{fontWeight:"550"}}>Distribution</Typography>
-                    <Typography>{props.details.distribution}</Typography>
-                    <Typography sx={{fontWeight:"550"}}>Data Type</Typography>
-                    <Typography>{props.details.type}</Typography>
+                    <Typography className={ButtonClasses.inputText}>Distribution</Typography>
+                    <Typography className={ButtonClasses.inputText}>{props.details.distribution}</Typography>
+                    <Typography className={ButtonClasses.inputText}>Data Type</Typography>
+                    <Typography className={ButtonClasses.inputText}>{props.details.type}</Typography>
                     
                     <Dialog disableEscapeKeyDown open={modifyDataType} onClose={handleCloseDataType}>
-                        <DialogTitle>Modify {props.details.column}</DialogTitle>
+                        <DialogTitle className={ButtonClasses.inputText}>Modify {props.details.column}</DialogTitle>
                         <DialogContent>
-                            <Typography>Data Distribution</Typography>
-                            <FormControlLabel control={<Switch onChange={handleNormalize} color="secondary"/>} label="Normalize" />
+                            <Typography className={ButtonClasses.inputText}>Data Distribution</Typography>
+                            <FormControlLabel control={<Switch onChange={handleNormalize} color="secondary" />} label="Normalize" />
 
-                            <Typography>Modify Data Type</Typography>
+                            <Typography className={ButtonClasses.inputText}>Modify Data Type</Typography>
                             <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
                                 <FormControl sx={{marginTop:"1rem", marginBottom:"2rem", minWidth: "100%" }}>
-                                    <InputLabel id="demo-dialog-select-label" color="secondary">Data Type</InputLabel>
+                                    <InputLabel id="demo-dialog-select-label" color="secondary" className={ButtonClasses.inputText}>Data Type</InputLabel>
                                     <Select
                                         labelId="demo-dialog-select-label"
                                         id="demo-dialog-select"
@@ -235,31 +276,32 @@ export default function DataTypeNormalize(props){
                                         onChange={handleDataType}
                                         input={<OutlinedInput label="Data Type" />}
                                         color="secondary"
+                                        className={ButtonClasses.inputText}
                                     >
-                                        <MenuItem value="Nominal">Nominal</MenuItem>
-                                        <MenuItem value="Ordinal">Ordinal</MenuItem>
-                                        <MenuItem value="Interval">Interval</MenuItem>
-                                        <MenuItem value="Ratio">Ratio</MenuItem>
+                                        <MenuItem className={ButtonClasses.inputText} value="Nominal">Nominal</MenuItem>
+                                        <MenuItem className={ButtonClasses.inputText} value="Ordinal">Ordinal</MenuItem>
+                                        <MenuItem className={ButtonClasses.inputText} value="Interval">Interval</MenuItem>
+                                        <MenuItem className={ButtonClasses.inputText} value="Ratio">Ratio</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Box>
 
-                            <Typography> Clean data</Typography>
-                            <CleaningOptions CleanOptions={props.options} CallbackColumnOptions={props.setOptions} Variable={props.details.column}/>
+                            <Typography className={ButtonClasses.inputText}> Clean data</Typography>
+                            <CleaningOptions className={ButtonClasses.inputText} CleanOptions={props.options} CallbackColumnOptions={props.setOptions} Variable={props.details.column}/>
                         </DialogContent>
                         <DialogActions>
-                        <Button onClick={handleCloseDataType} color="secondary">Cancel</Button>
-                        <Button onClick={handleCloseDataType} color="secondary">Apply Changes</Button>
+                        <Button onClick={handleCloseDataType} color="secondary" className={ButtonClasses.inputText}>Cancel</Button>
+                        <Button onClick={handleCloseDataType} color="secondary" className={ButtonClasses.inputText}>Apply Changes</Button>
                         </DialogActions>
                     </Dialog>
 
-                    <Typography sx={{fontWeight:"550"}}>Mean</Typography>
-                    <Typography>{props.details.mean}</Typography>
-                    <Typography sx={{fontWeight:"550"}}>Median</Typography>
-                    <Typography>{props.details.median}</Typography>
-                    <Typography sx={{fontWeight:"550"}}>Null Values</Typography>
-                    <Typography>{props.details.null_count}</Typography>
-                    <Typography sx={{fontWeight:"550"}}>
+                    <Typography className={ButtonClasses.inputText}>Mean</Typography>
+                    <Typography className={ButtonClasses.inputText}>{props.details.mean}</Typography>
+                    <Typography className={ButtonClasses.inputText}>Median</Typography>
+                    <Typography className={ButtonClasses.inputText}>{props.details.median}</Typography>
+                    <Typography className={ButtonClasses.inputText}>Null Values</Typography>
+                    <Typography className={ButtonClasses.inputText}>{props.details.null_count}</Typography>
+                    <Typography className={ButtonClasses.inputText}>
                         Outliers 
                         <Tooltip
                             title={iqrTooltip}
@@ -270,16 +312,18 @@ export default function DataTypeNormalize(props){
                             <HelpOutlineIcon fontSize='small' color='secondary'/>
                         </Tooltip>
                     </Typography>
-                    <Typography>{props.details.outliers}</Typography>
-                    <Typography sx={{fontWeight:"550"}}>Skew</Typography>
-                    <Typography>{props.details.skew}</Typography>
-                    <Typography sx={{fontWeight:"550"}}>Kurtosis</Typography>
-                    <Typography>{props.details.kurtosis}</Typography>
+                    <Typography className={ButtonClasses.inputText}>{props.details.outliers}</Typography>
+                    <Typography className={ButtonClasses.inputText}>Skew</Typography>
+                    <Typography className={ButtonClasses.inputText}>{props.details.skew}</Typography>
+                    <Typography className={ButtonClasses.inputText}>Kurtosis</Typography>
+                    <Typography className={ButtonClasses.inputText}>{props.details.kurtosis}</Typography>
                 </div>
 
                 
                 
             </div>
+            </ThemeProvider>
+           
         </div>
     ); 
 }

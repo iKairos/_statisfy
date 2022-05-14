@@ -14,6 +14,18 @@ import TextField from '@mui/material/TextField';
 import PercentIcon from '@mui/icons-material/Percent';
 import LoopIcon from '@mui/icons-material/Loop';
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#7051b8',
+      },
+      secondary: {
+        main: '#7051b8',
+      },
+    },
+  });
+
 export default function MachineLearningChoices(props){
     const filtered = MLTechniques.filter(([name, tags]) => {
         return props.tags.every(tag => tags.includes(tag))
@@ -51,6 +63,7 @@ export default function MachineLearningChoices(props){
 
     return(
         <div className="ChoicesCont">
+            <ThemeProvider theme={theme}>
             <Alert icon={props.chosen !== "" ? <CheckCircleOutlineOutlinedIcon/> : <AnalyticsIcon/>} color="secondary" sx={{marginBottom:"1rem", marginTop:"2rem"}}>
                 <div style={{display:"flex", flexDirection:"row", gap:"0.5rem"}}>
                     Select Machine Learning Technique 
@@ -194,6 +207,8 @@ export default function MachineLearningChoices(props){
 
                 </div>
             }
+            </ThemeProvider>
+            
             
         </div>
         

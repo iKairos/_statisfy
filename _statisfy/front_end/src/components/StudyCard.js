@@ -1,4 +1,5 @@
-import "../StyleSheets/studycardfolder/studycard.css"
+
+import "../StyleSheets/NewCSSFiles/StudyFolder/StudySection.css"
 import { useState } from "react";
 import { IconButton, Button, Typography, CircularProgress} from "@mui/material";
 import Backdrop from '@mui/material/Backdrop';
@@ -6,9 +7,32 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteStudy } from "../actions/researchAction";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { makeStyles } from '@mui/styles';
 
+const ButtonStyles = makeStyles ({
+    btn:{
+      borderRadius: '0.5rem',
+      width:'fit-content',
+      height:'2.5rem',
+      color:'#7051b8',
+      backgroundColor:'white',
+      fontWeight:'700',
+      paddingLeft:'0.5rem',
+      paddingRight:'0.5rem',
+      fontFamily:'Poppins',
+      border:'1px solid #7051b8',
+    },
+    tabs:{
+        textColor:'white'
+    },
+    icons:{
+        color: '#7051b8'
+    }
+  })
 
 export default function StudyCard(props){
+
+    const ButtonClasses = ButtonStyles();
     const [openBackdrop, setOpenBackdrop] = useState(false);
     const handleClose = () => {
         setOpenBackdrop(false);
@@ -46,27 +70,13 @@ export default function StudyCard(props){
 
     return(
         <div className ="StudyCard">
-            <div className="StudyCard_title">
+            <h6 className="StudyText_cardHeader">
                 {props.title}
-                {
-                    props.isAuthor ?
-                    loading ? <CircularProgress sx={{
-                        position:"absolute",
-                        right: 5,
-                        top: 5
-                    }}color="secondary" thickness={2.5} size={30}/> :
-                    <IconButton
-                        onClick={handleToggle}
-                        sx={{
-                            position:"absolute",
-                            right: 5,
-                            top: 5
-                        }}
-                    >
-                        <DeleteIcon color="secondary"/>
-                    </IconButton>
-                    : null
-                }
+            </h6>
+            <h6 className="StudyText_cardMethod"> 
+                {props.method}
+            </h6>
+                
 
                 <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -86,20 +96,31 @@ export default function StudyCard(props){
                         </div>
                     </div>
                 </Backdrop>
-            </div>
-            <div className="StudyCard_method">
-                {props.method}
+            
+            <p className="StudyText_cardDetails">
+                {props.description}
+            </p>
+            <div className="StudyCard_footer">
+                <Button 
+                    onClick={()=>props.HandleSelected(props.id)}
+                    variant="outlined"
+                    color="secondary"
+                    className={ButtonClasses.btn}
+                >View Study
+                </Button>
+                {
+                    props.isAuthor ?
+                    loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/> 
+                    :
+                    <IconButton
+                        onClick={handleToggle}
+                    >
+                        <DeleteIcon color="secondary" className={ButtonClasses.icons}/>
+                    </IconButton>
+                    : null
+                }
             </div>
             
-            <div className="StudyCard_desc">
-                {props.description}
-            </div>
-            <Button 
-                onClick={()=>props.HandleSelected(props.id)}
-                variant="outlined"
-                color="secondary"
-            >View Study
-            </Button>
             
         </div>
     ); 
