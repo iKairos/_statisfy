@@ -94,12 +94,12 @@ export default function UserProfileSection(props){
            <div className="UserProfile_Details">
                     <h6 className= "ProfileText_detailsHeader"><QuestionAnswerIcon className={classes.icon} color="secondary" fontSize="small"/> BIO</h6>
                     <p className= "ProfileText_detailsContent">
-                        {newBio != null ? newBio : '-'}Duis commodo reprehenderit sit exercitation reprehenderit cupidatat amet.
+                        {newBio != null ? newBio : '-'}
                     </p>
 
                     <h6 className= "ProfileText_detailsHeader"><LightbulbIcon className={classes.icon} color="secondary" fontSize="small"/> ABOUT</h6>
                     <p className= "ProfileText_detailsContent">
-                        <b>FullName: </b>  {newFirstName} {newLastName} 
+                        <b>Full Name: </b>  {newFirstName} {newLastName} 
                     </p>
                     <p className= "ProfileText_detailsContent">
                         <b>Email: </b> {newEmail}

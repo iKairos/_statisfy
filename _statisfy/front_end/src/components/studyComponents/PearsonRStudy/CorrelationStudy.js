@@ -42,7 +42,7 @@ ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, Title)
 
 
 
-export default function PearsonRStudy(props){
+export default function CorrelationStudy(props){
     const [studyPage, setStudyPage] = useState(1);
     const blackListedVariables = ['SSxy', 'SSx', 'SSy', 'Numerator', 'Denominator']
 
@@ -68,7 +68,7 @@ export default function PearsonRStudy(props){
     );
 
     const {studyDatasetFile} = studyDataSelector; 
-    console.log(studyDatasetFile)
+
     const options = {
         responsive: true,
         plugins: {
@@ -197,22 +197,18 @@ export default function PearsonRStudy(props){
                                 })
                             }
                         </div>
+                        <Scatter data={{
+                            label: props.data['columns'],
+                            datasets: [
                             {
-                                props.data['test_type'] === "Pearson R Correlation Test" ? 
-                                    <Scatter data={{
-                                        label: props.data['columns'],
-                                        datasets: [
-                                        {
-                                            label: `(${props.data['columns'][0]},${props.data['columns'][1]})`,
-                                            data: studyDatasetFile?.data.map(row => {
-                                                return {x: row[props.data['columns'][0]], y: row[props.data['columns'][1]]}
-                                            }),
-                                            backgroundColor: 'rgba(167, 66, 197, 1)',
-                                        },
-                                        ],
-                                    }} options={options}/> 
-                                : null
-                            }
+                                label: `(${props.data['columns'][0]},${props.data['columns'][1]})`,
+                                data: studyDatasetFile?.data.map(row => {
+                                    return {x: row[props.data['columns'][0]], y: row[props.data['columns'][1]]}
+                                }),
+                                backgroundColor: 'rgba(167, 66, 197, 1)',
+                            },
+                            ],
+                        }} options={options}/> 
                     </div>
                 }
                 {studyPage === 4 &&

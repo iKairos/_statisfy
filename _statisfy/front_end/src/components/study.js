@@ -1,6 +1,6 @@
 import "../StyleSheets/studyfolder/study.css"
 import LinearStudy from "./studyComponents/LinearRegressionStudy/LinearStudy";
-import PearsonRStudy from "./studyComponents/PearsonRStudy/PearsonRStudy";
+import CorrelationStudy from "./studyComponents/PearsonRStudy/CorrelationStudy";
 
 
 export default function Study(props){
@@ -9,7 +9,7 @@ export default function Study(props){
         <>
             {
                 props.data['test_type'] == "Pearson R Correlation Test" ? 
-                <PearsonRStudy
+                <CorrelationStudy
                     data = {props.data}
                     details = {props.details}
                 /> :
@@ -18,7 +18,11 @@ export default function Study(props){
                     data = {props.data}
                     details = {props.details}
                 />
-                : null
+                : props.data['test_type'] == "Spearman Rho Rank Correlation Test" ? 
+                <CorrelationStudy
+                    data = {props.data}
+                    details = {props.details}
+                /> : null
             }
         </>
         

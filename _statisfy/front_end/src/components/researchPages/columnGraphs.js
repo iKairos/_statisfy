@@ -154,7 +154,7 @@ export default function ColumnGraphs(props){
                     </div>
                     <div className="DataColumns_details_row">
                         <p className="DataColumnsText_content">Null Count: </p>
-                        <p className="DataColumnsText_content" style={{'color': (props.data.null_count / props.size) * 100 > 60 ? "red" : "green"}}>{props.data.null_count}  •{((props.data.null_count / props.size) * 100).toFixed(2)}% </p>
+                        <p className="DataColumnsText_content" style={{'color': (props.data.null_count / props.size) * 100 > 60 ? "red" : "green"}}>{props.data.null_count} row(s)  • {((props.data.null_count / props.size) * 100).toFixed(2)}% </p>
                         
                     </div>
                     <div className="DataColumns_details_row">

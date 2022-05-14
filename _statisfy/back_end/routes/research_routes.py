@@ -268,6 +268,14 @@ def add_study():
                 'cost_history': reactified_cost_history,
                 'gradient_history': reactified_gradient_history
             }
+        elif data['test_type'] == 'Spearman Rho Rank Correlation Test':
+            if len(columns) != 2:
+                return {
+                    'code': 'STUDY_ADD_FAIL',
+                    'error': 'Spearman Rho only accepts two variables. Please make sure to only select two columns to analyze.'
+                }
+            
+            compute_res = spearmanrho(df[columns[0]], df[columns[1]])
 
         res = Study.new_study(
             _id = uuid,

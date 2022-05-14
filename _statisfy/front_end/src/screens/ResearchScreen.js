@@ -234,8 +234,7 @@ export default function ResearchScreen(props){
                             style={{ textDecoration: 'none' }}
                             >
                                     {author['username']} 
-                            </Link>
-                            - CREATED 2 MONTHS AGO
+                            </Link> - CREATED AT {researchGetRes?.data.created_at}
                             </p>
                             
                         })}

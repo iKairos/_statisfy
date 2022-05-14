@@ -102,7 +102,7 @@ def spearmanrho(x, y):
 
     p = 2 * sp.t.sf(np.abs(t), n-2)
     
-    return rho, p
+    return (('Rho Value', rho), ('P Value', p), ('Rank Diff Squared Sum', d_squared_sum), ('Denominator', ((n)**3 - n)))
 
 def chi_square(x, expected = None, alpha = 0.05):
     """
