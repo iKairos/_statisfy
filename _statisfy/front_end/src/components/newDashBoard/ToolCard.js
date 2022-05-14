@@ -9,6 +9,8 @@ import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { makeStyles } from "@mui/styles";
+
 
 const theme = createTheme({
   palette: {
@@ -18,52 +20,63 @@ const theme = createTheme({
   },
 });
 
+const ButtonStyles = makeStyles ({
+  btn:{
+    borderRadius: '0.5rem',
+    width:'8rem',
+    height:'2.5rem',
+    color:'#7051b8',
+    backgroundColor:'white',
+    fontWeight:'700',
+    paddingLeft:'0.5rem',
+    paddingRight:'0.5rem',
+    fontFamily:'Poppins',
+    border:'1px solid #7051b8',
+  },
+  btn2:{
+    borderRadius: '0.5rem',
+    width:'8rem',
+    height:'2.5rem',
+    color:'white',
+    backgroundColor:'#7051b8',
+    fontWeight:'700',
+    paddingLeft:'0.5rem',
+    paddingRight:'0.5rem',
+    fontFamily:'Poppins',
+  }
+  
+})
+
 
 export default function ToolCard(props) {
+  const ButtonClasses = ButtonStyles();   
 
   return (
-    <Card sx={{ width: '1fr' }}>
-      <div className = {props.ToolLabel === "Statistical Method"? "resList_stat_overlay": "resList_ml_overlay"}>
-        <div className = {props.ToolLabel === "Statistical Method"? "resList_stat": "resList_ml"}>
-          <CardContent>
-            <Typography variant="h6" className="resList_stat_title">
-                {props.Title}
-            </Typography>
-
-            <Typography paragraph className="resList_stat_title">
-                {props.Desc}
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
-            <ThemeProvider theme={theme}>
-              {props.ToolSelected === props.ToolLabel
-              ?(
-                <Button
-                    color="primary"
-                    variant = "contained"
-                    onClick={()=>props.HandleTool()}
-                >
-                    Selected
-                </Button>
-              )
-              :(
-                <Button
-                    color="secondary"
-                    onClick={()=>props.HandleTool(props.ToolLabel)}
-                    variant = "contained"
-                >
-                    Select
-                </Button>
-              )
+      <div className="StudyTools">
+        <h6 className="StudyText_toolCardTitle">{props.Title}</h6>
+        <p className="StudyText_toolCardDesc">{props.Desc}</p>
+        {props.ToolSelected === props.ToolLabel
+            ?(
+              <Button
+                  className={ButtonClasses.btn}
+                  variant = "filled"
+                  onClick={()=>props.HandleTool()}
+              >
+                  Selected
+              </Button>
+            )
+            :(
+              <Button
+                  className={ButtonClasses.btn2}
+                  onClick={()=>props.HandleTool(props.ToolLabel)}
+                  variant = "filled"
+              >
+                  Select
+              </Button>
+            )
                 
-              }
-               </ThemeProvider>
-            
-          </CardActions>
-        </div>
+        }
       </div>
-      
-      
-    </Card>
+    
   );
 }

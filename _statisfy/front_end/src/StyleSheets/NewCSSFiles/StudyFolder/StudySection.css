@@ -9,6 +9,8 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .StudySection_header {
@@ -26,8 +28,8 @@
 }
 
 .StudySection_body_list {
-  padding: 1rem;
   width: 100%;
+  max-width: 30vw;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -41,12 +43,30 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  border-right: 1px solid #eeeeee;
+}
+
+.StudySection_body_list_header {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 2rem;
+  padding-top: 1rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
 .StudySection_body_study {
   width: 100%;
-  padding: 1rem;
-  width: 100%;
+  max-width: 50vw;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -57,5 +77,183 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.StudySection_body_study_content {
+  padding: 1rem;
+}
+
+.StudySection_tools {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.StudySection_tools_cards {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.StudyCard {
+  position: relative;
+  background-color: white;
+  border-top: 1px solid #7051b8;
+  padding: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.StudyCard_confirmation {
+  padding: 1rem;
+  background-color: white;
+  border-radius: 0.25rem;
+  border: 1px solid #a742c5;
+  width: 25rem;
+  height: 10rem;
+  color: #23272a;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+
+.StudyCard_confirmation_actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 1rem;
+}
+
+.StudyCard_title {
+  font-weight: 700;
+}
+
+.StudyCard_method {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.StudyCard_desc {
+  display: none;
+}
+
+.StudyCard_footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: absolute;
+  right: 0;
+  top: 5px;
+}
+
+.StudyText_inputLabel {
+  font-family: Poppins;
+  color: #7051b8;
+}
+
+.StudyText_listHeader {
+  font-family: Poppins;
+  font-weight: 900;
+  color: #7051b8;
+}
+
+.StudyText_cardHeader {
+  font-family: Poppins;
+  font-weight: 900;
+  color: #23272a;
+}
+
+.StudyText_cardMethod {
+  font-family: Poppins;
+  font-weight: 600;
+  color: #b5b5b5;
+}
+
+.StudyText_cardDetails {
+  font-family: Poppins;
+  color: #23272a;
+}
+
+.StudyText_newStudyTitle {
+  font-family: Poppins;
+  font-weight: 900;
+  color: #7051b8;
+  width: 100%;
+  text-align: center;
+}
+
+.StudyText_newStudyLabel {
+  font-family: Poppins;
+  color: #23272a;
+}
+
+.StudyText_toolCardTitle {
+  font-family: Poppins;
+  color: #7051b8;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.StudyText_toolCardDesc {
+  font-family: Poppins;
+  color: #23272a;
+  font-weight: 500;
+}
+
+.StudyTools {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  border-radius: 0.5rem;
+  background-color: #eeeeee;
+  padding: 1rem;
+  width: 100%;
+}
+
+@media screen and (min-width: 900px) {
+  .StudyCard {
+    width: 100%;
+  }
+  .StudyCard_desc {
+    display: block;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
 }
 /*# sourceMappingURL=StudySection.css.map */

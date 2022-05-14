@@ -58,7 +58,66 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import _ from "lodash";
 //<span className ="text_topic">{researchGetRes?.data.test_type}</span>
 
+const ButtonStyles = makeStyles ({
+    btn:{
+      borderRadius: '0.5rem',
+      width:'fit-content',
+      height:'2.5rem',
+      color:'#7051b8',
+      backgroundColor:'white',
+      fontWeight:'700',
+      paddingLeft:'0.5rem',
+      paddingRight:'0.5rem',
+      fontFamily:'Poppins',
+      border:'1px solid #7051b8',
+    },
+    btn3:{
+        borderRadius: '0.5rem',
+        width:'10rem',
+        height:'2.5rem',
+        color:'#7051b8',
+        backgroundColor:'white',
+        fontWeight:'700',
+        paddingLeft:'0.5rem',
+        paddingRight:'0.5rem',
+        fontFamily:'Poppins',
+        border:'1px solid #7051b8',
+    },
+    tabs:{
+        textColor:'white'
+    },
+    icons:{
+        color: '#7051b8'
+    },
+    textField:{
+        color: '#7051b8',
+    },
+    root: {
+        
+        fontFamily:'Poppins',
+        "& label.Mui-focused": {
+          color: '#7051b8',
+          fontFamily:'Poppins',
+        },
+        "& .MuiInput-underline:after": {
+          borderBottomColor: '#7051b8',
+          fontFamily:'Poppins',
+        },
+        "& .MuiInput-underline:before": {
+            fontFamily:'Poppins',
+        },
+        
+    },
+    alert:{
+        backgroundColor:'white',
+        border:'1px solid #7051b8',
+        fontFamily:'Poppins'
+    }
+  })
+
+
 export default function ResStudies(props){
+    const ButtonClasses = ButtonStyles();
 
     // main study variables
     const [studyName, setStudyName] = useState("");
@@ -282,13 +341,14 @@ export default function ResStudies(props){
 
         },
         active: {
-            backgroundColor: '#A742C5',
+            backgroundColor: '#7051b8',
             color: '#ffffff',
         },
         completed: {
             backgroundColor: '#e7e7e7',
-            color: '#A742C5',
+            color: '#7051b8',
         },
+
     }));
 
     const CustomStepIcon = (props) => {
@@ -396,11 +456,11 @@ export default function ResStudies(props){
                 {props.IsAuthor?(
                     <div className="resStudy_body_add">
                         <Button 
-                            color="secondary" 
-                            className="resStudy_body_add_button"
+                            color="secondary"
                             onClick={()=>handleAdding(true)}
+                            className={ButtonClasses.btn}
                         >
-                            <AddIcon className="AddIcon"/>
+                            <AddIcon className={ButtonClasses.icons}/>
                             add new study
                         </Button>
                     </div>
@@ -421,6 +481,9 @@ export default function ResStudies(props){
             
             <div className = "StudySection_body">
                 <div className = "StudySection_body_list">
+                    <div className = "StudySection_body_list_header"> 
+                        <h5 className="StudyText_listHeader"> STUDY LIST</h5>
+                    </div>
                     {
                         typeof getStudyRes !== 'undefined' ? getStudyRes.data?.map((i) => {
                             return (
@@ -440,12 +503,13 @@ export default function ResStudies(props){
                 <div className = "StudySection_body_study">
                     {isAdding 
                     ?(
-                        <div className = "resStudy_body_content">
+                        <div className = "StudySection_body_study_content">
+                             <h5 className="StudyText_newStudyTitle">Create New Study</h5>
                                 <Stepper activeStep={showActive-1} alternativeLabel>
                                     {studyStepsString.map((label) => (
                                         <Step key={label}>
                                             <StepLabel StepIconComponent={CustomStepIcon} >
-                                                <div className="stepper_div">{label}</div>
+                                                <p className="StudyText_cardDetails">{label}</p>
                                             </StepLabel>
                                         </Step>
                                     ))}
@@ -463,10 +527,13 @@ export default function ResStudies(props){
                                     autoComplete="off"
                                     className = "StudyTitle"
                                     >
-                                        <div>
+                                       <div style={{paddingTop:"1rem"}}>
+                                            <h6 className="StudyText_newStudyLabel">
+                                                Study Title
+                                            </h6>
                                             <TextField
                                                 id="outlined-textarea"
-                                                label="Study Title"
+                                                hiddenLabel
                                                 placeholder="Add new title"
                                                 multiline
                                                 rows={2}
@@ -474,12 +541,18 @@ export default function ResStudies(props){
                                                 onChange={e => setStudyName(e.target.value)}
                                                 value={studyName}
                                                 fullWidth
+                                                variant="standard"
+                                                className={ButtonClasses.root}
                                             />
-                                        </div>
+                                       </div>
+                                       
                                         <div style={{paddingTop:"1rem"}}>
+                                            <h6 className="StudyText_newStudyLabel">
+                                                Study Description
+                                            </h6>
                                             <TextField
                                                 id="outlined-textarea"
-                                                label="Study Description"
+                                                hiddenLabel
                                                 placeholder="Add description"
                                                 multiline
                                                 rows={4}
@@ -487,6 +560,8 @@ export default function ResStudies(props){
                                                 onChange={e => setStudyDesc(e.target.value)}
                                                 value={studyDesc}
                                                 fullWidth
+                                                variant="standard"
+                                                className={ButtonClasses.root}
                                             />
                                         </div>
                                         
@@ -494,12 +569,17 @@ export default function ResStudies(props){
                                     </Box>
                                 }
                                 {showActive === 2 &&
-                                    <Box className = "StudyTitle">
-                                        <Alert icon={tool !== "" ? <CheckCircleOutlineOutlinedIcon/> : <InfoOutlinedIcon/>} color="secondary" sx={{marginBottom:"1rem"}}>
+                                    <Box className = "StudySection_tools">
+                                        <Alert 
+                                            icon={tool !== "" 
+                                                ? <CheckCircleOutlineOutlinedIcon className={ButtonClasses.icons}/> 
+                                                : <InfoOutlinedIcon className={ButtonClasses.icons}/>} 
+                                            className={ButtonClasses.alert} 
+                                            sx={{marginBottom:"1rem"}}>
                                             Select your preferred tool
                                         </Alert>
                                         
-                                        <div className="resList_tools">
+                                        <div className = "StudySection_tools_cards">
                                             <ToolCard
                                                 Title = "Statistical Tool"
                                                 Desc = "this is statistical tool"
@@ -561,20 +641,26 @@ export default function ResStudies(props){
                                                 setCallbackLearningRate = {setCallbackLearningRate}
                                             />
                                         }
+                                        {loading ?(
+                                            <CircularProgress  className={ButtonClasses.icons} thickness={2.5} size={30}/>
+
+                                        ):(
+                                            <Button
+                                                onClick={handleSubmit}
+                                                className={ButtonClasses.btn3}
+                                                sx={{
+                                                    margin:'1rem',
+                                                    alignSelf:'center',
+                                                }}
+                                            >
+                                            Compute
+                                            </Button>
+                                        )
+                                        }
                                     </div>
                                     
                                 
                                 
-                                }
-                                {showActive === 3 ?
-                                    loading ? <CircularProgress color="secondary" thickness={2.5} size={30}/>:
-                                    <Button
-                                        onClick={handleSubmit}
-                                        color="secondary"
-                                    >
-                                    Compute
-                                    </Button>
-                                    : null
                                 }
                                 
                                 <Navigator
