@@ -32,17 +32,75 @@ import StudyDetails from "../studyDetails";
 import BarCor from "../../newDashBoard/bar";
 import CorrelationDegree from "../../CorrelationDegree";
 import ResultCards from "../../newDashBoard/ResultCards";
-
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { makeStyles } from "@mui/styles";
 
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, Title);
 
 
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#7051b8',
+      },
+      secondary: {
+        main: '#7051b8',
+      },
+    },
+  });
 
-
+  const ButtonStyles = makeStyles ({
+    btn:{
+      borderRadius: '0.5rem',
+      width:'fit-content',
+      height:'2.5rem',
+      color:'#7051b8',
+      backgroundColor:'white',
+      fontWeight:'700',
+      paddingLeft:'0.5rem',
+      paddingRight:'0.5rem',
+      fontFamily:'Poppins',
+      border:'1px solid #7051b8',
+    },
+    tabs:{
+        textColor:'white'
+    },
+    icons:{
+        color: '#7051b8'
+    },
+    textField:{
+        color: '#7051b8',
+    },
+    alert:{
+        backgroundColor:'white',
+        border:'1px solid #7051b8',
+        fontFamily:'Poppins'
+    },
+    root: {
+        
+        fontFamily:'Poppins',
+        "& label.Mui-focused": {
+          color: '#7051b8',
+          fontFamily:'Poppins',
+        },
+        "& .MuiInput-underline:after": {
+          borderBottomColor: '#7051b8',
+          fontFamily:'Poppins',
+        },
+        "& .MuiInput-underline:before": {
+            fontFamily:'Poppins',
+        },
+        
+    },
+    inputText:{
+        fontFamily:'Poppins',
+    }
+  })
 
 
 export default function CorrelationStudy(props){
+    const ButtonClasses = ButtonStyles();    
     const [studyPage, setStudyPage] = useState(1);
     const blackListedVariables = ['SSxy', 'SSx', 'SSy', 'Numerator', 'Denominator']
 
@@ -120,32 +178,35 @@ export default function CorrelationStudy(props){
   return(
         <div className ="Study">
             <div className = "Study_header">
-                <h4>{props.data['study_name']} | {props.data['test_type']}</h4>
-                <h6>{props.data['study_description']}</h6>
+                <h4 className = {ButtonClasses.inputText}>{props.data['study_name']} | {props.data['test_type']}</h4>
+                <h6 className = {ButtonClasses.inputText}>{props.data['study_description']}</h6>
             </div>
             <div className="Study_tabs_container">
                 <div className = "Study_tabs">
-                    <Box sx = {{ 
-                        minWidth: 100,
-                        width: '1fr',
-                    }}>
-                        <Tabs
-                            value={studyPage}
-                            onChange={switchStudyPage}
-                            textColor="secondary"
-                            indicatorColor="secondary"
-                            aria-label="scrollable tabs"
-                            variant="scrollable"
-                            scrollButtons="auto"
-                            sx = {{ 
-                            }}
-                        >
-                            <Tab value={1} label="Preprocessing" icon={<QueryStatsIcon fontSize="medium"/>}> </Tab>
-                            <Tab value={2} label="Computation" icon={<CalculateIcon fontSize="medium"/>} />
-                            <Tab value={3} label="Results" icon={<AutoGraphIcon fontSize="medium"/>} />
-                            <Tab value={4} label="Interpretation" icon={<ArticleIcon fontSize="medium"/>} />
-                        </Tabs>
-                    </Box>
+                    <ThemeProvider theme = {theme}>
+                        <Box sx = {{ 
+                            minWidth: 100,
+                            width: '1fr',
+                        }}>
+                            <Tabs
+                                value={studyPage}
+                                onChange={switchStudyPage}
+                                textColor="secondary"
+                                indicatorColor="secondary"
+                                aria-label="scrollable tabs"
+                                variant="scrollable"
+                                scrollButtons="auto"
+                                sx = {{ 
+                                }}
+                            >
+                                <Tab className={ButtonClasses.inputText} value={1} label="Preprocessing" icon={<QueryStatsIcon fontSize="medium"/>}> </Tab>
+                                <Tab className={ButtonClasses.inputText} value={2} label="Computation" icon={<CalculateIcon fontSize="medium"/>} />
+                                <Tab className={ButtonClasses.inputText} value={3} label="Results" icon={<AutoGraphIcon fontSize="medium"/>} />
+                                <Tab className={ButtonClasses.inputText} value={4} label="Interpretation" icon={<ArticleIcon fontSize="medium"/>} />
+                            </Tabs>
+                        </Box>
+                    </ThemeProvider>
+                    
                 </div>
             </div>
                 
@@ -197,7 +258,7 @@ export default function CorrelationStudy(props){
                                 })
                             }
                         </div>
-                        <Scatter data={{
+                        <Scatter className={ButtonClasses.inputText} data={{
                             label: props.data['columns'],
                             datasets: [
                             {
@@ -205,7 +266,7 @@ export default function CorrelationStudy(props){
                                 data: studyDatasetFile?.data.map(row => {
                                     return {x: row[props.data['columns'][0]], y: row[props.data['columns'][1]]}
                                 }),
-                                backgroundColor: 'rgba(167, 66, 197, 1)',
+                                backgroundColor: '#7051b8',
                             },
                             ],
                         }} options={options}/> 
@@ -227,14 +288,16 @@ export default function CorrelationStudy(props){
                             })
                         }
                         <div className = "Study_content_text">
-                            <Typography>INTERPRETATION</Typography>
+                            <Typography className={ButtonClasses.inputText}>INTERPRETATION</Typography>
                             {
                                 props.data['interpretations'].map(i => {
-                                    return <p>{i}</p>
+                                    return <p className={ButtonClasses.inputText}>{i}</p>
                                 })
                             }
+                            <ThemeProvider theme={theme}>
+                                <Button color="secondary"><DownloadIcon/>Generate PDF</Button>
+                            </ThemeProvider>
                             
-                            <Button color="secondary"><DownloadIcon/>Generate PDF</Button>
                         </div>
                     </div>
                 }

@@ -12,9 +12,30 @@ import useMeasure from 'react-use-measure'
 import { variableTooltip } from '../../constants/stringConstants';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { makeStyles } from "@mui/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#7051b8',
+    },
+    secondary: {
+      main: '#7051b8',
+    },
+  },
+});
+
+const ButtonStyles = makeStyles ({
+  inputText:{
+      fontFamily:'Poppins',
+  }
+})
+
 
 export default function ResultCards(props) {
-
+  
+  const ButtonClasses = ButtonStyles(); 
     const HtmlTooltip = styled(({ className, ...props }) => (
         <Tooltip {...props} classes={{ popper: className }} />
       ))(({ theme }) => ({
@@ -36,15 +57,17 @@ export default function ResultCards(props) {
                 }
                 placement="bottom-start"
             >
+              <ThemeProvider theme={theme}>
                 <div className="Study_cards">  
-                    
-                        <div className='Study_cards_text'>
-                            <AssessmentIcon fontSize='medium' color="secondary"/>
-                            <Typography variant="button" sx={{color:"#a742c5"}}>{props.variable}</Typography>
-                            <p className="Study_cards_text_value"> {props.value}</p>
-                            
-                        </div>  
+                    <div className='Study_cards_text'>
+                        <AssessmentIcon fontSize='medium' color="secondary"/>
+                        <Typography className={ButtonClasses.inputText} variant="h6" sx={{color:"#7051b8"}} >{props.variable}</Typography>
+                        <p className={ButtonClasses.inputText}> {props.value}</p>
+                        
+                    </div>  
                 </div>
+              </ThemeProvider>
+               
                     
             </HtmlTooltip>
     

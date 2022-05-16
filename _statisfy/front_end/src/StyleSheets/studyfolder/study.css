@@ -31,7 +31,7 @@
   display: -ms-flexbox;
   display: flex;
   text-align: center;
-  border: 1px solid #a742c5;
+  border: 1px solid #7051b8;
 }
 
 .Bar {
@@ -215,8 +215,8 @@
           align-items: center;
   overflow: hidden;
   padding: 1rem;
-  border: 1px solid #dfa9ff;
-  border-left: 1rem solid #dfa9ff;
+  border: 1px solid #7051b8;
+  border-left: 1rem solid #7051b8;
   border-radius: 1rem;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;

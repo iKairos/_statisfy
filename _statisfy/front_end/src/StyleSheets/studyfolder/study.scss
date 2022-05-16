@@ -8,6 +8,7 @@ $black: #23272a;
 $boxshadow: 0 0 10px 5px rgb(252, 252, 252);
 $buttonbg: #a742c5;
 $maxwidth: 40rem;
+$violet: #7051b8;
 
 .Correlation {
   width: 100%;
@@ -27,7 +28,7 @@ $maxwidth: 40rem;
     width: fit-content;
     display: flex;
     text-align: center;
-    border: 1px solid #a742c5;
+    border: 1px solid $violet;
   }
 }
 .Bar {
@@ -156,8 +157,8 @@ $maxwidth: 40rem;
     overflow: hidden;
     padding: 1rem;
 
-    border: 1px solid $pink;
-    border-left: 1rem solid $pink;
+    border: 1px solid $violet;
+    border-left: 1rem solid $violet;
     border-radius: 1rem;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;

@@ -31,10 +31,34 @@ import { getStudyDataset} from "../../../actions/datasetActions";
 import StudyDetails from "../studyDetails";
 import LinearConfiguration from "./LinearConfiguration";
 import LinearModel from "./LinearModel";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 //ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, Title);
+import { makeStyles } from "@mui/styles";
+
+  const ButtonStyles = makeStyles ({
+
+    icons:{
+        color: '#7051b8'
+    },
+    inputText:{
+        fontFamily:'Poppins',
+    }
+  })
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#7051b8',
+      },
+      secondary: {
+        main: '#7051b8',
+      },
+    },
+  });
 
 export default function LinearStudy(props){
+    const ButtonClasses = ButtonStyles();   
     const [studyPage, setStudyPage] = useState(1);
     const blackListedVariables = ['SSxy', 'SSx', 'SSy', 'Numerator', 'Denominator']
 
@@ -112,32 +136,35 @@ export default function LinearStudy(props){
   return(
         <div className ="Study">
             <div className = "Study_header">
-                <h4>{props.data['study_name']} | {props.data['test_type']}</h4>
-                <h6>{props.data['study_description']}</h6>
+                <h4 className={ButtonClasses.inputText}>{props.data['study_name']} | {props.data['test_type']}</h4>
+                <h6 className={ButtonClasses.inputText}>{props.data['study_description']}</h6>
             </div>
             <div className="Study_tabs_container">
                 <div className = "Study_tabs">
-                    <Box sx = {{ 
-                        minWidth: 100,
-                        width: '1fr',
-                    }}>
-                        <Tabs
-                            value={studyPage}
-                            onChange={switchStudyPage}
-                            textColor="secondary"
-                            indicatorColor="secondary"
-                            aria-label="scrollable tabs"
-                            variant="scrollable"
-                            scrollButtons="auto"
-                            sx = {{ 
-                            }}
-                        >
-                            <Tab value={1} label="Preprocessing" icon={<QueryStatsIcon fontSize="medium"/>}> </Tab>
-                            <Tab value={2} label="Configurations" icon={<CalculateIcon fontSize="medium"/>} />
-                            <Tab value={3} label="Performance" icon={<AutoGraphIcon fontSize="medium"/>} />
-                            <Tab value={4} label="Model" icon={<ArticleIcon fontSize="medium"/>} />
-                        </Tabs>
-                    </Box>
+                    <ThemeProvider theme={theme}>
+                        <Box sx = {{ 
+                            minWidth: 100,
+                            width: '1fr',
+                        }}>
+                            <Tabs
+                                value={studyPage}
+                                onChange={switchStudyPage}
+                                textColor="secondary"
+                                indicatorColor="secondary"
+                                aria-label="scrollable tabs"
+                                variant="scrollable"
+                                scrollButtons="auto"
+                                sx = {{ 
+                                }}
+                            >
+                                <Tab className={ButtonClasses.inputText} value={1} label="Preprocessing" icon={<QueryStatsIcon fontSize="medium"/>}> </Tab>
+                                <Tab className={ButtonClasses.inputText}value={2} label="Configurations" icon={<CalculateIcon fontSize="medium"/>} />
+                                <Tab className={ButtonClasses.inputText} value={3} label="Performance" icon={<AutoGraphIcon fontSize="medium"/>} />
+                                <Tab className={ButtonClasses.inputText} value={4} label="Model" icon={<ArticleIcon fontSize="medium"/>} />
+                            </Tabs>
+                        </Box>
+                    </ThemeProvider>
+                    
                 </div>
             </div>
                 
@@ -171,13 +198,13 @@ export default function LinearStudy(props){
                                 )
                             }
                         </div>
-                        <Line data={{
+                        <Line className={ButtonClasses.inputText} data={{
                                 labels: props.data['graphing']['cost_history'].map(data => data['x']),
                                 datasets: [
                                     {
                                         label: 'Cost History',
                                         data: props.data['graphing']['cost_history'].map(data => data['y'].toExponential()),
-                                        borderColor: 'rgba(167, 66, 197, 1)',
+                                        borderColor: '#7051b8',
                                         lineTension: 0,
                                         pointRadius: 0
                                     },
@@ -198,7 +225,7 @@ export default function LinearStudy(props){
                                     {
                                         label: 'Gradient History',
                                         data: props.data['graphing']['gradient_history'].map(data => data['y']),
-                                        borderColor: 'rgba(167, 66, 197, 1)',
+                                        borderColor: '#7051b8',
                                         lineTension: 0,
                                         pointRadius: 0
                                     },

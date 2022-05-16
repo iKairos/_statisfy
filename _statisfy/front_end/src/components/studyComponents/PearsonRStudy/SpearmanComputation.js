@@ -11,6 +11,35 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { MemoizedTable } from "../../DisplayTable";
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { makeStyles } from "@mui/styles";
+
+
+
+  const ButtonStyles = makeStyles ({
+    btn:{
+      borderRadius: '0.5rem',
+      width:'fit-content',
+      height:'2.5rem',
+      color:'#7051b8',
+      backgroundColor:'white',
+      fontWeight:'700',
+      paddingLeft:'0.5rem',
+      paddingRight:'0.5rem',
+      fontFamily:'Poppins',
+      border:'1px solid #7051b8',
+    },
+    tabs:{
+        textColor:'white'
+    },
+    icons:{
+        color: '#7051b8'
+    },
+    inputText:{
+        fontFamily:'Poppins',
+    }
+  })
+
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -61,6 +90,7 @@ const AccordionSummary = styled((props) => (
   
 
 export default function PearsonComputation(props){
+    const ButtonClasses = ButtonStyles();  
     const pr = "$$r_s = 1-\\frac{6\\sum_{i=0}^nd^2_i}{n(n^2-1)}$$";
     const vars = {};
 
@@ -70,7 +100,7 @@ export default function PearsonComputation(props){
     
     return(
         <div className="Computation_pearson">
-            <Typography variant="h6"> Spearman Rho Rank Correlation Test </Typography>
+            <Typography className={ButtonClasses.inputText} variant="h6"> Spearman Rho Rank Correlation Test </Typography>
             <p><i>Note: All values are rounded in four (4) decimal points.</i></p>
             <Accordion
                 defaultExpanded = {true}
@@ -81,21 +111,21 @@ export default function PearsonComputation(props){
                 expandIcon={<ExpandMoreIcon />}
                 color="secondary"
                 >
-                    <Typography variant="h6">Formula</Typography>
+                    <Typography className={ButtonClasses.inputText} variant="h6">Formula</Typography>
                 </AccordionSummary>
 
                 <AccordionDetails>
-                    <Typography>
+                    <Typography className={ButtonClasses.inputText}>
                         The Spearman Rho Rank Correlation <Latex>{"$r_s$"}</Latex> is equal to the formula:
                     </Typography>
                     <Latex strict>{pr}</Latex>
-                    <Typography>
+                    <Typography className={ButtonClasses.inputText}>
                         where
                     </Typography>
-                    <Typography>
+                    <Typography className={ButtonClasses.inputText}>
                         <b>· <Latex strict>$d_i$</Latex></b> is the difference in paired ranks.
                     </Typography>
-                    <Typography>
+                    <Typography className={ButtonClasses.inputText}>
                         <b>· <Latex strict>$n$</Latex></b> is the number of data.
                     </Typography>
                 </AccordionDetails>
@@ -110,11 +140,11 @@ export default function PearsonComputation(props){
                 expandIcon={<ExpandMoreIcon />}
                 color="secondary"
                 >
-                    <Typography variant="h6">Step 1: Evaluate <Latex strict>{'$\\sum_{i=0}^nd^2_i$'}</Latex></Typography>
+                    <Typography className={ButtonClasses.inputText} variant="h6">Step 1: Evaluate <Latex strict>{'$\\sum_{i=0}^nd^2_i$'}</Latex></Typography>
                 </AccordionSummary>
 
                 <AccordionDetails>
-                    <Typography>
+                    <Typography className={ButtonClasses.inputText}>
                         <b>1.1 </b>
                         Rank each variable's datapoints in descending order. Tabulate each rank of the variables' datapoints. An example is shown below.
                     </Typography>
@@ -130,7 +160,7 @@ export default function PearsonComputation(props){
                         checked={false}
                     />
                     <br/>
-                    <Typography>
+                    <Typography className={ButtonClasses.inputText}>
                         <b>1.2 </b>
                         Subtract each ranks of variable <Latex strict>$X$</Latex> and ranks of variable <Latex strict>$Y$</Latex>. The answer should be on its absolute value. It is shown by the formula below. Tabulate the results.
                         <Latex strict>
@@ -158,7 +188,7 @@ export default function PearsonComputation(props){
 
                     <br/>
 
-                    <Typography>
+                    <Typography className={ButtonClasses.inputText}>
                         <b>1.3 </b>
                         Square each paired rank differences of variables X and Y denoted by <Latex strict>$d$</Latex>.
                     </Typography>
@@ -177,14 +207,14 @@ export default function PearsonComputation(props){
 
                     <br/>
 
-                    <Typography>
+                    <Typography className={ButtonClasses.inputText}>
                         <b>1.4 </b>
                         Calculate the sum of all <Latex strict>$d^2$</Latex> or the paired rank differences squared. It is denoted by the formula below.
                     </Typography>
 
                     <Latex strict>{'$$\\sum_{i=0}^nd^2_i=\\text{abs}(\\text{rank}(X_i)-\\text{rank}(Y_i))^2$$'}</Latex>
 
-                    <Typography>
+                    <Typography className={ButtonClasses.inputText}>
                         The resulting answer for <b>Step 1</b> would be <Latex>{'$' + `${Number(vars['Rank Diff Squared Sum']).toFixed(4)}` + '$'}</Latex>.
                     </Typography>
                 </AccordionDetails>
@@ -199,25 +229,25 @@ export default function PearsonComputation(props){
                 expandIcon={<ExpandMoreIcon />}
                 color="secondary"
                 >
-                    <Typography variant="h6">Step 2: Calculate Spearman Rho Correlation</Typography>
+                    <Typography className={ButtonClasses.inputText} variant="h6">Step 2: Calculate Spearman Rho Correlation</Typography>
                 </AccordionSummary>
 
                 <AccordionDetails>
-                    <Typography>
+                    <Typography className={ButtonClasses.inputText}>
                         <b>2.1 </b>
                         Evaluate the denominator <Latex strict>$n(n^2-1)$</Latex>.
                     </Typography>
 
                     <Latex strict>{'$$n(n^2-1) = ' + `${Number(vars['Denominator']).toFixed(4)}` + '$$'}</Latex>
 
-                    <Typography>
+                    <Typography className={ButtonClasses.inputText}>
                         <b>2.2 </b>
                         Plugin the paired rank squared differences and the denominator to the equation.
                     </Typography>
                     
                     <Latex strict>{'$$r_s = 1-\\frac{6*' + `${Number(vars['Rank Diff Squared Sum']).toFixed(4)}` + '}{' + `${Number(vars['Denominator']).toFixed(4)}` + '}$$'}</Latex>
 
-                    <Typography>
+                    <Typography className={ButtonClasses.inputText}>
                         The resulting answer will be the Spearman Rho Rank Correlation value <Latex>{"$r_s$"}</Latex> which is equal to <Latex>{"$\\boxed{" + `${Number(vars['Rho Value']).toFixed(4)}` + "}$"}</Latex>.
                     </Typography>
 
