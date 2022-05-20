@@ -131,7 +131,9 @@ export default function Header(props){
                             </MenuItem>
                             
                             <MenuItem key={3} onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">Guides</Typography>
+                                <Link className="menuLink" to="/guides">
+                                    <Typography textAlign="center">Guides</Typography>
+                                </Link>
                             </MenuItem>
                             <MenuItem key={4} onClick={handleCloseNavMenu}>
                                 <Typography textAlign="center">About</Typography>
@@ -165,14 +167,16 @@ export default function Header(props){
                                 Profile
                             </Button>
                         </Link>
+                        <Link className="menuLink" to="/guides">
+                            <Button
+                                key={"3"}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Guides
+                            </Button>
+                        </Link>
                         
-                        <Button
-                            key={"3"}
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
-                        >
-                            Guides
-                        </Button>
                         <Button
                             key={"4"}
                             onClick={handleCloseNavMenu}

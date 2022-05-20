@@ -14,6 +14,7 @@ import UserScreen from './screens/UserScreen';
 import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import ResearchScreen from './screens/ResearchScreen';
+import GuidesScreen from './screens/GuidesScreen';
 import ResearchList from './components/newDashBoard/ResearchList';
 
 // stylesheets
@@ -50,6 +51,7 @@ function App() {
                   <Route path = "/profile" render={(props) => <UserScreen token={token} isUser={true}/>} exact></Route>
                   <Route path = "/profile/:id?" render={(props) => <UserScreen token={token}/>} exact></Route>
                   <Route path = "/dashboard/:id?" render={(props) => <ResearchScreen token={token}/>} exact></Route>
+                  <Route path = "/guides" exact component={GuidesScreen}></Route>
                   <Route path = "/signIn" exact render={(props) => <SignInScreen setToken={setToken} token={token} {...props}/>}/>
                   <Route path = "/signUp" exact render={() => <SignUpScreen token={token} />}></Route>
                 </Switch>
