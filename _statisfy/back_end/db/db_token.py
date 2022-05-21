@@ -1,5 +1,4 @@
 from .db_backbone import DatabaseBackbone
-from secret import CONN_STRING
 from secret import MONGO_CONN_STRING, MONGO_DB, MONGO_TOKEN_COLLECTION
 from pymongo import MongoClient
 
