@@ -1,25 +1,21 @@
-from __main__ import app 
 from flask import request
 from objects.token import Token
 from objects.user import User
 from flask_cors import cross_origin
+from secret import *
 
-@app.route("/api/login", methods = ['POST'])
-@cross_origin()
 def login():
     if request.method == 'POST':
         data = request.get_json(force=True)
 
-        secret_key = app.config.get('SECRET_KEY')
+        secret_key = SECRET_KEY
 
         auth = User.authenticate(data['username'], data['password'], secret_key)
         
         return {'access_token': auth[2], 'payload': auth[1] if not auth[0] else None}
 
-@app.route("/api/user/token/decode/<token>", methods = ['GET'])
-@cross_origin()
 def decode_token(token):
-    secret_key = app.config.get('SECRET_KEY')
+    secret_key = SECRET_KEY
 
     decoded = User.decode_auth_token(token, secret_key)
 
@@ -48,11 +44,9 @@ def decode_token(token):
             'code': 'TOKEN_SUCCESS'
         }
 
-@app.route("/api/user/token/expire/<token>")
-@cross_origin()
 def expire_token(token):
     try:
-        secret_key = app.config.get('SECRET_KEY')
+        secret_key = SECRET_KEY
 
         decoded = User.decode_auth_token(token, secret_key)
 

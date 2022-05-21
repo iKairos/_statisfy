@@ -152,7 +152,7 @@ export const MachineLearningSelection = (props) => {
                     sx={{marginBottom:"1rem", marginTop:"2rem"}}
                 >
                     <div style={{display:"flex", flexDirection:"row", gap:"0.5rem"}}>
-                        Configure variables as necessary. You can also select a label variable (optional)
+                        Configure variables as necessary. You can also select a label variable (optional).
                     
                     </div>
                     

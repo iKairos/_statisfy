@@ -1,4 +1,3 @@
-from __main__ import app
 from random import randint
 from flask import request
 from flask_cors import cross_origin
@@ -18,8 +17,6 @@ import io
 
 warnings.filterwarnings('ignore')
 
-@app.route("/api/research/<id>")
-@cross_origin()
 def fetch_research(id):
     try:
         research = Research(id)
@@ -55,12 +52,10 @@ def fetch_research(id):
             'message': str(e)
         }
 
-@app.route("/api/researches", methods=["POST"])
-@cross_origin()
 def fetch_researches():
     try:
         data = request.get_json()
-
+        print(data)
         user = User(data['_id'])
         
         researches = user.research_papers
@@ -75,10 +70,7 @@ def fetch_researches():
             'code': 'RESEARCHES_GET_FAIL',
             'error': str(e)
         }
-    
 
-@app.route("/api/research/new", methods=["POST"])
-@cross_origin()
 def add_research():
     try:
         data = request.form
@@ -123,8 +115,6 @@ def add_research():
             'type': 'error'
         }
 
-@app.route("/api/research/study/new", methods=["POST"])
-@cross_origin()
 def add_study():
     try:
         data = request.get_json()
@@ -276,6 +266,8 @@ def add_study():
                 }
             
             compute_res = spearmanrho(df[columns[0]], df[columns[1]])
+        elif data['test_type'] == 'Chi-square Test for Association':
+            compute_res = chi_square([df[i] for i in columns])
 
         res = Study.new_study(
             _id = uuid,
@@ -322,8 +314,6 @@ def add_study():
             'error': str(e),
         }
 
-@app.route("/api/research/delete", methods=["POST"])
-@cross_origin()
 def delete_research():
     try:
         data = request.get_json()
@@ -355,8 +345,6 @@ def delete_research():
             'message': str(e)
         }
 
-@app.route("/api/research/study/fetch", methods=["POST"])
-@cross_origin()
 def get_studies():
     try:
         data = request.form 
@@ -373,8 +361,6 @@ def get_studies():
             'message': str(e),
         }
 
-@app.route("/api/research/study/delete", methods=["POST"])
-@cross_origin()
 def delete_study():
     try:
         data = request.get_json()

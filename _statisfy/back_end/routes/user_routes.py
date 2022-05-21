@@ -1,13 +1,9 @@
-from __main__ import app
-from audioop import cross 
 from flask import request
 from random import randint
 from objects.user import User
 from flask_cors import cross_origin
 import bcrypt
 
-@app.route("/api/user/fetch/<id>")
-@cross_origin()
 def fetch_user(id):
     user = User(id)
     
@@ -22,8 +18,6 @@ def fetch_user(id):
             'code': 'USER_FETCH_SUCCESS'
         }
 
-@app.route("/api/user/new", methods = ['POST'])
-@cross_origin()
 def register_user():
     if request.method == 'POST':
         try:
@@ -80,8 +74,6 @@ def register_user():
                 'type': 'error'
             }
 
-@app.route("/api/user/update", methods = ['POST'])
-@cross_origin()
 def update_user():
     try:
         data = request.form

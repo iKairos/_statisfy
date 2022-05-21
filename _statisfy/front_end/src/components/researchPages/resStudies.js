@@ -220,6 +220,12 @@ export default function ResStudies(props){
             return;
         }
 
+        if((methodChosen === "Linear Regression" && label === "" ) || methodChosen === "Logistic Regression" && label === ""){
+            setError("A linear regression model needs a label or a variable to predict. Please select a variable to predict.");
+            setOpenErrorSnackbar(true);
+            return;
+        }
+
         setError("");
 
         handleBackdropToggle();

@@ -161,7 +161,7 @@ def chi_square(x, expected = None, alpha = 0.05):
 
     critical_value = sp.chi2.ppf(1-alpha, df)
     
-    return chi, p, df, expected, critical_value
+    return (('Chi Squared Value', chi), ('P-value', p), ('Degrees of Freedom', df), ('Critical Value', critical_value))
 
 # =========================================================================
 

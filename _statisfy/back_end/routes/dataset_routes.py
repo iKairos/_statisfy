@@ -1,4 +1,3 @@
-from __main__ import app 
 from flask import request, jsonify
 from flask.helpers import send_file
 from flask_cors import cross_origin
@@ -11,8 +10,6 @@ import pandas as pd
 import urllib.request
 import numpy as np
 
-@app.route("/api/dataset/process", methods = ['POST'])
-@cross_origin()
 def dataset_details():
     try:
         file = None
@@ -33,8 +30,6 @@ def dataset_details():
             'code': 'DATASET_PROCESS_FAIL'
         }
     
-@app.route("/api/dataset/get/<filename>/<cols>", methods=['GET'])
-@cross_origin()
 def get_dataset(filename,cols):
     try:
         url = BlobDatabase.get_dataset(filename)
@@ -57,8 +52,6 @@ def get_dataset(filename,cols):
             'error': str(e)
         }
 
-@app.route("/api/dataset/study/get/<filename>", methods=['GET'])
-@cross_origin()
 def get_study_dataset(filename):
     try:
         url = BlobDatabase.get_study_dataset(filename)

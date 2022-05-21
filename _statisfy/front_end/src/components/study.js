@@ -1,4 +1,5 @@
 import "../StyleSheets/studyfolder/study.css"
+import GenericStudy from "./studyComponents/GenericStudy";
 import LinearStudy from "./studyComponents/LinearRegressionStudy/LinearStudy";
 import CorrelationStudy from "./studyComponents/PearsonRStudy/CorrelationStudy";
 
@@ -22,7 +23,10 @@ export default function Study(props){
                 <CorrelationStudy
                     data = {props.data}
                     details = {props.details}
-                /> : null
+                /> : <GenericStudy
+                    data = {props.data}
+                    details = {props.details}
+                />
             }
         </>
         

@@ -201,6 +201,13 @@ export default function ResearchScreen(props){
         </React.Fragment>
     );
 
+    const stringifyDatetime = datetime => {
+        const d = new Date(datetime).toLocaleString('en-US', {
+            timeZone: 'Asia/Manila'
+            });
+        return d
+    }
+
     if(researchGetRes?.code === 'RESEARCH_GET_SUCCESS'){
         return(
             <div className = "research">
@@ -236,7 +243,7 @@ export default function ResearchScreen(props){
                             style={{ textDecoration: 'none' }}
                             >
                                     {author['username']} 
-                            </Link> - CREATED AT {researchGetRes?.data.created_at}
+                            </Link> - CREATED AT {stringifyDatetime(researchGetRes?.data.created_at)}
                             </p>
                             
                         })}
