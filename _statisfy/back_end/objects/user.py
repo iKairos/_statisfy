@@ -1,12 +1,10 @@
 from random import randint
 from db import db_users
-from db import db_authors
 import jwt, datetime, bcrypt
 
 class User:
     def __init__(self, uid = None):
         self.db = db_users.UsersBackbone()
-        self.rdb = db_authors.AuthorsBackbone()
         self.uid = uid
     
     @property 

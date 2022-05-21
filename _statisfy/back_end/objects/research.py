@@ -1,10 +1,8 @@
 from db import db_researches
-from db import db_authors
 
 class Research:
     def __init__(self, rid):
         self.db = db_researches.ResearchesBackbone()
-        self.rdb = db_authors.AuthorsBackbone()
         self.rid = rid 
     
     

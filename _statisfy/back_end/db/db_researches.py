@@ -1,12 +1,10 @@
 from .db_backbone import DatabaseBackbone
-from secret import CONN_STRING
 from secret import MONGO_CONN_STRING, MONGO_DB, MONGO_RESEARCH_COLLECTION, MONGO_STUDY_COLLECTION
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 class ResearchesBackbone(DatabaseBackbone):
     def __init__(self):
-        self.conn_string = CONN_STRING
         self.db = MongoClient(MONGO_CONN_STRING)[MONGO_DB][MONGO_RESEARCH_COLLECTION]
         self.studies_db = MongoClient(MONGO_CONN_STRING)[MONGO_DB][MONGO_STUDY_COLLECTION]
     
