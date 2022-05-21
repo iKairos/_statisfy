@@ -1,6 +1,7 @@
 from flask import Flask, request
 from flask_cors import CORS
 from secret import SECRET_KEY
+import os
 
 # app initialization
 app = Flask(__name__)
