@@ -1,0 +1,43 @@
+$white1: #eeeeee;
+$gray1: #b5b5b5;
+$pink: #dfa9ff;
+$purple: #a742c5;
+$black: #23272a;
+$violet: #7051b8;
+
+.StudyDetails {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.25rem;
+  width: 100%;
+  padding: 1rem;
+  gap: 1rem;
+  &_section {
+    display: flex;
+    flex-direction: column;
+    min-height: 40rem;
+    height: fit-content;
+    border: 1px solid $gray1;
+    border-radius: 0.25rem;
+  }
+  &_Dataset {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+  &_Variables {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    width: 100%;
+    height: fit-content;
+    margin-top: 1rem;
+    &_Selection {
+      padding: 0.5rem;
+    }
+    &_Container {
+      width: 100%;
+      padding: 1rem;
+      height: fit-content;
+    }
+  }
+}

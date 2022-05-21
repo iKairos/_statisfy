@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); 
+
+$Poppins: 'Poppins';
+
+.HomePage{
+    background-color: white;
+    width: 100vw;
+    height: fit-content;
+    &_section{
+        width: 100vw;
+        max-height: fit-content;
+        background-image: linear-gradient(180deg, #a742c5, #7051b8);
+        display: flex;
+        flex-direction: row ;
+        padding: 4rem;
+        justify-content: center;
+        align-items: center;
+        &_content{
+            max-width: 90vw;
+            &_container{
+                width: 90vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        &_text{
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            max-width: 90vw;
+            
+            align-items: center;
+        }
+    }
+    &_section2{
+        width: 100vw;
+        max-height: fit-content;
+        display: flex;
+        flex-direction: row ;
+        padding: 4rem;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        
+        &_content{
+            
+            &_container{
+                width: fit-content;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                max-width: 100vw;
+                
+            }
+        }
+        &_text{
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            align-items: center;
+
+        }
+    }
+    &_section3{
+        width: 100vw;
+        height: fit-content;
+        display: flex;
+        flex-direction: row ;
+        padding: 4rem;
+        justify-content: center;
+        align-items: center;
+        background-color: #eeeeee;
+
+        &_content{
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            gap: 3rem;
+            align-items: center;
+            justify-content: center;
+            height: fit-content;
+            &_container{
+                
+                width: 60vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        &_text{
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 90vw;
+            align-items: center;
+            gap: 2rem;
+
+        }
+    }
+}
+.HomeTexts{
+    &_header{
+        font-family: 'Poppins';
+        font-weight: 600;
+        text-align: center;
+        color: white;
+    }
+    &_content{
+        font-family: 'Poppins';
+        text-align: center;
+        color: white;
+        font-size:x-large;
+        word-wrap: normal;
+    }
+
+    &_header2{
+        font-family: 'Poppins';
+        color: black;
+        text-align: center;
+        
+    }
+    &_content2{
+        font-family: 'Poppins';
+        text-align: center;
+        color: black;
+        font-size:x-large;
+        word-wrap: normal;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .HomePage{
+
+        &_section{
+            width: 100vw;
+            max-height: 30rem;
+            background-image: linear-gradient(180deg, #a742c5, #7051b8);
+            display: flex;
+            flex-direction: row ;
+            padding: 4rem;
+            justify-content: center;
+            align-items: center;
+
+            &_content{
+                max-width: 25rem;
+                &_container{
+                    width: 60vw;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+
+                }
+            }
+            &_text{
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 50rem;
+                align-items: center;
+            }
+        }
+        &_section2{
+            width: 100vw;
+            max-height: 30rem;
+            display: flex;
+            flex-direction: row ;
+            padding: 4rem;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+        
+            
+            &_content{
+                
+                max-width: 25rem;
+                &_container{
+                    width: 60vw;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+            &_text{
+    
+            }
+        }
+        &_section3{
+    
+            &_content{
+                display: grid;
+                grid-template-columns: 2fr 1fr 2fr;
+                padding: 2rem;
+                gap: 3rem;
+                align-items: center;
+                justify-content: center;
+                height: fit-content;
+                
+                &_container{
+
+                }
+            }
+            &_text{
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 50rem;
+                align-items: center;
+                gap: 2rem;
+
+            }
+        }
+    }
+
+}

@@ -1,0 +1,445 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+
+$radius: 1rem;
+$cardcolor: #e8e8e8;
+$boxshadow: 0 0 10px 5px rgb(240, 240, 240);
+$buttonbg: #a742c5;
+$maxwidth: 40rem;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Montserrat";
+  overflow-x: hidden;
+}
+.stepper_div {
+  display: none;
+}
+.stepper_cont {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+.overall_div {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+}
+.component_div {
+  width: 1fr;
+  display: flex;
+  justify-content: center;
+}
+.dashboard {
+  display: grid;
+  padding: 2rem;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  justify-content: center;
+
+  max-width: 43rem;
+
+  &_container {
+    border-radius: $radius;
+    overflow: hidden;
+    box-shadow: $boxshadow;
+  }
+
+  &_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+    width: 1fr;
+  }
+
+  &_btn {
+    min-width: 5rem;
+    max-width: max-content;
+    height: 2.5rem;
+    border-radius: 2rem;
+    border: 0.1rem rgb(223, 154, 255) solid;
+    background-color: whitesmoke;
+    &_div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1fr;
+    }
+
+    &_cont {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+  }
+}
+
+.res {
+  display: grid;
+  padding: 2rem;
+  width: 1fr;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: center;
+  background-color: $cardcolor;
+
+  &_div {
+    width: 1fr;
+  }
+  &_span {
+    font-family: inherit;
+    font-weight: bold;
+  }
+  &_title {
+    width: 100%;
+    padding: 0.5rem;
+    border: 0ch;
+    border-radius: $radius;
+  }
+  &_desc {
+    width: 100%;
+    height: 10rem;
+    overflow-wrap: break-word;
+    padding: 0.5rem;
+    border: 0ch;
+    resize: none;
+    border-radius: $radius;
+  }
+
+  &_desc:focus {
+    border: 1px;
+  }
+}
+
+.cardwrapper {
+  display: grid;
+  padding: 2rem;
+  width: 1fr;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: center;
+  background-color: $cardcolor;
+}
+
+.upload {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 2rem;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  justify-content: center;
+
+  &_res {
+    width: 1fr;
+    position: relative;
+  }
+  &_container {
+    width: 1fr;
+    border-radius: $radius;
+    overflow: hidden;
+    box-shadow: $boxshadow;
+    margin-bottom: 2rem;
+    background-color: $cardcolor;
+  }
+
+  &_header {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+    width: 1fr;
+    position: relative;
+  }
+  &_headerstat {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: 1fr;
+    position: relative;
+    padding: 1rem;
+  }
+
+  &_body {
+    display: grid;
+    padding: 2rem;
+    width: 1fr;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    background-color: $cardcolor;
+    overflow-y: scroll;
+    max-height: 25rem;
+    position: relative;
+
+    word-wrap: break-word;
+  }
+  &_span {
+    color: #313131;
+    font-weight: bold;
+  }
+
+  &_desc {
+    display: inline-block;
+    min-width: 10rem;
+    max-width: fit-content;
+    overflow-wrap: break-word;
+  }
+
+  &_data {
+    max-width: 1fr;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    gap: 0.5rem;
+  }
+
+  &_btn {
+    min-width: 5rem;
+    border: none;
+    border-radius: 2rem;
+    margin-right: 0.5rem;
+    height: 2rem;
+  }
+  &_nxtbtn {
+    padding: 2px;
+    background-color: #a742c5;
+    min-width: 5rem;
+    min-height: 3rem;
+    border: none;
+    border-radius: 2rem;
+    margin-right: 0.5rem;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    transition: transform 200ms ease-in;
+  }
+  &_nxtbtndiv {
+    padding-top: 0.7rem;
+    background-color: white;
+    color: black;
+    border-radius: 2rem;
+    height: 3rem;
+    text-align: center;
+  }
+  &_table {
+    text-align: center;
+    height: 25rem;
+    overflow: scroll;
+  }
+}
+.stat {
+  &_checkbox {
+    display: grid;
+    padding: 2rem;
+    width: 1fr;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    background-color: $cardcolor;
+    overflow-y: scroll;
+    max-height: 25rem;
+    position: relative;
+  }
+}
+.data {
+  display: grid;
+  width: 1fr;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: center;
+
+  &_header {
+    background-color: white;
+    height: 3rem;
+  }
+  &_container {
+    height: 1fr;
+    background-color: white;
+    border-radius: $radius;
+    box-shadow: $boxshadow;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 2rem;
+
+    &_table {
+      width: 1fr;
+      height: fit-content;
+      background-color: $cardcolor;
+      border-radius: $radius;
+      box-shadow: $boxshadow;
+      overflow: hidden;
+    }
+    &_display {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 1rem;
+      height: 100%;
+    }
+  }
+  &_table {
+    height: 20rem;
+    overflow-y: scroll;
+  }
+  &_tabs {
+    background-color: white;
+    width: 1fr;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    &_inactive {
+      background-color: transparent;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    &_header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background-color: #838383;
+    }
+  }
+  &_content {
+    padding: 1rem;
+    background-color: rgb(255, 255, 255);
+    grid-template-columns: 1rem;
+    height: 15rem;
+    width: 20rem;
+    &_right {
+      padding: 1rem;
+      background-color: rgb(255, 255, 255);
+      grid-template-columns: 1rem;
+      height: 15rem;
+      width: 100%;
+      overflow-y: scroll;
+    }
+  }
+  &_cells {
+    &_left {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 1rem;
+      height: 15rem;
+    }
+    &_right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 15rem;
+      overflow-y: scroll;
+    }
+  }
+  &_span {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid #e7e7e7;
+    font-weight: 500;
+    font-size: 1rem;
+    height: 1.5rem;
+    row-gap: 0;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+
+    &_container {
+      width: 1fr;
+      height: min-content;
+    }
+  }
+  .stepper_div {
+    display: block;
+  }
+
+  .cardwrapper {
+    grid-template-columns: 1fr;
+    width: 1fr;
+  }
+
+  .proceed {
+    &_Btn {
+      background-color: white;
+      color: black;
+    }
+    &_Btn:hover {
+      box-shadow: none;
+      background-color: $buttonbg;
+      color: white;
+    }
+  }
+
+  .upload {
+    grid-template-columns: 1fr;
+
+    &_body {
+      max-width: 100rem;
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 15rem));
+      gap: 1rem;
+    }
+
+    &_nxtbtn {
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .data {
+    display: grid;
+    padding: 2rem;
+    width: 1fr;
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    &_table {
+      height: 35rem;
+    }
+    &_container {
+      width: 1fr;
+      min-width: 35rem;
+      max-width: 35rem;
+      height: 100%;
+      margin: 0;
+      &_table {
+        width: 2fr;
+        min-width: 65rem;
+        max-width: 65rem;
+        height: 36rem;
+      }
+    }
+    &_header {
+      padding: 1rem;
+      background-color: white;
+    }
+    &_cells {
+      &_right {
+        padding: 1rem;
+        width: fit-content;
+      }
+    }
+  }
+}

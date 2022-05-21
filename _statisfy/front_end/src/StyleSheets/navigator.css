@@ -1,0 +1,11 @@
+.navigator_div {
+  margin-top: 2rem;
+  width: 1fr;
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.navigator_stepper {
+  background-color: transparent;
+}

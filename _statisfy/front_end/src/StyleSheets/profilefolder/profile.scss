@@ -1,0 +1,112 @@
+$white1: #eeeeee;
+$gray1: #b5b5b5;
+$pink: #dfa9ff;
+$purple: #a742c5;
+$black: #23272a;
+
+.profile {
+  margin-top: 5rem;
+  width: 90vw;
+  background-color: white;
+  border-radius: 0;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+
+  &_names {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  &_backdrop {
+    width: 90vw;
+    margin-top: 5rem;
+    height: 90vh;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 0;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    margin-bottom: 5rem;
+  }
+
+  &_avatar {
+    display: flex;
+    flex-direction: column;
+
+    background: rgba(0, 0, 0, 0.3);
+
+    padding: 2rem;
+
+    &_container {
+      background-image: url(../../images/statisticsHeader.png);
+    }
+
+    &_icon {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  &_name {
+    text-align: center;
+    padding-top: 1rem;
+    gap: 1rem;
+    &_container {
+      background: rgba(68, 68, 68, 0.3);
+      padding-left: 0.4rem;
+      padding-right: 0.4rem;
+    }
+  }
+  &_details {
+    position: relative;
+    padding: 2rem;
+    color: #23272a;
+  }
+  &_content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+  }
+  &_edit {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+  }
+  &_upload {
+    padding: 1rem;
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .profile {
+    margin-top: 5rem;
+    background-color: white;
+    width: 50vw;
+
+    &_backdrop {
+      width: 50vw;
+      margin-top: 5rem;
+      background-color: white;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    &_avatar {
+      display: flex;
+      flex-direction: row;
+      &_icon {
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+      }
+    }
+    &_name {
+      padding-top: 1rem;
+      text-align: start;
+    }
+  }
+}

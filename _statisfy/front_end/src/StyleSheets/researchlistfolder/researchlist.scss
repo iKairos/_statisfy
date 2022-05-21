@@ -1,0 +1,114 @@
+$radius: 0.25rem;
+$white1: #eeeeee;
+$gray1: #b5b5b5;
+$pink: #dfa9ff;
+$purple: #a742c5;
+$black: #23272a;
+
+.resList {
+  &_column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  &_body {
+    &_container {
+      margin-top: 1rem;
+      height: 100%;
+      width: 90vw;
+      display: grid;
+      grid-template-rows: 1fr;
+      border-bottom-left-radius: $radius;
+      border-bottom-right-radius: $radius;
+      background-color: white;
+    }
+    &_content {
+      padding: 1rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+  &_stepper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+  &_textField {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+  }
+  &_tools {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-bottom: 2rem;
+  }
+  &_upload {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  &_stat {
+    background-image: url(../../images/statisticsHeader.png);
+    background-position: center;
+
+    &_overlay {
+      background-color: $black;
+    }
+    &_title {
+      color: white;
+      font-weight: 800;
+    }
+    &_desc {
+      color: white;
+    }
+  }
+  &_ml {
+    background-image: url(../../images/mlHeader.png);
+    background-position: center;
+  }
+
+  &_list {
+    padding: 1rem;
+    min-height: 30rem;
+    display: grid;
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .resList {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    &_column {
+      width: 47vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    &_body {
+      &_container {
+        margin-top: 1rem;
+        height: 100%;
+        width: 50vw;
+        margin-bottom: 1rem;
+      }
+      &_content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+    &_tools {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}

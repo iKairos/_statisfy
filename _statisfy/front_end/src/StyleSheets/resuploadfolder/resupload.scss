@@ -1,0 +1,220 @@
+$radius: 0.25rem;
+$white1: #eeeeee;
+$gray1: #b5b5b5;
+$pink: #dfa9ff;
+$purple: #a742c5;
+$black: #23272a;
+
+.resUpload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem;
+  min-height: 100%;
+  &_exit {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  &_columns {
+    height: 100%;
+    display: flex;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  &_cleaning {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    &_grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    &_title {
+      display: flex;
+      flex-direction: row;
+      width: 11rem;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+    }
+    &_container {
+      width: 1fr;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid $gray1;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      border-radius: 0.25rem;
+    }
+    &_variable {
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid $gray1;
+    }
+  }
+  &_outerCont {
+    display: flex;
+    flex-direction: column;
+  }
+  &_detailsCont {
+    display: flex;
+    flex-direction: column;
+  }
+  &_delimeter {
+    display: flex;
+    flex-direction: column;
+    width: 14rem;
+  }
+  &_content {
+    gap: 1rem;
+    width: 100%;
+  }
+  &_upload {
+    border: 1px solid #a8a8a8;
+    background-color: #ffffff;
+    cursor: pointer;
+    height: 2rem;
+    width: 14rem;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 0.2rem;
+    margin-bottom: 2rem;
+
+    &:hover {
+      border: 1px solid $purple;
+      color: $purple;
+    }
+    &_input {
+      display: none;
+    }
+    &_cont {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 1rem;
+      justify-content: center;
+      width: 80vw;
+      background-color: white;
+      color: $black;
+      padding: 1rem;
+    }
+    &_backdrop {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      width: 80vw;
+      height: 90vh;
+      background-color: white;
+      color: $black;
+      padding: 1rem;
+      border-radius: 0.25rem;
+      overflow-y: auto;
+    }
+    &_dispTable {
+      max-width: 100%;
+      transform: rotateX(180deg);
+    }
+    &_dummy {
+      transform: rotateX(180deg);
+    }
+    &_title {
+      display: flex;
+      width: 14rem;
+      justify-content: space-between;
+      padding-right: 0.5rem;
+    }
+  }
+  &_drop {
+    &_button {
+      margin-top: 1rem;
+      background-color: white;
+      &:hover {
+        background-color: #a8a8a8;
+        color: white;
+        border: 0;
+      }
+    }
+    &_input {
+      width: 10rem;
+      margin-bottom: 1rem;
+    }
+  }
+  &_details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem;
+    height: 15rem;
+  }
+  &_error {
+    width: 10rem;
+    height: 2rem;
+    border: 1px solid #ad2929;
+    color: #ad2929;
+    background-color: #ffc1c1;
+    &:hover {
+      background-color: #e26b6b;
+    }
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .datapage {
+    &_upload {
+      &_cont {
+        display: grid;
+        grid-template-rows: repeat(auto-fill, 2.5rem);
+        padding-bottom: 1rem;
+        justify-content: flex-start;
+      }
+    }
+    &_content {
+      padding: 2rem;
+      gap: 1rem;
+      overflow-y: scroll;
+    }
+
+    &_details {
+      display: grid;
+      grid-template-columns: 15vw 25vw;
+      padding: 1rem;
+      height: 15rem;
+    }
+    &_drop {
+      width: 20vw;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .resUpload {
+    &_upload {
+      &_cont {
+        width: 45vw;
+      }
+      &_backdrop {
+        width: 45vw;
+        padding-top: 0;
+      }
+    }
+    &_detailsCont {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    &_outerCont {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+    &_cleaning {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-left: 2rem;
+      &_grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+    }
+  }
+}

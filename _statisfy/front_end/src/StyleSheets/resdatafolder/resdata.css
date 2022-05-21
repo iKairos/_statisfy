@@ -1,0 +1,272 @@
+.resData {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.resData_body_container {
+  height: 100%;
+  width: 90vw;
+  display: -ms-grid;
+  display: grid;
+  margin-bottom: 2rem;
+  -ms-grid-rows: 1fr;
+      grid-template-rows: 1fr;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  background-color: white;
+}
+
+.resData_body_heading {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 1rem;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.resData_body_tabs {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 2rem 1fr 2rem;
+      grid-template-columns: 2rem 1fr 2rem;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.resData_body_content {
+  height: 100%;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.resData_dataset {
+  max-width: 80vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.resData_dataset_heading {
+  padding: 1rem;
+  border: 1px solid #b5b5b5;
+  border-bottom: none;
+}
+
+.resData_dataset_desc {
+  padding: 1rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #eeeeee;
+  border: 1px solid #b5b5b5;
+  word-wrap: break-word;
+}
+
+.resData_dataset_table {
+  margin-top: 1rem;
+  min-height: 20vh;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  overflow: auto;
+  background-color: white;
+  border: 1px solid #b5b5b5;
+}
+
+.resData_dataset_table_heading {
+  padding: 1rem;
+  border-bottom: 1px solid #b5b5b5;
+  height: 3rem;
+}
+
+.resData_arrow {
+  width: 2rem;
+  display: block;
+  border: none;
+  background-color: transparent;
+}
+
+.resData_details {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  padding: 1rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #eeeeee;
+  border: 1px solid #b5b5b5;
+  word-wrap: break-word;
+}
+
+.resData_container {
+  max-height: 85vh;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.colCard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border: 1px solid #b5b5b5;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+  width: 100%;
+  padding: 1rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.colCard_content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-top: 1rem;
+  gap: 1rem;
+}
+
+.colCard_details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 1fr;
+}
+
+.colCard_row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.colCard_graph {
+  width: 1fr;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: solid 1px #b5b5b5;
+}
+
+@media screen and (min-width: 1100px) {
+  .colCard_content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .resData_body {
+    max-width: 50vw;
+  }
+  .resData_body_container {
+    height: 100%;
+    max-width: 50vw;
+  }
+  .resData_body_heading {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    border-bottom: 1px solid #eeeeee;
+    max-width: 50vw;
+  }
+  .resData_body_tabs {
+    width: 50vw;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    border-bottom: 1px solid #eeeeee;
+  }
+  .resData_dataset {
+    padding: 1rem;
+    max-width: 48vw;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .resData_dataset_heading {
+    padding: 1rem;
+    border: 1px solid #b5b5b5;
+    border-bottom: none;
+  }
+  .resData_dataset_desc {
+    padding: 1rem;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    background-color: #eeeeee;
+    border: 1px solid #b5b5b5;
+  }
+  .resData_dataset_table {
+    margin-top: 1rem;
+    min-height: 20vh;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    overflow: auto;
+    background-color: white;
+    border: 1px solid #b5b5b5;
+  }
+  .resData_dataset_table_heading {
+    padding: 1rem;
+    border-bottom: 1px solid #b5b5b5;
+    height: 3rem;
+  }
+  .resData_arrow {
+    display: none;
+  }
+  .resData_container {
+    max-height: 85vh;
+    overflow-y: auto;
+    width: 100%;
+    padding: 1rem;
+  }
+}
+/*# sourceMappingURL=resdata.css.map */

@@ -1,0 +1,34 @@
+.contStyle {
+  min-width: max-content;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  word-wrap: normal;
+}
+
+.divStyle {
+  width: 1fr;
+  grid-template-columns: 1fr;
+}
+.checkbox_div {
+  word-wrap: break-word;
+}
+.checkbox_child {
+  width: 5rem;
+  word-wrap: break-word;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+label {
+  font-family: inherit;
+  cursor: pointer;
+  word-wrap: break-word;
+}
+@media screen and (min-width: 600px) {
+  .contStyle {
+    display: flex;
+    flex-direction: column;
+  }
+}

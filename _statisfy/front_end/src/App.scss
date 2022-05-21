@@ -1,0 +1,42 @@
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url(./images/Top-Header-Background.png),
+    url(./images/bgDummy.png);
+  background-size: cover;
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed;
+  background-attachment: scroll;
+}
+.account {
+  right: 0;
+}
+.Navigation {
+  background-color: white;
+  padding: 1rem;
+}
+.pagewrapper {
+  position: relative;
+  z-index: 999;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.menuLink {
+  color: inherit;
+  text-decoration: inherit;
+}
+@media screen and (min-width: 900px) {
+  .pagewrapper {
+    z-index: 999;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+}

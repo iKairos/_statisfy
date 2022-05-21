@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); 
+$violet : #7051b8;
+$white1: #eeeeee;
+$gray1: #b5b5b5;
+$pink: #dfa9ff;
+$purple: #a742c5;
+$black: #23272a;
+
+
+
+.StudySection{
+    max-width: 80vw;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    
+    &_header{
+        width: 100%;
+    }
+    &_body{
+        display: grid;
+        grid-template-columns: 30vw 50vw;
+        height: fit-content;
+        &_list{
+            width: 100%;
+            max-width: 30vw;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 1px solid $white1;
+            &_header{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                padding-left: 2rem;
+                padding-top: 1rem;
+                justify-content: center;
+                align-content: center;
+            }
+        }
+        &_study{
+            width: 100%;
+            max-width: 50vw;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            &_content{
+                padding: 1rem;
+
+            }
+        }
+    }
+    &_tools{
+      display: flex;
+      flex-direction: column;
+      &_cards{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        padding-bottom: 2rem;
+      }
+    }
+}
+
+.StudyCard {
+    
+    position: relative;
+    background-color: white;
+    border-top: 1px solid $violet;
+    padding: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+    height: fit-content;
+    cursor: pointer;
+    &_confirmation {
+      padding: 1rem;
+      background-color: white;
+      border-radius: 0.25rem;
+      border: 1px solid $purple;
+      width: 25rem;
+      height: 10rem;
+      color: #23272a;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      justify-content: center;
+      text-align: center;
+      &_actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+    }
+    &_title {
+      font-weight: 700;
+    }
+    &_method {
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    &_desc {
+      display: none;
+    }
+    &_footer{
+        
+        display: flex;
+        flex-direction: row;
+
+        position: absolute;
+        right: 0;
+        top: 5px;
+    }
+  }
+
+  .StudyText{
+      &_inputLabel{
+        font-family: Poppins;
+        color: #7051b8;
+      }
+      &_listHeader{
+          font-family: Poppins;
+          font-weight: 900;
+          color: #7051b8;
+      }
+      &_cardHeader{
+        font-family: Poppins;
+        font-weight: 900;
+        color: $black;
+      }
+      &_cardMethod{
+        font-family: Poppins;
+        font-weight: 600;
+        color: $gray1;
+      }
+      &_cardDetails{
+        font-family: Poppins;
+        color: $black;
+      }
+      &_newStudyTitle{
+        font-family: Poppins;
+        font-weight: 900;
+        color: #7051b8;
+        width: 100%;
+        text-align: center;
+      }
+      &_newStudyLabel{
+        font-family: Poppins;
+        color: $black;
+      }
+      &_toolCardTitle{
+        font-family: Poppins;
+        color: #7051b8;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      &_toolCardDesc{
+        font-family: Poppins;
+        color: #23272a;
+        font-weight: 500;
+      }
+  }
+
+  .StudyTools{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 0.5rem;
+    background-color: $white1;
+    padding: 1rem;
+    width: 100%;
+  }
+  
+  @media screen and (min-width: 900px) {
+    .StudyCard {
+        width: 100%;;
+  
+      &_desc {
+        display: block;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+      }
+    }
+  }
+  

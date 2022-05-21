@@ -1,0 +1,63 @@
+.StudyDetails {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 0.25rem;
+  width: 100%;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.StudyDetails_section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 40rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: 1px solid #b5b5b5;
+  border-radius: 0.25rem;
+}
+
+.StudyDetails_Dataset {
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.StudyDetails_Variables {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 0.5rem;
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-top: 1rem;
+}
+
+.StudyDetails_Variables_Selection {
+  padding: 0.5rem;
+}
+
+.StudyDetails_Variables_Container {
+  width: 100%;
+  padding: 1rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+/*# sourceMappingURL=studyDetails.css.map */

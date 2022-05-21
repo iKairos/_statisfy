@@ -1,0 +1,110 @@
+.display[type="signup"]{
+  position: relative;
+  width: 400px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+  border: .1rem #8951b8  solid;
+  margin: 30px auto;
+}
+.display h1{
+  text-align: center;
+  padding: 20px 0;
+}
+.display form{
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+form .division{
+  position: relative;
+  border-bottom: 2px solid #adadad;
+  margin: 30px 0;
+}
+.division input{
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+}
+.division label{
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: .5s;
+}
+.division span::before{
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: rgb(223, 154, 255);
+  transition: .5s;
+}
+.division input:focus ~ label,
+.division input:valid ~ label{
+  top: -5px;
+  color: rgb(223, 154, 255);
+}
+.division input:focus ~ span::before,
+.division input:valid ~ span::before{
+  width: 100%;
+}
+
+button[type="next_signup1"]{
+  background-color: #f8f8f8;
+  cursor: pointer;
+  padding: .5rem;
+  width: 30%;
+}
+button[type="next_signup2"]{
+  background-color: #f8f8f8;
+  cursor: pointer;
+  padding: .5rem;
+  width: 30%;
+}
+button[type="back_signup2"]{
+  background-color: #f8f8f8;
+  cursor: pointer;
+  padding: .5rem;
+  width: 30%;
+  
+}
+button.btn_next{
+  background-color: whitesmoke;
+  border-radius: 5rem;
+  border: 0.1rem rgb(223, 154, 255) solid;
+  margin-bottom: 0px;
+  margin-left: 20%;
+}
+button.btn_back{
+  background-color: whitesmoke;
+  border-radius: 5rem;
+  border: 0.1rem rgb(223, 154, 255) solid;
+  margin-bottom: 0px;
+  margin-right: 20%;
+}
+
+button.primary:hover{
+  transition: .2s;
+  color: white;
+  background-color: rgb(223, 154, 255);
+}
+.signin{
+  margin: 30px 0;
+  text-align: center;
+  font-size: 16px;
+  color: #666666;
+}
+.btn_container{
+  text-align:right;
+}
+
