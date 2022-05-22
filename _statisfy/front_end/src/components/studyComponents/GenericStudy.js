@@ -141,9 +141,7 @@ export default function GenericStudy(props){
                                 }}
                             >
                                 <Tab className={ButtonClasses.inputText} value={1} label="Preprocessing" icon={<QueryStatsIcon fontSize="medium"/>}> </Tab>
-                                <Tab className={ButtonClasses.inputText} value={2} label="Computation" icon={<CalculateIcon fontSize="medium"/>} />
                                 <Tab className={ButtonClasses.inputText} value={3} label="Results" icon={<AutoGraphIcon fontSize="medium"/>} />
-                                <Tab className={ButtonClasses.inputText} value={4} label="Interpretation" icon={<ArticleIcon fontSize="medium"/>} />
                             </Tabs>
                         </Box>
                     </ThemeProvider>
@@ -164,11 +162,6 @@ export default function GenericStudy(props){
                         />
                     </div>
                 }
-                {studyPage === 2 &&
-                    <div className = "Study_content_computation">
-                        <Computation method={props.data['test_type']} variables={props.data['variables']}/>
-                    </div>
-                }
                 {studyPage === 3 &&
                     <div className = "Study_content_graphs">
                         <div className = "Study_cards_container">       
@@ -182,22 +175,6 @@ export default function GenericStudy(props){
                                     )
                                 })
                             }
-                        </div>
-                    </div>
-                }
-                {studyPage === 4 &&
-                    <div className = "Study_content_interpretation">
-                        <div className = "Study_content_text">
-                            <Typography className={ButtonClasses.inputText}>INTERPRETATION</Typography>
-                            {
-                                props.data['interpretations'].map(i => {
-                                    return <p className={ButtonClasses.inputText}>{i}</p>
-                                })
-                            }
-                            <ThemeProvider theme={theme}>
-                                <Button color="secondary"><DownloadIcon/>Generate PDF</Button>
-                            </ThemeProvider>
-                            
                         </div>
                     </div>
                 }

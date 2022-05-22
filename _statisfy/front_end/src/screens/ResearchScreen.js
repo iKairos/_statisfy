@@ -256,7 +256,7 @@ export default function ResearchScreen(props){
 
                         <div className = "ResearchScreen_header_footer">
                             <p className="ResearchScreenText_resFooter">
-                                Author: Placeholder
+
                             </p>
                         </div>
                         <Button 

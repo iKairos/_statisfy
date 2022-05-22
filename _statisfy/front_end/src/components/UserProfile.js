@@ -154,7 +154,7 @@ export default function UserProfile(props){
 
                 <div className="profile_content"> 
                     <Typography variant="overline" display="block" gutterBottom><EventNoteIcon color="secondary" fontSize="small"/> JOINED:</Typography>
-                    <Typography variant="body2" display="block" gutterBottom>{stringifyDatetime(props.user.created_at)} GMT +8</Typography>
+                    <Typography variant="body2" display="block" gutterBottom>{stringifyDatetime(props.user.created_at)}</Typography>
                 </div>
 
                 <div className="profile_content"> 

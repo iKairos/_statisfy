@@ -268,6 +268,8 @@ def add_study():
             compute_res = spearmanrho(df[columns[0]], df[columns[1]])
         elif data['test_type'] == 'Chi-square Test for Association':
             compute_res = chi_square([df[i] for i in columns])
+        elif data['test_type'] == 'One-way ANOVA':
+            compute_res = one_way_anova([df[i] for i in columns])
 
         res = Study.new_study(
             _id = uuid,

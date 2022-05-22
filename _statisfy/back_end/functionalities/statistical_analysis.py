@@ -167,7 +167,8 @@ def chi_square(x, expected = None, alpha = 0.05):
 
 # SIGNIFICANT DIFFERENCE ANALYSIS
 
-def one_way_anova(*x, alpha = 0.05):
+def one_way_anova(x, alpha = 0.05):
+    print(x)
     if len(x) < 2:
         raise ValueError("The number of data groups should be at least two or more.")
 
@@ -205,7 +206,7 @@ def one_way_anova(*x, alpha = 0.05):
 
     critical_value = sp.f.ppf(1 - alpha, df_between, df_within)
 
-    return f_statistic, p, critical_value
+    return (('F Statistic',f_statistic), ('P-value', p), ('Critical Value', critical_value))
 
 # =========================================================================
 
