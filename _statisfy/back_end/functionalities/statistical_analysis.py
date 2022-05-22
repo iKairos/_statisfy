@@ -212,7 +212,7 @@ def one_way_anova(x, alpha = 0.05):
 
 # RANK SUM ANALYSIS
 
-def kruskal_wallis(*x, alpha = 0.05):
+def kruskal_wallis(x, alpha = 0.05):
     k = set(len(i) for i in x)
 
     if len(k) > 1:
@@ -250,9 +250,10 @@ def kruskal_wallis(*x, alpha = 0.05):
 
     critical_value = sp.chi2.ppf(1-alpha, df)
 
-    return H, p, critical_value
+    return (('H statistic', H), ('P-value', p), ('Critical Value', critical_value), ('Degrees of Freedom', df))
 
 def mann_whitney_u(x, y, alpha = 0.05):    
+    """
     df_x = pd.DataFrame(x)
     df_x['group'] = 'x'
 
@@ -269,8 +270,10 @@ def mann_whitney_u(x, y, alpha = 0.05):
     U2 = r2 - ((len(y)*(len(y) + 1)) / 2)
 
     U = U1 if U1 < U2 else U2
+    """
+    U = sp.mannwhitneyu(x, y)
 
-    return U
+    return (('U statistic', U[0]), ('P value', U[1]))
 
 # =========================================================================
 

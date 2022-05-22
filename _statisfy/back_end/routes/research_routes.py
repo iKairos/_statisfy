@@ -270,6 +270,16 @@ def add_study():
             compute_res = chi_square([df[i] for i in columns])
         elif data['test_type'] == 'One-way ANOVA':
             compute_res = one_way_anova([df[i] for i in columns])
+        elif data['test_type'] == 'Kruskal-Wallis Rank Sum Test':
+            compute_res = kruskal_wallis([df[i] for i in columns])
+        elif data['test_type'] == 'Wilcoxon-Mann-Whitney Rank Sum Test':
+            if len(columns) != 2:
+                return {
+                    'code': 'STUDY_ADD_FAIL',
+                    'error': 'Mann Whitney only accepts two variables. Please make sure to only select two columns to analyze.'
+                }
+                
+            compute_res = mann_whitney_u(df[columns[0]], df[columns[1]])
 
         res = Study.new_study(
             _id = uuid,
