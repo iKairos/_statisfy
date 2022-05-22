@@ -48,6 +48,8 @@ export default function ResultCards(props) {
         },
         }));
   return (
+    
+         <ThemeProvider theme={theme}>
             <HtmlTooltip
                 title={
                    <React.Fragment>
@@ -57,7 +59,6 @@ export default function ResultCards(props) {
                 }
                 placement="bottom-start"
             >
-              <ThemeProvider theme={theme}>
                 <div className="Study_cards">  
                     <div className='Study_cards_text'>
                         <AssessmentIcon fontSize='medium' color="secondary"/>
@@ -66,10 +67,11 @@ export default function ResultCards(props) {
                         
                     </div>  
                 </div>
-              </ThemeProvider>
+             
                
                     
             </HtmlTooltip>
+          </ThemeProvider>
     
     
   );

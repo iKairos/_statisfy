@@ -11,10 +11,24 @@
   padding: 1rem;
   border: 1px solid #b5b5b5;
   border-radius: 0.5rem;
+  height: 100%;
+  min-height: 17rem;
+}
+
+.DataColumns:hover {
+  cursor: pointer;
 }
 
 .DataColumns_graph {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .DataColumns_details {
@@ -25,7 +39,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 0;
+  gap: 0.1rem;
 }
 
 .DataColumns_details_row {
@@ -36,11 +50,14 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  padding: 0;
-  margin: 0;
+  gap: 1rem;
+}
+
+.DataColumns_newDetails {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
 }
 
 .DataColumnsText_title {
@@ -50,6 +67,7 @@
 
 .DataColumnsText_content {
   font-family: Poppins;
+  font-size: small;
 }
 
 @media screen and (min-width: 900px) {

@@ -506,202 +506,204 @@ export default function ResStudies(props){
                         }) : <CircularProgress color="secondary" thickness={2.5} size={30}/>
                     }
                 </div>
-                <div className = "StudySection_body_study">
-                    {isAdding 
-                    ?(
-                        <div className = "StudySection_body_study_content">
-                             <h5 className="StudyText_newStudyTitle">Create New Study</h5>
-                                <Stepper activeStep={showActive-1} alternativeLabel>
-                                    {studyStepsString.map((label) => (
-                                        <Step key={label}>
-                                            <StepLabel StepIconComponent={CustomStepIcon} >
-                                                <p className="StudyText_cardDetails">{label}</p>
-                                            </StepLabel>
-                                        </Step>
-                                    ))}
-                                </Stepper>
-                                <Backdrop
-                                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                                    open={open}
-                                >
-                                    <CircularProgress color="inherit" />
-                                </Backdrop>
-                                {showActive === 1 &&
-                                    <Box
-                                    component="form"
-                                    noValidate
-                                    autoComplete="off"
-                                    className = "StudyTitle"
-                                    >
+                {isAdding 
+                ?(
+                    <div className = "StudySection_body_study">
+                        {props.IsAuthor?(
+                            <div className = "StudySection_body_study_content">
+                            <h5 className="StudyText_newStudyTitle">Create New Study</h5>
+                               <Stepper activeStep={showActive-1} alternativeLabel>
+                                   {studyStepsString.map((label) => (
+                                       <Step key={label}>
+                                           <StepLabel StepIconComponent={CustomStepIcon} >
+                                               <p className="StudyText_cardDetails">{label}</p>
+                                           </StepLabel>
+                                       </Step>
+                                   ))}
+                               </Stepper>
+                               <Backdrop
+                                   sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                                   open={open}
+                               >
+                                   <CircularProgress color="inherit" />
+                               </Backdrop>
+                               {showActive === 1 &&
+                                   <Box
+                                   component="form"
+                                   noValidate
+                                   autoComplete="off"
+                                   className = "StudyTitle"
+                                   >
+                                      <div style={{paddingTop:"1rem"}}>
+                                           <h6 className="StudyText_newStudyLabel">
+                                               Study Title
+                                           </h6>
+                                           <TextField
+                                               id="outlined-textarea"
+                                               hiddenLabel
+                                               placeholder="Add new title"
+                                               multiline
+                                               rows={2}
+                                               color = "secondary"
+                                               onChange={e => setStudyName(e.target.value)}
+                                               value={studyName}
+                                               fullWidth
+                                               variant="standard"
+                                               className={ButtonClasses.root}
+                                           />
+                                      </div>
+                                      
                                        <div style={{paddingTop:"1rem"}}>
-                                            <h6 className="StudyText_newStudyLabel">
-                                                Study Title
-                                            </h6>
-                                            <TextField
-                                                id="outlined-textarea"
-                                                hiddenLabel
-                                                placeholder="Add new title"
-                                                multiline
-                                                rows={2}
-                                                color = "secondary"
-                                                onChange={e => setStudyName(e.target.value)}
-                                                value={studyName}
-                                                fullWidth
-                                                variant="standard"
-                                                className={ButtonClasses.root}
-                                            />
+                                           <h6 className="StudyText_newStudyLabel">
+                                               Study Description
+                                           </h6>
+                                           <TextField
+                                               id="outlined-textarea"
+                                               hiddenLabel
+                                               placeholder="Add description"
+                                               multiline
+                                               rows={4}
+                                               color = "secondary"
+                                               onChange={e => setStudyDesc(e.target.value)}
+                                               value={studyDesc}
+                                               fullWidth
+                                               variant="standard"
+                                               className={ButtonClasses.root}
+                                           />
                                        </div>
                                        
-                                        <div style={{paddingTop:"1rem"}}>
-                                            <h6 className="StudyText_newStudyLabel">
-                                                Study Description
-                                            </h6>
-                                            <TextField
-                                                id="outlined-textarea"
-                                                hiddenLabel
-                                                placeholder="Add description"
-                                                multiline
-                                                rows={4}
-                                                color = "secondary"
-                                                onChange={e => setStudyDesc(e.target.value)}
-                                                value={studyDesc}
-                                                fullWidth
-                                                variant="standard"
-                                                className={ButtonClasses.root}
-                                            />
-                                        </div>
-                                        
-                                    
-                                    </Box>
-                                }
-                                {showActive === 2 &&
-                                    <Box className = "StudySection_tools">
-                                        <Alert 
-                                            icon={tool !== "" 
-                                                ? <CheckCircleOutlineOutlinedIcon className={ButtonClasses.icons}/> 
-                                                : <InfoOutlinedIcon className={ButtonClasses.icons}/>} 
-                                            className={ButtonClasses.alert} 
-                                            sx={{marginBottom:"1rem"}}>
-                                            Select your preferred tool
-                                        </Alert>
-                                        
-                                        <div className = "StudySection_tools_cards">
-                                            <ToolCard
-                                                Title = "Statistical Tool"
-                                                Desc = "this is statistical tool"
-                                                ToolSelected = {tool}
-                                                HandleTool = {handleTool}
-                                                ToolLabel = "Statistical Method"
-                                                img = {StatImg}
-                                            />
-                                            <ToolCard
-                                                Title = "Machine Learning Tool"
-                                                Desc = " this is Machine Learning Tool"
-                                                ToolSelected = {tool}
-                                                HandleTool = {handleTool}
-                                                ToolLabel = "Machine Learning"
-                                                img = {MLImg}
-                                            />
-                                        </div>
-                                        {tool === "Statistical Method" &&
-                                            <StatisticalSelection
-                                                purpose = {purpose}
-                                                handlePurpose = {handlePurpose}
-                                                setTags = {setTags}
-                                                datasetDetails = {props.DatasetDetails}
-                                                callbackSetSelectedRows = {callbackSetSelectedRows}
-                                                studyColumns = {studyColumns}
-                                                callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
-                                                setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
-                                                
-                                            />
-                                        }
-                                        {tool === "Machine Learning" &&
-                                            <MachineLearningSelection
-                                                purpose = {purpose}
-                                                handlePurpose = {handlePurpose}
-                                                setTags = {setTags}
-                                                datasetDetails = {props.DatasetDetails}
-                                                callbackSetSelectedRows = {callbackSetSelectedRows}
-                                                studyColumns = {studyColumns}
-                                                callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
-                                                setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
-                                                setLabel = {setLabel}
-                                                label = {label}        
-                                            />
-                                        }
-    
-                                        
-                                    </Box>
-                                }
-                                
-                                {showActive === 3 &&
-                                    <div className="ToolChoices">
-                                        {tool === "Statistical Method" 
-                                            ? <StatisticalChoices 
-                                                tags={tags} 
-                                                display={displayMethodChosen} 
-                                                chosen={methodChosen}
-                                                studyColumns = {studyColumns}
-                                                datasetDetails = {props.DatasetDetails}
-                                            
-                                            />
-                                            : <MachineLearningChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}
-                                                callbackTestSize = {callbackTestSize}
-                                                setCallbackTestSize = {setCallbackTestSize}
-                                                callbackIteration = {callbackIteration}
-                                                setCallbackIteration = {setCallbackIteration}
-                                                callbackLearningRate = {callbackLearningRate}
-                                                setCallbackLearningRate = {setCallbackLearningRate}
-                                            />
-                                        }
-                                        {loading ?(
-                                            <CircularProgress  className={ButtonClasses.icons} thickness={2.5} size={30}/>
+                                   
+                                   </Box>
+                               }
+                               {showActive === 2 &&
+                                   <Box className = "StudySection_tools">
+                                       <Alert 
+                                           icon={tool !== "" 
+                                               ? <CheckCircleOutlineOutlinedIcon className={ButtonClasses.icons}/> 
+                                               : <InfoOutlinedIcon className={ButtonClasses.icons}/>} 
+                                           className={ButtonClasses.alert} 
+                                           sx={{marginBottom:"1rem"}}>
+                                           Select your preferred tool
+                                       </Alert>
+                                       
+                                       <div className = "StudySection_tools_cards">
+                                           <ToolCard
+                                               Title = "Statistical Tool"
+                                               Desc = "this is statistical tool"
+                                               ToolSelected = {tool}
+                                               HandleTool = {handleTool}
+                                               ToolLabel = "Statistical Method"
+                                               img = {StatImg}
+                                           />
+                                           <ToolCard
+                                               Title = "Machine Learning Tool"
+                                               Desc = " this is Machine Learning Tool"
+                                               ToolSelected = {tool}
+                                               HandleTool = {handleTool}
+                                               ToolLabel = "Machine Learning"
+                                               img = {MLImg}
+                                           />
+                                       </div>
+                                       {tool === "Statistical Method" &&
+                                           <StatisticalSelection
+                                               purpose = {purpose}
+                                               handlePurpose = {handlePurpose}
+                                               setTags = {setTags}
+                                               datasetDetails = {props.DatasetDetails}
+                                               callbackSetSelectedRows = {callbackSetSelectedRows}
+                                               studyColumns = {studyColumns}
+                                               callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
+                                               setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
+                                               
+                                           />
+                                       }
+                                       {tool === "Machine Learning" &&
+                                           <MachineLearningSelection
+                                               purpose = {purpose}
+                                               handlePurpose = {handlePurpose}
+                                               setTags = {setTags}
+                                               datasetDetails = {props.DatasetDetails}
+                                               callbackSetSelectedRows = {callbackSetSelectedRows}
+                                               studyColumns = {studyColumns}
+                                               callbackColumnsCleanOptions = {callbackColumnsCleanOptions}
+                                               setCallbackColumnsCleanOptions = {setCallbackColumnsCleanOptions}
+                                               setLabel = {setLabel}
+                                               label = {label}        
+                                           />
+                                       }
+   
+                                       
+                                   </Box>
+                               }
+                               
+                               {showActive === 3 &&
+                                   <div className="ToolChoices">
+                                       {tool === "Statistical Method" 
+                                           ? <StatisticalChoices 
+                                               tags={tags} 
+                                               display={displayMethodChosen} 
+                                               chosen={methodChosen}
+                                               studyColumns = {studyColumns}
+                                               datasetDetails = {props.DatasetDetails}
+                                           
+                                           />
+                                           : <MachineLearningChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}
+                                               callbackTestSize = {callbackTestSize}
+                                               setCallbackTestSize = {setCallbackTestSize}
+                                               callbackIteration = {callbackIteration}
+                                               setCallbackIteration = {setCallbackIteration}
+                                               callbackLearningRate = {callbackLearningRate}
+                                               setCallbackLearningRate = {setCallbackLearningRate}
+                                           />
+                                       }
+                                       {loading ?(
+                                           <CircularProgress  className={ButtonClasses.icons} thickness={2.5} size={30}/>
 
-                                        ):(
-                                            <Button
-                                                onClick={handleSubmit}
-                                                className={ButtonClasses.btn3}
-                                                sx={{
-                                                    margin:'1rem',
-                                                    alignSelf:'center',
-                                                }}
-                                            >
-                                            Compute
-                                            </Button>
-                                        )
-                                        }
-                                    </div>
-                                    
-                                
-                                
-                                }
-                                
-                                <Navigator
-                                    NextScreen={nextScreen}
-                                    PrevScreen={prevScreen}
-                                    ActiveStep = {showActive -1}
-                                    prevDisabled={true}
-                                />
-                            
+                                       ):(
+                                           <Button
+                                               onClick={handleSubmit}
+                                               className={ButtonClasses.btn3}
+                                               sx={{
+                                                   margin:'1rem',
+                                                   alignSelf:'center',
+                                               }}
+                                           >
+                                           Compute
+                                           </Button>
+                                       )
+                                       }
+                                   </div>
+                               }
+                               
+                               <Navigator
+                                   NextScreen={nextScreen}
+                                   PrevScreen={prevScreen}
+                                   ActiveStep = {showActive -1}
+                                   prevDisabled={true}
+                               />
+                           
+                           </div>
+                        ):( 
+                            <div style={{padding: '2rem'}}>
+                                <Typography variant="h5" className={ButtonClasses.textField}>Sign-in to create your own study</Typography>
                             </div>
-                    )
-                    :(<>
-                        {selected &&
-                            (
-                                <Study 
-                                    data={getStudyRes?.data.filter(i => i['_id'] === selected)[0]} 
-                                    details={props.DatasetDetails}
-                                />     
-                            )
+                        )}
+                        
+                    </div>
+                        )
+                        :(<>
+                            {selected &&
+                                (
+                                    <Study 
+                                        data={getStudyRes?.data.filter(i => i['_id'] === selected)[0]} 
+                                        details={props.DatasetDetails}
+                                    />     
+                                )
+                            }
+                        
+                        </>)
                         }
                     
-                    </>)
-                    }
-                    
-                    
-
-                </div>
             </div>
             
         </div>
