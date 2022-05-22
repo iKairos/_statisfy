@@ -234,7 +234,7 @@ export default function CorrelationStudy(props){
                                 props.data['variables'].map(([var_name, var_val]) => {
                                 return(
                                     <>
-                                    {var_name === "R Coefficient"
+                                    {var_name === "R Coefficient" || var_name === "Rho Value"
                                         ?(<BarCor value = {var_val}/>)
                                         :null
                                     }
