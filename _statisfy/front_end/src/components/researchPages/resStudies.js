@@ -634,10 +634,18 @@ export default function ResStudies(props){
                                         
                                     </Box>
                                 }
+                                
                                 {showActive === 3 &&
                                     <div className="ToolChoices">
                                         {tool === "Statistical Method" 
-                                            ? <StatisticalChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}/>
+                                            ? <StatisticalChoices 
+                                                tags={tags} 
+                                                display={displayMethodChosen} 
+                                                chosen={methodChosen}
+                                                studyColumns = {studyColumns}
+                                                datasetDetails = {props.DatasetDetails}
+                                            
+                                            />
                                             : <MachineLearningChoices tags={tags} display={displayMethodChosen} chosen={methodChosen}
                                                 callbackTestSize = {callbackTestSize}
                                                 setCallbackTestSize = {setCallbackTestSize}
