@@ -4,6 +4,7 @@ import { Button, Tooltip } from "@mui/material";
 import { Typography, Divider, useMediaQuery } from "@mui/material";
 import { Bar, Doughnut } from "react-chartjs-2";
 import React from 'react';
+import { useState } from "react";
 import {CategoryScale , 
     Chart as ChartJS,
     LinearScale,
@@ -28,15 +29,17 @@ ChartJS.register(
 
 export default function ColumnGraphs(props){
     const matches = useMediaQuery('(min-width:900px)');
+    const [select, setSelect] = useState(false);
 
     return(
-        <div className ="colCard">
-            <div className="DataColumns">
+        
+            <div className="DataColumns" onClick={()=> setSelect(!select)}>
                 <h6 className="DataColumnsText_title">
                     {props.data.column}
                 </h6>
                 <Divider/>
-                <div className="DataColumns_graph">
+                {select? (
+                    <div className="DataColumns_graph">
                     {
                         props.data.type === "numerical" && 
                         <Bar
@@ -120,59 +123,61 @@ export default function ColumnGraphs(props){
                     }
                 </div>
 
-                <div className="DataColumns_details">
-                    {!matches? 
-                        <Divider/> : null
-                    }
-                    <div className="DataColumns_details_row">
-                        <p className="DataColumnsText_content">Mean: </p>
-                        <p className="DataColumnsText_content">{props.data.mean}</p>
+
+                ):(
+                    <div className="DataColumns_newDetails">
+                        <div className="DataColumns_details_row">
+                            <p className="DataColumnsText_content">Mean: </p>
+                            <p className="DataColumnsText_content">{props.data.mean}</p>
+                        </div>
+                        <div className="DataColumns_details_row">
+                            <p className="DataColumnsText_content">Normality: </p>
+                            <p className="DataColumnsText_content">{props.data.distribution}</p>
+                        </div>
+                        <div className="DataColumns_details_row">
+                            <p className="DataColumnsText_content">Median: </p>
+                            <p className="DataColumnsText_content">{props.data.median}</p>
+                        </div>
+                        <div className="DataColumns_details_row">
+                            <p className="DataColumnsText_content">Min: </p>
+                            <p className="DataColumnsText_content">{props.data.min}</p>
+                        </div>
+                        <div className="DataColumns_details_row">
+                            <p className="DataColumnsText_content">Max: </p>
+                            <p className="DataColumnsText_content">{props.data.max}</p>
+                        </div>
+                        <div className="DataColumns_details_row">
+                            <p className="DataColumnsText_content">STD.DEV: </p>
+                            <p className="DataColumnsText_content">{props.data.std}</p>
+                        </div>
+                        <div className="DataColumns_details_row">
+                            <p className="DataColumnsText_content">Outliers: </p>
+                            <p className="DataColumnsText_content">{props.data.outliers}</p>
+                        </div>
+                        <div className="DataColumns_details_row">
+                            <p className="DataColumnsText_content">Null Count: </p>
+                            <p className="DataColumnsText_content" style={{'color': (props.data.null_count / props.size) * 100 > 60 ? "red" : "green"}}>{props.data.null_count} row(s)  • {((props.data.null_count / props.size) * 100).toFixed(2)}% </p>
+                            
+                        </div>
+                        <div className="DataColumns_details_row">
+                            <p className="DataColumnsText_content">Skew</p>
+                            <p className="DataColumnsText_content">{props.data.skew}</p>
+                        </div>
+                        <div className="DataColumns_details_row">
+                            <p className="DataColumnsText_content">Kurtosis: </p>
+                            <p className="DataColumnsText_content">{props.data.kurtosis}</p>
+                        </div>
                     </div>
-                    <div className="DataColumns_details_row">
-                        <p className="DataColumnsText_content">Normality: </p>
-                        <p className="DataColumnsText_content">{props.data.distribution}</p>
-                    </div>
-                    <div className="DataColumns_details_row">
-                        <p className="DataColumnsText_content">Median: </p>
-                        <p className="DataColumnsText_content">{props.data.median}</p>
-                    </div>
-                    <div className="DataColumns_details_row">
-                        <p className="DataColumnsText_content">Min: </p>
-                        <p className="DataColumnsText_content">{props.data.min}</p>
-                    </div>
-                    <div className="DataColumns_details_row">
-                        <p className="DataColumnsText_content">Max: </p>
-                        <p className="DataColumnsText_content">{props.data.max}</p>
-                    </div>
-                    <div className="DataColumns_details_row">
-                        <p className="DataColumnsText_content">STD.DEV: </p>
-                        <p className="DataColumnsText_content">{props.data.std}</p>
-                    </div>
-                    <div className="DataColumns_details_row">
-                        <p className="DataColumnsText_content">Outliers: </p>
-                        <p className="DataColumnsText_content">{props.data.outliers}</p>
-                    </div>
-                    <div className="DataColumns_details_row">
-                        <p className="DataColumnsText_content">Null Count: </p>
-                        <p className="DataColumnsText_content" style={{'color': (props.data.null_count / props.size) * 100 > 60 ? "red" : "green"}}>{props.data.null_count} row(s)  • {((props.data.null_count / props.size) * 100).toFixed(2)}% </p>
-                        
-                    </div>
-                    <div className="DataColumns_details_row">
-                        <p className="DataColumnsText_content">Skew</p>
-                        <p className="DataColumnsText_content">{props.data.skew}</p>
-                    </div>
-                    <div className="DataColumns_details_row">
-                        <p className="DataColumnsText_content">Kurtosis: </p>
-                        <p className="DataColumnsText_content">{props.data.kurtosis}</p>
-                    </div>
-                </div>
+                )}
+                
+                
             </div>
 
 
             
 
                 
-            </div>     
+              
     ); 
 }
 
