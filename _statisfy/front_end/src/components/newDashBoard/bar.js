@@ -6,7 +6,7 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import { makeStyles } from "@mui/styles";
 
-
+import "../../StyleSheets/studyfolder/study.css";
 
 
   const ButtonStyles = makeStyles ({
@@ -22,15 +22,21 @@ export default function BarCor(props) {
     const [ref, { width }] = useMeasure()
     const PosBar = useSpring({
         width: props.value > 0 ?  props.value * width : 1,
-        backgroundColor: "#7051b8;",
-        height: "1rem"
+        backgroundColor: "#7051b8",
+        height: "1rem",
+        display:"flex",
+        justifyContent:"end",
+
     })
     const NegBar = useSpring({
         minWidth: props.value < 0 ? props.value * width * -1 : 1,
         backgroundColor: "#b5b5b5",
         position: "absolute",
         right: 0,
-        height: "1rem"
+        height: "1rem",
+        display:"flex",
+        justifyContent:"end",
+
     });
 
   return (
