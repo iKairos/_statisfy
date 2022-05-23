@@ -458,35 +458,32 @@ export default function ResStudies(props){
                     </Alert>
                 </Snackbar>
             }
-            <div className="StudySection_header">
-                {props.IsAuthor?(
-                    <div className="resStudy_body_add">
-                        <Button 
-                            color="secondary"
-                            onClick={()=>handleAdding(true)}
-                            className={ButtonClasses.btn}
-                        >
-                            <AddIcon className={ButtonClasses.icons}/>
-                            add new study
-                        </Button>
-                    </div>
-                ):(
-                    <div className="resStudy_body_add">
-                        <Button 
-                            color="secondary" 
-                            className="resStudy_body_add_button"
-                            disabled
-                        >
-                            <DoNotDisturbOutlinedIcon className="AddIcon"/>
-                            only authors can add studies
-                        </Button>
-                    </div>
-                )}
-            </div>
+            
 
             
             <div className = "StudySection_body">
                 <div className = "StudySection_body_list">
+                    <div className="StudySection_header">
+                        {props.IsAuthor?(
+                                <Button 
+                                    color="secondary"
+                                    onClick={()=>handleAdding(true)}
+                                    className={ButtonClasses.btn}
+                                >
+                                    <AddIcon className={ButtonClasses.icons}/>
+                                    add new study
+                                </Button>
+                        ):(
+                                <Button 
+                                    color="secondary" 
+                                    className="resStudy_body_add_button"
+                                    disabled
+                                >
+                                    <DoNotDisturbOutlinedIcon className="AddIcon"/>
+                                    only authors can add studies
+                                </Button>
+                        )}
+                    </div>
                     <div className = "StudySection_body_list_header"> 
                         <h5 className="StudyText_listHeader"> STUDY LIST</h5>
                     </div>
@@ -696,10 +693,13 @@ export default function ResStudies(props){
                         :(<>
                             {selected &&
                                 (
-                                    <Study 
-                                        data={getStudyRes?.data.filter(i => i['_id'] === selected)[0]} 
-                                        details={props.DatasetDetails}
-                                    />     
+                                    <div className = "StudySection_body_study">
+                                        <Study 
+                                            data={getStudyRes?.data.filter(i => i['_id'] === selected)[0]} 
+                                            details={props.DatasetDetails}
+                                        />  
+                                    </div>
+                                       
                                 )
                             }
                         
