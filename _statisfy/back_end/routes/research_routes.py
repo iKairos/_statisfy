@@ -11,6 +11,7 @@ from functionalities.machine_learning import *
 from functionalities.interpretation import interpret
 from functionalities.dataset_ops import describe_dataset
 from sklearn.model_selection import train_test_split
+from sklearn import metrics
 import pandas as pd
 import warnings
 import io
@@ -124,6 +125,7 @@ def add_study():
         compute_res = None
         regression_configuration = None
         graphing = None
+        model_upload = None
         
         research = Research(data['research_id'])
         
@@ -140,50 +142,51 @@ def add_study():
         outlier_replaced = 0
         for col in columns:
             for option in options:
-                if option['column'] == col:
-                    if option['null_option']['method'] == 'delete':
-                        init_rows = int(df.shape[0])
-                        df.dropna(subset=[col], inplace=True)
-                        null_deleted = init_rows - int(df.shape[0])
-                    elif option['null_option']['method'] == 'replace':
-                        init_na = df[col].isna().sum()
-                        if option['null_option']['replace_by'] == 'mean':
-                            df[col].fillna(df[col].mean(), inplace=True)
-                        elif option['null_option']['replace_by'] == 'median':
-                            df[col].fillna(df[col].median(), inplace=True)
-                        elif option['null_option']['replace_by'] == 'mode':
-                            df[col].fillna(df[col].mode(), inplace=True)
-                        null_replaced = int(init_na - df[col].isna().sum())
-                    elif option['null_option']['method'] == 'nothing':
-                        pass
-                    if df[col].isnull().values.any():
-                        return {
-                            'code': 'STUDY_ADD_FAIL',
-                            'error': f'Statisfy detected null values on the variable {col} which may be detrimental to the computation process. Please clean your dataset first.'
-                        }
-                    
-                    low = df[col].quantile(0.10)
-                    hi = df[col].quantile(0.90)
+                if df[col].dtype != 'O':
+                    if option['column'] == col:
+                        if option['null_option']['method'] == 'delete':
+                            init_rows = int(df.shape[0])
+                            df.dropna(subset=[col], inplace=True)
+                            null_deleted = init_rows - int(df.shape[0])
+                        elif option['null_option']['method'] == 'replace':
+                            init_na = df[col].isna().sum()
+                            if option['null_option']['replace_by'] == 'mean':
+                                df[col].fillna(df[col].mean(), inplace=True)
+                            elif option['null_option']['replace_by'] == 'median':
+                                df[col].fillna(df[col].median(), inplace=True)
+                            elif option['null_option']['replace_by'] == 'mode':
+                                df[col].fillna(df[col].mode(), inplace=True)
+                            null_replaced = int(init_na - df[col].isna().sum())
+                        elif option['null_option']['method'] == 'nothing':
+                            pass
+                        if df[col].isnull().values.any():
+                            return {
+                                'code': 'STUDY_ADD_FAIL',
+                                'error': f'Statisfy detected null values on the variable {col} which may be detrimental to the computation process. Please clean your dataset first.'
+                            }
+                        
+                        low = df[col].quantile(0.10)
+                        hi = df[col].quantile(0.90)
 
-                    if option['outlier_option']['method'] == 'delete':
-                        index = df[col][(df[col] < low) | (df[col] > hi)].index 
-                        init_rows = int(df.shape[0])
-                        df.drop(index, inplace=True)
-                        outlier_deleted = init_rows - int(df.shape[0]) 
-                    elif option['outlier_option']['method'] == 'replace':
-                        init_outliers = len(df[col][(df[col] < low) | (df[col] > hi)])
-                        if option['outlier_option']['method'] == 'mean':
-                            df[col].where(df[col] < low, df[col].mean(), inplace=True)
-                            df[col].where(df[col] > hi, df[col].mean(), inplace=True)
-                        elif option['outlier_option']['method'] == 'median':
-                            df[col].where(df[col] < low, df[col].median(), inplace=True)
-                            df[col].where(df[col] > hi, df[col].median(), inplace=True)
-                        elif option['outlier_option']['method'] == 'mode':
-                            df[col].where(df[col] < low, df[col].mode(), inplace=True)
-                            df[col].where(df[col] > hi, df[col].mode(), inplace=True)
-                        outlier_replaced = init_outliers - (init_outliers - len(df[col][(df[col] < low) | (df[col] > hi)]))
-                    elif option['null_option']['method'] == 'nothing':
-                        pass
+                        if option['outlier_option']['method'] == 'delete':
+                            index = df[col][(df[col] < low) | (df[col] > hi)].index 
+                            init_rows = int(df.shape[0])
+                            df.drop(index, inplace=True)
+                            outlier_deleted = init_rows - int(df.shape[0]) 
+                        elif option['outlier_option']['method'] == 'replace':
+                            init_outliers = len(df[col][(df[col] < low) | (df[col] > hi)])
+                            if option['outlier_option']['method'] == 'mean':
+                                df[col].where(df[col] < low, df[col].mean(), inplace=True)
+                                df[col].where(df[col] > hi, df[col].mean(), inplace=True)
+                            elif option['outlier_option']['method'] == 'median':
+                                df[col].where(df[col] < low, df[col].median(), inplace=True)
+                                df[col].where(df[col] > hi, df[col].median(), inplace=True)
+                            elif option['outlier_option']['method'] == 'mode':
+                                df[col].where(df[col] < low, df[col].mode(), inplace=True)
+                                df[col].where(df[col] > hi, df[col].mode(), inplace=True)
+                            outlier_replaced = init_outliers - (init_outliers - len(df[col][(df[col] < low) | (df[col] > hi)]))
+                        elif option['null_option']['method'] == 'nothing':
+                            pass
 
             changes.append(
                 {
@@ -213,6 +216,13 @@ def add_study():
                     'code': 'STUDY_ADD_FAIL',
                     'error': 'The number of iterations is too big for the server to handle. Please reduce the number of iterations and try again.',
                 }
+            
+            for col in columns:
+                if df[col].dtype == 'O':
+                    classes = list(df[col].unique())
+
+                    df[col].replace(classes, list(range(len(classes))), inplace=True)
+
             new_cols = columns.copy()
             new_cols.remove(data['label'])
             
@@ -251,13 +261,55 @@ def add_study():
             regression_configuration = {
                 'test_size': data['testSize'],
                 'iterations': data['iterations'],
-                'learning_rate': data['learningRate']
+                'learning_rate': data['learningRate'],
+                'label': data['label']
             }
 
             graphing = {
                 'cost_history': reactified_cost_history,
                 'gradient_history': reactified_gradient_history
             }
+
+            model_upload = model.pickelize()
+        elif data['test_type'] == "Logistic Regression":
+            if int(data['iterations']) > 10000:
+                return {
+                    'code': 'STUDY_ADD_FAIL',
+                    'error': 'The number of iterations is too big for the server to handle. Please reduce the number of iterations and try again.',
+                }
+            
+            for col in columns:
+                if df[col].dtype == 'O':
+                    classes = list(df[col].unique())
+
+                    df[col].replace(classes, list(range(len(classes))), inplace=True)
+
+            new_cols = columns.copy()
+            new_cols.remove(data['label'])
+            
+            X = df[new_cols]
+            y = df[data['label']]
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=float(data['testSize'])/100, random_state=99)
+
+            model = LogisticRegression(X, y)
+
+            model.train_model(int(data['iterations']), float(data['learningRate']))
+
+            predicted = model.predict(np.matrix(X_test))
+
+            compute_res = [
+                ('Model Accuracy Score', model.accuracy(y_test, predicted)),
+                ('Average Precision Score', metrics.average_precision_score(y_test, predicted))
+            ]
+
+            regression_configuration = {
+                'test_size': data['testSize'],
+                'iterations': data['iterations'],
+                'learning_rate': data['learningRate'],
+                'label': data['label']
+            }
+
+            model_upload = model.pickelize()
         elif data['test_type'] == 'Spearman Rho Rank Correlation Test':
             if len(columns) != 2:
                 return {
@@ -278,9 +330,11 @@ def add_study():
                     'code': 'STUDY_ADD_FAIL',
                     'error': 'Mann Whitney only accepts two variables. Please make sure to only select two columns to analyze.'
                 }
-                
+
             compute_res = mann_whitney_u(df[columns[0]], df[columns[1]])
 
+        model_name = f"{uuid}_MODEL_{data['research_id']}.sfy"
+        
         res = Study.new_study(
             _id = uuid,
             study_name = data['study_name'],
@@ -296,7 +350,8 @@ def add_study():
             options = data['options'],
             changes = changes,
             regression_configuration = regression_configuration,
-            graphing = graphing
+            graphing = graphing,
+            model = model_name
         )
 
         if not res['status']:
@@ -308,6 +363,9 @@ def add_study():
         df = df[[col for col in columns]]
         blob = io.StringIO(df.to_csv(index=False))
         BlobDatabase.upload_study_dataset(f"{uuid}_{Research(data['research_id']).get_research()['dataset']}", blob.read())
+
+        if model_upload:
+            BlobDatabase.upload_model(model_name, model_upload)
 
         return {
             'code': 'STUDY_ADD_SUCCESS',
@@ -381,6 +439,9 @@ def delete_study():
         name = study['study_name']
 
         BlobDatabase.delete_study_dataset(study['study_dataset'])
+        if study['test_type'] == 'Linear Regression' or study['test_type'] == 'Logistic Regression':
+            BlobDatabase.delete_model(study['model'])
+            
         Study(data['_id']).delete_study()
 
         return {
@@ -390,5 +451,26 @@ def delete_study():
     except Exception as e:
         return {
             'code': 'STUDY_DELETE_FAIL',
+            'message': str(e)
+        }
+
+def predict_by_model():
+    try:
+        data = request.get_json()
+
+        study = Study(data['study_id']).get_study()
+
+        model = BlobDatabase.get_model(data['model'])
+        model = pickle.loads(model)
+
+        predict = float(model.predict(np.matrix(data['features'])))
+
+        return {
+            'code': 'MODEL_PREDICTION_SUCCESS',
+            'predicted': predict
+        }
+    except Exception as e:
+        return {
+            'code': 'MODEL_PREDICTION_FAIL',
             'message': str(e)
         }

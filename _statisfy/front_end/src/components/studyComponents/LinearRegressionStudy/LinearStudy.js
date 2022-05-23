@@ -136,7 +136,7 @@ export default function LinearStudy(props){
   return(
         <div className ="Study">
             <div className = "Study_header">
-                <h4 className={ButtonClasses.inputText}>{props.data['study_name']} | {props.data['test_type']}</h4>
+                <h4 className={ButtonClasses.inputText}><b>{props.data['study_name']}</b> | {props.data['test_type']}</h4>
                 <h6 className={ButtonClasses.inputText}>{props.data['study_description']}</h6>
             </div>
             <div className="Study_tabs_container">
@@ -235,7 +235,7 @@ export default function LinearStudy(props){
                 }
                 {studyPage === 4 &&
                     <div className = "Study_content_graphs">
-                        <LinearModel/>
+                        <LinearModel study={props.data['_id']} columns={props.data['columns'].filter(e => e!==props.data['configurations']['label'])} label={props.data['configurations']['label']} model={props.data['model']}/>
                     </div>
                 }
             </div>

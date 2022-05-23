@@ -5,7 +5,6 @@ import CorrelationStudy from "./studyComponents/PearsonRStudy/CorrelationStudy";
 
 
 export default function Study(props){
-    console.log(props.data)
     return(
         <>
             {

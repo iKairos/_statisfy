@@ -1,4 +1,7 @@
 import { 
+    PREDICT_FAIL,
+    PREDICT_REQUEST,
+    PREDICT_SUCCESS,
     RESEARCHES_GET_FAIL,
     RESEARCHES_GET_REQUEST,
     RESEARCHES_GET_SUCCESS,
@@ -128,6 +131,22 @@ export const studyDeleteReducers = (state={deleteStudyRes:{}}, action) => {
         
         case STUDY_DELETE_FAIL:
             return {loading: false, error: action.payload};
+        
+        default:
+            return state
+    }
+}
+
+export const predictReducers = (state={predictRes:{}}, action) => {
+    switch(action.type){
+        case PREDICT_REQUEST:
+            return {predictLoading: true};
+        
+        case PREDICT_SUCCESS:
+            return {predictLoading: false, predictRes: action.payload};
+        
+        case PREDICT_FAIL:
+            return {predictLoading: false, error: action.payload}
         
         default:
             return state

@@ -1,4 +1,7 @@
 import { 
+    PREDICT_FAIL,
+    PREDICT_REQUEST,
+    PREDICT_SUCCESS,
     RESEARCHES_GET_FAIL,
     RESEARCHES_GET_REQUEST,
     RESEARCHES_GET_SUCCESS,
@@ -164,6 +167,27 @@ export const deleteStudy = (id) => async(dispatch) => {
     }catch(error){
         dispatch({
             type:STUDY_DELETE_FAIL,
+            payload:error.message
+        });
+    }
+}
+
+export const predictModel = (pred_data) => async(dispatch) => {
+    dispatch({
+        type: PREDICT_REQUEST
+    });
+
+    try{
+        const {data} = await Axios.post('/api/research/study/predict', pred_data);
+
+        dispatch({
+            type: PREDICT_SUCCESS,
+            payload: data
+        })
+
+    }catch(error){
+        dispatch({
+            type: PREDICT_FAIL,
             payload:error.message
         });
     }

@@ -1,5 +1,5 @@
-from azure.storage.blob import ContainerClient
-from secret import AZURE_DATASETS_CONTAINER, AZURE_STORAGE_CONN_STRING, AZURE_STUDY_DATASETS_CONTAINER, AZURE_TRAIN_TEST_CONTAINER
+from azure.storage.blob import ContainerClient, BlobClient
+from secret import AZURE_DATASETS_CONTAINER, AZURE_STORAGE_CONN_STRING, AZURE_STUDY_DATASETS_CONTAINER, AZURE_TRAIN_TEST_CONTAINER, AZURE_MODELS_CONTAINER
 
 class BlobDatabase:
     def upload_dataset(name, blob):
@@ -78,6 +78,33 @@ class BlobDatabase:
     def delete_train_test_dataset(name):
         try:
             dataset_client = ContainerClient.from_connection_string(AZURE_STORAGE_CONN_STRING, AZURE_TRAIN_TEST_CONTAINER)
+
+            return dataset_client.delete_blob(name)
+        except Exception as e:
+            raise e 
+    
+    def upload_model(name, blob):
+        try:
+            dataset_client = ContainerClient.from_connection_string(AZURE_STORAGE_CONN_STRING, AZURE_MODELS_CONTAINER)
+
+            blob_client = dataset_client.get_blob_client(name)
+            blob_client.upload_blob(blob)
+        except Exception as e:
+            raise e 
+    
+    def get_model(name):
+        try:
+            dataset_client = ContainerClient.from_connection_string(AZURE_STORAGE_CONN_STRING, AZURE_MODELS_CONTAINER)
+
+            blob_client = dataset_client.get_blob_client(name)
+
+            return blob_client.download_blob().readall()
+        except Exception as e :
+            raise e 
+    
+    def delete_model(name):
+        try:
+            dataset_client = ContainerClient.from_connection_string(AZURE_STORAGE_CONN_STRING, AZURE_MODELS_CONTAINER)
 
             return dataset_client.delete_blob(name)
         except Exception as e:

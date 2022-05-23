@@ -142,7 +142,7 @@ export default function SignInScreen(props) {
                           >
                             Sign In</Button>
                         }
-                        <p className='SignText_btn'>Not a member? <Link to="/SignUp">Sign Up</Link> </p>
+                        <p className='SignText_btn'>Not a member?&nbsp;<Link to="/SignUp">Sign Up here!</Link> </p>
                     </div>
                   
                   </form>

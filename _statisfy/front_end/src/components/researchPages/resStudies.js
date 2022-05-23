@@ -9,7 +9,7 @@ import * as React from 'react';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import {Skeleton, Stepper, Step, StepLabel, Typography } from "@mui/material";
+import {Skeleton, Stepper, Step, StepLabel, Typography, LinearProgress } from "@mui/material";
 import { useState } from "react";
 import { status500, studyStepsString, studySuccess, studySuccessTitle } from "../../constants/stringConstants";
 import { makeStyles } from "@mui/styles";
@@ -648,7 +648,10 @@ export default function ResStudies(props){
                                             />
                                         }
                                         {loading ?(
-                                            <CircularProgress  className={ButtonClasses.icons} thickness={2.5} size={30}/>
+                                            <div>
+                                                <br/>
+                                                <LinearProgress  color='secondary'/>
+                                            </div>
 
                                         ):(
                                             <Button

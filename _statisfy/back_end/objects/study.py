@@ -78,7 +78,8 @@ class Study:
             options = kwargs['options'],
             changes = kwargs['changes'],
             regression_configuration = kwargs['regression_configuration'],
-            graphing = kwargs['graphing']
+            graphing = kwargs['graphing'],
+            model = kwargs['model']
         )
     
     def delete_study(self):
