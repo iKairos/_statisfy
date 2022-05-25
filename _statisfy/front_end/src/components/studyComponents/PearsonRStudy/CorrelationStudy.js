@@ -281,7 +281,7 @@ export default function CorrelationStudy(props){
                                    {var_name === "R Coefficient" || var_name === "Rho Value"
                                     ?(
                                     <CorrelationDegree value = {var_val}/>)
-                                    :null
+                                    :<>1</>
                                    }
                                    </>
                                ) 
