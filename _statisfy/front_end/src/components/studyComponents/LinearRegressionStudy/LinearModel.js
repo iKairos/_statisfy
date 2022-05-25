@@ -143,7 +143,9 @@ export default function LinearModel(props){
                                     }}
                                 />
                             }
-                        <Button className={ButtonClasses.btn} onClick={handlePredict}>Predict</Button>
+                        {
+                            typeof predictRes === 'undefined' ? null : <Button className={ButtonClasses.btn} onClick={handlePredict}>Predict</Button>
+                        }
                     </div>
                 </div>
             </div>
